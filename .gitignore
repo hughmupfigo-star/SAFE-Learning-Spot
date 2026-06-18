@@ -1,25 +1,46 @@
-# Secrets — must never be committed
+# ── Secrets & environment (NEVER commit these) ────────────────────────────────
 .env
+.env.*
+.env.txt
 .env.local
 .env.*.local
-*.pem
-*.key
+*.env
+secrets.json
+secrets.js
+credentials.json
 
-# Node / build
+# ── Node ──────────────────────────────────────────────────────────────────────
 node_modules/
-.next/
-dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
 
-# OS junk
+# ── Build outputs ─────────────────────────────────────────────────────────────
+dist/
+build/
+.cache/
+
+# ── OS / editor junk ─────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
-ehthumbs.db
-
-# Editor
+desktop.ini
 .vscode/
 .idea/
 *.swp
+*.swo
+*~
 
-# Local-only working files
-backup/
+# ── Logs ─────────────────────────────────────────────────────────────────────
 *.log
+logs/
+
+# ── Dev-only utility scripts (not needed in production repo) ──────────────────
+debug-users.js
+verify-setup.js
+check-env.js
+
+# ── Large binary / generated files ───────────────────────────────────────────
+*.docx
+*.zip
+*.tar.gz
