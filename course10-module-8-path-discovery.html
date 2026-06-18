@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module 08 · Path Discovery — Course 10</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display:flex;align-items:center;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);flex:1;order:1;min-width:0}
+.module-tag strong{color:var(--ink);font-weight:500}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:28px;height:2px;background:var(--line);transition:background .4s}
+.progress-dot.active{background:var(--ink)}
+.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}
+.slide{display:none;animation:fadeUp .6s ease}
+.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-title em{font-style:italic;font-weight:300}
+.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}
+.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}
+.body-text strong{font-weight:500;color:var(--ink)}
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}
+.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}
+.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s;position:relative;font-weight:400}
+.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}
+.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.selected .choice-letter{color:var(--paper);opacity:.6}
+.choice:disabled{cursor:default}
+.choice:disabled:hover{transform:none}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s}
+.feedback.visible{display:block}
+.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px;letter-spacing:-.005em}
+.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28;font-weight:400}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s;font-weight:500}
+.nav-btn:hover{opacity:.6}
+.nav-btn:disabled{opacity:.2;cursor:not-allowed}
+.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#2a2a28;opacity:1}
+.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}
+.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+.return-home-wrap{text-align:center;margin-top:20px}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s}
+.return-home-link:hover{color:var(--ink)}
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:18px}.complete-mark{font-size:80px}}
+html[data-theme="dark"]{--ink:#d8d8d4;--paper:#111110;--muted:#77776f;--line:#2c2c2a;--soft:#1c1c1a;--accent:#4aaa6f}
+html[data-theme="dark"] .body-text,html[data-theme="dark"] .lead,html[data-theme="dark"] .summary-text,html[data-theme="dark"] .pullquote,html[data-theme="dark"] .slide-title,html[data-theme="dark"] .feedback-text,html[data-theme="dark"] .scenario-context,html[data-theme="dark"] .feedback-headline{color:var(--ink)}
+html[data-theme="dark"] .choice{background:var(--soft);border-color:var(--line)}
+html[data-theme="dark"] .choice:hover:not(:disabled){background:#222220;border-color:#4a4a48}
+html[data-theme="dark"] .choice.selected{background:#141e17;border-color:var(--accent)}
+html[data-theme="dark"] .feedback{background:var(--soft)}
+html[data-theme="dark"] .nav-btn{background:var(--soft);color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .nav-btn.primary{background:var(--ink);color:var(--paper)}
+html[data-theme="dark"] .nav-btn.primary:hover{background:#b4b4b0;opacity:1}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s;z-index:10}
+.theme-toggle:hover{opacity:1}
+.header-center{display:flex;align-items:center;gap:14px;order:2;margin:0 auto}
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;z-index:49;display:none;scrollbar-width:none;flex-direction:column}
+.course-sidebar::-webkit-scrollbar{display:none}
+@media(min-width:1140px){.course-sidebar{display:flex}.module-container{margin-left:220px}}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s}
+.sidebar-back:hover{color:var(--ink)}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px}
+.sidebar-mod-list{list-style:none}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:8px}
+.sidebar-mod-item:last-child{border-bottom:none}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);flex-shrink:0;margin-top:2px;min-width:20px}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none}
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent)}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto}
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line)}
+.sidebar-mod-item.ss-now .sidebar-mod-n,.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none}
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line)}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<style>
+.pd-header{padding:3rem 1.5rem 2rem;max-width:820px;margin:0 auto;}
+.pd-header h1{font-family:var(--serif);font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.2;color:var(--ink);margin-bottom:.5rem;}
+.pd-header p.lead{font-size:1.1rem;color:var(--muted);line-height:1.7;max-width:620px;}
+.pd-progress-wrap{max-width:820px;margin:0 auto 1rem;padding:0 1.5rem;}
+.pd-progress-track{height:4px;background:var(--line);border-radius:2px;overflow:hidden;}
+.pd-progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease;width:0%;}
+.pd-counter{font-size:.8rem;color:var(--muted);margin-top:.4rem;font-family:var(--mono);}
+.pd-question-wrap{max-width:820px;margin:0 auto;padding:0 1.5rem 4rem;}
+.pd-question{display:none;animation:fadeSlide .35s ease;}
+.pd-question.active{display:block;}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.pd-question h2{font-family:var(--serif);font-size:clamp(1.2rem,2.5vw,1.55rem);line-height:1.4;color:var(--ink);margin-bottom:1.8rem;padding-bottom:1rem;border-bottom:1px solid var(--line);}
+.pd-choices{display:grid;gap:.85rem;}
+.pd-choice{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.25rem;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;background:var(--paper);transition:border-color .2s,background .2s,transform .15s;text-align:left;width:100%;color:var(--ink);font-family:var(--sans);}
+.pd-choice:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--paper));transform:translateY(-1px);}
+.pd-choice.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--paper));}
+.pd-choice-letter{width:28px;height:28px;min-width:28px;border-radius:50%;background:var(--soft);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.78rem;font-weight:700;margin-top:.05rem;transition:background .2s,color .2s;}
+.pd-choice.selected .pd-choice-letter{background:var(--accent);color:#fff;}
+.pd-choice-text{font-size:.97rem;line-height:1.55;}
+.pd-result{display:none;max-width:820px;margin:0 auto;padding:0 1.5rem 4rem;animation:fadeSlide .4s ease;}
+.pd-result.visible{display:block;}
+.pd-result-badge{display:inline-block;padding:.3rem .9rem;background:color-mix(in srgb,var(--accent) 15%,var(--paper));border:1.5px solid var(--accent);border-radius:100px;font-family:var(--mono);font-size:.75rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem;}
+.pd-result h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.2;color:var(--ink);margin-bottom:.4rem;}
+.pd-result-subtitle{font-size:1.1rem;color:var(--accent);margin-bottom:1.8rem;line-height:1.5;}
+.pd-result-desc{font-size:1rem;line-height:1.8;color:var(--ink);margin-bottom:2rem;white-space:pre-line;}
+.pd-result-section{margin-top:2rem;}
+.pd-result-section h3{font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--line);}
+.pd-practices{list-style:none;padding:0;margin:0;display:grid;gap:.75rem;}
+.pd-practices li{padding:1rem 1.25rem;background:var(--soft);border-radius:8px;font-size:.96rem;line-height:1.55;color:var(--ink);}
+.pd-practices li::before{content:'→ ';color:var(--accent);font-weight:700;}
+.pd-horizon{margin-top:1rem;padding:1.25rem 1.5rem;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 5%,var(--paper));border-radius:0 8px 8px 0;font-size:.96rem;line-height:1.6;color:var(--ink);font-style:italic;}
+.pd-distribution{margin-top:2rem;}
+.pd-dist-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;}
+.pd-dist-label{font-family:var(--mono);font-size:.78rem;width:180px;min-width:120px;color:var(--muted);}
+.pd-dist-bar-wrap{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden;}
+.pd-dist-bar{height:100%;border-radius:4px;background:var(--muted);transition:width .6s ease;}
+.pd-dist-bar.primary{background:var(--accent);}
+.pd-dist-count{font-family:var(--mono);font-size:.75rem;color:var(--muted);width:20px;text-align:right;}
+.pd-complete-btn{display:inline-block;margin-top:2.5rem;padding:1rem 2.2rem;background:var(--ink);color:var(--paper);border-radius:8px;font-family:var(--sans);font-size:1rem;cursor:pointer;border:none;transition:opacity .2s;}
+.pd-complete-btn:hover{opacity:.8;}
+.pd-restart{display:inline-block;margin-top:1rem;margin-left:1rem;padding:1rem 1.5rem;background:transparent;color:var(--muted);border:1.5px solid var(--line);border-radius:8px;font-family:var(--sans);font-size:.9rem;cursor:pointer;transition:border-color .2s,color .2s;}
+.pd-restart:hover{border-color:var(--accent);color:var(--accent);}
+</style>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem("safespot_theme")==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})()</script>
+<script>(function(){try{var s=localStorage.getItem("slsc_session");if(!s){var p=encodeURIComponent(location.pathname.split("/").pop()||"index.html");location.replace("login.html?from="+p);}}catch(e){}})()</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+
+<div class="layout-root">
+  <aside class="course-sidebar" id="courseSidebar">
+    <div class="sidebar-inner">
+      <a class="sidebar-back" href="course10-landing.html">← Course 10</a>
+      <p class="sidebar-course-title">The Uncharted Mind</p>
+      <ol class="sidebar-modules">
+        <li><a href="course10-module-1-the-10-percent-myth.html"  >01. The 10% Myth</a></li>
+<li><a href="course10-module-2-the-three-layers.html"  data-unlock="safespot_c10m1">02. The Three Layers</a></li>
+<li><a href="course10-module-3-belief-architecture.html"  data-unlock="safespot_c10m2">03. Belief Architecture</a></li>
+<li><a href="course10-module-4-fear-as-information.html"  data-unlock="safespot_c10m3">04. Fear as Information</a></li>
+<li><a href="course10-module-5-the-death-question.html"  data-unlock="safespot_c10m4">05. The Death Question</a></li>
+<li><a href="course10-module-6-neuroplasticity.html"  data-unlock="safespot_c10m5">06. Neuroplasticity</a></li>
+<li><a href="course10-module-7-stillness-and-superconscious.html"  data-unlock="safespot_c10m6">07. Stillness & Superconscious Access</a></li>
+<li><a href="course10-module-8-path-discovery.html" aria-current="page" data-unlock="safespot_c10m7">08. Path Discovery</a></li>
+
+      </ol>
+    </div>
+  </aside>
+
+  <main class="module-main" id="moduleMain">
+    <div class="module-header" id="moduleHeader">
+      <div class="module-header-inner">
+        <span class="module-eyebrow">Module 08 · Path Discovery</span>
+        <h1 class="module-title">Where are you in the expedition?</h1>
+      </div>
+    </div>
+
+    <div class="locked-overlay" id="lockedOverlay" style="display:none">
+      <div class="locked-card">
+        <p class="locked-icon">🔒</p>
+        <h2>Complete Module 07 first</h2>
+        <p>Work through Stillness &amp; Superconscious Access before discovering your path.</p>
+        <a href="course10-module-7-stillness-and-superconscious.html" class="btn-primary">Go to Module 07</a>
+      </div>
+    </div>
+
+    <div id="pdContent" style="display:none">
+      <div class="pd-header">
+        <h1>Your Path Discovery</h1>
+        <p class="lead">There are no right or wrong answers here. Each response reflects where you currently are in your expedition into the deeper mind — and every position described is a genuine and valuable one. What you are discovering is not a grade but a location: where you are standing right now, and what the terrain ahead most clearly asks of you.</p>
+        <p class="lead" style="margin-top:.75rem;">Answer as honestly as you can. Not as you aspire to be or think you should be — as you actually are, today.</p>
+      </div>
+
+      <div class="pd-progress-wrap">
+        <div class="pd-progress-track">
+          <div class="pd-progress-fill" id="pdProgressFill"></div>
+        </div>
+        <p class="pd-counter" id="pdCounter">Question 1 of 8</p>
+      </div>
+
+      <div class="pd-question-wrap" id="pdQuestions"></div>
+      <div class="pd-result" id="pdResult"></div>
+    </div>
+  </main>
+</div>
+
+<!-- TTS READER -->
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+
+<script>
+const QUESTIONS = [
+  {
+    q: 'When an insight arrives without you having reasoned toward it — an accurate knowing, a sudden clarity about something you had been puzzling over — what is your most honest relationship to it?',
+    choices: {
+      a: { text: 'I notice it, but I tend to explain it as unconscious inference or coincidence rather than treating it as reliable information.', path: 'A' },
+      b: { text: 'I take it seriously but I still feel the need to verify it through analytical thinking before acting on it.', path: 'B' },
+      c: { text: 'I receive it as genuine information and act on it, while remaining open to the possibility that it could be mistaken.', path: 'C' },
+      d: { text: 'These arrivals are a primary source of guidance for me. I have learned to distinguish accurate deep-knowing from ordinary wishful thinking.', path: 'D' },
+    }
+  },
+  {
+    q: 'How would you describe the noise level of your ordinary mind — the continuous activity of thoughts, plans, concerns, and reactions that fills your waking hours?',
+    choices: {
+      a: { text: 'High. The mental activity is nearly continuous and I rarely experience sustained quiet, even when I try to create it.', path: 'A' },
+      b: { text: 'Variable. I can access periods of genuine quiet through practice, but the default state is still fairly noisy.', path: 'B' },
+      c: { text: 'Manageable. The volume has reduced significantly through sustained practice and the quiet is available without significant effort.', path: 'C' },
+      d: { text: 'Quiet is my default. The mental activity is there but I am not identified with it — I move through it rather than in it.', path: 'D' },
+    }
+  },
+  {
+    q: 'When you encounter a belief about what you are capable of — in your work, your relationships, your development — what is your honest relationship to that belief?',
+    choices: {
+      a: { text: 'I tend to take my beliefs about capability as accurate self-knowledge rather than examining them as beliefs.', path: 'A' },
+      b: { text: 'I can identify limiting beliefs when they are pointed out, but they still shape my choices more than I would like.', path: 'B' },
+      c: { text: 'I have done significant work with limiting beliefs and most of the major ones have been substantially revised.', path: 'C' },
+      d: { text: 'Beliefs about capability are transparent to me — I see them operating and work with them as tools rather than facts.', path: 'D' },
+    }
+  },
+  {
+    q: 'How do you currently relate to the fear that arises in the presence of what genuinely matters to you — a significant project, a vulnerable conversation, a direction that is calling you?',
+    choices: {
+      a: { text: 'The fear tends to stop or significantly delay me. I wait until I feel ready, which means I sometimes wait a very long time.', path: 'A' },
+      b: { text: 'I move toward what matters despite the fear, but the internal friction is considerable and the process takes effort.', path: 'B' },
+      c: { text: 'I read fear as a signal of significance and move toward it fairly readily. The friction is present but no longer governing.', path: 'C' },
+      d: { text: 'Fear is navigation data for me. Its presence tells me I am approaching something real. I move toward it as a matter of course.', path: 'D' },
+    }
+  },
+  {
+    q: 'How consistent is your daily practice of stillness — the deliberate creation of quiet, non-agenda time in which the deeper mind can communicate?',
+    choices: {
+      a: { text: 'Occasional at best. I intend to do it regularly but it frequently gets displaced by other demands.', path: 'A' },
+      b: { text: 'Moderately consistent. I practice most days but gaps are common and the depth varies considerably.', path: 'B' },
+      c: { text: 'Consistent. Daily stillness is an established part of my life that I protect from displacement.', path: 'C' },
+      d: { text: 'The distinction between practice and ordinary life has substantially dissolved. Stillness is a quality I carry rather than a period I create.', path: 'D' },
+    }
+  },
+  {
+    q: 'How do you hold the reality of death — the fact that your consciousness and experience will end?',
+    choices: {
+      a: { text: 'I tend to avoid engaging with it. I know it intellectually but I have not genuinely sat with the reality of it.', path: 'A' },
+      b: { text: 'I think about it and it sometimes shifts my perspective, but the insight fades quickly and the urgency does not persist.', path: 'B' },
+      c: { text: 'The awareness of my own mortality is a genuine orientating presence — it shapes what I take seriously and what I let pass.', path: 'C' },
+      d: { text: 'My finitude is a daily companion and primary compass. It consistently clarifies what this particular day is worth.', path: 'D' },
+    }
+  },
+  {
+    q: 'What is your current relationship to the superconscious layer — the quiet, spacious, agenda-free dimension of mind that this course has been approaching?',
+    choices: {
+      a: { text: 'Mostly theoretical. I find the concept compelling but I have not yet had clear direct experience of this layer.', path: 'A' },
+      b: { text: 'I have touched it occasionally — there have been moments of unusual clarity or insight that felt different from ordinary thinking.', path: 'B' },
+      c: { text: 'I have a working relationship with it. I can approach it reliably through practice and I receive from it regularly.', path: 'C' },
+      d: { text: 'It is the ground I operate from. The access is no longer something I create — it is something I maintain.', path: 'D' },
+    }
+  },
+  {
+    q: 'Looking at the whole of your life as it currently is — your work, relationships, how you spend your time — how well does it reflect what you know, from the deepest level available to you, actually matters?',
+    choices: {
+      a: { text: 'There is a significant gap. I know what matters at some level, but the life I am living does not yet reflect it.', path: 'A' },
+      b: { text: 'Partially. Some significant areas of my life are aligned with what matters. Others are still organised around comfort, habit, or other priorities.', path: 'B' },
+      c: { text: 'Substantially aligned. The major dimensions of my life are organised around what I actually believe matters, though the alignment is never perfect.', path: 'C' },
+      d: { text: 'The alignment is close and self-correcting. When I notice drift, I return. The life and the knowing have substantially become the same thing.', path: 'D' },
+    }
+  },
+];
+
+const PATHS = {
+  'A': {
+    name: 'The Questioner',
+    subtitle: 'You are standing at the entrance to the territory — and that is exactly the right place to begin.',
+    description: 'Your responses reveal someone who has heard the call to explore their deeper mind and is genuinely interested in what lies there — but has not yet established the practices or conditions that make reliable access available. The territory is new. The map is being read for the first time. The belief that more is available is present, even if the direct experience of that "more" is still occasional and somewhat surprising when it arrives.\n\nThis is not a deficit. This is the beginning of what may be the most interesting expedition of your life. The people who access the deepest levels of their own mind were all, once, standing exactly where you are standing. What distinguishes those who go further is not exceptional intelligence or unusual gifts. It is the decision to take the exploration seriously and to practice consistently.\n\nYour particular edge is the gap between intellectual understanding and lived practice. You understand, at least in outline, what this course has described. The next step is not more understanding — it is the first thirty days of daily practice. Not because the practice will immediately produce dramatic results, but because the practice is what builds the neural architecture through which the access becomes reliable. The door is there. The key is in your hand. The only remaining question is whether you turn it.',
+    practices: ['Begin with five minutes of daily stillness — no agenda, no phone, nothing to achieve. Do this every day for thirty days before evaluating.', 'Keep a small notebook next to your bed. Write whatever is present in the first two minutes of waking, before full consciousness organises itself.', 'Choose one limiting belief this course has helped you identify and write a single paragraph examining it every day for two weeks.', 'Find one other person interested in this territory. Even one conversation a week about what you are noticing will accelerate the development significantly.'],
+    next_horizon: 'Your next significant development will likely be the first unmistakeable access event — the moment when something arrives that clearly came from deeper than ordinary conscious thinking. When it does, do not explain it away. Write it down and return to it.',
+  },
+  'B': {
+    name: 'The Explorer',
+    subtitle: 'You have begun the expedition — and the terrain is becoming familiar.',
+    description: 'Your responses reveal someone who has moved past the merely intellectual engagement with these ideas and has begun the actual practice of accessing the deeper mind. You have some direct experience of what this course describes — the insight that arrives unbidden, the accurate intuition, the quality of knowing that is different from the conclusions of analytical reasoning. These are not yet consistently available, but they are real, and you know they are real.\n\nThe path you are on is one of consolidation: developing the practices that have already produced some results into the kind of consistent daily engagement that makes the access reliable rather than occasional. This is the phase where most people either deepen or plateau — where the initial enthusiasm either becomes a genuine foundation or gradually fades back into the familiar noise of ordinary cognitive life.\n\nYour particular edge is the inconsistency of your practice. The access is available when the conditions are right — when you are still, when the agenda is absent, when you have created the space. The work now is to make those conditions available more reliably, more frequently, and eventually more automatically. The deeper mind has been communicating with you. The question is whether you have created the conditions to receive it consistently.',
+    practices: ['Extend your daily stillness practice to fifteen minutes and protect it as you would an important appointment. The consistency matters more than the duration.', 'Before any significant decision, take ten minutes to hold the question in receptive stillness rather than analytical deliberation. Notice what surfaces.', 'Identify one belief that is currently limiting your engagement with this work and apply the examination process from Module 3 to it over a two-week period.', 'Track your access events. When an accurate intuition or unexpected insight arrives, write it down. Over weeks, patterns will become visible.'],
+    next_horizon: 'Your next significant development will likely be the experience of the access becoming reliable rather than occasional — the moment when you trust the process enough to approach important questions through stillness first and analysis second.',
+  },
+  'C': {
+    name: 'The Navigator',
+    subtitle: 'You have learned to read the deeper currents — and you are increasingly guided by them.',
+    description: 'Your responses reveal someone who has developed genuine, working access to the deeper layers of mind. The superconscious is not a theoretical concept for you — it is a layer you have learned to approach and receive from with some consistency. The accurate intuitions, the creative insights that arrived without analytical derivation, the quality of knowing that is different from conclusion — these are part of your actual working experience, not aspirations.\n\nThe path you are on is one of integration: bringing the access that is available in your practices into the full range of your daily life. The gap between meditative depth and ordinary engagement is narrowing. The quality of receptive attention you have developed in stillness is beginning to be available in the midst of activity. This is the territory where the deeper mind becomes a reliable guide rather than an occasional visitor.\n\nYour particular edge is the refinement of trust. You have the access. What is still developing is the willingness to act on it with full confidence — to follow the accurate intuition even when the analytical mind has produced a different conclusion, to present the insight that arrived without derivation even when you cannot fully justify it, to let what you know from the deeper level determine the direction without requiring the approval of the surface level first. This trust is not blindness. It is the earned confidence of someone who has seen the access work.',
+    practices: ['Practice using the superconscious first — bring important questions to stillness before applying analytical thinking. Notice where the two converge and where they diverge.', 'Identify one area of your life where you know the deeper knowing but have not acted on it. Act on it, and track what follows.', 'Work specifically with the fear material: whatever is currently stopping the fullest expression of your access, apply the practice from Module 4 directly to it.', 'Begin sharing your access in some form — through creative work, through conversation, through whatever your particular form of contribution is. The deeper mind is not only for personal navigation.'],
+    next_horizon: 'Your next significant development will likely involve the access becoming available in the most challenging conditions — in conflict, in high pressure, in genuine uncertainty — rather than only in the conditions you have cultivated for it.',
+  },
+  'D': {
+    name: 'The Source',
+    subtitle: 'The deeper mind is not something you access. It is something you increasingly are.',
+    description: 'Your responses reveal someone for whom the ideas in this course are confirmed experience rather than new information. The three-layer map is not a model you are applying — it is how you actually experience your own mind. The superconscious is not a layer you visit through special practices — it is the ground from which you increasingly operate. The limiting beliefs, the fear patterns, the quality of attention — you have worked with these at depth, and the work shows in the quality of what is available to you.\n\nThe path you are on is one of increasingly effortless integration. The distinction between practice and life has substantially dissolved. The quality of presence that most people associate with elevated states is becoming your ordinary state. The access is not something you achieve — it is something you maintain, protect, and increasingly express in the full range of your contribution.\n\nYour particular edge is the question of what the access is for. Not for personal navigation only — though it serves that. Not for private development only — though it enables that. The superconscious accessed at depth carries a quality of knowing that belongs to more than the individual who is accessing it. What you have developed is not only yours. The question now is not how to deepen the access further but how to bring what you have access to into the lives and work of the people around you — not as teaching, not as performance, but as the natural expression of the ground you have found.',
+    practices: ['Turn your attention to the relationship between your deepest access and your most concrete contribution. What does the deeper knowing ask to express in the world?', 'Find a context that specifically challenges your current level of integration — a relationship, a domain, a difficulty — and bring your fullest access to it rather than reserving it for easier conditions.', 'Practice receiving. At this level of development, the capacity to be genuinely instructed — by others, by difficulty, by what you do not yet know — becomes the most important growing edge.', 'Sit regularly with the question: not "what do I know?" but "what is being asked of me?" The answer to this question, received in genuine stillness, is the direction the access is pointing.'],
+    next_horizon: 'Your next significant development will likely be less dramatic than what preceded it and more intimate — a deepening of presence in the specific relationships and contexts that are most directly yours to tend.',
+  },
+};
+
+const PATH_NAMES = {A:'The Questioner', B:'The Explorer', C:'The Navigator', D:'The Source'};
+
+(function(){
+  const sess = localStorage.getItem('slsc_session');
+  if(!sess){ window.location.href='index.html'; return; }
+  try{
+    const d = JSON.parse(atob(sess));
+    if(!d.email || !d.exp || Date.now() > d.exp){ window.location.href='index.html'; return; }
+  } catch(e){ window.location.href='index.html'; return; }
+  const prev = localStorage.getItem('safespot_c10m7');
+  if(!prev){
+    document.getElementById('lockedOverlay').style.display='flex';
+  } else {
+    document.getElementById('pdContent').style.display='block';
+    initPD();
+  }
+})();
+
+document.querySelectorAll('.sidebar-modules a[data-unlock]').forEach(a => {
+  const key = a.getAttribute('data-unlock');
+  if(!localStorage.getItem(key)){
+    a.style.opacity='0.4';
+    a.style.pointerEvents='none';
+  }
+});
+
+let answers = {};
+let currentQ = 0;
+
+function initPD(){
+  const container = document.getElementById('pdQuestions');
+  QUESTIONS.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'pd-question' + (i===0 ? ' active' : '');
+    div.id = 'pdq-'+i;
+    let choicesHtml = '';
+    for(const [letter, choice] of Object.entries(q.choices)){
+      choicesHtml += '<button class="pd-choice" data-q="'+i+'" data-letter="'+letter+'">'
+        + '<span class="pd-choice-letter">'+letter.toUpperCase()+'</span>'
+        + '<span class="pd-choice-text">'+choice.text+'</span>'
+        + '</button>';
+    }
+    div.innerHTML = '<h2>'+(i+1)+'. '+q.q+'</h2><div class="pd-choices">'+choicesHtml+'</div>';
+    container.appendChild(div);
+  });
+  document.querySelectorAll('.pd-choice').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const qi = parseInt(this.dataset.q);
+      const letter = this.dataset.letter;
+      answers[qi] = letter;
+      document.querySelectorAll('#pdq-'+qi+' .pd-choice').forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      setTimeout(() => advanceQ(qi), 420);
+    });
+  });
+  updateProgress(0);
+}
+
+function advanceQ(qi){
+  if(qi < QUESTIONS.length - 1){
+    document.getElementById('pdq-'+qi).classList.remove('active');
+    document.getElementById('pdq-'+(qi+1)).classList.add('active');
+    currentQ = qi+1;
+    updateProgress(qi+1);
+    document.getElementById('pdQuestions').scrollIntoView({behavior:'smooth',block:'start'});
+  } else {
+    showResult();
+  }
+}
+
+function updateProgress(qi){
+  const pct = (qi / QUESTIONS.length) * 100;
+  document.getElementById('pdProgressFill').style.width = pct+'%';
+  document.getElementById('pdCounter').textContent = 'Question '+(qi+1)+' of '+QUESTIONS.length;
+}
+
+function showResult(){
+  const scores = {A:0,B:0,C:0,D:0};
+  for(const [qi, letter] of Object.entries(answers)){
+    const path = QUESTIONS[parseInt(qi)].choices[letter].path;
+    scores[path]++;
+  }
+  let winner = 'A', maxScore = 0;
+  for(const [p,s] of Object.entries(scores)){
+    if(s > maxScore){ maxScore=s; winner=p; }
+  }
+  const path = PATHS[winner];
+  document.getElementById('pdQuestions').style.display='none';
+  document.getElementById('pdProgressFill').parentElement.parentElement.style.display='none';
+
+  const result = document.getElementById('pdResult');
+  let distHtml = '';
+  for(const [p,name] of Object.entries(PATH_NAMES)){
+    const isPrimary = p===winner;
+    distHtml += '<div class="pd-dist-row">'
+      + '<span class="pd-dist-label">'+name+'</span>'
+      + '<div class="pd-dist-bar-wrap"><div class="pd-dist-bar'+(isPrimary?' primary':'')+'" style="width:'+(scores[p]/8*100)+'%"></div></div>'
+      + '<span class="pd-dist-count">'+scores[p]+'</span>'
+      + '</div>';
+  }
+  let practicesHtml = path.practices.map(p => '<li>'+p+'</li>').join('');
+
+  result.innerHTML = '<div class="pd-result-badge">Your Path</div>'
+    + '<h2>'+path.name+'</h2>'
+    + '<p class="pd-result-subtitle">'+path.subtitle+'</p>'
+    + '<div class="pd-result-desc">'+path.description+'</div>'
+    + '<div class="pd-result-section"><h3>Practices for Where You Are</h3><ul class="pd-practices">'+practicesHtml+'</ul></div>'
+    + '<div class="pd-result-section"><h3>Your Next Horizon</h3><div class="pd-horizon">'+path.next_horizon+'</div></div>'
+    + '<div class="pd-result-section pd-distribution"><h3>Your Response Pattern</h3>'+distHtml+'</div>'
+    + '<div style="margin-top:2.5rem">'
+    + '<button class="pd-complete-btn" id="pdCompleteBtn">Mark Course Complete ✓</button>'
+    + '<button class="pd-restart" id="pdRestartBtn">Retake Discovery</button>'
+    + '</div>';
+
+  result.classList.add('visible');
+  result.scrollIntoView({behavior:'smooth',block:'start'});
+
+  document.getElementById('pdCompleteBtn').addEventListener('click', function(){
+    localStorage.setItem('safespot_c10m8','1');
+    this.textContent = 'Course Complete! ✓';
+    this.style.background = '#22863a';
+    setTimeout(() => window.location.href='course10-landing.html', 1200);
+  });
+
+  document.getElementById('pdRestartBtn').addEventListener('click', function(){
+    answers = {};
+    currentQ = 0;
+    document.getElementById('pdQuestions').style.display='block';
+    document.getElementById('pdProgressFill').parentElement.parentElement.style.display='block';
+    result.classList.remove('visible');
+    document.querySelectorAll('.pd-question').forEach((q,i) => {
+      q.classList.toggle('active', i===0);
+    });
+    document.querySelectorAll('.pd-choice').forEach(b => b.classList.remove('selected'));
+    updateProgress(0);
+    document.getElementById('pdQuestions').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+
+const sb = document.getElementById('courseSidebar');
+const tog = document.getElementById('sidebarToggle');
+if(tog) tog.addEventListener('click', () => sb.classList.toggle('open'));
+</script>
+
+<script>
+(function(){
+  try{
+    var items = Array.from(document.querySelectorAll('.sidebar-mod-item[data-mk]'));
+    items.forEach(function(li, idx){
+      var mk = li.getAttribute('data-mk');
+      var mn = parseInt(li.getAttribute('data-mn') || '0');
+      var done = !!localStorage.getItem(mk);
+      if(done){
+        li.classList.add('ss-done');
+      } else if(mn > 1){
+        // Locked if the immediately preceding module is not complete
+        var prev = items[idx - 1];
+        if(prev && !localStorage.getItem(prev.getAttribute('data-mk'))){
+          li.classList.add('ss-next');
+        }
+      }
+    });
+  }catch(e){}
+})();
+</script>
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

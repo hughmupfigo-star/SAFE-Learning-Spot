@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Course 8 · Module 9 · Building Your Alkaline Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.module-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);
+padding:14px 32px 14px 16px;display: grid; grid-template-columns: 1fr auto 1fr;align-items:baseline;justify-items: start;gap:24px}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;font-family:var(--mono)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:5px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);border-radius:1px;transition:background .3s}
+.progress-dot.done{background:var(--accent)}
+.progress-dot.active{background:var(--ink)}
+.stage{max-width:720px;margin:0 auto;padding:48px 32px 80px}
+.slide{display:none;animation:fadeUp .45s ease both}
+.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:24px;letter-spacing:.06em}
+.question-text{font-family:var(--serif);font-size:clamp(1.35rem,3vw,1.75rem);font-weight:300;line-height:1.45;
+margin-bottom:12px;color:var(--ink)}
+.question-context{font-size:.93rem;color:var(--muted);margin-bottom:36px;line-height:1.6;font-style:italic}
+.choices{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.choice{padding:16px 20px;border:1px solid var(--line);border-radius:4px;cursor:pointer;font-size:.95rem;
+line-height:1.5;transition:border-color .2s,background .2s;background:var(--paper);text-align:left;font-family:var(--sans);
+display:flex;gap:14px;align-items:flex-start}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice-letter{font-family:var(--mono);font-size:.8rem;color:var(--muted);min-width:16px;margin-top:2px}
+.choice.correct{border-color:var(--accent);background:#f0faf4}
+.choice.incorrect{border-color:#c0392b;background:#fdf5f4}
+.choice:disabled{cursor:default}
+.feedback{border-left:3px solid var(--accent);padding:20px 24px;background:var(--soft);margin-top:8px;
+border-radius:0 4px 4px 0;display:none}
+.feedback.visible{display:block}
+.feedback-head{font-weight:500;font-size:.95rem;margin-bottom:6px;color:var(--ink)}
+.feedback-body{font-size:.9rem;color:#3a3a36;line-height:1.65}
+.next-btn{margin-top:28px;padding:14px 32px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;
+font-size:.9rem;font-family:var(--sans);letter-spacing:.04em;cursor:pointer;display:none;transition:opacity .2s}
+.next-btn:hover{opacity:.85}
+.complete-block{text-align:center;padding:64px 32px}
+.complete-icon{font-size:2.5rem;margin-bottom:24px}
+.complete-title{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:16px;line-height:1.3}
+.complete-sub{font-size:1rem;color:var(--muted);max-width:480px;margin:0 auto 20px;line-height:1.7}
+.complete-sub2{font-size:.9rem;color:var(--muted);max-width:440px;margin:0 auto 40px;line-height:1.7;font-style:italic}
+.complete-line{width:48px;height:2px;background:var(--accent);margin:0 auto}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 08 &middot; Food Is Medicine &middot; Module <strong>09</strong> &middot; Building Your Alkaline Life</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 8 &middot; Food Is Medicine</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c8m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course8-module-6-healing-foods-and-herbs.html">Healing Foods & Herbs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course8-module-7-children-and-family-nutrition.html">Children & Family Nutrition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course8-module-8-detoxing-and-transition.html">Detoxing & Transition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m9" data-mn="9">
+      <span class="sidebar-mod-n">09</span>
+      <a class="sidebar-mod-a" href="course8-module-9-building-your-alkaline-life.html">Your Alkaline Life</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<div class="stage">
+
+<!-- SLIDE 1 -->
+<div class="slide" data-slide="1">
+  <div class="slide-number">01 / 08</div>
+  <div class="question-text">What does it mean to make alkaline living a lifestyle rather than a diet?</div>
+  <div class="question-context">Keisha has completed two months of consistent whole food eating. She no longer wants to think of herself as "on a diet" — but she is not sure what it means to have actually changed her relationship with food at the level of identity rather than effort.</div>
+  <div class="choices">
+    <button class="choice" data-q="1" data-v="a"><span class="choice-letter">a</span>It means following the rules perfectly with no exceptions, ever</button>
+    <button class="choice" data-q="1" data-v="b"><span class="choice-letter">b</span>It means the default is alkaline whole food — not a discipline to maintain but a preference that has genuinely shifted</button>
+    <button class="choice" data-q="1" data-v="c"><span class="choice-letter">c</span>It means tracking every meal and measuring pH levels daily</button>
+    <button class="choice" data-q="1" data-v="d"><span class="choice-letter">d</span>It means never eating with people who eat differently</button>
+  </div>
+  <div class="feedback" id="fb-1-a">
+    <div class="feedback-head">Perfection is a diet mindset — lifestyle is something else entirely</div>
+    <div class="feedback-body">The diet mentality says: follow the rules, and when you break them, you have failed. The lifestyle mentality says: this is how I eat, these are my values, and an occasional deviation does not erase who I am. Keisha has already crossed the threshold — two months of consistency means her gut has changed, her taste has shifted, her body has experienced what nourishment feels like. She does not need to be perfect. She needs to be rooted. When alkaline living is an identity rather than a rulebook, it survives disruption, travel, social occasions, and hard weeks — not because she is disciplined, but because she has genuinely changed.</div>
+  </div>
+  <div class="feedback" id="fb-1-b">
+    <div class="feedback-head">When the default shifts, the effort dissolves — that is the crossing point</div>
+    <div class="feedback-body">Keisha has reached something important: the point where the body has been reset enough that processed food no longer feels like comfort — it feels like heaviness. Where the craving for a green smoothie or a warm grain bowl is real, not performed. This is what the tradition always pointed toward — not a permanent battle with temptation, but a genuine reorientation of what the body recognises as food. Identity-level change means she chooses alkaline not to avoid something bad, but because it is simply who she is now. That shift is irreversible in a way that any diet rule never could be.</div>
+  </div>
+  <div class="feedback" id="fb-1-c">
+    <div class="feedback-head">Measurement is a tool for learning — not a lifestyle</div>
+    <div class="feedback-body">pH strips and food logs are useful during the early learning phase — they help people understand how different foods affect the body and what patterns support alkalinity. But building a life around measurement creates anxiety rather than wisdom. The goal is to develop an embodied understanding — to feel the difference between a meal that builds and a meal that depletes — so that the body itself becomes the measuring instrument. Keisha has already been developing that sensitivity. It is far more reliable than any app or strip.</div>
+  </div>
+  <div class="feedback" id="fb-1-d">
+    <div class="feedback-head">Isolation is not a sustainable foundation for any way of living</div>
+    <div class="feedback-body">A way of eating that requires complete social separation is one that will eventually crack under the weight of human connection. Keisha does not need to find a tribe of alkaline eaters before she can maintain her own practice. She needs to develop the ease of carrying her values into mixed environments — eating beforehand, bringing food, making peace with imperfect choices, and communicating without evangelism. The goal is a life integrated with real relationships, not a fortress against them.</div>
+  </div>
+  <button class="next-btn" id="next-1">Continue →</button>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" data-slide="2">
+  <div class="slide-number">02 / 08</div>
+  <div class="question-text">How does water quality affect the alkaline body — and what should you look for?</div>
+  <div class="question-context">Deon drinks two litres of water a day but still feels dehydrated — dry skin, persistent thirst, dark urine. He discovers that his tap water is treated with chlorine and fluoride and filtered through aged pipes. He starts questioning whether all water is the same.</div>
+  <div class="choices">
+    <button class="choice" data-q="2" data-v="a"><span class="choice-letter">a</span>All water hydrates equally — the body absorbs whatever it receives</button>
+    <button class="choice" data-q="2" data-v="b"><span class="choice-letter">b</span>Water quality matters — mineral-rich, chemical-free water hydrates at the cellular level; heavily treated water adds a detox burden and may not hydrate as effectively</button>
+    <button class="choice" data-q="2" data-v="c"><span class="choice-letter">c</span>The solution is to add commercial electrolyte powder to tap water</button>
+    <button class="choice" data-q="2" data-v="d"><span class="choice-letter">d</span>Deon should switch to sparkling water — the carbonation aids absorption</button>
+  </div>
+  <div class="feedback" id="fb-2-a">
+    <div class="feedback-head">Volume and quality are two different things</div>
+    <div class="feedback-body">The body can receive two litres of water and still be functionally dehydrated if the water carries disruptive compounds. Chlorine affects the gut microbiome — the bacteria it was put in the water to kill are similar to the bacteria lining the intestine. Fluoride accumulates in soft tissue and calcifies the pineal gland. Aged pipe residue adds heavy metals. These are not hypothetical concerns — they are documented biochemical loads that the body must process before the water itself can be used. Deon is not drinking too little. He may be delivering water that costs more to process than it provides.</div>
+  </div>
+  <div class="feedback" id="fb-2-b">
+    <div class="feedback-head">The body is mostly water — and the quality of that water shapes everything</div>
+    <div class="feedback-body">Cellular hydration requires water that carries minerals — magnesium, calcium, potassium, and trace elements that allow water to move across cell membranes efficiently. Spring water from a clean source, or filtered water remineralised with sea moss, a pinch of sea salt, or a squeeze of lime provides this. Tap water stripped of minerals by over-treatment and passed through chemical disinfection is absorbed, but it also triggers a detox response that consumes energy and minerals to neutralise. Deon's persistent thirst despite volume is the body signalling that it is not receiving what water is supposed to deliver. Quality of water is as important as quality of food.</div>
+  </div>
+  <div class="feedback" id="fb-2-c">
+    <div class="feedback-head">Commercial electrolyte powders often contain artificial sweeteners, dyes, and synthetic minerals</div>
+    <div class="feedback-body">The electrolyte supplement industry sells convenience — but most products contain the same synthetic compounds that alkaline eating is designed to move away from. Artificial colours, sucralose, citric acid from mould fermentation, and isolated synthetic minerals that the body recognises differently from food-form minerals. The simpler answer to electrolyte balance is sea moss in water, a small amount of unprocessed sea salt, or fresh coconut water. These provide the full mineral spectrum in the form the body was designed to receive.</div>
+  </div>
+  <div class="feedback" id="fb-2-d">
+    <div class="feedback-head">Carbonation does not improve hydration — and in excess can affect acidity</div>
+    <div class="feedback-body">Carbonated water contains carbonic acid, which slightly lowers the pH of the beverage. Consumed occasionally this is not a problem — the body buffers it quickly. But as a primary hydration strategy for someone pursuing alkaline health, it works against the goal. There is also no evidence that carbonation improves cellular absorption. Sparkling water is a pleasure, not a therapeutic upgrade. Deon needs clean, mineralised still water — and the body will show him within weeks that the quality matters more than the volume.</div>
+  </div>
+  <button class="next-btn" id="next-2">Continue →</button>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" data-slide="3">
+  <div class="slide-number">03 / 08</div>
+  <div class="question-text">How does chronic stress affect the body's pH balance — and what does this mean for alkaline living?</div>
+  <div class="question-context">Even after three months of clean eating, Layla still experiences inflammation and tension that she cannot fully explain through food alone. A practitioner asks about her stress levels. She realises she eats perfectly but lives under near-constant pressure.</div>
+  <div class="choices">
+    <button class="choice" data-q="3" data-v="a"><span class="choice-letter">a</span>Stress affects the mind but not the body's chemistry — diet is the only relevant factor</button>
+    <button class="choice" data-q="3" data-v="b"><span class="choice-letter">b</span>Chronic stress triggers cortisol and adrenaline, which are acid-forming — you cannot fully alkalise a body that is under constant threat response</button>
+    <button class="choice" data-q="3" data-v="c"><span class="choice-letter">c</span>She needs to exercise more intensely to burn off the stress hormones</button>
+    <button class="choice" data-q="3" data-v="d"><span class="choice-letter">d</span>The inflammation is probably from a food sensitivity she has not yet identified</button>
+  </div>
+  <div class="feedback" id="fb-3-a">
+    <div class="feedback-head">The body does not separate emotional experience from biochemistry</div>
+    <div class="feedback-body">Stress is not an abstract psychological event. Every stressful thought triggers a cascade of hormones — cortisol, adrenaline, noradrenaline — that have direct chemical effects on the body. These hormones raise blood pressure, increase blood sugar, suppress digestion, and shift the body's acid-base balance. Layla's body is experiencing chemistry — not just mood. Eating well is foundational, but it cannot fully neutralise the acid load of a nervous system running on high alert every day. The body is one system. Mind and body are not separate departments.</div>
+  </div>
+  <div class="feedback" id="fb-3-b">
+    <div class="feedback-head">You cannot out-eat a chronically stressed nervous system</div>
+    <div class="feedback-body">Cortisol is catabolic — it breaks tissue down rather than building it up. Chronic cortisol elevation depletes magnesium (the body's primary alkaline mineral), disrupts sleep (when most tissue repair occurs), increases intestinal permeability (leaky gut), and drives systemic inflammation. Adrenaline in sustained low doses keeps the cardiovascular system in a state of tension that generates metabolic acid as a byproduct. Layla is eating alkaline food into an acid-generating nervous system. The food matters enormously — but so does sleep, rest, breathwork, time in nature, and whatever allows the nervous system to come out of threat mode. Alkaline living includes how you live, not only what you eat.</div>
+  </div>
+  <div class="feedback" id="fb-3-c">
+    <div class="feedback-head">Intense exercise adds a short-term acid load — rest is the more powerful intervention here</div>
+    <div class="feedback-body">Exercise is genuinely beneficial for stress — moderate movement lowers cortisol, improves sleep, and supports lymph flow. But intense exercise in an already stressed body adds lactic acid and cortisol on top of what is already elevated. For Layla, the answer is not to push harder. It is to create genuine rest: restorative movement like walking or yoga, breath practices that activate the parasympathetic nervous system, adequate sleep, and wherever possible a reduction in the sources of pressure. The body heals in the rest phase, not the effort phase.</div>
+  </div>
+  <div class="feedback" id="fb-3-d">
+    <div class="feedback-head">Food sensitivity is worth investigating — but it should not distract from the stress picture</div>
+    <div class="feedback-body">Food sensitivities are real and do cause inflammation — and after three months of clean eating, Layla's digestive system is more capable of revealing them than it was before. But the practitioner's question about stress was not a deflection. It was the most likely explanation. The pattern of inflammation, tension, and unexplained symptoms despite excellent eating is a classic presentation of HPA axis dysregulation — the stress response system running without recovery. Layla needs to investigate stress management with the same seriousness she brought to her food.</div>
+  </div>
+  <button class="next-btn" id="next-3">Continue →</button>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" data-slide="4">
+  <div class="slide-number">04 / 08</div>
+  <div class="question-text">How does seasonal and local eating connect to the alkaline philosophy?</div>
+  <div class="question-context">Anton notices that the alkaline food list includes many fruits and vegetables available year-round in supermarkets — often shipped from thousands of miles away. He wonders whether where food comes from matters as much as what food it is.</div>
+  <div class="choices">
+    <button class="choice" data-q="4" data-v="a"><span class="choice-letter">a</span>Origin does not matter — if the food is whole and alkaline, it is equally nutritious regardless of where it came from</button>
+    <button class="choice" data-q="4" data-v="b"><span class="choice-letter">b</span>Seasonal and local produce is picked riper, travels less, loses fewer nutrients, and arrives more alive — connection to local food is part of living in alignment with the body's needs</button>
+    <button class="choice" data-q="4" data-v="c"><span class="choice-letter">c</span>Only food grown in tropical regions has true alkaline properties — local food is a compromise</button>
+    <button class="choice" data-q="4" data-v="d"><span class="choice-letter">d</span>Frozen fruit and vegetables are nutritionally superior to all fresh options because they are frozen at peak ripeness</button>
+  </div>
+  <div class="feedback" id="fb-4-a">
+    <div class="feedback-head">Origin affects nutrient content more than most people realise</div>
+    <div class="feedback-body">A tomato picked unripe in Spain, gassed with ethylene, and shipped to a UK supermarket is not the same food as a tomato picked ripe from a vine twenty miles away. Nutrient content — particularly vitamin C, folate, and antioxidant polyphenols — begins to degrade from the moment of harvest. The longer the supply chain, the more that is lost before the food reaches Anton's table. The alkaline food list identifies which foods to eat. Where and how they were grown determines how much of those properties survive to the plate.</div>
+  </div>
+  <div class="feedback" id="fb-4-b">
+    <div class="feedback-head">Local and seasonal food is food that arrived alive — and that matters</div>
+    <div class="feedback-body">The body does not only receive macronutrients and minerals from food. It receives enzymatic activity, biophotons (the light energy in living cells), and the full phytonutrient matrix that plants produce when allowed to ripen under their own sun. Locally grown, seasonal produce carries more of this because it has not spent weeks in refrigerated transit. It also costs less, supports local soil stewardship, and reconnects the person eating it to the rhythms of the environment they live in. This alignment — eating what the land offers in each season — is one of the oldest principles of food as medicine across every culture that practised it.</div>
+  </div>
+  <div class="feedback" id="fb-4-c">
+    <div class="feedback-head">The alkaline principle transcends geography — it applies wherever whole food grows</div>
+    <div class="feedback-body">The healers who developed the alkaline framework lived in the Caribbean and Central America — and the foods they worked with reflect that. But the underlying principle is universal: whole, unmanipulated, mineral-rich food that leaves an alkaline ash in the body is the standard. This principle applies to kale grown in Scotland as much as to ackee grown in Jamaica. Anton does not need to import tropical produce exclusively. He needs to apply the principle to what grows near him, in season, on good soil. The wisdom travels even when the specific foods do not.</div>
+  </div>
+  <div class="feedback" id="fb-4-d">
+    <div class="feedback-head">Frozen produce is a good option — not a superior one</div>
+    <div class="feedback-body">Frozen fruit and vegetables are frozen quickly after harvest, which does preserve water-soluble vitamins well — often better than supermarket fresh produce that has been sitting for days. This makes frozen a genuinely good choice, particularly for berries, greens, and vegetables out of season. But "frozen at peak ripeness" is not the same as "picked this morning from living soil." The enzymatic activity and the bioavailable mineral content of truly fresh, local, ripe produce is not fully replicated by freezing. Anton should use frozen as a valuable tool — not as the ceiling of what is possible.</div>
+  </div>
+  <button class="next-btn" id="next-4">Continue →</button>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" data-slide="5">
+  <div class="slide-number">05 / 08</div>
+  <div class="question-text">How do you share this knowledge with people you love without creating conflict or distance?</div>
+  <div class="question-context">Natasha has transformed her health and wants her family to experience the same. But when she shares what she has learned, her mother gets defensive, her partner resists, and her friends feel judged. The more urgently she tries to share, the more they pull away.</div>
+  <div class="choices">
+    <button class="choice" data-q="5" data-v="a"><span class="choice-letter">a</span>She should present the research more clearly — people resist because they do not have enough information</button>
+    <button class="choice" data-q="5" data-v="b"><span class="choice-letter">b</span>People change through witness, invitation, and safety — not pressure; the most powerful thing Natasha can do is embody the results and create space, not urgency</button>
+    <button class="choice" data-q="5" data-v="c"><span class="choice-letter">c</span>She should stop sharing entirely — her family's health is their own business</button>
+    <button class="choice" data-q="5" data-v="d"><span class="choice-letter">d</span>She should only eat with people who share her values</button>
+  </div>
+  <div class="feedback" id="fb-5-a">
+    <div class="feedback-head">Information rarely changes deeply held behaviour — relationship does</div>
+    <div class="feedback-body">If information alone changed people, the fact that smoking causes cancer would have ended tobacco use decades ago. People do not resist Natasha's message because they lack data. They resist it because changing how they eat means changing their identity, their rituals, their relationships with comfort and pleasure and memory — and no amount of additional research dissolves that. What dissolves it is watching someone they love become visibly different, and being invited into that transformation gently, without pressure or judgment. The information is secondary. The relationship is primary.</div>
+  </div>
+  <div class="feedback" id="fb-5-b">
+    <div class="feedback-head">Embodied results are the most persuasive argument there is — and they require no words</div>
+    <div class="feedback-body">Natasha's glowing skin, her sustained energy, her emotional steadiness, her absence of the complaints she used to have — these are the message. When her mother sees that she does not get sick as often, when her partner notices she sleeps through the night and wakes with clarity, when her friends see that she has lost weight without obsessing — the door opens. Not through argument, but through the irresistible evidence of a body that has been given what it needs. The role of a healer has always been to walk the path first, visibly, and to welcome others in — not to drag them through it before they are ready.</div>
+  </div>
+  <div class="feedback" id="fb-5-c">
+    <div class="feedback-head">Silence is not the answer — but urgency creates walls</div>
+    <div class="feedback-body">Natasha cares about her family's health. That care is not misplaced — it is love. The problem is not caring; it is the delivery. Urgency triggers defensiveness. Judgment triggers shame. Both make the person on the receiving end associate the information with discomfort — and they associate Natasha's healthy choices with being made to feel inadequate. She can share authentically without agenda: "this worked for me," "I made this dish if you want to try it," "here is something I found interesting." She can answer questions without lecturing. The care stays. The pressure goes.</div>
+  </div>
+  <div class="feedback" id="fb-5-d">
+    <div class="feedback-head">Selective social eating creates a life of walls — and rarely converts anyone</div>
+    <div class="feedback-body">Withdrawing from social food situations with people who eat differently is a form of self-protection that ultimately isolates rather than protects. The people Natasha most wants to influence — her family — will read her withdrawal as rejection, not as a healthy boundary. The goal is not to find a tribe that already agrees with her. It is to live so fully and healthfully within her existing relationships that those relationships naturally begin to ask questions. That takes patience, presence, and the willingness to be the person at the table who orders differently without making it a statement.</div>
+  </div>
+  <button class="next-btn" id="next-5">Continue →</button>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" data-slide="6">
+  <div class="slide-number">06 / 08</div>
+  <div class="question-text">What role does movement play in the alkaline lifestyle — beyond burning calories?</div>
+  <div class="question-context">Carl has transformed his eating but has a sedentary job and rarely exercises. He feels well but suspects he is missing something. He associates exercise with weight loss and gym culture — neither of which particularly motivates him.</div>
+  <div class="choices">
+    <button class="choice" data-q="6" data-v="a"><span class="choice-letter">a</span>Movement is mainly for weight management — if diet is clean, it is optional</button>
+    <button class="choice" data-q="6" data-v="b"><span class="choice-letter">b</span>Movement drives lymph flow, oxygenates cells, regulates hormones, and activates detox pathways that food alone cannot reach — it is an essential pillar, not a supplement</button>
+    <button class="choice" data-q="6" data-v="c"><span class="choice-letter">c</span>Only high-intensity exercise produces meaningful health benefits</button>
+    <button class="choice" data-q="6" data-v="d"><span class="choice-letter">d</span>Stretching and yoga are not real exercise and do not contribute to alkaline health</button>
+  </div>
+  <div class="feedback" id="fb-6-a">
+    <div class="feedback-head">Movement does something food cannot — it moves the body's fluids</div>
+    <div class="feedback-body">Food provides the materials. Movement activates the systems that use and distribute those materials. The lymphatic system — which carries cellular waste out of tissues — has no pump. It depends entirely on muscular movement, breath, and gravitational changes in body position. A person who eats impeccably but sits for eight hours a day has clean material arriving in a body that is not moving what it needs to move. Carl is missing the circulation of what he is building. That is not a minor gap — it is one of the pillars the alkaline life requires alongside food.</div>
+  </div>
+  <div class="feedback" id="fb-6-b">
+    <div class="feedback-head">Movement is medicine — and it does not require a gym</div>
+    <div class="feedback-body">Every major detox pathway benefits from movement: the lymph moves through muscle contractions; the lungs expel carbon dioxide (an acid waste product) more efficiently with deep breathing during activity; the skin sweats toxins through exertion; the bowels are stimulated by core engagement and walking. Beyond detox, movement regulates cortisol, produces BDNF (brain-derived neurotrophic factor, essential for mental clarity and mood), balances blood sugar, and maintains the cardiovascular flexibility that keeps the body resilient as it ages. Carl does not need gym culture. He needs daily walking, some form of resistance, occasional sweating, and consistent movement woven into his day. Thirty minutes of walking and ten minutes of stretching transforms his results from good to complete.</div>
+  </div>
+  <div class="feedback" id="fb-6-c">
+    <div class="feedback-head">Low-intensity consistent movement outperforms occasional high-intensity exercise for long-term health</div>
+    <div class="feedback-body">High-intensity training has genuine benefits — particularly for cardiovascular fitness, muscle building, and short-term hormonal response. But for the alkaline body, the most relevant movement is the kind that can be sustained daily: walking, rebounding, swimming, dancing, cycling at a comfortable pace. These maintain lymph flow, support sleep, regulate blood sugar without spiking cortisol, and preserve joint health across decades. Carl does not need to perform. He needs to move — consistently, enjoyably, and in ways that feel like living rather than obligation.</div>
+  </div>
+  <div class="feedback" id="fb-6-d">
+    <div class="feedback-head">Yoga and stretching are some of the most alkaline-supportive practices available</div>
+    <div class="feedback-body">Yoga activates the parasympathetic nervous system (reducing cortisol), compresses and releases internal organs (supporting detox and digestion), moves the lymph through inversions and twisting postures, deepens breathing (expelling CO2 and oxygenating cells), and creates the physical stillness within which the body can regulate itself. These are not peripheral effects. They address the very systems that alkaline eating is trying to support. If anything, a combination of daily walking and regular yoga practice provides more of what an alkaline body needs than any high-intensity protocol focused primarily on performance.</div>
+  </div>
+  <button class="next-btn" id="next-6">Continue →</button>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" data-slide="7">
+  <div class="slide-number">07 / 08</div>
+  <div class="question-text">How do you maintain your alkaline practice through disruption — travel, illness, grief, major life change?</div>
+  <div class="question-context">After a bereavement, Olu finds himself reverting to comfort foods he had left behind. He feels guilty but also exhausted. He wonders whether the practice was ever really his, or whether it only works when life is going well.</div>
+  <div class="choices">
+    <button class="choice" data-q="7" data-v="a"><span class="choice-letter">a</span>If the practice breaks down under stress, it was never properly established — he needs to restart from the beginning</button>
+    <button class="choice" data-q="7" data-v="b"><span class="choice-letter">b</span>Reversion under extreme stress is human and expected — what matters is the return, not the perfection; a practice tested by disruption and survived is deeper than one that never faced it</button>
+    <button class="choice" data-q="7" data-v="c"><span class="choice-letter">c</span>Grief justifies returning to old habits permanently — life is short and food should be comfort</button>
+    <button class="choice" data-q="7" data-v="d"><span class="choice-letter">d</span>He should fast through the grief period to prevent damage from comfort eating</button>
+  </div>
+  <div class="feedback" id="fb-7-a">
+    <div class="feedback-head">Disruption is not failure — it is the test that proves the practice is real</div>
+    <div class="feedback-body">A practice that only functions under ideal conditions is not yet a practice — it is a streak. Olu's reversion under bereavement does not mean he never changed. It means grief is one of the most destabilising experiences a human body and nervous system can pass through, and the ancient neural pathways of comfort and survival activated in response. The body did what bodies do under extreme stress — it went to the familiar. This is not a character flaw or a failure of willpower. It is biology. What it tells him about himself is not that the practice was shallow — it is that he is human.</div>
+  </div>
+  <div class="feedback" id="fb-7-b">
+    <div class="feedback-head">The return is what makes the practice permanent — not the unbroken streak</div>
+    <div class="feedback-body">Every practitioner in any tradition has faced the moment of reversion — food, sleep, movement, breath, prayer. The ones who build lasting change are not the ones who never fell. They are the ones who recognised where they were without judgment, and came back. Olu does not need to restart from scratch. His body remembers. His gut still has the beneficial bacteria. His palate still knows the difference. He is not at the beginning — he is at a chapter break. The guilt he feels is not useful; it adds acid to an already stressed system. What serves him is the gentleness to return, one meal at a time, without punishment.</div>
+  </div>
+  <div class="feedback" id="fb-7-c">
+    <div class="feedback-head">Food can hold love and comfort — and also not be the primary source of either</div>
+    <div class="feedback-body">Life is short — and that is precisely why what you put in your body during its most vulnerable moments matters. Grief taxes every system: immune, hormonal, cardiovascular, neurological. Returning to ultra-processed food during bereavement adds physiological burden to an already overwhelmed body, and the short-term comfort produces medium-term depletion that extends the difficulty of grief. This does not mean Olu should eat sterile, joyless food while grieving. It means the most loving thing he can do for his body — while his heart is breaking — is to feed it gently and well, not to compound loss with depletion.</div>
+  </div>
+  <div class="feedback" id="fb-7-d">
+    <div class="feedback-head">Fasting during active grief is not the right tool for this moment</div>
+    <div class="feedback-body">Extended fasting during acute stress — particularly bereavement, which involves cortisol dysregulation, disrupted sleep, and emotional overwhelm — can deepen the body's stress response rather than support healing. The body is already in crisis. Removing food removes one of the primary signals of safety and nourishment. What Olu needs during grief is gentle, consistent, mineral-rich nourishment — warm soups, soft grains, calming herbs like chamomile and ashwagandha, and the understanding that feeding himself through this is an act of love, not indulgence. Fasting can return when he is stable.</div>
+  </div>
+  <button class="next-btn" id="next-7">Continue →</button>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" data-slide="8">
+  <div class="slide-number">08 / 08</div>
+  <div class="question-text">What does it mean to pass this knowledge on — and why does it matter beyond the individual?</div>
+  <div class="question-context">Adaeze has practised alkaline living for two years. She is now thinking about her children, her community, and what it means to carry forward a tradition of healing that was nearly lost. She asks herself: is this just about my health, or is it something larger?</div>
+  <div class="choices">
+    <button class="choice" data-q="8" data-v="a"><span class="choice-letter">a</span>Health is personal — the knowledge does not need to extend beyond the individual</button>
+    <button class="choice" data-q="8" data-v="b"><span class="choice-letter">b</span>Every generation that recovers this knowledge and passes it on repairs a thread of ancestral wisdom that was deliberately severed — and that restoration is both personal and political</button>
+    <button class="choice" data-q="8" data-v="c"><span class="choice-letter">c</span>She should write a book or start a business before sharing — it needs to be formalised first</button>
+    <button class="choice" data-q="8" data-v="d"><span class="choice-letter">d</span>Sharing health knowledge publicly is irresponsible without a medical licence</button>
+  </div>
+  <div class="feedback" id="fb-8-a">
+    <div class="feedback-head">The personal and the collective have never been separate in healing traditions</div>
+    <div class="feedback-body">The vision of health as a private individual achievement is a modern and Western one — and it is relatively recent. In every traditional healing culture, wellness was understood as something held by communities, transmitted between generations, and maintained collectively. The healer's role was not to accumulate a private practice but to ensure the knowledge lived in enough people that it could not be lost. Adaeze's health is hers — and it is also a resource for every person whose life touches hers, and theirs, and theirs. The ripple is not optional. It is the point.</div>
+  </div>
+  <div class="feedback" id="fb-8-b">
+    <div class="feedback-head">Restoring this knowledge is an act of healing that goes beyond any one body</div>
+    <div class="feedback-body">The knowledge that food is medicine — that the body heals itself when given what it needs, that specific plants address specific imbalances, that the body's natural state is not disease but vitality — was not forgotten by accident. It was systematically displaced by commercial food systems, by pharmaceutical models that profit from ongoing illness, and by the cultural disruption that separated communities from their ancestral practices. When Adaeze teaches her children what an alkaline plate looks like, when she grows herbs for her neighbours, when she speaks plainly about what she has lived — she is doing something that extends far beyond nutrition. She is carrying forward a tradition of self-determination in health. That is the inheritance. Pass it on.</div>
+  </div>
+  <div class="feedback" id="fb-8-c">
+    <div class="feedback-head">Transmission has never required credentials — it requires integrity and lived experience</div>
+    <div class="feedback-body">The grandmothers who kept herbal knowledge alive did not have publishing deals. The community healers who understood food as medicine did not hold licences. They had something more durable: the visible evidence of a life well-lived, the accumulated observation of what worked and what did not, and the willingness to share without attachment to recognition. Adaeze can write a book, build a platform, or start a business if she chooses — and those are worthy paths. But the transmission does not wait for them. It happens at the table, in conversation, in what she feeds her children tonight.</div>
+  </div>
+  <div class="feedback" id="fb-8-d">
+    <div class="feedback-head">Sharing personal experience and lived knowledge is not the same as practising medicine</div>
+    <div class="feedback-body">There is an important distinction between prescribing treatment for a named disease — which requires clinical training and licensing — and sharing the knowledge of how food affects the body, what plants have been used historically and why, and how a personal transformation happened. The latter is testimony, education, and tradition. Communities have always shared this knowledge between themselves. Adaeze is not diagnosing or prescribing. She is passing on what she knows from living it — which is precisely what the healing tradition she is part of was always built on. That transmission is her right and her responsibility.</div>
+  </div>
+  <button class="next-btn" id="next-8">Continue →</button>
+</div>
+
+<!-- SLIDE 9 — COURSE COMPLETE -->
+<div class="slide" data-slide="9">
+  <div class="complete-block">
+    <div class="complete-icon">🌱</div>
+    <div class="complete-title">Course Complete</div>
+    <div class="complete-sub">You have finished <em>Food Is Medicine</em> — nine modules built in the tradition of those who understood that the body is designed to heal, and that food is the most direct conversation we have with that design. From the philosophy of what you eat, to the science of fasting, to the herbs that have supported human health for centuries, to the emotional dimension of change, to the life you build on the other side — this knowledge is now yours.</div>
+    <div class="complete-sub2">Health is not a destination you arrive at. It is the quality of attention you bring to how you live. The tradition continues through every person who carries it forward.</div>
+
+    <div class="section-heading" style="margin-top:48px;text-align:left">What you carry forward</div>
+    <ol class="summary-list" style="text-align:left">
+<li><span class="summary-num">01</span><span class="summary-text">Alkaline living is a lifestyle, not a diet. It is the integration of food, water, movement, stress response, and rest into a coherent way of living that supports the body&rsquo;s designed operating environment.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Water quality is a pillar of the alkaline practice. Spring water, properly mineralised, is categorically different from tap water processed through industrial systems. What you drink builds the medium your cells live in.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Chronic stress acidifies the body through hormonal and metabolic pathways. Stress management is not separate from nutritional practice &mdash; it is part of the same project of maintaining a healthy internal terrain.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Movement supports the alkaline body through multiple mechanisms: lymphatic flow, oxygenation, hormone regulation, and cellular waste removal. Exercise is not primarily about weight &mdash; it is about circulation and cellular health.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Sharing this knowledge with others requires patience and strategy. People do not change through information alone. They change through relationship, through watching someone they love live differently, and through their own readiness.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">Passing this knowledge on &mdash; to children, to family, to anyone who is ready &mdash; is how a tradition continues. Health knowledge that stays inside one person is limited. Health knowledge that travels through families and communities is generational medicine.</span></li>
+</ol>
+    <div class="section-heading" style="margin-top:48px;text-align:left">Practice going forward</div>
+    <p class="complete-sub" style="text-align:left;max-width:100%;color:var(--ink)">Daily: choose one hinge practice that anchors your alkaline life &mdash; something small enough to do every day without friction. It might be a glass of spring water with lime on waking. It might be a green food at one meal. It might be two minutes of deep breathing before eating. The hinge practice is not the whole of the work &mdash; it is the thing that keeps the door from closing when life gets difficult.</p>
+    <p class="complete-sub" style="text-align:left;max-width:100%;color:var(--ink)">Monthly: assess the four pillars &mdash; food, water, movement, stress &mdash; once per month. Not to grade yourself, but to see which pillar has received the least attention and make one small adjustment. The alkaline life is not built all at once. It is built by the continuous practice of noticing and adjusting, across months and years.</p>
+    <p class="complete-sub" style="text-align:left;max-width:100%;color:var(--ink)">Once per year: look back at where you were twelve months ago. What has changed in your body, your energy, your relationship with food, your capacity to navigate difficulty? The changes from real food and genuine practice accumulate slowly and then become undeniable. The tradition you carry forward &mdash; into your own health and into the people you love &mdash; is what this course was for.</p>
+    <div class="complete-line"></div>
+  </div>
+</div>
+
+</div><!-- /stage -->
+
+<script>
+const feedbacks={
+"1":{"a":"fb-1-a","b":"fb-1-b","c":"fb-1-c","d":"fb-1-d"},
+"2":{"a":"fb-2-a","b":"fb-2-b","c":"fb-2-c","d":"fb-2-d"},
+"3":{"a":"fb-3-a","b":"fb-3-b","c":"fb-3-c","d":"fb-3-d"},
+"4":{"a":"fb-4-a","b":"fb-4-b","c":"fb-4-c","d":"fb-4-d"},
+"5":{"a":"fb-5-a","b":"fb-5-b","c":"fb-5-c","d":"fb-5-d"},
+"6":{"a":"fb-6-a","b":"fb-6-b","c":"fb-6-c","d":"fb-6-d"},
+"7":{"a":"fb-7-a","b":"fb-7-b","c":"fb-7-c","d":"fb-7-d"},
+"8":{"a":"fb-8-a","b":"fb-8-b","c":"fb-8-c","d":"fb-8-d"}
+};
+const correct={"1":"b","2":"b","3":"b","4":"b","5":"b","6":"b","7":"b","8":"b"};
+let current=1;
+function showSlide(n){
+  document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+  const sl=document.querySelector('[data-slide="'+n+'"]');
+  if(sl)sl.classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((d,i)=>{
+    d.classList.remove('done','active');
+    if(i+1<n)d.classList.add('done');
+    else if(i+1===n)d.classList.add('active');
+  });
+}
+document.querySelectorAll('.choice').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const q=this.dataset.q;
+    const v=this.dataset.v;
+    const allChoices=document.querySelectorAll('[data-q="'+q+'"]');
+    allChoices.forEach(b=>b.disabled=true);
+    document.querySelectorAll('[id^="fb-'+q+'-"]').forEach(f=>f.classList.remove('visible'));
+    const fbId=feedbacks[q][v];
+    if(fbId){const fb=document.getElementById(fbId);if(fb)fb.classList.add('visible');}
+    if(v===correct[q])this.classList.add('correct');
+    else{
+      this.classList.add('incorrect');
+      const cb=document.querySelector('[data-q="'+q+'"][data-v="'+correct[q]+'"]');
+      if(cb)cb.classList.add('correct');
+    }
+    const nb=document.getElementById('next-'+q);
+    if(nb)nb.style.display='inline-block';
+  });
+});
+document.querySelectorAll('.next-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    current++;
+    showSlide(current);
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+showSlide(1);
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c8m8';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course8-module-8-detoxing-and-transition.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Course Complete ✓';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c8m9','1');window.location.href='index.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+function SS_restartCourse(){
+  try{['safespot_c8m1','safespot_c8m2','safespot_c8m3','safespot_c8m4','safespot_c8m5','safespot_c8m6','safespot_c8m7','safespot_c8m8','safespot_c8m9'].forEach(function(k){localStorage.removeItem(k);});}catch(e){}
+  window.location.href="course8-landing.html";
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

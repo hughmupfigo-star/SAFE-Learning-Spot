@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generational Patterns & Family — Safe Spot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})()</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+
+.site-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);
+  padding:14px 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:0}
+.site-logo{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.site-logo strong{color:var(--ink);font-weight:500}
+.header-back{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;transition:color .2s;justify-self:end}
+.header-back:hover{color:var(--ink)}
+.theme-toggle{grid-column:2;justify-self:center;background:none;border:none;
+  cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;line-height:1;
+  opacity:.55;transition:opacity .2s;}
+.theme-toggle:hover{opacity:1;}
+
+.landing-wrap{max-width:760px;margin:0 auto;padding:56px 32px 100px}
+.landing-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:24px}
+.landing-title{font-family:var(--serif);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:300;line-height:1.25;margin-bottom:20px}
+.landing-tagline{font-size:.95rem;color:#3a3a36;line-height:1.75;margin-bottom:10px;font-style:italic}
+.landing-intro{font-size:.95rem;color:#3a3a36;line-height:1.75;margin-bottom:32px;max-width:640px}
+.landing-intro p{margin-bottom:14px}
+.landing-intro p:last-child{margin-bottom:0}
+
+.what-youll-cover{border:1px solid var(--line);border-left:3px solid var(--ink);padding:20px 24px;
+  background:var(--soft);border-radius:0 4px 4px 0;margin-bottom:28px}
+.what-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px}
+.module-preview{list-style:none;display:flex;flex-direction:column;gap:0}
+.module-preview li{font-size:.88rem;line-height:1.55;border-bottom:1px solid var(--line);
+  padding:10px 0;display:flex;gap:14px;align-items:flex-start}
+.module-preview li:last-child{border-bottom:none}
+.mod-n{font-family:var(--mono);font-size:.72rem;color:var(--muted);flex-shrink:0;margin-top:3px;min-width:24px}
+.mod-title{font-weight:500;color:var(--ink);margin-bottom:2px}
+.mod-desc{color:var(--muted);font-size:.82rem;line-height:1.45}
+
+.time-notice{background:var(--paper);border:1px solid var(--line);padding:16px 20px;border-radius:4px;
+  margin-bottom:40px;font-size:.88rem;color:var(--muted);line-height:1.65}
+.time-notice strong{color:var(--ink);font-weight:500}
+
+.begin-btn{padding:14px 36px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;
+  font-size:.9rem;font-family:var(--sans);letter-spacing:.04em;cursor:pointer;
+  text-decoration:none;display:inline-block;transition:opacity .2s}
+.begin-btn:hover{opacity:.85}
+
+/* DARK MODE */
+html[data-theme="dark"]{--ink:#d8d8d4;--paper:#111110;--muted:#77776f;--line:#2c2c2a;--soft:#1c1c1a;--accent:#e06050}
+html[data-theme="dark"] .landing-intro,
+html[data-theme="dark"] .landing-tagline{color:var(--ink);}
+html[data-theme="dark"] .what-youll-cover{background:var(--soft);border-color:var(--line);border-left-color:var(--ink);}
+html[data-theme="dark"] .time-notice{background:var(--soft);border-color:var(--line);}
+html[data-theme="dark"] .begin-btn{background:var(--ink);color:var(--paper);}
+
+@media(max-width:600px){
+  .landing-wrap{padding:40px 20px 80px}
+  .site-header{padding:14px 20px}
+}
+
+/* ── DISCLAIMER (landing) ── */
+.disclaimer-pre{background:var(--soft);border:1px solid var(--line);border-left:3px solid var(--accent);
+  padding:20px 24px;border-radius:0 4px 4px 0;margin-bottom:36px}
+.disclaimer-pre-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px}
+.disclaimer-pre-text{font-size:.84rem;line-height:1.75;color:var(--muted)}
+.disclaimer-pre-text p{margin-bottom:8px}
+.disclaimer-pre-text p:last-child{margin-bottom:0}
+/* ── SLIM FOOTER (landing) ── */
+.landing-footer{background:#050505;border-top:1px solid #111;padding:18px 32px;margin-top:0}
+.landing-footer-bar{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;
+  align-items:center;gap:24px;flex-wrap:wrap}
+.landing-footer-copy{font-family:var(--mono);font-size:.7rem;color:#3a3a38;letter-spacing:.06em;text-transform:uppercase}
+.landing-footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.landing-footer-links a{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;
+  text-decoration:none;text-transform:uppercase;transition:color .2s}
+.landing-footer-links a:hover{color:#888}
+html[data-theme="dark"] .disclaimer-pre{background:#131311;border-color:#2c2c2a}<style>
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+</style></style>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-access.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-logo">Safe Spot &middot; <strong>Course 05</strong></div>
+  <button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">&#9680;</button>
+  <a href="index.html" class="header-back">&larr; All Courses</a>
+</header>
+
+<div class="landing-wrap">
+  <div class="landing-eyebrow">Safe Spot &middot; Course 05</div>
+  <h1 class="landing-title">Generational Patterns &amp; Family</h1>
+  <p class="landing-tagline">Some of what you carry was never yours. Learn to name it, trace it, and decide what you pass forward.</p>
+
+  <div class="landing-intro">
+    <p>Family systems repeat. The same wounds, the same roles, the same unspoken rules pass from generation to generation until someone sees them clearly enough to stop. The scapegoat is not an accident of personality — it is a structural function of how dysfunctional families maintain equilibrium.</p>
+    <p>This course traces the full picture: what the scapegoat role is and how to know if you hold it, the purpose scapegoating serves for the family system, how wounds compound across generations, the specific work of breaking the cycle, and the honest question of whether to rebuild or exit.</p>
+  </div>
+
+  <div class="what-youll-cover">
+    <div class="what-label">What you will cover</div>
+    <ul class="module-preview">
+      <li>
+        <span class="mod-n">01</span>
+        <div>
+          <div class="mod-title">The Scapegoat Role</div>
+          <div class="mod-desc">What the scapegoat role is, how it functions in a family system, and why it persists across generations.</div>
+        </div>
+      </li>
+      <li>
+        <span class="mod-n">02</span>
+        <div>
+          <div class="mod-title">Am I the Scapegoat?</div>
+          <div class="mod-desc">The diagnostic markers. Not a checklist — a map of the lived experience.</div>
+        </div>
+      </li>
+      <li>
+        <span class="mod-n">03</span>
+        <div>
+          <div class="mod-title">The Purpose of Scapegoating</div>
+          <div class="mod-desc">Why families scapegoat. The systemic function that makes it self-perpetuating.</div>
+        </div>
+      </li>
+      <li>
+        <span class="mod-n">04</span>
+        <div>
+          <div class="mod-title">Generational Wounding</div>
+          <div class="mod-desc">How trauma and dysfunction transmit across generations — and the mechanisms that carry it.</div>
+        </div>
+      </li>
+      <li>
+        <span class="mod-n">05</span>
+        <div>
+          <div class="mod-title">Breaking the Cycle</div>
+          <div class="mod-desc">What the work of breaking the generational pattern actually requires. Practically and psychologically.</div>
+        </div>
+      </li>
+      <li>
+        <span class="mod-n">06</span>
+        <div>
+          <div class="mod-title">Rebuilding or Exiting</div>
+          <div class="mod-desc">The most honest question: whether to rebuild the relationship or exit the system. Both are valid. Neither is easy.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="time-notice">
+    <strong>6 modules · approximately 3–4 hours</strong> &nbsp;&middot;&nbsp; Begin with Module 1. Each module unlocks the next.
+  </div>
+  <div class="disclaimer-pre">
+    <div class="disclaimer-pre-label">Before you begin</div>
+    <div class="disclaimer-pre-text">
+      <p><strong>Your data is yours.</strong> We do not sell your progress or any personal data to third parties. What happens in this course stays between you and this platform.</p>
+      <p>Think of SAFE as windscreen wipers on your drive. This is <em>your</em> healing — your direction, your destination. We are here to keep the view clear so you can read the signs without judgement.</p>
+      <p>The fees from these courses go directly toward funding SAFE youth hubs. Once we reach the right level of funding, every course will be free.</p>
+    </div>
+  </div>
+
+
+
+  <a href="course5-module-1-the-scapegoat-role.html" class="begin-btn" id="beginBtn">Begin Course &rarr;</a>
+</div>
+
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+      else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}}
+  catch(e){}
+}
+</script>
+
+<footer class="landing-footer">
+  <div class="landing-footer-bar">
+    <div class="landing-footer-copy">SAFE Learning Spot Centre &middot; All Rights Reserved</div>
+    <nav class="landing-footer-links">
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="help.html">Help</a>
+      <div class="footer-legal-wrap" style="position:relative;display:inline-block">
+        <button onclick="(function(b){var d=b.nextElementSibling;d.style.display=d.style.display==='flex'?'none':'flex';})(this)" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-transform:uppercase;background:none;border:none;cursor:pointer;padding:0;transition:color .2s" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Legal &#9662;</button>
+        <div class="footer-legal-menu" style="display:none;position:absolute;bottom:calc(100% + 8px);right:0;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:8px 0;flex-direction:column;min-width:140px;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.08)">
+          <a href="privacy.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Privacy</a>
+          <a href="terms.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Terms</a>
+          <a href="privacy-choices.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Choices</a>
+          <a href="accessibility.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Access</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];
+      var el=document.getElementById('ss-user-greeting');
+      if(el)el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next)document.documentElement.setAttribute('data-zoom',next);
+    else document.documentElement.removeAttribute('data-zoom');
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev)document.documentElement.setAttribute('data-zoom',prev);
+    else document.documentElement.removeAttribute('data-zoom');
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+<script>
+(function(){
+  var keys  = ['safespot_c5m1', 'safespot_c5m2', 'safespot_c5m3', 'safespot_c5m4', 'safespot_c5m5', 'safespot_c5m6'];
+  var urls  = ['course5-module-1-the-scapegoat-role.html', 'course5-module-2-am-i-the-scapegoat.html', 'course5-module-3-the-purpose-of-scapegoating.html', 'course5-module-4-generational-wounding.html', 'course5-module-5-breaking-the-cycle.html', 'course5-module-6-rebuilding-or-exiting.html'];
+  var lbls  = ['Module 01', 'Module 02', 'Module 03', 'Module 04', 'Module 05', 'Module 06'];
+  var done  = keys.filter(function(k){ return !!localStorage.getItem(k); }).length;
+  var total = keys.length;
+  var btn   = document.getElementById('beginBtn');
+  if(!btn) return;
+  if(done === 0){
+    // Default: button text already set to "Begin Course" in HTML
+  } else if(done < total){
+    btn.textContent = 'Continue: ' + lbls[done] + ' →';
+    btn.href = urls[done];
+  } else {
+    btn.textContent = 'Course Complete ✓';
+    btn.style.background = '#22863a';
+    btn.style.borderColor = '#22863a';
+    btn.style.color = '#fff';
+  }
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

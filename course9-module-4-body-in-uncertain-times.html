@@ -1,0 +1,977 @@
+<title>Module 04 · Your Body in Uncertain Times — Course 9</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display:flex;align-items:center;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);flex:1;order:1;min-width:0}
+.module-tag strong{color:var(--ink);font-weight:500}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:28px;height:2px;background:var(--line);transition:background .4s}
+.progress-dot.active{background:var(--ink)}
+.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}
+.slide{display:none;animation:fadeUp .6s ease}
+.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-title em{font-style:italic;font-weight:300}
+.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}
+.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}
+.body-text strong{font-weight:500;color:var(--ink)}
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}
+.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}
+.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s;position:relative;font-weight:400}
+.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}
+.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.selected .choice-letter{color:var(--paper);opacity:.6}
+.choice:disabled{cursor:default}
+.choice:disabled:hover{transform:none}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s}
+.feedback.visible{display:block}
+.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px;letter-spacing:-.005em}
+.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28;font-weight:400}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s;font-weight:500}
+.nav-btn:hover{opacity:.6}
+.nav-btn:disabled{opacity:.2;cursor:not-allowed}
+.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#2a2a28;opacity:1}
+.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}
+.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+.return-home-wrap{text-align:center;margin-top:20px}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s}
+.return-home-link:hover{color:var(--ink)}
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:18px}.complete-mark{font-size:80px}}
+html[data-theme="dark"]{--ink:#d8d8d4;--paper:#111110;--muted:#77776f;--line:#2c2c2a;--soft:#1c1c1a;--accent:#4aaa6f}
+html[data-theme="dark"] .body-text,html[data-theme="dark"] .lead,html[data-theme="dark"] .summary-text,html[data-theme="dark"] .pullquote,html[data-theme="dark"] .slide-title,html[data-theme="dark"] .feedback-text,html[data-theme="dark"] .scenario-context,html[data-theme="dark"] .feedback-headline{color:var(--ink)}
+html[data-theme="dark"] .choice{background:var(--soft);border-color:var(--line)}
+html[data-theme="dark"] .choice:hover:not(:disabled){background:#222220;border-color:#4a4a48}
+html[data-theme="dark"] .choice.selected{background:#141e17;border-color:var(--accent)}
+html[data-theme="dark"] .feedback{background:var(--soft)}
+html[data-theme="dark"] .nav-btn{background:var(--soft);color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .nav-btn.primary{background:var(--ink);color:var(--paper)}
+html[data-theme="dark"] .nav-btn.primary:hover{background:#b4b4b0;opacity:1}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s;z-index:10}
+.theme-toggle:hover{opacity:1}
+.header-center{display:flex;align-items:center;gap:14px;order:2;margin:0 auto}
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;z-index:49;display:none;scrollbar-width:none;flex-direction:column}
+.course-sidebar::-webkit-scrollbar{display:none}
+@media(min-width:1140px){.course-sidebar{display:flex}.module-container{margin-left:220px}}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s}
+.sidebar-back:hover{color:var(--ink)}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px}
+.sidebar-mod-list{list-style:none}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:8px}
+.sidebar-mod-item:last-child{border-bottom:none}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);flex-shrink:0;margin-top:2px;min-width:20px}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none}
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent)}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto}
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line)}
+.sidebar-mod-item.ss-now .sidebar-mod-n,.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none}
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line)}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem("safespot_theme")==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})()</script>
+<script>(function(){try{var s=localStorage.getItem("slsc_session");if(!s){var p=encodeURIComponent(location.pathname.split("/").pop()||"index.html");location.replace("login.html?from="+p);}}catch(e){}})()</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Module <strong>04</strong> &middot; Your Body in Uncertain Times</div>
+  <div class="progress-bar" id="progressBar"><div class="progress-dot active" data-page="1"></div><div class="progress-dot" data-page="2"></div><div class="progress-dot" data-page="3"></div><div class="progress-dot" data-page="4"></div><div class="progress-dot" data-page="5"></div><div class="progress-dot" data-page="6"></div></div>
+  <div class="header-center">
+    <button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">&#9680;</button>
+    <span class="zoom-ctrl">
+      <button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A&minus;</button>
+      <button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button>
+    </span>
+  </div>
+</header>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">&larr; Homepage</a>
+  <div class="sidebar-course-label">Course 9 &middot; The Art of Becoming</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c9m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course9-module-1-why-you-are-here.html">Why You Are Here</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course9-module-2-the-comfortable-cage.html">The Comfortable Cage</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course9-module-3-mechanics-of-evolution.html">The Mechanics of Evolution</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course9-module-4-body-in-uncertain-times.html">Your Body in Uncertain Times</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course9-module-5-the-observer-self.html">The Observer Self</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course9-module-6-fear-and-the-unknown.html">Fear and The Unknown</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course9-module-7-living-fully-in-both-worlds.html">Living Fully in Both Worlds</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course9-module-8-path-discovery.html">Path Discovery</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- ===== SLIDE 1 ===== -->
+  <section class="slide  active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 &middot; The Vehicle</div>
+    <h1 class="slide-title">Your body is not <em>who you are</em> — it is <em>where you are.</em></h1>
+    <p class="lead">The body is the most immediate point of contact between the spiritual and the physical. Understanding it as a vehicle — temporary, responsive, and intelligent — changes everything about how you inhabit it.</p>
+    <p class="body-text">In uncertain times, there is a temptation to leave the body — to retreat into the mind, into abstraction, into the relative safety of ideas. The news is too frightening, the world too chaotic, the physical reality too demanding. It can feel like transcendence to step back from the body's experience, to float a little above it, to observe rather than inhabit.</p>
+    <p class="body-text">But this is not transcendence. It is dissociation — a very old coping mechanism that provides short-term relief at long-term cost. <strong>The body is not the enemy of spiritual growth. It is the instrument of it.</strong> You cannot evolve while operating from a position of chronic self-abandonment. The ground of all genuine transformation is presence — and presence begins in the body.</p>
+    <div class="section-heading">The Intelligence in the Body</div>
+    <p class="body-text">Your body contains forms of intelligence that your rational mind does not. It registers safety and threat before the conscious mind has processed the information. It stores unprocessed experience in muscle memory and tissue. It communicates through sensation, posture, breath, and the quality of the energy that moves through it. <strong>Learning to read this intelligence — to be genuinely present in the body — is one of the most advanced practices available to a human being.</strong></p>
+    <div class="pullquote">You are a spiritual being having a physical experience. And the physical experience is the point, not an inconvenience to be endured until you return home.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You notice you have been spending most of your day in your head — planning, analyzing, worrying — while your body is present but unattended.</p>
+      <p class="scenario-context">Your shoulders are tight, your breathing is shallow, your jaw is held. You have been here for hours without noticing any of it.</p>
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Continue with the mental activity. The body can be addressed later.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Return to the body immediately. Three deep breaths, feel your feet, notice your posture.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Acknowledge the disconnection but wait for a better moment.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Decide you need a significant wellness practice and research options.</button>
+      </div>
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" disabled>&larr; Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 2 ===== -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 &middot; The Signals</div>
+    <h1 class="slide-title">The body speaks. Most people stopped <em>listening.</em></h1>
+    <p class="lead">Every emotion you experience has a physical location. Every belief you hold has a corresponding posture. Every unprocessed experience lives somewhere in your body, waiting.</p>
+    <p class="body-text">The modern world trains people to live above the neck. Education is about the development of the mind. Professional success is measured by cognitive output. Social identity is built around what you think, say, and present. The body is managed — exercised, fed, clothed, medicated when necessary — but rarely listened to as a source of intelligence. It becomes a machine for carrying the head around.</p>
+    <p class="body-text">But the body has been communicating all along. The tightness in the chest before a conversation you are dreading. The way your stomach drops when something is not right. The flooding sense of expansion when you step into alignment with something true. The physical weight of a relationship that is costing you more than it is giving. <strong>These are not incidental sensations. They are primary data.</strong></p>
+    <div class="section-heading">Somatic Intelligence</div>
+    <p class="body-text">Somatic intelligence — body knowing — is not mysticism. It is the intelligence of a system that evolved to read environments, relationships, and internal states with extraordinary precision. The rational mind is fast, but it is also easily deceived by language, social pressure, and the stories it tells about what should be true. The body is much harder to deceive. <strong>What your body knows about a situation is often ahead of what your mind has been able to articulate.</strong></p>
+    <div class="pullquote">Your body has never lied to you. You have simply learned not to ask it.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You are considering a significant decision. Rationally, the reasons to proceed are compelling. But something physical — a heaviness, a contraction, a low-level persistent unease — says otherwise.</p>
+      <p class="scenario-context">Not anxiety about the unknown. Something more specific. A quality of wrongness that is difficult to articulate but impossible to ignore once you are paying attention.</p>
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Proceed. The rational case is clear and the physical sensation is probably just anxiety.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Investigate the physical sensation further before deciding. It is data, not noise.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Delay the decision indefinitely because the body signal creates confusion.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss it explicitly: feelings are not facts and should not drive decisions.</button>
+      </div>
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 3 ===== -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 &middot; The Anchor</div>
+    <h1 class="slide-title">In chaos, the body is the <em>only ground that is always available.</em></h1>
+    <p class="lead">When the external world accelerates beyond comprehension, the body remains exactly where it is — in this room, breathing this air, on this floor. This is not a limitation. It is the anchor.</p>
+    <p class="body-text">As the world moves faster and the future becomes harder to predict, the mind tends to escalate — running further ahead in time, generating more scenarios, consuming more information, calibrating and recalibrating in search of a stable point. This strategy works well for manageable uncertainty. But for the kind of fundamental, structural uncertainty that characterises the current transition, it produces only more anxiety. The further ahead the mind reaches, the more unstable the terrain it finds.</p>
+    <p class="body-text">The body has a different relationship with uncertainty. It cannot worry about the future — it only exists in the present. When you drop into genuine body awareness, the crisis in your mind is still real, but it loses the quality of immediacy that the mind's time-travelling gives it. <strong>The present moment of bodily existence is always, structurally, manageable. The imagined future is always, structurally, overwhelming.</strong></p>
+    <div class="section-heading">Grounding as a Practice</div>
+    <p class="body-text">Grounding is not a metaphor. When you feel your feet on the floor, notice the weight of your body in the chair, attend to the sensation of your breath moving in and out, you are interrupting the anxiety circuit. You are returning the nervous system to the one location where it can actually do something: the present moment, in this body. <strong>From here, the next right thing is almost always visible. From the imagined future, almost nothing is.</strong></p>
+    <div class="pullquote">You cannot navigate the future from inside the future. The only place navigation is possible is here, now, in this body, at this moment.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You are overwhelmed by the scale and speed of what is happening in the world. The news is relentless, the implications vast, the uncertainty apparently bottomless.</p>
+      <p class="scenario-context">The mind is spinning. You can feel the cortisol, the contracted chest, the sense of helplessness in the face of something too large to manage.</p>
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Consume more information until the picture becomes clearer.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Stop, feel your feet, breathe, and ask: what is the next right thing in this moment?</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Disengage entirely from the world and focus only on immediate personal concerns.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Share your concern with others online and gather reactions.</button>
+      </div>
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 4 ===== -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 &middot; The Care</div>
+    <h1 class="slide-title">Caring for your body in uncertain times is a <em>spiritual act.</em></h1>
+    <p class="lead">How you treat your physical body during periods of sustained pressure is a direct reflection of how much you believe you are worth caring for. It is also the most practical thing you can do to maintain the capacity to evolve.</p>
+    <p class="body-text">People under sustained pressure tend to abandon the most fundamental practices first. Sleep degrades. The quality of food declines. Movement becomes irregular or disappears. The basic rhythms of the body — hunger, tiredness, the need for quiet — become inconveniences to be managed around rather than signals to be honoured. <strong>This is a strategy for shortening the runway.</strong> The body is the engine of everything you are trying to do. Running it at low fuel while demanding maximum output is not discipline. It is depletion.</p>
+    <p class="body-text">The connection between physical maintenance and spiritual capacity is direct and well-documented. The body's ability to process emotion, access insight, maintain presence, and sustain equanimity is dramatically reduced under conditions of chronic physical depletion. You cannot access the deepest dimensions of who you are from a depleted vehicle.</p>
+    <div class="section-heading">Rest as Spiritual Responsibility</div>
+    <p class="body-text">Rest is not laziness. Sleep is not wasted time. Movement is not vanity. Eating well is not self-indulgence. These are the basic maintenance of the instrument through which your consciousness operates. <strong>To care for your body in uncertain times is to declare, in the most concrete possible terms, that you intend to be present for what is coming.</strong></p>
+    <div class="pullquote">The most spiritual thing you can do today might be to go to bed an hour earlier, drink more water, and eat something that the earth grew rather than a factory made.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You are in a period of sustained high demand — significant pressure, reduced recovery time, consistently running on less than you need.</p>
+      <p class="scenario-context">You are managing. The outputs are being produced. But the quality of your inner life — your presence, your discernment, your access to joy and equanimity — has been quietly declining for weeks.</p>
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Continue. The demands are real and the maintenance can wait until things settle.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Identify the one physical practice that has been most neglected and restore it immediately.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Make a comprehensive wellness plan but delay implementing it until the current pressure subsides.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Decide that your current level of function is adequate and adjust your expectations of yourself downward.</button>
+      </div>
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 5 ===== -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 &middot; The Presence</div>
+    <h1 class="slide-title">Being fully here is <em>itself a form of contribution.</em></h1>
+    <p class="lead">In a world of increasing distraction, division, and absence, a person who is genuinely present — fully here, fully with what is actually happening — is rare and powerful.</p>
+    <p class="body-text">Presence is not merely a personal quality — it is a force in any room it enters. The person who is genuinely present with you, who is not half-attending while the other half is elsewhere, who is not performing engagement while secretly scrolling — that person changes the quality of the encounter in a way that you can feel but often cannot explain. <strong>Presence is the rarest form of gift one human being can give another.</strong></p>
+    <p class="body-text">And presence is inseparable from the body. The mind can pretend to be elsewhere. The body cannot. When you are fully in your body — breathing, sensing, attending — you are structurally prevented from being in the future or the past. You are here. And being here — genuinely, fully here — is both the foundation of all growth and the thing the world most needs from people who are on this path.</p>
+    <div class="section-heading">The Embodied Evolution</div>
+    <p class="body-text">The spiritual evolution you are undertaking is not something that happens only in your head or in meditation. It is happening in your body — in the quality of your breath, the openness of your chest, the ease or tension in your jaw and shoulders. It is visible in how you carry yourself. It is felt by the people you encounter. <strong>You cannot become more spiritually aware while becoming less physically present. The two move together.</strong></p>
+    <div class="pullquote">To be fully present in your body, exactly here, exactly now, is simultaneously the most ordinary and the most sacred thing you can do.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You are in a conversation with someone — a friend, a family member, a stranger — and you notice your mind beginning to travel elsewhere.</p>
+      <p class="scenario-context">Not because the conversation is unimportant. Because the habit of half-presence has become your default. You are here, but only partly.</p>
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Let the mind go where it goes. Full attention is not always possible or necessary.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Return to full presence deliberately. This conversation, this person, this moment — nothing else.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>End the conversation and go somewhere quiet where you can be alone.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Compensate by performing attentiveness — nodding more, making more eye contact — while still mentally elsewhere.</button>
+      </div>
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== COMPLETION SLIDE ===== -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">&#10003;</div>
+    <h1 class="slide-title">You've completed <em>Module 04.</em></h1>
+    <p class="lead">This knowledge does not stay on the page. It follows you out.</p>
+    <div class="section-heading">What You Carry Forward</div>
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">Your body is the instrument of your consciousness — not a vehicle to manage around but a source of intelligence to listen to.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Somatic signals are primary data. What your body knows about a situation is often ahead of what your mind has been able to articulate.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">In chaos, the body is the only anchor that is always available. The present moment of bodily existence is structurally manageable. The imagined future is not.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Caring for your body in uncertain times is a spiritual act. You cannot access the deepest dimensions of who you are from a depleted vehicle.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">Full presence is both the foundation of all growth and the rarest gift you can offer. Embodied evolution and spiritual evolution are the same journey.</span></li>
+    </ol>
+    <div class="section-heading">Practice This Week</div>
+    <p class="body-text">For five days, set a timer for every two hours. When it rings, stop whatever you are doing for sixty seconds. Feel your feet. Take three full breaths. Notice where you are holding tension without trying to release it. Just notice. At the end of five days, review what you found.</p>
+    <p class="body-text">The next module &mdash; <strong>The Observer Self</strong> &mdash; continues this thread deeper.</p>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" id="btn-complete">Begin Module 05 →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: "The body's neglect accumulates until it becomes impossible to ignore.", detail: "The mind's business always feels more pressing than the body's signals, which makes the delay seem reasonable every time. But the signals do not go away — they escalate. The tightness becomes pain. The shallow breathing becomes restriction. The unattended body becomes a source of symptoms rather than a source of intelligence. The body addressed later tends to arrive as a larger interruption than the one you chose not to make." },
+    b: { headline: 'Three breaths and felt feet is a genuine return, not a performance of one.', detail: 'The instruction to return to the body often sounds too simple for the scale of what is being asked of it. But the simplicity is the point. You cannot think your way into bodily presence — you can only arrive there by actually attending to sensation. Three deep breaths, feet felt on the floor, posture noticed — these are the mechanism of return, not a prelude to it. The return happens in the attending, not in the deciding to attend.' },
+    c: { headline: 'The better moment rarely arrives.', detail: "The body's signals do not get cleaner and clearer with time if they are consistently deferred. They tend instead to accumulate — to become noisier and more disruptive precisely because they have been waiting for a better moment. The better moment is also, structurally, always coming. The moment that is actually available is now. The return to the body takes sixty seconds. The better moment requires the right conditions. One of these is accessible; the other is not." },
+    d: { headline: 'Research about presence is practice about absence.', detail: 'Spending time researching somatic practices — reading about breathwork, looking into body-awareness techniques, comparing mindfulness programmes — is a way of being present to information about presence rather than present to your actual experience. It has the advantage of feeling productive while maintaining the existing distance from the body. The body does not need a new system. It needs your attention, now, in whatever form is currently available.' }
+  },
+  2: {
+    a: { headline: 'The rational case is clear, and the body signal may be accurately detecting something the rational case cannot yet articulate.', detail: 'The rational mind assembles a case from available information. The body reads a fuller dataset — including the energy behind words, the history of similar situations, the pre-verbal assessment of what is actually true rather than what is being presented. Both are reading the situation accurately, from different vantage points. When they conflict, the right response is not to dismiss one in favour of the other but to hold the conflict until it resolves into a clearer picture.' },
+    b: { headline: 'Investigating the body signal further produces information that the rational case does not contain.', detail: 'What does the heaviness feel like exactly? Where does it sit? What does it remind you of? Is it general anxiety or something more specific? When you bring genuinely curious attention to a body signal rather than immediately explaining it away, it tends to become more specific. That specificity contains information. The body is not saying "don\'t" — it is saying "look at this first." Looking at it is how you find out what it knows.' },
+    c: { headline: 'Indefinite delay is a third option that prevents the decision without resolving the conflict.', detail: 'The body signal creating confusion is only a problem if confusion means paralysis. Confusion can also be the honest state of someone who is genuinely uncertain — who has a rational case pointing one way and somatic data pointing another and does not yet have enough information to reconcile them. Staying in that honest uncertainty while continuing to gather information is different from using the confusion as a reason to neither decide nor investigate.' },
+    d: { headline: 'Feelings are data, and data drives all genuinely good decisions.', detail: 'The idea that feelings should not drive decisions conflates emotional reactivity with somatic intelligence. Emotional reactivity is fast, context-dependent, and often driven by historical material that is not relevant to the current situation. Somatic intelligence is slower, more consistent, and often more accurate about what is actually happening than the rationalised position. Dismissing the body signal explicitly because "feelings are not facts" closes a door that may contain the most relevant information available.' }
+  },
+  3: {
+    a: { headline: 'More information amplifies the anxiety without anchoring the person who receives it.', detail: "The mind reaches for more information because it believes that complete information would restore the sense of control. But the uncertainty you are navigating is structural — it cannot be resolved by additional data. There will always be more to know. Each additional piece of information expands the picture of uncertainty rather than shrinking it. The mind's appetite for information in this context is anxiety feeding itself rather than intelligence serving you." },
+    b: { headline: 'Feet, breath, and the next right thing is the complete practice.', detail: 'This is not a small suggestion. It is the whole thing. When you stop, feel your feet, breathe, and ask what the next right thing is in this moment — you have returned from the imagined crisis of the future to the actual conditions of the present. And in the present, there is almost always a next right thing that is visible, doable, and sufficient. Not the whole answer — just the next step. From there, the next step after that becomes visible.' },
+    c: { headline: 'Complete disengagement from the world can become another form of avoidance.', detail: 'There is a version of "focusing on what is immediately personal" that is healthy, proportionate, and grounding. And there is a version that is the comfortable cage at global scale — a retreat into the private life that protects you from what the larger moment is asking of you. The distinction is not in the activity but in the motivation. Grounding yourself in the personal so you can re-engage from a more stable place is different from using the personal as a permanent hiding place.' },
+    d: { headline: 'Sharing the anxiety online tends to amplify it rather than resolve it.', detail: 'Online environments are calibrated to amplify emotional states — particularly fear and outrage, because these drive the most engagement. Bringing a state of overwhelm into an environment designed to intensify emotional states tends to produce more overwhelm, more confirmation of the catastrophe, and less of the grounded orientation that was needed. The people who offer comfort online are also in the same overwhelming environment. Their words are genuine but their nervous systems are no more settled than yours.' }
+  },
+  4: {
+    a: { headline: 'Maintenance deferred accumulates interest.', detail: 'The strategy of sustaining maximum output while deferring basic maintenance works for a limited period — sometimes impressively long — before the body calls in the debt. The debt arrives not gradually but suddenly: an illness that removes you from the field entirely, a breakdown of resilience that makes ordinary demands feel impossible, a flatness of spirit that no amount of information or inspiration can lift. The demand was real. But so was the cost of ignoring the engine while running it.' },
+    b: { headline: 'Restoring one neglected practice has an effect that extends beyond the practice itself.', detail: 'The choice to restore one basic physical practice — sleep, movement, food quality, or time outside — is not only a restoration of that practice. It is a statement to the nervous system that the situation is survivable, that you are worth caring for even now, that the emergency does not justify the abandonment of the instrument. This signal changes the quality of everything else. One restoration opens the door for others.' },
+    c: { headline: 'The conditions that will allow the wellness plan to be implemented tend not to materialise.', detail: 'Comprehensive wellness plans designed for when the pressure has subsided are documents that are rarely opened. The pressure subsides and new pressure replaces it. The plan was written for a future self who has time and stability — a self who, by the time they arrive, has already developed different needs. The one practice that can be restored today, imperfectly, in the current conditions, is worth more than the comprehensive plan that will be implemented when the conditions are finally right.' },
+    d: { headline: 'Adjusting expectations of yourself downward during sustained pressure is sometimes the most compassionate option available and sometimes its opposite.', detail: 'When the adjustment is honest — a genuine recalibration of what is possible given the current constraints — it can prevent the guilt of a standard that cannot be met from compounding the depletion. When the adjustment is a surrender disguised as compassion — a way of making the depletion permanent rather than temporary — it closes the door on restoration. The distinction requires honesty about whether the current level of function is the ceiling or a temporary floor.' }
+  },
+  5: {
+    a: { headline: 'What the mind allows, the body records.', detail: 'Full attention may not always be required. But the habit of half-presence — of allowing the mind to be elsewhere during what is nominally a present engagement — trains the system toward absence as a default. Over time, the capacity for full presence degrades through disuse. The people in your life experience this as a quality of the relationship that they can feel but often cannot name. And you experience it as a general flatness — a sense of being present everywhere and nowhere at the same time.' },
+    b: { headline: 'The return to full presence is a choice that requires practice before it becomes reliable.', detail: 'Full presence during a conversation does not happen automatically even in people who value it highly — especially not when the habit of partial presence has been established for years. The deliberate return — this conversation, this person, this moment — is a practice that builds the capacity over time. Each return trains the system. The conversation you show up for fully is the practice, and the relationship that benefits from it is the result.' },
+    c: { headline: 'Withdrawing from engagement to be present in solitude is one option. The other is learning to be present in engagement itself.', detail: 'Solitude is genuinely necessary, and there are people who are better able to access their full presence when they are alone than when they are with others. But if withdrawal from engagement is the only circumstance in which full presence is available, the capacity is still developing. The deeper practice is learning to bring the quality of solitary presence into the encounter — to be with another person as fully as you are with yourself when alone.' },
+    d: { headline: 'Performing attentiveness while mentally absent is one of the loneliest interpersonal experiences available to both parties.', detail: 'The person on the receiving end of performed attention tends to feel the absence even without being able to identify it precisely. The quality of contact is different — they are being watched rather than met, attended to in the technical sense rather than the relational one. You, meanwhile, are experiencing the strange loneliness of being in the presence of another person while genuinely nowhere near them. The performance is the cost of the absence, not the solution to it.' }
+  }
+};
+
+var currentSlide=1;
+var totalSlides=document.querySelectorAll(".slide").length;
+function showSlide(n){
+  document.querySelectorAll(".slide").forEach(function(s){s.classList.remove("active");});
+  var t=document.querySelector("[data-slide=\""+n+"\"]");
+  if(t)t.classList.add("active");
+  document.querySelectorAll(".progress-dot").forEach(function(dot,i){
+    dot.classList.remove("active","complete");
+    if(i+1<n)dot.classList.add("complete");
+    else if(i+1===n)dot.classList.add("active");
+  });
+  currentSlide=n;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1);}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1);}
+document.addEventListener("DOMContentLoaded",function(){
+  document.querySelectorAll(".choices").forEach(function(group){
+    var sn=parseInt(group.getAttribute("data-scenario"));
+    group.querySelectorAll(".choice").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        group.querySelectorAll(".choice").forEach(function(b){b.classList.remove("selected");});
+        btn.classList.add("selected");
+        var answer=btn.getAttribute("data-answer");
+        var f=feedback[sn]&&feedback[sn][answer];
+        if(f){
+          var hl=document.getElementById("feedback-text-"+sn);
+          var dt=document.getElementById("feedback-detail-"+sn);
+          var box=document.getElementById("feedback-"+sn);
+          if(hl)hl.textContent=f.headline;
+          if(dt)dt.textContent=f.detail;
+          if(box){box.style.display="block";setTimeout(function(){box.classList.add("visible");},20);}
+        }
+        var nb=document.getElementById("next-"+sn);
+        if(nb)nb.removeAttribute("disabled");
+      });
+    });
+  });
+});
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute("data-theme")==="dark";
+  try{if(dark){h.removeAttribute("data-theme");localStorage.removeItem("safespot_theme");}
+      else{h.setAttribute("data-theme","dark");localStorage.setItem("safespot_theme","dark");}}
+  catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var prevKey='safespot_c9m3';
+    if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+      document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+      return;
+    }
+    var btn=document.getElementById("btn-complete");
+    if(btn){
+      btn.onclick=function(){
+        localStorage.setItem('safespot_c9m4',"1");
+        window.location.href='course9-module-5-the-observer-self.html';
+      };
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll(".sidebar-mod-item").forEach(function(li){
+        if(parseInt(li.getAttribute("data-mn"))===mn)li.classList.add("ss-now");
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem("slsc_session")||"null");
+    if(s&&s.fullName){
+      var nm=s.fullName&&s.fullName.indexOf("@")<0?s.fullName.split(" ")[0]:(s.email||s.fullName||"").split("@")[0];
+      var el=document.getElementById("ss-user-greeting");
+      if(el)el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem("slsc_session");localStorage.removeItem("slsc_token");localStorage.removeItem("slsc_sync_since");}catch(e){}
+  location.replace("login.html");
+}
+</script>
+<script>
+(function(){
+  var levels=["","lg","xl"];
+  function getLevel(){return document.documentElement.getAttribute("data-zoom")||"";}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next)document.documentElement.setAttribute("data-zoom",next);
+    else document.documentElement.removeAttribute("data-zoom");
+    try{localStorage.setItem("slsc_zoom",next||"");}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev)document.documentElement.setAttribute("data-zoom",prev);
+    else document.documentElement.removeAttribute("data-zoom");
+    try{localStorage.setItem("slsc_zoom",prev||"");}catch(e){}
+  };
+})();
+</script>
+<script>
+if("serviceWorker" in navigator){
+  window.addEventListener("load",function(){
+    navigator.serviceWorker.register("./sw.js").catch(function(){});
+  });
+}
+</script>
+
+<!-- TTS READER -->
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+
+<script>
+(function(){
+  try{
+    var items = Array.from(document.querySelectorAll('.sidebar-mod-item[data-mk]'));
+    items.forEach(function(li, idx){
+      var mk = li.getAttribute('data-mk');
+      var mn = parseInt(li.getAttribute('data-mn') || '0');
+      var done = !!localStorage.getItem(mk);
+      if(done){
+        li.classList.add('ss-done');
+      } else if(mn > 1){
+        // Locked if the immediately preceding module is not complete
+        var prev = items[idx - 1];
+        if(prev && !localStorage.getItem(prev.getAttribute('data-mk'))){
+          li.classList.add('ss-next');
+        }
+      }
+    });
+  }catch(e){}
+})();
+</script>
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

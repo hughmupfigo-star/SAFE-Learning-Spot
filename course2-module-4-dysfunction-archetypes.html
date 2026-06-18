@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 2 · Module 4 · Dysfunction Archetypes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --paper: #fafaf7;
+  --muted: #6b6b66;
+  --line: #d9d9d3;
+  --soft: #f0f0ea;
+  --accent: #c4452d;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+.module-header { border-bottom: 1px solid var(--line); padding: 32px 48px 32px 24px; display: grid; grid-template-columns: 1fr auto 1fr; justify-items: start; align-items: baseline; position: sticky; top: 0; background: var(--paper); z-index: 100; backdrop-filter: blur(8px); }
+.module-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.module-tag strong { color: var(--ink); font-weight: 500; }
+.progress-bar { grid-column: 3; justify-self: end; display: flex; gap: 6px; align-items: center; }
+.progress-dot { width: 24px; height: 2px; background: var(--line); transition: background 0.4s ease; }
+.progress-dot.active { background: var(--ink); }
+.progress-dot.complete { background: var(--accent); }
+
+.module-container { max-width: 780px; margin: 0 auto; padding: 80px 48px 120px; }
+.slide { display: none; animation: fadeUp 0.6s ease; }
+.slide.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-number { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 24px; text-transform: uppercase; }
+.slide-title { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.5vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 40px; font-variation-settings: "opsz" 144; }
+.slide-title em { font-style: italic; font-weight: 300; }
+.lead { font-family: var(--serif); font-size: 22px; line-height: 1.5; font-weight: 300; color: var(--ink); margin-bottom: 40px; letter-spacing: -0.01em; }
+.body-text { font-size: 17px; line-height: 1.7; color: #2a2a28; margin-bottom: 24px; max-width: 62ch; }
+.body-text strong { font-weight: 500; color: var(--ink); }
+.section-heading { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 56px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.section-heading::before { content: ''; width: 24px; height: 1px; background: var(--ink); }
+.pullquote { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; font-weight: 300; border-left: 2px solid var(--ink); padding: 8px 0 8px 32px; margin: 48px 0; color: var(--ink); }
+
+/* ARCHETYPE PORTRAIT — multi-section card for each archetype page */
+.archetype-portrait { margin: 40px 0; }
+.portrait-section { padding: 28px 0; border-top: 1px solid var(--line); }
+.portrait-section:last-of-type { border-bottom: 1px solid var(--line); }
+.portrait-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; font-weight: 500; }
+.portrait-text { font-size: 16px; line-height: 1.7; color: #2a2a28; max-width: 62ch; }
+.portrait-text strong { font-weight: 500; color: var(--ink); }
+
+.severity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  margin: 28px 0 16px;
+  border: 1px solid var(--line);
+}
+.severity-cell { background: var(--paper); padding: 22px 24px; }
+.severity-cell.harder { background: var(--soft); }
+.severity-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.severity-cell.harder .severity-label { color: var(--accent); }
+.severity-list { list-style: none; }
+.severity-list li { font-family: var(--serif); font-size: 15px; line-height: 1.5; padding: 8px 0; font-style: italic; color: var(--ink); border-bottom: 1px dotted var(--line); }
+.severity-list li:last-child { border-bottom: none; }
+
+/* MATCH ARCHITECTURE — page 6 */
+.match {
+  margin: 32px 0;
+  padding: 28px 32px;
+  background: var(--soft);
+  border-left: 2px solid var(--line);
+}
+.match-pair { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; font-weight: 500; }
+.match-name { font-family: var(--serif); font-size: 22px; font-style: italic; font-weight: 400; margin-bottom: 12px; line-height: 1.3; }
+.match-text { font-size: 15.5px; line-height: 1.65; color: #2a2a28; }
+
+.scenario { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--line); }
+.scenario-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+.scenario-prompt { font-family: var(--serif); font-size: 24px; line-height: 1.45; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+.scenario-context { font-size: 16px; color: var(--muted); margin-bottom: 32px; font-style: italic; }
+.choices { display: flex; flex-direction: column; gap: 12px; }
+.choice { display: block; width: 100%; text-align: left; background: transparent; border: 1px solid var(--line); padding: 20px 24px; font-family: var(--sans); font-size: 16px; line-height: 1.5; color: var(--ink); cursor: pointer; transition: all 0.25s ease; font-weight: 400; }
+.choice:hover { border-color: var(--ink); background: var(--soft); transform: translateX(2px); }
+.choice-letter { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 14px; letter-spacing: 0.1em; }
+.choice.selected { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.choice.selected .choice-letter { color: var(--paper); opacity: 0.6; }
+.choice:disabled { cursor: default; }
+.choice:disabled:hover { transform: none; }
+.choice.dimmed { opacity: 0.4; }
+
+.feedback { display: none; margin-top: 32px; padding: 32px; background: var(--soft); border-left: 2px solid var(--ink); animation: fadeUp 0.5s ease; }
+.feedback.visible { display: block; }
+.feedback-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.feedback-headline { font-family: var(--serif); font-size: 19px; line-height: 1.5; font-weight: 400; font-style: italic; color: var(--ink); margin-bottom: 16px; letter-spacing: -0.005em; }
+.feedback-text { font-family: var(--sans); font-size: 15.5px; line-height: 1.65; color: #2a2a28; font-weight: 400; }
+
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); }
+.nav-btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; border: none; color: var(--ink); cursor: pointer; padding: 12px 0; transition: opacity 0.2s ease; font-weight: 500; }
+.nav-btn:hover { opacity: 0.6; }
+.nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+.nav-btn.primary { background: var(--ink); color: var(--paper); padding: 16px 32px; }
+.nav-btn.primary:hover { background: #2a2a28; opacity: 1; }
+.nav-btn.primary:disabled { background: var(--line); color: var(--muted); }
+.nav-counter { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+
+.complete-mark { font-family: var(--serif); font-size: 120px; line-height: 1; font-weight: 300; margin-bottom: 32px; color: var(--accent); font-style: italic; }
+.summary-list { list-style: none; margin: 40px 0; }
+.summary-list li { padding: 20px 0; border-bottom: 1px solid var(--line); display: flex; gap: 24px; align-items: baseline; }
+.summary-list li:last-child { border-bottom: none; }
+.summary-num { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; min-width: 32px; }
+.summary-text { font-family: var(--serif); font-size: 18px; line-height: 1.5; font-weight: 400; }
+
+@media (max-width: 640px) {
+  .module-header { padding: 20px 24px; }
+  .module-container { padding: 48px 24px 80px; }
+  .slide-title { font-size: 38px; }
+  .lead { font-size: 19px; }
+  .body-text { font-size: 16px; }
+  .scenario-prompt { font-size: 20px; }
+  .pullquote { font-size: 22px; padding-left: 24px; margin: 32px 0; }
+  .progress-dot { width: 12px; }
+  .complete-mark { font-size: 80px; }
+  .severity-grid { grid-template-columns: 1fr; }
+  .match-name { font-size: 20px; }
+}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 02 · Module <strong>04</strong> · Dysfunction Archetypes</div>
+  <div class="progress-bar">
+    <div class="progress-dot active"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 2 &middot; Toxic Relationship Patterns</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c2m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course2-module-1-the-patterns-that-predict.html">The Patterns That Predict</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course2-module-2-love-bombing-and-the-initial-mask.html">Love Bombing & The Initial Mask</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course2-module-3-the-micro-aggressions-that-scale.html">Micro-Aggressions That Scale</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course2-module-4-dysfunction-archetypes.html">Dysfunction Archetypes</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course2-module-5-your-role-in-dysfunction.html">Your Role in Dysfunction</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course2-module-6-the-exit.html">The Exit</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course2-module-7-choosing-differently.html">Choosing Differently</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 07 · The Frame</div>
+    <h1 class="slide-title">The archetypes are diagnostic, not <em>verdicts.</em></h1>
+
+    <p class="lead">Before we name the four dysfunction archetypes, a careful frame. These are patterns of relating, not categories of people. A person is not a controller in the way they are a brunette. They run controlling patterns, in specific moments, often emerging from specific wounds, and almost always in combination with other patterns. The work of this module is to give you names for the patterns. The work is not to convert another human being into a label.</p>
+
+    <p class="body-text">There are three reasons archetypal thinking is useful, and three reasons it is dangerous. Both lists are worth holding before you read further. <strong>Used well, the archetypes are a vocabulary that lets you recognise structural moves in real time. Used poorly, they become a way to flatten a complex person into a verdict, write them off, and skip the actual work.</strong></p>
+
+    <div class="section-heading">Why naming the archetypes helps</div>
+
+    <p class="body-text"><strong>The patterns are real, and they recur.</strong> If you have been in two or three dysfunctional relationships across your adult life, the chances are high that there were recognisable shapes in common — not random misfortune, not bad luck, but structural patterns repeating with different faces. Naming the patterns lets you stop treating each new relationship's dysfunction as a surprise.</p>
+
+    <p class="body-text"><strong>The names interrupt the spell.</strong> While you are inside a relationship, the partner's behaviour usually feels personal, specific, unique to your situation. Naming the archetype creates distance. When you can think "this is the keeping-score move" rather than "they are mad at me about the laundry," the move loses some of its power. The naming converts the move from atmosphere into mechanism.</p>
+
+    <p class="body-text"><strong>The names create a shared diagnostic language with your one trusted friend.</strong> If you have been keeping the practice from previous modules — telling one person the unedited version — having shared vocabulary makes those conversations more useful. You no longer have to describe everything from scratch. "It's the abandoner thing again" carries the entire conversation in one phrase. The friend can recognise it, and you can recognise it together.</p>
+
+    <div class="section-heading">Why naming the archetypes can do harm</div>
+
+    <p class="body-text"><strong>People are more than one pattern.</strong> Most actual partners — including the most dysfunctional ones — run more than one archetype, in different proportions, in different moments. The partner who keeps score also occasionally controls. The controller occasionally abandons. Treating the archetype as the whole person flattens them in ways that distort your assessment.</p>
+
+    <p class="body-text"><strong>Labels can become permission to disengage from the actual work.</strong> Once you have decided your partner "is" the controller, you can stop engaging with them as a person and start interacting with them as a category. This is easier than the work of seeing them clearly, and it is a form of the same flattening they have been doing to you. <em>Recognising the pattern is the beginning of understanding. The label, treated as identity, is often the end of it.</em></p>
+
+    <p class="body-text"><strong>Naming the partner's archetype without naming your own role is half the diagnostic.</strong> The most important page in this module is Page Six — your matching architecture. Each archetype finds a specific wound in its partner. Naming the partner's pattern without examining your own participation in the system tends to produce another relationship with the same architecture, just with a different person. The full picture requires both halves.</p>
+
+    <div class="pullquote">The archetypes are a map, not the territory. Held loosely, they let you navigate. Held tightly, they replace the navigation with a story you tell yourself about who someone is, and stories like that are usually wrong by year three.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">Before reading the four archetypes, you already think you know which one your partner is.</p>
+      <p class="scenario-context">You have a label in mind, ready to be confirmed by what comes next. Some part of you is looking forward to the validation of your existing diagnosis.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Confirm the diagnosis as you read. Note all the evidence that fits the archetype you already chose.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold your existing guess lightly. Read each archetype as if you'd never heard of any of them. Notice which patterns appear in your relationship and which don't.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Skip the pages of the archetypes you don't think apply.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Read with the goal of finding evidence that none of the archetypes apply, so the relationship isn't dysfunctional.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 07 · Archetype One</div>
+    <h1 class="slide-title">The <em>Controller.</em></h1>
+
+    <p class="lead">The controller's defining operation is the management of your behaviour. Not always crudely. Often with sophistication. The control may not feel like control while it is happening — it may feel like care, like protection, like reasonable expectations, like the natural way a serious relationship operates. Recognising the controller is mostly the work of noticing how much of your daily behaviour has slowly come under another person's regulation.</p>
+
+    <div class="archetype-portrait">
+      <div class="portrait-section">
+        <div class="portrait-label">The wound it emerges from</div>
+        <p class="portrait-text">Most controllers were raised in environments of chaos, unpredictability, or felt powerlessness — sometimes from a parent's emotional volatility, sometimes from neglect, sometimes from being made responsible for a household before they were old enough. <strong>Control is what they learned to do with anxiety.</strong> Their nervous systems calmed only when they could predict the environment, and adult relationships became another environment to manage. This origin is not an excuse. It is context.</p>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">The architecture</div>
+        <p class="portrait-text">The controller does not usually arrive demanding control. They arrive offering structure — preferences that feel reasonable, suggestions that seem helpful, an ease with making decisions for both of you. Over months, the preferences become expectations. The expectations become rules. The rules become the air in the relationship. <em>You stop noticing when you stopped choosing what to wear to dinner.</em></p>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">How it scales</div>
+      </div>
+
+      <div class="severity-grid">
+        <div class="severity-cell">
+          <div class="severity-label">Milder forms</div>
+          <ul class="severity-list">
+            <li>Strong opinions about your friends, clothes, career choices</li>
+            <li>Subtle pressure to do things their way "because it makes sense"</li>
+            <li>Tracking of your time without naming it as tracking</li>
+            <li>Becoming the one who makes all the decisions about both of you</li>
+            <li>Reactivity when you make choices without consulting them</li>
+          </ul>
+        </div>
+        <div class="severity-cell harder">
+          <div class="severity-label">More severe forms</div>
+          <ul class="severity-list">
+            <li>Required check-ins, location-sharing, account monitoring</li>
+            <li>Isolation from friends and family framed as relationship loyalty</li>
+            <li>Financial control: combined accounts they manage, "allowances"</li>
+            <li>Decisions about your body — what you eat, wear, how you present</li>
+            <li>Punishment for autonomy, often expressed as withdrawal or rage</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">What it costs the person on the receiving end</div>
+        <p class="portrait-text">Living with sustained control produces a particular kind of erosion. You lose access to your own preferences because they have been overridden so often that your nervous system has stopped generating them. You stop making decisions because the decisions get countermanded. By month eighteen, when someone asks what you want, you genuinely do not know — and the not-knowing is the harm, more than any individual override.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">Control rarely arrives as control. It arrives as preference, then expectation, then rule, then climate. By the time you can name it, you can no longer remember the version of yourself that lived before it.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You realise that most decisions in your relationship — small and large — have been made by them or in deference to them for the past year.</p>
+      <p class="scenario-context">No one moment created this. There was no demand. There was just a series of small accommodations that became the structure. You don't quite know what you actually prefer for dinner tonight because you've gotten used to letting them choose.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Confront the pattern directly. Demand they recognise the control.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Begin, quietly, to make your own decisions again. Start small. Notice their response. The response is the diagnostic.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Decide this isn't really control because nothing dramatic has happened. Move on.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Take their decisions back all at once. Reassert your autonomy in one dramatic week.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 07 · Archetype Two</div>
+    <h1 class="slide-title">The <em>Abandoner.</em></h1>
+
+    <p class="lead">The abandoner's defining operation is withdrawal as a relationship strategy. Not as a single dramatic exit — most abandoners never actually leave. The withdrawal is the climate. They are present, technically, while being unreachable. They are in the room, while having left the conversation. They are in the relationship, while having quietly stopped showing up to it.</p>
+
+    <div class="archetype-portrait">
+      <div class="portrait-section">
+        <div class="portrait-label">The wound it emerges from</div>
+        <p class="portrait-text">Most abandoners learned, early, that intimacy was unsafe. Often a caregiver was emotionally inconsistent — present and warm, then suddenly distant, with no understandable pattern. The child's nervous system learned that connection was the precursor to loss, and built a defence: <strong>do not be fully present, and the disappearance cannot hurt you.</strong> This defence works for survival. It also produces an adult who cannot tolerate the closeness their partner expected when they began the relationship.</p>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">The architecture</div>
+        <p class="portrait-text">The abandoner is often the partner who began the relationship most enthusiastically. The early months may have been full presence — attention, warmth, depth, the feeling of being chosen. Then, somewhere around month three or four or six, the temperature begins to shift. The texts get shorter. The conversations get thinner. The plans get harder to schedule. Nothing has happened. Nothing is wrong, they assure you. They are just busy. They are just tired. They are just going through something. <em>The withdrawal is always presented as situational, even when it has become structural.</em></p>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">How it scales</div>
+      </div>
+
+      <div class="severity-grid">
+        <div class="severity-cell">
+          <div class="severity-label">Milder forms</div>
+          <ul class="severity-list">
+            <li>Periodic emotional unavailability with vague explanations</li>
+            <li>Slow response times that they describe as their natural pace</li>
+            <li>Difficulty discussing the relationship itself, even when invited</li>
+            <li>A felt distance even when physically present</li>
+            <li>The recurring need for "space" without specifying what would end the need</li>
+          </ul>
+        </div>
+        <div class="severity-cell harder">
+          <div class="severity-label">More severe forms</div>
+          <ul class="severity-list">
+            <li>Multi-day silent treatments after minor conflicts</li>
+            <li>Sudden disappearances followed by re-emergence as if nothing happened</li>
+            <li>Refusal to discuss the relationship's state, even in crisis</li>
+            <li>Threats to leave deployed strategically, never followed through</li>
+            <li>Withholding affection, sex, or warmth as the primary regulation tool</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">Why this archetype is the hardest to confront</div>
+        <p class="portrait-text">The controller is doing something visible. The abandoner is doing nothing visible. They are absent. They are quiet. They are not engaging. <strong>How do you confront an absence?</strong> The conversation you want to have about the withdrawal requires them to be present for the conversation, and presence is precisely what they are withholding. Most attempts to address the abandoning produce more abandoning, as the conversation itself becomes another thing to withdraw from. This is the structural reason this archetype tends to outlast the other three: you cannot push back against someone who is not, technically, doing anything.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">The abandoner is the only archetype who can leave the relationship while staying in it. The version of them you fell in love with did not vanish. It simply moved into a room you are no longer permitted to enter.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">Your partner has been gradually withdrawing for months and the latest silent stretch has lasted four days.</p>
+      <p class="scenario-context">You haven't fought. You're not sure what triggered it. When you ask if everything is okay, you get short answers and assurances that they're "just busy." You can feel yourself doing more work to restore the connection than they are.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Increase your efforts. More texts, more invitations, more emotional reaching. Eventually they'll come back.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Stop doing the work of restoration. Match their energy, not exceed it. Notice that the work of the relationship has been one-sided. Let it be visible.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Send the long, vulnerable message describing how their withdrawal has been affecting you. Hope it lands.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Demand a conversation about the state of the relationship. Insist on full presence.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 07 · Archetype Three</div>
+    <h1 class="slide-title">The Provider Who Keeps <em>Score.</em></h1>
+
+    <p class="lead">The score-keeper's defining operation is the conversion of generosity into leverage. They give. They give visibly, often dramatically, sometimes generously beyond what was asked for. And then, somewhere down the line, the giving is invoked — sometimes once, sometimes constantly, sometimes only at the strategic moment when leverage is needed. The generosity was real. It was also being recorded.</p>
+
+    <div class="archetype-portrait">
+      <div class="portrait-section">
+        <div class="portrait-label">The wound it emerges from</div>
+        <p class="portrait-text">Most score-keepers were raised in households where love was transactional — where care had to be earned, where worth was measured by contribution, where being valued required producing value. <strong>They learned, structurally, that relationships are exchanges, and the partner who keeps the better books holds the better position.</strong> They are not always aware of the accounting. Many score-keepers experience their own giving as straightforwardly generous — until the moment when leverage is needed, at which point the ledger emerges, fully detailed, sometimes years old.</p>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">The architecture</div>
+        <p class="portrait-text">The giving phase can look genuinely beautiful. The score-keeper may pay for things you couldn't afford, fly in to help when you were sick, put career or money or time toward your wellbeing in ways no previous partner did. You may, for the first time, feel materially or practically supported. The giving is real. <em>It is also being entered into a ledger that you have not been shown.</em> The first time the ledger is invoked — usually in a moment of conflict, often subtly — the entire history of the relationship reorganises in your mind. The gifts you thought were gifts were, retroactively, investments.</p>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">How it scales</div>
+      </div>
+
+      <div class="severity-grid">
+        <div class="severity-cell">
+          <div class="severity-label">Milder forms</div>
+          <ul class="severity-list">
+            <li>Mentioning past favours during current disagreements</li>
+            <li>Visible disappointment when reciprocity does not match their giving</li>
+            <li>An internal scoreboard you can sense even though it is unspoken</li>
+            <li>Performances of generosity that seem to require witnessing</li>
+            <li>A quiet sense that you are perpetually slightly indebted</li>
+          </ul>
+        </div>
+        <div class="severity-cell harder">
+          <div class="severity-label">More severe forms</div>
+          <ul class="severity-list">
+            <li>Detailed financial accounting deployed during fights</li>
+            <li>Career or financial sacrifices invoked to demand specific behaviour</li>
+            <li>The expectation that you owe specific actions in return for past help</li>
+            <li>Threats to "take it all back" if you do not perform gratitude correctly</li>
+            <li>Strategic giving designed to deepen your dependence</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">What it costs the person on the receiving end</div>
+        <p class="portrait-text">The score-keeper relationship produces a specific kind of accumulated debt that is felt in the body. You cannot receive cleanly anymore. Every gift carries a small dread of the future invoice. You stop allowing yourself to enjoy generosity, because the enjoyment has become evidence of obligation. You begin pre-emptively reciprocating, often in excess of what was given, to manage your sense of the running tally. <strong>The relationship turns you into a bookkeeper of an account you never agreed to open.</strong></p>
+      </div>
+    </div>
+
+    <div class="pullquote">A gift carries no expectation. A loan carries one. The score-keeper presents loans as gifts, and the difference becomes visible only when the call is made. By then, the interest has been compounding silently for years.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">During a disagreement, your partner invokes something they did for you eight months ago.</p>
+      <p class="scenario-context">It catches you off guard. The thing was real. They did do it, and you were grateful. You'd thought of it as part of the relationship — something they wanted to do because they loved you. The fact that it is now being deployed as leverage reframes the original act in a way that feels destabilising.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Apologise and acknowledge the debt. They have a point — they did do that for you.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Name what just happened. "I notice you're bringing that up to win this disagreement. I had thought of it as a gift, not a deposit." Watch the response. The response is the diagnostic.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Match the move. Bring up something equivalent you did for them. Even the scoreboard.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Refuse to engage with anything about the original favour. Stay on the current disagreement only.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 07 · Archetype Four</div>
+    <h1 class="slide-title">The One Who Needs <em>Saving.</em></h1>
+
+    <p class="lead">The fourth archetype is the most romantic, the most disguised, and the most exhausting. The one who needs saving is not, on the surface, dysfunctional in the way the other three are. They are not controlling. They are not abandoning. They are not keeping score. They are, however, structurally arranging the relationship so that one person — you — is the helper, and the other person — them — is the helped. And the help is the relationship.</p>
+
+    <div class="archetype-portrait">
+      <div class="portrait-section">
+        <div class="portrait-label">The wound it emerges from</div>
+        <p class="portrait-text">Most "needs saving" partners were children who learned that attention came primarily when they were suffering. The crisis was the connection. The struggle was what produced their parent's softer presence, or the only time anyone asked how they were. As adults, they have unconsciously reproduced the environment that gave them what they needed — a partner whose love is most reliably accessed when they are in some form of crisis. <strong>The crisis is not the obstacle to the relationship. The crisis is the relationship.</strong></p>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">The architecture</div>
+        <p class="portrait-text">The needs-saving partner often arrives sympathetic, vulnerable, in some kind of ongoing difficulty — career struggles, mental health, family of origin issues, addiction, financial chaos. The difficulties are usually real. They are not invented. But the structural feature is this: when one difficulty resolves, another emerges, often within weeks. <em>There is always something.</em> Sustained periods of stability rarely occur, and when they do, the partner often seems somehow less engaged with you during them — as if the dynamic only knows how to operate around an active difficulty.</p>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">How it scales</div>
+      </div>
+
+      <div class="severity-grid">
+        <div class="severity-cell">
+          <div class="severity-label">Milder forms</div>
+          <ul class="severity-list">
+            <li>Patterns of small recurring crises that always require your support</li>
+            <li>Difficulty taking advice that would resolve the recurring problems</li>
+            <li>The dynamic feels off during periods of ease, settles back during crisis</li>
+            <li>You are described as their saviour, their rock, the one who keeps them going</li>
+            <li>Your own difficulties are often minimised or quickly redirected back to theirs</li>
+          </ul>
+        </div>
+        <div class="severity-cell harder">
+          <div class="severity-label">More severe forms</div>
+          <ul class="severity-list">
+            <li>Threats of self-harm or breakdown when you attempt to set limits</li>
+            <li>The active sabotage of solutions, often after asking for help to find them</li>
+            <li>Financial dependence that grows year over year despite your support</li>
+            <li>The relationship cannot survive your having needs of your own</li>
+            <li>You are responsible for their survival, framed as love</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="portrait-section">
+        <div class="portrait-label">Why this archetype is uniquely exhausting</div>
+        <p class="portrait-text">The other three archetypes give you, at minimum, the dignity of being recognised as a separate person. The controller engages with you, even controllingly. The abandoner withdraws from you, but the withdrawal acknowledges that you exist as someone to withdraw from. The score-keeper, even at their worst, sees you as a counterparty. <strong>The needs-saving partner often does not quite see you at all.</strong> You exist primarily as the helper, the witness, the container for their experience. Your inner life, your difficulties, your needs — these are visible to them only when they are not in crisis, which is rarely. The exhaustion is in being chronically present for someone who is structurally unable to be chronically present for you.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">Helping someone you love through difficulty is one of the deepest acts of partnership. Being the permanent helper in a relationship that requires the other person to stay broken is a different thing entirely. The two look the same from year one. By year three, the difference is unmistakable.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You realise that your relationship has been organised around your partner's recurring crises for most of its length.</p>
+      <p class="scenario-context">The crises are real. They are not invented. But you cannot remember the last sustained period in which your partner was simply okay — not because life is hard, but because the dynamic itself seems to require that they not be.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Continue helping. They genuinely need you. To step back would be cruel.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Begin, gently, to have your own life again. Stop pre-emptively positioning yourself as the helper. Notice whether the relationship survives the redistribution of focus.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Confront them about using their crises to demand your attention.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Solve their problems faster. If you fix more of them, eventually the supply will run out.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Page 06 / 07 · The Matching Architecture</div>
+    <h1 class="slide-title">Your role in the <em>system.</em></h1>
+
+    <p class="lead">This is the most important page in the entire module, and the one most people would prefer to skip. Each archetype is one half of a system. The other half is the role that makes the archetype possible — the partner who reliably participates in a way that allows the dysfunctional pattern to continue. Without that participant, the controller cannot control, the abandoner cannot abandon usefully, the score-keeper has no debtor, and the needs-saving partner has no saviour.</p>
+
+    <p class="body-text">Two careful things before we proceed. <strong>First — this page is not about blaming you for the relationship you have been in.</strong> Identifying your participation in the system is not the same as identifying yourself as the cause of the dysfunction. Your role is a real piece of the architecture, but the architecture has two roles, and naming one does not absolve the other. You can be precisely accurate about your participation and entirely clear that the dysfunction was not yours to fix alone.</p>
+
+    <p class="body-text"><strong>Second — this is not the "you attract what you are" framing.</strong> That framing is lazy and often cruel. You did not attract dysfunction because you are dysfunctional. You participated in a system because you carried specific wounds that made you a structurally good fit for it. Wounds are not moral failures. They are the result of a history you did not author. The work is to recognise the wound, not to assign blame for having it.</p>
+
+    <div class="section-heading">The four matching architectures</div>
+
+    <div class="match">
+      <div class="match-pair">Controller · matches with</div>
+      <p class="match-name">The over-explainer</p>
+      <p class="match-text">If you were raised in an environment where your feelings had to be justified, where your decisions required you to defend them, where having a position meant having to argue for it — you became an adult fluent in justification. The controller does not control by force. They control by requiring your reasoning, then dismissing it, then offering theirs as the more reasonable position. You participate by continuing to explain. Each explanation is a small invitation to override. The controller takes the invitation. By month eighteen, you have stopped having unjustified preferences, because every preference requires defending. The matching architecture is not that you are weak. It is that you were trained to debate your own desires.</p>
+    </div>
+
+    <div class="match">
+      <div class="match-pair">Abandoner · matches with</div>
+      <p class="match-name">The chronic restorer</p>
+      <p class="match-text">If you were raised in an environment of inconsistent affection — where a parent's warmth was unreliable and you became the family's emotional repair worker — you became an adult who reflexively closes distance whenever it appears. The abandoner withdraws. You restore. They cool. You warm. They go silent. You initiate the conversation that brings them back. The system works because your restoration prevents them from ever having to face the consequences of their own withdrawal. The matching architecture is not that you are needy. It is that you were trained, very young, that closeness was your job to maintain.</p>
+    </div>
+
+    <div class="match">
+      <div class="match-pair">Score-keeper · matches with</div>
+      <p class="match-name">The debt-acceptor</p>
+      <p class="match-text">If you were raised in an environment where love was transactional — where being good required earning it, where you carried a permanent low-grade sense of being not quite enough — you became an adult who accepts unspoken debts as part of how love operates. The score-keeper extends generosity. You absorb it as obligation, often before they have called it in. You pre-emptively over-give to manage a ledger they have not yet referenced. The system works because your acceptance of indebtedness keeps both of you operating in their preferred currency. The matching architecture is not that you are calculating. It is that you were taught that worth must be paid for.</p>
+    </div>
+
+    <div class="match">
+      <div class="match-pair">Needs-saving partner · matches with</div>
+      <p class="match-name">The compulsive rescuer</p>
+      <p class="match-text">If you were raised in an environment that required you to manage someone else's wellbeing — a depressed parent, an addicted sibling, a chaotic household — you became an adult who reliably positions yourself as the helper. Your nervous system calmed when you were useful. Other people's emergencies were familiar territory. The needs-saving partner gives you a permanent supply of what your childhood trained you to do — manage someone else's chaos as a substitute for managing your own life. The system works because your rescuing instinct provides the structure their crisis requires. The matching architecture is not that you have a saviour complex. It is that you were given a job too young, and you became excellent at it.</p>
+    </div>
+
+    <div class="section-heading">What this recognition is for</div>
+
+    <p class="body-text">The point of naming your matching architecture is not to assign you partial blame for the dysfunction. It is to identify the structural feature that, if it does not change, will reliably pull you into another version of the same system with a different person. <strong>The partner is replaceable. The architecture is what travels with you.</strong> Until the matching architecture is recognised, the next relationship will tend to have the same shape, because the same signal is being broadcast.</p>
+
+    <p class="body-text">The recognition does two things. It frees you from the narrative that you have terrible luck or pick wrong — neither of which is accurate, both of which keep you helpless. And it gives you something to actually work on: the specific learned response that pulls you, reflexively, into your half of these dynamics. Working on the architecture is hard, slow, lifelong work. <em>It is also the only intervention that changes which relationships become available to you in the future.</em></p>
+
+    <p class="body-text">A final note that holds the whole module together. The presence of your matching architecture does not make the partner's behaviour acceptable. The controller is still controlling. The abandoner is still abandoning. The score-keeper is still keeping score. The needs-saving partner is still requiring you to remain in the helper role. <strong>Recognising your participation in the system is not the same as accepting responsibility for the system. Both parties are running their architectures. Both are responsible for the part they bring. Neither's recognition cancels the other's.</strong></p>
+
+    <div class="pullquote">A dysfunctional relationship has two roles, and both are required for the dance. Naming your role is not surrendering to the idea that you caused the dance. It is recognising that the music will play again, with someone new, until you have changed the step you keep performing.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You recognise yourself in one of the four matching architectures, clearly and specifically.</p>
+      <p class="scenario-context">The recognition produces two simultaneous feelings — a clarity about why the same shape of relationship keeps finding you, and a slight defensiveness, as if naming your role is a way of letting the partner off the hook.</p>
+
+      <div class="choices" data-scenario="6">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Refuse the recognition. Insist that the dysfunction was entirely the partner's responsibility.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold both truths. Your matching architecture is real and worth working on. The partner's behaviour was still their behaviour. Both are accurate.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Accept the recognition and use it to absolve the partner. They were just running their pattern, and you were running yours.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Turn the recognition into self-attack. You are the cause of every dysfunctional relationship you have been in.</button>
+      </div>
+
+      <div class="feedback" id="feedback-6">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-6"></p>
+        <p class="feedback-text" id="feedback-detail-6"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module Four.</em></h1>
+
+    <p class="lead">You now have names for the four most recognisable dysfunction archetypes in adult relationships — and, more importantly, names for the four matching architectures in yourself. The combination is the diagnostic. Without your half, the recognition is incomplete. With it, you can finally see the system rather than blaming either of its participants.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">The archetypes are patterns of relating, not verdicts on people. Held loosely, they are diagnostic. Held tightly, they replace the person with a category.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">The Controller manages your behaviour through preference, expectation, rule, and climate. Most controllers were raised in chaos and learned that control was how anxiety became manageable.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">The Abandoner is present while being unreachable. Withdrawal is the operation. You cannot confront an absence — which is the structural reason this archetype tends to outlast the others.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">The Score-Keeper converts generosity into leverage. The gifts were real. They were also being recorded. The ledger emerges in the moment leverage is needed.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">The One Who Needs Saving organises the relationship around their crises because crisis is how they learned love operates. There is always something. The crisis is the relationship.</span></li>
+      <li><span class="summary-num">06</span><span class="summary-text">Each archetype matches a specific architecture in you: the over-explainer, the chronic restorer, the debt-acceptor, the compulsive rescuer. Recognising both halves is the diagnostic. Neither half's recognition cancels the other half's responsibility.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">Identify the matching architecture in yourself with the most precision you can manage. Not the one you wish were true. The one that actually fits when you look at the relationships you've been in across your adult life. Write down, privately, the situations in which you most reliably run that architecture — the moments when you over-explain, restore, accept the debt, rescue. The naming itself is most of the work. Without acting on it. Without confronting anyone. Just the noticing, over the course of one week.</p>
+
+    <p class="body-text">The next module — <strong>Your Role in Dysfunction</strong> — goes deeper into the matching architecture. Why these patterns were installed in you. How to work with them rather than against them. And how recognising your role becomes the precondition for choosing differently the next time.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">07 / 07</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 05 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: "Reading to confirm an existing diagnosis is structurally different from reading to learn.", detail: "Once you have decided the archetype before reading the descriptions, your attention narrows to the confirming evidence. You will see the controller traits clearly because you are looking for them. You will miss the other archetypes operating alongside, and you will miss the moments when your partner does not fit the archetype you assigned. The diagnosis arrives as confirmation rather than as observation, which is a different kind of evidence — and a less reliable one. The module is more useful when held lightly than when held as a thesis to defend." },
+    b: { headline: "Holding your existing guess lightly while reading produces the most useful version of the diagnostic.", detail: "Most actual partners run more than one archetype. You may discover that the label you had in mind is partly right and partly miscategorised — that your partner runs Controller patterns in some areas and Abandoner patterns in others, or that what you read as control is closer to score-keeping. The accuracy of the diagnosis matters because the response to each archetype is slightly different. Reading openly preserves the precision the framework was designed to enable." },
+    c: { headline: "Skipping the archetypes you don't think apply usually means skipping the ones that apply most.", detail: "The defence against recognising particular archetypes often comes from the same architecture that pulled you into the relationship. Readers most likely to skip the Abandoner page are often partnered with one. Readers most likely to skip the Provider Who Keeps Score page are often the ones with the most unspoken debt accumulated. The page you do not want to read is often the one with the most useful information. Reading all four is light work and prevents the most common form of selective engagement." },
+    d: { headline: "Reading with the goal of disproving the framework forecloses the diagnostic before it has started.", detail: "If you read each page looking for the evidence that none of it applies, you will find that evidence — because every relationship has moments of normal warmth and ordinary care that can be marshalled to disprove any single archetype. The question the module asks is not 'is your relationship entirely dysfunctional?' It is 'are recognisable patterns of dysfunction operating, and to what degree?' Reading to disprove ensures you cannot answer that question accurately." }
+  },
+  2: {
+    a: { headline: "Confronting the pattern directly with a controller usually produces a sophisticated defence and a marginal contraction of control.", detail: "Most controllers respond to direct confrontation about control with one of two moves — a denial that they are controlling, often framed as wounded surprise that you would see them that way, or a partial acknowledgement followed by a brief, calibrated reduction of the most obvious controlling behaviours while leaving the structural control intact. The conversation produces emotional intensity without producing structural change. The behaviour shift, when it comes, is usually about avoiding visible confrontation rather than about ceasing the underlying pattern." },
+    b: { headline: "Beginning to make your own decisions, quietly, without announcement, is the move that actually reveals what the relationship can hold.", detail: "Start small. Order what you want for dinner. Choose the film. Make a plan with a friend without consulting them first. Notice what happens — not in their words, but in the temperature of the relationship over the following days. Some controllers, when the controlled behaviour stops being supplied, adjust to a more equal dynamic. Most do not. The response, observed across several weeks, will tell you which relationship you are actually in. The information is gathered without confrontation, which means the partner cannot defend against information they have not been formally accused of." },
+    c: { headline: "Deciding it isn't really control because nothing dramatic has happened is precisely how control normalises itself.", detail: "Control rarely arrives dramatically. It arrives as the absence of small choices, and the absence accumulates without any dramatic moment to point at. The lack of a visible incident is not evidence that there is no control — it is evidence that the control is operating effectively, below the threshold of confrontation. The dismissal is the inherited voice of the relationship protecting itself from being examined." },
+    d: { headline: "Taking back every decision in one dramatic week produces a crisis the relationship will frame as your overreaction.", detail: "Reasserting autonomy all at once is read by most controllers as an attack on the relationship's stability. The response is usually some combination of rage, withdrawal, and accusation that you have become a different person. The reassertion is correct in principle and badly executed in practice — the speed converts a structural change into a relationship event, and the event becomes the conversation rather than the structural change. Small, slow, consistent decisions over months produce more durable change than one dramatic week does." }
+  },
+  3: {
+    a: { headline: "Increasing your efforts when an abandoner has withdrawn teaches the system that withdrawal produces more attention.", detail: "Every additional text, invitation, and emotional reaching while they are silent confirms, to the relationship's structure, that withdrawal is a reliable tool for adjusting your behaviour. They become quieter; you reach more. You reach more; they become quieter still. The escalating asymmetry trains both of you to expect this pattern. By month eighteen, you have become the partner who carries the entire relationship across their absences, and they have become the partner who can disappear without consequence." },
+    b: { headline: "Matching their energy rather than exceeding it makes the asymmetry visible without confrontation.", detail: "When you stop doing the work of restoration, one of two things happens — either the relationship dies in the silence (which tells you the relationship was running entirely on your maintenance), or the partner notices the change and re-engages (which tells you something different but also reveals the dynamic clearly). Either outcome is information you could not otherwise access. The matching is not punitive. It is honest. It simply allows the relationship to live at the level both of you are actually maintaining, rather than the level your work has been hiding." },
+    c: { headline: "The long vulnerable message to an abandoner is the move most likely to extend the withdrawal.", detail: "Vulnerability requires the other person to be present to receive it. Sending a vulnerable message to someone who is structurally absent invites two outcomes — they will not respond (extending the silence and adding the new humiliation of having been unanswered), or they will respond with a brief, performative warmth designed to end the conversation without engaging with its content. Neither produces the closeness the message was reaching for. The withdrawal is not addressed by depth. It is addressed by structural change." },
+    d: { headline: "Demanding a conversation about the relationship's state usually produces a conversation that does not happen.", detail: "Abandoners specifically protect themselves from these conversations. Demands for full presence in a moment when presence is exactly what they are withholding tends to produce one of three responses — agreement to talk later (followed by avoidance of later), a brief insincere conversation designed to end the demand, or an escalation of withdrawal as punishment for the demand itself. The demand is reasonable. It is not, in this archetype, productive. Other moves work better." }
+  },
+  4: {
+    a: { headline: "Apologising and acknowledging the debt confirms the ledger you did not consent to.", detail: "The moment you accept that the past gift was, in fact, a deposit that you now owe behaviour against, you have entered the score-keeper's accounting system as a legitimate participant. The conversation reorganises around what you owe and what you have failed to repay. The original disagreement — which was probably about something else entirely — gets quietly redirected into a discussion of your gratitude. You leave the conversation indebted, not only for the original favour but for having tried to push back against the debt." },
+    b: { headline: "Naming what just happened, calmly, is the move that interrupts the structure of the exchange.", detail: "'I notice you're bringing that up to win this disagreement. I had thought of it as a gift, not a deposit.' This sentence, delivered without aggression, refuses the framing without escalating the disagreement. The score-keeper has three possible responses — they can deny the framing (which is information), they can become defensive in a way that confirms the framing (also information), or they can pause and consider it (the rare response that suggests they may not be running the pattern as deeply as the moment suggested). The diagnostic is the response. The conversation is not won. The system has simply been described back to itself, which is harder for the system to absorb than agreement or argument." },
+    c: { headline: "Matching the move by listing your own contributions enters the ledger war and ensures both of you continue accounting.", detail: "Bringing up something equivalent you did for them treats their bookkeeping as legitimate and adds your own counter-ledger. Now both of you are accounting. Now both of you are running the score-keeping operation, just from opposite sides of the table. The relationship has been converted into a transactional system, and the conversion will not reverse easily. Even if you win the individual exchange — even if your contribution is, by any measure, larger than theirs — the win locks both of you into accounting as the relationship's primary mode." },
+    d: { headline: "Refusing to engage with the original favour at all skips the diagnostic the moment offered.", detail: "The deflection to the current disagreement is not wrong, but it misses the opportunity to see, clearly, what just happened. The score-keeper has revealed the existence of the ledger. Pretending that revelation did not occur leaves the ledger intact and operative, and it will be invoked again. Acknowledging what happened, briefly and without giving ground, gives both of you a piece of information neither of you had access to before. The deflection preserves the peace of the current moment at the cost of seeing the structural feature that just made itself visible." }
+  },
+  5: {
+    a: { headline: "Continuing to help indefinitely is the move the architecture is built around.", detail: "Your helping is the structural feature that allows the dynamic to continue. The partner's crises are real, and your help is real, and the system requires both — your continuing presence as the helper is what keeps the relationship operating in its existing shape. Staying available indefinitely is not love in the way it is usually framed. It is participation in a system that requires you to remain the helper indefinitely. The system protects itself by making any alternative feel cruel, but the alternative is not cruel. It is the precondition for the partner having to engage with their own life as an adult." },
+    b: { headline: "Gently rebuilding your own life while the relationship continues is the move that reveals what is actually possible.", detail: "Stop pre-emptively positioning yourself as the helper. Have your own difficulties without immediately redirecting attention back to theirs. Take an evening for yourself when their latest crisis arises and is not immediately dangerous. Notice what happens. Some partners, given the space, begin to do their own work — the dynamic was running because you were running it, and once you stop, they begin developing their own systems. Most do not. The crisis pattern persists, escalates, or transforms into accusation that you have abandoned them. Either response is information you could not get any other way. The redistribution of focus is the diagnostic, and the diagnostic produces clarity about what to do next." },
+    c: { headline: "Confronting them about using their crises is the conversation that almost always backfires.", detail: "The framing of 'using' crisis tends to land as accusation, and most needs-saving partners respond to this accusation with a deeper crisis — sometimes a real one, sometimes one that emerges immediately in response to the confrontation. The confrontation has just provided new material for the dynamic to operate on. You will spend the next several weeks managing the fallout from the confrontation itself, which is precisely the kind of emergency the system specialises in. The behavioural change — reducing the helping — is more effective than the verbal challenge." },
+    d: { headline: "Solving their problems faster is the most exhausting and least effective response, and it is the one most rescuers attempt first.", detail: "If the dynamic requires there to always be something, faster solving simply produces faster problem-replacement. The crisis pipeline does not run out — it adjusts to the rate at which you can fix things. You will accelerate to keep up. They will produce new difficulties to match your accelerated capacity. Within months, you will be doing more work than ever, with less acknowledgement, while their crisis volume has only increased. The volume was never about whether the problems were solvable. It was about the structure of the relationship." }
+  },
+  6: {
+    a: { headline: "Refusing the recognition keeps the partner fully responsible and ensures the next relationship has the same shape.", detail: "It is true that the partner ran their pattern and is responsible for it. It is also true that your matching architecture is the half of the system that travels with you between relationships. Refusing to recognise the architecture preserves your innocence in the current relationship and guarantees that you will replicate the dynamic with someone new, because the signal you broadcast has not changed. The next partner will be different. The structure will be uncannily similar. You will, in two or three years, find yourself reading material like this again." },
+    b: { headline: "Holding both truths simultaneously is the actual work this entire module was built to enable.", detail: "Your matching architecture is real. The partner's behaviour is also real. Neither cancels the other. The architecture is the half you can work on. The behaviour is the half you cannot. Refusing to look at the architecture, in the name of holding the partner fully accountable, keeps you trapped in the system. Looking at the architecture clearly, while continuing to recognise that the partner's behaviour was the partner's behaviour, is the only position that produces actual freedom. Both truths. Held simultaneously. This is the work." },
+    c: { headline: "Using the recognition to absolve the partner converts a useful diagnostic into a sophisticated version of the dynamic continuing.", detail: "'They were just running their pattern' is true and is often the move people make to avoid the harder truth — that even people running their patterns are responsible for the harm those patterns cause. The architecture explains the behaviour. It does not absolve it. Adults are accountable for what they bring to relationships, regardless of where the patterns originated. The recognition is for understanding the system, not for excusing either participant. Both you and the partner remain responsible for the parts you brought." },
+    d: { headline: "Turning the recognition into self-attack is the inherited voice using the framework as a new weapon.", detail: "If you walk away from this module with the conclusion that you are the cause of every dysfunctional relationship you have been in, the framework has been hijacked. The architecture is one half of the system. It explains why these specific relationships found you, but it does not make you responsible for the partner's behaviour, the dysfunction of the dynamic, or the harm that resulted. Self-attack feels like accountability. It is usually the same critical voice from earlier modules, now operating with new material. The honest position is precise — your architecture made you findable for this kind of partner, and the partner remains responsible for what they then did once they had found you." }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 7;
+const answered = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c2m3';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course2-module-3-the-micro-aggressions-that-scale.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c2m4','1');window.location.href='course2-module-5-your-role-in-dysfunction.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

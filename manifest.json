@@ -1,0 +1,107 @@
+{
+  "name": "Safe Learning Spot Centre",
+  "short_name": "Safe Spot",
+  "description": "A healing curriculum covering energy, relationships, sovereignty, money, family, media and food — 10 courses plus a self-assessment tool.",
+  "start_url": "./index.html?source=pwa",
+  "scope": "./",
+  "id": "safe-learning-spot-centre",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#fafaf7",
+  "theme_color": "#0a0a0a",
+  "lang": "en-GB",
+  "dir": "ltr",
+  "categories": ["education", "health", "lifestyle"],
+  "iarc_rating_id": "",
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "splash-iphone13.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Course catalogue"
+    },
+    {
+      "src": "splash-ipad-pro12.png",
+      "sizes": "2048x2732",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Course catalogue on iPad"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "My Courses",
+      "short_name": "Courses",
+      "url": "./index.html?source=shortcut",
+      "icons": [{ "src": "icon-512.png", "sizes": "512x512" }],
+      "description": "Browse all courses"
+    },
+    {
+      "name": "Free Courses",
+      "short_name": "Free",
+      "url": "./index.html#free-courses",
+      "icons": [{ "src": "icon-512.png", "sizes": "512x512" }],
+      "description": "Access the free courses"
+    },
+    {
+      "name": "Self-Assessment",
+      "short_name": "Assessment",
+      "url": "./assessment.html",
+      "icons": [{ "src": "icon-512.png", "sizes": "512x512" }],
+      "description": "Take the Healing Stage Assessment"
+    },
+    {
+      "name": "Login",
+      "short_name": "Login",
+      "url": "./login.html",
+      "icons": [{ "src": "icon-512.png", "sizes": "512x512" }],
+      "description": "Sign in to your account"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.safelearningspot.centre",
+      "id": "com.safelearningspot.centre"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/safe-learning-spot/id0000000000"
+    }
+  ]
+}

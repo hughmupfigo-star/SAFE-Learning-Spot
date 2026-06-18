@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 5 · Module 3 · The Purpose of Scapegoating</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.mechanism:last-of-type{border-bottom:1px solid var(--line)}.mechanism-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.mechanism-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+
+.cost-block{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.cost-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.cost-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+
+.safety-note{margin:40px 0;padding:28px;border:1px solid var(--accent);background:var(--paper)}.safety-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}.safety-text{font-size:15px;line-height:1.65;color:#2a2a28}.safety-text a{color:var(--accent);text-decoration:underline}
+
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+
+.reflection{margin:40px 0;padding:32px;border:1px solid var(--line);background:var(--paper)}.reflection-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}.reflection-prompt{font-family:var(--serif);font-size:20px;line-height:1.45;font-weight:400;font-style:italic;margin-bottom:20px;letter-spacing:-.005em}.reflection-area{width:100%;min-height:120px;background:var(--paper);border:1px solid var(--line);padding:16px;font-family:var(--sans);font-size:15.5px;line-height:1.6;color:var(--ink);resize:vertical;transition:border-color .2s ease}.reflection-area:focus{outline:none;border-color:var(--ink)}.reflection-note{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em;margin-top:10px;text-transform:uppercase}
+
+.function-card{margin:32px 0;padding:32px;background:var(--soft);border-left:2px solid var(--accent);transition:background .25s ease}.function-card:hover{background:#ebebe4}.function-tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:500}.function-name{font-family:var(--serif);font-size:24px;font-style:italic;font-weight:400;line-height:1.3;margin-bottom:16px;letter-spacing:-.01em}.function-desc{font-size:15.5px;line-height:1.7;color:#2a2a28}.function-desc strong{font-weight:500;color:var(--ink)}.function-without{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);font-size:14.5px;line-height:1.6;color:var(--muted);font-style:italic}.function-without strong{font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);font-weight:500;display:block;margin-bottom:6px}
+
+.concealment{margin:32px 0;padding:0;border:1px solid var(--line);background:var(--paper)}.concealment-header{padding:24px 28px;background:var(--soft);border-bottom:1px solid var(--line)}.concealment-tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:500}.concealment-name{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:400;line-height:1.3;letter-spacing:-.01em}.concealment-body{padding:28px}.concealment-pair{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);margin-top:20px}.concealment-pair:first-child{margin-top:0;border-top:none}.concealment-side{padding:20px 24px 20px 0}.concealment-side+.concealment-side{border-left:1px solid var(--line);padding:20px 0 20px 24px}.concealment-side-label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:500}.concealment-side-text{font-size:14.5px;line-height:1.6;color:#2a2a28}.concealment-side-text strong{font-weight:500;color:var(--ink)}.concealment-truth{margin-top:24px;padding:20px 24px;background:var(--ink);color:var(--paper)}.concealment-truth-label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#999;margin-bottom:8px;font-weight:500}.concealment-truth-text{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.55;font-weight:300}
+
+.beneficiary{margin:28px 0;padding:0;border-top:1px solid var(--line)}.beneficiary:last-of-type{border-bottom:1px solid var(--line);padding-bottom:32px}.beneficiary-header{display:flex;align-items:baseline;gap:20px;padding:28px 0 16px}.beneficiary-role{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:500;min-width:140px}.beneficiary-name{font-family:var(--serif);font-size:24px;font-style:italic;font-weight:400;line-height:1.3;letter-spacing:-.01em}.beneficiary-desc{font-size:15.5px;line-height:1.7;color:#2a2a28;padding-left:160px}.beneficiary-desc strong{font-weight:500;color:var(--ink)}@media(max-width:640px){.beneficiary-header{flex-direction:column;gap:6px}.beneficiary-role{min-width:auto}.beneficiary-desc{padding-left:0}}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.mechanism-name{font-size:24px}.sov-frame{padding:28px}.sov-text{font-size:19px}.function-card{padding:24px}.function-name{font-size:21px}.concealment-pair{grid-template-columns:1fr}.concealment-side+.concealment-side{border-left:none;border-top:1px solid var(--line);padding:20px 24px 0 0}.concealment-body{padding:20px}.concealment-header{padding:18px 20px}.reflection{padding:24px}.reflection-prompt{font-size:18px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 05 · Family Patterns & Scapegoating · Module <strong>03</strong> · The Purpose of Scapegoating</div>
+<div class="progress-bar"><div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 5 &middot; Generational Patterns &amp; Family</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c5m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course5-module-1-the-scapegoat-role.html">The Scapegoat Role</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course5-module-2-am-i-the-scapegoat.html">Am I the Scapegoat?</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course5-module-3-the-purpose-of-scapegoating.html">Purpose of Scapegoating</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course5-module-4-generational-wounding.html">Generational Wounding</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course5-module-5-breaking-the-cycle.html">Breaking the Cycle</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course5-module-6-rebuilding-or-exiting.html">Rebuilding or Exiting</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+<!-- ============================================================ -->
+<!-- PAGE 1 — THE FUNCTION THE ROLE PERFORMS -->
+<!-- ============================================================ -->
+<section class="slide active" data-slide="1">
+<div class="slide-number">Page 01 / 06 · The Structural Function</div>
+<h1 class="slide-title">What scapegoating <em>does for</em> the family.</h1>
+
+<p class="lead">Module 1 established the role's structure. Module 2 examined whether the role applied to you. This module asks the question that changes everything that follows: why does the family system need someone to occupy this position? The question is not rhetorical and the answer is not metaphorical. The scapegoat role performs specific, identifiable structural functions for the family — functions that explain why the role is so persistent, why it is so resistant to being named, and why your eventual exit will produce a response in the family system that has nothing to do with you personally.</p>
+
+<div class="safety-note">
+<div class="safety-label">A note on this module</div>
+<p class="safety-text">This module asks you to look at your family system structurally rather than personally. The shift can be disorienting — and for some readers, it can produce a temporary increase in compassion toward family members that feels destabilising, or a temporary increase in anger that feels overwhelming. Both responses are normal. Neither is the final destination. Hold what arrives without yet deciding what it means. Samaritans: 116 123. Mind: 0300 123 3393.</p>
+</div>
+
+<p class="body-text"><strong>The family system is not the family members.</strong> The system is the pattern of relationships, allocations, and unspoken agreements that organises how the family functions. Family members participate in the system, but the system itself is larger than any individual within it — and the system has its own requirements, its own self-protective mechanisms, and its own functions, which operate whether or not any single member is conscious of them. The scapegoat role is one of these functions. Understanding the function is the precondition for understanding the family system. Understanding the family system is the precondition for the governed exit.</p>
+
+<p class="body-text"><strong>The role performs five specific functions.</strong> The functions are not separate. They operate simultaneously, reinforcing each other, and together they explain why the role is so structurally entrenched. Each function answers a question the family system cannot answer in any other way without examining itself — which is precisely what the family system has organised itself to avoid.</p>
+
+<div class="function-card">
+<div class="function-tag">Function 01</div>
+<h2 class="function-name">Containment of unprocessed material.</h2>
+<p class="function-desc">Every family carries unprocessed material — grief that was never mourned, rage that was never expressed, shame that was never acknowledged, trauma that was never integrated. The material exists. It does not disappear because the family declines to face it. <strong>It must go somewhere.</strong> The scapegoat role is the containment vessel. The family's unprocessed emotions flow into the designated member, who absorbs them, expresses them on the family's behalf, and is then blamed for the expression. The family observes the scapegoat's "instability" and concludes that the instability is the scapegoat's. The instability is, structurally, the family's — externalised into a single member so that the family does not have to recognise it as its own.</p>
+<div class="function-without"><strong>Without the role</strong>The family would have to face its own unprocessed material directly. The grief would have to be mourned. The rage would have to be expressed by the people who actually carry it. The shame would have to be acknowledged. None of this is impossible — but all of it requires capacities the family has organised itself not to develop.</div>
+</div>
+
+<div class="function-card">
+<div class="function-tag">Function 02</div>
+<h2 class="function-name">Preservation of the family's self-image.</h2>
+<p class="function-desc">Every family has a story about itself — a narrative of who we are, what we value, how we operate. The narrative is often substantially different from the actual functioning of the family, and the gap between the narrative and the reality must be managed. The scapegoat role manages the gap by absorbing every piece of evidence that would otherwise expose it. <strong>The family is a loving family — except for the difficult one.</strong> The family is high-achieving — except for the failure. The family is functional — except for the one who keeps causing problems. The "except for" clause allows the narrative to survive intact by attributing all contradictory evidence to a single member, whose existence becomes the family's explanation for any inconsistency between its self-image and its reality.</p>
+<div class="function-without"><strong>Without the role</strong>The family would have to revise its self-image to account for the evidence — to acknowledge that the loving family was also sometimes cruel, that the high-achieving family also produced certain costs, that the functional family was also dysfunctional in specific, identifiable ways. The revision is uncomfortable. The role makes it unnecessary.</div>
+</div>
+
+<div class="function-card">
+<div class="function-tag">Function 03</div>
+<h2 class="function-name">Stabilisation of the marital or parental subsystem.</h2>
+<p class="function-desc">In many families, the parents' relationship contains unresolved conflict — a marriage that no longer functions, a partnership organised around avoidance, a couple that cannot navigate its own dysfunction. The scapegoat role provides the parents with a shared focus that allows the underlying conflict to remain unaddressed. <strong>The scapegoat becomes the family's common problem</strong> — the issue that gives the parents something to discuss other than themselves, the crisis that allows them to function as a team even when their own connection has eroded, the worry that occupies the energy that would otherwise have to be spent on the actual relational work. The parents may genuinely believe they are concerned about the scapegoat. They are. They are also, structurally, using the concern to avoid the conversation they cannot have.</p>
+<div class="function-without"><strong>Without the role</strong>The parents would face each other. The actual conflict — the resentment, the absence, the disappointment, the loss of intimacy — would have to be addressed or accepted. Neither addressing nor accepting is easy. The scapegoat's existence makes both indefinitely postponable.</div>
+</div>
+
+<div class="function-card">
+<div class="function-tag">Function 04</div>
+<h2 class="function-name">Maintenance of the other roles.</h2>
+<p class="function-desc">The scapegoat is not the only role in the family. There are typically others — the golden child, the peacemaker, the invisible child, the mediator, the hero. Each role is sustained, in part, by its relationship to the scapegoat. <strong>The golden child's status depends on the scapegoat's failure.</strong> The peacemaker's function depends on there being a conflict to manage. The invisible child's invisibility depends on the scapegoat absorbing the family's attention. Remove the scapegoat from the system and the other roles destabilise — because each was defined, in part, against the position the scapegoat occupied. The family does not consciously want the scapegoat to suffer. The family does, structurally, require the scapegoat's suffering to maintain the architecture of all the other positions.</p>
+<div class="function-without"><strong>Without the role</strong>The other family members would have to find their identity in something other than their relative position to the scapegoat. The golden child would have to discover their own worth without the contrast. The peacemaker would have to find a function without a conflict to mediate. The system would have to reorganise itself around something other than the original allocation.</div>
+</div>
+
+<div class="function-card">
+<div class="function-tag">Function 05</div>
+<h2 class="function-name">Discharge of generational inheritance.</h2>
+<p class="function-desc">Every family inherits unprocessed material from previous generations — patterns, traumas, shame, secrets that were handed down rather than resolved. The scapegoat role is one of the most efficient mechanisms for managing the inheritance: the unresolved material flows down the generations and concentrates in the designated member, who is then blamed for the difficulty of carrying what they never agreed to inherit. <strong>The scapegoat is often carrying not only the current family's dysfunction but the unprocessed material of grandparents and great-grandparents</strong> — material that was never theirs to carry but that the family system, lacking any other mechanism for processing it, deposits in the youngest available container. The generational dimension of the role is examined more fully in Module 4. Its operation as a function is established here.</p>
+<div class="function-without"><strong>Without the role</strong>The family would have to confront the inheritance directly — to recognise that some of what it has been calling "the scapegoat's problem" is actually material from two or three generations back that has been waiting to be metabolised. The metabolising is the work of generations. The role is the avoidance.</div>
+</div>
+
+<div class="pullquote">The scapegoat is not the family's failure. The scapegoat is the family's mechanism — the structural device that allows the family to continue functioning without facing what it cannot face. The role is the family's solution. The role's existence is what allows the rest of the system to remain as it is.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">You finish reading the five functions and recognise that the framework reframes your family from a collection of people who treated you badly into a system that required someone to occupy a specific position — and you happened to be the one assigned.</p>
+<p class="scenario-context">The reframing is structural, not exculpatory. It does not absolve any family member of their participation. It does, however, change the question from "why did they do this to me?" to "what was the system protecting itself from by needing this role to exist?" The shift is uncomfortable. The discomfort is the point.</p>
+
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Use the structural reframing to exonerate the family. If it was the system, no one is really to blame. Begin minimising the harm because the harm had structural causes.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the structural reframing alongside the personal harm without collapsing one into the other. The system required the role. The family members enacted the requirement. The enactment was real. The structural understanding does not erase the enactment — it explains the persistence of the enactment, which is different. Both layers are present. Both are needed.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Reject the structural reframing entirely. They knew what they were doing. The system framework is making excuses for behaviour that was deliberate.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Become fascinated by the system as an intellectual object — diagramming it, analysing it, mapping its functions — as a way of staying in your head and out of your body.</button>
+</div>
+
+<div class="feedback" id="feedback-1">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-1"></p>
+<p class="feedback-text" id="feedback-detail-1"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" disabled>← Previous</button>
+<span class="nav-counter">01 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PAGE 2 — WHAT THE ROLE CONCEALS -->
+<!-- ============================================================ -->
+<section class="slide" data-slide="2">
+<div class="slide-number">Page 02 / 06 · What the Role Conceals</div>
+<h1 class="slide-title">The actual <em>dysfunction</em> the role hides.</h1>
+
+<p class="lead">If the scapegoat role's primary function is to allow the family to avoid examining itself, then understanding the role requires understanding what specifically the role is keeping invisible. Every scapegoat is the visible cover for a specific concealed dysfunction. The concealment is not random — the scapegoat's "problems" are typically structured to obscure the precise nature of the actual family pathology. The relationship between what is visible (the scapegoat's difficulty) and what is concealed (the family's actual dysfunction) is what gives the role its specific shape in your specific family.</p>
+
+<p class="body-text"><strong>The pattern is consistent across families:</strong> the more visible the scapegoat's problems, the more invisible the family's. The scapegoat's behaviour absorbs the attention that would otherwise have to be directed at examining the system. The louder the surface noise, the quieter the underlying pathology can remain. This is not coincidence. It is the role's design — and the design is so effective that even outside observers, including therapists who have not been trained to see family systems, will often accept the family's narrative and treat the scapegoat as the patient when the system is, structurally, the patient.</p>
+
+<p class="body-text">Below are the most common configurations — the specific concealments that the scapegoat role typically performs. Read each one carefully and ask: which configuration, or which combination, fits the family I grew up in?</p>
+
+<div class="concealment">
+<div class="concealment-header">
+<div class="concealment-tag">Configuration 01</div>
+<h3 class="concealment-name">Parental dysfunction concealed by child difficulty.</h3>
+</div>
+<div class="concealment-body">
+<p class="body-text" style="margin-bottom:0;">The most common configuration. One or both parents carry significant dysfunction — addiction, untreated mental illness, personality disorder, chronic abusive behaviour, unprocessed trauma. The dysfunction would be the most prominent feature of the family if it were visible. The scapegoat's "difficulty" makes it invisible by absorbing the family's attention and the family's identification of "the problem."</p>
+
+<div class="concealment-pair">
+<div class="concealment-side">
+<div class="concealment-side-label">What is visible</div>
+<p class="concealment-side-text"><strong>The scapegoat's emotional reactivity, behavioural problems, difficulty in school or work, troubled relationships, mental health struggles, "drama."</strong> The family's life is organised around managing the scapegoat's issues. Family conversations return to them. Family resources flow toward containing them.</p>
+</div>
+<div class="concealment-side">
+<div class="concealment-side-label">What is concealed</div>
+<p class="concealment-side-text"><strong>The parent's untreated condition</strong> — the alcoholism that is never named, the rage that is never addressed, the depression that is medicated only with the family's collective management, the personality disorder that organises every interaction without ever being identified.</p>
+</div>
+</div>
+
+<div class="concealment-truth">
+<div class="concealment-truth-label">The structural truth</div>
+<p class="concealment-truth-text">The scapegoat's "difficulty" is often an accurate response to the parent's dysfunction — a response that would be recognised as such in any system willing to look at the parent. The family is not willing. The scapegoat becomes the explanation for everything that is actually the parent's expression.</p>
+</div>
+</div>
+</div>
+
+<div class="concealment">
+<div class="concealment-header">
+<div class="concealment-tag">Configuration 02</div>
+<h3 class="concealment-name">Marital failure concealed by child crisis.</h3>
+</div>
+<div class="concealment-body">
+<p class="body-text" style="margin-bottom:0;">The parents' relationship has effectively ended — emotionally, sexually, or functionally — but the marriage continues in form because neither parent is willing or able to address the dissolution. The scapegoat's ongoing crisis gives the parents a reason to remain in contact, to maintain the appearance of partnership, and to avoid the conversation that would acknowledge what has actually happened to the marriage.</p>
+
+<div class="concealment-pair">
+<div class="concealment-side">
+<div class="concealment-side-label">What is visible</div>
+<p class="concealment-side-text"><strong>The scapegoat as the family's crisis</strong> — the child who is always in trouble, always struggling, always in need of intervention. The parents present a united front in response to the crisis. They appear to be working together, even if the working together is exhausted and resentful.</p>
+</div>
+<div class="concealment-side">
+<div class="concealment-side-label">What is concealed</div>
+<p class="concealment-side-text"><strong>The marital reality</strong> — the parents do not function as a couple. They have not for years. Without the scapegoat to give them a shared project, they would have to face the absence at the centre of the marriage and decide what to do about it. The scapegoat's crisis provides indefinite postponement.</p>
+</div>
+</div>
+
+<div class="concealment-truth">
+<div class="concealment-truth-label">The structural truth</div>
+<p class="concealment-truth-text">If the scapegoat's crisis ever fully resolves, the marriage often collapses shortly after. This is not a coincidence. The marriage was held together by the crisis. The crisis was the structural function the scapegoat was performing. The scapegoat, sensing this at some level, often unconsciously sustains the crisis to prevent the collapse.</p>
+</div>
+</div>
+</div>
+
+<div class="concealment">
+<div class="concealment-header">
+<div class="concealment-tag">Configuration 03</div>
+<h3 class="concealment-name">Generational shame concealed by current blame.</h3>
+</div>
+<div class="concealment-body">
+<p class="body-text" style="margin-bottom:0;">The family carries shame from previous generations — a secret kept, a failure not metabolised, a wound from grandparents or great-grandparents that was never addressed. The shame is alive in the family system, generating diffuse tension and distorted patterns, but it cannot be named because naming it would require facing what it concerns. The scapegoat absorbs the diffuse tension by becoming the current target for the energy the historical shame produces.</p>
+
+<div class="concealment-pair">
+<div class="concealment-side">
+<div class="concealment-side-label">What is visible</div>
+<p class="concealment-side-text"><strong>The scapegoat as the recipient of family disapproval</strong> — the one who is constantly criticised, never quite right, always disappointing. The disapproval has an intensity that exceeds the scapegoat's actual behaviour, but the excess is attributed to the scapegoat's particularly difficult nature rather than to its actual source.</p>
+</div>
+<div class="concealment-side">
+<div class="concealment-side-label">What is concealed</div>
+<p class="concealment-side-text"><strong>The unresolved historical shame</strong> — the grandparent's secret, the great-aunt who was institutionalised, the family business that failed in disgrace, the immigration that was actually exile, the war crime never confessed, the abuse never acknowledged. The shame requires a contemporary target. The scapegoat is it.</p>
+</div>
+</div>
+
+<div class="concealment-truth">
+<div class="concealment-truth-label">The structural truth</div>
+<p class="concealment-truth-text">The scapegoat is often being punished for something that happened before they were born — receiving the family's accumulated shame as if they had personally caused it. The mismatch between the disapproval and any plausible cause is the diagnostic. Excess disapproval, with no proportionate origin in current behaviour, is the family's old shame seeking expression.</p>
+</div>
+</div>
+</div>
+
+<div class="concealment">
+<div class="concealment-header">
+<div class="concealment-tag">Configuration 04</div>
+<h3 class="concealment-name">System addiction concealed by individual focus.</h3>
+</div>
+<div class="concealment-body">
+<p class="body-text" style="margin-bottom:0;">The entire family system is organised around addiction — to a substance, to work, to image, to control, to crisis itself. The addiction is so pervasive and so naturalised that no one in the family recognises it as such. The scapegoat is identified as having the family's problem because the scapegoat's struggles are visible while everyone else's accommodation of the system addiction is invisible.</p>
+
+<div class="concealment-pair">
+<div class="concealment-side">
+<div class="concealment-side-label">What is visible</div>
+<p class="concealment-side-text"><strong>The scapegoat's substance use, behavioural pattern, or compulsion</strong> — clearly identified as the family's concern. The family rallies around helping the scapegoat. Resources are deployed. Interventions are organised. The scapegoat becomes the family's project.</p>
+</div>
+<div class="concealment-side">
+<div class="concealment-side-label">What is concealed</div>
+<p class="concealment-side-text"><strong>The family's collective addiction</strong> — the workaholism that organises everyone's schedule, the control patterns that determine every decision, the image management that consumes every gathering, the crisis-generation that all family members participate in maintaining. The scapegoat's identified problem is, structurally, the family's coping mechanism made visible in one member.</p>
+</div>
+</div>
+
+<div class="concealment-truth">
+<div class="concealment-truth-label">The structural truth</div>
+<p class="concealment-truth-text">In families organised around system addiction, the scapegoat is often the only family member whose dysfunction is visible because they have not been able to channel it into a socially sanctioned form. The workaholic parent's addiction is invisible because it produces income. The image-obsessed parent's addiction is invisible because it produces social approval. The scapegoat's addiction is visible because it produces only the family's disapproval.</p>
+</div>
+</div>
+</div>
+
+<div class="pullquote">The scapegoat's visibility is the family's invisibility. As long as you remain the visible problem, the actual problem remains invisible. The role's effectiveness is measured by how completely it succeeds in concealing what it was designed to conceal. The exit from the role is, in part, the exit from the concealment.</div>
+
+<div class="reflection">
+<div class="reflection-label">Sit with this · The concealment in your family</div>
+<p class="reflection-prompt">Of the four configurations above, which one — or which combination — most closely describes what the scapegoat role concealed in your family? Be specific about what was visible and what was actually being kept invisible.</p>
+<textarea class="reflection-area" id="reflect-concealment" placeholder="Name the configuration. Then name, as precisely as you can, the specific dysfunction the role was designed to keep invisible. The specificity is the diagnostic. Vague answers protect the concealment. Precise ones begin to dissolve it."></textarea>
+<div class="reflection-note">— This text remains private and is not stored or transmitted —</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">You read the four configurations and recognise that the family's narrative about you — the one that described you as the problem — was specifically structured to obscure a particular dysfunction that has been operating, undiscussed, for years or decades.</p>
+<p class="scenario-context">The recognition is not just intellectual. It is the felt sense of an entire framework reconfiguring. What you have spent decades trying to fix in yourself was, structurally, the cover for what the family was never going to fix in itself. The fixing was never going to work because the brokenness was never yours.</p>
+
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Use the recognition to launch an immediate confrontation with the family — name the concealment, expose the actual dysfunction, force the family to acknowledge what has been hidden.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the recognition as private structural understanding before deciding what, if anything, to do with it externally. The understanding is yours. The family's response to the understanding — if you eventually share it — is not. The architecture for that decision is the work of later modules. For now, the understanding stabilises in private, where it is most effective at changing your relationship to your own history.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Become preoccupied with the concealed dysfunction — researching it, analysing it, trying to understand every detail of what the family was hiding — at the expense of your own life in the present.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel paralysed by the recognition. If the role was designed to conceal something larger, then everything you have been working on in yourself was misdirected. You no longer know where to begin.</button>
+</div>
+
+<div class="feedback" id="feedback-2">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-2"></p>
+<p class="feedback-text" id="feedback-detail-2"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">02 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PAGE 3 — THE UNCONSCIOUS NATURE OF THE ASSIGNMENT -->
+<!-- ============================================================ -->
+<section class="slide" data-slide="3">
+<div class="slide-number">Page 03 / 06 · The Unconscious Assignment</div>
+<h1 class="slide-title">Why no one <em>decided</em> to do this.</h1>
+
+<p class="lead">The most difficult feature of the scapegoat role to hold is its unconscious nature. The family did not sit in a meeting and assign you the role. There was no document, no deliberation, no explicit decision. The role was produced by the system through processes none of the participants — not the parents, not the siblings, not extended family — fully understood. This does not absolve anyone. It does, however, change what the exit work requires. Understanding the unconscious nature of the assignment is what prevents the exit from becoming an unwinnable confrontation about intent.</p>
+
+<p class="body-text"><strong>Three things were operating simultaneously when the role was assigned.</strong> First, each family member was carrying their own unprocessed material from their own history — material they were not consciously aware of and could not have named. Second, the family system was producing role assignments through patterns that no individual member designed but that all members participated in sustaining. Third, the assignments were so consistent with the system's existing structure that they appeared to family members as the natural state of things rather than as choices anyone was making. The result: a role that was rigorously assigned by a system whose participants would, if asked, deny that any assignment was occurring.</p>
+
+<div class="mechanism">
+<div class="mechanism-num">Mechanism 01</div>
+<h2 class="mechanism-name">Inheritance precedes intention.</h2>
+<p class="body-text">Each of your parents arrived at parenthood carrying their own unprocessed material from their own families — material that shaped their nervous systems, their reactions, their available patterns of response. The material was not chosen. It was inherited. When you arrived in the family, you encountered not the parents your parents might have been with full processing of their own histories but the parents they actually were, organised around inherited patterns they had never examined. <strong>The role you were assigned was, in significant part, a function of patterns that arrived in your parents before you did.</strong> The patterns were not designed for you. They were waiting for someone to occupy the position they required.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Mechanism 02</div>
+<h2 class="mechanism-name">The system designs without designers.</h2>
+<p class="body-text">Family systems produce role assignments through processes that resemble unconscious selection more than conscious decision. The system identifies — through thousands of micro-interactions, none individually significant — which child has the temperament, the timing, the sensitivity, or the difference that suits the function the system requires. The selection is incremental. No single interaction is decisive. By the time the role is fully assigned, it has been built through a long sequence of small allocations, each of which could plausibly be denied as significant. <strong>The cumulative effect is the assignment. The individual increments are not the assignment.</strong> This is why family members can sincerely deny ever scapegoating anyone — because no single moment, examined in isolation, looks like the assignment. The assignment is the pattern across moments, which no participant has had to see in aggregate.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Mechanism 03</div>
+<h2 class="mechanism-name">Familiarity disguises selection.</h2>
+<p class="body-text">By the time you were old enough to notice the role, it had been operating for years. To you, the role felt like how things had always been. To your parents and siblings, your position in the family felt like who you were rather than what the system had made you. The familiarity is the disguise. Family members do not experience the role assignment as something they are doing — they experience it as a response to the kind of person you happen to be. <em>"They are just like that"</em> is the family's account of what is, structurally, the result of the family's own selection. The disguise is so effective that even pointing it out, in adulthood, frequently produces genuine confusion: <em>"But you really were a difficult child. We were responding to your behaviour."</em> The behaviour was, in part, the response to the role. The role was, in part, the cause of the behaviour. The family has no language for the circularity.</p>
+</div>
+
+<div class="section-heading">Why this matters for the exit</div>
+
+<p class="body-text"><strong>The exit cannot wait for family acknowledgement of intent.</strong> If you require the family to admit that the role was assigned — that you were scapegoated, that the assignment was a structural process the family participated in — you may wait indefinitely. The family's denial is not, primarily, a defence of bad behaviour. It is a structural fact about how the role was produced. The participants genuinely do not experience themselves as having scapegoated anyone, because no participant was conscious of the cumulative pattern. <strong>The exit must therefore proceed without the family's structural confirmation.</strong> Your exit is governed by your own seeing. The family's seeing is not required. If it ever arrives, it is a gift. If it never arrives, the exit remains valid.</p>
+
+<p class="body-text"><strong>The unconscious nature also explains the family's response when the exit begins.</strong> If you say "you scapegoated me" to a family member who has no internal experience of having scapegoated anyone, the family member will hear the statement as an attack on their identity — because it conflicts with their genuine self-perception. The conflict produces defensiveness, denial, counter-accusation, or hurt. None of these responses are evidence that you are wrong. They are evidence that you are speaking about a structural process the family member has no internal access to. Naming the structure to people who participated in it unconsciously rarely produces acknowledgement. It usually produces escalation. The exit work proceeds despite this, but it proceeds with the structural understanding that acknowledgement is not the goal — sovereignty is.</p>
+
+<div class="sov-frame">
+<div class="sov-label">The structural shift</div>
+<p class="sov-text">The question is not whether the family meant to scapegoat you. The question is whether the role operated. The role operated. The operation produced its effects regardless of anyone's intent. Intent is not the diagnostic. Structure is. The structural reading remains valid even if every family member sincerely denies that anything was assigned. Their denial is part of the structure. Your seeing is what allows the structure to be exited.</p>
+</div>
+
+<div class="pullquote">The family did not decide to scapegoat you. The family system produced the role through patterns no individual designed. The role is real. The assignment is structural. The participants are not, in the usual sense, culpable in the way the role's victims often imagine. The exit does not require culpability. The exit requires structural seeing. You are doing the seeing now.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">You attempt, in private conversation, to name the dynamic to a family member who participated in sustaining it. The family member responds with genuine confusion and visible hurt — they do not recognise what you are describing and feel attacked by your description.</p>
+<p class="scenario-context">The confusion is not performed. The family member genuinely does not have internal access to what you are naming. The hurt is real. The naming, accurate as it was, produced a response that has nothing to do with whether your naming was correct.</p>
+
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude that you must be wrong. The family member's genuine confusion proves that the role was not, in fact, assigned — that you have constructed a framework that does not match reality.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the structural reading without requiring the family member to confirm it. Their confusion is consistent with the unconscious nature of the assignment — they participated without conscious awareness of participating, and the awareness is not available to them on demand. The reading remains valid. The conversation may not have produced acknowledgement, but acknowledgement was never the diagnostic of the reading's accuracy.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Press harder. Provide more evidence. Try different framings. Find some version of the explanation that will finally penetrate the family member's defence and produce the acknowledgement you have been seeking.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Apologise for raising the issue. Comfort the family member. Manage their hurt. Restore the relationship to its previous state by withdrawing the structural naming.</button>
+</div>
+
+<div class="feedback" id="feedback-3">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-3"></p>
+<p class="feedback-text" id="feedback-detail-3"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">03 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PAGE 4 — THE BENEFITS THE FAMILY RECEIVES -->
+<!-- ============================================================ -->
+<section class="slide" data-slide="4">
+<div class="slide-number">Page 04 / 06 · The Structural Payoffs</div>
+<h1 class="slide-title">What each member <em>gains</em> from the role.</h1>
+
+<p class="lead">The role is persistent because the role pays. Each family member receives specific structural benefits from the scapegoat's continued occupation of the position — benefits the family member is rarely conscious of, but benefits that explain why the family will resist, often fiercely, any attempt to alter the arrangement. The benefits are not the same for each member. Each role within the family system receives a particular payoff from the scapegoat's continued performance of theirs. Mapping the payoffs is what reveals the structural alliance that sustains the role across decades.</p>
+
+<p class="body-text"><strong>This page asks you to look at your specific family members and identify what they each receive from your continued occupation of the role.</strong> The exercise is uncomfortable. It requires looking at people you may love — or have loved — and identifying the structural advantage they accrue from your suffering. The exercise is not about assigning malice. It is about understanding the mechanics of the system. The advantages are usually invisible to the recipients. They are not, however, less real for being invisible.</p>
+
+<div class="beneficiary">
+<div class="beneficiary-header">
+<div class="beneficiary-role">The other parent</div>
+<h3 class="beneficiary-name">The non-scapegoating parent receives an alliance.</h3>
+</div>
+<p class="beneficiary-desc">When one parent is the primary source of the scapegoating, the other parent often functions as the "good parent" — the one who is less harsh, occasionally protective, sometimes sympathetic. <strong>The good parent's status is sustained by the scapegoating parent's behaviour.</strong> Without the contrast, the good parent's relative goodness disappears. The good parent's failure to actively protect the scapegoat — their tolerance of the scapegoating, their failure to leave or to intervene decisively — is what allows them to maintain the good parent identity without doing the harder work of actually stopping the harm. The structural payoff: moral identity at low cost. The good parent appears good by comparison, not by action.</p>
+</div>
+
+<div class="beneficiary">
+<div class="beneficiary-header">
+<div class="beneficiary-role">The golden child</div>
+<h3 class="beneficiary-name">The favoured sibling receives a baseline of approval.</h3>
+</div>
+<p class="beneficiary-desc">The golden child's identity is constructed in contrast to the scapegoat's. Every failure attributed to the scapegoat is, structurally, a confirmation of the golden child's success. Every disapproval directed at the scapegoat is, structurally, an approval of the golden child by negation. <strong>The golden child receives, without effort, a permanent floor of family approval — a floor that exists only because someone else has been allocated the ceiling of family disapproval.</strong> The golden child often does not consciously want the scapegoat to suffer. The golden child does, however, structurally require it: their identity, their family standing, their sense of being the family's success, all depend on the scapegoat's continued performance of failure. The payoff is identity-by-contrast.</p>
+</div>
+
+<div class="beneficiary">
+<div class="beneficiary-header">
+<div class="beneficiary-role">The peacemaker</div>
+<h3 class="beneficiary-name">The mediating sibling receives a function.</h3>
+</div>
+<p class="beneficiary-desc">The peacemaker's role exists because there is conflict to mediate. The conflict, in scapegoating families, is reliably produced by the scapegoat's friction with the rest of the system. <strong>The peacemaker's identity depends on the friction's continued existence.</strong> If the scapegoat ever exits the role — if the friction disappears — the peacemaker loses the function around which they have organised their family identity. The peacemaker is therefore often the family member who most actively, and most invisibly, resists the scapegoat's exit. They may appear sympathetic. They may appear to be helping. The structural effect of their help, however, is usually to keep the scapegoat in proximity to the family, where the friction can continue, where the peacemaker's function remains required. The payoff is structural relevance.</p>
+</div>
+
+<div class="beneficiary">
+<div class="beneficiary-header">
+<div class="beneficiary-role">The invisible child</div>
+<h3 class="beneficiary-name">The overlooked sibling receives safety through invisibility.</h3>
+</div>
+<p class="beneficiary-desc">The invisible child's strategy is to avoid the family's gaze. The strategy works only as long as the family's gaze is occupied elsewhere. <strong>The scapegoat absorbs the gaze. The invisible child escapes it.</strong> If the scapegoat exits — if the family's attention becomes available for redistribution — the invisible child loses the cover that has been their primary protection. The invisible child often appears to support the scapegoat's exit on the surface while undermining it in subtle ways, because the exit threatens the invisibility on which their own survival has been built. The payoff is structural protection at the cost of structural participation.</p>
+</div>
+
+<div class="beneficiary">
+<div class="beneficiary-header">
+<div class="beneficiary-role">The scapegoating parent</div>
+<h3 class="beneficiary-name">The primary perpetrator receives a container.</h3>
+</div>
+<p class="beneficiary-desc">The parent who most actively scapegoats receives the largest structural payoff: a container for everything they cannot face about themselves. Their own unprocessed shame, their own failures, their own inherited dysfunction — all of it can be located in the scapegoat rather than in themselves. <strong>The scapegoat's existence is what allows the scapegoating parent to maintain a tolerable self-image despite carrying material that would otherwise be unbearable.</strong> The scapegoating parent's resistance to the scapegoat's exit is the most intense, because the exit threatens the most fundamental protection. Without the container, the parent would have to face what the container has been holding — and the facing may be psychologically intolerable to a system that has spent decades organising itself to avoid it. The payoff is the preservation of self.</p>
+</div>
+
+<div class="pullquote">The role pays. Each family member receives specific structural benefits from your continued occupation of the position. The benefits explain the resistance. The resistance is not personal. It is the system protecting the arrangements that have been sustaining each member's particular adaptation to the family's dysfunction. Your exit threatens all of them — not because they wish you harm, but because their structural positions are built on yours.</p>
+
+<div class="reflection">
+<div class="reflection-label">Sit with this · Mapping the payoffs</div>
+<p class="reflection-prompt">Identify, by name or relationship, two specific family members and the structural payoff each receives from your continued occupation of the role. Be precise about the benefit — not the personality, the benefit.</p>
+<textarea class="reflection-area" id="reflect-payoffs" placeholder="Member 1: [name/relationship] — payoff: ... Member 2: [name/relationship] — payoff: ... The specificity makes the structure visible. Vague answers ('they liked having me as the bad one') protect the structure. Precise ones ('my older sister's identity as the responsible one required my identity as the irresponsible one to remain stable') begin to dissolve it."></textarea>
+<div class="reflection-note">— This text remains private and is not stored or transmitted —</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">You complete the mapping exercise and realise that the family member you have always considered your closest ally — the one who seemed sympathetic, who occasionally validated your perceptions — was also receiving a structural benefit from your continued occupation of the role.</p>
+<p class="scenario-context">The realisation is destabilising. The ally was not insincere — they were genuinely sympathetic within the limits of what the system allowed. But the sympathy was bounded by their own structural position, and the bounding meant their support never extended to actions that would have ended your role. The sympathy was the maximum the system permitted them to offer. The system did not permit them to offer the exit.</p>
+
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Cut off the ally entirely. They were complicit. Their sympathy was a structural alibi. They do not deserve continued relationship.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the recognition with the same structural understanding you are extending to the rest of the system. The ally's bounded sympathy was not malice — it was their adaptation to the system, just as your role was your adaptation. The relationship can continue, but the assumption that the ally is a fellow exit-traveller may need to be revised. They are still in the system. You are leaving. The asymmetry is real and must be navigated.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Pretend you have not noticed. Keep the relationship intact by avoiding the structural reading. Preserve the comfort of believing the ally is more than they structurally were.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Try to recruit the ally into the exit. Explain the structural reading. Invite them to join you in seeing the system. Persuade them to leave alongside you.</button>
+</div>
+
+<div class="feedback" id="feedback-4">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-4"></p>
+<p class="feedback-text" id="feedback-detail-4"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">04 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PAGE 5 — THE RETURN OF THE PROJECTION -->
+<!-- ============================================================ -->
+<section class="slide" data-slide="5">
+<div class="slide-number">Page 05 / 06 · The Return of the Projection</div>
+<h1 class="slide-title">Returning what was <em>never yours.</em></h1>
+
+<p class="lead">The function-mapping is complete. The role contained the family's unprocessed material. The role concealed the family's actual dysfunction. The assignment operated unconsciously. The other family members received structural benefits from your continued performance. The picture is now whole. The question this page asks is the one the structural understanding makes available: what does it mean to return the family's material to the family — and what becomes possible once the returning has begun?</p>
+
+<p class="body-text"><strong>Throughout the role, you have been carrying material that did not originate in you.</strong> The shame was the family's. The dysfunction was the family's. The unprocessed grief, the inherited trauma, the marital failure, the parental pathology — all of it belonged to its origins. You absorbed it because the system required a container, and you happened to be the member selected. The absorption was not consent. The absorption was structural. The returning, therefore, is not aggression. The returning is the correction of a structural misallocation — putting back, where it always belonged, what was never properly yours.</p>
+
+<p class="body-text"><strong>The returning is internal before it is external.</strong> The first act of return is not a confrontation, a declaration, or a public reattribution. The first act of return is the private recognition that the material you have been carrying does not belong to you. The recognition does not change anything in the family system immediately. It changes everything in your relationship to the material. The shame becomes recognisable as the family's. The dysfunction becomes recognisable as the family's. The narrative about who is responsible for the system's distress becomes recognisable as a story the system needed you to believe. The recognition is the return — the private, internal reallocation that the family does not yet need to know about for it to take effect in your nervous system, your self-concept, and your daily functioning.</p>
+
+<div class="section-heading">What the internal return changes</div>
+
+<div class="cost-block">
+<p class="cost-name">It changes the inner voice's authority.</p>
+<p class="cost-text">When the voice says "you are the problem," the internal return allows you to recognise the statement as a misallocation — the family's problem, redirected at the available container, recorded in your internal monologue, replaying without authority. The voice may continue to speak. The voice's authority diminishes, because you have located the source of its content. <strong>The voice was reciting the family's verdicts. The family's verdicts were the family's, not the truth.</strong></p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">It changes the body's responses.</p>
+<p class="cost-text">The body has been holding the family's emotional weather as if it were the body's own. The internal return begins to release the holding — slowly, incompletely, but recognisably. The hypervigilance has less reason to operate, because the threats it was scanning for are recognised as belonging to a system you are no longer required to manage. The bracing eases, because the impacts it was preparing for have been re-attributed to their source. <em>The somatic release is gradual but real.</em></p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">It changes the patterns in other systems.</p>
+<p class="cost-text">The relational fingerprint — the role's projection into workplaces, friendships, romantic relationships — depends on you continuing to carry the family's material as if it were your identity. The internal return reduces the projection's intensity, because the material being projected becomes recognisable as imported rather than as innate. Other systems begin to register you differently, because you are bringing less of the role into them. The change is not immediate. The change does compound.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">It changes the meaning of any eventual external return.</p>
+<p class="cost-text">If, at some future point, you choose to communicate any portion of the structural understanding to a family member — through a letter, a conversation, a boundary, an explicit naming — the communication will be different because the internal return has already happened. <strong>You will not be seeking the family's acknowledgement to validate the reading.</strong> You will be informing the family of a reading you have already validated for yourself. The difference is the difference between negotiation and statement. The system can argue with negotiation. The system has no leverage against statement.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">The return</div>
+<p class="sov-text">What you have been carrying is not yours. It is the family's material, deposited in you because the system required a container. The returning begins inside — with the private recognition that the material has been misallocated. The family does not need to participate in the return for it to take effect. Your nervous system, your self-concept, and your capacity to function in every subsequent system are restructured by the internal return alone. What comes after — whether you choose to make any portion of the return external — is the architecture of the next two modules. For now, the return begins where it must begin: in the quiet recognition that you have been carrying what was never yours.</p>
+</div>
+
+<p class="body-text"><strong>The returning does not require the family to receive what is being returned.</strong> Many readers, at this point, become preoccupied with whether the family will accept the reallocation — whether the parents will acknowledge their dysfunction, whether the siblings will recognise their benefits, whether the system will finally see itself. The preoccupation is understandable and structurally misleading. The family's recognition is not required for the return to take effect in you. The return takes effect because you have made it. The material has been internally reallocated. Whether the external system ever reorganises around the reallocation is a separate question — important, but not foundational. The foundation is your own seeing. The seeing is the return. The return is what makes everything that follows possible.</p>
+
+<div class="pullquote">You have been carrying the family's material. The carrying was structural. The returning is, first and most importantly, internal — a private reallocation that the family does not need to acknowledge for it to take effect in you. The external work, when it comes, will be the work of the next modules. The internal return begins now. It is already beginning. The reading of this module is part of how it begins.</div>
+
+<div class="reflection">
+<div class="reflection-label">Sit with this · What you are returning</div>
+<p class="reflection-prompt">Name, specifically, one thing you have been carrying that belonged to the family system rather than to you. The naming is the first internal act of return.</p>
+<textarea class="reflection-area" id="reflect-return" placeholder="One specific thing. Not 'their dysfunction' — name it. The exact shame, the exact narrative, the exact verdict you have been carrying as if it were yours. The specificity is the return. The vagueness perpetuates the carrying."></textarea>
+<div class="reflection-note">— This text remains private and is not stored or transmitted —</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">You sit with the recognition that the internal return is possible — that you can, in private, reallocate the family's material to the family without needing their participation — and you notice a strange resistance to actually doing it.</p>
+<p class="scenario-context">The resistance does not make sense on the surface. The return seems straightforward. The material is the family's. The carrying has been costly. The release should be simple. And yet something resists — a hesitation, a reluctance, a sense that releasing the material is somehow a betrayal of something you cannot quite name.</p>
+
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Override the resistance through willpower. Force the return regardless of the hesitation. The resistance is the role's last defence and must be defeated.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Investigate the resistance with curiosity rather than overriding it. The resistance is information — it may be naming a real attachment to the role that the structural analysis has not yet addressed. The role has been part of your identity for decades. Releasing it is not only relief; it is also loss — loss of the familiar, loss of the identity organised around the role, loss of the structural position even when that position has been costly. The hesitation honours the loss. The return will be more complete if the hesitation is acknowledged rather than defeated.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Accept the resistance as final. The return is not for you. The material cannot actually be released. The framework's promise of internal return is unrealistic for your specific situation.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Reframe the resistance as loyalty — to the family, to the role, to the version of yourself that the role produced. Decide that the loyalty matters more than the return, and continue carrying the material as an act of devotion.</button>
+</div>
+
+<div class="feedback" id="feedback-5">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-5"></p>
+<p class="feedback-text" id="feedback-detail-5"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">05 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue →</button>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PAGE 6 — COMPLETION -->
+<!-- ============================================================ -->
+<section class="slide" data-slide="6">
+<div class="slide-number">Page 06 / 06 · Module Complete</div>
+<div class="complete-mark">✦</div>
+<h1 class="slide-title">The purpose is <em>visible</em> now.</h1>
+
+<p class="lead">You have moved through the structural analysis of why the scapegoat role exists. The role was not a mistake. It was a function. The function had specific operations, specific concealments, specific beneficiaries, and specific mechanisms of unconscious assignment. With the function visible, the role's persistence is no longer mysterious. The role persists because the system requires it. The system has been organised, across years and often generations, to make the role's continuation feel like the natural state of things rather than the structural arrangement it actually is.</p>
+
+<div class="section-heading">What this module established</div>
+
+<ul class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">The scapegoat role performs five specific structural functions for the family system: containment of unprocessed material, preservation of the family's self-image, stabilisation of the marital or parental subsystem, maintenance of the other roles, and discharge of generational inheritance.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Every scapegoat is the visible cover for a specific concealed dysfunction. The configurations include parental dysfunction concealed by child difficulty, marital failure concealed by child crisis, generational shame concealed by current blame, and system addiction concealed by individual focus.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">The role was assigned through unconscious processes that no individual family member designed but all participated in sustaining. The unconscious nature explains the family's likely denial when the structure is named — and explains why the exit cannot wait for family acknowledgement of intent.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Each family member receives specific structural benefits from your continued occupation of the role — benefits the recipient is rarely conscious of, but benefits that explain the system's resistance to your exit. The benefits are not malice. They are the structural alliances that sustain the role across decades.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The internal return — the private recognition that the material you have been carrying belongs to the family system rather than to you — does not require family acknowledgement to take effect. The return changes the voice's authority, the body's responses, the patterns in other systems, and the meaning of any eventual external communication.</span></li>
+</ul>
+
+<div class="sov-frame">
+<div class="sov-label">From purpose to inheritance</div>
+<p class="sov-text">You now understand why the role existed and what it was protecting the family from having to face. The next module — Module 04, Generational Wounding — extends the structural analysis backward into the generations that preceded you. The patterns that produced your role did not begin in your family. They arrived. Tracing the arrival is what makes the eventual exit not only an exit from a single family but an interruption in a pattern that has been operating, in many cases, for far longer than anyone in your immediate family realises.</p>
+</div>
+
+<p class="body-text">This module has asked you to see the family system structurally — as a mechanism with functions, not a collection of people with intentions. The seeing is uncomfortable. It changes the categories you may have used to understand your history. <strong>Hold the discomfort.</strong> The structural seeing is what makes the work of the next three modules possible — the generational tracing, the practical architecture of leaving, and the governed decision about rebuilding or departing. Each rests on the seeing this module produced. The seeing is the foundation. You have built it now.</p>
+
+<div class="safety-note">
+<div class="safety-label">If you need support</div>
+<p class="safety-text">If this module produced material that needs additional support, please reach out. Samaritans: 116 123 (free, 24/7). Mind: 0300 123 3393. Text SHOUT to 85258 for free, confidential text support. Looking at the family system structurally is uniquely destabilising work, because it asks you to revise the categories you have used to understand your history. The destabilisation is appropriate to the magnitude of what is being revised. You do not have to hold it alone.</p>
+</div>
+
+<div class="section-heading">Practice this week</div>
+<p class="body-text">Identify which structural function the scapegoat role performed most prominently in your specific family. Was it primarily concealing a parental dysfunction? Preserving the family's self-image? Stabilising a failing marriage? Write one honest paragraph — not for anyone else to read — describing what the role was covering. The specificity matters. The more precisely you can name what the role concealed, the less power the concealment retains over your interpretation of your own history.</p>
+<p class="body-text"><strong>The unconscious assignment.</strong> This module established that no one decided to do this to you. Hold both truths simultaneously this week: the harm was real, and no one chose it consciously. This is not forgiveness — forgiveness is a separate process and is not required here. It is accuracy. The accuracy reduces the amount of energy spent on the wrongness of what happened and redirects it toward the understanding that enables the exit. Practice holding both truths without needing to resolve the tension between them.</p>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">06 / 06</span>
+<button class="nav-btn primary" disabled>Module Complete ✦</button>
+</div>
+</section>
+
+</main>
+
+<script>
+// ============================================================
+// FEEDBACK CONTENT
+// ============================================================
+const feedback = {
+ 1:{
+  a:{headline:"Using the structural reframing to exonerate the family converts a tool for understanding into a tool for minimisation — and the minimisation is the role's old reflex applied to the new material.",detail:"The structural reading explains why the role persisted. It does not erase the experiences. The family members participated in the system. The participation produced harm. The harm was real, whether or not the harm was the consequence of structural processes rather than conscious choice. The trap is the move from 'it was structural' to 'therefore nothing was anyone's fault' — a move that protects the family from the reckoning the structural understanding actually requires. The governance position holds both: the structure was real, and the participants are responsible for what they did within the structure, regardless of whether they consciously designed it. The exoneration response would have been familiar to the role — the impulse to absolve the family at your own expense is what the role trained for. The governance response declines the absolution while also declining the simpler narrative of malicious intent."},
+  b:{headline:"Holding the structural and the personal layers simultaneously is the precise governance position this module is asking you to construct.",detail:"The system required the role. The family members enacted the requirement. Both statements are true. The structural understanding explains the persistence of the enactment without erasing the enactment. It explains why even good people, with good intentions, could have produced the outcomes you experienced — because the system's requirements operate regardless of intention, and intention is therefore not the diagnostic of harm. The harm is the diagnostic of harm. The structural reading adds explanatory depth to the harm without subtracting from its reality. This is the position the module's later pages will build on. The seeing-without-collapsing is the practice. The practice is what makes the rest of the course's work possible."},
+  c:{headline:"Rejecting the structural reframing in favour of a deliberate-intent narrative produces an emotionally satisfying story that does not match the underlying mechanism.",detail:"The deliberate-intent narrative — they knew exactly what they were doing — has the appeal of clear villains and clear victims. It maps onto stories from books and films. It produces a moral universe in which the lines are clean. The narrative is also, structurally, inaccurate in most cases. Real family scapegoating rarely involves conscious deliberation. The participants typically have no internal access to the cumulative pattern; they experience themselves as responding to the scapegoat's behaviour rather than as producing the conditions that shape the behaviour. This does not absolve them — the structural reading is not exoneration — but the deliberate-intent framing leaves you with a story that the family will be able to refute (because, structurally, it is refutable) and that will therefore weaken the exit work rather than strengthen it. The structural reading is the more powerful position precisely because it cannot be refuted by the participants' denial of intent. Intent was not required for the structure to produce its effects."},
+  d:{headline:"Becoming fascinated by the system as an intellectual object is the role's most sophisticated bypass — using the structural understanding to escape into analysis rather than into governed feeling.",detail:"The intellectual fascination is real. The system is genuinely interesting. The diagramming, the mapping, the analysis — all of it can be done well, can be done at length, and can produce considerable intellectual satisfaction. The fascination's structural function, however, is often to keep the reader in the head and out of the body — to engage with the framework as a puzzle to be solved rather than as a description of the conditions that shaped their nervous system. The bypass is the role's perfected adaptation to material that would otherwise produce the emotional reckoning the role is designed to prevent. The governance move is to allow the intellectual engagement without letting it become the entire engagement. The structural reading is meant to inform the body, the relationships, the daily functioning — not only the analytical mind. The mind can be allowed its work. The body must also be allowed its."}
+ },
+ 2:{
+  a:{headline:"Launching an immediate confrontation uses a fresh structural recognition as a weapon — and the weapon, deployed before the architecture is built, typically rebounds.",detail:"The recognition is new. The framework has just arrived. The confrontation, made within hours of the seeing, will be shaped by the urgency of the new knowing rather than by the governance the structural understanding is meant to produce. The family will respond to the confrontation with the predictable mechanisms: denial, counter-accusation, the recruitment of other family members against you, the production of evidence that you are the destabiliser. None of these responses are evidence that the recognition was wrong. They are evidence that the system is functioning as it always has. The governance alternative is to allow the recognition to stabilise into a structural understanding that no longer needs the family's acknowledgement to be valid. The understanding, once stable, can be communicated in ways that are not negotiations — but the communication, if it comes, comes after the architecture is built, which is the work of the next two modules."},
+  b:{headline:"Holding the recognition as private structural understanding before deciding what to do with it externally is the governance the page is asking for.",detail:"The understanding does its work internally first. The voice's authority diminishes. The body's responses begin to release. The patterns in other systems begin to shift. None of this requires the family's participation. None of it requires you to have spoken to anyone in the family. The internal work is the foundational work, and the foundational work is yours alone — protected from the family's responses, free to develop without interference, available to consolidate into the governance that any eventual external communication will rest on. The patience is not avoidance. The patience is the structural sequence. Internal first. External later, if at all. The order matters."},
+  c:{headline:"Becoming preoccupied with the concealed dysfunction can produce a new form of organising your life around the family — only now around understanding their pathology rather than absorbing their blame.",detail:"The preoccupation is the role's familiar pattern in a new costume. Where you once organised your attention around the family's distress, you now organise it around the family's dysfunction. The orientation is still toward the family. The exit requires, gradually, the redirection of attention away from the family system and toward your own life — your own work, your own relationships, your own development. The understanding of the concealed dysfunction is useful and finite. Once it is established, it is established. Continued research into the family's specific pathology can be a way of remaining structurally bound to the system the work is meant to exit. The governance move is to gather what you need, allow the understanding to settle, and turn the attention forward — into the life that has been waiting for the attention the role has been consuming."},
+  d:{headline:"Feeling paralysed by the recognition that the role was concealing something larger is the system's last defence: producing overwhelm to prevent the integration of the seeing.",detail:"The paralysis is structural. The recognition that your work on yourself was, in significant part, work on the wrong material is genuinely disorienting. The disorientation is appropriate to the magnitude of the revision. The disorientation is not, however, a verdict on what follows. Work on yourself that was directed at material you were not actually carrying may have produced less specific results, but it has not been wasted — much of the capacity built during that work transfers to the more accurately targeted work that becomes available now. The paralysis says: you are starting from zero. The structural reality is: you are starting from where you are, with the same capacities you have developed, now able to apply them to the actual material rather than to the misallocated material. The work continues. The work just becomes more accurate."}
+ },
+ 3:{
+  a:{headline:"Concluding that you must be wrong because the family member is genuinely confused is the unconscious-assignment trap operating in real time — the family's lack of internal access being taken as evidence that nothing was being assigned.",detail:"The family member's confusion is consistent with the unconscious nature of the assignment. They participated without conscious access to their participation. Their inability to recall the participation, in the moment you describe it, is not evidence that the participation did not occur. It is evidence that they participated without awareness — which is the structural condition this module has described. The role's most reliable defence is precisely this: producing genuine confusion in family members when the role is named, which the scapegoat then reads as proof that the naming was inaccurate. The structural reading remains valid despite the confusion. The validity does not require the family member to remember what they have no available memory of. The validity rests on the pattern, which exists in your record of years of interactions, not in the family member's recollection of any specific moment."},
+  b:{headline:"Holding the structural reading without requiring the family member to confirm it is the governance position applied to the most difficult social terrain.",detail:"The reading is valid because the pattern operated. The family member's confusion is part of the structure, not a refutation of it. The conversation produced what unconscious-assignment conversations typically produce: a family member who genuinely does not have access to what is being named, an emotional response that has nothing to do with whether the naming was accurate, and a relational situation that has just become more complicated without producing the acknowledgement you may have been hoping for. The acknowledgement was never the foundation. The structural reading was. The reading remains. The conversation is information about the family member's capacity to participate in the exit work — useful information, sometimes painful — but not information that invalidates the reading itself. The governance holds the reading despite the social cost of the unsuccessful conversation."},
+  c:{headline:"Pressing harder for acknowledgement converts the conversation from a one-time naming into an ongoing campaign — and the campaign is the system pulling you back into engagement with the role.",detail:"The pressing assumes that with enough effort, the right framing, sufficient evidence, the family member will eventually see what you are describing. The assumption is often inaccurate. The unconscious nature of the assignment is not a temporary obstruction to insight — it is, frequently, a structural feature of the family member's psychology that protects them from material they cannot face. The pressing produces escalating defensiveness, deeper denial, and recruitment of other family members against you. It also keeps you in the role of the one trying to make the family see — which is one of the role's most exhausting deployments. The governance alternative is to make the structural observation once, observe the family member's capacity to receive it, and accept the capacity as the answer regardless of whether the answer is the one you hoped for. The pressing extends the role. The acceptance ends a particular cycle."},
+  d:{headline:"Apologising for raising the issue and managing the family member's hurt is the scapegoat role resuming its primary function — absorbing the family's discomfort to restore the system's equilibrium.",detail:"The role trained you to take responsibility for others' emotional states, particularly the states produced by accurate things you said. The apology is the role's reflex. The reflex restores the family member's comfort at the cost of your own structural understanding — which is the exact transaction the role has been performing for decades. The governance alternative is to allow the family member their discomfort without managing it for them. Their discomfort is theirs. The conversation produced what conversations of this kind tend to produce. The relationship can continue, with whatever the new conditions turn out to be, but the apology — if it is offered — apologises away the structural reading. The reading does not require an apology. The reading was accurate. The naming was, perhaps, premature for that particular relationship. The premature naming and the structural inaccuracy are different categories. Distinguishing them is the governance move."}
+ },
+ 4:{
+  a:{headline:"Cutting off the ally entirely treats structural participation as moral identity — and the conflation can produce decisions that are sharper than the structural analysis actually warrants.",detail:"The ally's bounded sympathy was, structurally, their adaptation to the system. The adaptation produced real limits on the support they could offer. The limits were real. The limits, however, are not the same as malice. The ally may have been doing the maximum that their own structural position allowed — which is genuinely less than you needed, and also genuinely more than several other family members offered. The cutting-off response treats the gap between what they offered and what you needed as if it were the same as the gap between what active perpetrators did and what you needed. The two gaps are different. The governance alternative is to revise the assumption that the ally was a fellow exit-traveller while preserving the relationship at whatever terms now actually fit. The relationship may need to change. It does not necessarily need to end. The structural reading produces a more accurate map of the relationship, not necessarily an instruction to terminate it."},
+  b:{headline:"Holding the recognition with the same structural understanding extended to the rest of the system is the governance position that allows nuanced relationship-by-relationship navigation.",detail:"The ally's bounded sympathy was their adaptation. Your role was your adaptation. The system shaped both. The recognition does not require you to condemn the ally for the limits of what their position permitted — but it does require you to stop expecting from them what their position did not permit them to offer. The relationship can continue on revised terms. You can value what they did offer (which was, often, significant) without continuing to assume that they will offer more than they ever did. The exit is yours. The ally's continued presence in the system is theirs. The asymmetry is real and can be navigated, conversation by conversation, without requiring either dramatic ending or false continuation. The governance is the holding of both: their actual capacity, and your continued affection within the limits of that capacity."},
+  c:{headline:"Pretending you have not noticed preserves the relationship at the cost of the structural reading — and the structural reading is what makes the rest of the exit work possible.",detail:"The pretending is comfortable in the short term. The relationship continues in its familiar form. The cost, however, is that the structural reading remains private — held by you alone, never integrated into how you actually relate to this specific family member. The relationship continues to operate on the old terms, which require you to continue performing portions of the role to maintain the comfort. The role continues. The exit stalls. The governance alternative does not require you to confront the ally with the revised reading. It does require you to allow your internal map of the relationship to update, which will, over time, produce visible shifts in how you engage. The shifts may be small. They will be real. The pretending freezes the relationship in the role's frame. The internal updating, without external confrontation, allows the relationship to evolve as your own structural position changes."},
+  d:{headline:"Recruiting the ally into the exit places onto them the burden of seeing what their structural position has, for years, prevented them from seeing.",detail:"The recruitment is well-intentioned. The structural reading is real, and sharing it with someone who has shown sympathy seems natural. The structural reality is that the ally's bounded sympathy was bounded for a reason — their own position in the system required certain limits on what they could see. Asking them to see more, by force of explanation, is asking them to do work they may not be ready to do, may not have capacity to do, or may have organised their own life around not doing. The recruitment frequently produces a response that resembles the response of the more directly implicated family members: defensiveness, denial, sometimes hurt. The hurt is real. The ally is not a fellow exit-traveller just because they were sympathetic within the system's limits. The exit is structurally individual. Others may join later, on their own timing, through their own work. The recruitment compresses the timeline in ways that often produce the loss of the relationship rather than the conversion of the relationship into something deeper."}
+ },
+ 5:{
+  a:{headline:"Overriding the resistance through willpower treats the hesitation as an enemy to be defeated — and the framing perpetuates the same combative relationship to your own internal states that the role installed.",detail:"The role trained you to override your own signals — to push past the hesitation, to ignore the body's reluctance, to perform the required function regardless of what your internal state was telling you. The willpower-override response is the same training applied to the return. The return is not a battlefield. The hesitation is not the enemy. The hesitation is information. The information may include real material the structural analysis has not yet fully addressed — an attachment to the role, a fear of the unknown territory beyond it, a grief for the identity that was constructed around carrying the material. Defeating the hesitation skips over the material. The governance alternative is to investigate the hesitation with the same care the rest of the module has applied to the structural pattern. What is the hesitation actually saying? What does it know that the analysis has not yet integrated? The investigation produces more complete return than the override does. The override leaves the unintegrated material to resurface later."},
+  b:{headline:"Investigating the resistance with curiosity rather than overriding it is the governance applied to your own internal complexity.",detail:"The resistance is information. Releasing the role's material involves real loss — loss of the familiar identity, loss of the structural position that, however costly, was at least known. The role provided a function, a place in the family, a way of organising attention. Releasing it produces, in the short term, a gap — a space where the familiar organisation used to be and where the new organisation has not yet established itself. The hesitation honours the gap. It says: do not pretend this is only relief. There is also loss. The governance move is to acknowledge both — the relief of putting down what was never yours, and the loss of the version of yourself that was organised around carrying it. The acknowledgement does not stop the return. The acknowledgement makes the return more complete by letting the loss be felt rather than suppressed. What is felt can be metabolised. What is suppressed continues to operate."},
+  c:{headline:"Accepting the resistance as final treats a temporary hesitation as a permanent verdict — and the treatment is the role's most efficient defence against the possibility of change.",detail:"The resistance is not the end. The resistance is one signal in a larger process. The role survives by convincing its occupant that any obstacle to exit is, in fact, the proof that exit is impossible — that the framework's promise of release was unrealistic for your specific case. The conviction is structural. The role has been operating for decades. It will produce many such moments of apparent impossibility along the way. Each moment is data, not verdict. The governance alternative is to acknowledge the resistance, investigate what it is telling you, and continue the work without assuming that the resistance constitutes the final answer about whether the work is possible. The resistance is real. The resistance is also temporary. The temporariness becomes visible only by continuing past it."},
+  d:{headline:"Reframing the resistance as loyalty converts a temporary hesitation into a permanent identity — and the conversion preserves the role under a new name.",detail:"The reframing is sophisticated. Loyalty sounds noble. Devotion to the family, to the role, to the version of yourself organised around carrying the material — all of it can be presented as a virtue. The reframing's structural function, however, is to provide a new justification for continuing the carrying. The role no longer needs to be defended on its own terms (it is too costly for that); the role can now be defended as an act of love or fidelity, which preserves the carrying while updating the narrative around it. The governance alternative recognises the loyalty without ratifying the carrying. You can love your family without continuing to absorb their unprocessed material. The two are different. The role conflated them. The governance distinguishes them. The distinction allows the love to continue, on terms that do not require you to remain the system's container, which is the only configuration in which the love can be sustainable across the rest of your life."}
+ }
+};
+
+// ============================================================
+// CHOICE & NAV LOGIC
+// ============================================================
+let currentSlide = 1;
+const totalSlides = 6;
+const answered = {1:false,2:false,3:false,4:false,5:false};
+
+document.querySelectorAll('.choices').forEach(group=>{
+ const scenarioNum = parseInt(group.dataset.scenario);
+ const choices = group.querySelectorAll('.choice');
+ choices.forEach(choice=>{
+  choice.addEventListener('click',()=>{
+   if(answered[scenarioNum]) return;
+   const answer = choice.dataset.answer;
+   const fb = feedback[scenarioNum][answer];
+   choices.forEach(c=>{
+    if(c===choice) c.classList.add('selected');
+    else c.classList.add('dimmed');
+    c.disabled = true;
+   });
+   document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+   document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+   document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+   const nextBtn = document.getElementById(`next-${scenarioNum}`);
+   if(nextBtn) nextBtn.disabled = false;
+   answered[scenarioNum] = true;
+  });
+ });
+});
+
+function showSlide(n){
+ document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+ document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+ document.querySelectorAll('.progress-dot').forEach((dot,i)=>{
+  dot.classList.remove('active','complete');
+  if(i+1 < n) dot.classList.add('complete');
+  else if(i+1 === n) dot.classList.add('active');
+ });
+ currentSlide = n;
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextSlide(){ if(currentSlide < totalSlides) showSlide(currentSlide+1); }
+function prevSlide(){ if(currentSlide > 1) showSlide(currentSlide-1); }
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c5m2';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course5-module-2-am-i-the-scapegoat.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c5m3','1');window.location.href='course5-module-4-generational-wounding.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

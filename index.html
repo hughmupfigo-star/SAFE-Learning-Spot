@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Safe Spot — Learning Centre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+
+/* ── HEADER ── */
+.site-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);
+padding:14px 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;align-items:center;gap:24px}
+.header-brand{justify-self:start;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.header-brand span{color:var(--muted);font-weight:300}
+.header-nav{justify-self:end;display:flex;gap:28px;align-items:center}
+.header-nav a{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+color:var(--muted);text-decoration:none;transition:color .2s}
+.header-nav a:hover{color:var(--ink)}
+.header-nav .nav-assess{color:var(--accent)}
+.header-nav .nav-assess:hover{color:var(--ink)}
+
+/* ── HERO ── */
+.hero{background:var(--ink);padding:88px 40px 80px}
+.hero-inner{max-width:820px;margin:0 auto}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#666;margin-bottom:28px}
+.hero-title{font-family:var(--serif);font-size:clamp(2.4rem,6vw,4rem);font-weight:300;line-height:1.15;margin-bottom:28px;color:var(--paper)}
+.hero-title em{font-style:italic;color:var(--accent)}
+.hero-body{font-size:1rem;color:#aaa;line-height:1.8;max-width:620px;margin-bottom:12px}
+.hero-body p{margin-bottom:14px}
+.hero-body p:last-child{margin-bottom:0}
+.hero-disclaimer{font-family:var(--mono);font-size:.75rem;color:#555;letter-spacing:.03em;margin-top:20px;line-height:1.6;max-width:560px;padding-top:20px;border-top:1px solid #222}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:36px}
+.btn-primary{padding:14px 32px;background:var(--accent);color:var(--paper);text-decoration:none;border-radius:3px;font-size:.9rem;font-family:var(--sans);letter-spacing:.04em;transition:opacity .2s}
+.btn-primary:hover{opacity:.82}
+.btn-secondary{padding:14px 24px;color:#aaa;text-decoration:none;font-size:.88rem;font-family:var(--sans);letter-spacing:.03em;border:1px solid #333;border-radius:3px;transition:border-color .2s,color .2s}
+.btn-secondary:hover{border-color:#666;color:var(--paper)}
+
+/* ── PRICING ── */
+.pricing-section{max-width:900px;margin:0 auto;padding:72px 40px 64px;border-bottom:1px solid var(--line)}
+.section-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.section-heading{font-family:var(--serif);font-size:clamp(1.4rem,2.8vw,1.9rem);font-weight:300;margin-bottom:8px;color:var(--ink)}
+.section-sub{font-size:.9rem;color:var(--muted);line-height:1.65;max-width:540px;margin-bottom:40px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.price-card{background:var(--paper);border:1px solid var(--line);padding:32px 28px;display:flex;flex-direction:column;gap:0;transition:border-color .2s;cursor:pointer;text-decoration:none;color:inherit}
+.price-card:hover{border-color:#aaa}
+.price-card.featured{border-color:var(--accent);background:#f5fbf7;position:relative}
+.price-card.featured::before{content:'Best value';position:absolute;top:-1px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:var(--paper);padding:3px 12px;border-radius:0 0 4px 4px}
+.price-label{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.price-amount{font-family:var(--serif);font-size:3rem;font-weight:300;line-height:1;color:var(--ink);margin-bottom:6px}
+.price-amount sup{font-size:1.2rem;vertical-align:super}
+.price-desc{font-size:.88rem;color:var(--muted);line-height:1.6;margin-bottom:24px;flex:1}
+.price-includes{font-family:var(--mono);font-size:.72rem;color:#999;letter-spacing:.04em;line-height:1.7;margin-bottom:24px}
+.price-cta{display:block;padding:11px 20px;text-align:center;background:var(--ink);color:var(--paper);text-decoration:none;border-radius:3px;font-size:.85rem;font-family:var(--sans);letter-spacing:.04em;transition:opacity .2s;margin-top:auto}
+.price-card.featured .price-cta{background:var(--accent)}
+.price-cta:hover{opacity:.82}
+
+/* ── COURSES ── */
+.courses-section{max-width:900px;margin:0 auto;padding:72px 40px 100px}
+.courses-hdr{margin-bottom:48px;border-bottom:1px solid var(--line);padding-bottom:28px}
+.courses-hdr h2{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2rem);font-weight:300;margin-bottom:8px}
+.courses-hdr p{font-size:.92rem;color:var(--muted);line-height:1.65;max-width:560px}
+.price-note{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--ink);background:var(--soft);padding:4px 10px;border-radius:2px}
+.courses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.course-card{background:var(--paper);border:1px solid var(--line);padding:28px 28px 24px;display:flex;flex-direction:column;gap:0;transition:border-color .2s}
+.course-card:hover{border-color:#aaa}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.card-num{font-family:var(--mono);font-size:1.8rem;font-weight:400;color:var(--line);line-height:1}
+.card-badge{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--muted);background:var(--soft);padding:3px 8px;border-radius:2px;text-transform:uppercase}
+.card-title{font-family:var(--serif);font-size:1.2rem;font-weight:400;line-height:1.3;margin-bottom:6px;color:var(--ink)}
+.card-tagline{font-size:.85rem;color:var(--muted);line-height:1.55;margin-bottom:20px;font-style:italic}
+.card-divider{height:1px;background:var(--line);margin-bottom:16px}
+.modules-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.modules-list{list-style:none;display:flex;flex-direction:column;gap:0;margin-bottom:20px;flex:1}
+.modules-list li{font-size:.82rem;line-height:1.4;border-bottom:1px solid var(--line);padding:6px 0;display:flex;align-items:baseline;gap:8px}
+.modules-list li:last-child{border-bottom:none}
+.mod-num{font-family:var(--mono);font-size:.7rem;color:var(--muted);flex-shrink:0}
+.modules-list a{color:var(--ink);text-decoration:none;transition:color .2s}
+.modules-list a:hover{color:var(--accent)}
+.mod-soon{color:var(--muted);font-style:italic}
+.card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid var(--line)}
+.card-price{font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--ink)}
+.card-link{font-size:.82rem;color:var(--ink);text-decoration:none;letter-spacing:.03em;border-bottom:1px solid var(--ink);padding-bottom:1px;transition:color .2s,border-color .2s}
+.card-link:hover{color:var(--accent);border-color:var(--accent)}
+.card-link.coming{color:var(--muted);border-color:var(--line);cursor:default;pointer-events:none}
+
+
+/* ── DISCLAIMER ── */
+.disclaimer-section{background:var(--soft);border-top:1px solid var(--line);padding:48px 40px}
+.disclaimer-inner{max-width:820px;margin:0 auto}
+.disclaimer-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.disclaimer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:28px}
+.disclaimer-block{background:var(--paper);border:1px solid var(--line);padding:24px}
+.disclaimer-block-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.disclaimer-block-text{font-size:.84rem;line-height:1.7;color:var(--muted)}
+.disclaimer-note{font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.03em;line-height:1.7;border-top:1px solid var(--line);padding-top:16px}
+html[data-theme="dark"] .disclaimer-section{background:#0d0d0c}
+html[data-theme="dark"] .disclaimer-block{background:#111110}
+@media(max-width:700px){.disclaimer-grid{grid-template-columns:1fr}.disclaimer-section{padding:40px 20px}}
+
+/* ── FOOTER ── */
+.site-footer{background:#050505;border-top:1px solid #111;padding:18px 40px}
+.footer-bar{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.footer-copy{font-family:var(--mono);font-size:.7rem;color:#3a3a38;letter-spacing:.06em;text-transform:uppercase}
+.footer-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.footer-links a{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;transition:color .2s}
+.footer-links a:hover{color:#888}
+
+/* ── DARK MODE ── */
+html[data-theme="dark"]{--ink:#d8d8d4;--paper:#111110;--muted:#77776f;--line:#2c2c2a;--soft:#1c1c1a;--accent:#4aaa6f}
+html[data-theme="dark"] .hero{background:#0a0a0a}
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title{color:#e0e0dc}
+html[data-theme="dark"] .btn-secondary{border-color:#2c2c2a;color:#888}
+html[data-theme="dark"] .price-card.featured{background:#131b16}
+html[data-theme="dark"] .card-num{color:#282826}
+html[data-theme="dark"] .price-includes{color:#666}
+
+/* ── THEME TOGGLE (centred absolute) ── */
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;line-height:1;opacity:.5;transition:opacity .2s;z-index:10}
+.theme-toggle:hover{opacity:1}
+
+
+/* ── ENQUIRY SECTION ── */
+.enquiry-section{background:var(--ink);padding:80px 40px}
+.enquiry-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.enquiry-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#555;margin-bottom:8px}
+.enquiry-title{font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:300;color:var(--paper);line-height:1.3;margin-bottom:16px}
+.enquiry-body{font-size:.92rem;color:#999;line-height:1.75}
+.enquiry-form{display:flex;flex-direction:column;gap:16px}
+.enquiry-field{display:flex;flex-direction:column;gap:6px}
+.enquiry-label{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:#666}
+.enquiry-input{background:#1a1a18;border:1px solid #2c2c2a;color:var(--paper);font-family:var(--sans);font-size:.9rem;padding:10px 14px;border-radius:3px;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.enquiry-input::placeholder{color:#444}
+.enquiry-input:focus{border-color:#555}
+.enquiry-textarea{resize:vertical;min-height:96px}
+.enquiry-btn{padding:13px 28px;background:var(--accent);color:var(--paper);border:none;border-radius:3px;font-size:.9rem;font-family:var(--sans);letter-spacing:.04em;cursor:pointer;transition:opacity .2s;align-self:flex-start;margin-top:4px}
+.enquiry-btn:hover{opacity:.85}
+.enquiry-confirm{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.04em;padding-top:4px}
+html[data-theme="dark"] .enquiry-section{background:#0a0a0a}
+html[data-theme="dark"] .enquiry-input{background:#111;border-color:#222}
+
+/* ── ASSESSMENT FULL CARD ── */
+.assess-full-card .card-title{color:var(--ink)}
+
+@media(max-width:700px){
+  .enquiry-inner{grid-template-columns:1fr;gap:40px}
+  .enquiry-section{padding:56px 20px}
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .site-header{padding:12px 20px}
+  .header-nav{gap:16px}
+  .hero{padding:56px 20px 52px}
+  .pricing-section{padding:48px 20px 44px}
+  .pricing-grid{grid-template-columns:1fr}
+  .price-card.featured::before{display:none}
+  .courses-section{padding:48px 20px 64px}
+  .courses-grid{grid-template-columns:1fr}
+}<style>
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+</style></style>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-access.js"></script>
+<script src="slsc-sync.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-brand">Safe Spot <span>&middot; Learning Centre</span></div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+  <nav class="header-nav"><span style="font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);margin-left:4px" id="ss-user-greeting"></span><button onclick="SS_logout()" style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:5px 10px;color:var(--muted);cursor:pointer;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Safe Spot &middot; A curriculum for healing</div>
+    <h1 class="hero-title">Trauma doesn't end<br>with you. <em>It travels.</em></h1>
+    <div class="hero-body">
+      <p>You cannot build a family, a friendship, or an intimate relationship with anyone until you have built one with yourself. The work of healing is not optional — it is the foundation of everything else.</p>
+      <p>Eight courses on the knowledge they did not give you: energy, relationships, sovereignty, money, family, institutions, media, and food. Not motivational content. Structural understanding — the kind that changes what is actually possible.</p>
+      <p>It is time to do the work.</p>
+    </div>
+    <div class="hero-disclaimer">These courses are a tool for self-understanding, not a replacement for professional support. If you need a therapist, please seek one. This curriculum runs alongside that work — not instead of it.</div>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">See Pricing &darr;</a>
+      <a href="#courses" class="btn-secondary">Browse All Courses &darr;</a>
+      <a href="#free-courses" class="btn-secondary" style="border-color:#7b5ea7;color:#7b5ea7">Free Courses &darr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="section-eyebrow">Investment</div>
+  <h2 class="section-heading">Choose where to begin</h2>
+  <p class="section-sub">Each course stands alone. Begin with the one that calls you — or use the assessment to find out where you most need to focus.</p>
+  <div class="pricing-grid">
+    <a href="#courses" class="price-card">
+      <div class="price-label">Single Course</div>
+      <div class="price-amount"><sup>&pound;</sup>11</div>
+      <p class="price-desc">One course, full access to all modules. Begin wherever it calls you.</p>
+      <div class="price-includes">Any one of 10 courses<br>All modules included<br>Lifetime access</div>
+      <span class="price-cta">Browse Courses &darr;</span>
+    </a>
+    <a href="https://buy.stripe.com/8x2aEQ5yJgYucZpdBqe3e19" class="price-card featured">
+      <div class="price-label">Full Bundle</div>
+      <div class="price-amount"><sup>&pound;</sup>88</div>
+      <p class="price-desc">The complete curriculum. All 10 courses plus the Healing Stage Assessment.</p>
+      <div class="price-includes">All 10 courses<br>Assessment included<br>Lifetime access</div>
+      <span class="price-cta">Get the Bundle &rarr;</span>
+    </a>
+    <a href="https://buy.stripe.com/aFa28k7GR6jQcZpdBqe3e1l" class="price-card">
+      <div class="price-label">Assessment Only</div>
+      <div class="price-amount"><sup>&pound;</sup>11</div>
+      <p class="price-desc">Not sure where to start? 80 questions across all 10 areas — shows you exactly where to begin.</p>
+      <div class="price-includes">80 questions<br>Private results<br>Course recommendations</div>
+      <span class="price-cta">Take the Assessment &rarr;</span>
+    </a>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="courses-section" id="courses">
+  <div class="courses-hdr">
+    <h2>The Curriculum</h2>
+    <p>Ten standalone courses, designed to be taken in any order. Each goes deeper into one dimension of your healing and self-sovereignty.</p>
+    <div class="price-note">&pound;11 per course &nbsp;&middot;&nbsp; or &pound;88 for all 10 + assessment</div>
+  </div>
+
+  <div class="courses-grid">
+
+    <!-- COURSE 1 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">01</div><div class="card-badge">6 modules</div></div>
+      <div class="card-title">Energy &amp; Relationships</div>
+      <div class="card-tagline">Your energy is finite. Learn to read where it goes — and protect it.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course1-module-1-energy-as-currency.html">Energy as Currency</a></li>
+        <li><span class="mod-num">02</span><a href="course1-module-2-energy-vampire-archetype.html">The Energy Vampire Archetype</a></li>
+        <li><span class="mod-num">03</span><a href="course1-module-3-boundaries-that-stick.html">Boundaries That Stick</a></li>
+        <li><span class="mod-num">04</span><a href="course1-module-4-the-cost-of-nice.html">The Cost of Nice</a></li>
+        <li><span class="mod-num">05</span><a href="course1-module-5-reclaiming-your-space.html">Reclaiming Your Space</a></li>
+        <li><span class="mod-num">06</span><a href="course1-module-6-friendship-without-weaponry.html">Friendship Without Weaponry</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course1-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+    <!-- COURSE 2 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">02</div><div class="card-badge">7 modules</div></div>
+      <div class="card-title">Toxic Relationship Patterns</div>
+      <div class="card-tagline">The patterns that hurt you were never random. Learn to name them — and choose differently.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course2-module-1-the-patterns-that-predict.html">The Patterns That Predict</a></li>
+        <li><span class="mod-num">02</span><a href="course2-module-2-love-bombing-and-the-initial-mask.html">Love Bombing and the Initial Mask</a></li>
+        <li><span class="mod-num">03</span><a href="course2-module-3-the-micro-aggressions-that-scale.html">The Micro-Aggressions That Scale</a></li>
+        <li><span class="mod-num">04</span><a href="course2-module-4-dysfunction-archetypes.html">Dysfunction Archetypes</a></li>
+        <li><span class="mod-num">05</span><a href="course2-module-5-your-role-in-dysfunction.html">Your Role in Dysfunction</a></li>
+        <li><span class="mod-num">06</span><a href="course2-module-6-the-exit.html">The Exit</a></li>
+        <li><span class="mod-num">07</span><a href="course2-module-7-choosing-differently.html">Choosing Differently</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course2-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+    <!-- COURSE 3 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">03</div><div class="card-badge">6 modules</div></div>
+      <div class="card-title">Energy Body &amp; Sovereignty</div>
+      <div class="card-tagline">Your body is territory, not a resource. Learn to inhabit and govern it.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course3-module-1-the-energy-body.html">The Energy Body</a></li>
+        <li><span class="mod-num">02</span><a href="course3-module-2-energy-harvesting-tactics.html">Energy Harvesting Tactics</a></li>
+        <li><span class="mod-num">03</span><a href="course3-module-3-the-weaponisation-of-sexuality.html">The Weaponisation of Sexuality</a></li>
+        <li><span class="mod-num">04</span><a href="course3-module-4-what-sacred-sexuality-actually-is.html">What Sacred Sexuality Actually Is</a></li>
+        <li><span class="mod-num">05</span><a href="course3-module-5-your-body-as-territory.html">Your Body as Territory</a></li>
+        <li><span class="mod-num">06</span><a href="course3-module-6-energy-restoration-and-sovereignty.html">Energy Restoration and Sovereignty</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course3-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+    <!-- COURSE 4 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">04</div><div class="card-badge">7 modules</div></div>
+      <div class="card-title">Financial Sovereignty</div>
+      <div class="card-tagline">Money is a language. Learn to read it, speak it, and use it as a foundation for all other freedom.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course4-module-1-the-language-of-money.html">The Language of Money</a></li>
+        <li><span class="mod-num">02</span><a href="course4-module-2-how-the-system-keeps-you-poor.html">How the System Keeps You Poor</a></li>
+        <li><span class="mod-num">03</span><a href="course4-module-3-the-debt-trap-architecture.html">The Debt Trap Architecture</a></li>
+        <li><span class="mod-num">04</span><a href="course4-module-4-building-true-wealth.html">Building True Wealth</a></li>
+        <li><span class="mod-num">05</span><a href="course4-module-5-the-frequency-of-abundance.html">The Frequency of Abundance</a></li>
+        <li><span class="mod-num">06</span><a href="course4-module-6-money-as-sovereignty.html">Money as Sovereignty</a></li>
+        <li><span class="mod-num">07</span><a href="course4-module-7-the-next-economy.html">The Next Economy</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course4-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+    <!-- COURSE 5 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">05</div><div class="card-badge">6 modules</div></div>
+      <div class="card-title">Generational Patterns &amp; Family</div>
+      <div class="card-tagline">Some of what you carry was never yours. Learn to name it, trace it, and decide what you pass forward.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course5-module-1-the-scapegoat-role.html">The Scapegoat Role</a></li>
+        <li><span class="mod-num">02</span><a href="course5-module-2-am-i-the-scapegoat.html">Am I the Scapegoat?</a></li>
+        <li><span class="mod-num">03</span><a href="course5-module-3-the-purpose-of-scapegoating.html">The Purpose of Scapegoating</a></li>
+        <li><span class="mod-num">04</span><a href="course5-module-4-generational-wounding.html">Generational Wounding</a></li>
+        <li><span class="mod-num">05</span><a href="course5-module-5-breaking-the-cycle.html">Breaking the Cycle</a></li>
+        <li><span class="mod-num">06</span><a href="course5-module-6-rebuilding-or-exiting.html">Rebuilding Family or Exiting Completely</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course5-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+    <!-- COURSE 6 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">06</div><div class="card-badge">7 modules</div></div>
+      <div class="card-title">Institutional Conditioning</div>
+      <div class="card-tagline">The rules you follow were written by someone else. Learn which ones you actually chose.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course6-module-1-institution-training.html">Institution Training</a></li>
+        <li><span class="mod-num">02</span><a href="course6-module-2-school-compliance.html">School Compliance</a></li>
+        <li><span class="mod-num">03</span><a href="course6-module-3-work-adult-school.html">Work: Adult School</a></li>
+        <li><span class="mod-num">04</span><a href="course6-module-4-religion-meaning.html">Religion and Meaning</a></li>
+        <li><span class="mod-num">05</span><a href="course6-module-5-government-governance.html">Government and Governance</a></li>
+        <li><span class="mod-num">06</span><a href="course6-module-6-independence-deprogramming.html">Independence and De-Programming</a></li>
+        <li><span class="mod-num">07</span><a href="course6-module-7-thinking-for-yourself.html">Thinking for Yourself</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course6-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+    <!-- COURSE 7 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">07</div><div class="card-badge">6 modules</div></div>
+      <div class="card-title">Media &amp; Narrative Control</div>
+      <div class="card-tagline">Every story is told by someone with an interest. Learn to read the interest, not just the story.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course7-module-1-narratives-as-weapons.html">Narratives as Weapons</a></li>
+        <li><span class="mod-num">02</span><a href="course7-module-2-architecture-of-propaganda.html">The Architecture of Propaganda</a></li>
+        <li><span class="mod-num">03</span><a href="course7-module-3-media-literacy.html">Media Literacy</a></li>
+        <li><span class="mod-num">04</span><a href="course7-module-4-hero-villain.html">Hero and Villain</a></li>
+        <li><span class="mod-num">05</span><a href="course7-module-5-algorithmic-narratives.html">Algorithmic Narratives</a></li>
+        <li><span class="mod-num">06</span><a href="course7-module-6-building-narrative-immunity.html">Building Narrative Immunity</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course7-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+    <!-- COURSE 8 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">08</div><div class="card-badge">9 modules</div></div>
+      <div class="card-title">Food Is Medicine</div>
+      <div class="card-tagline">What you eat is a conversation with your body. Learn to speak the language of healing.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a></li>
+        <li><span class="mod-num">02</span><a href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a></li>
+        <li><span class="mod-num">03</span><a href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a></li>
+        <li><span class="mod-num">04</span><a href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a></li>
+        <li><span class="mod-num">05</span><a href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does to You</a></li>
+        <li><span class="mod-num">06</span><a href="course8-module-6-healing-foods-and-herbs.html">Healing Foods and Herbs</a></li>
+        <li><span class="mod-num">07</span><a href="course8-module-7-children-and-family-nutrition.html">Children and Family Nutrition</a></li>
+        <li><span class="mod-num">08</span><a href="course8-module-8-detoxing-and-transition.html">Detoxing and Transition</a></li>
+        <li><span class="mod-num">09</span><a href="course8-module-9-building-your-alkaline-life.html">Building Your Alkaline Life</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course8-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+
+    <!-- COURSE 9 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">09</div><div class="card-badge">8 modules</div></div>
+      <div class="card-title">The Art of Becoming</div>
+      <div class="card-tagline">Human purpose. Spiritual evolution. What it means to keep becoming, especially when everything is uncertain.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course9-module-1-why-you-are-here.html">Why You Are Here</a></li>
+        <li><span class="mod-num">02</span><a href="course9-module-2-the-comfortable-cage.html">The Comfortable Cage</a></li>
+        <li><span class="mod-num">03</span><a href="course9-module-3-mechanics-of-evolution.html">The Mechanics of Evolution</a></li>
+        <li><span class="mod-num">04</span><a href="course9-module-4-body-in-uncertain-times.html">Your Body in Uncertain Times</a></li>
+        <li><span class="mod-num">05</span><a href="course9-module-5-the-observer-self.html">The Observer Self</a></li>
+        <li><span class="mod-num">06</span><a href="course9-module-6-fear-and-the-unknown.html">Fear and The Unknown</a></li>
+        <li><span class="mod-num">07</span><a href="course9-module-7-living-fully-in-both-worlds.html">Living Fully in Both Worlds</a></li>
+        <li><span class="mod-num">08</span><a href="course9-module-8-path-discovery.html">Path Discovery</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course9-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+    <!-- COURSE 10 -->
+    <div class="course-card">
+      <div class="card-top"><div class="card-num">10</div><div class="card-badge">8 modules</div></div>
+      <div class="card-title">The Uncharted Mind</div>
+      <div class="card-tagline">Accessing untapped mental power. Understanding what blocks it. Learning not to fear the depth of your own mind.</div>
+      <div class="card-divider"></div>
+      <div class="modules-label">Modules</div>
+      <ul class="modules-list">
+        <li><span class="mod-num">01</span><a href="course10-module-1-the-10-percent-myth.html">The 10% Myth</a></li>
+        <li><span class="mod-num">02</span><a href="course10-module-2-the-three-layers.html">The Three Layers</a></li>
+        <li><span class="mod-num">03</span><a href="course10-module-3-belief-architecture.html">Belief Architecture</a></li>
+        <li><span class="mod-num">04</span><a href="course10-module-4-fear-as-information.html">Fear as Information</a></li>
+        <li><span class="mod-num">05</span><a href="course10-module-5-the-death-question.html">The Death Question</a></li>
+        <li><span class="mod-num">06</span><a href="course10-module-6-neuroplasticity.html">Neuroplasticity</a></li>
+        <li><span class="mod-num">07</span><a href="course10-module-7-stillness-and-superconscious.html">Stillness &amp; Superconscious Access</a></li>
+        <li><span class="mod-num">08</span><a href="course10-module-8-path-discovery.html">Path Discovery</a></li>
+      </ul>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="course10-landing.html" class="card-link">Begin Course &rarr;</a>
+      </div>
+    </div>
+
+    <!-- ASSESSMENT — FULL WIDTH CARD -->
+    <div class="course-card assess-full-card" style="grid-column:1/-1">
+      <div class="card-top" style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-bottom:6px">The Final Step</div>
+          <div class="card-title" style="font-size:1.35rem">Healing Stage Assessment</div>
+          <div class="card-tagline">80 questions across all 10 areas. No right or wrong. At the end you'll see exactly where your healing work is most active — and which course to begin.</div>
+        </div>
+        <div class="card-badge">80 questions</div>
+      </div>
+      <div class="card-divider"></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px">
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.55"><span style="font-family:var(--mono);font-size:.7rem;color:var(--ink);display:block;margin-bottom:4px">FORMAT</span>Multiple-choice reflection prompts</div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.55"><span style="font-family:var(--mono);font-size:.7rem;color:var(--ink);display:block;margin-bottom:4px">TIME</span>Approximately one hour. No time limit.</div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.55"><span style="font-family:var(--mono);font-size:.7rem;color:var(--ink);display:block;margin-bottom:4px">RESULTS</span>Private. Shown to you only at the end.</div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.55"><span style="font-family:var(--mono);font-size:.7rem;color:var(--ink);display:block;margin-bottom:4px">PRICE</span>Free with the &pound;88 bundle (10 courses) &mdash; or &pound;11 standalone.</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-price">&pound;11</div>
+        <a href="assessment.html" class="card-link">Take the Assessment &rarr;</a>
+      </div>
+    </div>
+
+  </div><!-- close courses-grid -->
+</section><!-- close courses-section -->
+
+<!-- FREE COURSES SECTION -->
+<section class="courses-section" id="free-courses" style="background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:64px 32px">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">No payment required</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);font-weight:300;margin-bottom:8px">Free Courses</h2>
+    <p style="font-size:.92rem;color:#3a3a36;line-height:1.7;margin-bottom:40px;max-width:580px">A growing set of completely free courses — the bedrock that makes the rest of the curriculum land. Including a practical, real-world course for ages 16+.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
+
+      <!-- FREE: Inner Child -->
+      <div class="course-card" style="border-color:#7b5ea7;background:var(--paper)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <span style="background:#7b5ea7;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px">Free</span>
+          <span class="card-badge">8 modules</span>
+        </div>
+        <div class="card-title">The Inner Child &amp; Self-Reparenting</div>
+        <div class="card-tagline">Why you do what you do — and the first practical steps toward changing it.</div>
+        <div class="card-divider"></div>
+        <div class="modules-label">Modules</div>
+        <ul class="modules-list">
+          <li><span class="mod-num">01</span><a href="course13-module-1-what-is-the-inner-child.html">What Is the Inner Child</a></li>
+          <li><span class="mod-num">02</span><a href="course13-module-2-developmental-windows.html">Developmental Windows & Strategies</a></li>
+          <li><span class="mod-num">03</span><a href="course13-module-3-four-adaptations-and-needs.html">Adaptations & Unmet Needs</a></li>
+          <li><span class="mod-num">04</span><a href="course13-module-4-the-wound-in-the-body.html">The Wound in the Body</a></li>
+          <li><span class="mod-num">05</span><a href="course13-module-5-wounding-and-identity.html">Wounding & Identity</a></li>
+          <li><span class="mod-num">06</span><a href="course13-module-6-the-reparenting-framework.html">The Reparenting Framework</a></li>
+          <li><span class="mod-num">07</span><a href="course13-module-7-reparenting-in-practice.html">Reparenting in Practice</a></li>
+          <li><span class="mod-num">08</span><a href="course13-module-8-building-and-sustaining.html">Building & Sustaining the Work</a></li>
+          </ul>
+        <div class="card-footer">
+          <div class="card-price" style="color:#7b5ea7">Free</div>
+          <a href="course13-landing.html" class="card-link" style="border-color:#7b5ea7;color:#7b5ea7">Begin &rarr;</a>
+        </div>
+      </div>
+
+      <!-- FREE: Emotional Regulation -->
+      <div class="course-card" style="border-color:#3a7ca5;background:var(--paper)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <span style="background:#3a7ca5;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px">Free</span>
+          <span class="card-badge">8 modules</span>
+        </div>
+        <div class="card-title">Emotional Regulation Fundamentals</div>
+        <div class="card-tagline">Understanding your nervous system is the foundation everything else is built on.</div>
+        <div class="card-divider"></div>
+        <div class="modules-label">Modules</div>
+        <ul class="modules-list">
+          <li><span class="mod-num">01</span><a href="course14-module-1-your-nervous-system.html">Your Nervous System</a></li>
+          <li><span class="mod-num">02</span><a href="course14-module-2-window-and-polyvagal.html">Window of Tolerance & Polyvagal</a></li>
+          <li><span class="mod-num">03</span><a href="course14-module-3-baseline-and-social-engagement.html">Baseline & Social Engagement</a></li>
+          <li><span class="mod-num">04</span><a href="course14-module-4-recognising-dysregulation.html">Recognising Dysregulation</a></li>
+          <li><span class="mod-num">05</span><a href="course14-module-5-dysregulation-shapes-life.html">How Dysregulation Shapes Life</a></li>
+          <li><span class="mod-num">06</span><a href="course14-module-6-suppression-and-physiology.html">Suppression & Physiology of Emotion</a></li>
+          <li><span class="mod-num">07</span><a href="course14-module-7-processing-and-completion.html">Processing & The Completion Cycle</a></li>
+          <li><span class="mod-num">08</span><a href="course14-module-8-your-regulation-toolkit.html">Your Regulation Toolkit</a></li>
+          </ul>
+        <div class="card-footer">
+          <div class="card-price" style="color:#3a7ca5">Free</div>
+          <a href="course14-landing.html" class="card-link" style="border-color:#3a7ca5;color:#3a7ca5">Begin &rarr;</a>
+        </div>
+      </div>
+
+      <!-- FREE: Speaking With the Living World -->
+      <div class="course-card" style="border-color:#2d6a4f;background:var(--paper)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <span style="background:#2d6a4f;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px">Free</span>
+          <span class="card-badge">8 modules</span>
+        </div>
+        <div class="card-title">Speaking With the Living World</div>
+        <div class="card-tagline">The science, the Hermetic tradition, and the practical method of communicating with trees and nature.</div>
+        <div class="card-divider"></div>
+        <div class="modules-label">Modules</div>
+        <ul class="modules-list">
+          <li><span class="mod-num">01</span><a href="course11-module-1-everything-is-alive.html">Everything Is Alive</a></li>
+          <li><span class="mod-num">02</span><a href="course11-module-2-what-thoth-knew.html">What Thoth Knew</a></li>
+          <li><span class="mod-num">03</span><a href="course11-module-3-the-language-of-trees.html">The Language of Trees</a></li>
+          <li><span class="mod-num">04</span><a href="course11-module-4-entering-the-frequency.html">Entering the Frequency</a></li>
+          <li><span class="mod-num">05</span><a href="course11-module-5-the-practice-of-asking.html">The Practice of Asking</a></li>
+          <li><span class="mod-num">06</span><a href="course11-module-6-receiving-the-response.html">Receiving the Response</a></li>
+          <li><span class="mod-num">07</span><a href="course11-module-7-working-with-specific-trees.html">Working With Specific Trees</a></li>
+          <li><span class="mod-num">08</span><a href="course11-module-8-building-the-daily-practice.html">Building the Daily Practice</a></li>
+        </ul>
+        <div class="card-footer">
+          <div class="card-price" style="color:#2d6a4f">Free</div>
+          <a href="course11-landing.html" class="card-link" style="border-color:#2d6a4f;color:#2d6a4f">Begin &rarr;</a>
+        </div>
+      </div>
+      <!-- FREE: What the Festivals Actually Remember -->
+      <div class="course-card" style="border-color:#8b4513;background:var(--paper)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <span style="background:#8b4513;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px">Free</span>
+          <span class="card-badge">8 modules</span>
+        </div>
+        <div class="card-title">What the Festivals Actually Remember</div>
+        <div class="card-tagline">The pre-Christian origins of Christmas, Easter, Valentine's Day, Mother's Day, and Halloween.</div>
+        <div class="card-divider"></div>
+        <div class="modules-label">Modules</div>
+        <ul class="modules-list">
+          <li><span class="mod-num">01</span><a href="course12-module-1-how-the-calendar-was-shaped.html">How the Calendar Was Shaped</a></li>
+          <li><span class="mod-num">02</span><a href="course12-module-2-christmas-and-the-winter-sun.html">Christmas & the Winter Sun</a></li>
+          <li><span class="mod-num">03</span><a href="course12-module-3-easter-and-the-spring-goddess.html">Easter & the Spring Goddess</a></li>
+          <li><span class="mod-num">04</span><a href="course12-module-4-valentines-and-lupercalia.html">Valentine's Day & Lupercalia</a></li>
+          <li><span class="mod-num">05</span><a href="course12-module-5-mothers-day-and-the-great-mother.html">Mother's Day & the Great Mother</a></li>
+          <li><span class="mod-num">06</span><a href="course12-module-6-the-pattern-of-rebranding.html">The Pattern of Rebranding</a></li>
+          <li><span class="mod-num">07</span><a href="course12-module-7-halloween-and-samhain.html">Halloween & Samhain</a></li>
+          <li><span class="mod-num">08</span><a href="course12-module-8-reclaiming-the-year.html">Reclaiming the Year</a></li>
+        </ul>
+        <div class="card-footer">
+          <div class="card-price" style="color:#8b4513">Free</div>
+          <a href="course12-landing.html" class="card-link" style="border-color:#8b4513;color:#8b4513">Begin &rarr;</a>
+        </div>
+      </div>
+      <!-- FREE: The Permissionless Portfolio -->
+      <div class="course-card" style="border-color:#4b3f9e;background:var(--paper)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <span style="background:#4b3f9e;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px">Free</span>
+          <span class="card-badge">5 modules</span>
+        </div>
+        <div class="card-title">The Permissionless Portfolio</div>
+        <div class="card-tagline">For ages 16+ — stop firing CVs into the void. Create undeniable value first, and walk in the side door.</div>
+        <div class="card-divider"></div>
+        <div class="modules-label">Modules</div>
+        <ul class="modules-list">
+          <li><span class="mod-num">01</span><a href="course15-module-1-the-death-of-the-front-door.html">The Death of the Front Door</a></li>
+          <li><span class="mod-num">02</span><a href="course15-module-2-spotting-the-bleeding-artery.html">Spotting the Bleeding Artery</a></li>
+          <li><span class="mod-num">03</span><a href="course15-module-3-building-the-asset.html">Building the Asset</a></li>
+          <li><span class="mod-num">04</span><a href="course15-module-4-the-direct-approach.html">The Direct Approach</a></li>
+          <li><span class="mod-num">05</span><a href="course15-module-5-from-free-work-to-paid.html">From Free Work to Paid</a></li>
+        </ul>
+        <div class="card-footer">
+          <div class="card-price" style="color:#4b3f9e">Free</div>
+          <a href="course15-landing.html" class="card-link" style="border-color:#4b3f9e;color:#4b3f9e">Begin &rarr;</a>
+        </div>
+      </div>
+      <!-- FREE: Under-18 Financial Sovereignty -->
+      <div class="course-card" style="border-color:#15706b;background:var(--paper)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <span style="background:#15706b;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px">Free</span>
+          <span class="card-badge">5 modules</span>
+        </div>
+        <div class="card-title">Under-18 Financial Sovereignty</div>
+        <div class="card-tagline">For ages 16+ — your money, your documents, your rights. The practical, legal, grown-up stuff about handling money before 18.</div>
+        <div class="card-divider"></div>
+        <div class="modules-label">Modules</div>
+        <ul class="modules-list">
+          <li><span class="mod-num">01</span><a href="course16-module-1-your-documents-your-rights.html">Your Documents, Your Rights</a></li>
+          <li><span class="mod-num">02</span><a href="course16-module-2-your-own-account.html">Your Own Account</a></li>
+          <li><span class="mod-num">03</span><a href="course16-module-3-getting-paid-the-right-way.html">Getting Paid, the Right Way</a></li>
+          <li><span class="mod-num">04</span><a href="course16-module-4-tax-without-the-panic.html">Tax Without the Panic</a></li>
+          <li><span class="mod-num">05</span><a href="course16-module-5-the-18th-birthday-plan.html">The 18th-Birthday Plan</a></li>
+        </ul>
+        <div class="card-footer">
+          <div class="card-price" style="color:#15706b">Free</div>
+          <a href="course16-landing.html" class="card-link" style="border-color:#15706b;color:#15706b">Begin &rarr;</a>
+        </div>
+      </div>
+      <!-- FREE: Your Mental Health Toolkit -->
+      <div class="course-card" style="border-color:#2f6f9f;background:var(--paper)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <span style="background:#2f6f9f;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px">Free</span>
+          <span class="card-badge">6 modules</span>
+        </div>
+        <div class="card-title">Your Mental Health Toolkit</div>
+        <div class="card-tagline">For US teens &amp; young adults &mdash; practical tools to steady your mind and find real, free help, now that school support has been cut thin.</div>
+        <div class="card-divider"></div>
+        <div class="modules-label">Modules</div>
+        <ul class="modules-list">
+          <li><span class="mod-num">01</span><a href="course17-module-1-you-deserve-support.html">You Deserve Support</a></li>
+          <li><span class="mod-num">02</span><a href="course17-module-2-reading-your-own-weather.html">Reading Your Own Weather</a></li>
+          <li><span class="mod-num">03</span><a href="course17-module-3-tools-for-the-hard-moments.html">Tools for the Hard Moments</a></li>
+          <li><span class="mod-num">04</span><a href="course17-module-4-building-your-support-web.html">Building Your Support Web</a></li>
+          <li><span class="mod-num">05</span><a href="course17-module-5-being-there-for-a-friend.html">Being There for a Friend</a></li>
+          <li><span class="mod-num">06</span><a href="course17-module-6-staying-steady.html">Staying Steady</a></li>
+        </ul>
+        <div class="card-footer">
+          <div class="card-price" style="color:#2f6f9f">Free</div>
+          <a href="course17-landing.html" class="card-link" style="border-color:#2f6f9f;color:#2f6f9f">Begin &rarr;</a>
+        </div>
+      </div>
+      <!-- FREE: The Global Ecology of Youth Violence -->
+      <div class="course-card" style="border-color:#6d4c7d;background:var(--paper)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <span style="background:#6d4c7d;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px">Free</span>
+          <span class="card-badge">6 modules</span>
+        </div>
+        <div class="card-title">The Global Ecology of Youth Violence</div>
+        <div class="card-tagline">University-level &amp; interdisciplinary &mdash; youth violence as a global, structural, public-health phenomenon, from state exploitation to peacebuilding.</div>
+        <div class="card-divider"></div>
+        <div class="modules-label">Modules</div>
+        <ul class="modules-list">
+          <li><span class="mod-num">01</span><a href="course18-module-1-the-public-health-paradigm.html">The Public Health Paradigm</a></li>
+          <li><span class="mod-num">02</span><a href="course18-module-2-the-political-economy-of-recruitment.html">The Political Economy of Recruitment</a></li>
+          <li><span class="mod-num">03</span><a href="course18-module-3-gender-masculinities-and-violence.html">Gender, Masculinities &amp; Violence</a></li>
+          <li><span class="mod-num">04</span><a href="course18-module-4-digital-ecosystems-and-radicalisation.html">Digital Ecosystems &amp; Radicalisation</a></li>
+          <li><span class="mod-num">05</span><a href="course18-module-5-environment-scarcity-and-conflict.html">Environment, Scarcity &amp; Conflict</a></li>
+          <li><span class="mod-num">06</span><a href="course18-module-6-youth-led-peacebuilding.html">Youth-Led Peacebuilding</a></li>
+        </ul>
+        <div class="card-footer">
+          <div class="card-price" style="color:#6d4c7d">Free</div>
+          <a href="course18-landing.html" class="card-link" style="border-color:#6d4c7d;color:#6d4c7d">Begin &rarr;</a>
+        </div>
+      </div>
+      <!-- FREE: The Digital Runway -->
+      <div class="course-card" style="border-color:#1f8a9c;background:var(--paper)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <span style="background:#1f8a9c;color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px">Free</span>
+          <span class="card-badge">6 modules</span>
+        </div>
+        <div class="card-title">The Digital Runway</div>
+        <div class="card-tagline">For teens 13&ndash;15 (and the adults around them) &mdash; the digital-literacy &lsquo;missing manual&rsquo; for the under-16 social media ban. Use the wait as a runway.</div>
+        <div class="card-divider"></div>
+        <div class="modules-label">Modules</div>
+        <ul class="modules-list">
+          <li><span class="mod-num">01</span><a href="course19-module-1-the-cliff-edge.html">The Cliff Edge</a></li>
+          <li><span class="mod-num">02</span><a href="course19-module-2-how-the-feed-works.html">How the Feed Really Works</a></li>
+          <li><span class="mod-num">03</span><a href="course19-module-3-the-hooks.html">The Hooks: Persuasive Design</a></li>
+          <li><span class="mod-num">04</span><a href="course19-module-4-spotting-fakes.html">Spotting Fakes</a></li>
+          <li><span class="mod-num">05</span><a href="course19-module-5-identity-beyond-the-like.html">Identity Beyond the Like</a></li>
+          <li><span class="mod-num">06</span><a href="course19-module-6-your-runway-plan.html">Your Runway Plan</a></li>
+        </ul>
+        <div class="card-footer">
+          <div class="card-price" style="color:#1f8a9c">Free</div>
+          <a href="course19-landing.html" class="card-link" style="border-color:#1f8a9c;color:#1f8a9c">Begin &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ENQUIRY SECTION -->
+<section class="enquiry-section" id="contact">
+  <div class="enquiry-inner">
+    <div class="enquiry-left">
+      <div class="enquiry-eyebrow">Get in Touch</div>
+      <h2 class="enquiry-title">Any questions?</h2>
+      <p class="enquiry-body">Whether you have a question about a course, want to know more about the curriculum, or need help deciding where to start — we&rsquo;re happy to hear from you.</p>
+      <p class="enquiry-body" style="margin-top:8px">Drop us a message and we&rsquo;ll get back to you.</p>
+    </div>
+    <div class="enquiry-right">
+      <form class="enquiry-form" onsubmit="SS_submitEnquiry(event)">
+        <div class="enquiry-field">
+          <label class="enquiry-label" for="eq-name">Your name</label>
+          <input class="enquiry-input" type="text" id="eq-name" placeholder="Jane Smith" autocomplete="name">
+        </div>
+        <div class="enquiry-field">
+          <label class="enquiry-label" for="eq-email">Email address</label>
+          <input class="enquiry-input" type="email" id="eq-email" placeholder="jane@example.com" autocomplete="email">
+        </div>
+        <div class="enquiry-field">
+          <label class="enquiry-label" for="eq-msg">Message</label>
+          <textarea class="enquiry-input enquiry-textarea" id="eq-msg" placeholder="I&rsquo;d like to know more about&hellip;" rows="4"></textarea>
+        </div>
+        <button type="submit" class="enquiry-btn">Send Message &rarr;</button>
+        <div class="enquiry-confirm" id="eq-confirm" style="display:none">&#10003; Message sent &mdash; we&rsquo;ll be in touch soon.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="disclaimer-section">
+  <div class="disclaimer-inner">
+    <div class="disclaimer-eyebrow">A note from SAFE</div>
+    <div class="disclaimer-grid">
+      <div class="disclaimer-block">
+        <div class="disclaimer-block-label">Your data</div>
+        <div class="disclaimer-block-text">We do not sell your data to third parties. What you do here is yours. Your progress, your reflections, your results — none of it leaves this platform for commercial purposes.</div>
+      </div>
+      <div class="disclaimer-block">
+        <div class="disclaimer-block-label">Our role</div>
+        <div class="disclaimer-block-text">Think of us as windscreen wipers. This is your drive — your healing, your direction, your destination. We are here to keep the glass clear so you can see the signs along the road, without judgement.</div>
+      </div>
+      <div class="disclaimer-block">
+        <div class="disclaimer-block-label">Why we charge</div>
+        <div class="disclaimer-block-text">The fees from this platform go directly toward funding SAFE youth hubs. Once we reach the right level of funding, every course on this platform will be free. Your investment now makes that possible.</div>
+      </div>
+    </div>
+    <div class="disclaimer-note">These courses are tools for self-understanding, not a replacement for professional support. If you are working through something that requires clinical care, please seek it &mdash; this curriculum runs alongside that work, not instead of it.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-bar">
+    <div class="footer-copy">SAFE Learning Spot Centre &middot; All Rights Reserved</div>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="help.html">Help</a>
+      <div class="footer-legal-wrap" style="position:relative;display:inline-block">
+        <button onclick="(function(b){var d=b.nextElementSibling;d.style.display=d.style.display==='flex'?'none':'flex';})(this)" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-transform:uppercase;background:none;border:none;cursor:pointer;padding:0;transition:color .2s" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Legal &#9662;</button>
+        <div class="footer-legal-menu" style="display:none;position:absolute;bottom:calc(100% + 8px);right:0;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:8px 0;flex-direction:column;min-width:140px;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.08)">
+          <a href="privacy.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Privacy</a>
+          <a href="terms.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Terms</a>
+          <a href="privacy-choices.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Choices</a>
+          <a href="accessibility.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Access</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+function SS_submitEnquiry(e){
+  e.preventDefault();
+  var name=document.getElementById('eq-name').value.trim();
+  var email=document.getElementById('eq-email').value.trim();
+  var msg=document.getElementById('eq-msg').value.trim();
+  if(!email||!msg){alert('Please fill in your email and message.');return;}
+  // mailto fallback (static site)
+  var subject=encodeURIComponent('Safe Spot Enquiry from '+name);
+  var body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\nMessage:\n'+msg);
+  window.location.href='mailto:enquiries@safespot.life?subject='+subject+'&body='+body;
+  document.getElementById('eq-confirm').style.display='block';
+}
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+<!-- SLSC_CONTINUE — homepage 'resume where you left off' banner -->
+<style>
+.slsc-continue{margin:0 0 30px;padding:18px 22px;background:#131b16;border-left:2px solid var(--accent,#2d7a4f);
+  border-radius:4px;max-width:560px}
+.slsc-continue .sc-eyebrow{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent,#2d7a4f);margin-bottom:12px}
+.slsc-continue a.sc-link{display:flex;align-items:center;gap:14px;flex-wrap:wrap;text-decoration:none}
+.slsc-continue .sc-label{font-family:var(--serif,Georgia,serif);font-size:18px;color:var(--paper,#fafaf7);
+  font-style:italic;line-height:1.3;flex:1;min-width:200px}
+.slsc-continue .sc-prog{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:#7d8a82}
+.slsc-continue .sc-arrow{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--paper,#fafaf7);background:var(--accent,#2d7a4f);
+  padding:9px 16px;border-radius:3px;transition:opacity .2s}
+.slsc-continue a.sc-link:hover .sc-arrow{opacity:.82}
+</style>
+<script>
+(function(){
+  function init(){
+    if(document.querySelector('.slsc-continue'))return;
+    var host=document.querySelector('.hero-inner');
+    if(!host)return;
+    var last;try{last=JSON.parse(localStorage.getItem('slsc_last')||'null');}catch(e){}
+    if(!last||!last.file||!last.label)return;
+    var n=parseInt(last.slide,10)||1, t=parseInt(last.total,10)||0;
+    var prog=t? ('Page '+(n<10?'0':'')+n+' of '+(t<10?'0':'')+t) : '';
+    var box=document.createElement('div');
+    box.className='slsc-continue';
+    box.innerHTML='<div class="sc-eyebrow">Continue where you left off</div>'
+      +'<a class="sc-link" href="'+last.file+'#resume">'
+      +'<span class="sc-label">'+last.label+'</span>'
+      +(prog?'<span class="sc-prog">'+prog+'</span>':'')
+      +'<span class="sc-arrow">Resume &rarr;</span></a>';
+    host.insertBefore(box,host.firstChild);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<script src="slsc-cart.js"></script>
+<script src="slsc-install.js"></script>
+</body>
+</html>

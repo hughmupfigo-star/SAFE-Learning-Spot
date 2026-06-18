@@ -1,0 +1,979 @@
+<title>Module 2 · The Comfortable Cage — Course 9</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display:flex;align-items:center;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);flex:1;order:1;min-width:0}
+.module-tag strong{color:var(--ink);font-weight:500}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:28px;height:2px;background:var(--line);transition:background .4s}
+.progress-dot.active{background:var(--ink)}
+.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}
+.slide{display:none;animation:fadeUp .6s ease}
+.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-title em{font-style:italic;font-weight:300}
+.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}
+.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}
+.body-text strong{font-weight:500;color:var(--ink)}
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}
+.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}
+.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s;position:relative;font-weight:400}
+.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}
+.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.selected .choice-letter{color:var(--paper);opacity:.6}
+.choice:disabled{cursor:default}
+.choice:disabled:hover{transform:none}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s}
+.feedback.visible{display:block}
+.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px;letter-spacing:-.005em}
+.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28;font-weight:400}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s;font-weight:500}
+.nav-btn:hover{opacity:.6}
+.nav-btn:disabled{opacity:.2;cursor:not-allowed}
+.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#2a2a28;opacity:1}
+.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}
+.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+.return-home-wrap{text-align:center;margin-top:20px}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s}
+.return-home-link:hover{color:var(--ink)}
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:18px}.complete-mark{font-size:80px}}
+html[data-theme="dark"]{--ink:#d8d8d4;--paper:#111110;--muted:#77776f;--line:#2c2c2a;--soft:#1c1c1a;--accent:#4aaa6f}
+html[data-theme="dark"] .body-text,html[data-theme="dark"] .lead,html[data-theme="dark"] .summary-text,html[data-theme="dark"] .pullquote,html[data-theme="dark"] .slide-title,html[data-theme="dark"] .feedback-text,html[data-theme="dark"] .scenario-context,html[data-theme="dark"] .feedback-headline{color:var(--ink)}
+html[data-theme="dark"] .choice{background:var(--soft);border-color:var(--line)}
+html[data-theme="dark"] .choice:hover:not(:disabled){background:#222220;border-color:#4a4a48}
+html[data-theme="dark"] .choice.selected{background:#141e17;border-color:var(--accent)}
+html[data-theme="dark"] .feedback{background:var(--soft)}
+html[data-theme="dark"] .nav-btn{background:var(--soft);color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .nav-btn.primary{background:var(--ink);color:var(--paper)}
+html[data-theme="dark"] .nav-btn.primary:hover{background:#b4b4b0;opacity:1}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s;z-index:10}
+.theme-toggle:hover{opacity:1}
+.header-center{display:flex;align-items:center;gap:14px;order:2;margin:0 auto}
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;z-index:49;display:none;scrollbar-width:none;flex-direction:column}
+.course-sidebar::-webkit-scrollbar{display:none}
+@media(min-width:1140px){.course-sidebar{display:flex}.module-container{margin-left:220px}}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s}
+.sidebar-back:hover{color:var(--ink)}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px}
+.sidebar-mod-list{list-style:none}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:8px}
+.sidebar-mod-item:last-child{border-bottom:none}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);flex-shrink:0;margin-top:2px;min-width:20px}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none}
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent)}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto}
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line)}
+.sidebar-mod-item.ss-now .sidebar-mod-n,.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none}
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line)}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem("safespot_theme")==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})()</script>
+<script>(function(){try{var s=localStorage.getItem("slsc_session");if(!s){var p=encodeURIComponent(location.pathname.split("/").pop()||"index.html");location.replace("login.html?from="+p);}}catch(e){}})()</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Module <strong>02</strong> &middot; The Comfortable Cage</div>
+  <div class="progress-bar" id="progressBar"><div class="progress-dot active" data-page="1"></div><div class="progress-dot" data-page="2"></div><div class="progress-dot" data-page="3"></div><div class="progress-dot" data-page="4"></div><div class="progress-dot" data-page="5"></div><div class="progress-dot" data-page="6"></div></div>
+  <div class="header-center">
+    <button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">&#9680;</button>
+    <span class="zoom-ctrl">
+      <button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A&minus;</button>
+      <button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button>
+    </span>
+  </div>
+</header>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">&larr; Homepage</a>
+  <div class="sidebar-course-label">Course 9 &middot; The Art of Becoming</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c9m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course9-module-1-why-you-are-here.html">Why You Are Here</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course9-module-2-the-comfortable-cage.html">The Comfortable Cage</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course9-module-3-mechanics-of-evolution.html">The Mechanics of Evolution</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course9-module-4-body-in-uncertain-times.html">Your Body in Uncertain Times</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course9-module-5-the-observer-self.html">The Observer Self</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course9-module-6-fear-and-the-unknown.html">Fear and The Unknown</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course9-module-7-living-fully-in-both-worlds.html">Living Fully in Both Worlds</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c9m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course9-module-8-path-discovery.html">Path Discovery</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- ===== SLIDE 1 ===== -->
+  <section class="slide  active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 &middot; The Cage</div>
+    <h1 class="slide-title">Comfort feels like <em>safety</em> until it becomes a <em>prison.</em></h1>
+    <p class="lead">The comfortable life is not the problem. The problem is when comfort becomes the goal — when the avoidance of difficulty is mistaken for the art of living well.</p>
+    <p class="body-text">There is a particular kind of pain that is easy to miss because it looks like contentment from the outside. The person experiencing it has a steady life. A known routine. A reliable set of people and places and habits that asks nothing new of them. From the outside, this looks like success — stability, predictability, the opposite of chaos.</p>
+    <p class="body-text">But there is a version of stability that is, in truth, a very elegant form of hiding. Where every new experience is unconsciously screened for its threat to the existing structure. Where novelty is treated as risk. Where the primary operating principle is <strong>keeping things as they are</strong> — not because things are good, but because things are <em>known.</em></p>
+    <div class="section-heading">What Comfort Costs</div>
+    <p class="body-text">The nervous system habituates to comfort the same way it habituates to everything else. What once felt like relief becomes the new baseline. What once seemed peaceful begins to feel flat. The safe routine that protected you during a difficult period becomes the thing that prevents you from growing past it. <strong>Comfort, over time, does not stay comfortable. It becomes constriction.</strong></p>
+    <div class="pullquote">The cage that feels safest is the one you built yourself, out of the wood of your own past experiences.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You realise you have not done anything genuinely new in over a year. Every week is a variation of the same pattern.</p>
+      <p class="scenario-context">Nothing is wrong. But nothing is alive in the way things used to feel alive. The repetition is not restful — it is numbing.</p>
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude that this is just what adult life feels like. Adjust expectations downward.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Recognise the numbness as information. Something is being asked of you.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Fill the calendar with activity to generate the sensation of movement.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Plan a holiday and assume the feeling will pass once you've had a break.</button>
+      </div>
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" disabled>&larr; Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 2 ===== -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 &middot; The Identity</div>
+    <h1 class="slide-title">Who you think you are <em>keeps you where you are.</em></h1>
+    <p class="lead">Your comfort zone is not a place. It is an identity. A story about who you are, what you are capable of, what kind of person does or does not do certain things.</p>
+    <p class="body-text">The most effective cages are the ones built out of self-concept. "I'm not the kind of person who does things like that." "I've always been anxious in situations like this." "I'm not creative, I'm not adventurous, I'm not the type who..." These statements are not descriptions of reality. They are instructions to the subconscious mind — and the subconscious follows them with remarkable precision.</p>
+    <p class="body-text">Every time you confirm the cage story — every time you decline an invitation, avoid an opportunity, or return to the familiar after a brief venture outward — the story solidifies. It becomes more real. It becomes harder to question. <strong>The identity protects itself by selecting the evidence that confirms it.</strong></p>
+    <div class="section-heading">The Question of Identity</div>
+    <p class="body-text">Who told you that you are the kind of person who cannot tolerate uncertainty? Who decided that your ceiling is where it currently sits? Almost always, the answer is: nobody in particular — or everybody at once. The identity was assembled from a thousand small moments, most of them in childhood, most of them involving adults who were themselves operating within their own cages and inadvertently passing the dimensions down.</p>
+    <p class="body-text">The cage is not a life sentence. It is an old map. And like any map, it can be updated once you recognise that what you are holding is a description of where you have been, not a prescription for where you must remain.</p>
+    <div class="pullquote">The identity that kept you safe during the difficult years is not the same identity that will carry you into what you are becoming.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">An opportunity arises that genuinely excites you and genuinely terrifies you in equal measure.</p>
+      <p class="scenario-context">Your first response is the familiar internal voice: "That's not really for someone like me." You notice the voice immediately — it has said this before.</p>
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Trust the voice. It's probably protecting you from something.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice the voice without obeying it. Investigate what it's actually protecting.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Override it completely. Decide the voice is always wrong.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Spend so long analysing the voice that the opportunity passes.</button>
+      </div>
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 3 ===== -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 &middot; The Break</div>
+    <h1 class="slide-title">Breaking routine is not <em>destruction</em> — it is <em>archaeology.</em></h1>
+    <p class="lead">When you disrupt a comfortable routine, you do not destroy yourself. You discover what was underneath the routine all along.</p>
+    <p class="body-text">People are afraid to break their routines because they believe the routine is what is holding them together. And sometimes this is partially true — during periods of grief, transition, or recovery, routine is a genuine source of stability. But there comes a point where the routine is no longer holding you up. It is holding you back. And the only way to discover which is which is to <strong>pause it and notice what emerges.</strong></p>
+    <p class="body-text">What emerges is usually one of three things: relief, which tells you the routine had become a burden you were carrying without knowing it; clarity, which shows you what you actually want when you are not managing the appearance of wanting the right things; or discomfort, which is not evidence that the break was wrong but evidence that you have found the edge of your current self — the membrane between who you have been and who you are in the process of becoming.</p>
+    <div class="section-heading">The Archaeology Metaphor</div>
+    <p class="body-text">Archaeologists do not destroy the site when they dig. They remove what is covering something older and more essential. Breaking your routine is the same kind of work. You are not eliminating yourself. You are removing what has accumulated over the original self — the habits, the defaults, the patterns installed by circumstance and repetition — so that something truer can surface.</p>
+    <p class="body-text"><strong>You cannot evolve inside a sealed container.</strong> The disruption is not the enemy of growth. It is the mechanism of it.</p>
+    <div class="pullquote">The version of you that can handle uncertainty has been there all along. The comfortable routine has simply been preventing you from meeting it.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You decide to break one habitual pattern for a month — not because it is harmful, but because it has become automatic.</p>
+      <p class="scenario-context">A morning routine you've followed for years. A social habit that runs on autopilot. A default way of spending evenings. Something that asks nothing of you anymore.</p>
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Choose the smallest, safest version of the disruption.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Choose something that genuinely creates discomfort — enough to surface something real.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Break everything at once, creating so much chaos that you retreat to the routine within two weeks.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Research the practice extensively before trying it, and then decide it's not the right time.</button>
+      </div>
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 4 ===== -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 &middot; The Threshold</div>
+    <h1 class="slide-title">At the edge of your comfort zone lives <em>everything you are becoming.</em></h1>
+    <p class="lead">Growth does not happen inside the zone of competence. It happens at the exact boundary where competence ends and something new is required.</p>
+    <p class="body-text">The threshold experience — the moment where familiar strategies stop working and something new is demanded — is one of the most uncomfortable human experiences. It is also one of the most important. Every significant development in a human life occurs at a threshold. Every meaningful relationship begins with the risk of vulnerability. Every creative breakthrough requires a period where the old way has been abandoned and the new way has not yet arrived. <strong>The threshold is not a failure state. It is the growth state.</strong></p>
+    <p class="body-text">The reason most people avoid the threshold is that it feels like falling. The familiar structures are gone. The competence you relied on has been outgrown. There is a moment of genuine freefall between who you were and who you are becoming. This moment is not evidence that you have made a mistake. It is evidence that you have finally reached the place where real growth can happen.</p>
+    <div class="section-heading">The Biology of Challenge</div>
+    <p class="body-text">Your nervous system is designed for challenge. The parasympathetic rest-and-digest mode is for maintenance. But the optimal state for growth — what researchers call the "zone of proximal development" — is mild to moderate stress. Not overwhelming threat, but genuine challenge. <strong>Your physiology is built for this. It is the comfort zone, ironically, that your biology finds enervating.</strong></p>
+    <div class="pullquote">The freefall between who you were and who you are becoming is not falling. It is flying in a direction you have not yet learned to name.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You are at the threshold. The familiar is behind you. The new is not yet clear. You are in the uncomfortable middle.</p>
+      <p class="scenario-context">This feeling — not the dramatic crisis but the ambiguous, groundless in-between — is the exact location where evolution happens. Your instinct is to resolve it as quickly as possible.</p>
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Return to the familiar. The discomfort is a sign you went too far.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the ambiguity. Don't resolve it prematurely. Let the new thing form.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Make a decision — any decision — just to end the uncertainty.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Seek external validation that you're doing it right.</button>
+      </div>
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 5 ===== -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 &middot; The Practice</div>
+    <h1 class="slide-title">Evolution is a <em>daily practice</em>, not a single event.</h1>
+    <p class="lead">You do not evolve once, dramatically, and then arrive. Evolution is the continuous practice of choosing growth over comfort — of choosing the edge over the centre — in ordinary moments.</p>
+    <p class="body-text">One of the most misleading ideas about growth is that it arrives in revelations — sudden awakenings, dramatic turning points, peak experiences that rearrange everything. These moments exist. But they are not the mechanism of lasting transformation. The mechanism is much quieter: <strong>the daily choice, in small things, to choose the slightly uncomfortable option over the comfortable one.</strong></p>
+    <p class="body-text">The person you are becoming is built not by a single brave act but by a thousand micro-choices to engage rather than avoid, to try rather than watch, to say what is true rather than what is safe. Each of these choices is small. Each of them is real. And they compound — in exactly the same way that small comfortable choices compound into a comfortable cage.</p>
+    <div class="section-heading">The Daily Edge</div>
+    <p class="body-text">The practice is not about engineering crises or pursuing adrenalin. It is about maintaining a gentle, consistent relationship with your own growing edge. Where is the boundary of your current self? What would push you, slightly but genuinely, beyond it today? Not next year, not after the conditions are right — <strong>today. In the available circumstances. With what is actually present.</strong></p>
+    <div class="pullquote">The life that is most fully yours is assembled from small brave choices, not from one perfect moment of total transformation.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You identify one small, specific place in your daily life where you consistently choose comfort over growth.</p>
+      <p class="scenario-context">Not a dramatic failure — a small, habitual retreat. The opinion you don't give. The invitation you decline. The conversation you steer toward safe territory. The creative thing you almost start.</p>
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Commit to doing the uncomfortable version of that one thing every day for thirty days.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Identify the pattern but wait for a more significant opportunity to change.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Address everything at once — make a comprehensive list of all the places you are hiding.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Forgive yourself and move on without making any specific change.</button>
+      </div>
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== COMPLETION SLIDE ===== -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">&#10003;</div>
+    <h1 class="slide-title">You've completed <em>Module 02.</em></h1>
+    <p class="lead">This knowledge does not stay on the page. It follows you out.</p>
+    <div class="section-heading">What You Carry Forward</div>
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">Comfort does not stay comfortable. Over time, without growth, it becomes constriction — and the constriction compounds.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Your comfort zone is an identity, not a location. The story "I'm not the kind of person who..." is the real cage.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">Breaking routine is archaeology, not destruction. What emerges when the pattern pauses is exactly the information you need.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">The threshold — the uncomfortable in-between — is not falling. It is the specific location where genuine growth happens.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">Evolution is daily and incremental. One small, specific, genuine choice toward growth today compounds into who you are becoming.</span></li>
+    </ol>
+    <div class="section-heading">Practice This Week</div>
+    <p class="body-text">This week, identify one specific habitual pattern you follow without thinking — one routine response, one repeated choice — that is not actively harmful but is completely automatic. Disrupt it for seven days. Not to improve it, not to replace it with something better, but simply to notice what is underneath it. Write what surfaces.</p>
+    <p class="body-text">The next module &mdash; <strong>The Mechanics of Evolution</strong> &mdash; continues this thread deeper.</p>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" id="btn-complete">Begin Module 03 →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: 'Adjusting expectations downward is one of the quietest forms of defeat available.', detail: 'Concluding that flatness is simply what adult life looks like is a story many people tell — and it has the advantage of being somewhat plausible, since many adults do live this way. But it confuses the common with the inevitable. The numbness is not adulthood. It is a signal that growth has stalled. The signal is accurate regardless of how many other people are experiencing the same thing.' },
+    b: { headline: 'Recognising numbness as information is the first and most important move.', detail: 'Numbness in a life is the equivalent of numbness in a body part — it is not the absence of something happening, it is a communication that circulation has stopped. The question is not "why is this happening?" but "what is this signalling about the direction of my growth?" The numbness is not the problem. It is the message about the problem. Reading it correctly is the beginning of movement.' },
+    c: { headline: 'Filling the calendar generates activity, not aliveness.', detail: 'Busyness is the most socially acceptable form of avoidance. When you are busy enough, you do not have to confront the numbness directly. The activity provides the sensation of movement without the substance of it. You end up exhausted and still numb, which is worse than simply numb, because now you are also depleted. Aliveness does not come from volume. It comes from depth and genuine engagement.' },
+    d: { headline: 'The holiday will help and the feeling will return.', detail: 'Rest is genuinely necessary and often underrated. But the assumption that the flatness is a rest problem rather than a direction problem means you will return from the holiday restored and then gradually return to the same numbness. A change of location changes the scenery of the question, not the question. When you get back, the question will be waiting exactly where you left it.' }
+  },
+  2: {
+    a: { headline: 'The voice that says "not for someone like me" has a function, but it is not wisdom.', detail: 'The protective voice developed for good reasons — it was calibrated to the circumstances of your earlier life, when certain kinds of risk were genuinely threatening. But it has not updated since then. It is running an old safety programme in new circumstances. Trusting it without examining it means continuing to let the circumstances of your past determine the possibilities of your future.' },
+    b: { headline: 'Noticing the voice without obeying it creates the first space for choice.', detail: 'The moment of noticing — "ah, there\'s the voice again" — is the moment of freedom. Before that moment, the voice was automatic; it was you. After it, the voice is a pattern you can examine. You do not have to immediately override it. You only have to stop treating it as reality. Ask what it is protecting, what it is afraid of, and what it would cost you to test its claims against actual experience.' },
+    c: { headline: 'Deciding the voice is always wrong replaces one automatic response with another.', detail: "The protective voice is not always wrong. Sometimes the thing that excites and terrifies you equally is genuinely risky and the risk is worth examining carefully. The goal is not to silence the voice but to hold it at arm's length — to hear it as information without treating it as command. Overriding it completely means losing access to valid protective signals along with the outdated ones." },
+    d: { headline: 'Analysis in service of avoidance is one of the most elegant forms the comfortable cage takes.', detail: 'If you are intellectually sophisticated, the cage will be built from sophisticated materials — extensive self-reflection, careful examination of motives, rigorous interrogation of every impulse. These are not bad qualities. But when they are deployed specifically in the direction of interesting opportunities, producing sufficient complexity that action becomes indefinitely postponable, they have become the mechanism of avoidance rather than the mechanism of growth.' }
+  },
+  3: {
+    a: { headline: 'The smallest version of disruption produces the smallest version of information.', detail: 'A disruption small enough to be entirely comfortable does not actually test anything. It is a performance of breaking routine rather than the actual thing. The value of breaking a habitual pattern is in encountering the discomfort of not having it — in discovering what was underneath it. If you calibrate the disruption precisely to the level of comfort, you protect the cage while appearing to challenge it.' },
+    b: { headline: 'Genuine discomfort is the correct level of calibration.', detail: 'You are looking for the disruption that produces something real — not overwhelming crisis, but genuine friction. Enough that the absence of the pattern actually registers. Enough that something has to adapt. That adaptation — the small, genuine stretch — is where the archaeology happens. What surfaces when the routine is paused is exactly the information you need about who you actually are when you are not performing your habits.' },
+    c: { headline: 'Breaking everything at once produces chaos rather than clarity.', detail: 'The impulse to make a comprehensive, dramatic break is often the comfort zone asserting itself in reverse. By making the disruption so overwhelming that retreat becomes inevitable, the familiar pattern gets to win while you feel like you tried. Sustainable evolution is incremental. Pick one thing, and pick it well. The goal is to stay in the disruption long enough to get information from it — not to generate an event that validates the return to the familiar.' },
+    d: { headline: 'The research phase can last indefinitely when it is performing the function of delay.', detail: "There is no amount of information about the practice of disruption that substitutes for the practice itself. You will not understand what you discover at the threshold by reading about other people's thresholds. The research is useful preparation up to a point. Beyond that point, it is the cage dressed in the language of thoroughness. At some point, the work requires you to actually do it." }
+  },
+  4: {
+    a: { headline: 'The discomfort is not the sign you went too far — it is the sign you went far enough.', detail: "Every threshold in a human life feels like too far from inside it. This is definitional: if it were within your comfort zone, it would not be a threshold. The instinct to return to the familiar when you reach genuine discomfort is extremely powerful and extremely old — it is the nervous system doing its job. The question is whether you manage the nervous system's response or let it manage your choices." },
+    b: { headline: 'Holding ambiguity is one of the most advanced and most important human capacities.', detail: 'The ability to remain in a state of not-knowing without collapsing it prematurely is the precondition for genuine insight, genuine creativity, and genuine transformation. All three require a period of holding a question open while something new forms. The new thing cannot form if you resolve the uncertainty before it has finished arriving. Premature resolution is how people return to the familiar while believing they chose the new.' },
+    c: { headline: 'Any decision to end the discomfort tends to be the wrong decision.', detail: 'Decisions made in service of ending discomfort are decisions made from the old self — the self that finds the threshold intolerable. They usually produce a return, in slightly new packaging, to something familiar. The discomfort at the threshold is not a problem to be solved. It is the process of formation — of the new self taking shape. Interrupting it to end the unpleasantness is like taking a cake out of the oven because the smell of baking makes the kitchen too warm.' },
+    d: { headline: 'Seeking validation confirms that you have not yet trusted your own navigation.', detail: 'There is no external observer who can tell you whether you are growing correctly. Growth does not come with external confirmation, and the absence of external confirmation does not mean you have gone wrong. The search for validation at the threshold is understandable — it is lonely there — but it is also a movement away from the very thing that growth requires: the capacity to trust your own sense of where you are going.' }
+  },
+  5: {
+    a: { headline: 'Thirty days of a single changed behaviour produces a measurable shift in who you are.', detail: 'One specific, daily practice sustained over thirty days is more transformative than any amount of intention, insight, or preparation. The brain is plastic. It rewires in response to repeated behaviour. Every day you do the uncomfortable version of the habitual thing, you are building new neural pathways — new default responses — that gradually replace the old comfortable ones. Simple, specific, sustained. This is the actual mechanism of change.' },
+    b: { headline: "Waiting for significance is the comfortable cage's most elegant delay strategy.", detail: 'Significant opportunities are rare. Ordinary ones are constant. The practice of growth does not live in the significant moments — it lives in the daily encounter with your own habits. The significance that you are waiting for will never be more significant than the daily practice that actually builds the capacity to meet it when it arrives. The small uncomfortable choice you are avoiding today is the training that makes the larger ones possible.' },
+    c: { headline: 'Addressing everything at once produces paralysis rather than momentum.', detail: 'A comprehensive inventory of all the places you are hiding is not a plan — it is an overwhelming document that will serve primarily as evidence of how far you have to go. The mind cannot process and address multiple growth edges simultaneously with the same quality of attention it can bring to one. Choose one thing. Do it daily. When it becomes the new normal — when the uncomfortable thing has become comfortable — choose the next one.' },
+    d: { headline: 'Forgiveness without change is something, but not progress.', detail: 'Self-compassion is genuinely important — especially at the beginning, when the gap between who you are and who you want to be is most obvious and most discouraging. But forgiveness in the absence of any specific change is a loop. You are not being asked to punish yourself for the comfortable choices. You are being asked to replace them, gradually and specifically, with different ones. The forgiveness is the starting point, not the endpoint.' }
+  }
+};
+
+var currentSlide=1;
+var totalSlides=document.querySelectorAll(".slide").length;
+function showSlide(n){
+  document.querySelectorAll(".slide").forEach(function(s){s.classList.remove("active");});
+  var t=document.querySelector("[data-slide=\""+n+"\"]");
+  if(t)t.classList.add("active");
+  document.querySelectorAll(".progress-dot").forEach(function(dot,i){
+    dot.classList.remove("active","complete");
+    if(i+1<n)dot.classList.add("complete");
+    else if(i+1===n)dot.classList.add("active");
+  });
+  currentSlide=n;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1);}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1);}
+document.addEventListener("DOMContentLoaded",function(){
+  document.querySelectorAll(".choices").forEach(function(group){
+    var sn=parseInt(group.getAttribute("data-scenario"));
+    group.querySelectorAll(".choice").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        group.querySelectorAll(".choice").forEach(function(b){b.classList.remove("selected");});
+        btn.classList.add("selected");
+        var answer=btn.getAttribute("data-answer");
+        var f=feedback[sn]&&feedback[sn][answer];
+        if(f){
+          var hl=document.getElementById("feedback-text-"+sn);
+          var dt=document.getElementById("feedback-detail-"+sn);
+          var box=document.getElementById("feedback-"+sn);
+          if(hl)hl.textContent=f.headline;
+          if(dt)dt.textContent=f.detail;
+          if(box){box.style.display="block";setTimeout(function(){box.classList.add("visible");},20);}
+        }
+        var nb=document.getElementById("next-"+sn);
+        if(nb)nb.removeAttribute("disabled");
+      });
+    });
+  });
+});
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute("data-theme")==="dark";
+  try{if(dark){h.removeAttribute("data-theme");localStorage.removeItem("safespot_theme");}
+      else{h.setAttribute("data-theme","dark");localStorage.setItem("safespot_theme","dark");}}
+  catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var prevKey='safespot_c9m1';
+    if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+      document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+      return;
+    }
+    var btn=document.getElementById("btn-complete");
+    if(btn){
+      btn.onclick=function(){
+        localStorage.setItem('safespot_c9m2',"1");
+        window.location.href='course9-module-3-mechanics-of-evolution.html';
+      };
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll(".sidebar-mod-item").forEach(function(li){
+        if(parseInt(li.getAttribute("data-mn"))===mn)li.classList.add("ss-now");
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem("slsc_session")||"null");
+    if(s&&s.fullName){
+      var nm=s.fullName&&s.fullName.indexOf("@")<0?s.fullName.split(" ")[0]:(s.email||s.fullName||"").split("@")[0];
+      var el=document.getElementById("ss-user-greeting");
+      if(el)el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem("slsc_session");localStorage.removeItem("slsc_token");localStorage.removeItem("slsc_sync_since");}catch(e){}
+  location.replace("login.html");
+}
+</script>
+<script>
+(function(){
+  var levels=["","lg","xl"];
+  function getLevel(){return document.documentElement.getAttribute("data-zoom")||"";}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next)document.documentElement.setAttribute("data-zoom",next);
+    else document.documentElement.removeAttribute("data-zoom");
+    try{localStorage.setItem("slsc_zoom",next||"");}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev)document.documentElement.setAttribute("data-zoom",prev);
+    else document.documentElement.removeAttribute("data-zoom");
+    try{localStorage.setItem("slsc_zoom",prev||"");}catch(e){}
+  };
+})();
+</script>
+<script>
+if("serviceWorker" in navigator){
+  window.addEventListener("load",function(){
+    navigator.serviceWorker.register("./sw.js").catch(function(){});
+  });
+}
+</script>
+
+<!-- TTS READER -->
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+
+<script>
+(function(){
+  try{
+    var items = Array.from(document.querySelectorAll('.sidebar-mod-item[data-mk]'));
+    items.forEach(function(li, idx){
+      var mk = li.getAttribute('data-mk');
+      var mn = parseInt(li.getAttribute('data-mn') || '0');
+      var done = !!localStorage.getItem(mk);
+      if(done){
+        li.classList.add('ss-done');
+      } else if(mn > 1){
+        // Locked if the immediately preceding module is not complete
+        var prev = items[idx - 1];
+        if(prev && !localStorage.getItem(prev.getAttribute('data-mk'))){
+          li.classList.add('ss-next');
+        }
+      }
+    });
+  }catch(e){}
+})();
+</script>
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

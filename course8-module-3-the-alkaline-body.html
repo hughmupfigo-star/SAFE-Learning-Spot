@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 8 · Module 3 · The Alkaline Body</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:500}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:720px;margin:0 auto;padding:72px 48px 120px}
+.slide-num{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:40px;letter-spacing:.06em}
+.slide h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:32px}
+.slide h1 em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.15rem;line-height:1.75;color:var(--ink);margin-bottom:32px;font-weight:300}
+.body-text{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:24px}
+.divider{width:40px;height:1px;background:var(--accent);margin:40px 0}
+.scenario-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;font-family:var(--sans)}
+.scenario-text{font-family:var(--serif);font-size:1.3rem;font-weight:300;line-height:1.6;margin-bottom:36px;padding-left:20px;border-left:2px solid var(--line)}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.choice{background:transparent;border:1px solid var(--line);padding:18px 22px;text-align:left;cursor:pointer;
+font-family:var(--sans);font-size:.95rem;line-height:1.5;color:var(--ink);transition:all .2s ease;border-radius:2px}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--soft)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback{display:none;border-top:1px solid var(--line);padding-top:28px;margin-top:8px}
+.feedback.visible{display:block;animation:fadeUp .4s ease}
+.feedback-headline{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:10px}
+.feedback-detail{font-size:.95rem;line-height:1.75;color:var(--muted)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{background:none;border:none;font-family:var(--sans);font-size:.9rem;color:var(--muted);cursor:pointer;
+letter-spacing:.04em;padding:8px 0;transition:color .2s}
+.nav-btn:hover:not(:disabled){color:var(--ink)}.nav-btn:disabled{opacity:.2;cursor:default}
+.nav-btn.primary{color:var(--ink);font-weight:500}
+.completion{text-align:center;padding:80px 48px}
+.completion-icon{font-size:3rem;margin-bottom:32px}
+.completion h2{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:20px}
+.completion p{font-size:1rem;line-height:1.8;color:var(--muted);max-width:480px;margin:0 auto 40px}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 08 &middot; Food Is Medicine &middot; Module <strong>03</strong> &middot; The Alkaline Body</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 8 &middot; Food Is Medicine</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c8m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course8-module-6-healing-foods-and-herbs.html">Healing Foods & Herbs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course8-module-7-children-and-family-nutrition.html">Children & Family Nutrition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course8-module-8-detoxing-and-transition.html">Detoxing & Transition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m9" data-mn="9">
+      <span class="sidebar-mod-n">09</span>
+      <a class="sidebar-mod-a" href="course8-module-9-building-your-alkaline-life.html">Your Alkaline Life</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide-1" data-slide="1">
+  <div class="slide-inner">
+    <div class="slide-num">01 / 09</div>
+    <h1>The Body Runs <em>Alkaline</em></h1>
+    <p class="lead">The human body is not neutral. It is designed to operate in a slightly alkaline state. Maintaining that state is one of the body's highest priorities — and what you eat either supports that work or fights against it.</p>
+    <div class="divider"></div>
+    <p class="body-text">pH is a measure of acidity or alkalinity, running from 0 (most acidic) to 14 (most alkaline), with 7 being neutral. Healthy human blood sits at a tightly maintained range of 7.35 to 7.45 — slightly alkaline. Even small deviations from this range indicate serious illness. The body will go to extraordinary lengths — drawing minerals from bones, producing bicarbonate, accelerating breathing — to maintain this balance.</p>
+    <p class="body-text">The teaching that has guided natural healers for generations runs deeper than blood pH alone: it says that the overall internal environment — the tissues, the cells, the lymphatic system — thrives in alkalinity and struggles in chronic acidity. What you eat shifts that environment, daily and cumulatively, toward one state or the other.</p>
+    <div class="scenario-label">Scenario 01</div>
+    <p class="scenario-text">A doctor dismisses the concept of an "alkaline diet" by pointing out that blood pH is tightly regulated and cannot be significantly changed by food. Is this the full picture?</p>
+    <div class="choices" data-scenario="1">
+      <button class="choice" data-answer="a">Yes — because blood pH doesn't change, what you eat has no effect on the body's acid-alkaline balance</button>
+      <button class="choice" data-answer="b">No — while blood pH is tightly regulated, the body uses significant resources to maintain it against an acid-forming diet, and the acidity or alkalinity of the broader cellular environment and lymphatic system is meaningfully influenced by what we eat</button>
+      <button class="choice" data-answer="c">Yes — the only pH that matters in the body is blood pH, and everything else is irrelevant</button>
+      <button class="choice" data-answer="d">No — blood pH changes dramatically based on diet and this is how alkaline foods improve health</button>
+    </div>
+    <div class="feedback" id="feedback-1">
+      <p class="feedback-headline" id="feedback-text-1"></p>
+      <p class="feedback-detail" id="feedback-detail-1"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()" disabled>← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="slide-2" data-slide="2">
+  <div class="slide-inner">
+    <div class="slide-num">02 / 09</div>
+    <h1>Mucus, Acidity, and <em>Disease</em></h1>
+    <p class="lead">The healing tradition taught that all disease begins in the same place: a body pushed into chronic acidity, producing excess mucus as a protective response. Understand mucus, and you begin to understand the root of most chronic illness.</p>
+    <div class="divider"></div>
+    <p class="body-text">Mucus is not the enemy — it is the body's response to an acidic internal environment. When cells are under stress from acid-forming foods, toxins, and inflammation, the body produces mucus to coat and protect vulnerable tissue. This is protective in the short term. In the chronic state — when the acid-forming diet never stops — the mucus itself becomes a problem: blocking pathways, harbouring bacteria and parasites, and creating the conditions in which disease takes hold.</p>
+    <p class="body-text">This framework — that disease requires an acidic, mucus-producing environment to thrive, and that an alkaline body is a hostile environment for most chronic illness — is the foundation of the alkaline healing tradition. It does not replace understanding specific conditions. It describes the terrain in which those conditions either flourish or fail to take hold.</p>
+    <div class="scenario-label">Scenario 02</div>
+    <p class="scenario-text">Nathan has chronic sinus congestion, frequent colds, and a persistent cough that doctors have been unable to resolve with medication. His diet is heavy in dairy, refined sugar, and processed meats. What might the alkaline healing perspective offer that conventional treatment has not?</p>
+    <div class="choices" data-scenario="2">
+      <button class="choice" data-answer="a">His symptoms are almost certainly viral and unrelated to his diet</button>
+      <button class="choice" data-answer="b">The alkaline tradition would identify his diet as heavily acid-forming and mucus-producing — dairy in particular is strongly associated with excess mucus — and would address the internal terrain rather than suppressing individual symptoms</button>
+      <button class="choice" data-answer="c">He should take antihistamines to manage the mucus production</button>
+      <button class="choice" data-answer="d">His symptoms suggest a structural problem in his sinuses — diet is unlikely to be relevant</button>
+    </div>
+    <div class="feedback" id="feedback-2">
+      <p class="feedback-headline" id="feedback-text-2"></p>
+      <p class="feedback-detail" id="feedback-detail-2"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="slide-3" data-slide="3">
+  <div class="slide-inner">
+    <div class="slide-num">03 / 09</div>
+    <h1>What Makes a Food <em>Acid-Forming</em></h1>
+    <p class="lead">The distinction is not about whether the food tastes acidic — a lemon is acidic in a glass but alkaline-forming in the body. What matters is the ash the food leaves after the body metabolises it: acidic or alkaline.</p>
+    <div class="divider"></div>
+    <p class="body-text">Acid-forming foods are those that, once digested, produce acidic residues the body must neutralise. The main categories are: animal products — meat, fish, eggs, dairy; refined grains — white flour, white rice, most commercial bread and pasta; refined sugar in all forms; processed and packaged foods; alcohol; and most pharmaceutical drugs. These are not all equally harmful, and small amounts of some are managed easily by a healthy body. But consumed as the foundation of the daily diet, they push the body's terrain toward chronic acidity.</p>
+    <p class="body-text">Understanding this is not about fear or rigid rules. It is about understanding the direction each food choice takes you — so that the cumulative effect of daily eating supports the body rather than burdens it.</p>
+    <div class="scenario-label">Scenario 03</div>
+    <p class="scenario-text">Leila is surprised to learn that orange juice — which tastes acidic — is considered alkaline-forming, while milk — which tastes neutral — is acid-forming. How does this make sense?</p>
+    <div class="choices" data-scenario="3">
+      <button class="choice" data-answer="a">It doesn't make sense — if something tastes acidic, it creates acidity in the body</button>
+      <button class="choice" data-answer="b">The pH of a food before digestion is different from its effect on the body's internal environment after metabolism — the minerals in orange juice produce an alkaline ash, while the animal proteins and phosphorus in milk produce an acidic one</button>
+      <button class="choice" data-answer="c">Only the pH of the stomach matters — all food becomes acidic once it reaches the stomach anyway</button>
+      <button class="choice" data-answer="d">The acid-forming or alkaline-forming nature of food is determined entirely by its sugar content</button>
+    </div>
+    <div class="feedback" id="feedback-3">
+      <p class="feedback-headline" id="feedback-text-3"></p>
+      <p class="feedback-detail" id="feedback-detail-3"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide-4" data-slide="4">
+  <div class="slide-inner">
+    <div class="slide-num">04 / 09</div>
+    <h1>The Alkaline <em>Food List</em></h1>
+    <p class="lead">Alkaline-forming foods are, overwhelmingly, the foods that nature made in their original form — leafy greens, fruits, roots, seeds, and herbs. The alkaline plate is not a diet of deprivation. It is a return to abundance.</p>
+    <div class="divider"></div>
+    <p class="body-text">Among the most alkaline-forming foods: dark leafy greens — kale, watercress, dandelion greens, wild arugula; fruits — figs, dates, mangoes, papayas, berries, melons; vegetables — cucumber, courgette, peppers, avocado, sweet potato; sea vegetables — dulse, wakame, nori; nuts and seeds — hemp seeds, sesame seeds and tahini, walnuts; whole grains — spelt, teff, quinoa; and herbs — elderflower, burdock root, sea moss, sarsaparilla.</p>
+    <p class="body-text">Water deserves special mention. The body is roughly 60% water and the quality of what you hydrate with directly influences your internal environment. Natural spring water, naturally alkaline, is what the body was designed to receive. Filtered water is preferable to unfiltered tap water. Staying well hydrated with clean water is itself a foundational alkaline practice.</p>
+    <div class="scenario-label">Scenario 04</div>
+    <p class="scenario-text">David wants to shift toward an alkaline diet but is worried the food will be tasteless and restrictive. A practitioner lists what he can eat freely: mangoes, figs, avocados, sweet potato, all leafy greens, berries, dates, cucumber, peppers, hemp seeds, spelt bread, and herbal teas. What should David understand about the alkaline approach?</p>
+    <div class="choices" data-scenario="4">
+      <button class="choice" data-answer="a">The practitioner has made a mistake — most of these foods are actually acid-forming</button>
+      <button class="choice" data-answer="b">The alkaline approach is built around abundance of natural foods, not deprivation — the list of alkaline-forming whole foods is broad, varied, and deeply nourishing</button>
+      <button class="choice" data-answer="c">These foods are fine occasionally but cannot form the basis of a nutritionally complete diet</button>
+      <button class="choice" data-answer="d">The alkaline diet is only suitable for people with specific health conditions, not for general daily eating</button>
+    </div>
+    <div class="feedback" id="feedback-4">
+      <p class="feedback-headline" id="feedback-text-4"></p>
+      <p class="feedback-detail" id="feedback-detail-4"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide-5" data-slide="5">
+  <div class="slide-inner">
+    <div class="slide-num">05 / 09</div>
+    <h1>Plant Protein and the <em>Protein Myth</em></h1>
+    <p class="lead">One of the most persistent objections to alkaline eating is the protein question. "Where do you get your protein?" The answer is: from the same place the strongest animals on earth get theirs.</p>
+    <div class="divider"></div>
+    <p class="body-text">Gorillas, elephants, horses, and oxen are among the most muscular, powerful creatures alive. They eat plants. Hemp seeds contain all essential amino acids in excellent proportions. So do quinoa, teff, and combinations of whole plant foods eaten across a day. The alkaline tradition has always maintained that the body can build and maintain itself fully on plant-based sources — provided those plants are natural, mineral-rich, and varied.</p>
+    <p class="body-text">The belief that animal protein is essential is relatively recent and culturally specific. Traditional healing communities across Africa, Asia, and the Americas lived on predominantly plant-based diets and demonstrated robust health and longevity. The protein they obtained was alkaline-forming — it came without the acid-producing phosphorus load, saturated fat, and inflammatory compounds that accompany animal protein.</p>
+    <div class="scenario-label">Scenario 05</div>
+    <p class="scenario-text">Grace tells her family she wants to eat fully alkaline and plant-based. Her mother is worried she won't get enough protein and insists she needs meat and eggs for strength. How might Grace respond using what she has learned?</p>
+    <div class="choices" data-scenario="5">
+      <button class="choice" data-answer="a">Her mother is right — plant foods cannot provide complete protein and she risks deficiency</button>
+      <button class="choice" data-answer="b">A varied plant-based alkaline diet — including hemp seeds, quinoa, teff, legumes, and dark greens — provides all essential amino acids without the acid-forming burden of animal products, and has supported robust health in traditional communities throughout history</button>
+      <button class="choice" data-answer="c">She will need protein powder supplements to make up the difference</button>
+      <button class="choice" data-answer="d">Plant protein is only adequate for people who are not physically active</button>
+    </div>
+    <div class="feedback" id="feedback-5">
+      <p class="feedback-headline" id="feedback-text-5"></p>
+      <p class="feedback-detail" id="feedback-detail-5"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="slide-6" data-slide="6">
+  <div class="slide-inner">
+    <div class="slide-num">06 / 09</div>
+    <h1>What You <em>Drink</em> Matters</h1>
+    <p class="lead">The body is predominantly water. What you hydrate with is not secondary to what you eat — it is equally fundamental. Clean, natural water is one of the most alkalising things you can give your body.</p>
+    <div class="divider"></div>
+    <p class="body-text">Natural spring water is slightly alkaline by nature — the minerals it picks up as it moves through rock give it a gentle alkalising quality. Tap water in many urban areas contains chlorine (added to kill bacteria), fluoride (added historically for dental health), and residues of medications and agricultural chemicals that pass through treatment systems. These compounds are not neutral in the body and add to the acid-forming burden it must manage.</p>
+    <p class="body-text">Beyond water: fizzy drinks are among the most acid-forming substances a person can consume — phosphoric acid in cola drinks has a pH close to battery acid. Alcohol, coffee, and commercial fruit juices (loaded with refined sugar) all create acid-forming conditions. Herbal teas — elderflower, burdock, dandelion — are among the most alkalising drinks available and double as medicine.</p>
+    <div class="scenario-label">Scenario 06</div>
+    <p class="scenario-text">Michael drinks two cans of cola every day, rarely drinks plain water, and has frequent heartburn, joint aches, and skin breakouts. He does not connect these symptoms to his drinks — only to his food. What is he missing?</p>
+    <div class="choices" data-scenario="6">
+      <button class="choice" data-answer="a">Drinks don't affect the body's acid-alkaline balance — only food does</button>
+      <button class="choice" data-answer="b">Cola is one of the most acid-forming substances in the modern diet — the phosphoric acid, refined sugar, and caffeine create a significant acid burden; his symptoms are consistent with chronic internal acidity and the drinks are a primary contributor</button>
+      <button class="choice" data-answer="c">His heartburn is likely caused by eating too quickly, not by what he drinks</button>
+      <button class="choice" data-answer="d">Two cans a day is a moderate amount — the symptoms are probably caused by other factors</button>
+    </div>
+    <div class="feedback" id="feedback-6">
+      <p class="feedback-headline" id="feedback-text-6"></p>
+      <p class="feedback-detail" id="feedback-detail-6"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="slide-7" data-slide="7">
+  <div class="slide-inner">
+    <div class="slide-num">07 / 09</div>
+    <h1>Inflammation Is <em>Acidity Speaking</em></h1>
+    <p class="lead">Modern medicine calls it inflammation. The healing tradition calls it the body's response to an acidic internal environment. They are describing the same process from different angles — and the alkaline diet addresses the root.</p>
+    <div class="divider"></div>
+    <p class="body-text">Chronic inflammation underlies most of the conditions that dominate modern medicine: arthritis, eczema, psoriasis, asthma, IBS, Crohn's disease, type 2 diabetes, cardiovascular disease, and many cancers. These are not separate diseases with separate causes — they are different expressions of a body whose internal terrain has been pushed into a state of chronic stress and defence.</p>
+    <p class="body-text">When the acid-forming diet is removed and replaced with mineral-rich, alkaline-forming whole food, inflammation decreases — not as a theory, but as a measurable, lived experience. People who shift to alkaline eating consistently report reductions in joint pain, improved skin conditions, reduced digestive inflammation, and clearer breathing. The body, given the environment it was designed for, begins to repair.</p>
+    <div class="scenario-label">Scenario 07</div>
+    <p class="scenario-text">Yvonne has been managing rheumatoid arthritis with anti-inflammatory medication for five years. A nutritional healer suggests that shifting to an alkaline, plant-based diet could reduce her inflammation significantly. Her rheumatologist dismisses this as unproven. What does the evidence actually indicate?</p>
+    <div class="choices" data-scenario="7">
+      <button class="choice" data-answer="a">The rheumatologist is correct — diet has no evidence base for reducing autoimmune inflammation</button>
+      <button class="choice" data-answer="b">Multiple studies and extensive clinical observation support dietary intervention — particularly elimination of acid-forming foods and adoption of anti-inflammatory whole foods — as meaningful support for autoimmune and inflammatory conditions, including rheumatoid arthritis</button>
+      <button class="choice" data-answer="c">Diet changes can only reduce mild inflammation — for serious conditions like rheumatoid arthritis, medication is the only effective approach</button>
+      <button class="choice" data-answer="d">The healer's advice is dangerous because it may cause her to stop taking her medication</button>
+    </div>
+    <div class="feedback" id="feedback-7">
+      <p class="feedback-headline" id="feedback-text-7"></p>
+      <p class="feedback-detail" id="feedback-detail-7"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="slide-8" data-slide="8">
+  <div class="slide-inner">
+    <div class="slide-num">08 / 09</div>
+    <h1>Building the <em>Alkaline Plate</em></h1>
+    <p class="lead">Alkaline eating is not about perfection. It is about direction. The aim is to make the majority of what you eat each day alkaline-forming — and to minimise, not necessarily eliminate, what is acid-forming.</p>
+    <div class="divider"></div>
+    <p class="body-text">A practical starting point: make half your plate at every meal dark leafy greens or vegetables. Add a serving of fruit daily — fresh figs, mango, papaya, or berries. Replace refined grains with spelt, teff, or quinoa. Swap cow's milk for hemp, walnut, or coconut milk. Replace fizzy drinks and commercial juices with spring water, coconut water, and herbal teas. Add sea moss and other sea vegetables weekly.</p>
+    <p class="body-text">These shifts do not require a dramatic overnight transformation. They require a direction. Each meal is a choice between more acidic or more alkaline. Over days, weeks, and months, the cumulative shift in internal terrain produces changes that are felt in energy levels, skin clarity, joint comfort, digestion, mood, and immunity. The body responds to being given what it was designed to receive.</p>
+    <div class="scenario-label">Scenario 08</div>
+    <p class="scenario-text">Theo is ready to move toward alkaline eating but feels he cannot change everything at once. He decides to start by replacing his daily cola with spring water, swapping white rice for spelt or quinoa, and adding a green salad to each evening meal. Is this a meaningful start?</p>
+    <div class="choices" data-scenario="8">
+      <button class="choice" data-answer="a">No — partial changes are not enough to affect the body's internal environment</button>
+      <button class="choice" data-answer="b">Yes — these three changes remove a significant acid-forming burden, replace a refined grain with a mineral-rich alkaline grain, and add living greens to the daily diet; the cumulative effect of consistent incremental changes is substantial</button>
+      <button class="choice" data-answer="c">He should focus on supplements first before changing his diet</button>
+      <button class="choice" data-answer="d">These changes are only meaningful if he also eliminates all animal products immediately</button>
+    </div>
+    <div class="feedback" id="feedback-8">
+      <p class="feedback-headline" id="feedback-text-8"></p>
+      <p class="feedback-detail" id="feedback-detail-8"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: COMPLETION -->
+<div class="slide" id="slide-9" data-slide="9">
+  <div class="slide-inner">
+    <div class="completion">
+      <div class="completion-icon">◈</div>
+      <h2>Module 3 Complete</h2>
+      <p>You now understand why the body runs alkaline, what mucus and chronic acidity mean for long-term health, which foods support or disturb that balance, and how to begin building a plate — and a life — that works with the body's design rather than against it.</p>
+      <p style="margin-top:16px;font-size:.9rem;color:var(--muted)">Course 08 &middot; Food Is Medicine &middot; Module 03 of 09</p>
+
+<div class="section-heading" style="margin-top:40px">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">The body is designed to maintain a slightly alkaline blood pH. It works continuously to hold this balance &mdash; and the dietary acid load determines how hard that work is and what it costs.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Excess mucus is the body&rsquo;s protective response to chronic irritation and acidity. It is a symptom pointing to its cause &mdash; not a problem that exists independently of what is feeding it.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Chronic low-grade inflammation is acidity speaking. Many conditions that present as separate diseases share an underlying terrain of sustained acid load and cellular stress.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">The alkaline food list centres on fresh fruits, vegetables, and leafy greens. These foods are not simply &ldquo;healthy&rdquo; in the conventional sense &mdash; they actively support the body&rsquo;s preferred operating environment.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Plant protein is sufficient and is delivered with fibre, minerals, and anti-inflammatory compounds. The protein myth &mdash; that sufficient protein requires animal products &mdash; does not survive scrutiny of the evidence.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">What you drink matters as much as what you eat. Spring water, coconut water, and fresh vegetable juices support alkalinity; carbonated drinks, alcohol, and coffee create acid load.</span></li>
+</ol>
+<div class="section-heading">Practice this week</div>
+<p class="body-text">Add one genuinely alkaline food to each day this week &mdash; not instead of something, just in addition. Sea moss gel, fresh cucumber, leafy greens, or a glass of spring water with lime. Seven days, one addition per day. At the end of the week, note any change in energy levels, digestion, or the quality of sleep. Small additions reveal a great deal.</p>
+<p class="body-text">Monthly: track your mucus production and inflammatory symptoms (congestion, skin reactions, joint stiffness, digestive discomfort) for one month while increasing alkaline foods. You are not running a clinical trial. You are paying attention to how your specific body responds to specific inputs. Your body&rsquo;s response is data.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const feedback = {
+  1:{
+    a:{headline:"Blood pH regulation uses resources — and those resources come at a cost.",detail:"The fact that blood pH is tightly regulated does not mean diet has no effect. It means the body works hard to maintain that pH against dietary acid load — drawing calcium from bones, producing bicarbonate, and taxing the kidneys. That buffering work is the cost of an acid-forming diet, and it compounds over time into the bone density loss, kidney strain, and mineral depletion that characterise chronic poor eating."},
+    b:{headline:"Correct. The regulation of blood pH is a process, not a free pass.",detail:"The doctor's point is technically accurate in isolation — blood pH does not shift dramatically with diet in a healthy body. But this misses the larger picture: the buffering systems that maintain blood pH are under constant strain from an acid-forming diet, and the broader cellular and lymphatic environment — where disease actually develops — is meaningfully influenced by what we eat. The distinction is important: stable blood pH is not the same as a healthy internal terrain."},
+    c:{headline:"Blood pH is one measurement — the internal terrain is a broader concept.",detail:"The healing tradition is not primarily concerned with blood pH as a measurement. It is concerned with the conditions in which cells live and function — the fluid environment around them, the lymphatic system, the gut lining. These environments are influenced by diet in ways that blood pH measurements alone do not capture."},
+    d:{headline:"Blood pH does not change significantly with diet — and that stability is the point.",detail:"The body's blood pH regulation is robust precisely because deviations are dangerous. Diet shifts the internal terrain and imposes a buffering burden — it doesn't directly shift blood pH in a healthy person. Understanding this distinction is important: the alkaline approach is about the cost and quality of maintaining that balance, not about directly raising blood pH."}
+  },
+  2:{
+    a:{headline:"Chronic congestion and repeated illness are often terrain conditions, not isolated viral events.",detail:"Frequent colds and persistent mucus production are symptoms of a body whose immune terrain is compromised. Viruses and bacteria are ever-present — what determines whether they take hold is the condition of the body they encounter. A body producing excess mucus from chronic acid-forming eating provides exactly the warm, nutrient-rich, stagnant environment that pathogens favour."},
+    b:{headline:"Correct. The tradition treats the terrain, not just the symptom.",detail:"Dairy is among the most mucus-forming foods in the alkaline framework — its proteins trigger mucus production in many people, and its acid-forming properties tax the body's buffering systems. Refined sugar and processed meats compound the acid load. Addressing Nathan's symptoms through medication while leaving these dietary triggers intact is like mopping the floor without turning off the tap. The alkaline approach turns off the tap."},
+    c:{headline:"Antihistamines manage the mucus response without addressing what is producing it.",detail:"Antihistamines work by blocking the histamine response — one mechanism among several that drives mucus production. They may offer temporary relief, but they do not address the dietary and internal conditions that are generating the chronic excess. The mucus returns when the medication stops because the condition that produces it has not changed."},
+    d:{headline:"Structural problems can contribute — but a dietary factor this obvious warrants addressing first.",detail:"Some chronic sinus issues do have structural components. But investigating structural causes while leaving a diet that is heavily dairy-based, refined sugar-rich, and processed-food-heavy unchanged is incomplete. If the dietary changes produce significant improvement — as they commonly do in cases like Nathan's — it retroactively indicates that the structural hypothesis was premature."}
+  },
+  3:{
+    a:{headline:"Taste is not the test — metabolic ash is.",detail:"The confusion between how a food tastes and how it behaves in the body is common and understandable. Vinegar tastes acidic and is acidic — but when metabolised, it leaves an alkaline ash. Lemon juice behaves the same way. The measure is not what the food does in a glass; it's what the body produces after digesting it."},
+    b:{headline:"Correct. It is the metabolic residue, not the food's own pH, that determines its effect.",detail:"When the body breaks down food, the residue left after metabolism is either acidic or alkaline — this is called the 'ash.' Citrus fruits, despite their obvious acidity before digestion, contain citrate and mineral salts that produce an alkaline ash. Milk and other animal products, despite their neutral or mildly acidic taste, contain animal proteins and phosphorus compounds that produce an acid ash the body must neutralise. This is why intuition based on taste alone misleads."},
+    c:{headline:"The stomach's acidity is specific to digestion — it doesn't determine the body's overall acid-alkaline state.",detail:"The stomach is highly acidic by design — it needs to be to break down food and kill pathogens. This is a localised, temporary acidity that does not define what the body does with the metabolic products of digestion. The kidneys, bones, lymph, and cellular environment are all involved in managing the balance beyond the stomach."},
+    d:{headline:"Sugar content influences blood glucose but is not the main determinant of acid-alkaline effect.",detail:"A food's effect on the body's acid-alkaline balance depends primarily on the mineral content of its metabolic ash — specifically the balance of acid-producing elements (sulphur, phosphorus, chlorine) versus alkaline-producing minerals (calcium, magnesium, potassium, sodium). Sugar creates acidity through a different pathway — through blood glucose dysregulation and fermentation — but it is not the primary variable in classifying foods as acid or alkaline-forming."}
+  },
+  4:{
+    a:{headline:"These foods are among the most well-documented alkaline-forming foods available.",detail:"Each food on the list — mango, figs, avocado, sweet potato, dark greens, berries, dates, cucumber, peppers, hemp seeds, spelt, herbal teas — is recognised in alkaline nutritional frameworks as genuinely alkaline-forming and mineral-rich. The practitioner's list is accurate."},
+    b:{headline:"Correct. The alkaline approach is one of the most food-rich dietary frameworks there is.",detail:"The fear that alkaline eating means deprivation comes from conflating it with other restrictive approaches. In reality, the alkaline food world includes an enormous variety of fruits, vegetables, seeds, grains, and herbs. The foods being removed — processed products, refined grains, animal products — are replaced not by nothing, but by an abundance of natural food. Many people who make this transition report feeling more satisfied, not less, once their palate adjusts."},
+    c:{headline:"A varied alkaline plant-based diet provides complete nutrition.",detail:"The concern that alkaline-forming foods cannot form a nutritionally complete diet is unfounded when the diet is varied. Hemp seeds provide complete protein. Leafy greens provide calcium and iron. Avocado provides essential fats. Spelt and teff provide complex carbohydrates and minerals. Sea vegetables provide iodine. A well-constructed alkaline diet is not nutritionally incomplete — it is nutritionally dense."},
+    d:{headline:"The alkaline approach is a foundational eating philosophy for anyone — not a therapeutic diet for the sick.",detail:"Like any sound nutritional framework, alkaline eating works best as a lifelong orientation rather than an intervention only sought when illness arrives. People who eat this way from a foundation of health maintain it more effectively than those who come to it only in crisis. It is a way of living, not a temporary prescription."}
+  },
+  5:{
+    a:{headline:"Plant foods provide complete protein when the diet is varied and whole.",detail:"The concept that plant protein is incomplete unless carefully combined at every meal has been significantly revised. The body maintains an amino acid pool and does not require all essential amino acids in every sitting. Hemp seeds alone are a complete protein. Across a day of varied alkaline eating — greens, seeds, grains, legumes — full amino acid coverage is consistently achieved."},
+    b:{headline:"Correct. The strongest animals on earth eat plants. The protein is there.",detail:"This is one of the most powerful reframings available: the animals humans most associate with physical strength — gorillas, horses, elephants, bulls — are herbivores. They build extraordinary muscle from plant food. The alkaline tradition has always understood this. What plant protein provides that animal protein does not is alkalinity — it comes without the acid-forming phosphorus load, saturated fat, and inflammatory compounds that accompany meat and dairy."},
+    c:{headline:"Protein powder is a manufactured supplement — not a substitute for whole food protein.",detail:"Most commercial protein powders are processed products, often with artificial additives, that provide isolated protein without the co-factors of whole food. Hemp seeds, quinoa, teff, and dark leafy greens provide protein in the context of minerals, healthy fats, and living compounds — which is how the body uses protein most effectively. Supplements are a poor substitute for the real thing."},
+    d:{headline:"Plant-based athletes consistently demonstrate that activity and plant protein are fully compatible.",detail:"The number of elite athletes performing at the highest levels on plant-based diets has grown significantly. Endurance athletes, strength athletes, and competitive sportspeople across disciplines have demonstrated that plant protein is not only adequate for active people but often produces faster recovery, lower inflammation, and greater endurance than animal-protein-heavy diets."}
+  },
+  6:{
+    a:{headline:"Everything you put in your body — liquid or solid — affects your internal environment.",detail:"The body does not distinguish between food and drink when it comes to the acid-alkaline effect. Both enter the digestive system and produce metabolic effects. Phosphoric acid in cola, refined sugar, and caffeine are all processed and must be neutralised. The idea that drinks are somehow separate from diet is a significant blind spot in how most people think about what they consume."},
+    b:{headline:"Correct. What you drink is as significant as what you eat — and cola is among the most acid-forming substances in common use.",detail:"The phosphoric acid in cola has a pH of around 2.5 — highly acidic. Combined with refined sugar that creates blood glucose spikes and fermentation, and caffeine that stresses the adrenal glands, two cans daily represents a significant and consistent acid load. Heartburn is the direct acid effect. Joint aches and skin breakouts are consistent with systemic inflammation driven by chronic acidity. Michael is right to look at his food — but he is missing half the picture by not looking at what he drinks."},
+    c:{headline:"Heartburn from cola is directly chemical — the acid in the drink irritates the oesophagus.",detail:"Phosphoric acid in cola can directly irritate the lining of the oesophagus and stomach, lowering the pH of the stomach environment and relaxing the lower oesophageal sphincter — the valve that prevents acid reflux. This is a direct mechanical and chemical effect, not primarily about eating speed. Removing the cola would likely produce rapid improvement in the heartburn independently of other changes."},
+    d:{headline:"Two cans daily is not moderate — it is a significant daily acid load.",detail:"At roughly 70g of refined sugar and meaningful phosphoric acid per day, two cans of cola represents one of the highest consistent acid and sugar burdens a person can voluntarily impose on their body. There is no threshold below which this combination is neutral. The dose over time is what matters — and daily, it is substantial."}
+  },
+  7:{
+    a:{headline:"The evidence base for dietary intervention in inflammatory conditions is substantial and growing.",detail:"A 2018 review in Frontiers in Nutrition found significant evidence supporting plant-based diets for reducing inflammation in autoimmune conditions. Multiple clinical observations and patient-reported outcomes support dietary change as a meaningful complement to medical treatment for rheumatoid arthritis. Dismissing this as unproven misrepresents the available literature."},
+    b:{headline:"Correct. Diet and inflammation are well-connected in the evidence — and dismissal is not the same as disproof.",detail:"The anti-inflammatory effect of a whole food, plant-based diet — and conversely the pro-inflammatory effect of animal products, refined sugar, and processed food — is supported by a substantial and growing evidence base. For autoimmune conditions in particular, where the immune system is chronically activated, removing dietary triggers that amplify immune response is a rational and evidence-supported approach. It does not replace medication; it addresses the terrain in which the medication is working."},
+    c:{headline:"Dietary change has demonstrated effects on serious inflammatory conditions — not just mild ones.",detail:"Some of the most compelling evidence for dietary intervention in inflammation comes from serious conditions, not mild ones. Crohn's disease, ulcerative colitis, rheumatoid arthritis, and lupus have all shown responsiveness to significant dietary change in clinical observation and controlled studies. Serious conditions are exactly where terrain-level intervention matters most."},
+    d:{headline:"Nutrition advice and medication are not mutually exclusive — and concern about medication withdrawal is a separate conversation from the validity of dietary change.",detail:"The appropriate response to concerns about medication interaction is supervised transition — not dismissal of the dietary approach. Yvonne reducing her dietary inflammation load while working with a medical team to monitor her condition is a responsible, integrated approach. The healer is not asking her to stop her medication; they are addressing a factor her medication does not."}
+  },
+  8:{
+    a:{headline:"Incremental, consistent change compounds — the body responds to direction, not perfection.",detail:"The idea that partial changes produce no effect assumes that the body's internal environment is binary — either fully alkaline or fully acidic. It is not. It is a dynamic balance influenced by the cumulative effect of choices over time. Removing a significant acid-forming drink, replacing a refined grain, and adding daily greens represents a meaningful shift in that balance. The body registers and responds to it."},
+    b:{headline:"Correct. These three changes are more significant than they might appear.",detail:"Replacing cola with spring water removes a daily dose of phosphoric acid, refined sugar, and caffeine — one of the most acid-forming habits in the modern diet. Replacing white rice with spelt or quinoa replaces a refined, mineral-stripped carbohydrate with a whole, alkaline-forming grain. Adding a daily green salad introduces living minerals, chlorophyll, and enzymes to every evening meal. Together, these three shifts create a meaningfully different daily chemical environment. Consistency with small changes produces large cumulative results."},
+    c:{headline:"Supplements cannot substitute for the foundational shift — and food comes first.",detail:"Starting with supplements while the diet remains unchanged is addressing the downstream effect while the upstream cause continues. The alkaline approach is food-first: the minerals, the living compounds, the alkalising effect come from the food. Supplements may have a supporting role later, but they are not where the work begins."},
+    d:{headline:"The alkaline transition works best as a gradual, sustainable shift — not an overnight elimination.",detail:"Sudden complete elimination of animal products and other acid-forming foods, without preparation or gradual adjustment, is more likely to produce a rebound than a lasting change. The tradition supports movement in the direction of alkaline eating — beginning with what is achievable and building from there. Theo's three changes are a genuine beginning, and beginning is what matters."}
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById('feedback-text-' + scenarioNum).textContent = fb.headline;
+      document.getElementById('feedback-detail-' + scenarioNum).textContent = fb.detail;
+      document.getElementById('feedback-' + scenarioNum).classList.add('visible');
+      const nextBtn = document.getElementById('next-' + scenarioNum);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function updateProgress() {
+  for (let i = 1; i <= totalSlides; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active','complete');
+    if (i === currentSlide) dot.classList.add('active');
+    else if (i < currentSlide) dot.classList.add('complete');
+  }
+}
+function showSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+updateProgress();
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c8m2';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course8-module-2-god-made-vs-man-made.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c8m3','1');window.location.href='course8-module-4-the-power-of-fasting.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

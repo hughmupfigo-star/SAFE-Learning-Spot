@@ -1,0 +1,29 @@
+{
+  "name": "safe-learning-spot-centre",
+  "version": "1.0.0",
+  "description": "Safe Learning Spot Centre — healing curriculum app",
+  "private": true,
+  "scripts": {
+    "cap:add:ios":       "npx cap add ios",
+    "cap:add:android":   "npx cap add android",
+    "cap:sync":          "npx cap sync",
+    "cap:update":        "npx cap update",
+    "cap:open:ios":      "npx cap open ios",
+    "cap:open:android":  "npx cap open android",
+    "cap:run:ios":       "npx cap run ios",
+    "cap:run:android":   "npx cap run android",
+    "cap:copy":          "npx cap copy"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli":     "^6.0.0",
+    "@capacitor/ios":     "^6.0.0",
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/assets":  "^3.0.0"
+  },
+  "keywords": ["education", "healing", "wellness", "courses"],
+  "author": "Safe Learning Spot Centre",
+  "license": "UNLICENSED"
+}

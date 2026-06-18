@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 3 · Module 1 · The Energy Body</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --paper: #fafaf7;
+  --muted: #6b6b66;
+  --line: #d9d9d3;
+  --soft: #f0f0ea;
+  --accent: #c4452d;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; }
+
+.module-header { border-bottom: 1px solid var(--line); padding: 32px 48px 32px 24px; display: grid; grid-template-columns: 1fr auto 1fr; justify-items: start; align-items: baseline; position: sticky; top: 0; background: var(--paper); z-index: 100; backdrop-filter: blur(8px); }
+.module-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.module-tag strong { color: var(--ink); font-weight: 500; }
+.progress-bar { grid-column: 3; justify-self: end; display: flex; gap: 6px; align-items: center; }
+.progress-dot { width: 24px; height: 2px; background: var(--line); transition: background 0.4s ease; }
+.progress-dot.active { background: var(--ink); }
+.progress-dot.complete { background: var(--accent); }
+
+.module-container { max-width: 780px; margin: 0 auto; padding: 80px 48px 120px; }
+.slide { display: none; animation: fadeUp 0.6s ease; }
+.slide.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-number { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 24px; text-transform: uppercase; }
+.slide-title { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.5vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 40px; font-variation-settings: "opsz" 144; }
+.slide-title em { font-style: italic; font-weight: 300; }
+.lead { font-family: var(--serif); font-size: 22px; line-height: 1.5; font-weight: 300; color: var(--ink); margin-bottom: 40px; letter-spacing: -0.01em; }
+.body-text { font-size: 17px; line-height: 1.7; color: #2a2a28; margin-bottom: 24px; max-width: 62ch; }
+.body-text strong { font-weight: 500; color: var(--ink); }
+.section-heading { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 56px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.section-heading::before { content: ''; width: 24px; height: 1px; background: var(--ink); }
+.pullquote { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; font-weight: 300; border-left: 2px solid var(--ink); padding: 8px 0 8px 32px; margin: 48px 0; color: var(--ink); }
+
+/* CHANNEL BLOCKS — page 1 */
+.channel { margin: 28px 0; padding: 28px; background: var(--soft); border-left: 2px solid var(--line); }
+.channel-name { font-family: var(--serif); font-size: 21px; font-style: italic; font-weight: 400; margin-bottom: 10px; line-height: 1.3; }
+.channel-text { font-size: 16px; line-height: 1.65; color: #2a2a28; }
+
+/* CONTRAST GRID — page 3 */
+.contrast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); margin: 40px 0; border: 1px solid var(--line); }
+.contrast-cell { background: var(--paper); padding: 28px; }
+.contrast-cell.right { background: var(--soft); }
+.contrast-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.contrast-cell.right .contrast-label { color: var(--accent); }
+.contrast-list { list-style: none; }
+.contrast-list li { font-family: var(--serif); font-size: 15.5px; line-height: 1.55; padding: 10px 0; font-style: italic; color: var(--ink); border-bottom: 1px dotted var(--line); }
+.contrast-list li:last-child { border-bottom: none; }
+
+/* MECHANISM BLOCKS — page 4 */
+.mechanism { margin: 36px 0; padding: 32px 0; border-top: 1px solid var(--line); }
+.mechanism:last-of-type { border-bottom: 1px solid var(--line); }
+.mechanism-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 8px; }
+.mechanism-name { font-family: var(--serif); font-size: 28px; line-height: 1.15; font-weight: 400; letter-spacing: -0.015em; margin-bottom: 16px; font-style: italic; }
+
+/* TERRITORY FRAME — page 5 */
+.territory-frame { margin: 48px 0; padding: 40px; background: var(--ink); color: var(--paper); }
+.territory-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: #999; margin-bottom: 16px; }
+.territory-text { font-family: var(--serif); font-size: 22px; line-height: 1.5; font-weight: 300; font-style: italic; color: var(--paper); }
+
+/* SCENARIO + FEEDBACK */
+.scenario { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--line); }
+.scenario-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+.scenario-prompt { font-family: var(--serif); font-size: 24px; line-height: 1.45; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+.scenario-context { font-size: 16px; color: var(--muted); margin-bottom: 32px; font-style: italic; }
+.choices { display: flex; flex-direction: column; gap: 12px; }
+.choice { display: block; width: 100%; text-align: left; background: transparent; border: 1px solid var(--line); padding: 20px 24px; font-family: var(--sans); font-size: 16px; line-height: 1.5; color: var(--ink); cursor: pointer; transition: all 0.25s ease; font-weight: 400; }
+.choice:hover { border-color: var(--ink); background: var(--soft); transform: translateX(2px); }
+.choice-letter { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 14px; letter-spacing: 0.1em; }
+.choice.selected { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.choice.selected .choice-letter { color: var(--paper); opacity: 0.6; }
+.choice:disabled { cursor: default; }
+.choice:disabled:hover { transform: none; }
+.choice.dimmed { opacity: 0.4; }
+
+.feedback { display: none; margin-top: 32px; padding: 32px; background: var(--soft); border-left: 2px solid var(--ink); animation: fadeUp 0.5s ease; }
+.feedback.visible { display: block; }
+.feedback-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.feedback-headline { font-family: var(--serif); font-size: 19px; line-height: 1.5; font-weight: 400; font-style: italic; color: var(--ink); margin-bottom: 16px; }
+.feedback-text { font-family: var(--sans); font-size: 15.5px; line-height: 1.65; color: #2a2a28; }
+
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); }
+.nav-btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; border: none; color: var(--ink); cursor: pointer; padding: 12px 0; transition: opacity 0.2s ease; font-weight: 500; }
+.nav-btn:hover { opacity: 0.6; }
+.nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+.nav-btn.primary { background: var(--ink); color: var(--paper); padding: 16px 32px; }
+.nav-btn.primary:hover { background: #2a2a28; opacity: 1; }
+.nav-btn.primary:disabled { background: var(--line); color: var(--muted); }
+.nav-counter { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+
+.complete-mark { font-family: var(--serif); font-size: 120px; line-height: 1; font-weight: 300; margin-bottom: 32px; color: var(--accent); font-style: italic; }
+.summary-list { list-style: none; margin: 40px 0; }
+.summary-list li { padding: 20px 0; border-bottom: 1px solid var(--line); display: flex; gap: 24px; align-items: baseline; }
+.summary-list li:last-child { border-bottom: none; }
+.summary-num { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; min-width: 32px; }
+.summary-text { font-family: var(--serif); font-size: 18px; line-height: 1.5; font-weight: 400; }
+
+@media (max-width: 640px) {
+  .module-header { padding: 20px 24px; }
+  .module-container { padding: 48px 24px 80px; }
+  .slide-title { font-size: 38px; }
+  .lead { font-size: 19px; }
+  .body-text { font-size: 16px; }
+  .scenario-prompt { font-size: 20px; }
+  .pullquote { font-size: 22px; padding-left: 24px; margin: 32px 0; }
+  .progress-dot { width: 12px; }
+  .complete-mark { font-size: 80px; }
+  .mechanism-name { font-size: 24px; }
+  .contrast-grid { grid-template-columns: 1fr; }
+  .territory-frame { padding: 28px; }
+  .territory-text { font-size: 19px; }
+}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+
+<header class="module-header">
+  <div class="module-tag">Course 03 · Truth Reversal Framework · Module <strong>01</strong> · The Energy Body</div>
+  <div class="progress-bar">
+    <div class="progress-dot active"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 3 &middot; Energy Body &amp; Sovereignty</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c3m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course3-module-1-the-energy-body.html">The Energy Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course3-module-2-energy-harvesting-tactics.html">Energy Harvesting Tactics</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course3-module-3-the-weaponisation-of-sexuality.html">Weaponisation of Sexuality</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course3-module-4-what-sacred-sexuality-actually-is.html">Sacred Sexuality</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course3-module-5-your-body-as-territory.html">Your Body as Territory</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course3-module-6-energy-restoration-and-sovereignty.html">Energy Restoration</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- PAGE 1 -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 · The Architecture</div>
+    <h1 class="slide-title">Energy is not a <em>metaphor.</em></h1>
+
+    <p class="lead">Before anything else in this course can land, the word "energy" needs to be rescued from the two industries that have made it nearly useless. The wellness industry treats energy as a mystical substance — something that flows through chakras, can be cleansed with sage, and responds to crystals placed on specific meridians. The sceptic industry treats energy as a word used by people who cannot think clearly. Neither is helpful. Neither is what this course means when it uses the word.</p>
+
+    <p class="body-text"><strong>Energy, in this course, refers to four measurable, felt, finite resources that your body produces and distributes every day.</strong> They are not mystical. They are not imaginary. They are the actual material of your daily life — the substance you spend in every conversation, every decision, every interaction, every hour of your waking existence. When this course says someone is "harvesting your energy," it means something specific, observable, and felt. It means they are drawing on one or more of these four resources without your conscious agreement.</p>
+
+    <div class="section-heading">The four channels</div>
+
+    <div class="channel">
+      <p class="channel-name">Attention.</p>
+      <p class="channel-text">The first and most easily extracted resource. Your attention is not infinite — it is produced in a limited quantity each day and it is spent every time you focus on something. When someone captures your attention without adding to your life, they are drawing from this channel. When you leave an interaction feeling mentally scattered, you have been depleted through attention. The depletion is real. It is not a feeling. It is a measurable reduction in your capacity to focus on what matters to you for the remainder of the day.</p>
+    </div>
+
+    <div class="channel">
+      <p class="channel-name">Nervous system capacity.</p>
+      <p class="channel-text">The second channel, and the one most people cannot name. Your nervous system has a daily budget for activation — for being alert, responsive, on-guard. Every interaction that requires you to manage someone's mood, anticipate their reaction, or calibrate your behaviour to their emotional weather draws from this channel. When you feel exhausted after a conversation that was "perfectly fine" on the surface, the exhaustion is not imaginary. Your nervous system budget has been spent, and the spending was invisible because it happened below the level of conscious thought.</p>
+    </div>
+
+    <div class="channel">
+      <p class="channel-name">Emotional bandwidth.</p>
+      <p class="channel-text">The third channel. Your capacity to feel, process, and hold emotions — your own and other people's — is finite. It replenishes, but it replenishes slowly, and the replenishment requires conditions (rest, solitude, safety) that many adults do not regularly have. When someone deposits their emotional distress into you regularly, without invitation, they are drawing from a channel that you need for your own emotional processing. The cost is not that you heard their feelings. The cost is that you now have less capacity to feel your own.</p>
+    </div>
+
+    <div class="channel">
+      <p class="channel-name">Sexual and creative presence.</p>
+      <p class="channel-text">The fourth channel, and the one this course will spend the most time with. Your sexual energy and your creative energy are not separate systems — they draw from the same well. The life force that produces desire, imagination, creative output, physical vitality, and the felt sense of being alive in your own body is a single resource. When this resource is being extracted — through unwanted sexual attention, through relationships that treat your body as a commodity, through cultural programming that converts your sexuality into a performance for consumption — the cost is not only sexual. It is creative, physical, and existential. The depletion reaches into every part of your life.</p>
+    </div>
+
+    <p class="body-text">These four channels are not metaphors for something else. They are the actual substance of what you have available each day. <strong>When this course talks about energy sovereignty, it means the governance of these four resources — who has access to them, under what conditions, and whether the access was chosen or extracted.</strong></p>
+
+    <div class="pullquote">You have been told that energy is either mystical nonsense or a vague feeling. It is neither. It is four finite resources that your body produces daily, that other people can draw from, and that you have the right to govern. The governance is the sovereignty.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You arrive home from a social gathering feeling inexplicably drained, though nothing bad happened.</p>
+      <p class="scenario-context">The conversation was normal. Nobody was rude. You laughed several times. Yet you are now lying on the sofa unable to think clearly, unable to start the evening you had planned, feeling as though something has been taken from you that you cannot name.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Dismiss the feeling. You're just tired. Social events are tiring. There's nothing to investigate here.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Name the feeling as a depletion across one or more of the four channels. Ask: where was my attention being drawn without my choosing? Was I managing someone's mood? Was I holding emotions that were not mine? The naming is the beginning of the diagnostic.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Conclude that you're an introvert and social events will always cost you this. Accept the depletion as the price of being around people.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Blame the most difficult person at the gathering. They drained you. It's their fault.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 · The Felt Sense</div>
+    <h1 class="slide-title">How energy actually moves through <em>you.</em></h1>
+
+    <p class="lead">If the four channels are the architecture, the felt sense is the instrument. Your body already knows the difference between expansion and depletion — between being with someone who contributes to your energy and being with someone who draws from it. The body has always known. What it has not had, until now, is language precise enough to convert the knowing into a diagnostic you can use in real time.</p>
+
+    <p class="body-text">Energy does not move through you abstractly. It moves through specific physical pathways that produce specific sensations. The sensations have been there your whole life. <strong>You have been feeling them after every interaction, every encounter, every hour spent with another person. What you have not been doing is reading them as information.</strong> This page teaches you to read them.</p>
+
+    <div class="section-heading">The felt sense of expansion</div>
+
+    <p class="body-text">When you are with someone who is contributing to your energy rather than extracting it, the body produces a recognisable set of responses. The breathing deepens without effort. The shoulders drop. The chest opens slightly — not dramatically, just a degree or two of physical space that was not there before. You find yourself thinking clearly, sometimes more clearly than you think alone. Ideas arrive. The felt sense is of having been given something, though nothing material has been exchanged.</p>
+
+    <p class="body-text">After an expansive interaction, you have more energy than you arrived with — not dramatically, but measurably. You can think. You can start things. You have momentum. The conversation did not cost you. <em>It generated something, and the something is available to you for hours after the interaction has ended.</em> This is what chosen energy exchange produces. Both parties leave richer than they arrived.</p>
+
+    <div class="section-heading">The felt sense of depletion</div>
+
+    <p class="body-text">When someone is drawing from your energy without contributing to it, the body produces a different set of responses. The breathing becomes shallow. The shoulders rise. There is a tightening across the chest or the stomach — subtle, often not noticed until after the interaction is over. You may find your thoughts becoming circular, scattered, difficult to land. The felt sense is of something having been removed, though you cannot always identify what was taken or when the taking occurred.</p>
+
+    <p class="body-text">After a depleting interaction, you have less energy than you arrived with. The deficit shows up as brain fog, as physical tiredness that is not proportional to what you actually did, as the inability to start things you had been looking forward to. <strong>The depletion is not imaginary. It is the felt signature of one or more of the four channels having been drawn from without your active participation in the exchange.</strong></p>
+
+    <div class="section-heading">The critical distinction</div>
+
+    <p class="body-text">Expansion and depletion are not about whether you liked the person. You can enjoy an interaction and still be depleted by it. You can find someone mildly tedious and still be expanded by the exchange. <strong>The diagnostic is not your opinion of the interaction. The diagnostic is your body's state after the interaction.</strong> The opinion can be wrong — the interaction was fun, therefore it must have been good for you. The body is rarely wrong. The body has no investment in the social narrative of what should have been energising. It simply reports what occurred.</p>
+
+    <p class="body-text">Learning to read the body after interactions — consistently, without overriding its signals with social interpretation — is the foundational skill of this course. Everything that follows depends on your ability to feel the difference between expansion and depletion in real time, and to trust what you feel over what you think you should feel.</p>
+
+    <div class="pullquote">Your body has been filing reports after every human interaction you have ever had. You have not been reading them. The reports are accurate. The reports are still available. The reading begins now.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You leave a conversation with someone you genuinely like, and notice that your body is registering depletion — shallow breath, scattered thoughts, a vague tiredness.</p>
+      <p class="scenario-context">Your mind says: that was a good conversation, I like this person, I enjoyed myself. Your body says: something was taken. The two signals are in conflict.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Trust the mind. The body is being dramatic. You liked them, therefore the interaction was fine.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold both signals as real. You liked them and the interaction was depleting. Both can be true. The body's report does not cancel the enjoyment — it adds information the enjoyment alone does not provide.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Trust the body absolutely. Conclude this person is bad for you and should be avoided.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the body entirely. Physical sensations after conversations are meaningless.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 · The Two Directions</div>
+    <h1 class="slide-title">Chosen exchange versus <em>extraction.</em></h1>
+
+    <p class="lead">Energy exchange between people is not inherently harmful. It is the basic currency of all human interaction — every conversation, every touch, every shared silence involves an exchange of energy through one or more of the four channels. The question is not whether energy is being exchanged. The question is whether the exchange was chosen or extracted.</p>
+
+    <p class="body-text">This distinction is the structural spine of the entire course. <strong>Chosen exchange is what healthy relationships run on.</strong> Both parties are aware, at some level, that energy is moving between them. Both parties have consented to the exchange, even if the consent is implicit rather than declared. Both parties leave the interaction with something — not always equal, not always balanced, but something. The exchange is mutual, even when it is asymmetric.</p>
+
+    <p class="body-text"><strong>Extraction is what happens when energy moves in one direction without the other party's conscious participation.</strong> The taking is often invisible — neither party may be fully aware of what is occurring. The person extracting is frequently unconscious of the extraction. The person being extracted from is frequently unable to name what has been taken. The invisibility is the mechanism. If the extraction were visible, it would be refused.</p>
+
+    <div class="contrast-grid">
+      <div class="contrast-cell">
+        <div class="contrast-label">Chosen exchange</div>
+        <ul class="contrast-list">
+          <li>You chose to give your attention, and it was received with care</li>
+          <li>You held someone's emotional distress because you had the capacity and they asked — implicitly or explicitly</li>
+          <li>The interaction cost you something and you would choose to pay it again</li>
+          <li>Both parties left with something, though not necessarily the same thing</li>
+          <li>The exchange has a natural end point — it does not continue extracting after the interaction is over</li>
+          <li>Your body, afterwards, registers tiredness that is proportional to what you gave</li>
+        </ul>
+      </div>
+      <div class="contrast-cell right">
+        <div class="contrast-label">Extraction</div>
+        <ul class="contrast-list">
+          <li>Your attention was captured before you chose to give it — through crisis, performance, or manipulation of your empathy</li>
+          <li>Someone's emotional distress was deposited in you without invitation, often disguised as conversation</li>
+          <li>The interaction cost you something and you did not consent to the spending</li>
+          <li>One party left lighter; the other left heavier. The direction was consistent</li>
+          <li>You find yourself still processing the interaction hours later — the taking continues after the encounter has ended</li>
+          <li>Your body, afterwards, registers a tiredness disproportionate to anything that visibly occurred</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="body-text">Read both columns slowly. <strong>The left column costs you and feels clean. The right column costs you and feels residual.</strong> The residual quality — the sense that the interaction is still taking from you hours later, that your processing capacity has been occupied by something you did not choose to carry — is the felt signature of extraction. It is not the same as the clean tiredness of a chosen exchange. It is the tiredness of having been drawn from without consent.</p>
+
+    <div class="section-heading">Why this distinction matters for the rest of the course</div>
+
+    <p class="body-text">The entire course operates on this distinction. Module Two examines the specific tactics of extraction. Module Three examines how extraction became normalised, particularly in the domain of sexuality. Module Four reclaims what sacred sexuality actually means when separated from both the wellness industry and the morality industry. Module Five treats the body as territory. Module Six restores the depleted reserves. <em>All of this work depends on your capacity, right now, to feel the difference between chosen exchange and extraction — in real time, in your own body, with the accuracy that only your nervous system can provide.</em></p>
+
+    <div class="pullquote">You have been taught that generosity means giving without counting. The truth reversal: generosity is giving from choice. Extraction is having it taken before you chose. The difference between these two is the difference between sovereignty and depletion.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">A friend calls, upset, and talks for forty-five minutes about a recurring crisis you have heard about many times before.</p>
+      <p class="scenario-context">You care about them. The distress is real. But you notice, midway through the call, that your breathing has become shallow, your thoughts are scattering, and your evening plans have already been quietly abandoned. The call was not requested — they called, you answered, and the extraction began before you had time to choose whether to give.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Stay on the call. A good friend does not calculate the cost of being there for someone.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice what is happening in your body and make a choice — either to continue giving from a place of conscious consent, or to gently end the call and offer a time when you can be more present. The key is that you chose, rather than being drawn from before the choice was available.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>End the call immediately. Your energy is more important than their crisis.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Stay on the call but resent it. Say nothing about the depletion. Process the resentment later, alone.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 · The Mechanism</div>
+    <h1 class="slide-title">Why some people deplete you and others <em>expand</em> you.</h1>
+
+    <p class="lead">The explanation is not personality. It is not vibes. It is not that some people are toxic and others are safe. The explanation is structural — and the structure, once seen, demystifies the entire experience of feeling inexplicably drained by certain people and inexplicably energised by others.</p>
+
+    <p class="body-text">Three mechanisms determine whether an interaction expands or depletes you. All three operate below conscious awareness. All three are felt in the body before they are understood by the mind. <strong>Learning to read these mechanisms in real time is the practical skill this module exists to develop.</strong></p>
+
+    <div class="mechanism">
+      <div class="mechanism-num">Mechanism 01</div>
+      <h2 class="mechanism-name">Directionality of attention.</h2>
+      <p class="body-text">In an expanding interaction, attention flows in both directions. You are attending to them and they are attending to you. The flow is not always equal — sometimes you are listening more, sometimes they are — but over the course of the interaction, both parties have received attention and both parties have given it. The flow, across time, is mutual.</p>
+
+      <p class="body-text">In a depleting interaction, attention flows in one direction. You are attending to them. They are receiving your attention without reciprocating. The flow may be disguised — they may appear to be asking you questions, but the questions are calibrated to redirect the conversation back to themselves. Or they may not bother with the disguise at all, simply occupying the entire conversation with their own material. <strong>The unidirectional flow of attention is the simplest and most common mechanism of depletion.</strong> It is also the easiest to detect, once you know to look for it.</p>
+    </div>
+
+    <div class="mechanism">
+      <div class="mechanism-num">Mechanism 02</div>
+      <h2 class="mechanism-name">Nervous system regulation transfer.</h2>
+      <p class="body-text">Some people use you, unconsciously, to regulate their own nervous system. Their anxiety, when deposited in you through conversation, becomes more manageable for them — because it is no longer only inside them, it is now distributed between two nervous systems. The transfer is rarely visible. It shows up as you, after the interaction, carrying a low-grade anxiety that was not yours before the conversation began.</p>
+
+      <p class="body-text">This is not a mystical process. It is co-regulation operating in one direction. <strong>Co-regulation is the natural process by which two nervous systems influence each other.</strong> In a healthy interaction, co-regulation is mutual — both systems stabilise. In a depleting interaction, one system stabilises by transferring its dysregulation to the other. You leave calmer for them and more agitated for you. The transfer was the purpose of the interaction, even though neither party named it.</p>
+    </div>
+
+    <div class="mechanism">
+      <div class="mechanism-num">Mechanism 03</div>
+      <h2 class="mechanism-name">Identity positioning.</h2>
+      <p class="body-text">Some interactions deplete you not through what is taken but through the position you are placed in. The person across from you — through tone, assumption, framing — positions you as the audience, the helper, the support act, the less interesting one. You find yourself, without having chosen it, playing a role that requires the suppression of parts of yourself. The suppression costs energy. The role costs energy. The slow disappearance of your own presence, in order to maintain theirs, is a form of extraction as real as any other.</p>
+
+      <p class="body-text"><strong>Expanding interactions produce the opposite.</strong> The person across from you, through the quality of their attention, positions you as fully present — interesting, worth hearing, permitted to take up space. You do not have to perform a smaller version of yourself. The fullness is welcomed. The welcoming, felt in the body, is the expansion. <em>It is not that they gave you energy. It is that they did not require you to spend any on self-suppression.</em></p>
+    </div>
+
+    <div class="pullquote">You are not depleted by bad people and expanded by good people. You are depleted by specific mechanisms — unidirectional attention, regulation transfer, identity positioning — that operate regardless of the person's character. The mechanism is what you learn to read. The character is irrelevant to the body's report.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You spend an hour with someone you deeply respect and leave feeling smaller, quieter, and oddly flattened.</p>
+      <p class="scenario-context">They are kind. They are impressive. They are not, in any obvious way, doing anything wrong. And yet you are depleted, and the depletion has the specific texture of having been positioned as the audience for the duration of the interaction.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude the depletion is your problem — you are intimidated, insecure, not at their level. The smallness is your inferiority, not their positioning.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold both truths. They are impressive and the interaction positioned you as the audience. Both are real. The depletion is not your insecurity. It is the cost of an interaction in which your full presence was not structurally available.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Decide they are an energy vampire. Avoid them in future.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Try harder next time. Be more impressive, more articulate, more present. Earn your place in the interaction.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 · The Territory</div>
+    <h1 class="slide-title">Your body is not a resource. It is a <em>territory.</em></h1>
+
+    <p class="lead">This is the framing that will carry through the entire course, and it is the one that most directly challenges the programming most adults have received about their bodies, their energy, and their sexuality. The programming says: your body is a resource — to be offered, shared, accessed, appreciated, consumed. The truth reversal says: your body is a territory — to be governed, defended, opened selectively, and never entered without your active, conscious, ongoing consent.</p>
+
+    <p class="body-text">The difference between these two framings is not semantic. It is structural. <strong>A resource exists to be used.</strong> A resource that is not being used is wasted. A resource that is being hoarded is selfish. A resource has value only in proportion to how much of it has been made available. This is the framing most of us have been given about our bodies — particularly about our sexual energy, our emotional capacity, and our physical presence. The framing says: share, give, open, make available. The framing does not say: to whom, on what terms, with what consequences.</p>
+
+    <p class="body-text"><strong>A territory is different.</strong> A territory has borders. It has an interior that is not visible from outside. It has entry points that can be opened or closed. A territory is not diminished by being ungoverned — it is diminished by being governed by someone else. A territory that is well-governed is not selfish. It is sovereign. The sovereignty is not about withholding. It is about choosing — from a position of clarity, authority, and full ownership — what enters, what leaves, and under what conditions.</p>
+
+    <div class="territory-frame">
+      <div class="territory-label">The truth reversal</div>
+      <p class="territory-text">You have been told that your openness is your value. The reversal: your governance is your value. You have been told that your availability is generosity. The reversal: your selectivity is sovereignty. You have been told that your body is a gift to be given. The reversal: your body is a territory to be inhabited. The gift framing serves the people who want access. The territory framing serves you.</p>
+    </div>
+
+    <div class="section-heading">What the territory framing changes</div>
+
+    <p class="body-text"><strong>It changes how you think about boundaries.</strong> In the resource framing, a boundary is a wall — something defensive, something that blocks. In the territory framing, a boundary is a border — something that defines, something that marks where governance begins and ends. Borders are not hostile. They are the structural requirement of any territory that intends to remain self-governing. Without borders, the territory is not shared. It is undefended.</p>
+
+    <p class="body-text"><strong>It changes how you think about depletion.</strong> In the resource framing, depletion means you have been too generous — you gave too much, you should have held back. In the territory framing, depletion means your borders were crossed without your governance — someone entered a channel without your consent, and the cost is being paid in your reserves. The problem is not your generosity. The problem is the absence of governance over who enters and when.</p>
+
+    <p class="body-text"><strong>It changes how you think about your sexuality.</strong> This is the change the rest of the course will develop. In the resource framing, your sexuality is something to be managed — given wisely, withheld strategically, deployed for maximum effect. In the territory framing, your sexuality is a region of your own body that you govern absolutely. <em>It is not given or withheld. It is opened or closed, from the inside, by the only person with legitimate authority to do so — which is you.</em></p>
+
+    <div class="pullquote">Your body has been treated as a resource for long enough that the resource framing feels natural. It is not natural. It is programming. The territory framing will feel strange at first, because sovereignty always feels strange to someone who has been governed by others for a long time. The strangeness is the reclamation beginning.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the territory framing and feel a complicated response — part recognition, part resistance, part grief.</p>
+      <p class="scenario-context">The recognition: you have been operating as a resource. The resistance: the territory framing sounds selfish, withholding, cold. The grief: for the years in which your body was open to access you did not consciously choose.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Reject the framing. It sounds cold and transactional. Love requires openness, not governance.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold all three responses as real. The recognition is accurate. The resistance is the old programming defending itself. The grief is for what was given before the governance was available. All three can be true simultaneously.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Adopt the framing immediately and begin closing every border. No more giving. Full lockdown.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Intellectually accept the framing without letting it reach the body. It makes sense as a concept. The application is someone else's work.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- COMPLETION -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module One.</em></h1>
+
+    <p class="lead">You now have the foundation the rest of this course builds on. Energy is not a metaphor — it is four finite channels that your body produces and distributes daily. The body already knows the difference between expansion and depletion. Three mechanisms determine which direction the energy flows. And the central reframe: your body is not a resource to be accessed. It is a territory to be governed.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">Energy is four measurable channels: attention, nervous system capacity, emotional bandwidth, and sexual/creative presence. All four are finite. All four can be drawn from without your consent.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">The body knows the difference between expansion and depletion. The diagnostic is not your opinion of the interaction — it is your body's state after the interaction.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">The critical distinction is chosen exchange versus extraction. Chosen exchange leaves both parties with something. Extraction leaves one lighter and the other heavier.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Three mechanisms produce depletion: unidirectional attention, nervous system regulation transfer, and identity positioning. None of them require the other person to be a bad person.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">Your body is not a resource to be accessed. It is a territory to be governed. The difference between these two framings is the difference between depletion and sovereignty.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">After every significant interaction this week — every conversation, every meeting, every social encounter — pause for thirty seconds and read your body. Breath: deeper or shallower than before? Shoulders: dropped or raised? Thoughts: clear or scattered? Energy: more or less than you arrived with? Write one word: <em>expanded</em> or <em>depleted</em>. Do not analyse. Do not judge. Just read the report. After seven days, look at the list. The pattern it reveals is the beginning of your energy map — and the map is the foundation of everything this course will build.</p>
+
+    <p class="body-text">The next module — <strong>Energy Harvesting Tactics</strong> — examines the specific, visible and invisible ways people extract energy from your body without permission. Not vague draining. Specific tactics, named precisely, so you can recognise them in real time and respond from governance rather than from depletion.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 02 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: "Dismissing the feeling as 'just tiredness' is the most common override of the body's accurate reporting.", detail: "Social events are tiring — that part is true. The question is what kind of tired. The tiredness of having been genuinely engaged — of having given attention and received it, of having laughed and been laughed with — has a different quality from the tiredness of having been drawn from. The first feels earned. The second feels stolen. The override ('just tired') collapses both into a single category, which prevents you from ever distinguishing between interactions that cost you by choice and interactions that cost you by extraction. The distinction is the diagnostic. The override erases it." },
+    b: { headline: "Naming the depletion as a draw on one or more of the four channels converts a vague feeling into a diagnostic you can act on.", detail: "Once you ask 'which channel was depleted?' the vague sense of being drained becomes specific. Was it attention — did someone monopolise your focus without reciprocating? Was it nervous system capacity — were you managing someone's mood for an hour? Was it emotional bandwidth — did someone deposit their distress into you? The specificity changes what you can do next time. The next time, you can recognise the draw beginning and make a choice about it — which is the difference between extraction and chosen exchange." },
+    c: { headline: "Accepting depletion as the permanent cost of being around people normalises extraction and forecloses governance.", detail: "Some people genuinely have less capacity for social interaction than others — that is real and worth honouring. But the blanket acceptance of depletion as the price of being social prevents you from distinguishing between interactions that cost you proportionally (a long evening with friends, genuinely tiring) and interactions that cost you disproportionately (a specific person drawing from you in ways you did not consent to). The introvert framing can be accurate and also be used, unconsciously, to avoid examining specific extractions that deserve to be examined." },
+    d: { headline: "Blaming the most difficult person at the gathering identifies a possible source without examining the mechanism.", detail: "They may indeed have been the source. Many depleting interactions centre on a specific person. But the blame, by itself, does not teach you anything about why the depletion occurred. Were they monopolising attention? Transferring their nervous system dysregulation? Positioning you as their audience? The mechanism is what you learn to read. The blame stops at the who. The mechanism reaches the how — and the how is what you can, with practice, learn to interrupt or decline in real time." }
+  },
+  2: {
+    a: { headline: "Trusting the mind over the body is the override that has been running, unchecked, for most of your adult life.", detail: "The mind is invested in social coherence — the narrative that things are fine, that the person is good, that the interaction went well. The body has no such investment. The body simply reports what occurred at the level of the nervous system. When the two conflict, the mind's report is often the more comfortable one to believe. The body's report is almost always the more accurate one to act on. You can like someone and still be depleted by them. The two pieces of information serve different functions. The liking tells you about your values. The depletion tells you about the exchange." },
+    b: { headline: "Holding both signals without collapsing one into the other is the integrated position the course is designed to teach.", detail: "The enjoyment was real. The depletion was also real. These are not contradictory — they are two different measurements of the same interaction, reporting from two different systems. The mind measures social quality. The body measures energy cost. An interaction can be high-quality socially and high-cost energetically. Knowing both pieces of information gives you something neither piece alone provides: a complete picture of what the interaction actually did to you, not just what you thought of it." },
+    c: { headline: "Labelling them based on one depleting interaction converts a diagnostic tool into a verdict.", detail: "One depleting interaction does not make someone an energy vampire. The depletion may have been about the specific conditions of this particular encounter — they were stressed, you were already low, the timing was off. The diagnostic is not designed for single-instance labelling. It is designed for pattern recognition across multiple encounters. If the depletion is consistent — if your body reliably reports the same thing after repeated interactions with this person — then you have a pattern worth acting on. One interaction is a data point, not a diagnosis." },
+    d: { headline: "Dismissing physical sensations after conversations as meaningless discards the most reliable diagnostic instrument you have.", detail: "Your nervous system has been tracking the energy cost of every human interaction you have ever had. The physical sensations — the breathing changes, the tension shifts, the mental clarity or fog — are the readout of that tracking. Dismissing them as meaningless is like dismissing the fuel gauge in a car as decorative. The sensations are data. The data is accurate. The accuracy is not dependent on your willingness to read it. The reading is what gives you governance over what happens next." }
+  },
+  3: {
+    a: { headline: "Staying on the call without choosing to is the structural definition of extraction, regardless of how good a friend you are.", detail: "The call began before you had time to choose whether to give. The giving started as soon as you answered. The giving is continuing because the social narrative ('good friends stay on the phone') is stronger than the body's report ('this is taking from you without your consent'). A good friend does not calculate the cost — but a sovereign person notices the cost, and the noticing is what allows the giving to be a choice rather than an extraction. The difference is not in whether you stay. It is in whether you chose to stay." },
+    b: { headline: "Noticing what is happening and making a choice — either to continue from consent or to gently reschedule — is the practice of governance over the emotional bandwidth channel.", detail: "You may choose to stay on the call. You may choose to offer a different time. Either choice is valid. What matters is that it is a choice — made from awareness of the cost, with your governance intact, rather than an automatic response that the social narrative produced before your discernment had a chance to engage. The governance does not require you to end every depleting call. It requires you to know, in real time, that the call is depleting you — and to decide, from that knowing, whether to continue." },
+    c: { headline: "Ending the call immediately, without care, converts sovereignty into brutality.", detail: "Your energy is important. So is the relationship. The territory framing does not mean that every border is slammed shut the moment the body reports a cost. It means the borders are governed — with awareness, with care, with the capacity to say 'I want to be present for this and I cannot be right now, can we talk tomorrow when I can actually hold this?' The sovereignty is in the quality of the governance, not in the speed of the closure. Immediate disconnection is not sovereignty. It is a different kind of reactivity." },
+    d: { headline: "Staying while resenting is the worst possible outcome — the extraction continues, the resentment accumulates, and neither the friendship nor the boundary is served.", detail: "The resentment is the body's protest against unconsented extraction, processed silently rather than converted into governance. Over time, the accumulation of silent resentment damages the friendship more reliably than any single honest boundary ever could. The resentment festers. The friendship, without the boundary, becomes a site of extraction that produces avoidance. The irony is that the boundary — the uncomfortable conversation, the gentle rescheduling — is what would have preserved the friendship. The resentment is what will eventually end it." }
+  },
+  4: {
+    a: { headline: "Concluding the depletion is your insecurity is the most common way the body's accurate report gets overridden by a social narrative.", detail: "You may indeed be intimidated. You may feel less accomplished, less articulate, less interesting. These feelings are real. They are also not the explanation for the depletion. The depletion was produced by a mechanism — identity positioning — in which the interaction's structure placed you as the audience and them as the event. The mechanism operates regardless of your confidence level. A supremely confident person, positioned as the audience for an hour, would feel a version of the same depletion. The narrative of insecurity is what the mechanism uses to prevent you from naming it." },
+    b: { headline: "Holding both the admiration and the depletion as simultaneously true is the diagnostic the page was designed to teach.", detail: "They are impressive and the interaction was depleting. Both truths operate at the same time. The admiration tells you something about their qualities. The depletion tells you something about the interaction's structure. It is possible that the structure is addressable — that a different kind of interaction with the same person, in which you are positioned differently, would expand rather than deplete. It is also possible that this person, impressive as they are, produces audience-positioning in every interaction they have. The data point is worth holding. The verdict is premature." },
+    c: { headline: "Labelling someone an energy vampire on the basis of one interaction converts the framework into a weapon rather than a diagnostic.", detail: "They produced a depleting interaction. This does not make them an energy vampire. It makes them someone whose presence, in this particular encounter, triggered one of the three depletion mechanisms. Many impressive people produce identity positioning without any awareness that they are doing it — the positioning is a function of the social space they occupy, not necessarily of their intent. The label forecloses the curiosity that would tell you whether the mechanism was structural (it always happens with them) or situational (it happened this time, under these conditions). Curiosity is more useful than verdict." },
+    d: { headline: "Trying harder next time to earn your place in the interaction is the pre-empter shape from Course Two, running in a new context.", detail: "The instinct to perform a more impressive version of yourself — to earn the right to not be the audience — is the same shape Module Four of Course Two described: the pre-empter, adjusting to match the predicted standard before the choice is even conscious. You do not need to earn your place in an interaction. Your presence is sufficient. If the interaction's structure does not permit your full presence, the problem is not your performance. It is the structure. Performing harder will produce a more exhausting version of the same depletion." }
+  },
+  5: {
+    a: { headline: "The resistance to the framing — that it sounds cold, transactional, withholding — is the old programming defending itself from being replaced.", detail: "The resource framing has been running long enough that it feels like love. Openness feels like generosity. Availability feels like warmth. The territory framing, by contrast, sounds like defence — and defence, in the resource framing, is selfishness. Notice the logic: the framing that serves the people who want access to you feels like love. The framing that serves you feels like coldness. This is not an accident. This is how the programming was designed to work. The discomfort of the territory framing is the sound of the programming being identified. The programming has every reason to label the identification as coldness." },
+    b: { headline: "Holding all three responses as simultaneously true is the integrated position from which the rest of the course's work becomes possible.", detail: "The recognition that you have been operating as a resource is accurate — and uncomfortable. The resistance, which frames governance as coldness, is the programming doing its job. The grief, for the years in which your body was open to access you did not choose, is real and deserves time. All three responses are working. None of them is the whole picture. The integration — letting the recognition sit alongside the resistance alongside the grief — is the emotional posture from which the territory framing can begin to operate in your daily life, slowly, without the brittle urgency of either the immediate lockdown or the intellectual-only engagement." },
+    c: { headline: "Closing every border immediately converts the territory framing into a fortress, which is a different kind of dysfunction.", detail: "The territory framing is about governance, not closure. A well-governed territory has open borders — open selectively, open on terms, open to people and exchanges that the governor has chosen. A territory with every border closed is not sovereign. It is besieged. The difference between sovereignty and siege is the quality of the governance — whether the borders are open and closed from clarity, or whether they are all slammed shut from the same reactivity that previously left them all open. The overcorrection is as ungoverned as the original condition. Both are the absence of discernment." },
+    d: { headline: "Intellectually accepting the framing without letting it reach the body is the most common way adults engage with material that would change them if they let it.", detail: "The concept makes sense. The application feels too personal, too close to the body, too intimate. Keeping it at the level of ideas — interesting, correct, worth remembering — prevents it from doing the work it was designed to do, which is to change how you relate to your own body and its energy. The application is not someone else's work. It is yours. The body that has been treated as a resource is your body. The territory that needs governance is your territory. The intellectual engagement without the embodied engagement is the course as entertainment, not as practice." }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 6;
+const answered = { 1: false, 2: false, 3: false, 4: false, 5: false };
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+
+<script>
+(function(){
+  try{
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c3m1','1');window.location.href='course3-module-2-energy-harvesting-tactics.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 4 · Module 3 · The Debt Trap Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+
+.debt-type{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.debt-type:last-of-type{border-bottom:1px solid var(--line)}.debt-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.debt-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+.debt-verdict{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:20px 0 8px;font-weight:500}.debt-quote{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.6;padding-left:20px;border-left:2px solid var(--line);color:var(--ink);margin-bottom:8px}
+
+.trap-block{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.trap-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.trap-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.time-grid{margin:48px 0;padding:36px;background:var(--soft);border:1px solid var(--line)}.time-header{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}.time-row{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:16px 0;align-items:baseline;border-bottom:1px dotted var(--line)}.time-row:last-child{border-bottom:none}.time-label{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em;font-weight:500}.time-text{font-family:var(--serif);font-size:16px;line-height:1.55;font-style:italic;color:var(--ink)}
+
+.practice{margin:28px 0;padding-left:28px;border-left:2px solid var(--line)}.practice-name{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.25}.practice-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.debt-name{font-size:24px}.time-grid{padding:24px}.time-row{grid-template-columns:1fr;gap:8px}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 04 · Financial Truth & Reversal · Module <strong>03</strong> · The Debt Trap Architecture</div>
+  <div class="progress-bar"><div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 4 &middot; Financial Sovereignty</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c4m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course4-module-1-the-language-of-money.html">The Language of Money</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course4-module-2-how-the-system-keeps-you-poor.html">How the System Keeps You Poor</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course4-module-3-the-debt-trap-architecture.html">The Debt Trap</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course4-module-4-building-true-wealth.html">Building True Wealth</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course4-module-5-the-frequency-of-abundance.html">The Frequency of Abundance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course4-module-6-money-as-sovereignty.html">Money as Sovereignty</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course4-module-7-the-next-economy.html">The Next Economy</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- PAGE 1 -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 · The Product</div>
+    <h1 class="slide-title">Debt is not a failure. It is a <em>product.</em></h1>
+
+    <p class="lead">The language around debt positions it as a personal failing — something you fell into through poor discipline, excessive spending, or insufficient planning. This framing is the personal responsibility disguise from Module Two, applied specifically to the most profitable product the financial industry has ever created. Debt is not something you fell into. It is something that was sold to you. The selling is the industry. The industry is the most profitable in human economic history.</p>
+
+    <p class="body-text">The lending industry does not make money by helping you achieve your goals. <strong>It makes money by selling you access to future time at a markup.</strong> The product is your future labour, purchased at a discount, with the discount being the interest you pay. The longer you carry the debt, the more of your future time has been sold forward, and the more profitable the product becomes for the seller. <em>The product is not designed to be paid off quickly. The product is designed to be carried.</em></p>
+
+    <p class="body-text">This reframe is not about demonising lenders. Lending serves a genuine function — it provides access to capital that can be used productively. <strong>The reframe is about understanding who the product serves and under what conditions.</strong> When a mortgage enables the purchase of an appreciating asset, the debt is a tool. When a credit card enables the consumption of depreciating goods at 22% interest, the debt is a trap. The tool and the trap use the same mechanism. The outcome is determined by the structure of the specific product and the literacy of the person purchasing it.</p>
+
+    <div class="section-heading">Why debt is the primary tool of control</div>
+
+    <p class="body-text"><strong>A person in debt cannot leave their job.</strong> The monthly obligations require the monthly income. The income requires the employment. The employment, regardless of its conditions, must continue because the debt requires continuation. The debt has converted your freedom to choose into a structural obligation to produce — and the production must continue at a rate sufficient to service the debt, regardless of whether the production serves you.</p>
+
+    <p class="body-text"><strong>A person in debt cannot take risks.</strong> Starting a business, changing careers, moving to a lower cost-of-living area, taking time to retrain — all of these require a period of reduced income that the debt does not permit. The debt has narrowed your options to the set of choices that produce enough income to service the payments. <em>The narrowing is not a side effect. The narrowing is the product.</em></p>
+
+    <p class="body-text"><strong>A person in debt cannot accumulate assets.</strong> The income that would otherwise be directed toward ownership — toward the asset gate from Module Two — is instead directed toward debt service. The debt payments pre-empt the savings. The savings pre-empt the investment. The investment pre-empt the ownership. The debt, by occupying the income first, ensures that the income loop from Module Two continues indefinitely.</p>
+
+    <div class="pullquote">Debt is not your mistake. Debt is their product. The product was designed to be sold to you, carried by you, and serviced by your future time. Understanding the product is the precondition for governing your relationship with it.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You carry debt and have, until this moment, experienced it primarily as a personal failure — evidence that you spent too much, saved too little, lacked discipline.</p>
+      <p class="scenario-context">The reframe — that the debt is a product that was sold to you, not a hole you dug — produces a complicated response. Part relief (it's not entirely your fault). Part discomfort (you still signed). Part anger (the product was designed to trap you).</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Reject the reframe. You borrowed the money. You spent the money. The debt is your responsibility regardless of how the product was designed.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold both truths. You signed and the product was designed to be signed. Your participation is real and the architecture that produced the participation is also real. The yin/yang is the same as every other module in the curriculum.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Use the reframe to absolve yourself entirely. The system did this. You bear no responsibility for the debt.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel overwhelmed. If the product was designed to trap you, how can you possibly escape it?</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 · The Four Structures</div>
+    <h1 class="slide-title">Not all debt is the <em>same.</em></h1>
+
+    <p class="lead">The word "debt" flattens four entirely different structures into a single category, which prevents you from making governed decisions about which ones to carry and which ones to eliminate. A mortgage and a payday loan are both "debt." They operate on completely different logic, produce completely different outcomes, and require completely different responses. This page separates them.</p>
+
+    <div class="debt-type">
+      <div class="debt-num">Structure 01</div>
+      <h2 class="debt-name">Productive debt.</h2>
+      <p class="body-text">Borrowing that is used to acquire an asset that appreciates or generates income. A mortgage on a property that increases in value. A business loan that funds revenue-producing capacity. Student debt that genuinely increases earning power (though this is increasingly contested). <strong>Productive debt leverages borrowed capital into a position of greater value than the debt itself.</strong> The cost of the borrowing is offset — sometimes exceeded — by the value the borrowed capital produces.</p>
+      <div class="debt-verdict">The governed position</div>
+      <p class="debt-quote">Productive debt is a tool. The tool has a cost (interest), and the cost is justified when the value produced exceeds the cost paid. The governed question: does this debt produce more value than it costs? If yes, the debt is serving you. If no, the debt has crossed from productive to consumptive.</p>
+    </div>
+
+    <div class="debt-type">
+      <div class="debt-num">Structure 02</div>
+      <h2 class="debt-name">Survival debt.</h2>
+      <p class="body-text">Borrowing that covers the gap between income and the cost of living. The overdraft that funds the last week of the month. The credit card that pays for the car repair that enables the commute to the job that produces the income. The loan that covers the deposit that secures the housing. <strong>Survival debt is produced by the gap between what the system pays you and what the system charges you to live.</strong> It is not the result of poor decisions. It is the structural consequence of the poverty premium from Module Two.</p>
+      <div class="debt-verdict">The governed position</div>
+      <p class="debt-quote">Survival debt is not a tool. It is a symptom — a symptom of a position in which income does not cover cost. The governed response is not to berate yourself for carrying it. It is to address the underlying position: increase the income, reduce the cost, or both. The survival debt itself is the last problem to solve, not the first.</p>
+    </div>
+
+    <div class="debt-type">
+      <div class="debt-num">Structure 03</div>
+      <h2 class="debt-name">Consumptive debt.</h2>
+      <p class="body-text">Borrowing that funds the purchase of things that depreciate — consumer goods, holidays, status purchases, lifestyle inflation that exceeds income growth. <strong>Consumptive debt is the status function from Module One operating on borrowed time.</strong> The purchase depreciates. The debt remains. The interest accumulates. The net position worsens with every payment because the thing purchased is worth less while the debt remains the same or grows.</p>
+      <div class="debt-verdict">The governed position</div>
+      <p class="debt-quote">Consumptive debt is the trap the product was designed to create. The governed response is to identify which of your current debts are consumptive, to stop adding to them, and to prioritise their elimination — because consumptive debt is the only category that produces pure extraction with no offsetting value.</p>
+    </div>
+
+    <div class="debt-type">
+      <div class="debt-num">Structure 04</div>
+      <h2 class="debt-name">Predatory debt.</h2>
+      <p class="body-text">Borrowing designed to trap rather than to serve — payday loans, doorstep lending, high-interest short-term products marketed to populations with no alternative access to credit. <strong>Predatory debt operates on the poverty premium at its most extreme.</strong> The interest rates are designed not to be repaid from the original borrowing — they are designed to produce a rolling debt that extracts continuously, with each rollover generating new fees that increase the total obligation.</p>
+      <div class="debt-verdict">The governed position</div>
+      <p class="debt-quote">Predatory debt is the architecture at its most visible. The governed response is immediate: identify any predatory products, access free debt advice (StepChange, Citizens Advice, National Debtline in the UK), and replace the predatory products with less extractive alternatives. Predatory debt is the one category where external professional support is not optional — it is structurally necessary.</p>
+    </div>
+
+    <div class="pullquote">Four structures. One word. The flattening of all debt into a single category prevents the governed response — because the response to productive debt (manage) is different from the response to survival debt (address the position) is different from the response to consumptive debt (eliminate) is different from the response to predatory debt (get professional support immediately).</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You list your current debts and categorise each one into the four structures.</p>
+      <p class="scenario-context">The exercise produces a specific, uncomfortable clarity. Some of your debt is survival (the gap the system created). Some is consumptive (the status function running on borrowed time). The categories were invisible while the debt was undifferentiated. Now the categories are visible, and each one requires a different response.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Panic. Attack all debt simultaneously. Eliminate everything as fast as possible regardless of category.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Govern the response by category. Productive debt: evaluate. Survival debt: address the underlying position. Consumptive debt: stop adding, begin eliminating. Predatory debt: seek professional support immediately. The sequence matters.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Feel ashamed of the consumptive debt. You should have known better. The status spending was vanity.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the categorisation. Debt is debt. The categories are academic. Just pay it off.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 · The Engineering</div>
+    <h1 class="slide-title">How the trap actually <em>works.</em></h1>
+
+    <p class="lead">The debt trap is not a single mechanism. It is an engineered system — four interlocking components that, together, convert a single borrowing decision into years of continuous extraction. Each component is legal, documented, and explained in the terms you signed. Each component is also designed to be opaque enough that its cumulative effect is invisible until the trap has closed.</p>
+
+    <div class="trap-block">
+      <p class="trap-name">Component one: the minimum payment illusion.</p>
+      <p class="trap-text">The minimum payment on most consumer debt is calculated to maximise the duration of the debt, not to minimise it. <strong>A credit card minimum payment — typically 1-2.5% of the balance or a fixed minimum — is designed so that the majority of the payment services the interest, with only a fraction reducing the principal.</strong> A £3,000 balance at 22% interest, serviced at the minimum payment, takes over twenty-five years to clear and costs over £4,000 in interest — more than the original borrowing. The minimum payment is not the lender being generous with your repayment schedule. It is the lender maximising the extraction window.</p>
+    </div>
+
+    <div class="trap-block">
+      <p class="trap-name">Component two: the interest architecture.</p>
+      <p class="trap-text">Interest on consumer debt compounds — meaning you pay interest on the interest. The architecture is exponential, not linear. <strong>Each month, the interest is calculated on the full balance including previously accumulated interest, which means the debt grows faster than your payments reduce it if you are paying at or near the minimum.</strong> The gap between the growth rate of the debt and the reduction rate of your payments is the extraction. The gap is the product's profit margin. The profit margin is engineered to be as wide as the market will tolerate.</p>
+    </div>
+
+    <div class="trap-block">
+      <p class="trap-name">Component three: the refinancing loop.</p>
+      <p class="trap-text">When the debt becomes unmanageable, the system offers a solution — consolidation, balance transfers, refinancing. The solution feels like relief. <strong>The solution is often a new product, with new terms, that extends the extraction window while reducing the monthly pain.</strong> The monthly payment drops. The total cost increases. The duration extends. The sense of having "dealt with" the debt prevents the examination of whether the new product is less extractive than the old one. Often it is not. Often it is the same extraction, redistributed across a longer timeline with a lower monthly visibility.</p>
+    </div>
+
+    <div class="trap-block">
+      <p class="trap-name">Component four: the psychological hold.</p>
+      <p class="trap-text">Debt produces a specific psychological state — a low-grade anxiety that occupies cognitive bandwidth, reduces decision quality, and prevents the kind of strategic thinking that would address the debt structurally. <strong>The anxiety is not a side effect of the debt. It is a functional component of the trap.</strong> The anxious person makes worse financial decisions. The worse decisions produce more debt. The more debt produces more anxiety. The loop is self-reinforcing, and the reinforcement is the architecture operating as designed. <em>The poverty of bandwidth that debt produces is as consequential as the poverty of money. Both are extracted by the same system.</em></p>
+    </div>
+
+    <div class="pullquote">The trap is not one mechanism. It is four, interlocking, each one feeding the others. The minimum payment extends the duration. The interest architecture widens the extraction. The refinancing loop resets the clock. The psychological hold prevents the strategic response. Together, they convert a single signature into years of future time sold forward.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You calculate the total interest you will pay on your largest consumer debt if you continue making minimum payments.</p>
+      <p class="scenario-context">The number is larger than the original borrowing. Significantly larger. You have been paying the minimum for years and the balance has barely moved. The four components — minimum payment illusion, interest architecture, the refinancing you did two years ago, the anxiety that has prevented you from looking at the numbers — have all been operating simultaneously.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Continue paying the minimum. The number is too large to address. At least the minimum keeps the account in good standing.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Identify the smallest additional amount you can consistently redirect above the minimum. Even £20 more per month changes the total interest paid by thousands and the duration by years. The governed response is not dramatic. It is incremental and sustained.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Stop paying entirely. The system is rigged. Refuse to participate in the extraction.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Refinance again. Consolidate into a new product with a lower monthly payment and stop worrying about it.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 · The Time Cost</div>
+    <h1 class="slide-title">What debt costs in <em>time.</em></h1>
+
+    <p class="lead">Module One established that money stores time — that every pound you hold is an hour of your life converted into a storable form, and every pound you owe is an hour of your future life already committed. This page converts your debt from a monetary figure into what it actually costs: hours, days, months, and years of your life that have been sold forward to service the obligation.</p>
+
+    <p class="body-text">The conversion is uncomfortable. It is designed to be. <strong>The monetary figure on a debt statement is abstract. The time figure is visceral.</strong> Most people can carry £15,000 of debt as a number without the number producing action. Most people cannot carry the knowledge that the number represents eighteen months of their post-tax working life without the knowledge producing a different relationship with the debt.</p>
+
+    <div class="section-heading">How to calculate the time cost</div>
+
+    <p class="body-text">The calculation is simple. <strong>Take your total debt. Divide it by your hourly take-home pay. The result is the number of working hours your future self has already committed to servicing the debt.</strong> Convert the hours to working days (divide by eight). Convert the days to working months (divide by twenty-two). The number of months is the time cost — the portion of your future working life that has already been allocated to the lender before you have lived it.</p>
+
+    <p class="body-text">The time cost does not include interest. If you include the total interest you will pay across the life of the debt (from the calculation on Page Three), the time figure increases — often dramatically. <strong>The total time cost — principal plus all interest payments — is the actual price of the product.</strong> The product was not £15,000. The product was £15,000 plus £8,000 in interest, which is twenty-eight months of your working life rather than eighteen. The additional ten months are the extraction's profit margin, measured in your time.</p>
+
+    <div class="time-grid">
+      <div class="time-header">The time cost at different scales</div>
+
+      <div class="time-row">
+        <div class="time-label">£5,000 debt</div>
+        <div class="time-text">At £15/hour take-home: 333 working hours. Forty-two working days. Approximately two working months of your life already committed to the lender.</div>
+      </div>
+
+      <div class="time-row">
+        <div class="time-label">£15,000 debt</div>
+        <div class="time-text">At £15/hour take-home: 1,000 working hours. One hundred and twenty-five working days. Approximately six working months. With interest at typical consumer rates: nine to twelve months.</div>
+      </div>
+
+      <div class="time-row">
+        <div class="time-label">£30,000 debt</div>
+        <div class="time-text">At £15/hour take-home: 2,000 working hours. Two hundred and fifty working days. Over a full working year. With interest: eighteen months to two years of your working life, already sold forward.</div>
+      </div>
+
+      <div class="time-row">
+        <div class="time-label">£50,000+ debt</div>
+        <div class="time-text">At £15/hour take-home: 3,333+ working hours. Over four hundred working days. Nearly two full working years — and with interest, potentially three years or more of your life committed to servicing the obligation.</div>
+      </div>
+    </div>
+
+    <p class="body-text">Read the grid with your own numbers. Insert your own hourly rate. Insert your own total debt including projected interest. <strong>The number of months is the portion of your remaining working life that has already been allocated.</strong> The allocation happened when you signed. The allocation can be reduced — through the governed exit on Page Five — but it cannot be undone. The time has been committed. The question, now, is how to minimise the total commitment going forward.</p>
+
+    <div class="pullquote">Debt is not a number on a statement. It is a portion of your life — specific hours, specific days, specific months — that you have already agreed to spend producing income for someone else's balance sheet. The portion, once visible as time rather than as money, changes the emotional relationship with the debt entirely.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You calculate the time cost of your total debt and the number is larger than you expected — months, possibly years, of your working life already committed.</p>
+      <p class="scenario-context">The number, expressed in time rather than money, produces a different quality of recognition. The monetary figure was abstract. The time figure is personal — these are months of your life, months you will spend working to service obligations that were incurred in the past, months that will not be available for building sovereignty.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Feel despair. The time cost is too high. You have already sold too much of your future.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the number as the time cost of the previous position. The committed time cannot be uncommitted. The uncommitted time — the months and years ahead — is where the governance operates. Each month of accelerated repayment reclaims future time that would otherwise have been extracted. The reclamation begins now.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Dismiss the time-cost framing as manipulative. Debt is a financial instrument. Converting it to time is emotional rhetoric.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Take on more debt to invest, hoping to earn returns that exceed the interest cost.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 · The Governed Exit</div>
+    <h1 class="slide-title">Leaving the trap from <em>governance.</em></h1>
+
+    <p class="lead">The governed exit from debt is not a programme that promises you will be debt-free in twelve months. It is a structural, sequenced, sustainable approach that recognises where you actually are, addresses each category of debt with the appropriate response, and reduces the extraction incrementally rather than dramatically — because the dramatic approach, as the rest of this curriculum has taught, tends to produce a surge of effort followed by collapse and return.</p>
+
+    <div class="sov-frame">
+      <div class="sov-label">The governed exit position</div>
+      <p class="sov-text">I carry debt. The debt is a product that was sold to me, carried inside a system that was designed to sustain it. My participation in the carrying is real. My governance over the exit is also real. The exit is not heroic. It is structural, sequential, and sustained. The exit is measured in years, not months. The measurement is honest.</p>
+    </div>
+
+    <div class="section-heading">The sequence</div>
+
+    <div class="practice">
+      <p class="practice-name">Step one: stop the bleeding.</p>
+      <p class="practice-text">Before any repayment strategy, address the active additions to the debt. Identify and stop any ongoing consumptive borrowing — the credit card spending that adds to the balance each month, the recurring subscriptions funded by overdraft, the buy-now-pay-later accumulation. The exit cannot begin while the debt is still growing. <strong>Stopping the additions does not reduce the debt. It stabilises the position from which the reduction begins.</strong></p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Step two: address predatory debt immediately.</p>
+      <p class="practice-text">If any of your debt is predatory — payday loans, doorstep lending, any product with interest rates above 40% — address it first, with professional support. Contact StepChange (0800 138 1111), Citizens Advice, or National Debtline (0808 808 4000). These services are free, confidential, and specifically designed to help you navigate predatory debt structures. <strong>Predatory debt is the only category where this course explicitly recommends external professional support rather than self-directed governance.</strong> The products are engineered to resist individual navigation.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Step three: order the remaining debt by extraction rate.</p>
+      <p class="practice-text">List your remaining debts by interest rate, highest first. The debt with the highest interest rate is extracting the most from your position per pound owed. <strong>Direct any repayment capacity above the minimums toward the highest-rate debt first.</strong> When that debt is cleared, redirect the payment to the next highest rate. This is the avalanche method — it minimises the total interest paid across all debts and reclaims the most future time per pound of repayment.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Step four: find the additional amount.</p>
+      <p class="practice-text">Review the thirty-day spending record from Module One. Identify the status-function spending — the expenditures that served signal rather than sovereignty. <strong>You do not have to eliminate all of it. You have to redirect some of it.</strong> Even a small, consistent additional payment above the minimum changes the mathematics dramatically. £50 per month above the minimum on a £5,000 debt at 20% interest reduces the total interest by over £3,000 and the duration by years. The amount is not heroic. The consistency is what produces the result.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Step five: protect the exit from the refinancing loop.</p>
+      <p class="practice-text">Consolidation and balance transfers can serve the exit — but only when the new product genuinely reduces the extraction rate, and only when the consolidation is paired with the cessation of new consumptive borrowing. <strong>A balance transfer that reduces the rate but extends the term and is followed by new spending on the old card is not an exit. It is the refinancing loop running as designed.</strong> The governed use of consolidation: transfer to a lower rate, close the old account, and direct the saved interest toward accelerated repayment. The ungoverned use: transfer, keep both accounts open, and continue the cycle.</p>
+    </div>
+
+    <div class="section-heading">The timeline</div>
+
+    <p class="body-text">The governed exit takes time. For most people carrying consumer debt, the timeline is measured in years, not months. <strong>The honesty of this timeline is not discouraging. It is realistic.</strong> The programmes that promise debt freedom in twelve months are selling a product — and the product, like the debt itself, is designed to extract from you (through course fees, through unsustainable strategies, through the collapse-and-return cycle). The governed exit is slower. The governed exit is sustainable. The governed exit does not collapse.</p>
+
+    <p class="body-text">During the exit, you are reclaiming time. Each month of accelerated repayment is future time returned to you — time that would have been spent servicing interest, now available for the sovereignty the rest of this course describes. <em>The exit is not a punishment for having entered the trap. It is the governed navigation of a system that was designed to keep you inside it. The navigation is the sovereignty.</em></p>
+
+    <div class="pullquote">The exit from debt is not dramatic. It is governed — structured, sequenced, sustained across years. The consistency is what the architecture was not designed for. The architecture was designed for minimum payments, refinancing loops, and the psychological hold that prevents strategic response. The governed exit is the strategic response the hold was preventing.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You begin the governed exit and, three months in, the progress feels painfully slow.</p>
+      <p class="scenario-context">The balance has decreased, but only slightly. The timeline stretches ahead. The voice inside says: this will take forever, there must be a faster way, you should be doing more. The voice is the performance layer — from Course Three — applying itself to your financial governance.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Search for a faster method. There must be a programme, a strategy, a hack that accelerates the exit.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the pace. The progress is real. The mathematics are working. The slow pace is the sustainable pace. The sustainability is what prevents the collapse-and-return cycle that every faster method eventually produces.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Give up. The exit is too slow to justify the effort. Return to minimum payments and accept the time cost.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dramatically cut all spending. Eliminate everything non-essential. Accelerate the exit through austerity.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- COMPLETION -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module Three.</em></h1>
+
+    <p class="lead">You now have a structural understanding of debt — not as a personal failure but as a product, sold by the most profitable industry in history, engineered through four interlocking components to maximise the duration and cost of the extraction. You have the four-category diagnostic, the time-cost conversion, and the five-step governed exit. The trap is real. The exit is also real. The exit is governed, not heroic.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">Debt is not a failure. It is a product — sold to you, designed to be carried, and serviced by your future time. The product is the most profitable the financial industry has ever created.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Four structures of debt: productive (tool), survival (symptom), consumptive (trap), predatory (weapon). Each one requires a different governed response.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">The trap operates through four components: the minimum payment illusion, the interest architecture, the refinancing loop, and the psychological hold. Each feeds the others.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Debt costs time, not just money. The time cost — your total debt divided by your hourly take-home pay — is the number of working hours your future self has already committed. The time cost makes the abstract visceral.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">The governed exit: stop the bleeding, address predatory debt with professional support, order by extraction rate, find the additional amount, protect against the refinancing loop. The exit is slow, sustainable, and does not collapse.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">Categorise your current debts into the four structures. Calculate the time cost of each one — total owed divided by your hourly take-home pay. Write the time figures alongside the monetary figures. The time figures will change your relationship with the debt in a way the monetary figures alone cannot. From the time figures, begin the governed exit: stop any active additions, seek support for any predatory products, and identify the smallest consistent additional amount you can direct above the minimum toward the highest-rate debt.</p>
+
+    <p class="body-text">The next module — <strong>Building True Wealth</strong> — moves past debt entirely and addresses the other side of the financial equation. Assets versus income. Passive versus active. Why most people's relationship with money is designed to produce survival rather than sovereignty, and the specific structural moves that change the trajectory. The exit from debt is the beginning. The building of wealth is what the exit was for.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 04 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback={
+  1:{
+    a:{headline:"Rejecting the reframe and holding only personal responsibility is the personal responsibility disguise from Module Two, operating on the most profitable product the system sells.",detail:"You did sign. You did borrow. You did spend. All of this is true. The reframe does not erase your participation. It adds the structural context that the personal responsibility narrative obscures: the product was designed to be signed, the selling was targeted, the terms were engineered for maximum extraction, and the information asymmetry ensured you understood less about the product than the person selling it to you. Holding only the personal responsibility prevents you from examining the product's design — which is the examination that changes what you do next."},
+    b:{headline:"Holding both truths — that you signed and that the product was designed to be signed — is the yin/yang applied to the most consequential financial product in your life.",detail:"Your participation is real. The architecture that produced the participation is also real. The debt was not entirely imposed (you made choices) and it was not entirely chosen (the choices were made inside a system that constrained the alternatives and engineered the product for maximum carry-time). Both truths held simultaneously produce neither helplessness (the system did this) nor self-blame (I did this). They produce governance: I am carrying a product. The product was designed. My governed response to the design is the exit strategy this module describes."},
+    c:{headline:"Using the reframe to absolve yourself entirely converts structural understanding into structural passivity.",detail:"If the system is entirely responsible and you bear no responsibility, then the response is to wait for the system to change — which the system has no incentive to do. The structural understanding is not an absolution. It is an accurate description of the forces that shaped your position. Your participation — the choices, the spending, the signing — is the half of the equation that is within your power to govern. The governed exit, on Page Five, operates on this half. Absolution abandons the half. The abandonment ensures the debt continues."},
+    d:{headline:"Overwhelm at the designed nature of the trap is the fourth component — the psychological hold — operating in real time.",detail:"The recognition that the product was designed to trap you is producing the exact emotional state the trap was designed to produce: the sense that escape is impossible, that the engineering is too comprehensive, that one person cannot navigate what an entire industry built. This is the psychological hold. The hold produces cognitive narrowing — the inability to think strategically about the debt while the anxiety about the debt is consuming the bandwidth. The governed response to the hold is the same as the governed response to the three layers in Course Three: name it, let the activation settle, and then engage with the exit from a settled position rather than from a panicked one."}
+  },
+  2:{
+    a:{headline:"Attacking all debt simultaneously without regard to category tends to produce the highest-effort, lowest-impact version of the exit.",detail:"If you pay extra on every debt equally, you are reducing the most extractive debts (high-interest consumer credit) at the same rate as the least extractive debts (low-interest productive debt). The governed response prioritises by extraction rate — which means the highest-interest debt receives the most aggressive repayment, while the lowest-interest debt receives minimums. The prioritisation produces faster total debt reduction than the equal-treatment approach because it eliminates the most expensive products first, freeing the interest payments for redirection to the next debt."},
+    b:{headline:"Governing the response by category is the structural approach the module was designed to produce.",detail:"Each category of debt requires a different response because each category operates on a different logic. Productive debt may not need to be eliminated — it may be serving you. Survival debt needs the underlying position addressed, not just the debt itself. Consumptive debt needs cessation first, then elimination. Predatory debt needs professional support immediately. Treating them all the same is like treating all body signals as the same injury. The categories are the diagnostic. The diagnostic determines the treatment."},
+    c:{headline:"Shame about the consumptive debt is the personal responsibility disguise applied to the most visible category of extraction.",detail:"Some of the consumptive debt was status spending. Some of it was survival spending that you categorised as consumptive because the shame programme conflates the two. The distinction matters. The status spending was the status function from Module One, operating on borrowed time — and the status function, as Module One described, is not always vanity. It is sometimes survival, because the system punishes visible poverty. The shame prevents the governed response, which is to stop adding to the consumptive debt and begin eliminating it. The shame is the programme. The elimination is the governance."},
+    d:{headline:"Dismissing the categorisation as academic prevents the governed response that the categorisation enables.",detail:"If debt is just debt, then the response is the same for every product — pay it off. If debt is four different structures, each with different logic and different optimal responses, then the categorisation is the most practically useful thing the module offers. A person who treats their mortgage (productive debt at 4%) the same as their credit card (consumptive debt at 22%) will make governed decisions about neither. The categorisation is not academic. It is the foundation of every financial decision about the debt from this point forward."}
+  },
+  3:{
+    a:{headline:"Continuing minimum payments because the total interest is too large to address is the minimum payment illusion operating exactly as designed.",detail:"The minimum payment was engineered to produce this response — the sense that the debt is too large to address, so the minimum is the only option. The minimum is the option that maximises the duration and total cost of the debt. Any amount above the minimum — even a small amount — disrupts the engineering. The disruption is incremental. The increments, compounded across months and years, are what the minimum payment illusion was designed to prevent. The illusion says the debt is too large. The mathematics says any additional amount changes the total. The mathematics is correct."},
+    b:{headline:"Identifying the smallest sustainable additional amount above the minimum is the governed response to the minimum payment illusion.",detail:"The additional amount does not need to be large. It needs to be consistent. The consistency is what the architecture was not designed for — the architecture was designed for minimum payments, occasional large payments followed by relapse, and the refinancing loop. A small, consistent additional payment disrupts all three by steadily reducing the principal, which reduces the interest calculated each month, which accelerates the reduction. The compounding that was working against you (interest on interest) begins working in your favour (reduced interest on reduced principal). The smallest consistent amount is more powerful than the largest inconsistent one."},
+    c:{headline:"Stopping payments entirely produces immediate legal and financial consequences that compound the extraction rather than ending it.",detail:"Non-payment triggers default charges, penalty interest, damage to your credit profile (which increases the poverty premium on all future borrowing), and potential legal action. The extraction does not stop when you stop paying. It accelerates — through fees and penalties designed for exactly this scenario. The system was engineered for non-payment as well as for minimum payment. Both produce extraction. The governed exit operates between the two — paying more than the minimum, consistently, while the account remains in good standing. The standing preserves your options. The additional payment reduces the extraction."},
+    d:{headline:"Refinancing again, without structural changes to the borrowing behaviour, is the refinancing loop running its next iteration.",detail:"The new product may have a lower monthly payment. The lower payment produces the felt sense of having dealt with the debt. The felt sense prevents the examination of the total cost — which, across the extended term of the new product, may be higher than the original. The refinancing loop is the third component of the trap: it resets the monthly pain while extending the extraction window. The governed use of refinancing is to transfer to a genuinely lower rate, close the old facility, cease new borrowing on the old product, and direct the interest saving toward accelerated repayment. Without these conditions, the refinancing is the loop, not the exit."}
+  },
+  4:{
+    a:{headline:"Despair at the time cost is the psychological hold — the fourth component of the trap — operating on the most visceral possible data.",detail:"The time cost is large. The despair is the system's most useful emotional output, because a person in despair does not navigate — they continue minimum payments, continue the loop, continue the extraction. The time already committed cannot be reclaimed. The time not yet committed can be reduced — through the governed exit on Page Five, through accelerated repayment, through the cessation of new consumptive borrowing. The despair says the committed time is all that matters. The governance says the uncommitted time is where the sovereignty operates. The uncommitted time is the only time you can do anything about."},
+    b:{headline:"Holding the number as the cost of the previous position while governing the uncommitted future is the sovereignty move applied to debt.",detail:"The committed time is a sunk cost — it cannot be recovered. The uncommitted time — the months and years ahead — is governed by the decisions you make from this point forward. Each month of accelerated repayment reclaims future time. Each month of ceased consumptive borrowing prevents new time from being committed. The time cost of the previous decade is information. The time governance of the next decade is the response. The information produces the response. The response changes the number."},
+    c:{headline:"Dismissing the time-cost framing as emotional rhetoric prevents the most visceral and most actionable reframe the module offers.",detail:"The framing is emotional. It is also mathematically accurate. Every pound of debt divided by your hourly wage equals hours of your life committed to servicing the obligation. The conversion is not rhetoric — it is arithmetic. The emotional response to the arithmetic is the point: monetary figures are abstract, time figures are personal. The personal quality of the time figure is what produces the motivation that the monetary figure, alone, has failed to produce for years. The framing is designed to change your emotional relationship with the debt. The changed relationship is what produces the governed exit."},
+    d:{headline:"Taking on more debt to invest is a sophisticated financial strategy that, at consumer debt interest rates, almost never produces a positive return.",detail:"The logic is sound in theory: if you can earn a return that exceeds the interest rate on your debt, the leveraged position produces net value. In practice, at consumer debt interest rates of 15-25%, consistently earning returns above that rate requires either exceptional skill or exceptional risk. The risk, at that level, frequently produces losses — which means you now carry the original debt plus the investment loss plus the interest on both. The strategy is legitimate at very low interest rates (borrowing at 3% to invest for 7%). At consumer debt rates, the strategy is the refinancing loop wearing an investment costume."}
+  },
+  5:{
+    a:{headline:"Searching for a faster method is the performance layer — from Course Three — applying its demand for dramatic results to the financial exit.",detail:"The faster method exists in the same category as the intensive restoration from Course Three Module Six: it produces a surge of effort, a brief period of dramatic progress, and then a collapse when the intensity becomes unsustainable. The programmes that promise debt freedom in twelve months are products — and the products, like the debt itself, are sold on the basis of your desire for speed. The speed is what sells the programme. The sustainability is what produces the exit. The two are, at consumer debt levels, usually incompatible. The governed exit is slower. The governed exit does not collapse."},
+    b:{headline:"Holding the pace and trusting the mathematics is the governed exit operating as designed — slowly, consistently, and without the collapse cycle.",detail:"Three months of progress feels small because the total is large. The progress is real. The mathematics — compound interest working in your favour as the principal reduces — is accelerating the exit with each payment. The acceleration is invisible at month three. It becomes visible at month twelve. It becomes significant at month twenty-four. The exit is designed for years, not months. The years of governed repayment are the years the architecture was designed to prevent, because the architecture profits from the minimum-payment-plus-refinancing cycle, not from the accelerated-repayment-plus-cessation cycle."},
+    c:{headline:"Giving up and returning to minimum payments is the psychological hold completing its function — converting the recognition into resignation.",detail:"The recognition of how the trap works was supposed to produce the governed exit. The psychological hold — the fourth component of the trap — converts the recognition into despair, and the despair into resignation, and the resignation into the continuation of minimum payments. The continuation is the product functioning as designed. The hold has won. The governed response to the hold is the same as the governed response to every other programme in the curriculum: name it, let the activation settle, and return to the practice. The practice is the additional payment above the minimum, made consistently, regardless of how the progress feels in month three."},
+    d:{headline:"Dramatic austerity — eliminating everything non-essential — produces a brief surge followed by the deprivation-rebound cycle.",detail:"Cutting all non-essential spending produces an immediate increase in repayment capacity. It also produces a daily experience of deprivation that, for most people, is unsustainable beyond four to eight weeks. The rebound — the return to previous spending levels, often with compensatory overspending — erases the progress and often worsens the position. The governed exit does not eliminate everything. It redirects a sustainable portion — an amount you can maintain indefinitely, without deprivation, without the felt sense that your life is on hold. The sustainable portion, maintained for years, outperforms the dramatic cut, maintained for weeks, every time."}
+  }
+};
+
+let currentSlide=1;const totalSlides=6;const answered={1:false,2:false,3:false,4:false,5:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c4m2';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course4-module-2-how-the-system-keeps-you-poor.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c4m3','1');window.location.href='course4-module-4-building-true-wealth.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

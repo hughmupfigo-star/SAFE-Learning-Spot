@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 8 · Module 5 · What Junk Food Does to You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:500}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:720px;margin:0 auto;padding:72px 48px 120px}
+.slide-num{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:40px;letter-spacing:.06em}
+.slide h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:32px}
+.slide h1 em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.15rem;line-height:1.75;color:var(--ink);margin-bottom:32px;font-weight:300}
+.body-text{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:24px}
+.divider{width:40px;height:1px;background:var(--accent);margin:40px 0}
+.scenario-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;font-family:var(--sans)}
+.scenario-text{font-family:var(--serif);font-size:1.3rem;font-weight:300;line-height:1.6;margin-bottom:36px;padding-left:20px;border-left:2px solid var(--line)}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.choice{background:transparent;border:1px solid var(--line);padding:18px 22px;text-align:left;cursor:pointer;
+font-family:var(--sans);font-size:.95rem;line-height:1.5;color:var(--ink);transition:all .2s ease;border-radius:2px}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--soft)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback{display:none;border-top:1px solid var(--line);padding-top:28px;margin-top:8px}
+.feedback.visible{display:block;animation:fadeUp .4s ease}
+.feedback-headline{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:10px}
+.feedback-detail{font-size:.95rem;line-height:1.75;color:var(--muted)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{background:none;border:none;font-family:var(--sans);font-size:.9rem;color:var(--muted);cursor:pointer;
+letter-spacing:.04em;padding:8px 0;transition:color .2s}
+.nav-btn:hover:not(:disabled){color:var(--ink)}.nav-btn:disabled{opacity:.2;cursor:default}
+.nav-btn.primary{color:var(--ink);font-weight:500}
+.completion{text-align:center;padding:80px 48px}
+.completion-icon{font-size:3rem;margin-bottom:32px}
+.completion h2{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:20px}
+.completion p{font-size:1rem;line-height:1.8;color:var(--muted);max-width:480px;margin:0 auto 40px}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 08 &middot; Food Is Medicine &middot; Module <strong>05</strong> &middot; What Junk Food Does to You</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 8 &middot; Food Is Medicine</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c8m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course8-module-6-healing-foods-and-herbs.html">Healing Foods & Herbs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course8-module-7-children-and-family-nutrition.html">Children & Family Nutrition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course8-module-8-detoxing-and-transition.html">Detoxing & Transition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m9" data-mn="9">
+      <span class="sidebar-mod-n">09</span>
+      <a class="sidebar-mod-a" href="course8-module-9-building-your-alkaline-life.html">Your Alkaline Life</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide-1" data-slide="1">
+  <div class="slide-inner">
+    <div class="slide-num">01 / 09</div>
+    <h1>What Ultra-Processed Food <em>Actually Is</em></h1>
+    <p class="lead">Not all processed food is equal. Cutting a vegetable is processing. Fermenting food is processing. What this module addresses is something distinct — ultra-processed food: industrial formulations made primarily from substances extracted from food or synthesised in laboratories.</p>
+    <div class="divider"></div>
+    <p class="body-text">The NOVA classification system, developed by nutritional researchers, distinguishes four categories of food based on the degree and purpose of processing. Ultra-processed foods — the fourth category — are not modified versions of real food. They are industrial products that use minimal whole food ingredients and instead combine refined starches, sugars, fats, flavourings, colourings, emulsifiers, and preservatives to produce something that mimics the experience of eating without delivering the substance of it.</p>
+    <p class="body-text">Crisps, breakfast cereals, packaged breads, fizzy drinks, flavoured yogurts, instant noodles, processed meats, most fast food — these are ultra-processed. They now make up more than half of the calories consumed in many Western countries. Understanding what they are is the beginning of understanding what they do.</p>
+    <div class="scenario-label">Scenario 01</div>
+    <p class="scenario-text">A parent packs their child's lunchbox with a cereal bar (oats, glucose syrup, palm oil, flavouring, E471), a flavoured yogurt drink (skimmed milk powder, sugar, modified starch, colour, flavour), and a juice box (fruit concentrate, sugar, citric acid, vitamin C). They believe they are packing a healthy lunch. What category does this food fall into?</p>
+    <div class="choices" data-scenario="1">
+      <button class="choice" data-answer="a">Minimally processed — the ingredients listed are all recognisable</button>
+      <button class="choice" data-answer="b">Ultra-processed — each item is an industrial formulation using refined and synthetic ingredients engineered for palatability and shelf life rather than nutrition</button>
+      <button class="choice" data-answer="c">The cereal bar is processed but the yogurt drink and juice box are natural products</button>
+      <button class="choice" data-answer="d">It depends on whether organic ingredients were used</button>
+    </div>
+    <div class="feedback" id="feedback-1">
+      <p class="feedback-headline" id="feedback-text-1"></p>
+      <p class="feedback-detail" id="feedback-detail-1"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()" disabled>← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="slide-2" data-slide="2">
+  <div class="slide-inner">
+    <div class="slide-num">02 / 09</div>
+    <h1>What Refined Sugar <em>Does</em></h1>
+    <p class="lead">Sugar is not just empty calories. In its refined form — stripped of the fibre, minerals, and water that accompany it in natural fruit — sugar is one of the most disruptive substances the modern diet delivers to the body.</p>
+    <div class="divider"></div>
+    <p class="body-text">When refined sugar enters the bloodstream, insulin spikes sharply to manage it. The liver, receiving more fructose than it can process, begins converting the excess to fat — contributing to fatty liver disease, the fastest-growing liver condition in the world. Chronically elevated insulin drives inflammation throughout the body, disrupts hormone balance, and over time produces insulin resistance — the metabolic root of Type 2 diabetes.</p>
+    <p class="body-text">Refined sugar also feeds the harmful bacteria and yeasts in the gut — particularly Candida — at the expense of beneficial microbes. It depletes the body of B vitamins and minerals that are required to metabolise it but are absent from the refined product itself. It ages the skin through a process called glycation, where sugar molecules bind to collagen and break it down. And it is addictive — triggering dopamine responses similar in mechanism to other addictive substances.</p>
+    <div class="scenario-label">Scenario 02</div>
+    <p class="scenario-text">Kevin eats very little obviously sweet food but consumes large amounts of white bread, pasta, breakfast cereal, flavoured sauces, and fruit juice daily. His doctor says his blood sugar is elevated and he is at risk of Type 2 diabetes. Kevin is confused — he doesn't eat much sugar. What is he missing?</p>
+    <div class="choices" data-scenario="2">
+      <button class="choice" data-answer="a">His doctor must be wrong — elevated blood sugar only comes from obviously sweet foods like sweets and cake</button>
+      <button class="choice" data-answer="b">Refined carbohydrates — white bread, pasta, cereal — and fruit juice convert rapidly to glucose in the body and produce the same insulin response as sugar; his diet is effectively a high-sugar diet despite the absence of obviously sweet foods</button>
+      <button class="choice" data-answer="c">Fruit juice is healthy and cannot contribute to elevated blood sugar</button>
+      <button class="choice" data-answer="d">His elevated blood sugar is genetic and unrelated to his diet</button>
+    </div>
+    <div class="feedback" id="feedback-2">
+      <p class="feedback-headline" id="feedback-text-2"></p>
+      <p class="feedback-detail" id="feedback-detail-2"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="slide-3" data-slide="3">
+  <div class="slide-inner">
+    <div class="slide-num">03 / 09</div>
+    <h1>Seed Oils and <em>Silent Inflammation</em></h1>
+    <p class="lead">The oils that dominate modern cooking and food production — sunflower, canola, corn, soybean — are a recent industrial invention. They are also one of the most significant dietary drivers of chronic inflammation in the modern world.</p>
+    <div class="divider"></div>
+    <p class="body-text">These oils are extremely high in omega-6 fatty acids. Omega-6 and omega-3 are both essential fats, but they have opposing effects: omega-6 is pro-inflammatory when in excess; omega-3 is anti-inflammatory. The body requires a balance — traditionally around 4:1 or lower. In the modern diet dominated by seed oils, the ratio has reached 20:1 or higher. The result is a body in a state of chronic, low-grade inflammation — the silent driver behind heart disease, arthritis, eczema, depression, and many cancers.</p>
+    <p class="body-text">Seed oils are extracted using high heat and chemical solvents — processes that produce toxic by-products including aldehydes. They are found in almost every packaged food, every restaurant fryer, and most commercial cooking. Replacing them with cold-pressed olive oil, coconut oil, avocado oil, and the natural fats in seeds and nuts is one of the most significant anti-inflammatory dietary changes available.</p>
+    <div class="scenario-label">Scenario 03</div>
+    <p class="scenario-text">Zara cooks exclusively with sunflower oil, believing it is heart-healthy because it is low in saturated fat. She also eats a lot of packaged food. She has chronic joint pain, eczema, and low-grade fatigue. What connection might she be missing?</p>
+    <div class="choices" data-scenario="3">
+      <button class="choice" data-answer="a">Sunflower oil is universally recognised as the healthiest cooking oil — it cannot be contributing to her symptoms</button>
+      <button class="choice" data-answer="b">Sunflower oil is extremely high in omega-6 — combined with the omega-6 load from packaged food, her dietary fat profile is likely driving the chronic inflammation that manifests as joint pain, eczema, and fatigue</button>
+      <button class="choice" data-answer="c">Her symptoms are autoimmune and have nothing to do with dietary fat</button>
+      <button class="choice" data-answer="d">The problem is the saturated fat in the packaged food, not the sunflower oil</button>
+    </div>
+    <div class="feedback" id="feedback-3">
+      <p class="feedback-headline" id="feedback-text-3"></p>
+      <p class="feedback-detail" id="feedback-detail-3"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide-4" data-slide="4">
+  <div class="slide-inner">
+    <div class="slide-num">04 / 09</div>
+    <h1>Engineered to <em>Addict</em></h1>
+    <p class="lead">Junk food is not accidentally irresistible. Food scientists are paid to make it that way. The inability to stop eating it is not a moral failing — it is the product of deliberate engineering.</p>
+    <div class="divider"></div>
+    <p class="body-text">Food companies employ scientists to find what researchers call the "bliss point" — the precise combination of fat, sugar, and salt that maximises palatability and minimises the brain's ability to register fullness. This combination does not exist in nature. Natural foods contain fat, sugar, or salt — rarely all three in engineered ratios. When the bliss point is hit, the brain's dopamine reward system responds similarly to how it responds to addictive substances — releasing a hit of pleasure and priming the body to want more before the current portion is finished.</p>
+    <p class="body-text">The result is a product designed not to satisfy but to perpetuate consumption. You finish the packet and want another. You eat until the packet is empty, not until you are nourished. The hunger this creates is not a natural hunger — it is a manufactured one. Recognising this mechanism is the first step to being free of it.</p>
+    <div class="scenario-label">Scenario 04</div>
+    <p class="scenario-text">After finishing an entire bag of flavoured crisps, Michael feels vaguely dissatisfied and wants more — despite having consumed over 500 calories. He tells himself he simply has poor willpower. What more accurately explains his experience?</p>
+    <div class="choices" data-scenario="4">
+      <button class="choice" data-answer="a">He does have poor willpower — self-control is the solution to overeating processed food</button>
+      <button class="choice" data-answer="b">The crisps were engineered to bypass satiety signals and trigger continued wanting — his dissatisfaction is the designed outcome of the product, not a personal failure</button>
+      <button class="choice" data-answer="c">He is simply still hungry and needs to eat a proper meal</button>
+      <button class="choice" data-answer="d">Flavoured crisps are addictive only for people with certain genetic tendencies toward overeating</button>
+    </div>
+    <div class="feedback" id="feedback-4">
+      <p class="feedback-headline" id="feedback-text-4"></p>
+      <p class="feedback-detail" id="feedback-detail-4"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide-5" data-slide="5">
+  <div class="slide-inner">
+    <div class="slide-num">05 / 09</div>
+    <h1>What Junk Food Does to <em>the Gut</em></h1>
+    <p class="lead">The gut microbiome — the vast community of bacteria, fungi, and other organisms living in your digestive tract — governs immunity, mental health, hormone balance, and more. Junk food is devastating to it.</p>
+    <div class="divider"></div>
+    <p class="body-text">A healthy gut microbiome requires diversity — hundreds of different microbial species living in balance. Refined sugar selectively feeds harmful bacteria and yeasts while starving beneficial ones. Emulsifiers — found in almost all packaged food — have been shown to break down the mucus layer that protects the gut lining, allowing bacteria to come into direct contact with gut wall cells and triggering inflammation. Artificial sweeteners disrupt the microbiome even without calories. Antibiotics in conventionally raised meat wipe out gut flora indiscriminately.</p>
+    <p class="body-text">A depleted microbiome creates its own cravings — the harmful bacteria and yeasts that thrive on junk food produce chemical signals that influence the brain's food preferences, creating a cycle in which junk food depletes the microbiome and the depleted microbiome craves more junk food. Breaking this cycle requires consistent introduction of living, fermented, and fibre-rich whole food that feeds and rebuilds beneficial microbial communities.</p>
+    <div class="scenario-label">Scenario 05</div>
+    <p class="scenario-text">Aisha has been told she has irritable bowel syndrome and takes medication to manage her symptoms. She eats a diet high in packaged foods, diet drinks with artificial sweeteners, and processed meats. Her gut symptoms have never improved despite the medication. What might the missing piece be?</p>
+    <div class="choices" data-scenario="5">
+      <button class="choice" data-answer="a">IBS is a structural condition that cannot be affected by diet</button>
+      <button class="choice" data-answer="b">Her diet is directly damaging the gut microbiome and gut lining — the emulsifiers, artificial sweeteners, and processed meats are active contributors to her symptoms; medication manages the pain while the dietary cause continues unaddressed</button>
+      <button class="choice" data-answer="c">She needs a different medication — her symptoms suggest she has been misdiagnosed</button>
+      <button class="choice" data-answer="d">Artificial sweeteners are safe for gut health because they contain no calories</button>
+    </div>
+    <div class="feedback" id="feedback-5">
+      <p class="feedback-headline" id="feedback-text-5"></p>
+      <p class="feedback-detail" id="feedback-detail-5"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="slide-6" data-slide="6">
+  <div class="slide-inner">
+    <div class="slide-num">06 / 09</div>
+    <h1>Hormonal <em>Disruption</em></h1>
+    <p class="lead">The endocrine system — the body's hormonal communication network — is exquisitely sensitive to chemical inputs. Junk food delivers a constant stream of compounds that interfere with it in ways that medicine has been slow to acknowledge.</p>
+    <div class="divider"></div>
+    <p class="body-text">Refined sugar chronically elevates insulin and drives cortisol dysregulation — the stress hormone that, when chronically elevated, promotes fat storage particularly around the abdomen, disrupts sleep, suppresses immune function, and accelerates ageing. Processed food packaging — particularly plastics — leaches xenoestrogens: synthetic compounds that mimic oestrogen in the body. Chronic exposure to these compounds is associated with hormonal imbalance, early puberty in children, impaired fertility, and increased cancer risk.</p>
+    <p class="body-text">Many artificial additives also function as endocrine disruptors — interfering with thyroid function, reproductive hormones, and the signalling systems that regulate appetite, mood, and metabolism. The body's hormonal intelligence is a precision system. Flooding it daily with industrial chemicals produces the diffuse, hard-to-diagnose symptoms that millions of people now carry as their normal: weight that won't shift, moods that won't stabilise, energy that won't return.</p>
+    <div class="scenario-label">Scenario 06</div>
+    <p class="scenario-text">Danielle has struggled with unexplained weight gain, irregular periods, low energy, and mood swings for years. Her blood tests come back "normal." She eats predominantly packaged and fast food and drinks from plastic bottles daily. What might her doctors be failing to investigate?</p>
+    <div class="choices" data-scenario="6">
+      <button class="choice" data-answer="a">Her symptoms are likely psychological since her blood tests are normal</button>
+      <button class="choice" data-answer="b">Standard blood tests do not measure xenoestrogen exposure, microbiome health, or chronic low-grade inflammation — her diet is a plausible source of the hormonal disruption producing her cluster of symptoms</button>
+      <button class="choice" data-answer="c">These symptoms are a normal part of being a woman in her age group</button>
+      <button class="choice" data-answer="d">She should ask for more blood tests until something shows up</button>
+    </div>
+    <div class="feedback" id="feedback-6">
+      <p class="feedback-headline" id="feedback-text-6"></p>
+      <p class="feedback-detail" id="feedback-detail-6"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="slide-7" data-slide="7">
+  <div class="slide-inner">
+    <div class="slide-num">07 / 09</div>
+    <h1>The Stakes Are Higher <em>for Children</em></h1>
+    <p class="lead">A child's gut microbiome, hormonal system, brain, and immune system are all in active development. Feeding them ultra-processed food during this window does not just affect today's health — it shapes the biological foundation they will carry for life.</p>
+    <div class="divider"></div>
+    <p class="body-text">The gut microbiome is largely established in the first three years of life. The foods that dominate those years determine which microbial communities take up long-term residence — and those communities influence immunity, behaviour, mood, and metabolism well into adulthood. A child raised on ultra-processed food develops a microbiome dominated by the organisms that thrive on it — and those organisms make it harder to enjoy or crave natural food later.</p>
+    <p class="body-text">Children are also more vulnerable to chemical exposure than adults — their livers are less developed, their blood-brain barriers more permeable, and their bodies are building rapidly from whatever materials are available. Artificial colours and preservatives that produce modest effects in adults produce more pronounced effects in children's developing nervous systems. The food industry knows this — which is why it targets children so deliberately in its marketing.</p>
+    <div class="scenario-label">Scenario 07</div>
+    <p class="scenario-text">A grandmother insists that the crisps, sweets, and fizzy drinks she gives her grandchildren are "just treats" and cannot cause real harm because they are eaten in moderation. What does the evidence on child development suggest about this framing?</p>
+    <div class="choices" data-scenario="7">
+      <button class="choice" data-answer="a">She is right — occasional treats have no lasting effect on a child's health</button>
+      <button class="choice" data-answer="b">Even moderate regular exposure during critical developmental windows shapes taste preferences, gut microbiome composition, and appetite regulation in ways that persist into adulthood — "moderation" in childhood is not a neutral intervention</button>
+      <button class="choice" data-answer="c">The harm only occurs if children are eating junk food as their main diet — treats are entirely harmless</button>
+      <button class="choice" data-answer="d">Children metabolise junk food more efficiently than adults so the effects are actually less harmful for them</button>
+    </div>
+    <div class="feedback" id="feedback-7">
+      <p class="feedback-headline" id="feedback-text-7"></p>
+      <p class="feedback-detail" id="feedback-detail-7"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="slide-8" data-slide="8">
+  <div class="slide-inner">
+    <div class="slide-num">08 / 09</div>
+    <h1>Hunger vs. <em>Craving</em></h1>
+    <p class="lead">Real hunger can be satisfied by any real food. A manufactured craving wants one thing specifically — and it does not go away when you are full. Learning to tell the difference is one of the most liberating nutritional skills there is.</p>
+    <div class="divider"></div>
+    <p class="body-text">True nutritional hunger develops gradually, feels like an absence, and can be satisfied by a wide variety of foods — including simple ones. An apple, some nuts, a piece of fruit. When you are genuinely hungry, these satisfy. A craving for junk food is specific, urgent, and frequently present even when the body is full of calories. It is not the body asking for nourishment — it is the trained response of a dopamine system and a microbiome shaped by the very food being craved.</p>
+    <p class="body-text">As the diet transitions toward whole, alkaline, natural food, the cravings for junk food diminish — often dramatically — within two to four weeks. The microbiome shifts. The dopamine system recalibrates. The taste for natural food returns — or in many cases develops for the first time. People who have eaten naturally for months frequently find that junk food no longer tastes like food at all. The body, given real nourishment, stops asking for the imitation.</p>
+    <div class="scenario-label">Scenario 08</div>
+    <p class="scenario-text">Three weeks into transitioning to a whole food, alkaline diet, Nadia notices her intense cravings for crisps and chocolate have almost completely disappeared. She expected it to be a lifelong struggle and is surprised. What has changed?</p>
+    <div class="choices" data-scenario="8">
+      <button class="choice" data-answer="a">She has developed strong willpower after three weeks of discipline</button>
+      <button class="choice" data-answer="b">Her gut microbiome has begun to shift — the organisms that drove her cravings are being replaced by communities that thrive on whole food; her dopamine system is recalibrating; and her body, genuinely nourished, is no longer seeking the imitation</button>
+      <button class="choice" data-answer="c">She has simply forgotten what crisps and chocolate taste like</button>
+      <button class="choice" data-answer="d">The cravings will return — three weeks is not long enough for lasting change</button>
+    </div>
+    <div class="feedback" id="feedback-8">
+      <p class="feedback-headline" id="feedback-text-8"></p>
+      <p class="feedback-detail" id="feedback-detail-8"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: COMPLETION -->
+<div class="slide" id="slide-9" data-slide="9">
+  <div class="slide-inner">
+    <div class="completion">
+      <div class="completion-icon">◈</div>
+      <h2>Module 5 Complete</h2>
+      <p>You now understand what ultra-processed food actually is, what refined sugar and seed oils do in the body, how junk food is engineered to addict, what it does to your gut and hormones, why the stakes are higher for children, and the crucial difference between true hunger and a manufactured craving.</p>
+      <p style="margin-top:16px;font-size:.9rem;color:var(--muted)">Course 08 &middot; Food Is Medicine &middot; Module 05 of 09</p>
+
+<div class="section-heading" style="margin-top:40px">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">Ultra-processed food is not simply convenient food &mdash; it is food engineered by industrially combining ingredients that do not exist in nature, specifically to override the body&rsquo;s satiety signals.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Refined sugar creates inflammatory cascades, disrupts insulin signalling, feeds pathogenic gut bacteria, and generates dependency through the same dopamine pathways involved in addictive substances.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Seed oils &mdash; canola, soybean, corn, sunflower &mdash; are industrially processed, chemically unstable at cooking temperatures, and pro-inflammatory. They are not equivalent to cold-pressed plant oils.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Junk food is engineered to addict. Bliss points, texture contrasts, and flavour layering are designed to maximise repeat consumption. The difficulty of stopping is not personal weakness &mdash; it is the product working as intended.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The gut microbiome is directly shaped by what you eat. Processed food consistently favours pathogenic bacteria and reduces microbial diversity. The mood, cognitive, and immune consequences follow from this shift.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">Manufactured craving is not hunger. Learning to distinguish the two &mdash; by noticing the quality of the signal, where it came from, and what would satisfy it &mdash; is a fundamental skill in food sovereignty.</span></li>
+</ol>
+<div class="section-heading">Practice this week</div>
+<p class="body-text">The next time a food craving arrives, before acting on it, sit with it for two minutes and ask: is this a genuine hunger signal from the body, or is this a learned craving triggered by an external cue, a time of day, an emotion, or habit? You do not have to override the craving to do this practice. You only have to name what it is before you respond to it.</p>
+<p class="body-text">Monthly: check the seed oils in your kitchen. What oils are you currently cooking with? Replace one bottle of a refined seed oil with cold-pressed extra-virgin olive oil or coconut oil this month. This single swap, over time, reduces a significant source of chronic inflammatory load without requiring an overhaul of everything else.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const feedback = {
+  1:{
+    a:{headline:"Recognisable-sounding ingredients do not make a product minimally processed.",detail:"Glucose syrup, modified starch, palm oil, and E471 are all technically derived from food sources — but they are industrial extractions and synthesised compounds, not food. The NOVA classification is not about whether you can pronounce the ingredients but about the degree to which the product has been industrially reformulated. Each item in this lunchbox is a formulated product using real food ingredients as raw material, not as food."},
+    b:{headline:"Correct. All three items are ultra-processed products marketed with health language.",detail:"The cereal bar uses glucose syrup as its second ingredient and adds a synthetic emulsifier. The yogurt drink uses skimmed milk powder — a highly processed ingredient — with added sugar, modified starch, artificial colour and flavour. The juice box uses fruit concentrate — stripped of fibre — with added sugar. 'Fruit,' 'yogurt,' and 'oat' on the front of the packet do not change the classification of what is inside. This child's 'healthy' lunch is predominantly ultra-processed."},
+    c:{headline:"Fruit juice and yogurt drinks in processed form are not natural products.",detail:"A yogurt drink made from skimmed milk powder, modified starch, and artificial flavour is not the same as natural yogurt. A juice box made from fruit concentrate and added sugar is not the same as fresh fruit. The processing — and the ingredients added during it — transforms both from natural to ultra-processed. The category on the label is not the category in the body."},
+    d:{headline:"Organic ultra-processed food is still ultra-processed.",detail:"Organic certification refers to how ingredients were grown — without synthetic pesticides and fertilisers. It does not change the degree to which a product has been industrially refined, reformulated, and supplemented with additives. An organic cereal bar with organic glucose syrup and organic emulsifiers is still an ultra-processed product. Organic and natural are not the same thing."}
+  },
+  2:{
+    a:{headline:"Refined carbohydrates convert to glucose as rapidly as sugar — often faster.",detail:"White bread has a glycaemic index higher than table sugar. The body breaks down refined starch into glucose within minutes of eating. Kevin's diet — white bread, pasta, cereal, sauces, and juice — delivers a constant high glucose load to the bloodstream, keeping insulin elevated and creating the same metabolic conditions as eating sweets. The absence of obviously sweet food from his diet is not the same as the absence of its effect."},
+    b:{headline:"Correct. The body sees refined carbohydrates and sugar as the same thing.",detail:"Refined starch is glucose chains with the fibre removed. Without fibre to slow absorption, it hits the bloodstream as fast as refined sugar. Fruit juice — stripped of the pulp and fibre of whole fruit — is essentially sugar water with vitamins. Kevin's mental model of 'sugar' as only the white granular kind has left him consuming a high-sugar diet without recognising it. His doctor's finding is consistent with his actual dietary pattern."},
+    c:{headline:"Fruit juice without fibre is among the most rapidly absorbed forms of sugar in the diet.",detail:"Whole fruit contains fibre that dramatically slows the absorption of its natural sugars — producing a gentle, sustained glucose response. Juice removes this fibre. The result is a product with the sugar of fruit and the absorption rate of a soft drink. Commercially processed juice often has additional sugar added. 'Natural' on the label does not mitigate this."},
+    d:{headline:"Genetics influence blood sugar regulation but do not override the effect of a chronically high-glucose diet.",detail:"Some people are genetically more susceptible to insulin resistance, and family history is a relevant risk factor for Type 2 diabetes. But the primary driver in most cases is dietary — specifically the chronic high-carbohydrate, high-sugar load that Kevin's diet represents. Attributing the finding entirely to genetics without addressing the obvious dietary factor is clinically incomplete."}
+  },
+  3:{
+    a:{headline:"The 'heart-healthy' claim for seed oils was built on contested science — the omega-6 excess it creates is now a major concern.",detail:"The low-saturated-fat recommendation for seed oils was driven by research later found to have serious methodological limitations, some of which was funded by the sugar industry specifically to shift blame for cardiovascular disease from sugar to fat. The omega-6 excess created by widespread seed oil use is now recognised by a growing body of researchers as a significant driver of chronic inflammation — which is itself a primary risk factor for cardiovascular disease."},
+    b:{headline:"Correct. The omega-6 excess from sunflower oil is a direct driver of chronic inflammation.",detail:"Sunflower oil is over 60% linoleic acid — an omega-6 fatty acid. The body requires a balance between omega-6 and omega-3, and when omega-6 dominates, the inflammatory pathways it feeds are chronically activated. Zara's joint pain, eczema, and fatigue are all consistent presentations of systemic inflammation — the kind that an omega-6-dominant dietary fat profile reliably produces. Switching to cold-pressed olive oil or avocado oil, combined with eliminating packaged food high in seed oils, often produces visible improvement in these conditions."},
+    c:{headline:"Autoimmune conditions are themselves driven by inflammation — and dietary fat directly governs inflammatory pathways.",detail:"Many conditions labelled autoimmune have a significant inflammatory dietary component. The immune system's tendency to misfire is amplified by chronic inflammatory conditions in the gut and tissues — conditions that omega-6 excess directly contributes to. Calling a condition 'autoimmune' does not place it beyond dietary influence; it describes a mechanism that dietary change can still modulate."},
+    d:{headline:"The primary problem here is omega-6 from the oil, not saturated fat from the packaged food.",detail:"Saturated fat has a more complex and contested relationship with inflammation than the omega-6 excess from seed oils. The specific concern in Zara's case is the linoleic acid load from sunflower oil — an oil she uses for all her cooking — compounded by the seed oils in her packaged food. Redirecting concern to saturated fat misidentifies the primary driver."}
+  },
+  4:{
+    a:{headline:"Willpower is not the appropriate tool against a system engineered to defeat it.",detail:"Willpower is a finite resource that depletes with use. Junk food is designed by specialists with decades of research behind them to overcome exactly this resource. Framing the inability to stop eating engineered food as a personal moral failing serves the industry that makes that food — it redirects responsibility from the product to the consumer and prevents people from understanding what is actually happening to them."},
+    b:{headline:"Correct. Dissatisfaction is the product's intended output — not a sign of personal weakness.",detail:"The food industry's own internal research documents describe the deliberate engineering of foods that people cannot stop eating. The combination of fat, salt, and sugar at the bliss point activates dopamine reward circuits and suppresses satiety signalling. Michael finished the bag not because he lacks self-control but because the product was specifically designed to make stopping difficult. Understanding this is not an excuse — it is accurate information about what is happening, and it redirects the question from 'how do I resist?' to 'why am I in contact with this product?'"},
+    c:{headline:"Michael consumed over 500 calories — his body is not short of energy, it is short of nourishment.",detail:"The genuine hunger that would warrant eating more is not present here. What is present is the dopamine-driven wanting that engineered food produces. This is distinct from caloric hunger. Eating a meal in response to a manufactured craving adds calories without addressing the mechanism that produced the craving — and in a nutrient-depleted processed form, it still does not deliver nourishment."},
+    d:{headline:"The bliss point engineering affects virtually everyone — it is not a genetic susceptibility.",detail:"While individuals do vary in their sensitivity to hyper-palatable food, the research on bliss point engineering shows consistent effects across populations. This is not a niche vulnerability affecting a subset of people with eating disorders — it is a universal human neurological response to a specific combination of inputs that the food industry has spent decades optimising. Attributing it to genetics again serves the industry."}
+  },
+  5:{
+    a:{headline:"IBS has a strong and well-documented dietary component — the gut microbiome is central to it.",detail:"Irritable bowel syndrome is not a structural disease in the sense of a tumour or an obstruction — it is a functional disorder in which the gut's behaviour is dysregulated. The gut microbiome is one of the most significant regulators of gut function. A microbiome disrupted by processed food, artificial sweeteners, and emulsifiers will produce exactly the kind of unpredictable, chronic gut dysfunction that IBS describes. Diet is not peripheral to IBS — it is central to it."},
+    b:{headline:"Correct. The medication manages symptoms while the dietary cause operates unchecked.",detail:"Emulsifiers like carboxymethylcellulose and polysorbate 80 — found in most packaged food — have been shown in animal studies to directly thin the mucus layer protecting the gut lining, allowing gut bacteria to contact the gut wall and trigger inflammation. Artificial sweeteners including aspartame and saccharin have been shown to alter gut microbiome composition. Processed meats contain preservatives that kill gut bacteria. Aisha's gut is receiving a daily dose of microbiome-disrupting compounds while her medication tries to manage the downstream result."},
+    c:{headline:"The pattern of symptoms and their persistence despite medication points toward an unaddressed dietary cause, not misdiagnosis.",detail:"Before concluding misdiagnosis, the most obvious variable — the dietary pattern — warrants addressing. When a gut condition does not respond to medication while the dietary environment that produces it is maintained, the logical step is dietary change, not diagnostic revision. Many people with an IBS diagnosis find that significant dietary change resolves the condition entirely."},
+    d:{headline:"Artificial sweeteners have no calories but are not safe for the gut microbiome.",detail:"The calorie-free nature of artificial sweeteners does not make them neutral in the gut. Multiple studies have found that common artificial sweeteners — saccharin, sucralose, aspartame — alter the composition and diversity of the gut microbiome in ways that promote glucose intolerance and gut inflammation. The absence of calories is not the same as the absence of biological effect."}
+  },
+  6:{
+    a:{headline:"'Normal' blood tests reflect the narrow range of markers most doctors test — not the full picture of hormonal health.",detail:"Standard blood panels test thyroid hormones, haemoglobin, blood glucose, and a limited range of other markers. They do not routinely measure xenoestrogen levels, microbiome health, inflammatory cytokines, or the subtle hormonal disruptions caused by chronic low-level chemical exposure. 'Normal blood tests' means no acute deficiency or disease — not optimal function. Danielle's cluster of symptoms is coherent and deserves a more thorough investigation."},
+    b:{headline:"Correct. The dietary and exposure pattern she describes is consistent with her cluster of symptoms.",detail:"Weight that resists change despite reasonable caloric intake, menstrual irregularity, low energy, and mood instability are a recognisable cluster of symptoms associated with hormonal disruption — particularly oestrogen dominance or thyroid interference. Xenoestrogens from plastics and food packaging accumulate in fatty tissue and interfere with the body's own hormonal signalling. Combined with the chronic insulin and cortisol elevation from a processed food diet, the picture Danielle presents is coherent. The place to start is the diet and the exposure — not more blood tests looking at the same markers."},
+    c:{headline:"This symptom cluster is not a normal female experience — it is a sign that something is wrong.",detail:"The normalisation of hormonal disruption symptoms in women — dismissing them as 'just being a woman' — has delayed appropriate investigation and treatment for generations. These symptoms have causes. They are not inevitable. In many cases their cause is substantially dietary and environmental, meaning they are substantially addressable. Accepting them as normal prevents women from accessing the knowledge that could resolve them."},
+    d:{headline:"More blood tests measuring the same markers will produce the same result.",detail:"If standard blood tests have returned normal, repeating them will not produce new information. What is needed is a different kind of investigation — one that looks at the dietary and environmental factors standard medicine does not routinely assess. The question is not whether the existing tests missed something — it is whether the right questions are being asked."}
+  },
+  7:{
+    a:{headline:"Regular exposure during developmental windows is not neutral — frequency and timing both matter.",detail:"The concept of 'moderation' assumes that small doses of harmful things produce proportionally small harm. In developmental biology this is not always the case. Taste preferences, microbiome composition, and appetite regulation are being established during childhood in ways that regular exposure to hyperpalatable, artificially flavoured food actively shapes. The habit of junk food, established in childhood, is not easily reversed in adulthood — because it was not just a habit but a biological shaping."},
+    b:{headline:"Correct. Childhood exposure shapes the biological baseline, not just the habit.",detail:"Research in developmental nutrition consistently shows that the foods children eat regularly during early childhood influence taste preference circuits in the developing brain, establish which microbial communities dominate the gut, and calibrate appetite regulation systems. A child who regularly eats hyper-palatable, artificially flavoured food learns to find natural food bland and unsatisfying — because their neurological and microbial baseline has been set to expect the industrial version. This is not a moral judgment about grandmothers — it is information about developmental biology that should be widely known."},
+    c:{headline:"The boundary between treat and main diet is less clear — and less protective — than the framing suggests.",detail:"Weekly crisps, occasional sweets, and regular fizzy drinks add up to meaningful exposure, particularly during the developmental windows of early childhood. The division between 'main diet' and 'treat' obscures the cumulative chemical and neurological effect of regular contact with ultra-processed food. Frequency and developmental stage both matter alongside quantity."},
+    d:{headline:"Children are more vulnerable to junk food's effects than adults, not less.",detail:"Children's livers are less developed and detoxify more slowly. Their blood-brain barriers are more permeable to chemical compounds. Their nervous systems are in active development and more susceptible to the effects of artificial additives. Their microbiomes are still being established. In every relevant biological dimension, children face greater risk from ultra-processed food exposure than adults — not less."}
+  },
+  8:{
+    a:{headline:"Willpower didn't change — her biology did.",detail:"If the disappearance of cravings were purely about willpower or discipline, it would require continuous effort to maintain. What Nadia is describing is the opposite: the cravings have simply diminished without ongoing struggle. This is biological, not volitional. Her gut microbiome, her dopamine system, and her cellular nourishment have all shifted — and the body that was perpetually seeking the imitation no longer needs to seek it because it is being genuinely fed."},
+    b:{headline:"Correct. The craving was biological — and the resolution is biological.",detail:"Within two to four weeks of consistent whole food eating, measurable shifts occur in gut microbiome composition. The organisms that drove cravings for sugar and processed food decline as their preferred fuel is withdrawn and the conditions that favour diverse, beneficial communities are restored. Simultaneously, consistent nourishment — genuine minerals, living compounds, real fats — meets needs that the processed food was perpetually failing to meet. The craving was never a personality trait. It was a biological state. And biological states change when their conditions change."},
+    c:{headline:"She has not forgotten — the neurological and microbial conditions that generated the craving have changed.",detail:"This distinction matters: forgetting implies the craving still exists but is being suppressed. What Nadia is describing is different — the craving itself is largely gone. This is not memory suppression but genuine recalibration of the systems that generated the craving. People who have undergone this shift often report that the junk food they once craved simply no longer appeals — its taste has not changed, but their response to it has."},
+    d:{headline:"Three weeks is enough time for meaningful microbiome shift — the change is real.",detail:"Gut microbiome composition begins to shift within days of significant dietary change. By three weeks of consistent whole food eating, the microbial landscape has changed meaningfully enough to alter the chemical signals being sent to the brain. This is not a temporary suppression of craving that will rebound — it is the beginning of a genuine recalibration. Sustained change produces sustained results."}
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById('feedback-text-' + scenarioNum).textContent = fb.headline;
+      document.getElementById('feedback-detail-' + scenarioNum).textContent = fb.detail;
+      document.getElementById('feedback-' + scenarioNum).classList.add('visible');
+      const nextBtn = document.getElementById('next-' + scenarioNum);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function updateProgress() {
+  for (let i = 1; i <= totalSlides; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active','complete');
+    if (i === currentSlide) dot.classList.add('active');
+    else if (i < currentSlide) dot.classList.add('complete');
+  }
+}
+function showSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+updateProgress();
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c8m4';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course8-module-4-the-power-of-fasting.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c8m5','1');window.location.href='course8-module-6-healing-foods-and-herbs.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

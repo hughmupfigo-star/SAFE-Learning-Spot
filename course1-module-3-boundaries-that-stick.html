@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3 · Boundaries That Stick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --paper: #fafaf7;
+  --muted: #6b6b66;
+  --line: #d9d9d3;
+  --soft: #f0f0ea;
+  --accent: #c4452d;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* HEADER */
+.module-header {
+  border-bottom: 1px solid var(--line);
+  padding: 32px 48px 32px 24px;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  justify-items: start;
+  align-items: baseline;
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.module-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.module-tag strong { color: var(--ink); font-weight: 500; }
+
+.progress-bar { grid-column: 3; justify-self: end; display: flex; gap: 6px; align-items: center; }
+
+.progress-dot {
+  width: 24px;
+  height: 2px;
+  background: var(--line);
+  transition: background 0.4s ease;
+}
+
+.progress-dot.active { background: var(--ink); }
+.progress-dot.complete { background: var(--accent); }
+
+/* CONTAINER */
+.module-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 80px 48px 120px;
+}
+
+.slide { display: none; animation: fadeUp 0.6s ease; }
+.slide.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* TYPOGRAPHY */
+.slide-number {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.slide-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 5.5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+  font-variation-settings: "opsz" 144;
+}
+
+.slide-title em { font-style: italic; font-weight: 300; }
+
+.lead {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
+
+.body-text {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #2a2a28;
+  margin-bottom: 24px;
+  max-width: 62ch;
+}
+
+.body-text strong { font-weight: 500; color: var(--ink); }
+
+.section-heading {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 56px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-heading::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.pullquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.4;
+  font-weight: 300;
+  border-left: 2px solid var(--ink);
+  padding: 8px 0 8px 32px;
+  margin: 48px 0;
+  color: var(--ink);
+}
+
+/* CONTRAST CARDS — used for "this vs that" structure on Page 2 */
+.contrast-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  margin: 40px 0;
+  border: 1px solid var(--line);
+}
+
+.contrast-cell {
+  background: var(--paper);
+  padding: 28px;
+}
+
+.contrast-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.contrast-cell.is-true .contrast-label {
+  color: var(--accent);
+}
+
+.contrast-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* KIND CARDS — used for "four kinds of boundaries" */
+.kind {
+  margin: 36px 0;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+}
+
+.kind:last-of-type { border-bottom: 1px solid var(--line); margin-bottom: 56px; }
+
+.kind-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.kind-name {
+  font-family: var(--serif);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.kind-example {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 20px 0 8px;
+  font-weight: 500;
+}
+
+.kind-example-text {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--ink);
+  padding-left: 20px;
+  border-left: 2px solid var(--line);
+}
+
+/* RESPONSE CARDS — used for "surviving the response" */
+.response {
+  margin: 32px 0;
+  padding: 28px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+}
+
+.response-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.response-sounds {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+.response-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: #2a2a28;
+  line-height: 1.5;
+}
+
+/* SCENARIO */
+.scenario {
+  margin-top: 72px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line);
+}
+
+.scenario-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.scenario-prompt {
+  font-family: var(--serif);
+  font-size: 24px;
+  line-height: 1.45;
+  font-weight: 400;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.scenario-context {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+.choices { display: flex; flex-direction: column; gap: 12px; }
+
+.choice {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 20px 24px;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  font-weight: 400;
+}
+
+.choice:hover {
+  border-color: var(--ink);
+  background: var(--soft);
+  transform: translateX(2px);
+}
+
+.choice-letter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  margin-right: 14px;
+  letter-spacing: 0.1em;
+}
+
+.choice.selected {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.choice.selected .choice-letter { color: var(--paper); opacity: 0.6; }
+.choice:disabled { cursor: default; }
+.choice:disabled:hover { transform: none; }
+.choice.dimmed { opacity: 0.4; }
+
+/* FEEDBACK */
+.feedback {
+  display: none;
+  margin-top: 32px;
+  padding: 32px;
+  background: var(--soft);
+  border-left: 2px solid var(--ink);
+  animation: fadeUp 0.5s ease;
+}
+
+.feedback.visible { display: block; }
+
+.feedback-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.feedback-headline {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: -0.005em;
+}
+
+.feedback-text {
+  font-family: var(--sans);
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #2a2a28;
+  font-weight: 400;
+}
+
+/* NAVIGATION */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.nav-btn {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 12px 0;
+  transition: opacity 0.2s ease;
+  font-weight: 500;
+}
+
+.nav-btn:hover { opacity: 0.6; }
+.nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+
+.nav-btn.primary {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 16px 32px;
+}
+
+.nav-btn.primary:hover { background: #2a2a28; opacity: 1; }
+.nav-btn.primary:disabled { background: var(--line); color: var(--muted); }
+
+.nav-counter {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* COMPLETION */
+.complete-mark {
+  font-family: var(--serif);
+  font-size: 120px;
+  line-height: 1;
+  font-weight: 300;
+  margin-bottom: 32px;
+  color: var(--accent);
+  font-style: italic;
+}
+
+.summary-list { list-style: none; margin: 40px 0; }
+
+.summary-list li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 24px;
+  align-items: baseline;
+}
+
+.summary-list li:last-child { border-bottom: none; }
+
+.summary-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  min-width: 32px;
+}
+
+.summary-text {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .module-header { padding: 20px 24px; }
+  .module-container { padding: 48px 24px 80px; }
+  .slide-title { font-size: 38px; }
+  .lead { font-size: 19px; }
+  .body-text { font-size: 16px; }
+  .scenario-prompt { font-size: 20px; }
+  .pullquote { font-size: 22px; padding-left: 24px; margin: 32px 0; }
+  .progress-dot { width: 12px; }
+  .complete-mark { font-size: 80px; }
+  .kind-name { font-size: 24px; }
+  .contrast-grid { grid-template-columns: 1fr; }
+  .response-name { font-size: 20px; }
+}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Module <strong>03</strong> · Boundaries That Stick</div>
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-dot active" data-page="1"></div>
+    <div class="progress-dot" data-page="2"></div>
+    <div class="progress-dot" data-page="3"></div>
+    <div class="progress-dot" data-page="4"></div>
+    <div class="progress-dot" data-page="5"></div>
+    <div class="progress-dot" data-page="6"></div>
+    <div class="progress-dot" data-page="7"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 1 &middot; Energy &amp; Relationships</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c1m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course1-module-1-energy-as-currency.html">Energy as Currency</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course1-module-2-energy-vampire-archetype.html">The Energy Vampire Archetype</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course1-module-3-boundaries-that-stick.html">Boundaries That Stick</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course1-module-4-the-cost-of-nice.html">The Cost of Nice</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course1-module-5-reclaiming-your-space.html">Reclaiming Your Space</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course1-module-6-friendship-without-weaponry.html">Friendship Without Weaponry</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- ============ SLIDE 1: WHY THEY COLLAPSE ============ -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 07 · The Collapse</div>
+    <h1 class="slide-title">Why most boundaries <em>collapse.</em></h1>
+
+    <p class="lead">You've set boundaries before. You probably set one last month, last year, last decade. And yet here you are, in the same dynamic, having the same conversation with yourself about why you let it happen again.</p>
+
+    <p class="body-text">It is tempting to read this as evidence of your weakness. It is not. <strong>Boundaries don't fail because they were wrong. They fail because they were stated once and then abandoned at the first sign of resistance.</strong></p>
+
+    <p class="body-text">You were taught that a boundary is something you announce. You say the sentence — "I need space," "I can't do that anymore," "please don't call this late" — and then you wait for the other person to respect it. When they don't, you assume the failure is yours for not communicating clearly enough. So you try again. With more words. With more apology baked in. With more softening.</p>
+
+    <div class="section-heading">The three reasons they don't hold</div>
+
+    <p class="body-text"><strong>You stated it as a request, not a position.</strong> "Can you please stop doing X?" leaves the answer to them. They can say no, and many will — quietly, by continuing to do X. A boundary that depends on their consent is not a boundary. It's a wish.</p>
+
+    <p class="body-text"><strong>You attached no consequence.</strong> Without a consequence, the boundary is a complaint. The person hears the discomfort but has no incentive to adjust. They wait it out. They know you'll fold by next week, because you always have. The pattern is the evidence.</p>
+
+    <p class="body-text"><strong>You expected to feel good after setting it.</strong> Real boundaries usually feel terrible at first — guilty, mean, exposed, like you've broken something. People who set boundaries cleanly are not free of those feelings. They've just stopped using those feelings as evidence that the boundary was wrong.</p>
+
+    <div class="pullquote">A boundary that requires the other person to agree with it is not a boundary. It is a negotiation you're losing in advance.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You've set the same boundary with the same person three times in the past year.</p>
+      <p class="scenario-context">Each time, they apologise, things improve for a week or two, and then the behaviour returns — sometimes worse than before. You're starting to feel foolish for trying again.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Set the boundary a fourth time, but this time really mean it.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Stop stating the boundary out loud and start enforcing it through what you actually do.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Accept that the boundary won't stick. Adjust your expectations of the relationship downward.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Decide they'll never change and end the relationship today.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 2: WHAT A BOUNDARY IS ============ -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 07 · The Definition</div>
+    <h1 class="slide-title">What a boundary actually <em>is.</em></h1>
+
+    <p class="lead">Almost everything you've been told is a boundary is actually something else. A rule. A request. An ultimatum. A wall. Each of these has its own logic, and none of them does what a boundary does.</p>
+
+    <p class="body-text">Here is the core distinction, and it is the distinction that changes everything: <strong>a boundary is not what the other person must do. It is what you will do.</strong></p>
+
+    <div class="contrast-grid">
+      <div class="contrast-cell">
+        <div class="contrast-label">Not a boundary</div>
+        <p class="contrast-text">"You can't talk to me that way."</p>
+      </div>
+      <div class="contrast-cell is-true">
+        <div class="contrast-label">Boundary</div>
+        <p class="contrast-text">"If you talk to me that way, I'll end the conversation."</p>
+      </div>
+
+      <div class="contrast-cell">
+        <div class="contrast-label">Not a boundary</div>
+        <p class="contrast-text">"Stop calling me after 10pm."</p>
+      </div>
+      <div class="contrast-cell is-true">
+        <div class="contrast-label">Boundary</div>
+        <p class="contrast-text">"I don't answer calls after 10pm."</p>
+      </div>
+
+      <div class="contrast-cell">
+        <div class="contrast-label">Not a boundary</div>
+        <p class="contrast-text">"You need to respect my time."</p>
+      </div>
+      <div class="contrast-cell is-true">
+        <div class="contrast-label">Boundary</div>
+        <p class="contrast-text">"I leave conversations that run past the time I agreed to."</p>
+      </div>
+    </div>
+
+    <div class="section-heading">Why the distinction matters</div>
+
+    <p class="body-text">The boundary on the right does not depend on the other person's cooperation. It does not require their agreement, their understanding, or their good faith. It simply describes <strong>what you do.</strong> The other person can do whatever they like — and you will respond according to your stated position. You are no longer asking. You are informing.</p>
+
+    <p class="body-text">This shift is not semantic. It rearranges the entire power structure of the interaction. The person on the other side no longer holds your wellbeing hostage to their willingness. You have taken back the only thing that was ever yours to control — your own behaviour.</p>
+
+    <div class="pullquote">The boundary is not the sentence. The boundary is the action you take when the sentence is tested.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You realise that most of what you've called boundaries have actually been requests.</p>
+      <p class="scenario-context">Years of "please stop doing X" and "I need you to do Y." The person has been technically free to refuse the entire time — and they have, mostly by not noticing.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Feel humiliated. Decide you've been weak this whole time.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Re-read the situations with the new lens. Notice which were requests, which were ultimatums, which were nothing at all.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Immediately rewrite every old boundary as a boundary and announce them all.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Decide the framework is too rigid. Most of your relationships are fine. You don't need this.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 3: THE FOUR KINDS ============ -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 07 · The Four Kinds</div>
+    <h1 class="slide-title">The four kinds of <em>boundary.</em></h1>
+
+    <p class="lead">Not all boundaries are about behaviour. Some are about time, some about energy, some about what you'll discuss, some about how close someone gets to your inner life. Knowing which one is being violated tells you which one to set.</p>
+
+    <!-- KIND 1 -->
+    <div class="kind">
+      <div class="kind-num">Kind 01</div>
+      <h2 class="kind-name">Time</h2>
+      <p class="body-text">The most basic and the most violated. How much of your day, week, attention, and immediate availability you offer. Time boundaries are violated by people who treat your time as infinite — who call without checking, drop in without notice, expect immediate replies, and stretch every meeting past its agreed end.</p>
+      <div class="kind-example">What it sounds like</div>
+      <p class="kind-example-text">"I'm not available without notice. If you need something urgently, send a message and I'll respond when I can."</p>
+    </div>
+
+    <!-- KIND 2 -->
+    <div class="kind">
+      <div class="kind-num">Kind 02</div>
+      <h2 class="kind-name">Energy</h2>
+      <p class="body-text">How much emotional, psychological, and physical bandwidth you offer to anyone's experience that isn't yours. Energy boundaries are violated by people who use you as their emotional regulator — who unload without asking, monopolise conversations, and never reciprocate. You can give someone time and still protect your energy.</p>
+      <div class="kind-example">What it sounds like</div>
+      <p class="kind-example-text">"I don't have capacity for this conversation tonight. I can listen for ten minutes, or we can pick it up tomorrow when I have more to give."</p>
+    </div>
+
+    <!-- KIND 3 -->
+    <div class="kind">
+      <div class="kind-num">Kind 03</div>
+      <h2 class="kind-name">Content</h2>
+      <p class="body-text">What you will and won't discuss. Some topics are not on the table. Some questions you won't answer. Some details about your life are not anyone's business — and the people most insistent on receiving them are usually the people most likely to use them against you later. Content boundaries protect the inner architecture of your life.</p>
+      <div class="kind-example">What it sounds like</div>
+      <p class="kind-example-text">"That's not something I discuss. Let's talk about something else." (No further explanation required. The explanation is the loophole.)</p>
+    </div>
+
+    <!-- KIND 4 -->
+    <div class="kind">
+      <div class="kind-num">Kind 04</div>
+      <h2 class="kind-name">Proximity</h2>
+      <p class="body-text">How close someone gets to your inner life — your real opinions, your unresolved fears, your private hopes, your tender places. Not everyone earns this access. Many relationships work perfectly well at arm's length and would be damaged by closeness. Proximity is the boundary that decides who knows the real you.</p>
+      <div class="kind-example">What it sounds like</div>
+      <p class="kind-example-text">No words required. You simply stop volunteering. You answer the surface question without offering the deeper context. You let the relationship live at the depth it has actually earned.</p>
+    </div>
+
+    <div class="pullquote">When you can name which kind of boundary is being violated, you can respond with precision. Most people are vague because they were taught a vocabulary of one.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">A close family member asks about your finances for the third time this month.</p>
+      <p class="scenario-context">They are not in crisis. They are not asking to help. They simply want to know — how much you earn, what you spent on the trip, why you bought the thing you bought. You don't want to answer, but refusing feels rude.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Give a partial answer and feel resentful about giving it.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Treat this as a content boundary. "That's not something I discuss." Change the subject. Don't explain.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Give a long explanation about why finances are private to you.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Lie about the amounts to protect yourself.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 4: STATING ONCE, HOLDING FOREVER ============ -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 07 · The Architecture</div>
+    <h1 class="slide-title">State it once. Hold it <em>forever.</em></h1>
+
+    <p class="lead">A boundary, once set, is not re-negotiated each time it's tested. This is the part almost nobody is taught — and it's the part that separates boundaries that work from boundaries that produce more conflict than they solve.</p>
+
+    <p class="body-text">When a boundary is tested, the temptation is to restate it, defend it, explain it again, justify why you have it in the first place. <strong>Every time you do this, you weaken the boundary.</strong> You are re-opening a settled matter. You are inviting the negotiation you already closed.</p>
+
+    <div class="section-heading">The three rules of holding</div>
+
+    <p class="body-text"><strong>State it once. Clearly. Without softening.</strong> "I don't lend money to family. That's my position." One sentence. No long preamble. No apologetic framing. The brevity is the strength — long boundaries invite long counter-arguments.</p>
+
+    <p class="body-text"><strong>Don't justify it on subsequent occasions.</strong> When it's tested again, you do not re-explain. You repeat the same sentence, or a shorter version of it. "I don't lend money to family." Not a new reason. Not an updated rationale. <em>The boundary is the answer. Justification is the leak.</em></p>
+
+    <p class="body-text"><strong>Enact the consequence without warning the second time.</strong> The first violation gets the statement. The second gets the action. You said you would leave conversations that became hostile. The conversation becomes hostile. You leave. No fresh announcement. The leaving is the announcement.</p>
+
+    <div class="section-heading">Why explanation is the leak</div>
+
+    <p class="body-text">When you justify a boundary, you are implicitly accepting that the boundary requires justification — which means the other person can challenge the justification, find holes in it, present new arguments, and re-open the question. <strong>The conversation moves from your position to your reasoning</strong>, and once you're defending your reasoning, you've already lost.</p>
+
+    <p class="body-text">People who hold boundaries cleanly are not better at arguing. They've simply stopped arguing. The position is the position. It does not require their interlocutor's approval. It exists whether or not it's understood.</p>
+
+    <div class="pullquote">"I'm not discussing it" is a complete sentence. The instinct to add more is the instinct that erodes everything you just built.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You set a boundary clearly last month. It's now being tested for the second time.</p>
+      <p class="scenario-context">The person seems to have forgotten. Or pretended to forget. They're asking you to re-explain why this matters to you. They sound reasonable. Your instinct is to walk them through it again, gently.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Re-explain everything in detail. Maybe this time they'll understand.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Repeat the original sentence. No new reasoning. Then enact the consequence if the testing continues.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Soften the boundary slightly so the conversation can move on.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Refuse to engage with the question at all. Don't respond.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 5: SURVIVING THE RESPONSE ============ -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 07 · The Response</div>
+    <h1 class="slide-title">Surviving the <em>response.</em></h1>
+
+    <p class="lead">Whenever you set a real boundary with someone who has benefited from your lack of one, you will be tested. The test is not personal — it is procedural. The person is checking whether the new system will hold or whether the old system can be restored.</p>
+
+    <p class="body-text">The tests come in four predictable shapes. Knowing the shapes in advance is most of the work of surviving them — because the test only works when you don't recognise it as a test.</p>
+
+    <div class="response">
+      <p class="response-name">The guilt-trip</p>
+      <p class="body-text">The most common response, and the most weaponised. They will frame your boundary as cruelty, abandonment, selfishness, or proof that you've changed for the worse. They may bring up sacrifices they've made for you, things you owe them, the suffering your boundary causes.</p>
+      <p class="response-sounds">What it sounds like</p>
+      <p class="response-quote">"After everything I've done for you, this is how you treat me?"<br>"You've really changed since you started reading those self-help things."<br>"I never thought I'd hear you say something so cold."</p>
+    </div>
+
+    <div class="response">
+      <p class="response-name">The rage</p>
+      <p class="body-text">Anger, sometimes explosive, sometimes cold. The intensity is designed to make the cost of holding the boundary feel higher than the cost of dropping it. Most people fold here, because the rage feels like an emergency. It is not an emergency. It is a tactic — conscious or not.</p>
+      <p class="response-sounds">What it sounds like</p>
+      <p class="response-quote">"This is ridiculous." (Voice rising.)<br>"You're being completely unreasonable."<br>"I can't believe you're doing this to me right now."</p>
+    </div>
+
+    <div class="response">
+      <p class="response-name">The silent treatment</p>
+      <p class="body-text">The withdrawal. They go quiet — sometimes for days, sometimes for weeks. The silence is meant to teach you that boundaries have a cost, and that the cost is their warmth. They are betting that you will break first and apologise to restore the connection.</p>
+      <p class="response-sounds">What it feels like</p>
+      <p class="response-quote">No response to your messages. Short, clipped replies. The atmosphere goes cold without explanation. The relationship is held hostage to a conversation neither of you is having.</p>
+    </div>
+
+    <div class="response">
+      <p class="response-name">The love-bomb</p>
+      <p class="body-text">The most disorienting response, because it doesn't feel like an attack. They become suddenly affectionate, generous, contrite. Gifts arrive. Apologies are made. The relationship glows for a week or two. This is not change — it is a deposit being made into an account they intend to withdraw from later.</p>
+      <p class="response-sounds">What it sounds like</p>
+      <p class="response-quote">"You were right, I've been awful. I'm going to do better."<br>"I love you so much. I don't know what I'd do without you."<br>(Three weeks later: the original behaviour returns.)</p>
+    </div>
+
+    <div class="pullquote">The response to your boundary is not feedback on your boundary. It is information about the person responding.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You set a clear boundary three days ago. Since then, the person has gone completely silent.</p>
+      <p class="scenario-context">No replies to your last two messages. The silence is loud. Your stomach hurts. Part of you wants to send a long, apologetic message to make it stop.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Send the apology. Restore the warmth. Tell yourself you'll set the boundary differently next time.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Recognise the silence as the test it is. Let it continue. Do not break it.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Send one message confronting the silent treatment directly.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Spiral. Refresh your phone every ten minutes. Lose sleep. Wait.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 6: WHEN IT ENDS THE RELATIONSHIP ============ -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Page 06 / 07 · The Cost</div>
+    <h1 class="slide-title">When the boundary <em>ends</em> the relationship.</h1>
+
+    <p class="lead">Some boundaries reveal that the relationship was contingent on you not having them. The connection survived only because you kept paying a cost you could no longer afford. When you stopped paying, the connection collapsed — because the connection was the payment.</p>
+
+    <p class="body-text">This is the most painful part of the work, and the part nobody prepares you for. You will lose people. Some of them will be people you loved. Some of them will be people you've known your whole life. And the loss will feel, in the moment, like proof that your boundary was wrong — that you were too harsh, too sudden, too inflexible.</p>
+
+    <p class="body-text">It is not proof of that. It is proof of something harder to accept: <strong>the relationship needed your over-functioning to exist. Once you stopped, there was nothing left.</strong> This is not a failure of the boundary. It is the boundary doing exactly what it was supposed to do — revealing the actual shape of what was there.</p>
+
+    <div class="section-heading">What to do with the grief</div>
+
+    <p class="body-text"><strong>Let it be real.</strong> Don't pretend you don't miss them. Don't pretend the relationship was always bad. Some of it was real. Some of it was beautiful. The grief is correct, and trying to argue yourself out of it will only delay it. You can hold the loss without taking the boundary back.</p>
+
+    <p class="body-text"><strong>Resist the rewrite.</strong> The mind will be tempted to revise the history — to remember the relationship as worse than it was, so the loss feels justified. This is a defence mechanism, not the truth. The honest position is: it was real, it was costly, you chose your sovereignty, and you are grieving an actual thing.</p>
+
+    <p class="body-text"><strong>Wait before re-evaluating.</strong> In the first weeks after a major boundary, the urge to reach out, apologise, restore the relationship will be intense. Wait. Give it three months minimum before you re-examine. The version of you that wants to undo it is the version still in withdrawal — not the version that set the boundary in the first place.</p>
+
+    <p class="body-text"><strong>Watch what fills the space.</strong> When you stop paying for relationships that required your depletion, you will have more energy than you've had in years. The new space is uncomfortable at first — it is silent, and silence is unfamiliar. Be careful what you fill it with. Don't immediately recruit a new version of the old pattern. Let the space be quiet for a while. <em>The quiet is the result.</em></p>
+
+    <div class="pullquote">The relationships that survive your sovereignty are the ones that were never feeding on it. That information is its own kind of arrival.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">A long-standing relationship has ended because of a boundary you held.</p>
+      <p class="scenario-context">It's been six weeks. You feel the grief, the doubt, the temptation to reach out and undo it. You're not sure if you did the right thing.</p>
+
+      <div class="choices" data-scenario="6">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Send the message. Apologise. Restore the relationship on the old terms.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Let the grief be real, but don't act on it. Wait at least three months before considering anything.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Rewrite the relationship in your mind as having been worse than it was, to make the loss easier.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Immediately fill the gap by recruiting someone new into a similar role.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-6">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-6"></p>
+        <p class="feedback-text" id="feedback-detail-6"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 7: COMPLETE ============ -->
+  <section class="slide" data-slide="7">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module Three.</em></h1>
+
+    <p class="lead">You now know why your boundaries have collapsed in the past — and you have an architecture for ones that will hold. Not every relationship will survive your new structure. The ones that do will be more honest than the ones that don't.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li>
+        <span class="summary-num">01</span>
+        <span class="summary-text">A boundary is not what the other person must do. It is what you will do. The shift from request to position changes everything.</span>
+      </li>
+      <li>
+        <span class="summary-num">02</span>
+        <span class="summary-text">Without a consequence, a boundary is a complaint. The consequence does not need to be punitive. It just needs to exist.</span>
+      </li>
+      <li>
+        <span class="summary-num">03</span>
+        <span class="summary-text">Time. Energy. Content. Proximity. When you can name which kind is being violated, you can respond with precision.</span>
+      </li>
+      <li>
+        <span class="summary-num">04</span>
+        <span class="summary-text">State it once. Don't justify on subsequent occasions. Explanation is the leak that erodes everything you built.</span>
+      </li>
+      <li>
+        <span class="summary-num">05</span>
+        <span class="summary-text">The guilt-trip, the rage, the silent treatment, the love-bomb — these are predictable tests. The response is not feedback on your boundary. It is information about the person responding.</span>
+      </li>
+      <li>
+        <span class="summary-num">06</span>
+        <span class="summary-text">Some relationships will end. That is the boundary doing its job, not a sign that you set it wrong.</span>
+      </li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">Identify one place in your life where you have been setting a request and calling it a boundary. Rewrite it as a position — what <em>you</em> will do, not what they must do. You do not have to enact it this week. Just rewrite it on paper. Notice how the sentence sits differently. Notice how it feels in your body to know that the boundary no longer requires anyone's consent.</p>
+
+    <p class="body-text"><strong>Reflection prompt one.</strong> Think of a boundary you have set more than twice with the same person. Ask yourself honestly: what was I afraid would happen if I enforced the consequence? Write the fear down without editing it. Most collapsed boundaries have a specific fear underneath them — losing the relationship, being called difficult, not being believed. Naming the fear is the first step to separating it from the decision.</p>
+
+    <p class="body-text"><strong>Reflection prompt two.</strong> When you picture setting a clean boundary with someone significant — stating it once, holding it without explanation — notice which response from them you most dread. The guilt-trip? The rage? The cold withdrawal? The wounded silence? Your most-dreaded response is the one they have already learned is most effective on you. Knowing this doesn't make you immune to it. But it makes the response visible as a tool rather than a verdict on your character.</p>
+
+    <p class="body-text">The next module — <strong>The Cost of Nice</strong> — examines the specific way niceness has been trained into you as a survival mechanism, and how it quietly disqualifies you from the very sovereignty you've been building.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">07 / 07</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 04 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ============ FEEDBACK CONTENT ============
+// Pure consequence reflection. No grading. The reader decides the meaning.
+
+const feedback = {
+  1: {
+    a: {
+      headline: "Stating the same boundary a fourth time teaches them the boundary is renewable.",
+      detail: "Every restatement without enforcement signals that the words are the whole game — that talking about the line is what happens, not the line itself. They learn to weather the conversation, apologise sincerely, and resume the behaviour, because the pattern shows them that nothing else will happen. The intensity of your sincerity this time is not new information to them. It's the same data with a louder soundtrack."
+    },
+    b: {
+      headline: "Enforcement without announcement is the move that actually changes the dynamic.",
+      detail: "Once your behaviour shifts — you don't pick up the late call, you leave the conversation when it tips into the old pattern, you stop volunteering the energy you were spending on damage control — the relationship reorganises itself around your new defaults. No speeches required. The boundary is no longer a thing you announce. It's a thing you embody, and the person on the other side adjusts to the embodiment or doesn't."
+    },
+    c: {
+      headline: "Lowering your expectations protects you from disappointment and from the relationship.",
+      detail: "Adjusting expectations downward is a real and sometimes necessary move — it acknowledges what the relationship can hold. The cost is that you also stop hoping for repair, which means you stop investing in anything that might produce it. This is sometimes exactly right. It is also sometimes a slow-motion exit that nobody has called yet."
+    },
+    d: {
+      headline: "An immediate exit prevents you from learning what was actually possible.",
+      detail: "Cutting cleanly today, without first testing what enforcement (rather than restatement) would have produced, skips the data that would tell you whether the relationship was salvageable. Some relationships are not salvageable. But you'll never know which ones unless you change your own behaviour first and watch what happens to theirs. The exit will still be available in three months — and you'll know more by then."
+    }
+  },
+  2: {
+    a: {
+      headline: "Humiliation about past patterns keeps you stuck in them.",
+      detail: "Calling your previous self weak is a form of self-attack disguised as insight. It produces shame, not change — and shame tends to drive people back to the very patterns they're ashamed of, because shame is exhausting and the old patterns are familiar. The version of you who used requests was using the only tool you'd been given. The work is to add tools, not to indict the person who didn't have them."
+    },
+    b: {
+      headline: "Re-reading old situations with a new lens reorganises your sense of what happened.",
+      detail: "Some of what you called failures will turn out to have been requests that were perfectly reasonable for you to make — they just weren't boundaries. Some will turn out to have been ultimatums you couldn't follow through on. Some will turn out to have been nothing at all, just complaints you voiced and then forgot. The taxonomy clarifies. After the clarification, you have a much smaller and more manageable list of actual things to address."
+    },
+    c: {
+      headline: "Announcing a wave of new boundaries at once tends to produce a wave of resistance at once.",
+      detail: "When you change the rules in five relationships in the same week, the people in those relationships will compare notes — sometimes literally, sometimes just emotionally — and the change will feel coordinated, theatrical, like a phase. The boundaries will be tested simultaneously. You will burn out before you can hold them. Sequencing the changes, one or two relationships at a time, lets each adjustment land and stabilise before the next."
+    },
+    d: {
+      headline: "Rejecting the framework lets the old patterns continue uninterrupted.",
+      detail: "Deciding the framework is too rigid for real human relationships is one way to avoid applying it. The relationships are 'mostly fine' until they aren't, and the not-fine moments are the ones that keep recurring — at increasing intervals or decreasing intervals, but always recurring. The framework does not need to be applied to every relationship. But declining to apply it anywhere is usually a way of declining to look at where it would land."
+    }
+  },
+  3: {
+    a: {
+      headline: "Partial answers given under pressure produce resentment that outlasts the conversation.",
+      detail: "You'll feel the cost for days afterwards — the small humiliation of having given information you didn't want to give, the rehearsal of what you should have said instead, the quiet anger at yourself for folding. The relative comes away with the data they wanted and no sense that anything was difficult for you. The pattern repeats next month because nothing in the encounter signalled that the question shouldn't be asked."
+    },
+    b: {
+      headline: "'That's not something I discuss' is sufficient and complete.",
+      detail: "The first time, there may be visible surprise — relatives unaccustomed to your refusal will sometimes test it twice, looking for the soft middle. Hold the line. Change the subject. Don't explain. The third time the question doesn't come, because the pattern has been re-established. The relationship survives the redirection in nearly every case. The thing that doesn't survive is your private resentment, which dissolves once you stop participating in the interrogation."
+    },
+    c: {
+      headline: "A long explanation invites a long counter-argument.",
+      detail: "The moment you defend your need for privacy, you accept that the privacy requires defending. Now you're in a debate about whether your privacy is reasonable — and the relative will produce a series of reasons it isn't. You will lose, because you are arguing on terrain they chose. The explanation was the loophole. The short refusal was the door."
+    },
+    d: {
+      headline: "Lying solves the immediate problem and creates a longer one.",
+      detail: "You'll need to remember what you said, defend it under follow-up questioning, and live with the small low-grade dread that the lie will surface later. The relative gets answers, just false ones. You get a sense of having been disrespected and having compounded the disrespect by participating dishonestly. The truth — which is that you're not discussing it — was the easier option and the one that didn't require ongoing maintenance."
+    }
+  },
+  4: {
+    a: {
+      headline: "Re-explaining is the move that converts your boundary back into a request.",
+      detail: "When you walk through the reasoning a second time, you are saying — implicitly — that the boundary requires their understanding to be valid. Which means it requires their agreement. Which means it's not a boundary anymore. The longer the second explanation, the smaller the boundary becomes. By the end of the conversation, you'll have negotiated yourself back to where you started, often without noticing the negotiation happened."
+    },
+    b: {
+      headline: "Repeating the original sentence holds the structure that the explanation would erode.",
+      detail: "Short repetition is sometimes called 'broken record' in the older literature, and people resist using it because it feels rude. The discomfort is real. It also passes. The person on the other side eventually understands that the line is the line — not because you proved it again, but because you didn't allow the proving to become the new conversation. The first enacted consequence after a second restatement is what actually teaches them the line is real."
+    },
+    c: {
+      headline: "Softening the boundary to ease the moment reopens the entire negotiation.",
+      detail: "A small softening — 'well, just this once' or 'I see your point' — tells the other person that pressure produces movement. The next test will be a little harder, because the system has been shown to respond. You will end up holding a much weaker version of the boundary you originally set, and feeling like you compromised reasonably, when what actually happened is that you trained them to push."
+    },
+    d: {
+      headline: "Total silence is sometimes appropriate and is often confusing.",
+      detail: "Refusing to engage can be a clean move when the question is in obviously bad faith, but applied to ordinary testing it usually reads as moodiness rather than position. The person doesn't know whether you're upset, busy, or rethinking. They will keep asking. The repetition of the same sentence is usually more effective than silence, because it removes ambiguity — there is no question of whether you've thought about it, only of whether they've heard you."
+    }
+  },
+  5: {
+    a: {
+      headline: "The apology you send to end the silence teaches the silence to work next time.",
+      detail: "What you've just demonstrated is that silence — applied long enough — produces capitulation. The relationship returns to a fragile warmth, but the underlying terms have shifted: you've shown that this person can, at any point, withdraw their presence and you will break first. The next time you set a boundary, the silent treatment will arrive sooner and last longer, because it has been confirmed as a functional tool."
+    },
+    b: {
+      headline: "Holding through the silence is the hardest part of the entire module.",
+      detail: "Your nervous system will interpret the silence as an emergency for days, possibly weeks. The discomfort is not a sign that you've done something wrong — it is the predictable cost of refusing the system you used to participate in. Most silent treatments end on their own once the initiator realises the strategy isn't producing what it used to. Some don't. Either outcome is information you needed."
+    },
+    c: {
+      headline: "Naming the silent treatment directly sometimes lands and sometimes accelerates the escalation.",
+      detail: "Calling out the silence — 'I notice you've gone quiet and I want to name it' — can occasionally produce a real conversation with someone who's open to one. With most people who use the silent treatment as a tactic, it produces denial ('I wasn't doing anything, you're being paranoid') and a deepening of the silence. Effective only with someone who has the self-awareness to admit what they were doing. Counterproductive with everyone else."
+    },
+    d: {
+      headline: "Spiralling in silent vigilance trains your body to fear the next boundary.",
+      detail: "Three days of refreshing your phone, losing sleep, and waiting for absolution is not 'holding the boundary' — it's paying for the boundary in a different currency. The body learns that setting boundaries means days of nervous-system distress, and starts trying to talk you out of setting them in the first place. The boundary survives. You arrive at the other side depleted and afraid to do it again."
+    }
+  },
+  6: {
+    a: {
+      headline: "Restoring the relationship on the old terms confirms that the boundary was the problem.",
+      detail: "The person on the other side will accept the apology, sometimes graciously, sometimes with a small note of triumph. The relationship resumes — and the dynamic resumes with it, because nothing has changed about what made it costly. You will likely find yourself in the same crisis within six to twelve months, this time with the added weight of having tried once and failed. The next attempt will be harder, not easier."
+    },
+    b: {
+      headline: "Three months of waiting protects you from a decision made in withdrawal.",
+      detail: "The grief is real and the urge to undo is normal, but neither is the same as new information. After three months the nervous system has settled, the absence has been integrated, and you can re-evaluate the relationship without the chemical pull of acute loss. Some people, after three months, decide to reach out on different terms. Some realise they don't want to. Both are valid. Neither is available while the wound is fresh."
+    },
+    c: {
+      headline: "Rewriting the relationship as worse than it was makes the loss easier and the lesson smaller.",
+      detail: "If you remember it as having been all bad, you don't have to grieve anything real — which seems like a relief, but it also means you don't have to learn anything. The honest position is harder: there was real love there, real warmth, real connection, AND it was costing you something you could no longer afford. Both true. The rewrite spares you the grief and steals the wisdom."
+    },
+    d: {
+      headline: "Recruiting a replacement immediately reinstalls the old role with a new face.",
+      detail: "The energy that was being absorbed by the previous relationship now has somewhere to go. If you don't let it sit empty for a while, it will find a familiar shape — someone who needs your over-functioning, your emotional regulation, your over-supply. The pattern that drew the original relationship is still operational in you. Until it has time to settle, the next person you recruit will closely resemble the person you lost."
+    }
+  }
+};
+
+// ============ STATE ============
+let currentSlide = 1;
+const totalSlides = 7;
+const answered = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+
+// ============ CHOICE HANDLING ============
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+// ============ NAVIGATION ============
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+
+  currentSlide = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+  if (currentSlide > 1) showSlide(currentSlide - 1);
+}
+</script>
+
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var prevKey='safespot_c1m2';
+    if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+      document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+      return;
+    }
+    var slides=document.querySelectorAll('.slide');
+    if(slides.length>0){
+      var last=slides[slides.length-1];
+      last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+        b.textContent='Begin Module 04 →';
+        b.setAttribute('onclick','');
+        b.onclick=function(){localStorage.setItem('safespot_c1m3','1');window.location.href='course1-module-4-the-cost-of-nice.html';};
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

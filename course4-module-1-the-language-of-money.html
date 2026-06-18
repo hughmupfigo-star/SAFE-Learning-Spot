@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 4 · Module 1 · The Language of Money</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+
+.truth-block{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.truth-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.truth-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.relationship{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.relationship:last-of-type{border-bottom:1px solid var(--line)}.rel-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.rel-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+.rel-signal{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:20px 0 8px;font-weight:500}.rel-quote{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.6;padding-left:20px;border-left:2px solid var(--line);color:var(--ink);margin-bottom:8px}
+
+.install{margin:28px 0;padding:28px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent)}.install-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:500}.install-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.install-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.rel-name{font-size:24px}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+
+<header class="module-header">
+  <div class="module-tag">Course 04 · Financial Truth & Reversal · Module <strong>01</strong> · The Language of Money</div>
+  <div class="progress-bar"><div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 4 &middot; Financial Sovereignty</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c4m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course4-module-1-the-language-of-money.html">The Language of Money</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course4-module-2-how-the-system-keeps-you-poor.html">How the System Keeps You Poor</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course4-module-3-the-debt-trap-architecture.html">The Debt Trap</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course4-module-4-building-true-wealth.html">Building True Wealth</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course4-module-5-the-frequency-of-abundance.html">The Frequency of Abundance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course4-module-6-money-as-sovereignty.html">Money as Sovereignty</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course4-module-7-the-next-economy.html">The Next Economy</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- PAGE 1 -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 · The Architecture</div>
+    <h1 class="slide-title">What money actually <em>is.</em></h1>
+
+    <p class="lead">Money is not what you were taught it is. You were taught that money is a reward — that it arrives in proportion to effort, that hard work produces it reliably, that the people who have the most of it earned the most of it. This is the foundational lie of personal finance. It is not always untrue. It is structurally incomplete in a way that keeps most people poor while believing they are doing the right things.</p>
+
+    <p class="body-text"><strong>Money is a technology.</strong> It is not a reward, a measure of worth, a moral outcome, or a force of nature. It is a human-made system — a set of encoded agreements about who gets to access what, under what conditions, and at whose expense. Understanding it as a technology rather than as a reward changes everything about how you relate to it — because technologies can be learned, operated, and directed by anyone who understands their mechanism. Rewards can only be waited for.</p>
+
+    <p class="body-text"><strong>Money is a language.</strong> It is the language in which power is written. Not the only language — there are others — but the most precise. When you want to know who actually has power in any system, do not listen to what the system says about itself. Look at where the money flows. The speeches, the mission statements, the declared values — all of these can be fabricated. <em>The money flow cannot. The money tells you, with absolute precision, what the system actually values, who it actually serves, and who it is actually extracting from.</em></p>
+
+    <div class="section-heading">The three things money actually does</div>
+
+    <div class="truth-block">
+      <p class="truth-name">Money stores time.</p>
+      <p class="truth-text">Every unit of money you have is stored time — time that was exchanged for labour, or time that was generated by a system you built. When you spend money, you are spending stored time. When you save money, you are saving stored time. When you invest money, you are deploying stored time to generate more stored time without additional labour. <strong>The wealthy do not have more money than you. They have more stored time than you — which means they have more future than you.</strong> This is the structural meaning of wealth, and it has nothing to do with luxury or lifestyle.</p>
+    </div>
+
+    <div class="truth-block">
+      <p class="truth-name">Money encodes access.</p>
+      <p class="truth-text">Money determines what you can access — not just goods and services, but choices. The person with money can choose where to live, what to eat, how to spend their time, what risks to take, and what emergencies to survive. The person without money has fewer choices — and the reduction of choices is the actual mechanism of poverty, more than the absence of material goods. <strong>Poverty is not the absence of money. Poverty is the absence of choice.</strong> Money is the technology that produces choice.</p>
+    </div>
+
+    <div class="truth-block">
+      <p class="truth-name">Money moves power.</p>
+      <p class="truth-text">Every financial transaction is a transfer of power — from the person spending to the person receiving. The flow of money through a system is the flow of power through that system. When you pay rent, power flows from you to the property owner. When you receive a salary, power flows from the company to you — less power than the company extracted from your labour, which is the structural basis of employment. <em>Understanding money as a power technology, rather than as a personal reward, is the shift that makes the rest of this course possible.</em></p>
+    </div>
+
+    <div class="pullquote">You were told money is what you earn from working hard. The structural truth: money is stored time, encoded access, and transferred power. The people who understand this build wealth. The people who believe the story work until they cannot.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the three definitions — stored time, encoded access, transferred power — and feel a shift in how you understand your own financial situation.</p>
+      <p class="scenario-context">You have been working hard for years. The money has come in and the money has gone out. You have more experience and less savings than you expected by this point in your life. The story you were told — work hard, money follows — has not produced what it promised.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude you haven't worked hard enough. The story is correct. You must not be applying it properly.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the possibility that the story was incomplete. Hard work produces income. Income is not wealth. The gap between the two is the structural territory this course will map.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Reject the system entirely. Money is corrupt. The only honest response is to opt out.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel angry at the people who told you the story. Blame parents, teachers, society for installing a false narrative.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 · The Honest Language</div>
+    <h1 class="slide-title">Money tells the truth when everything else <em>lies.</em></h1>
+
+    <p class="lead">Every system in the world — every government, every corporation, every institution, every family — tells a story about its own values. The story is often sophisticated, often sincere, and often false. Money tells the truth. Not because money is moral — it is not — but because money cannot be fabricated in the way that words can. Where the money flows is where the power actually sits. The flow is the truth. Everything else is narration.</p>
+
+    <p class="body-text"><strong>A company that says it values its employees and pays them the minimum it can negotiate</strong> is telling you, through the money, what it actually values. A government that says it values education and underfunds schools is telling you, through the money, what it actually prioritises. A partner who says they are committed to the relationship and withholds financial transparency is telling you, through the money, where the real power dynamics sit. <em>The words are what they want you to believe. The money is what they actually do.</em></p>
+
+    <div class="section-heading">How to read the money language</div>
+
+    <p class="body-text"><strong>Follow the flow, not the story.</strong> When you want to understand any system — a company, a government, a relationship, your own life — look at where the money goes. Not where it is said to go. Where it actually goes. The gap between the declared values and the financial reality is the gap between the story and the truth. <em>In some systems, the gap is small — the story and the money roughly align. In many systems, the gap is enormous — and the gap is the lie.</em></p>
+
+    <p class="body-text"><strong>Notice who pays and who receives.</strong> In any transaction — a salary, a purchase, a rent payment, a debt repayment — power is moving. The person paying is transferring power. The person receiving is accumulating it. Over time, the pattern of who pays and who receives tells you, with mathematical precision, who is building power and who is depleting it. <strong>Your personal financial situation is not a reflection of your character. It is a reflection of which side of the flow you have been placed on.</strong></p>
+
+    <p class="body-text"><strong>Trace the architecture, not the amount.</strong> The amount of money you have matters less than the architecture of how it moves. A person earning £80,000 who spends £79,000 has less financial power than a person earning £30,000 who deploys £5,000 into systems that generate more. The architecture — where the money goes after it arrives — is the structure that determines whether money accumulates or dissipates. <em>Most financial advice focuses on the amount. This course focuses on the architecture.</em></p>
+
+    <div class="pullquote">You have been reading words your entire life. You have not been reading money. Money is the most honest language there is — it cannot be spun, cannot be rephrased, cannot be reinterpreted. It goes where the power goes. Learning to read it changes what you can see about every system you participate in, including your own.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You apply the "follow the flow" principle to your own finances and discover something uncomfortable.</p>
+      <p class="scenario-context">Your income flows in, and most of it flows out — to rent, to bills, to subscriptions, to purchases that felt necessary at the time. Very little is flowing into anything that generates more. You are on the paying side of almost every transaction. You are, structurally, a conduit for other people's wealth accumulation.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Feel shame. You should have been more careful with money. This is a personal failing.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Recognise the architecture without shame. The flow is the system operating as designed — your income was always intended to pass through you, not to stay with you. The recognition is not blame. It is the beginning of redirecting the architecture.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Cut all spending immediately. Hoard everything. Become financially defensive.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the analysis. This is just how life works. Everyone lives pay cheque to pay cheque. It is normal.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 · The Three Relationships</div>
+    <h1 class="slide-title">Scarcity, transaction, and <em>sovereignty.</em></h1>
+
+    <p class="lead">Every person operates from one of three relationships with money. The relationship is not determined by how much money you have — it is determined by the internal structure through which you relate to money as a concept, as a tool, and as a force in your life. People with very little money can operate from sovereignty. People with enormous wealth can operate from scarcity. The relationship is the operating system. The amount is the hardware.</p>
+
+    <div class="relationship">
+      <div class="rel-num">Relationship 01</div>
+      <h2 class="rel-name">Scarcity.</h2>
+      <p class="body-text">The felt sense that there is never enough — that money is dangerous, precarious, always threatening to disappear. The scarcity relationship produces a particular set of behaviours: hoarding without purpose, spending impulsively to relieve anxiety, avoiding financial information because looking at the numbers produces panic, making decisions from fear rather than from strategy. <strong>Scarcity is not caused by having little money. It is an internal relationship that was installed before the current financial reality existed.</strong> Some people with six-figure salaries operate from scarcity. Some people on modest incomes do not.</p>
+      <div class="rel-signal">The felt signature</div>
+      <p class="rel-quote">A tightening in the chest when money is discussed. A low-grade anxiety that operates underneath daily life, connected to the felt sense that the ground could disappear. A tendency to avoid financial conversations, to defer financial decisions, to treat money as a threatening force rather than as a neutral technology.</p>
+    </div>
+
+    <div class="relationship">
+      <div class="rel-num">Relationship 02</div>
+      <h2 class="rel-name">Transaction.</h2>
+      <p class="body-text">The earn-spend-earn cycle. Money arrives, money leaves, money arrives again. The transaction relationship is the most common — it is the relationship the economy is designed to produce, because the economy runs on throughput. Your value, in this relationship, is proportional to how much you earn and how much you spend. <strong>The transaction relationship is not dysfunctional in the way scarcity is. It is the factory setting — the default that operates when no other relationship has been consciously installed.</strong> It produces a comfortable life and no structural wealth.</p>
+      <div class="rel-signal">The felt signature</div>
+      <p class="rel-quote">A sense that money is a flow to be managed — in, out, in, out. Financial planning means budgeting the flow, not changing its architecture. The future is projected from the current income. Wealth is imagined as a higher version of the same flow, not as a structurally different relationship with money.</p>
+    </div>
+
+    <div class="relationship">
+      <div class="rel-num">Relationship 03</div>
+      <h2 class="rel-name">Sovereignty.</h2>
+      <p class="body-text">Money as a tool you govern — a technology you understand, operate, and direct toward chosen outcomes. The sovereignty relationship does not require wealth. It requires comprehension — the structural understanding of how money moves, where it accumulates, what causes it to grow, and how to position yourself on the receiving side of the flow rather than the paying side. <strong>The sovereignty relationship is not taught. It is learned — by observation, by practice, by the deliberate study of how wealth is actually built, rather than by the consumption of motivational content about deserving abundance.</strong></p>
+      <div class="rel-signal">The felt signature</div>
+      <p class="rel-quote">A calm clarity about money's function. Financial decisions are made from strategy, not from anxiety or impulse. The future is not projected from the current income — it is designed from the current understanding. Money is neither feared nor worshipped. It is operated, the way any technology is operated by someone who understands its mechanism.</p>
+    </div>
+
+    <p class="body-text">The three relationships are not moral categories. Scarcity is not weakness. Transaction is not failure. <strong>They are operating systems — and operating systems can be changed, deliberately, by someone who can see the one they are currently running.</strong> The rest of this course is the installation manual for the sovereignty relationship. The installation requires, first, the identification of which relationship you are currently operating from — and where it was installed.</p>
+
+    <div class="pullquote">You do not have a money problem. You have a money relationship. The relationship was installed before you had any money of your own, and it has been running, unexamined, ever since. Examining it is the first act of financial sovereignty.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the three relationships and recognise yourself immediately in one of them — with the specific, physical recognition that accompanies accurate description.</p>
+      <p class="scenario-context">The recognition is not comfortable. The felt signature — the chest tightening of scarcity, the flow-management of transaction, or the calm clarity of sovereignty — is identifiable in your body right now. You know which one you are running.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Declare you are operating from sovereignty. The description of sovereignty sounds like you. You understand money.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Sit with the honest recognition. Name the relationship you are actually running, not the one you would prefer. The naming is the precondition for the change. The change cannot begin from a misidentification.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Despair at recognising scarcity or transaction. Conclude you will always be trapped in the relationship you identified.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Reject the framework. Money relationships are not installed. They are chosen freely based on circumstances.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 · The Installation</div>
+    <h1 class="slide-title">How your money relationship was <em>installed.</em></h1>
+
+    <p class="lead">Your relationship with money was not chosen. It was installed — through specific experiences, specific messages, and specific observations that occurred before you had any financial agency of your own. The installation happened in childhood, was reinforced by culture, and was solidified by your early adult financial experiences. By the time you had enough money to make decisions about it, the decisions were already being made by the installed relationship.</p>
+
+    <p class="body-text">This page is a diagnostic — not for assigning blame, but for identifying which specific installation produced your current operating system. <strong>The installation, once identified, can be examined, and the examination is the precondition for changing it.</strong></p>
+
+    <div class="install">
+      <div class="install-label">Installation source 01</div>
+      <p class="install-name">What money meant in the house you grew up in.</p>
+      <p class="install-text">Money was either discussed openly or it was not. It was either a source of anxiety or a source of stability. It was either shared transparently or managed secretly. Your earliest programming about money came not from what you were told about it but from how it operated in the household — whether it was treated as a dangerous, scarce, shameful, powerful, or neutral force. <strong>The household's relationship with money became your relationship with money, before you had any money of your own.</strong> The household did not need to teach you about money. It only needed to demonstrate its own relationship, and you absorbed the demonstration without questioning it.</p>
+    </div>
+
+    <div class="install">
+      <div class="install-label">Installation source 02</div>
+      <p class="install-name">The cultural story about money and morality.</p>
+      <p class="install-text">Most cultures carry a moral narrative about money — some version of the belief that wanting money is greedy, that rich people are morally suspect, that poverty is noble, that talking about money is vulgar, that spiritual people should not be concerned with financial matters. <strong>The moral narrative serves the people who already have money by discouraging the people who do not from pursuing it with the same strategic precision.</strong> The narrative was installed as a value. It operates as a constraint. The constraint is invisible because it feels like ethics rather than like programming.</p>
+    </div>
+
+    <div class="install">
+      <div class="install-label">Installation source 03</div>
+      <p class="install-name">Your first financial experiences.</p>
+      <p class="install-text">The first time you earned money. The first time you lost money. The first time you were in debt. The first time you could not afford something that mattered to you. These experiences — usually occurring in late adolescence or early adulthood — solidified the installed relationship by adding felt evidence to the programming. If the first experiences confirmed scarcity, scarcity deepened. If the first experiences confirmed transaction, transaction became permanent. <em>The experiences did not create the relationship. They reinforced the one that was already installed.</em></p>
+    </div>
+
+    <div class="install">
+      <div class="install-label">Installation source 04</div>
+      <p class="install-name">The absence of financial education.</p>
+      <p class="install-text">What you were not taught is as consequential as what you were. Most formal education teaches nothing about how money actually works — about compound interest, about asset classes, about the difference between income and wealth, about the structural mechanisms that cause money to accumulate or dissipate. <strong>The absence is not an oversight. It is the system operating as designed.</strong> A population that understands the mechanics of wealth accumulation is a population that is harder to keep on the paying side of the flow. The ignorance was not your failure. It was the system's product.</p>
+    </div>
+
+    <div class="pullquote">Your money relationship was installed by your household, reinforced by your culture, solidified by your early experiences, and preserved by the absence of education that would have let you see the installation. None of this was your fault. All of it is now yours to address.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You trace your money relationship back to a specific household dynamic and recognise, with uncomfortable precision, the exact moment it was installed.</p>
+      <p class="scenario-context">A parent arguing about money late at night. A feeling, absorbed without words, that money was dangerous and scarce and that talking about it produced conflict. The tightening in your chest when money comes up in conversation — the same tightening that was in the house.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Blame your parents. They should have had a healthier relationship with money. Their dysfunction produced yours.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the recognition as the map, not as the verdict. Your parents' relationship with money was installed in them, too — by their household, their culture, their experiences. The installation is a chain. The examination is where the chain can break.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Decide the installation is too deep to change. The programming is in your bones. You will always carry their anxiety about money.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the connection. Your financial situation has nothing to do with your childhood. Money is money. Feelings are feelings.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 · The First Reversal</div>
+    <h1 class="slide-title">The truth reversal that unlocks <em>everything.</em></h1>
+
+    <p class="lead">This is the foundational reversal of the entire course. Every module that follows builds on it. Without this reversal landing — in the body, not just in the mind — the rest of the course will be information rather than transformation. The reversal is simple. It is also the single most consequential reframe most people will ever encounter about how wealth is actually built.</p>
+
+    <div class="sov-frame">
+      <div class="sov-label">The first truth reversal</div>
+      <p class="sov-text">You were told that money is earned through labour — that you exchange your time for money, and that more time exchanged produces more money. The structural truth: money is accumulated through systems. Labour is the least efficient way to build wealth. The wealthiest people in any economy are not the hardest workers. They are the people who built or acquired systems that generate money without requiring their continuous time.</p>
+    </div>
+
+    <p class="body-text">Read that again slowly. <strong>Labour is the least efficient way to build wealth.</strong> This is not a motivational statement about passive income or a dismissal of hard work. It is an architectural fact about how wealth is actually structured in every modern economy. The employee exchanges time for money — and the exchange has a ceiling, because time is finite. The system-builder constructs something that generates money independently of their time — and the generation has no ceiling, because it is not bounded by the hours in a day.</p>
+
+    <div class="section-heading">What the reversal changes</div>
+
+    <p class="body-text"><strong>It changes what you spend your time on.</strong> If money is earned through labour, the correct strategy is to work more hours, to work harder, to increase your hourly rate. If money is accumulated through systems, the correct strategy is to spend some of your time building or acquiring systems — even while continuing to labour — so that the systems begin generating alongside the labour, and eventually replace it.</p>
+
+    <p class="body-text"><strong>It changes what you save for.</strong> In the labour model, you save for security — a cushion against the possibility that the labour stops. In the systems model, you save to deploy — to invest in assets, businesses, or structures that produce returns independent of your time. The saving is not the endpoint. <em>The saving is the fuel for the next system.</em></p>
+
+    <p class="body-text"><strong>It changes what you teach your children.</strong> The labour model teaches the next generation to find a good job and work hard. The systems model teaches the next generation to understand how money moves, where it accumulates, what causes it to grow, and how to build structures that produce it. <strong>The difference between these two teachings is the difference between a family that trades time for money for generations and a family that builds wealth across them.</strong></p>
+
+    <div class="section-heading">What a "system" is, in practical terms</div>
+
+    <p class="body-text">A system, for the purposes of this course, is <strong>any structure that generates value — and therefore money — without requiring your continuous active participation.</strong> This includes, but is not limited to: a business that operates through employees or automation, a property that generates rental income, an investment portfolio that compounds, intellectual property that produces royalties, a digital product that sells while you sleep. The common feature is separation — the separation of income from time. The rest of this course will examine each of these in practical detail. For now, the reversal is the frame: <em>the question is no longer "how do I earn more?" The question is "what can I build that earns without me?"</em></p>
+
+    <div class="pullquote">You have been asking the wrong question your entire financial life. "How do I earn more?" is a labour question. "What can I build that earns without me?" is a sovereignty question. The first question has a ceiling. The second does not. The rest of this course is about the second question.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the reversal and feel two things simultaneously: recognition and resistance.</p>
+      <p class="scenario-context">The recognition: this explains something you had felt but could not name — the ceiling that hard work kept hitting, the sense that the rules as described did not match the results as observed. The resistance: if the reversal is true, it implicates years of effort that were structurally directed at the wrong target.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Reject the reversal. Hard work does build wealth. The wealthiest people you know work incredibly hard.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold both the recognition and the resistance. The wealthiest people may indeed work hard — but they work on systems, not for salaries. The effort is real. The architecture of where the effort is directed is the reversal. The implication for past years is uncomfortable and cannot be undone. The implication for future years is actionable and starts now.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Quit your job immediately. Build a system. The reversal means labour is a waste of time.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Accept the reversal intellectually but change nothing about your daily financial behaviour. Interesting concept. Not applicable yet.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- COMPLETION -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module One.</em></h1>
+
+    <p class="lead">You now have the foundation the rest of this course builds on. Money is a technology, not a reward. Money is the most honest language there is. Three relationships with money exist — scarcity, transaction, sovereignty — and the one you are running was installed before you had any money of your own. The first reversal: money is accumulated through systems, not through labour. Everything that follows builds on this frame.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">Money is a technology that stores time, encodes access, and moves power. Understanding it as technology rather than as reward changes everything about how you relate to it.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Money is the most honest language. Follow the flow, not the story. Where the money goes is where the power actually sits.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">Three relationships: scarcity (never enough), transaction (earn-spend-earn), sovereignty (money as a governed tool). The relationship was installed, not chosen. The installation can be examined and changed.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Your money relationship was installed by your household, reinforced by culture, solidified by early experiences, and preserved by the absence of education. None of it was your fault. All of it is now yours to address.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">The first reversal: money is accumulated through systems, not through labour. The question changes from "how do I earn more?" to "what can I build that earns without me?"</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">Do two things this week. First, identify which of the three relationships you are currently running — scarcity, transaction, or sovereignty — and trace it to its installation source. Write the source down. It is the first entry in your financial map. Second, look at your money flow for the last month — not in judgement, but in the language of Page Two. Where did the money go? Who received it? Which transactions moved power toward you, and which moved it away? <em>The reading of the flow is the diagnostic. The diagnostic is where the sovereignty begins.</em></p>
+
+    <p class="body-text">The next module — <strong>How the System Keeps You Poor</strong> — examines the structural mechanisms designed to extract wealth and prevent accumulation in specific populations. Not conspiracy. Architecture. The architecture, once visible, can be navigated rather than suffered through.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 02 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback={
+  1:{
+    a:{headline:"Concluding you haven't worked hard enough is the story protecting itself from examination.",detail:"You have worked hard. The working hard was real. The story's promise — that the working hard would produce proportional financial results — is where the gap sits. Many of the hardest-working people in any economy have the least wealth, and many of the wealthiest people work far fewer hours than the people who produced their wealth for them. This is not a moral failing in either direction. It is an architectural fact about how money flows in a system designed to move it from labourers to system-owners. The conclusion that you have not worked hard enough is the story's most effective defence: it converts a structural observation into a personal accusation, which keeps you working harder inside the same structure."},
+    b:{headline:"Holding the possibility that the story was incomplete — that income is not wealth — is the structural territory the rest of this course will map.",detail:"Hard work produces income. Income is what arrives. Wealth is what remains after the arriving and the departing have been governed. The gap between income and wealth is not a personal failing — it is the territory that most financial education never addresses, because addressing it would require naming the structural mechanisms that keep income flowing through people rather than accumulating in them. The gap is the subject of this course. The recognition of the gap is the beginning of the work. The story was not a lie. It was the incomplete version of the truth, offered to people whose comprehension of the full version would have made them harder to extract from."},
+    c:{headline:"Rejecting the system entirely and opting out is the scarcity relationship's most noble-sounding expression.",detail:"The desire to opt out is understandable. The system is extractive. The flow is designed to move money from people who work to people who own. The opting-out, however, does not change the system. It removes you from the possibility of building the financial sovereignty that would allow you to operate within the system on your own terms. Money is not moral. It is a technology. You can reject the morality of a system while still understanding its technology — the way you might reject the politics of a country while still understanding its language. The understanding is not endorsement. The understanding is the precondition for sovereignty."},
+    d:{headline:"Anger at the people who installed the false narrative is valid and is not the same as addressing the narrative's effects.",detail:"They told you the story because they believed it. They believed it because they were told the same story. The story — work hard, money follows — is not a conspiracy. It is the popular version of a half-truth, installed across generations, that serves the system by directing people toward labour rather than toward system-building. The anger at the installers is a phase. The examination of the installation is the work. The anger, if it remains the focus, consumes the energy that the examination requires. The people who told you the story cannot undo its effects. You can."}
+  },
+  2:{
+    a:{headline:"Feeling shame about the flow pattern is the scarcity relationship converting a structural observation into a personal verdict.",detail:"The flow is not your fault. The flow is the system operating as designed. Your income was structured — by the economy, by the rent market, by the consumer infrastructure — to pass through you on its way to the people and institutions who own the assets you are paying for. The shame is what the system produces in individuals who observe their own extraction — because the shame prevents the observation from becoming strategic action. The structural observation is: you are on the paying side of most flows. The strategic question is: how do you begin moving to the receiving side? The shame answers neither question. The examination does."},
+    b:{headline:"Recognising the architecture without shame is the first act of financial sovereignty — seeing the flow as structure rather than as personal failure.",detail:"The flow is the system operating as designed. Your income was always intended to pass through you — into rent (which builds the landlord's equity), into products (which build the company's revenue), into debt repayments (which build the lender's profit). The flow is not evidence of your failure. It is evidence of the system's architecture. The recognition of the architecture is what makes the redirection possible. The redirection — which this course will address in detail — begins with the observation: where is the money going after it arrives, and how much of it can be redirected toward structures that generate rather than dissipate?"},
+    c:{headline:"Cutting all spending and hoarding everything is the scarcity relationship's defensive response — preservation without strategy.",detail:"Hoarding is not sovereignty. Hoarding is scarcity with a larger balance. The money, saved without deployment, loses value to inflation and produces no return. The sovereign relationship with money is not about accumulating the largest possible balance. It is about directing the flow — strategically, deliberately — toward structures that generate more. Cutting all spending produces short-term preservation and long-term stagnation. The course's work is not about spending less. It is about redirecting the flow — which requires spending with precision, not with restriction."},
+    d:{headline:"Dismissing the analysis because 'everyone lives pay cheque to pay cheque' normalises the architecture rather than examining it.",detail:"Yes, most people live pay cheque to pay cheque. This is the system functioning as designed. The normalisation — 'everyone does it, so it must be normal' — is the architecture's most effective camouflage. When the flow-through is universal, it stops being visible as a structure and starts being experienced as the natural condition of adult life. It is not the natural condition. It is the produced condition — produced by an economy that requires the majority of participants to be on the paying side of most transactions. The examination of this production is not paranoia. It is the literacy that makes different choices possible."}
+  },
+  3:{
+    a:{headline:"Declaring you operate from sovereignty because the description sounds like you is the most common misidentification — because sovereignty is the aspirational version of what most people wish they were running.",detail:"Sovereignty is not a self-description. It is a structural reality — observable in the architecture of your financial life, in the felt quality of your financial decisions, in the presence or absence of financial anxiety. If you are currently earning income primarily through labour, if your savings are oriented toward security rather than deployment, if your financial planning is based on managing the flow rather than changing its architecture — you are running the transaction relationship, regardless of how clearly you understand money conceptually. Understanding is not sovereignty. Sovereignty is understanding plus architecture. The honest identification of which relationship you are actually running is the precondition for changing it."},
+    b:{headline:"Naming the relationship you are actually running — with honesty rather than aspiration — is the only starting point from which the change can begin.",detail:"Most people reading this are running either scarcity or transaction. Both are the most common operating systems because both are the ones the economy is designed to install and maintain. The naming is not a verdict. It is a position from which the work can begin. The scarcity relationship can be addressed through the practices in Module Five. The transaction relationship can be addressed through the architectural changes in Module Four. Both require, first, the honest identification. The misidentification — 'I'm already sovereign' — forecloses the examination and preserves the installed relationship while wearing the language of the new one."},
+    c:{headline:"Despairing at recognising scarcity or transaction is the installed relationship producing a depleted decision about its own changeability.",detail:"The despair — 'I will always be trapped in this relationship' — is the scarcity relationship's most effective self-maintenance move. The relationship, examined for the first time, produces a feeling so aversive that the examination is abandoned. The abandonment is what the relationship requires in order to continue operating. The relationship was installed. Installed relationships can be changed. The change takes time, practice, and the specific architectural adjustments that the rest of this course will describe. The despair is the relationship's defence against the change. Notice the despair. Name it as the installation protecting itself. Then continue."},
+    d:{headline:"Rejecting the framework on the grounds that money relationships are freely chosen ignores decades of research on financial socialisation.",detail:"Financial psychology, behavioural economics, and the study of intergenerational wealth patterns all converge on the same structural observation: your relationship with money is primarily shaped by factors that precede your conscious financial life — household dynamics, cultural narratives, early experiences, and the presence or absence of financial education. This does not mean you have no agency. It means your agency is operating within a framework that was installed before you could evaluate it. The examination of the framework is how the agency becomes sovereign rather than reactive. The insistence that the relationship was freely chosen is, structurally, the framework preventing itself from being examined."}
+  },
+  4:{
+    a:{headline:"Blaming your parents for their money relationship converts a structural observation into a personal prosecution that cannot produce the change you need.",detail:"Their relationship with money was installed in them — by their parents, their culture, their economic conditions. The chain extends further back than blame can usefully reach. Many parents did the best they could with the financial understanding they had, which was often minimal and often shaped by scarcity they themselves never examined. The blame is valid as a feeling. It is not useful as a strategy. The energy spent prosecuting the installers is energy diverted from the actual work — which is examining the installation in yourself and beginning the structural changes that redirect the flow. Their chapter is written. Yours is the one being written now."},
+    b:{headline:"Holding the recognition as the map rather than the verdict is the integrated position from which the financial installation can actually be changed.",detail:"The chain of installed money relationships extends backwards through generations. Your parents' relationship was installed in them. Theirs in them. The installation is not a curse. It is a pattern — and patterns, once visible, can be interrupted. The interruption does not require your parents to change, or to acknowledge what they passed on, or to participate in your financial recalibration in any way. The interruption requires your own examination of the installation, your own identification of the beliefs and behaviours it produces, and your own deliberate movement toward the sovereignty relationship. The chain breaks where you break it. Breaking it is the work of this course."},
+    c:{headline:"Deciding the installation is too deep to change is the installation's most effective defence against the examination that would change it.",detail:"The programming is deep. It is in the body — in the chest tightening, in the anxiety that accompanies financial conversations, in the avoidance of financial information. Deep does not mean permanent. Deep means the change requires more than intellectual understanding — it requires the felt-sense practices that Course Three described and the architectural changes that this course will describe. The belief that the programming is permanent is itself a product of the scarcity relationship — which teaches that scarcity is the natural condition, that abundance is for other people, and that the conditions of your early life determine the conditions of your adult life. This belief is the installation speaking. It is not the truth."},
+    d:{headline:"Dismissing the connection between childhood financial dynamics and adult financial behaviour ignores the most robust finding in financial psychology.",detail:"Your felt response to money — the anxiety, the avoidance, the impulsive spending, the hoarding — is not a rational response to your current financial reality. It is a felt pattern that was installed in a specific household, under specific conditions, before you had any financial agency of your own. The pattern may align with your current reality (you may indeed have reason to be anxious about money) but the pattern preceded the reality. Separating the two — the installed pattern from the current situation — is the diagnostic that makes strategic financial action possible. Without the separation, every financial decision is being made by the installation rather than by the governor."}
+  },
+  5:{
+    a:{headline:"Rejecting the reversal because wealthy people work hard misses the structural point: they work hard on systems, not for salaries.",detail:"The wealthiest people you know almost certainly work very hard. The reversal does not deny their effort. It identifies where the effort is directed. An employee working eighty hours a week is directing effort toward someone else's system — and the system's owner captures the value the effort produces, minus the salary. A system-builder working eighty hours a week is directing effort toward their own system — and they capture the value their effort produces, minus the costs. The hours are the same. The effort is the same. The architecture of where the effort lands is the reversal. The employee's effort has a ceiling (the salary). The system-builder's effort does not (the system's output). This is not a moral judgement. It is a structural description of how wealth actually accumulates."},
+    b:{headline:"Holding both the recognition and the resistance — that the effort was real and the architecture was wrong — is the position from which the next chapter becomes available.",detail:"The years of effort were not wasted. The skills, the experience, the knowledge — all of these are real and remain yours. The implication of the reversal is not that the past was wrong. It is that the past's effort was directed, architecturally, at income rather than at wealth. Income served its purpose — it kept you alive, housed, fed. Wealth serves a different purpose — it buys future, choice, and sovereignty. The effort can be redirected. The skills can be applied to system-building rather than to salary-earning. The redirection does not need to happen all at once. It begins alongside the labour, not instead of it. The starting is what matters. The starting is now."},
+    c:{headline:"Quitting your job immediately because the reversal says labour is inefficient converts a structural observation into a reactive decision made from depletion.",detail:"The reversal does not say labour is a waste of time. It says labour is the least efficient way to build wealth. The difference is critical. Labour produces the income that funds your daily life and — if governed — provides the capital for system-building. Quitting the labour before any system has been built removes the income without replacing it. The system must be built alongside the labour, funded by the labour, until the system's output replaces the salary. This is not exciting. It is architectural. The exciting version — quit everything, bet on the vision — is the motivational narrative that produces dramatic failure in the majority of cases. The architectural version produces slower, more durable results."},
+    d:{headline:"Accepting the reversal intellectually without changing financial behaviour is the most common response — and it is the one that produces no change.",detail:"The reversal, understood intellectually, is information. Information without application is entertainment. The application begins with two questions, asked this week: where is my money actually going (the flow diagnostic), and what is one small structure I could begin building that generates value independent of my time? The structure does not need to be dramatic. It needs to exist. A small investment. A small product. A small asset. The smallness is not inadequacy — it is the beginning. The beginning, compounded across months and years, is how the reversal moves from concept to architecture. Without the beginning, the reversal remains a good idea you once read in a course."}
+  }
+};
+
+let currentSlide=1;const totalSlides=6;const answered={1:false,2:false,3:false,4:false,5:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c4m1','1');window.location.href='course4-module-2-how-the-system-keeps-you-poor.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

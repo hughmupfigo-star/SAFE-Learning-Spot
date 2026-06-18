@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 2 · Module 3 · The Micro-Aggressions That Scale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --paper: #fafaf7;
+  --muted: #6b6b66;
+  --line: #d9d9d3;
+  --soft: #f0f0ea;
+  --accent: #c4452d;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+.module-header { border-bottom: 1px solid var(--line); padding: 32px 48px 32px 24px; display: grid; grid-template-columns: 1fr auto 1fr; justify-items: start; align-items: baseline; position: sticky; top: 0; background: var(--paper); z-index: 100; backdrop-filter: blur(8px); }
+.module-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.module-tag strong { color: var(--ink); font-weight: 500; }
+.progress-bar { grid-column: 3; justify-self: end; display: flex; gap: 6px; align-items: center; }
+.progress-dot { width: 24px; height: 2px; background: var(--line); transition: background 0.4s ease; }
+.progress-dot.active { background: var(--ink); }
+.progress-dot.complete { background: var(--accent); }
+
+.module-container { max-width: 780px; margin: 0 auto; padding: 80px 48px 120px; }
+.slide { display: none; animation: fadeUp 0.6s ease; }
+.slide.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-number { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 24px; text-transform: uppercase; }
+.slide-title { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.5vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 40px; font-variation-settings: "opsz" 144; }
+.slide-title em { font-style: italic; font-weight: 300; }
+.lead { font-family: var(--serif); font-size: 22px; line-height: 1.5; font-weight: 300; color: var(--ink); margin-bottom: 40px; letter-spacing: -0.01em; }
+.body-text { font-size: 17px; line-height: 1.7; color: #2a2a28; margin-bottom: 24px; max-width: 62ch; }
+.body-text strong { font-weight: 500; color: var(--ink); }
+.section-heading { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 56px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.section-heading::before { content: ''; width: 24px; height: 1px; background: var(--ink); }
+.pullquote { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; font-weight: 300; border-left: 2px solid var(--ink); padding: 8px 0 8px 32px; margin: 48px 0; color: var(--ink); }
+
+.micro { margin: 36px 0; padding: 32px 0; border-top: 1px solid var(--line); }
+.micro:last-of-type { border-bottom: 1px solid var(--line); margin-bottom: 56px; }
+.micro-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 8px; }
+.micro-name { font-family: var(--serif); font-size: 28px; line-height: 1.15; font-weight: 400; letter-spacing: -0.015em; margin-bottom: 16px; font-style: italic; }
+.micro-examples { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin: 20px 0 8px; font-weight: 500; }
+.micro-quote { font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.6; padding-left: 20px; border-left: 2px solid var(--line); color: var(--ink); margin-bottom: 8px; }
+
+.accumulation { margin: 48px 0; padding: 36px; background: var(--soft); border: 1px solid var(--line); }
+.acc-header { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.acc-row { display: grid; grid-template-columns: 100px 1fr; gap: 24px; padding: 16px 0; align-items: baseline; border-bottom: 1px dotted var(--line); }
+.acc-row:last-child { border-bottom: none; }
+.acc-month { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.1em; font-weight: 500; }
+.acc-text { font-family: var(--serif); font-size: 16px; line-height: 1.55; font-style: italic; color: var(--ink); }
+
+.practice { margin: 28px 0; padding-left: 28px; border-left: 2px solid var(--line); }
+.practice-name { font-family: var(--serif); font-size: 22px; font-style: italic; font-weight: 400; margin-bottom: 10px; line-height: 1.25; }
+.practice-text { font-size: 16px; line-height: 1.65; color: #2a2a28; }
+
+.scenario { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--line); }
+.scenario-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+.scenario-prompt { font-family: var(--serif); font-size: 24px; line-height: 1.45; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+.scenario-context { font-size: 16px; color: var(--muted); margin-bottom: 32px; font-style: italic; }
+.choices { display: flex; flex-direction: column; gap: 12px; }
+.choice { display: block; width: 100%; text-align: left; background: transparent; border: 1px solid var(--line); padding: 20px 24px; font-family: var(--sans); font-size: 16px; line-height: 1.5; color: var(--ink); cursor: pointer; transition: all 0.25s ease; font-weight: 400; }
+.choice:hover { border-color: var(--ink); background: var(--soft); transform: translateX(2px); }
+.choice-letter { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 14px; letter-spacing: 0.1em; }
+.choice.selected { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.choice.selected .choice-letter { color: var(--paper); opacity: 0.6; }
+.choice:disabled { cursor: default; }
+.choice:disabled:hover { transform: none; }
+.choice.dimmed { opacity: 0.4; }
+
+.feedback { display: none; margin-top: 32px; padding: 32px; background: var(--soft); border-left: 2px solid var(--ink); animation: fadeUp 0.5s ease; }
+.feedback.visible { display: block; }
+.feedback-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.feedback-headline { font-family: var(--serif); font-size: 19px; line-height: 1.5; font-weight: 400; font-style: italic; color: var(--ink); margin-bottom: 16px; letter-spacing: -0.005em; }
+.feedback-text { font-family: var(--sans); font-size: 15.5px; line-height: 1.65; color: #2a2a28; font-weight: 400; }
+
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); }
+.nav-btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; border: none; color: var(--ink); cursor: pointer; padding: 12px 0; transition: opacity 0.2s ease; font-weight: 500; }
+.nav-btn:hover { opacity: 0.6; }
+.nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+.nav-btn.primary { background: var(--ink); color: var(--paper); padding: 16px 32px; }
+.nav-btn.primary:hover { background: #2a2a28; opacity: 1; }
+.nav-btn.primary:disabled { background: var(--line); color: var(--muted); }
+.nav-counter { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+
+.complete-mark { font-family: var(--serif); font-size: 120px; line-height: 1; font-weight: 300; margin-bottom: 32px; color: var(--accent); font-style: italic; }
+.summary-list { list-style: none; margin: 40px 0; }
+.summary-list li { padding: 20px 0; border-bottom: 1px solid var(--line); display: flex; gap: 24px; align-items: baseline; }
+.summary-list li:last-child { border-bottom: none; }
+.summary-num { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; min-width: 32px; }
+.summary-text { font-family: var(--serif); font-size: 18px; line-height: 1.5; font-weight: 400; }
+
+@media (max-width: 640px) {
+  .module-header { padding: 20px 24px; }
+  .module-container { padding: 48px 24px 80px; }
+  .slide-title { font-size: 38px; }
+  .lead { font-size: 19px; }
+  .body-text { font-size: 16px; }
+  .scenario-prompt { font-size: 20px; }
+  .pullquote { font-size: 22px; padding-left: 24px; margin: 32px 0; }
+  .progress-dot { width: 12px; }
+  .complete-mark { font-size: 80px; }
+  .micro-name { font-size: 24px; }
+  .accumulation { padding: 24px; }
+  .acc-row { grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 02 · Module <strong>03</strong> · The Micro-Aggressions That Scale</div>
+  <div class="progress-bar">
+    <div class="progress-dot active"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 2 &middot; Toxic Relationship Patterns</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c2m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course2-module-1-the-patterns-that-predict.html">The Patterns That Predict</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course2-module-2-love-bombing-and-the-initial-mask.html">Love Bombing & The Initial Mask</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course2-module-3-the-micro-aggressions-that-scale.html">Micro-Aggressions That Scale</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course2-module-4-dysfunction-archetypes.html">Dysfunction Archetypes</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course2-module-5-your-role-in-dysfunction.html">Your Role in Dysfunction</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course2-module-6-the-exit.html">The Exit</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course2-module-7-choosing-differently.html">Choosing Differently</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 07 · The Accumulation Problem</div>
+    <h1 class="slide-title">Why the small ones are more dangerous than the <em>obvious</em> ones.</h1>
+
+    <p class="lead">Dramatic cruelty produces clean exits. When someone shouts in a way that frightens you, when they throw something, when they call you a name that lands like a slap — these moments are terrible, and they are also legible. They give you something to point at, something to take to a friend, something that crosses a line you can name.</p>
+
+    <p class="body-text">Micro-aggressions do not work this way. They are small enough, individually, that pointing at any single one feels disproportionate. A dig, a forgotten thing, a joke that wasn't quite a joke, a tone that was off for a moment. Each one is below the threshold of fair confrontation. Each one would make you sound paranoid if you described it to a friend in isolation. <strong>And yet, together, over months and years, they produce a different person — and that different person is you.</strong></p>
+
+    <p class="body-text">This is the structural genius of micro-aggressions. They are not bugs in a relationship. In many dysfunctional relationships, they are the operating system. The relationship does not run on dramatic incidents — it runs on the steady distribution of small cruelties small enough that you cannot, in any single moment, justify leaving. The dramatic incident, when it eventually arrives, will be the result of years of accumulation that nobody, including you, was tracking.</p>
+
+    <div class="section-heading">Why this module is delicate</div>
+
+    <p class="body-text">Before we go further, an honest caveat. Not every small unkindness from a partner is a micro-aggression in the sense this module means. Everyone has bad days. Everyone occasionally says something thoughtless, forgets something important, makes a joke that lands wrong. <strong>The presence of any single instance of any of the patterns in this module does not mean you are in a dysfunctional relationship.</strong> Read this module looking for accumulation, not isolated incidents. The diagnostic is texture, not events.</p>
+
+    <p class="body-text">The risk with material like this is that it produces hypervigilance — a kind of paranoid scanning that converts every normal partner imperfection into evidence of dysfunction. That is not the work. The work is to develop the capacity to feel, across months, whether the texture of the relationship is one in which you are slowly diminishing, or one in which you are basically growing despite occasional friction. <em>The diagnostic is the trend line, not the data point.</em></p>
+
+    <div class="pullquote">A single dig means almost nothing. The same dig in twenty costumes across two years means almost everything. Most people, by the time they recognise the second one, have stopped being able to remember the first.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">A friend describes a single small thing their partner did and asks if it's a red flag.</p>
+      <p class="scenario-context">The thing is mildly hurtful but not outrageous. They are asking because they want a verdict — they want you to either confirm it's serious or tell them they're overreacting.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Tell them yes, it's a red flag, this kind of thing always escalates.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Tell them you can't tell from one instance. Ask whether they can name two more examples of the same structural thing. The pattern is the diagnostic, not the event.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Tell them they're overthinking it. One small thing is nothing.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Refuse to comment. It's their relationship, not yours.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 07 · The Seven Kinds</div>
+    <h1 class="slide-title">The seven <em>kinds.</em></h1>
+
+    <p class="lead">There are seven recognisable kinds of micro-aggression in dysfunctional relationships. They overlap, they repeat in different costumes, and a partner does not need to use all of them — sometimes one or two are the entire architecture. The work of this page is to give you names for each, so you can recognise them in real time.</p>
+
+    <div class="micro">
+      <div class="micro-num">Kind 01</div>
+      <h2 class="micro-name">The dig wrapped in care</h2>
+      <p class="body-text">A criticism delivered in the language of concern. The structure is always the same — a hurtful observation presented as a worry, so that any objection from you becomes proof that they were right to be worried. The dig is what's actually being delivered. The care is the wrapping that makes the dig undeliverable to anyone else.</p>
+      <div class="micro-examples">What it sounds like</div>
+      <p class="micro-quote">"I'm just worried about you in those jeans, babe."<br>"I don't mean to upset you, but have you thought about how you came across in that meeting?"<br>"I love you and that's why I have to tell you — people are starting to notice you've gained weight."</p>
+    </div>
+
+    <div class="micro">
+      <div class="micro-num">Kind 02</div>
+      <h2 class="micro-name">The joke that isn't a joke</h2>
+      <p class="body-text">A cruel observation delivered with a smile, often in front of other people, with the defence preloaded — they were joking, you can't take a joke, why are you so sensitive. The joke is the cruelty. The framing as a joke is the deniability. You cannot push back without proving the accusation of oversensitivity, which is the point.</p>
+      <div class="micro-examples">What it sounds like</div>
+      <p class="micro-quote">"Don't worry about her, she's always like this — bless her."<br>"He's the smart one, I'm the pretty one — right, babe?" (When you both know who is being assigned what.)<br>"Oh ignore him, he gets like this when he hasn't been the centre of attention for ten minutes."</p>
+    </div>
+
+    <div class="micro">
+      <div class="micro-num">Kind 03</div>
+      <h2 class="micro-name">The strategic forgetting</h2>
+      <p class="body-text">They remember, in extraordinary detail, the things that matter to them. They forget, with remarkable consistency, the things that matter to you. The promise. The plan. The detail you mentioned three times. The thing they said they'd handle. The forgetting is not random — it is statistically correlated with what costs them and benefits you. It is also entirely deniable, because forgetting is human.</p>
+      <div class="micro-examples">What it looks like</div>
+      <p class="micro-quote">The anniversary they remember down to the minute, and the doctor's appointment they forgot. The football fixture they planned around for weeks, and the parent visit they "didn't realise was a fixed date." The names of every colleague who flatters them, and a recurring confusion about the name of your closest friend.</p>
+    </div>
+
+    <div class="micro">
+      <div class="micro-num">Kind 04</div>
+      <h2 class="micro-name">The public versus private split</h2>
+      <p class="body-text">Two different partners depending on who is watching. In public, charming, attentive, generous with affection — the version of them everyone praises. In private, the warmth recedes, the attention narrows, the kindness becomes conditional. The split is itself the cruelty, because it means the version of them others see is the version you are working to recreate at home, and that version exists, and somehow it is not yours.</p>
+      <div class="micro-examples">What it looks like</div>
+      <p class="micro-quote">A long warm hug when friends are present, a coldness in the car on the way home. Compliments about you delivered to others while you sit beside them, never delivered to you directly. The sense, when guests leave, that the temperature in the room has dropped by ten degrees and you don't know why.</p>
+    </div>
+
+    <div class="micro">
+      <div class="micro-num">Kind 05</div>
+      <h2 class="micro-name">The conditional praise</h2>
+      <p class="body-text">Praise that comes with a small bite, an exception, a comparison, a backhand. You almost can't tell it's not actually praise — until you notice that you walk away from compliments feeling slightly worse rather than slightly better. The praise is structurally engineered to keep you working, never quite arriving, always one revision away from the unconditional version that would land cleanly.</p>
+      <div class="micro-examples">What it sounds like</div>
+      <p class="micro-quote">"You look great — for someone who's been so stressed."<br>"That was a really good email. I didn't think you had it in you."<br>"You're being so calm tonight, it's nice."<br>"You're attractive when you put effort in."</p>
+    </div>
+
+    <div class="micro">
+      <div class="micro-num">Kind 06</div>
+      <h2 class="micro-name">The comparison</h2>
+      <p class="body-text">A reference, casual and unprompted, to someone else who handles things better than you. An ex who never got jealous. A friend who is easier going. A colleague who would have been more graceful. The comparison is rarely defended as a comparison — it is defended as "just an observation." The function is to make you compete with people who are not there to defend themselves, on terms you did not consent to.</p>
+      <div class="micro-examples">What it sounds like</div>
+      <p class="micro-quote">"My ex used to find this stuff funny, but okay, I won't joke about it."<br>"You know what I love about Sarah, she just lets things go."<br>"Everyone at the office has been so flexible about overtime — it's weird that you find it hard."<br>"I'm not comparing, I'm just saying — my last partner would have handled this differently."</p>
+    </div>
+
+    <div class="micro">
+      <div class="micro-num">Kind 07</div>
+      <h2 class="micro-name">The small refusal</h2>
+      <p class="body-text">A pattern of declining small things you ask for, with reasonable-sounding justifications, until you notice that the cumulative refusals form a shape. The favour they couldn't quite get to. The visit they couldn't quite commit to. The small intimacy they were "not in the mood for" on the third consecutive occasion. Each refusal is individually defensible. Together they communicate a position that nobody ever stated.</p>
+      <div class="micro-examples">What it looks like</div>
+      <p class="micro-quote">Eight months of small requests, each declined with a good reason, none of them ever the same reason. A growing list of things you've stopped asking for because the cumulative no has trained you not to. A felt sense that you are the one who wants things from this relationship, and they are the one who is too busy, too tired, or too uninterested to provide them.</p>
+    </div>
+
+    <div class="pullquote">The micro-aggression is designed for plausible deniability. Each instance is small. Each one has a defence. The whole point is that no single one is worth confronting. The point is the aggregate, and the aggregate is the part nobody is calibrated to feel.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the seven kinds and recognise at least three of them in a current or recent relationship.</p>
+      <p class="scenario-context">Not vaguely. Specifically. You can name examples from the last six months for each of three different kinds. The pattern is real. The aggregate is what you've been feeling without language for it.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Sit with the recognition. Don't act yet. The naming itself is doing work — let it do that work before any decision.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Catalogue every example into a document. Build a case. Prepare to present the evidence.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Confront them at the next opportunity with the names of the seven kinds. Demand they recognise themselves.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the framework. Most relationships have some friction. You're being clinical about something organic.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 07 · The Defensibility</div>
+    <h1 class="slide-title">Why each one is individually <em>unworth</em> confronting.</h1>
+
+    <p class="lead">The most important thing to understand about micro-aggressions is structural: each one is calibrated to sit just below the threshold of fair confrontation. This is not accidental. It is the entire point. If a behaviour is small enough that confronting it would make you look unreasonable, then the behaviour has been engineered — consciously or not — to be unconfrontable.</p>
+
+    <p class="body-text">Try to confront the dig wrapped in care, and you become the partner who can't accept loving feedback. Try to confront the joke that isn't a joke, and you become the partner who can't take a joke. Try to confront the strategic forgetting, and you become the partner with the unreasonable expectations of human memory. <strong>The confrontation, in each individual case, would cost you more than the offence itself. So you let it go. And the letting-go becomes the training data for the next instance.</strong></p>
+
+    <div class="section-heading">The three reasons confrontation backfires</div>
+
+    <p class="body-text"><strong>The individual instance is genuinely small.</strong> When you finally do confront a particular moment, you will, in the act of describing it, hear yourself sounding petty. You will second-guess yourself mid-sentence. The partner will exploit this — sometimes consciously, sometimes not — by amplifying the smallness of the original instance, often through tone and incredulity, until the focus of the conversation becomes whether you are too sensitive rather than whether the instance was harmful. You will leave the conversation feeling that you should not have raised it. The lesson learned is to not raise it next time.</p>
+
+    <p class="body-text"><strong>The defence is preloaded.</strong> Every micro-aggression comes with its own counterargument built in. The dig was caring. The joke was a joke. The forgetting was human. The comparison was just an observation. The conditional praise was a compliment. The refusal had a reasonable explanation. Because the defence is preloaded, the confrontation does not produce reflection — it produces a quick retrieval of the prepared response. The partner is not surprised by your objection. The objection was anticipated and the language for dismissing it was prepared in advance.</p>
+
+    <p class="body-text"><strong>Your evidence is fragmentary.</strong> When you try to describe what is wrong, you can usually only describe one or two instances at a time. The full texture — the way these patterns operate across months — is felt in the body but does not transfer well into a single conversation. You are trying to describe a film by holding up two still frames. The partner can defend each still frame individually, and the architecture between the frames remains invisible.</p>
+
+    <div class="section-heading">What this means for what you actually do</div>
+
+    <p class="body-text">Once you understand that each instance is individually unworth confronting, the question changes. The question is no longer "should I confront this instance?" The answer to that question is almost always no — for the structural reasons above. The new question is: <em>what do I do about a pattern when the pattern's design depends on each instance being unconfrontable?</em></p>
+
+    <p class="body-text">The answer is not heroic confrontation. The answer is what Module One taught — observation, accumulation, the private record, and eventually, the pattern conversation rather than the instance conversation. <strong>You do not push back on the dig. You track the dig. The tracking is the response, and the tracking is what the next module will teach you to do without becoming the kind of person who tracks for tracking's sake.</strong></p>
+
+    <div class="pullquote">Trying to confront a micro-aggression is like trying to argue with the weather. Each cloud is defensible. The climate is what is changing. Climates are not addressed by pointing at individual clouds.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">They make a comment that lands as a small dig wrapped in care.</p>
+      <p class="scenario-context">In the moment, you feel the familiar sting. You also feel the trap — saying anything about it would make you look defensive, oversensitive, ungrateful for their concern. You have thirty seconds to decide what to do.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Confront them directly about the comment. Name what just happened. Demand they acknowledge it.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Stay neutral in the moment. Note the instance in your private record later. Track the pattern, not the moment.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Laugh it off. Pretend you weren't bothered. Restore the pleasant tone of the evening.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Make a sharper joke back at them. Show them you can give as well as take.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 07 · The Aggregation</div>
+    <h1 class="slide-title">What twelve months of small things does to a <em>person.</em></h1>
+
+    <p class="lead">If each micro-aggression is individually defensible, what is the actual cost? The cost is in the aggregate, and the aggregate produces a slow, almost invisible change in the person on the receiving end. By month twelve of a relationship operating on this texture, you are not who you were when it began. The change has been so gradual you have not felt it occurring — but if you could see yourself at month one and month twelve side by side, the difference would be unmistakable.</p>
+
+    <p class="body-text">This is the most important thing about the aggregation: <strong>you cannot see it happen to you while it is happening, because the rate of change is calibrated to be below your noticing threshold.</strong> Each week, you adjust by half a degree. After twelve months, you are pointing in a different direction entirely — but no single week's adjustment was alarming enough to register. This is how a relationship that began with you laughing easily ends with you walking on eggshells, without anyone able to identify the moment the change occurred.</p>
+
+    <div class="accumulation">
+      <div class="acc-header">The slow shape of accumulation</div>
+      <div class="acc-row">
+        <div class="acc-month">Month 01</div>
+        <div class="acc-text">You laugh easily, share opinions freely, look forward to seeing them, have full unedited conversations with friends about the relationship.</div>
+      </div>
+      <div class="acc-row">
+        <div class="acc-month">Month 03</div>
+        <div class="acc-text">You begin pre-reading their mood when you walk into a room. You make small editorial choices about what to mention. You haven't named these choices as choices.</div>
+      </div>
+      <div class="acc-row">
+        <div class="acc-month">Month 06</div>
+        <div class="acc-text">You're rehearsing conversations before they happen. You've stopped sharing certain opinions because the response wasn't worth the conversation. Friends have noticed that something is different about how you talk about the relationship — you change the subject when the relationship comes up.</div>
+      </div>
+      <div class="acc-row">
+        <div class="acc-month">Month 09</div>
+        <div class="acc-text">You feel mild relief when they cancel. You can't quite remember what you used to think about certain subjects — your positions have softened into ambivalence to avoid friction. The version of you that existed at month one is no longer fully accessible.</div>
+      </div>
+      <div class="acc-row">
+        <div class="acc-month">Month 12</div>
+        <div class="acc-text">Default emotional state is low-grade vigilance. You apologise frequently for things you haven't done. You're tired in a way that sleep doesn't address. You wonder, occasionally, what happened to the person you were a year ago — but cannot trace the path that led from there to here.</div>
+      </div>
+    </div>
+
+    <div class="section-heading">Why this is the actual harm</div>
+
+    <p class="body-text">The cost of micro-aggressions is not in the moments themselves. It is in the cumulative restructuring of your sense of yourself. <strong>You lose access, over months, to opinions you used to hold confidently. You lose access to emotions you used to express freely. You lose access to friendships that previously sustained you, because they are now slightly more effortful and the effort is competing with the energy you are spending managing the relationship.</strong> By month twelve, the relationship has produced a version of you that is calibrated specifically for its own continuation — a version of you that is easier for the relationship to extract from.</p>
+
+    <p class="body-text">This is why the question "is this worth confronting?" is the wrong question. The right question is: <em>"is this relationship's texture making me larger or smaller over time?"</em> The answer to that question is felt across months, not measured in any single moment. And the only way to access the answer is to look at the person you were a year ago — honestly, without protecting the relationship — and ask whether the trend is the one you wanted.</p>
+
+    <div class="pullquote">The harm is not the dig. The harm is who you become in order to live with the digs. By the time the change is visible, the version of you who could have noticed it has already left the building.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You compare the version of you a year ago with the version of you now, and the comparison is uncomfortable.</p>
+      <p class="scenario-context">A year ago you had opinions you stated easily, you laughed at things, you went to events without rehearsing them. Now you do less of all of that. You'd told yourself it was growing up, settling down, being more mature. Now you're wondering.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Decide the change is your fault. You've gotten anxious, less confident, less yourself, and the relationship has nothing to do with it.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the comparison as honest data. Not all of the change is the relationship — but the relationship is part of the texture, and the texture has shaped you.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Blame the relationship entirely. End it today based on the comparison.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the exercise. Everyone changes over a year. The comparison is unfair.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 07 · The Tracking</div>
+    <h1 class="slide-title">How to track without becoming the kind of person who <em>tracks.</em></h1>
+
+    <p class="lead">If micro-aggressions cannot be confronted individually, and if the aggregate is what matters, then the only useful response is to track them — to keep a record of the pattern that can be read across months. But tracking, done wrong, becomes its own kind of dysfunction. It produces hypervigilance, paranoid scanning, and a relationship to your partner that is structurally identical to the one you are trying to escape.</p>
+
+    <p class="body-text">This page is about how to track in a way that gives you the data without colonising your inner life. The practice is light. The practice is private. The practice is not a vigilance — it is a quiet weekly noticing. Done well, it is almost invisible to you, and entirely invisible to them. Done well, it preserves the part of you that can still relax in their presence while collecting the information you will need if a decision is required later.</p>
+
+    <div class="practice">
+      <p class="practice-name">Use the same record from Module One.</p>
+      <p class="practice-text">You already have a structure. The ninety-day verification protocol from Module One is the same notebook, the same Sunday evening reflection, the same private documentation. If you have been keeping it, you simply continue. If you have not started it yet, this is the prompt — same instrument, expanded scope. The record is for you. It is never used as evidence in confrontation, never shown to the partner, never deployed as ammunition. It exists so that the version of you in month nine can read the version of you in month two and see whether your perception has been quietly rewritten.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Note instances briefly. Do not analyse them.</p>
+      <p class="practice-text">When something occurs that fits one of the seven kinds, write it down — short, factual, no editorialising. The date. What was said or done. Your immediate physical response. That is enough. Resist the urge to write paragraphs about what it might mean, what their intent might have been, what the relationship's broader patterns are. The single instance is data. The analysis comes later, across months, when there is enough data for patterns to emerge. The brevity of each entry is what makes the practice sustainable.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Read the record once a month, not once a day.</p>
+      <p class="practice-text">If you read the record daily, you become the kind of person who tracks — anxious, hypervigilant, scoring every interaction in real time. If you read it once a month, you are doing something different. You are checking the trend line. You are looking for the shape, not the moment. Many entries will read, individually, as fine. The shape is what you are looking for. The shape only becomes visible at the scale of weeks, not days.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Tell the one trusted friend the unedited version.</p>
+      <p class="practice-text">Same practice as Module One. One person — not a panel, one — who hears the actual texture of the relationship every few weeks. Tell them about the small things. The dig, the joke, the strategic forgetting. Tell them in the voice you would use if you were not protecting the relationship. The act of telling is itself a discipline against the editing that the inside of the relationship will perform. If you cannot find the words to tell this friend the truth, that inability is also data.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Test against the year-ago comparison every six months.</p>
+      <p class="practice-text">Twice a year, in a quiet hour alone, do the exercise from Page Four. Compare the version of you now to the version of you six months ago. Are you larger or smaller? More yourself or less? More confident in your opinions or more cautious? This is the truest diagnostic in the entire module. The relationship's texture is producing a trend. The trend either bends toward your growth or it bends toward your shrinking. There is no third option, however much the relationship's complexity might disguise this.</p>
+    </div>
+
+    <div class="section-heading">What this is not</div>
+
+    <p class="body-text"><strong>This is not a case file.</strong> The record is not for use in confrontation. It is not evidence for a trial. It will not be shown to anyone, including the partner, even if the relationship ends. Treating it as a case file converts the practice into the same prosecutorial energy that drove the partner's behaviour toward you. The point is to know — for yourself — what has been happening. Knowing is sufficient. Knowing is the entire point.</p>
+
+    <p class="body-text"><strong>This is not surveillance.</strong> You are not watching them. You are noticing what happens between you, in moments that you would have noticed anyway, with one small addition: you write down what you noticed instead of letting the noticing dissolve. The partner remains, in your daily life, the partner. They are not the subject of an investigation. The record is your record of your own experience, not a dossier on them.</p>
+
+    <p class="body-text"><strong>This is not paranoia.</strong> Paranoia scans every interaction looking for harm. Tracking notes what occurred and moves on. The difference is in the texture of your everyday attention — whether you are vigilant in a relationship, or whether you are simply present and occasionally writing down what occurs. <em>Done well, the tracking should make you less paranoid, not more — because the noticing has somewhere to go that isn't your inner ruminating.</em></p>
+
+    <div class="pullquote">The record is not the relationship. It is what survives the relationship's attempts to rewrite itself in your memory. You will not need it, until you need it, and then you will be grateful you kept it.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You begin the tracking practice and find, three weeks in, that you've started scoring every interaction.</p>
+      <p class="scenario-context">Each conversation, you're mentally filing the moment into one of the seven kinds, or noting that it didn't fit any of them. The practice has become a vigilance. You're aware that this is not what was prescribed.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Stop the practice entirely. It clearly isn't working for you. Throw away the record.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Recalibrate. Write down one thing a week, maximum. Do not read the record except once a month. Notice that the scoring impulse will fade once the formal structure shrinks.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Lean into the vigilance. The more you score, the more accurate your diagnostic will be.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Show the partner the record to make the tracking transparent.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Page 06 / 07 · The Pattern Conversation</div>
+    <h1 class="slide-title">The conversation about <em>patterns</em> rather than instances.</h1>
+
+    <p class="lead">There comes a point, if you have been tracking, where the aggregate is undeniable and a conversation feels necessary. Not about a specific instance — those, you've learned, are individually defensible. About the pattern. The texture. The shape of the year. This module's final page is about that conversation: when to have it, how to have it, and what to do with what it reveals.</p>
+
+    <p class="body-text">Before the conversation, an honest disclaimer. <strong>This conversation almost never produces the outcome you hope for.</strong> The hope, almost always, is that the partner — when shown the pattern — will recognise it, accept responsibility, and change. This is what should happen in a healthy relationship and what occasionally does happen with people who are doing their own work. In dysfunctional relationships, the conversation almost always produces one of three other outcomes, and recognising those outcomes in advance is most of how you decide what to do with what the conversation reveals.</p>
+
+    <div class="section-heading">When to have it</div>
+
+    <p class="body-text"><strong>After at least three months of tracking, not before.</strong> You need enough data to describe the pattern accurately. Without three months of evidence, you will be drawing the pattern from impression rather than observation, and the conversation will collapse the moment the partner asks you for specifics you cannot produce.</p>
+
+    <p class="body-text"><strong>When you are calm, not when an instance has just occurred.</strong> Bringing up the pattern in the moments after a specific instance converts the pattern conversation into a specific-instance conversation, and you will lose the specific-instance conversation for the structural reasons in Page Three. The pattern conversation must happen in a neutral hour, ideally days after the most recent instance, when neither of you is reacting to anything fresh.</p>
+
+    <p class="body-text"><strong>When you have already decided what you will do with each possible outcome.</strong> This is the hardest preparation. Before the conversation, you must know, internally, what you will do if they respond with denial, defensiveness, or performative recognition. Without this preparation, you will leave the conversation in whatever state the partner has constructed, and you will rationalise the state as the correct one because it is the one you find yourself in.</p>
+
+    <div class="section-heading">How to have it</div>
+
+    <p class="body-text"><strong>Speak in patterns, not instances.</strong> The structure of the conversation is: "I have noticed something I want to share. Over the past several months, I have experienced a pattern in how you respond when I [do specific category of thing]. The pattern is [brief description]. I am not raising any single instance — I am raising the pattern." Resist the urge to offer specific examples, even when asked. The examples are the trap. The pattern is the conversation. <em>If they cannot engage with the pattern without specific examples, they are not engaging with the pattern.</em></p>
+
+    <p class="body-text"><strong>State what you have noticed about yourself, not just about them.</strong> The pattern is, by definition, something happening in the system between you. Bring this honestly — describe how you have changed, what you have noticed about your own behaviour, what version of yourself you have become in response to the texture. This is not blame-sharing. It is honest accounting, and it makes the conversation harder for the partner to dismiss as one-sided.</p>
+
+    <p class="body-text"><strong>Do not ask for an apology. Ask for recognition.</strong> An apology is a verbal performance. Recognition is a state of having seen what is happening. The two are not the same. Many partners will produce an apology to end the conversation while never recognising the pattern. Recognition, when it is real, has a different quality — it is slower, more searching, more uncomfortable, less rehearsed. You will know recognition when you see it. It rarely looks like the apology you wanted.</p>
+
+    <div class="section-heading">The three responses, and what they tell you</div>
+
+    <p class="body-text"><strong>Denial.</strong> "I don't do that. You're imagining it. You're paranoid. You're picking up things from this course you're doing." Denial is the simplest response and the clearest information. The partner is not willing to look at the pattern — possibly because they cannot, possibly because they will not. In either case, the conversation has revealed that the pattern will continue, because there is no recognition from which change could grow.</p>
+
+    <p class="body-text"><strong>Performative recognition.</strong> "You're right, I do that, I'm so sorry, I'll work on it." Said quickly, with emotion, with the right words. This is the most common response and the one most likely to misdirect you. The performance is genuine in the moment — they often believe what they are saying. The test is what happens over the following weeks. Most performative recognition is followed by a brief, deliberate softening of the pattern (sometimes called the "honeymoon"), and then a return to baseline, often with the pattern now harder to confront because they "already addressed it."</p>
+
+    <p class="body-text"><strong>Genuine recognition.</strong> "I want to think about what you've said before responding. I'm noticing my defence rising, and I don't want to give you the defensive version." Slower. Less rehearsed. Sometimes followed by days of quiet, after which the partner returns with a more considered acknowledgement. This is rare. It is also the only response that genuinely correlates with change. <strong>If you receive this response, the relationship may be salvageable. If you receive either of the other two, the question is not whether the relationship is salvageable but what you do next.</strong></p>
+
+    <div class="pullquote">The pattern conversation is not how you change the relationship. It is how you find out whether the relationship has the capacity to change. The conversation is the test. What happens in the weeks after the conversation is the result.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You have the pattern conversation and they respond with performative recognition — quick, emotional, the right words, an apology, a promise to work on it.</p>
+      <p class="scenario-context">In the moment, you feel relief and the urge to consider the conversation a success. Some part of you knows that the speed of the recognition does not quite match the depth of the pattern.</p>
+
+      <div class="choices" data-scenario="6">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the apology at face value. The conversation went well. The relationship is on a new path.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Acknowledge the response without making it the verdict. Wait six to eight weeks. Track what actually happens. The response tells you what they will say. The next two months tell you what they will do.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Push back on the apology. Tell them you don't believe it. Demand a more considered response.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>End the relationship now. The performative apology was the diagnostic. Don't wait for the proof.</button>
+      </div>
+
+      <div class="feedback" id="feedback-6">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-6"></p>
+        <p class="feedback-text" id="feedback-detail-6"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module Three.</em></h1>
+
+    <p class="lead">You now have precise vocabulary for an experience most people carry their whole adult lives without ever naming. The small cruelties. The defensible digs. The aggregation problem. The slow shape-change. The tracking that does not become surveillance. The conversation that tests whether the relationship can change. These are not paranoia. They are tools.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">Dramatic cruelty produces clean exits. Micro-aggressions produce trapped people. The smallness is the structure, not the consolation.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Seven kinds: the dig wrapped in care, the joke that isn't a joke, the strategic forgetting, the public versus private split, the conditional praise, the comparison, the small refusal.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">Each instance is individually unworth confronting because each one is calibrated to be just below the threshold of fair confrontation. The defensibility is the design.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Twelve months of small things produces a different person — slower, smaller, more vigilant. The rate of change is below your noticing threshold. You cannot see it while it is happening to you.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">Tracking is brief, private, monthly-read. The record is not a case file. It is what survives the relationship's quiet rewriting of your memory.</span></li>
+      <li><span class="summary-num">06</span><span class="summary-text">The pattern conversation is the test, not the cure. Denial, performative recognition, and genuine recognition tell you which relationship you are actually in.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">If you are in a relationship, take one quiet hour and do the year-ago comparison from Page Four. Honest, not generous. Notice what has expanded in you and what has contracted. The exercise is not a verdict. It is a piece of information you have not previously had clearly. If you are not in a relationship, return to your most recent one and identify which two or three of the seven kinds were operating. The naming, by itself, changes what you can recognise the next time.</p>
+
+    <p class="body-text">The next module — <strong>Dysfunction Archetypes</strong> — examines the recognisable shapes of dysfunctional partners. The controller, the abandoner, the keeper of scores, the one who needs saving. Each one operates on a different logic. Each one finds a different wound in you. The work continues.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">07 / 07</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 04 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: "Declaring a single instance to be a red flag produces hypervigilance in your friend and damages their discernment.", detail: "Single instances rarely diagnose relationships. The friend who tells you that any small unkindness 'always escalates' is teaching you to scan rather than to assess. This is a different kind of damage — it produces a generation of people who interpret every minor partner imperfection as evidence of dysfunction, which then becomes its own dysfunction. The honest answer is that you cannot tell from one instance, which is also the answer that actually helps." },
+    b: { headline: "Asking whether they can name two more examples of the same structural thing is the diagnostic the module is built around.", detail: "This is how you teach someone to read patterns instead of incidents. If they can name three examples, the conversation is about the pattern. If they cannot, the moment was probably an incident — a bad day, a moment of stress, a single small unkindness that does not predict anything. The question is more valuable than a verdict, because it gives your friend a tool they can use in their own observation rather than a conclusion that depends on you." },
+    c: { headline: "Telling someone they are overthinking it is sometimes accurate and is often the move that disqualifies their perception.", detail: "If the friend is in a relationship that is in fact accumulating small cruelties, telling them they are overthinking it confirms the voice their partner has been gently planting — that they are too sensitive, that they imagine things, that their perceptions are unreliable. The dismissal feels like reassurance but functions as further training of their self-doubt. The friend asked because they wanted a tool, not a verdict in either direction." },
+    d: { headline: "Refusing to comment respects their autonomy and abandons them at the moment they asked for help.", detail: "Sometimes refusing to comment is correct — when the situation is genuinely outside your understanding, when you have a conflict of interest, when the friend is asking you to validate a decision they have clearly already made. But declining to engage with a friend's genuine question about whether something is a pattern is, structurally, a way of avoiding the responsibility of friendship. The honest response is to give them the framework, not the verdict." }
+  },
+  2: {
+    a: { headline: "Sitting with the recognition before acting is the practice the entire module was designed to enable.", detail: "Recognition is not a decision. It is a state of having seen what was previously invisible. Acting from the first shock of recognition tends to produce one of two errors — a dramatic confrontation that destabilises the relationship without producing clarity, or a pre-emptive exit that you'll second-guess for months. The naming, by itself, changes what you can perceive going forward. The decision about what to do with the perception can be made later, from a settled place rather than a shocked one." },
+    b: { headline: "Cataloguing every example into a document and building a case turns the relationship into a trial in your own mind.", detail: "The prosecution position is exhausting and rarely useful. Even if your case is airtight, the partner will not respond to evidence the way courtrooms respond — they will respond to the energy of being prosecuted, which is almost always defensive. The catalogue also keeps you mentally inside the relationship at a level of attention that prevents you from rebuilding your own life alongside it. The light tracking from Page Five is sufficient. The full case file is overcorrection." },
+    c: { headline: "Confronting them with the names of the seven kinds and demanding recognition almost never produces recognition.", detail: "The names are diagnostic tools for you. Presenting them to the partner converts them into accusations — and accusations are met with defence, not reflection. The partner will engage with whether the framework applies, not with whether the pattern is real. You will end the conversation arguing about whether the joke that isn't a joke is really a category, while the actual texture of the relationship continues unchanged. The framework is for your understanding, not for the partner's prosecution." },
+    d: { headline: "Dismissing the framework as 'clinical' protects the relationship from being looked at clearly.", detail: "The framework is clinical, in the sense that it gives precise names to specific patterns. Calling this clinical and rejecting it on those grounds is sometimes a legitimate aesthetic preference — and is often the inherited voice protecting the relationship from being examined. Most relationships do have some friction. This module is not about ordinary friction. It is about a specific texture that produces a different kind of accumulation. The recognition you experienced was specific. The dismissal is the relationship's response to the recognition, not your own clarity." }
+  },
+  3: {
+    a: { headline: "Confronting the comment directly will produce a defence you cannot defeat in a single conversation.", detail: "The dig wrapped in care has its defence preloaded — they meant well, they were worried, you're being defensive about their concern. The conversation will reframe itself, within minutes, into one about whether you can accept loving feedback. You will leave the conversation feeling smaller. The lesson learned is to not raise it next time. This is the structural reason confrontation backfires, and the reason the tracking practice exists instead." },
+    b: { headline: "Staying neutral in the moment and noting the instance later is the practice the entire module is built on.", detail: "You do not engage in the moment. You let the comment pass. Later, in private, you write down what was said and your physical response to it. The pattern, if it is real, will accumulate. The aggregate, when you read the record in a month or two, will tell you whether you are in a relationship with someone who occasionally says things they don't mean, or in a relationship with someone for whom the dig is a recurring structure. Both are possible. The tracking distinguishes them." },
+    c: { headline: "Laughing it off restores the pleasant tone of the evening at the cost of training the system that produced the comment.", detail: "When you laugh off a dig, you have communicated, without needing to use words, that this kind of comment is acceptable. The partner — consciously or not — registers that this is a category of statement that produces no friction. The next instance arrives a little easier. The third instance arrives a little sharper. The dismissal feels like grace in the moment and operates as permission in the system. The neutral response, without performance of laughter, is the cleaner move." },
+    d: { headline: "Making a sharper joke back at them escalates the cruelty in the relationship by half a degree.", detail: "Returning the dig with a sharper version of itself converts the relationship into a system in which both of you are casually cruel — which is a real outcome some couples settle into, and is structurally toxic regardless of whether it feels equal. You may win the individual exchange. You will have lost the relationship's basic decency, possibly by the second year of the practice. The competitive cruelty model is a stable equilibrium, and the equilibrium is not a place anyone wants to live." }
+  },
+  4: {
+    a: { headline: "Taking the entire blame for the year-ago change is the inherited voice doing its work in real time.", detail: "Some of the change is yours. Some of it is the relationship. Some of it is the inevitable shifting of being a year older. Untangling the causes is part of the work — but it is not the work to assign yourself the entire blame. The version of you that has shrunk in the last year did not shrink in a vacuum. The texture you have been living in is part of what produced the shrinking, and refusing to look at that part of the picture is the relationship protecting itself from being part of the analysis." },
+    b: { headline: "Holding the comparison as honest data, with multiple contributing causes, is the diagnostic the page was designed to enable.", detail: "Not everything is the relationship. Aging matters. Career stress matters. Other relationships and circumstances matter. But the texture of the primary relationship in your life is one of the most significant inputs into who you are over a year, and refusing to include it in the analysis distorts the picture. The honest position is that the change has multiple sources, and the relationship is one of them — and the size of its contribution is something you can begin to estimate by looking at when the changes accelerated, what they correlated with, and what version of yourself emerged in moments away from the partner." },
+    c: { headline: "Blaming the relationship entirely and ending it today converts a piece of data into a verdict.", detail: "The comparison is information, not a sentence. Some of the change may be the relationship. Some of it may not. Ending the relationship in the heat of the recognition tends to produce decisions you'll second-guess, especially when the next relationship reveals that some of the changes — the reduced confidence, the lost ease, the general dampening — persist after the partner is gone. That information would have told you which parts were really the relationship. Acting on the comparison too quickly forecloses the analysis the comparison was supposed to make possible." },
+    d: { headline: "Dismissing the comparison because 'everyone changes' protects you from looking at a specific kind of change.", detail: "Yes, everyone changes over a year. Not everyone changes in the direction of becoming smaller, quieter, more cautious, less themselves. The comparison was not asking whether you changed. It was asking which direction the change has bent in. If the trend is toward expansion, the relationship is feeding you — even if it has friction. If the trend is toward contraction, the relationship has a cost that is not being captured in any individual instance. The dismissal converts a specific question into a general one to avoid the specific answer." }
+  },
+  5: {
+    a: { headline: "Stopping the practice and throwing away the record loses the data alongside the over-vigilance.", detail: "The hypervigilance is real and worth addressing. Abandoning the practice entirely, however, loses the months of accumulated observations and forces you to start over from impression rather than evidence. The fix for over-vigilance is not no tracking — it is less tracking. Smaller entries. Longer intervals between reading. The record stays. The relationship to it gets gentler. Throwing it away converts a calibration problem into a binary choice that loses everything you've gathered so far." },
+    b: { headline: "Recalibrating to less frequent, smaller entries is the move that turns a vigilance into a practice.", detail: "One entry a week. Read the record once a month. The scoring impulse will fade once the formal structure shrinks, because the structure was producing the scoring. With less structure, the noticing returns to the background, which is where it should be. You are not building a case. You are creating one piece of evidence per week that protects against memory rewrites. The lightness of the practice is what makes it sustainable, and the sustainability is what makes the long-arc diagnostic possible." },
+    c: { headline: "Leaning into the vigilance produces the most accurate diagnostic and ruins your everyday life in the process.", detail: "Tracking every interaction in real time will produce comprehensive data. It will also turn every conversation with the partner into a quasi-clinical encounter, in which you are simultaneously their partner and their observer. You will be exhausted within months. The partner will sense the surveillance even if you are not declaring it, and the relationship's quality will deteriorate from your side regardless of what they are doing. The accuracy is not worth the cost. The light version produces sufficient data without colonising your inner life." },
+    d: { headline: "Showing the partner the record transfers a private practice into a relationship issue, and very rarely lands as intended.", detail: "The record is for you. The partner, shown the record, will engage with it as either evidence in a trial (and defend each entry individually) or as proof that you have become paranoid (and use it to dismiss your perceptions wholesale). Either response damages the practice and damages the relationship. Transparency sounds noble. In this specific case, it converts a tool that protects your perception into a tool that the partner can use to argue your perception away. Keep the record private. That is its function." }
+  },
+  6: {
+    a: { headline: "Accepting the performative apology at face value is the move the performance was designed to produce.", detail: "Quick, emotional, the right words, an apology, a promise to work on it. The performance is well-rehearsed because, statistically, this version of the conversation has gone exactly this way before — possibly with previous partners, possibly with you. The relief you feel in the moment is real. It is also the predictable response to a successful performance. The diagnostic is not the words. The diagnostic is what happens in the weeks that follow. Accepting the apology as a verdict converts the test into a conclusion before the test has actually been run." },
+    b: { headline: "Acknowledging the response without making it the verdict, then waiting six to eight weeks to see what changes, is the only honest application of the framework.", detail: "The response tells you what they will say. The next two months tell you what they will do. Most performative recognition is followed by a brief, deliberate softening (the 'honeymoon'), and then a slow return to baseline. If this is the relationship you are in, the pattern will quietly resume by week eight. If you are in the rare relationship where the recognition was real, the pattern will not resume — the change will be slow but durable. Either way, the waiting is what produces the answer. The waiting is the practice." },
+    c: { headline: "Pushing back on the apology and demanding a more considered response usually produces a more considered performance.", detail: "If the original response was performative, the partner — sensing that the first version did not land — will deliver a second, slower, more sophisticated version. This is not progress. It is calibration. The performance, given feedback, becomes more accurate to what you wanted to hear. You will leave the second version more reassured than the first, while the underlying capacity for change has not shifted. Demanding better responses tends to produce better responses without producing better behaviour, and the better responses are harder to track." },
+    d: { headline: "Ending the relationship immediately on the basis of the performative apology forecloses the test the conversation was supposed to set up.", detail: "You may be right. Many performative apologies are followed by a return to the pattern, and ending today saves you eight weeks of waiting. But the eight weeks of waiting is not punishment — it is information. If you end based on the performance alone, you will spend the next several months wondering whether you over-read it, whether the apology was real and you cut it short. The waiting eliminates that doubt. The waiting protects your future certainty about the decision you eventually make." }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 7;
+const answered = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c2m2';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course2-module-2-love-bombing-and-the-initial-mask.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c2m3','1');window.location.href='course2-module-4-dysfunction-archetypes.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 6 · Module 1 · The Institution as Training Ground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.mechanism:last-of-type{border-bottom:1px solid var(--line)}.mechanism-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.mechanism-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+.cost-block{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.cost-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.cost-text{font-size:16px;line-height:1.65;color:#2a2a28}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}.voice-block::before{content:'“';position:absolute;top:-8px;left:24px;font-family:var(--serif);font-size:72px;color:var(--accent);line-height:1;font-style:italic}.voice-name{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px;padding-left:0}.voice-text{font-family:var(--serif);font-size:19px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);padding-top:8px}
+.safety-note{margin:40px 0;padding:28px;border:1px solid var(--accent);background:var(--paper)}.safety-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}.safety-text{font-size:15px;line-height:1.65;color:#2a2a28}
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.mechanism-name{font-size:24px}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+
+<header class="module-header">
+<div class="module-tag">Course 06 &middot; Institutional Brainwashing &middot; Module <strong>01</strong> &middot; The Institution as Training Ground</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 6 &middot; Institutional Conditioning</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c6m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course6-module-1-institution-training.html">Institution Training</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course6-module-2-school-compliance.html">School Compliance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course6-module-3-work-adult-school.html">Work: Adult School</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course6-module-4-religion-meaning.html">Religion and Meaning</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course6-module-5-government-governance.html">Government & Governance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course6-module-6-independence-deprogramming.html">Independence & De-Programming</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course6-module-7-thinking-for-yourself.html">Thinking for Yourself</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+<!-- SLIDE 1 -->
+<section class="slide active" data-slide="1">
+<div class="slide-number">Page 01 / 09 &middot; The Structural Definition</div>
+<h1 class="slide-title">What an institution actually <em>is.</em></h1>
+
+<p class="lead">The word &ldquo;institution&rdquo; conjures buildings: the school, the prison, the parliament, the church. These are the visible forms. But the institution is not the building. The institution is the system of rules, roles, rewards, and punishments that the building houses. The system precedes the building. The system outlasts it. And the system, in most cases, was operating on you before you were old enough to see it.</p>
+
+<div class="safety-note">
+<div class="safety-label">Before you begin</div>
+<p class="safety-text">This course examines how major social institutions shape thought, behaviour, and identity before individuals have the capacity to consent to that shaping. The material may surface strong reactions, especially regarding family, school, or religious experiences. If at any point the content feels overwhelming, please pause and access support. Samaritans: 116 123 (free, 24/7). Mind: 0300 123 3393. You can also text SHOUT to 85258.</p>
+</div>
+
+<p class="body-text"><strong>The structural definition:</strong> an institution is a system that shapes the behaviour, beliefs, and self-concept of its members through the organised application of reward, punishment, role, ritual, and narrative. Institutions are not evil by definition. They are systems designed to produce predictable human outputs. The outputs they were designed to produce, however, were not necessarily the outputs that serve you. They were the outputs that serve the institution.</p>
+
+<p class="body-text">The institution&rsquo;s first task is always the same: <strong>produce compliance.</strong> Not because institutions are malicious, but because institutions are systems, and systems require predictable inputs and outputs to function. A school that cannot predict the behaviour of its students cannot function as a school. A family that cannot predict the behaviour of its children cannot maintain its structure. A workplace that cannot predict the behaviour of its employees cannot deliver its product. <em>Compliance is not a by-product of institutional life. It is the primary product.</em></p>
+
+<div class="section-heading">The two earliest institutions</div>
+
+<p class="body-text"><strong>The family</strong> is the first institution. You entered it without choice, at the moment of birth, into a pre-existing hierarchy with pre-existing rules. You were not given the rules. You were trained into them through the accumulated responses of every adult around you to every behaviour you produced. The training was total. It operated before language. It shaped your nervous system before you had the conceptual framework to examine what was happening to you.</p>
+
+<p class="body-text"><strong>The school</strong> is the second institution, and in most cases the first one that operates outside the family&rsquo;s direct control. School does not replace the family&rsquo;s conditioning. School amplifies it, extends it, and gives it the authority of the state. The lessons school teaches about behaviour, hierarchy, and the relationship between obedience and reward are not written in the curriculum. They are written into the structure of the school day itself. <em>What you are taught to do in the classroom is less important than what you are trained to be.</em></p>
+
+<div class="pullquote">An institution does not ask for your consent. It does not need to. By the time you are old enough to question the institution&rsquo;s premises, the premises have already been installed. The questioning happens inside a mind that was shaped by the system before it could examine the system. That is not an accident. That is the design.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You read the structural definition of an institution and feel a flicker of resistance. Your family was not an &ldquo;institution.&rdquo; Your school was imperfect but mostly fine. This framework feels like it is reaching.</p>
+<p class="scenario-context">The resistance is not irrational. It is the first evidence of the conditioning at work. The conditioning&rsquo;s primary task is to make itself invisible &mdash; to feel like common sense, like normal life, like just the way things are. The framework is not reaching. The framework is naming a structure that has been present and invisible throughout your life.</p>
+
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Maintain the resistance. The family is a relationship, not a system. The comparison is reductive and unfair to the people who raised you.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Distinguish between the people and the structure. Your family members may have been loving, well-intentioned, and genuinely caring &mdash; and the family was still a system that operated on you before you could examine it. The structural reading does not indict the people. It names the architecture.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Accept the framework entirely and immediately. Yes &mdash; all institutions are systems of control and all conditioning is damage.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Agree intellectually but feel nothing. This is academic. It applies to other people&rsquo;s families and other people&rsquo;s schools. Not yours.</button>
+</div>
+
+<div class="feedback" id="feedback-1">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-1"></p>
+<p class="feedback-text" id="feedback-detail-1"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" disabled>&larr; Previous</button>
+<span class="nav-counter">01 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide" data-slide="2">
+<div class="slide-number">Page 02 / 09 &middot; The Mechanisms</div>
+<h1 class="slide-title">How obedience is <em>installed.</em></h1>
+
+<p class="lead">Obedience is not taught by telling children to obey. It is installed through four interlocking mechanisms that operate continuously, across years, in every institution the child enters. By the time the mechanisms have run their full course, the child does not obey because someone told them to. The child obeys because disobedience has become inconceivable &mdash; or, if conceivable, suffused with the emotional weight of danger, shame, and exclusion.</p>
+
+<div class="mechanism">
+<div class="mechanism-num">Mechanism 01</div>
+<h2 class="mechanism-name">Reward and punishment.</h2>
+<p class="body-text">The most visible mechanism. Correct behaviour is rewarded: with praise, gold stars, approval, promotion, love expressed as warmth. Incorrect behaviour is punished: with withdrawal of approval, exclusion, shame, detention, the removal of affection. <strong>Over thousands of repetitions, the child&rsquo;s nervous system learns to associate compliance with safety and non-compliance with threat.</strong> The learning happens below conscious thought. It does not feel like conditioning. It feels like knowing right from wrong &mdash; because the nervous system has been trained to experience obedience as virtue and disobedience as transgression. The learning is so thorough that in adulthood, the adult continues to reward and punish themselves on the institution&rsquo;s behalf, long after the institution itself has no direct power over them.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Mechanism 02</div>
+<h2 class="mechanism-name">Social modelling.</h2>
+<p class="body-text">Children learn by watching. The adults and older children around them provide continuous demonstrations of the correct way to exist within the institution. <em>The modelling is not always explicit.</em> The parent who goes silent when a difficult topic arises models: silence is the correct response to difficulty. The teacher who defers to the headteacher without question models: hierarchy is natural and unquestionable. The older sibling who performs the expected role without resistance models: the role is who you are. <strong>Social modelling installs the rules of the institution without the institution having to articulate them.</strong> The child does not receive the rules. The child absorbs them from the texture of observed behaviour, and internalises them as common sense.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Mechanism 03</div>
+<h2 class="mechanism-name">The manufacture of identity.</h2>
+<p class="body-text">Institutions do not merely shape behaviour. They shape self-concept. <strong>The child who is told, repeatedly, that they are &ldquo;good&rdquo; when they comply and &ldquo;bad&rdquo; (or difficult, or a problem) when they do not, learns to organise their entire sense of self around the institution&rsquo;s judgement.</strong> The &ldquo;good student&rdquo; is not a description of intellectual ability. It is a description of compliance. The &ldquo;good child&rdquo; is not a description of character. It is a description of tractability. The child who internalises the &ldquo;good&rdquo; label as identity then carries it into every subsequent institution: working to maintain the goodness, feeling the threat of the bad, organising their choices around the management of the institution&rsquo;s approval rather than the governance of their own values.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Mechanism 04</div>
+<h2 class="mechanism-name">The threat of exclusion.</h2>
+<p class="body-text">The final and most powerful mechanism. Every institution holds the implicit threat of expulsion: from the family, from the school, from the social group, from the community of faith. <em>Exclusion, for a dependent child, is not merely social difficulty. It is existential threat.</em> A child excluded from the family has no survival resources. A child excluded from the peer group has no social reality. A child excluded from the community of faith has no spiritual belonging. The threat of exclusion does not need to be stated explicitly &mdash; it is present in every moment of institutional life as the ultimate consequence of complete non-compliance. <strong>The threat installs a deep, pre-verbal aversion to behaviour that risks exclusion, which is precisely the aversion the institution requires to maintain its structure.</strong></p>
+</div>
+
+<p class="body-text">The four mechanisms operate simultaneously and reinforce each other. The reward-and-punishment cycle creates the initial associations. Social modelling normalises the associations. Identity manufacture converts the associations into self-concept. The threat of exclusion ensures the self-concept is maintained. Together they constitute a total conditioning environment &mdash; one that operates on the child before the child has the cognitive development to interrogate it, and that produces in the adult a set of automatic responses to authority, hierarchy, and independent thought that feel like personality but are, in structural terms, programming.</p>
+
+<div class="pullquote">You did not choose to be compliant. You were trained to be compliant, through thousands of interactions, before the part of your brain capable of critical examination was fully developed. The compliance is not a character trait. It is a conditioned response to a training programme that ran for years before you knew it was running.</p>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You think of a moment in adulthood when you did something you did not want to do &mdash; stayed silent, agreed, deferred, performed &mdash; not because you believed it was right, but because the alternative felt somehow dangerous or wrong, without being able to articulate why.</p>
+<p class="scenario-context">The behaviour in the moment felt like a choice. The structural reading suggests it was closer to a reflex &mdash; the conditioned response firing, producing compliance before your conscious thought had time to intervene.</p>
+
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Reject the structural reading. You made a choice. You are not a conditioned robot. Agency is real.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold both truths. You have genuine agency &mdash; and conditioning shapes the landscape within which that agency operates. Seeing the conditioning does not eliminate agency. It expands it, because you can now see the conditioned reflexes before you act on them.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Accept full determinism. You have no real agency. Everything you do is the product of conditioning. The self is an illusion.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel shame at having been so thoroughly conditioned. You should have seen this sooner. You should have resisted harder.</button>
+</div>
+
+<div class="feedback" id="feedback-2">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-2"></p>
+<p class="feedback-text" id="feedback-detail-2"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">02 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 3 -->
+<section class="slide" data-slide="3">
+<div class="slide-number">Page 03 / 09 &middot; The Family</div>
+<h1 class="slide-title">The family as the <em>first classroom.</em></h1>
+
+<p class="lead">Before school. Before religion. Before government. Before any institution the child will encounter by name &mdash; there is the family. The family is the first training environment, and the training it delivers is the deepest, the earliest, and the hardest to examine, because it arrives before language, before memory, and before any independent framework exists against which to measure it.</p>
+
+<p class="body-text"><strong>The family does not set out to train the child in obedience.</strong> The family sets out to raise a child: to keep it fed, safe, loved, and prepared for the world. The training in obedience is a structural by-product of that goal, because the family is a system, and systems require compliance from their members to function. The infant who will not sleep becomes a child who is trained into sleep patterns. The toddler who will not stop at the road becomes a child trained into road safety. <em>The training is necessary. What is also necessary is to see clearly what else the training installs alongside the necessary lessons.</em></p>
+
+<div class="section-heading">What the family trains alongside safety</div>
+
+<p class="body-text"><strong>Emotional suppression.</strong> Most families cannot tolerate the full emotional range of a child &mdash; the rage, the grief, the terror, the inconsolable need. The child who expresses these emotions loudly and persistently learns, over time, that certain emotional expressions result in withdrawal of approval, increased adult distress, or outright punishment. <em>The lesson installed: certain feelings are not acceptable. Acceptable feelings should be performed. Unacceptable feelings should be hidden.</em> The adult who cannot identify their own emotional states, who performs equanimity while feeling chaos, who apologises for expressing need, learned this lesson in the family before they could articulate what was being taught.</p>
+
+<p class="body-text"><strong>Hierarchy as nature.</strong> In the family, the adults are always right &mdash; not because they are always right, but because the structure requires this to be the operating premise. The child who argues is corrected, not engaged. The child who questions is managed, not answered. The child who refuses is punished, not heard. <strong>Over years, the family installs in the child a map of how authority operates: authority speaks, and the correct response is compliance.</strong> The map follows the child into every workplace, every relationship, every institution. The adult who cannot disagree with a manager, who defers immediately to any figure of authority, who experiences the expression of their own opinion as dangerous &mdash; this adult is carrying the family&rsquo;s map.</p>
+
+<p class="body-text"><strong>Performance of the acceptable self.</strong> The family has a self-image &mdash; a story about who it is and what kind of people it produces. The child is trained to perform the self that fits this story. The performance may conflict with the child&rsquo;s actual nature: the sensitive child in the family that prizes toughness, the artistic child in the family that values practicality, the questioning child in the family that prizes unquestioning faith. <em>The conflict between the trained self and the actual self is the source of a specific kind of adult distress: the feeling of being fundamentally inauthentic, of performing a life that does not quite fit, without being able to identify why.</em></p>
+
+<div class="voice-block">
+<div class="voice-name">The long lesson</div>
+<p class="voice-text">The family did not sit you down and say: hide your feelings, defer to authority, be who we need you to be. It taught these things through the accumulated texture of ten thousand small interactions &mdash; the glance when you said the wrong thing, the warmth when you played the right role, the silence when you asked the dangerous question. By the time the teaching was complete, you had no memory of a time before it. You called it your personality. It was your training.</p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You think of a feeling you habitually suppress &mdash; anger, grief, need, fear &mdash; and trace the suppression back to a specific, recurring response pattern in your childhood family.</p>
+<p class="scenario-context">The suppression does not feel like suppression. It feels like self-control, maturity, appropriateness. These are the words the training provides to make itself invisible. The training calls itself virtue so that examining it feels like attacking virtue.</p>
+
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Defend the suppression. Emotional self-regulation is a skill. Adults who cannot regulate their emotions cause harm. The family trained you well.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Distinguish between regulation and suppression. Genuine regulation is the capacity to experience a feeling fully and choose how to express it. Suppression is the elimination of the feeling before it is fully experienced. The family may have trained suppression while calling it regulation &mdash; and seeing the distinction is the first step toward developing the genuine version.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Feel rage at the family for suppressing your emotional expression. They damaged you. They should have known better.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel nothing at the question. The suppression is so complete that tracing it back to its source produces no emotional response at all &mdash; which is itself the suppression operating.</button>
+</div>
+
+<div class="feedback" id="feedback-3">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-3"></p>
+<p class="feedback-text" id="feedback-detail-3"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">03 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 4 -->
+<section class="slide" data-slide="4">
+<div class="slide-number">Page 04 / 09 &middot; The School</div>
+<h1 class="slide-title">School: what it is actually <em>teaching.</em></h1>
+
+<p class="lead">School is where the family&rsquo;s conditioning is taken from the private to the public, from the intimate to the industrial. What the family began with love and necessity, school continues with systems and numbers. The curriculum teaches mathematics, language, and history. The structure teaches something else entirely: how to exist within an institution, how to submit to authority, how to perform competence on demand, and how to understand your own worth through someone else&rsquo;s assessment.</p>
+
+<p class="body-text"><strong>The curriculum is the visible curriculum.</strong> It is what the school says it is teaching: reading, arithmetic, science, geography. The visible curriculum changes with governments and educational philosophies. It is debated, reformed, updated. <em>The hidden curriculum does not change.</em> The hidden curriculum is what the structure of the school day itself teaches, regardless of what subjects are on the timetable. It is what every child learns from the experience of school as an institution, independent of any individual teacher or lesson.</p>
+
+<div class="section-heading">The hidden curriculum</div>
+
+<div class="cost-block">
+<p class="cost-name">Your body is not yours.</p>
+<p class="cost-text">The school timetable teaches this lesson before the first class begins. <strong>You will sit when told. You will stand when told. You will move when the bell rings and not before. You will ask permission to use the bathroom.</strong> The body, which the child has been using freely, is brought under institutional schedule. The lesson is not stated. It is enacted, daily, for years. The adult who struggles to listen to their own physical needs &mdash; who overrides hunger, exhaustion, the need for rest, the need for movement &mdash; learned to override the body in an institution that required the body to serve the schedule. The schedule was never theirs.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">Your curiosity requires permission.</p>
+<p class="cost-text">The child arrives at school with undifferentiated curiosity &mdash; interested in everything, asking questions about everything, pursuing tangents freely. School teaches the child to direct curiosity only at approved subjects, at approved times, in approved formats. <em>The question that is not on the curriculum is, at best, a distraction and, at worst, a problem.</em> <strong>The child who asks why they need to learn the approved material, who pursues a tangent beyond the lesson&rsquo;s scope, who challenges the teacher&rsquo;s framing, learns that curiosity without permission is a form of disruption.</strong> The adult who cannot begin a project without external permission, who waits for someone else to sanction their interest before pursuing it, learned this lesson in a classroom that required curiosity to be managed rather than followed.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">Your worth is your performance.</p>
+<p class="cost-text">The school&rsquo;s primary technology is assessment. Everything the child does is assessed, graded, ranked, commented upon. The child learns, over years, to understand their own value through the institution&rsquo;s assessments of their performance. <strong>The high-achieving child learns that love and belonging come from performance. The low-achieving child learns that they are, by institutional measurement, less valuable than their peers.</strong> <em>Neither lesson is accurate. Both are durable.</em> The adult who cannot distinguish between their worth as a person and their performance in a role; the adult who is incapable of rest because rest produces no assessable output; the adult who experiences any criticism of their work as a criticism of their person &mdash; all are carrying the school&rsquo;s assessment framework, applied now to their entire existence.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">Collective conformity is safety.</p>
+<p class="cost-text">The school is the first large-scale experience of the peer group, and the peer group&rsquo;s power is immense. <strong>The child who stands out &mdash; in dress, in interests, in manner, in opinion &mdash; is at risk. The risk is social exclusion, mockery, the withdrawal of belonging.</strong> The school does not design this. The school merely provides the conditions in which it operates: large numbers of children, institutional hours together, limited adult mediation of social dynamics, and the group&rsquo;s innate mechanisms for enforcing conformity. <em>The adult who cannot hold a minority opinion without intense anxiety; the adult who modifies their presentation and behaviour compulsively to match the perceived expectations of the room; the adult who experiences distinctiveness as dangerous &mdash; this adult is carrying the peer group&rsquo;s lesson, which the school provided the conditions for, and which has never been examined.</em></p>
+</div>
+
+<div class="pullquote">School did not teach you what to think. School taught you how to exist in an institution &mdash; how to sit, wait, ask permission, perform, accept assessment, and conform. These are the lessons that shaped your adult life. The quadratic equations did not.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You are in an adult professional setting. Your manager says something you believe to be factually incorrect. You say nothing.</p>
+<p class="scenario-context">You are not afraid of your manager. You are not at risk. The stakes are modest. And yet the reflex that fires &mdash; keep quiet, do not correct authority, the cost of speaking is greater than the cost of silence &mdash; is the school&rsquo;s hidden curriculum operating in a room your teachers never entered.</p>
+
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the silence as appropriate. Correcting your manager in public is unprofessional. The silence is a social skill, not a conditioned reflex.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Distinguish between tactical silence and conditioned silence. Sometimes silence is a conscious choice made from a reading of the situation. Sometimes silence is the conditioned response firing before the conscious choice has formed. The distinction matters &mdash; because conditioned silence is never a genuine choice. Seeing the distinction allows you to choose consciously, even if the choice in this specific situation is still silence.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Feel contempt for yourself for not speaking up. You are a coward. The conditioning has destroyed your courage.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Speak up immediately in every future situation as a deliberate act of deconditioning. No more silence.</button>
+</div>
+
+<div class="feedback" id="feedback-4">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-4"></p>
+<p class="feedback-text" id="feedback-detail-4"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">04 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 5 -->
+<section class="slide" data-slide="5">
+<div class="slide-number">Page 05 / 09 &middot; The Conversion</div>
+<h1 class="slide-title">Obedience taught as <em>virtue.</em></h1>
+
+<p class="lead">The most sophisticated move the institution makes is not the installation of compliance. It is the moral reframing of compliance. Obedience is not merely rewarded &mdash; it is sanctified. The compliant child is not merely safe. The compliant child is good. And &ldquo;good&rdquo; is not a description of their behaviour in a specific institutional context. It becomes the description of who they are as a person, at the level of character and worth.</p>
+
+<p class="body-text"><strong>The moral vocabulary of institutional virtue:</strong> responsible, disciplined, hardworking, respectful, cooperative, reliable, mature. These words describe what institutions require from their members. In the mouth of the institution, they become character traits &mdash; evidence of inner goodness, of developed personhood, of admirable humanity. <em>The child who is called these things learns that these qualities are not merely useful. They are who good people are.</em></p>
+
+<p class="body-text"><strong>The moral vocabulary of institutional non-compliance:</strong> difficult, disruptive, attention-seeking, disrespectful, immature, troublemaker, a bad influence. These words describe behaviour that the institution cannot accommodate. In the mouth of the institution, they become character indictments &mdash; evidence of inner badness, of deficient personhood, of problematic humanity. <em>The child who is called these things learns that these qualities are not merely inconvenient. They are who bad people are.</em> And they carry the indictment forward, into every room they enter, as a self-concept that was written by the institution and experienced as innate truth.</p>
+
+<div class="section-heading">The qualities being condemned</div>
+
+<p class="body-text">Look more carefully at the qualities the institution labels as problematic: <strong>curiosity without permission, persistence when told to stop, challenging authority when authority is wrong, refusing roles that do not fit, expressing inconvenient truths, preferring one&rsquo;s own agenda over the institution&rsquo;s.</strong> None of these are vices. In any context outside the institution, they are precisely the qualities that produce originality, justice, courage, and genuine thought. The institution cannot accommodate them because the institution requires predictable, manageable behaviour &mdash; and these qualities produce unpredictable, unmanageable individuals.</p>
+
+<p class="body-text"><em>The conversion of inconvenient qualities into moral flaws is the institution&rsquo;s most enduring achievement.</em> The child who was told they were difficult because they asked too many questions grows into an adult who experiences curiosity as something to be suppressed &mdash; not because they chose to suppress it, but because the institution installed the suppression as a moral imperative. The adult who is afraid to ask questions, who experiences independent thought as a kind of disloyalty, who feels a vague but persistent guilt at expressing their own perspective &mdash; this adult is carrying the institution&rsquo;s moral vocabulary as their own inner voice.</p>
+
+<div class="sov-frame">
+<div class="sov-label">The conversion in full</div>
+<p class="sov-text">The institution did not merely punish your curiosity. It told you your curiosity was a flaw. It did not merely reward your compliance. It told you your compliance was your goodness. And you believed both, because you had no other framework. The framework is now available. The qualities the institution condemned were not your flaws. They were your capacities &mdash; the very capacities the institution needed to suppress in order to make you manageable. They are available to you. They have always been available to you. The institution called them problems so that you would call them problems. You do not have to.</p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You think of a quality in yourself that you have always experienced as a flaw &mdash; too much, too loud, too questioning, too persistent, too intense, too different &mdash; and consider where that characterisation first arrived.</p>
+<p class="scenario-context">The characterisation did not emerge from a neutral examination of your qualities. It emerged from an institutional context that found the quality inconvenient. The institution needed you to experience it as a flaw so that you would manage it on the institution&rsquo;s behalf. The management has been so effective that you have been doing it for decades.</p>
+
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Resist the reframing. Some of your qualities really are flaws. You have evidence. You have hurt people with them. The institution was not wrong.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Examine the quality on its own terms, outside the institutional framing. Some qualities need development, not suppression. Some need context, not elimination. The question is not whether the institution approved or disapproved. The question is: what is this quality actually for, and what would it look like, developed and directed by your own governance rather than suppressed by someone else&rsquo;s?</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Fully reclaim every quality that was ever condemned. The institution was wrong about all of it. You are entirely without fault. Everything that was labelled a flaw was, in fact, a gift.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel grief at the years spent suppressing something that was not a flaw. The loss is large. The quality has been dormant for so long it may not be recoverable.</button>
+</div>
+
+<div class="feedback" id="feedback-5">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-5"></p>
+<p class="feedback-text" id="feedback-detail-5"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">05 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 6 -->
+<section class="slide" data-slide="6">
+<div class="slide-number">Page 06 / 09 &middot; What Gets Pathologised</div>
+<h1 class="slide-title">The qualities that institutions <em>cannot tolerate.</em></h1>
+
+<p class="lead">Institutions are not indifferent to human qualities. They are actively selective. Certain qualities make the institution&rsquo;s functioning easier and are cultivated accordingly. Other qualities make the institution&rsquo;s functioning harder and are systematically suppressed &mdash; not through conspiracy but through the structural logic of any large system that requires predictable outputs from its members. Understanding which qualities get pathologised, and why, is the key to understanding why so many capable, perceptive, and genuine people have spent their lives believing something is wrong with them.</p>
+
+<div class="mechanism">
+<div class="mechanism-num">Pathologised quality 01</div>
+<h2 class="mechanism-name">The refusal to accept the given narrative.</h2>
+<p class="body-text">Every institution runs on a narrative: about its purposes, its legitimacy, its history, and its relationship to truth. The school&rsquo;s narrative is that it exists to educate. The family&rsquo;s narrative is that it exists to nurture. The government&rsquo;s narrative is that it exists to serve. <strong>The child or adult who questions the narrative &mdash; who asks whether the institution is, in practice, doing what it claims &mdash; is immediately disruptive to the system.</strong> The questioning does not need to be hostile. A child who simply asks &ldquo;why do we have to do it this way?&rdquo; is already threatening the narrative&rsquo;s naturalness. The institution&rsquo;s response is to pathologise the questioning: this child is difficult, contrarian, attention-seeking, unable to accept instruction. <em>The pathologisation protects the narrative by discrediting the questioner.</em> The adult who was this child now finds it extremely difficult to question narratives &mdash; because the questioning was so thoroughly associated with punishment that it carries an emotional charge of danger even when the danger is entirely absent.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Pathologised quality 02</div>
+<h2 class="mechanism-name">Non-conformity of identity.</h2>
+<p class="body-text">Institutions produce identity templates: the good student, the reliable employee, the faithful member. The individual whose identity does not fit any available template presents a classification problem that institutions solve by pathologising the misfit. <strong>The child who does not fit the school&rsquo;s identity templates &mdash; who is neither the academic achiever, the athletic hero, nor the sociable performer &mdash; is classified as lacking rather than as simply different.</strong> The lack is then treated as a problem to be addressed, through additional intervention, remediation, or redirection toward a template that fits slightly better than the original. <em>The individual learns: the self that I actually am is insufficient. The acceptable self is a template that I must perform. The performance is the price of belonging.</em></p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Pathologised quality 03</div>
+<h2 class="mechanism-name">The capacity for sustained independent focus.</h2>
+<p class="body-text">School requires children to divide their attention into standard units &mdash; forty-five-minute lessons, subject by subject, according to a timetable designed for institutional management. <strong>The child who is capable of sustained, deep engagement with a single subject, and who therefore resists the enforced transition to the next subject, is diagnosed as inflexible, unable to concentrate, or &mdash; in the contemporary version &mdash; presenting symptoms of a condition requiring management.</strong> The capacity for deep focus is one of the most valuable cognitive resources a person can have. In the institutional context, it is precisely the wrong shape. The institution needs a mind that can switch on instruction. The deep-focus mind cannot. The institution pathologises what it cannot use, and the individual carries the pathologisation as their own self-assessment. <em>The adult who believes they cannot concentrate is often the adult whose concentration was so deep that the institution could not accommodate it &mdash; and called the depth a deficit.</em></p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Pathologised quality 04</div>
+<h2 class="mechanism-name">Emotional truth-telling.</h2>
+<p class="body-text">Institutions require the management of emotional expression. The child who expresses distress at institutional injustice &mdash; who cries when treated unfairly, who rages when the rules are arbitrary, who grieves when something genuine is lost &mdash; disrupts the institution&rsquo;s emotional management. <strong>The response is to pathologise the expression: this child is oversensitive, too emotional, unable to cope, drama-prone.</strong> The emotions were not disproportionate. They were accurate responses to real experiences. The institution could not accommodate them &mdash; not because the child was wrong, but because the institution&rsquo;s functioning required the suppression of emotional responses that would have implicated the institution&rsquo;s practices. <em>The adult who is afraid to express emotion in institutional settings &mdash; who performs competence and suppresses distress, who has learned that emotional truth is a form of weakness &mdash; was told this by an institution that had a structural interest in making it true.</em></p>
+</div>
+
+<div class="pullquote">What the institution called your problems were the institution&rsquo;s problems with you. There is a difference. The institution needed you to carry the assessment as your own self-knowledge. You have been carrying it. You can put it down.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You receive feedback in a professional review that echoes the language of your school reports: &ldquo;needs to be more of a team player,&rdquo; &ldquo;sometimes pushes back more than is helpful,&rdquo; &ldquo;can be overly focused on their own approach.&rdquo;</p>
+<p class="scenario-context">The feedback is institutional language for: your independence, your critical thinking, and your capacity for deep individual work are inconvenient to the system. The feedback is dressed as developmental guidance. It is structural management.</p>
+
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Take the feedback at face value and work on the identified areas. The feedback is from a senior person who knows the organisation better than you do.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Read the feedback structurally before acting on it. What quality is being named? Is this a genuine developmental need, or is the institution managing a quality it finds inconvenient? Some feedback is accurate. Some feedback is the institution protecting itself. Knowing which is which is the governed response.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Dismiss the feedback entirely. All institutional feedback is management. None of it applies to you as a person.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel the old familiar shame. Here again. The same message. School, family, and now this. It must be true. There really is something wrong with you.</button>
+</div>
+
+<div class="feedback" id="feedback-6">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-6"></p>
+<p class="feedback-text" id="feedback-detail-6"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">06 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 7 -->
+<section class="slide" data-slide="7">
+<div class="slide-number">Page 07 / 09 &middot; The Costs</div>
+<h1 class="slide-title">What the training <em>costs</em> the adult.</h1>
+
+<p class="lead">The conditioning delivered by the earliest institutions does not stay in childhood. It travels into every adult context &mdash; into relationships, into workplaces, into the interior life. By the time an adult arrives at this material, the conditioning has been running for twenty, thirty, forty years or more, producing a specific set of patterns that feel like personality but are, in structural terms, the operating system installed by the training ground.</p>
+
+<div class="cost-block">
+<p class="cost-name">The compliance compulsion.</p>
+<p class="cost-text">The adult trained in institutional compliance finds disobedience not merely inconvenient but physically uncomfortable. <strong>The word &ldquo;no&rdquo; &mdash; addressed to an employer, a manager, a social norm, an expected role &mdash; arrives with a charge of fear, guilt, or danger that is entirely disproportionate to the actual risk.</strong> The compliance compulsion is not cowardice. It is the nervous system&rsquo;s learned association between non-compliance and threat, installed before the threat-assessment capacity was developed, and never since examined. The adult spends enormous energy managing this compulsion &mdash; saying yes when they mean no, agreeing when they disagree, performing enthusiasm for projects they find meaningless, maintaining relationships that cost more than they return. The energy is not freely given. It is extracted by the compulsion.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">Authority dependency.</p>
+<p class="cost-text">The adult trained to receive direction rather than generate it finds self-direction extraordinarily difficult. <strong>Without an external authority providing instruction &mdash; a manager, a teacher, a set of rules, a social norm to conform to &mdash; the trained adult experiences paralysis, anxiety, and the conviction that they are not qualified to determine their own direction.</strong> <em>The dependency is not a personality trait. It is the consequence of eighteen or more years of training in which the individual&rsquo;s own judgement was systematically devalued in favour of the institution&rsquo;s direction.</em> The adult who cannot begin a project without external validation, who requires constant reassurance that they are doing the right thing, who experiences independence as a form of irresponsibility, was trained into this state by institutions that needed their members to be directed rather than self-directed.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">The suppressed interior life.</p>
+<p class="cost-text">The training suppressed not merely the expression of certain feelings and thoughts but their very occurrence &mdash; or, more precisely, the individual&rsquo;s trust in them. <strong>The adult trained by institutions arrives at significant life decisions &mdash; career, relationship, location, identity &mdash; with a very limited access to their own genuine preferences, because the genuine preferences were systematically overridden by institutional requirements for so long that the adult has lost confidence in their own interior life as a source of reliable guidance.</strong> The adult does not know what they want, not because they have no wants, but because the training taught them that their wants were less relevant than the institution&rsquo;s requirements &mdash; and they have been applying this lesson to themselves ever since.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">Guilt at independence.</p>
+<p class="cost-text">The final and perhaps most insidious cost. The adult who begins to exercise genuine independence &mdash; to refuse roles that do not fit, to question narratives that do not hold, to pursue their own direction rather than the institution&rsquo;s &mdash; does not feel liberated. They feel guilty. <em>The guilt is the institution&rsquo;s final programme: the internal enforcement mechanism that activates when the conditioning is being transcended.</em> The guilt says: who do you think you are? You are being selfish. You are letting people down. Good people do not behave this way. <strong>The guilt is not a moral response. It is a trained response &mdash; the institution continuing to operate from inside the individual long after the individual has left the institution.</strong> The guilt is the clearest possible evidence that the conditioning is present. It activates precisely when the conditioning is being challenged.</p>
+</div>
+
+<div class="pullquote">The guilt you feel when you refuse, when you question, when you pursue your own direction &mdash; that guilt is not your conscience. It is the institution&rsquo;s voice, using the register of conscience so that you cannot distinguish the two. The distinction is the beginning of the work.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You decline an invitation &mdash; a social obligation, a work commitment, a family event &mdash; that you genuinely do not want to attend, and immediately feel guilty, selfish, and certain that you have done something wrong.</p>
+<p class="scenario-context">You declined something you did not want to do. In any neutral analysis, this is an exercise of ordinary human autonomy. The guilt is not evidence of wrongdoing. The guilt is the conditioning activating, using the language of conscience to enforce the institution&rsquo;s original requirement: show up. Perform. Comply.</p>
+
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Reverse the decision. The guilt is valid. You do owe people your presence. Declining was selfish.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the decision while observing the guilt. You can feel guilty and still have made the right decision. The guilt is data &mdash; it tells you the conditioning is active &mdash; not instruction. You are not required to obey it. Observe it, name it as conditioned rather than moral, and allow it to pass without reversing the decision.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Feel contempt for the guilt. It is just conditioning. Dismiss it. You owe no one anything.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Spiral into analysis. Was it the right decision? Maybe the guilt is moral. Maybe it is conditioned. You cannot tell the difference and the uncertainty is paralysing.</button>
+</div>
+
+<div class="feedback" id="feedback-7">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-7"></p>
+<p class="feedback-text" id="feedback-detail-7"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">07 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 8 -->
+<section class="slide" data-slide="8">
+<div class="slide-number">Page 08 / 09 &middot; The Beginning</div>
+<h1 class="slide-title">The first act of <em>seeing.</em></h1>
+
+<p class="lead">The recognition that you have been shaped by institutional conditioning does not require you to condemn the institutions that shaped you, to reject every value they instilled, or to position yourself as a victim of a malign conspiracy. It requires something both simpler and harder: to begin to see the conditioning clearly, to distinguish between what was installed and what is genuinely yours, and to start the slow work of governing your own territory rather than administering the institution&rsquo;s programme on its behalf.</p>
+
+<p class="body-text"><strong>The institutions that shaped you were not evil.</strong> The family that trained you in emotional suppression was, in most cases, a family that was itself trained in emotional suppression by its own family. The school that pathologised your independence was staffed by individuals who had themselves been shaped by the same institutional logic. The conditioning was not designed in a room by people with malicious intent. It was the outcome of systems that required predictable human outputs and produced those outputs through the mechanisms this module has described. <em>Seeing the conditioning clearly does not require you to hate the systems or the people within them. It requires you to stop running their programme.</em></p>
+
+<p class="body-text"><strong>What &ldquo;stopping the programme&rdquo; actually looks like:</strong> it does not look like revolution. It does not look like the dramatic rejection of all authority, all social norms, all institutional participation. Those are reactive postures &mdash; defined by the institution in opposition, rather than genuinely independent. <em>The genuinely de-programmed individual is not the one who reflexively rejects everything institutional. They are the one who can engage with or decline institutional participation from a conscious, governed position, rather than from a conditioned reflex.</em></p>
+
+<div class="section-heading">The three capacities to begin developing</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Capacity 01</div>
+<h2 class="mechanism-name">The pause before compliance.</h2>
+<p class="body-text">When the compliance reflex fires &mdash; when the automatic &ldquo;yes,&rdquo; the automatic silence, the automatic performance of the expected role &mdash; insert a pause. Not a refusal. Not a rebellion. A pause. The pause creates the space in which a conscious choice can form. The pause says: I am aware that a conditioned reflex is firing. I am not yet certain whether I am going to follow it or not. But I am going to choose, rather than react. <strong>The pause is the first act of governance in an institutionally conditioned life.</strong> It does not require courage, confrontation, or radical independence. It requires only the half-second between the reflex firing and the action completing.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Capacity 02</div>
+<h2 class="mechanism-name">The distinction between conditioned guilt and moral guilt.</h2>
+<p class="body-text">Conditioned guilt activates when you exercise autonomy, decline obligations, pursue your own direction, or fail to perform the expected role. Moral guilt activates when you have actually harmed someone or acted against your own values. <strong>They feel identical in the body. They are not identical in origin or in what they require from you.</strong> Conditioned guilt requires observation and non-compliance. Moral guilt requires examination and, often, action. <em>Learning to ask &ldquo;have I actually done something wrong, or have I merely done something the institution would not have approved of?&rdquo; is the beginning of the distinction.</em> The question seems simple. The question, honestly asked and honestly answered, is one of the most significant cognitive practices this course introduces.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Capacity 03</div>
+<h2 class="mechanism-name">The recovery of your own interior life as a source of guidance.</h2>
+<p class="body-text">The conditioning systematically devalued your interior life &mdash; your own preferences, perceptions, feelings, and judgements &mdash; in favour of the institution&rsquo;s external authority. The recovery of the interior life as a valid source of guidance is the slow work that the remaining modules of this course will support. <strong>It begins with a simple practice: regularly asking yourself what you actually think, what you actually feel, and what you actually want &mdash; and taking the answers seriously as data, even when they conflict with what the institution would require of you.</strong> The answers do not need to override every external consideration. They need only to be included in the calculation. For most people trained by institutions, they have been systematically excluded. Including them changes everything.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">The beginning</div>
+<p class="sov-text">You cannot undo the conditioning. You can see it. You can name it. You can insert a pause before it completes. You can distinguish its guilt from genuine guilt. You can begin to recover your interior life as a source of guidance that your institutions taught you to distrust. None of this is quick. None of it is permanent in the sense that the work ends. The conditioning is woven into the body, the nervous system, the automatic responses of decades. The seeing is the beginning. The seeing is enough, for now.</p>
+</div>
+
+<div class="pullquote">The goal is not to become ungovernable. The goal is to become self-governed &mdash; to participate in institutional life from a position of conscious choice rather than conditioned reflex. The distance between the two is the entire distance this course travels.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You finish this module and feel the familiar urge to immediately implement everything, to fix the conditioning now, to apply all three capacities starting tomorrow, to finally, after all this time, get this right.</p>
+<p class="scenario-context">The urgency is itself a conditioned response &mdash; the institution&rsquo;s performance imperative applied to the work of undoing the institution&rsquo;s performance imperative. The urgency says: you must do this correctly and completely and immediately. Governance says: slowly. One pause at a time.</p>
+
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Commit to immediate, total transformation. Starting tomorrow, you will question every compliance reflex, examine every guilt response, and recover your interior life in full.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Choose one small practice and begin it. The pause before compliance. Notice when the reflex fires. Insert the half-second. Do this once, somewhere this week, and observe what happens. Nothing else is required yet.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Feel overwhelmed by the scale of the work and disengage. The conditioning is too deep. The work is too large. It is not possible.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Treat the module as intellectual content and move on. Interesting material. Does not require action. You will think about it sometime.</button>
+</div>
+
+<div class="feedback" id="feedback-8">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-8"></p>
+<p class="feedback-text" id="feedback-detail-8"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">08 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Complete Module &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 9: COMPLETION -->
+<section class="slide" data-slide="9">
+<div class="slide-number">Module Complete</div>
+<div class="complete-mark">&#10003;</div>
+<h1 class="slide-title">You&rsquo;ve completed <em>Module One.</em></h1>
+
+<p class="lead">You now have the structural map of the institution as a training ground &mdash; what institutions are, how they install compliance, what the family and school specifically teach, what gets pathologised and why, what the training costs the adult, and what the first acts of seeing and self-governance look like. The conditioning is not a personal failing. It is a structural outcome. The examination of it is the beginning of something different.</p>
+
+<div class="safety-note">
+<div class="safety-label">Support is available</div>
+<p class="safety-text">This material can surface strong reactions, particularly around early family and school experiences. If you are experiencing distress, please reach out. Samaritans: 116 123 (free, 24/7). Mind: 0300 123 3393. Text SHOUT to 85258 for free, confidential text support. You do not have to process this alone.</p>
+</div>
+
+<div class="section-heading">What you carry forward</div>
+
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">An institution is a system that shapes behaviour, belief, and self-concept through reward, punishment, role, ritual, and narrative. Its primary product is compliance, not education or nurture.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Obedience is installed through four mechanisms: reward and punishment, social modelling, the manufacture of identity, and the threat of exclusion. Together they constitute a total conditioning environment.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">The family installs emotional suppression, hierarchy as nature, and the performance of an acceptable self &mdash; before language, before memory, before any independent framework exists to examine it.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">School runs a hidden curriculum alongside the visible one: your body is not yours, your curiosity requires permission, your worth is your performance, and collective conformity is safety.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Obedience is taught as virtue. Compliance becomes goodness. Non-compliance becomes moral failure. The qualities institutions cannot accommodate are labelled as character flaws and internalised as self-knowledge.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">The qualities that institutions pathologise &mdash; questioning, non-conformity of identity, sustained independent focus, emotional truth-telling &mdash; are the same qualities that, outside the institutional context, constitute originality, courage, and genuine thought.</span></li>
+<li><span class="summary-num">07</span><span class="summary-text">The adult costs of institutional conditioning: the compliance compulsion, authority dependency, a suppressed interior life, and guilt at independence. These feel like personality traits. They are trained responses.</span></li>
+<li><span class="summary-num">08</span><span class="summary-text">The first acts of governance: the pause before compliance, the distinction between conditioned guilt and moral guilt, and the recovery of your own interior life as a source of guidance the institution taught you to distrust.</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+
+<p class="body-text">This week&rsquo;s practice is the pause. Once &mdash; just once &mdash; when the compliance reflex fires, insert the half-second before completing the action. Do not refuse. Do not rebel. Simply pause, notice that the reflex has fired, and then make a conscious choice about whether to follow it. The choice may be the same as the reflex. That is entirely fine. What matters is the pause &mdash; the moment of consciousness inserted between the conditioned response and the action. Notice what the pause feels like. Notice what the reflex feels like before the pause. The noticing is the practice.</p>
+
+<p class="body-text">The next module &mdash; <strong>School: Manufacturing Compliance</strong> &mdash; goes deeper into the institution you spent the most of your early life inside: the school. What it was designed to produce. What it actually produced in you. And what the structure of compulsory education teaches about the relationship between the individual and the state &mdash; a relationship that shapes every subsequent encounter with institutional power.</p>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">09 / 09</span>
+<button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 02 &rarr;</button>
+</div>
+</section>
+
+</main>
+
+<script>
+const feedback={
+1:{
+a:{headline:"Protecting the people from the structure is the conditioning&rsquo;s first move: convert the structural analysis into a personal attack so that examining the structure feels like betraying the people inside it.",detail:"The framework does not require the family to have been unloving, or the parents to have been malicious, or the childhood to have been overtly harmful. It requires only that the family was a system &mdash; with roles, rules, rewards, and punishments &mdash; that operated on the child before the child could examine what was being installed. The people and the structure are separable. Loving parents, operating unconsciously within a family system, can install conditioning that costs their children decades. The structural reading is not an indictment of the people. It is a description of the architecture. The architecture can be examined without condemning anyone."},
+b:{headline:"Distinguishing between the people and the structure is the precision the module requires &mdash; and the distinction that makes the structural analysis useful rather than destructive.",detail:"Your family members may have been loving, well-intentioned, genuinely caring &mdash; and the family was still a system that operated on you before you could examine it. These two facts are not in conflict. The structural reading does not require the people to have been bad. It requires the system to have had structural properties that shaped you before you could consent to being shaped. Holding both truths &mdash; the love and the structure, the care and the conditioning &mdash; is harder than collapsing into either simple narrative. It is also accurate. And accuracy is what this course is built on."},
+c:{headline:"Total acceptance of the framework without personal examination collapses the structural analysis into a different kind of dogma &mdash; one that is equally blinding.",detail:"Not all institutional conditioning produces damage of equal depth or significance. Not all compliance training is harmful in the same way. The framework is a lens, not a verdict. Its value lies in what it allows you to examine, not in how completely you can apply it as a sweeping indictment. The governed use of the framework asks: what specific conditioning was installed in my specific family and school? What does it cost me now? What am I still running? The wholesale acceptance produces a comfortable narrative of victimhood without the uncomfortable work of personal examination. The personal examination is where the value is."},
+d:{headline:"Intellectual acceptance without personal application is the conditioning&rsquo;s most effective defence against examination: allow the framework to be understood and simultaneously prevent it from being felt.",detail:"The conditioning, if it is working, will produce precisely this response: a sense that the material is interesting and accurate in the abstract, and that it applies to other people and other families &mdash; not to yours specifically. This is not a failure of intelligence. It is the conditioning operating as designed: protecting itself from examination by making the examination feel irrelevant. The invitation is to bring the material to your own specific experience &mdash; to ask, not &lsquo;is this true of institutions in general?&rsquo; but &lsquo;what was installed in me specifically?&rsquo; The second question is where the work begins."}
+},
+2:{
+a:{headline:"Defending agency at the expense of seeing the conditioning is itself a conditioned response &mdash; the institution&rsquo;s insistence on the myth of perfect individual freedom.",detail:"Genuine agency exists. It also exists within a landscape shaped by conditioning. Denying the conditioning in order to protect the sense of agency is as limiting as denying agency altogether. The person who cannot see how their choices are shaped by conditioning is not more free than the person who can see it. They are less free &mdash; because they are making choices inside a landscape they cannot examine. The structural reading does not eliminate agency. It makes the exercise of genuine agency possible by making visible the forces that have been operating on it."},
+b:{headline:"Holding both truths &mdash; genuine agency and real conditioning &mdash; is the only position that allows you to exercise the former in full awareness of the latter.",detail:"Agency is not the absence of conditioning. Agency is the capacity to choose consciously within a conditioned landscape &mdash; and to gradually expand the territory of conscious choice by seeing the conditioning more clearly. The person who sees their compliance reflex as conditioned, and then consciously chooses whether to follow it or not, has more genuine agency than the person who follows the reflex and calls it a free choice. Seeing the conditioning does not make you less free. It makes you freer, because the seeing is the precondition for the pause that precedes the genuine choice."},
+c:{headline:"Complete determinism &mdash; the surrender of agency to conditioning &mdash; is as inaccurate and as unhelpful as complete denial.",detail:"The conditioning is real and significant. It does not constitute the entirety of who you are. Consciousness exists. The capacity to observe your own processes exists. The capacity to, over time and with practice, make choices that differ from conditioned reflexes &mdash; this capacity exists. The deterministic position is comfortable because it removes responsibility along with freedom. But it also removes the possibility of the work this course describes. If you have no agency, there is nothing to do. The structural reading suggests there is something to do &mdash; and that doing it is possible, incrementally, through the practices this module ends with. The doing requires agency. The agency is real."},
+d:{headline:"Self-blame for having been conditioned replicates the institution&rsquo;s logic: assigning personal moral failure to a structural outcome.",detail:"The conditioning was installed before you had the capacity to resist it. It was installed through mechanisms that operated on your nervous system before your critical thinking was developed. You could not have seen it sooner. You could not have resisted it earlier. The shame assumes that you should have &mdash; which is the institution&rsquo;s moral framework applied to the experience of recognising the institution&rsquo;s moral framework. The recognition is not late. It is here. What matters is what you do with it now. The shame for not having arrived sooner is the conditioning adding one more cost to the costs it has already extracted. You do not owe it that."}
+},
+3:{
+a:{headline:"Defending emotional suppression as self-regulation conflates a conditioned behaviour with a developed skill and prevents the examination that would distinguish the two.",detail:"Self-regulation is a genuine and valuable capacity: the ability to experience a feeling fully and choose a considered response. Suppression is different: the elimination of the feeling before it is fully experienced, so that no response &mdash; considered or otherwise &mdash; is required. Many people who believe they are regulated are suppressed. The distinction matters enormously for wellbeing and for the quality of their relationships. The family may have produced suppression. The conditioning presents suppression as regulation so that the examination feels like an attack on virtue. The examination is not an attack. It is the beginning of the development of genuine regulation."},
+b:{headline:"Distinguishing between regulation and suppression &mdash; and examining which the family actually taught &mdash; is the precise and useful application of this module&rsquo;s framework.",detail:"Genuine regulation requires that the feeling be fully experienced first. You cannot regulate what you have not felt. Suppression eliminates the feeling before it is fully experienced, producing a person who appears calm and functions efficiently, and who over time accumulates the physiological and relational consequences of a feeling life that has been systematically shut down. The family trained the suppression. Calling it regulation was the family&rsquo;s framing. Examining whether the framing is accurate &mdash; whether you actually experience feelings fully and then choose responses, or whether you eliminate feelings before they complete &mdash; is the practice this module points toward."},
+c:{headline:"Rage at the family for suppressing your emotional expression is valid and, if it becomes the entire response, prevents the structural examination that is more useful.",detail:"The family trained emotional suppression. The cost is real. The rage is legitimate. The rage, however, directed at specific people who were themselves trained by their own families in their own emotional suppression, produces a story with clear villains and a clear victim &mdash; which is emotionally satisfying and structurally limited. The more useful reading holds the rage alongside the structural understanding: the family trained what it was trained to train. The cost was real. The work now is to develop what the family could not teach, not to remain in the rage at the people who were themselves taught by the system they passed on."},
+d:{headline:"Feeling nothing when the question is asked is itself evidence of suppression operating at the highest level of efficiency.",detail:"The suppression, when it is most complete, does not produce a sensation of suppressing. It produces a sensation of nothing &mdash; of neutrality, of calm, of absence. The question about the feeling that is habitually suppressed arrives and finds nothing, because the suppression operates before the feeling has the opportunity to register. This is not peace. This is the most thorough form of the training. If this is what the question produces, the practice this module recommends &mdash; the recovery of the interior life as a source of guidance &mdash; may be particularly important, and may begin with simply noticing the absence rather than trying to fill it. The absence, noticed, is the beginning."}
+},
+4:{
+a:{headline:"Accepting the silence as appropriate professional behaviour may be accurate &mdash; or it may be the conditioning presenting itself as social wisdom to prevent examination.",detail:"Sometimes silence is the right professional choice. Sometimes silence is the conditioned response dressed as professional wisdom. The person who can always account for their silence &mdash; who can say &lsquo;I chose silence here because of X, Y, and Z specific considerations&rsquo; &mdash; may genuinely be exercising social skill. The person who finds themselves silent before they have consciously chosen silence, who experiences the thought of speaking as dangerous before they have assessed the actual risk, who has never spoken up to authority and attributes this to consistent appropriate social judgement &mdash; this person may be carrying the school&rsquo;s hidden curriculum and calling it social skill. The distinction requires honesty about which is actually happening."},
+b:{headline:"Distinguishing between tactical silence and conditioned silence is the precision the scenario requires &mdash; and the capacity the module is building.",detail:"The distinction is not always visible in the moment. But it can be developed: by noticing the speed of the silence (conditioned silence is faster than conscious choice), by noticing the quality of the internal experience (conditioned silence arrives with a sensation of compulsion or fear; conscious silence arrives with a sense of considered assessment), and by noticing the pattern across situations (if the silence is consistent in the presence of authority regardless of the specific stakes, the pattern suggests conditioning rather than consistent appropriate judgement). The capacity to make this distinction, developed over time, is exactly what this module exists to begin building."},
+c:{headline:"Self-contempt for conditioned behaviour applies a harsh moral judgement to an outcome that was structurally produced, not freely chosen.",detail:"You were conditioned. The conditioning produced the silence. Responding to the recognition of the conditioning with contempt for yourself replicates the institution&rsquo;s logic &mdash; the assignment of moral failure to structural outcomes. The contempt is also counterproductive, because the person in a state of self-contempt does not learn. The person in a state of self-contempt either overcorrects (creating new problems) or collapses further into the condemned behaviour. The governed response observes the conditioning with curiosity rather than contempt: what is this? Where does it come from? What does it cost me? What would governance look like in this specific context? Curiosity produces learning. Contempt produces shame."},
+d:{headline:"Wholesale behavioural change as a response to structural insight typically produces reactive non-compliance rather than genuine governance.",detail:"The impulse to speak up everywhere immediately, to never be silent again, to make the deconditioning visible and total &mdash; this impulse is the conditioning&rsquo;s inverse. It is still the conditioning driving: now instead of compliance, non-compliance; instead of always deferring, always challenging. The genuinely de-programmed individual is not defined by their opposition to authority. They are defined by their capacity to assess each specific situation from a conscious position and choose accordingly &mdash; which sometimes means silence, and sometimes means speaking, and which is always a conscious choice rather than a conditioned reflex in either direction. The work is the pause, not the programme."}
+},
+5:{
+a:{headline:"Resisting the reframing to protect the self-assessment is the conditioning&rsquo;s final defence: ensuring the individual continues to manage the inconvenient quality on the institution&rsquo;s behalf.",detail:"Some qualities need development. Some need context. Some are genuinely problematic in specific forms. The institutional condemnation, however, does not distinguish between development and elimination, between context and suppression. It requires the elimination of what it cannot accommodate. The examination the module invites is not &lsquo;was the institution wrong about everything?&rsquo; It is: what is this quality actually, outside the institutional framing? Is the problem the quality itself, or the form it took in a specific context? What would the quality look like, developed rather than suppressed? These questions cannot be answered while accepting the institutional verdict as the final word."},
+b:{headline:"Examining the quality on its own terms &mdash; outside the institutional framing &mdash; is the governed response to a lifetime of externally authored self-assessment.",detail:"The examination is not a wholesale exoneration. It is an honest inquiry: what is this quality actually, and what is it for? The questioning might produce surprising results &mdash; the quality the institution called &lsquo;too much&rsquo; may be the very capacity that is most needed, in a different context. The quality the institution called a disorder may be an aptitude that is wrong for one specific environment and essential in another. The examination is not about vindicating the quality against the institution. It is about recovering the quality for your own assessment rather than the institution&rsquo;s. Your assessment might confirm some of what the institution said. It might contradict other parts. Either result is more useful than accepting the institutional verdict without examination."},
+c:{headline:"Total reclamation of every condemned quality as a gift replicates the binary logic of the conditioning: instead of bad, now good; instead of flaw, now virtue &mdash; without the examination that would produce genuine understanding.",detail:"Some qualities that were condemned were unfairly condemned. Some were condemned because they were genuinely problematic in specific forms that still require development. Some were condemned and also carry genuine complexity that the examination would reveal. The wholesale reclamation, like the wholesale acceptance of the institutional verdict, bypasses the examination. The examination is what produces actual understanding of your own qualities &mdash; their capacities, their costs, their contexts, their development. The reclamation without examination produces a mirror image of the conditioning rather than its genuine transcendence."},
+d:{headline:"Grief at the years spent suppressing the quality is a valid and honest response &mdash; and the assumption that the quality is unrecoverable is the conditioning&rsquo;s final line of defence.",detail:"The grief is real. The years are gone. The conditioning has cost time, creative energy, authentic expression. The mourning is appropriate. The assumption that the quality is therefore permanently dormant, however, is the conditioning&rsquo;s last instruction: even in the recognition, even in the reclaiming, even here at the threshold &mdash; it is too late. You are too damaged. The quality is gone. This instruction is not accurate. Capacities that have been suppressed are not destroyed. They are waiting under the suppression. The recovery is not immediate. It is not complete. It is possible. The grief, held honestly without the additional assumption of permanence, is the beginning of the recovery, not its obstacle."}
+},
+6:{
+a:{headline:"Taking institutional feedback at face value, without structural reading, is the compliance reflex operating in the context where it costs the most.",detail:"Some institutional feedback is accurate and developmental. Some institutional feedback is structural management &mdash; the institution protecting itself from qualities it finds inconvenient by relabelling them as personal development needs. Accepting all feedback at face value without reading it structurally means that the institution continues to author your self-concept through the mechanism of professional development. The institutional feedback that condemned your questioning, your independence, and your individual approach in school may now arrive in different language in a different building. The structural reading asks: is this feedback accurate? Or is this the institution managing a quality it finds inconvenient? Both questions need to be genuinely asked and honestly answered."},
+b:{headline:"Reading feedback structurally before acting on it &mdash; distinguishing genuine developmental guidance from institutional management &mdash; is the governed response to a system that uses the language of development to enforce compliance.",detail:"The structural reading does not mean dismissing all feedback. It means applying a prior question: what quality is being named here, and why? Some feedback is accurate. Some is the institution&rsquo;s management dressed as your developmental need. The governed individual can distinguish between &lsquo;this is an area where I genuinely need to develop&rsquo; and &lsquo;this is an area where I am inconvenient to the system.&rsquo; The distinction requires honesty in both directions: honest enough to accept feedback that is genuinely accurate, and honest enough to decline feedback that is institutional management presented as truth. The same feedback, read structurally first, can be responded to more precisely and more usefully."},
+c:{headline:"Dismissing all institutional feedback as structural management is the reactive non-compliance that mirrors compliance &mdash; still defined by the institution, just from the opposite position.",detail:"Some institutional feedback is management. Some is accurate. The person who dismisses all feedback as institutional management has not transcended the institution. They have simply reversed their relationship to it &mdash; which is still a relationship defined by the institution&rsquo;s terms. The governed position requires reading each piece of feedback on its own terms: is this accurate? Is this management? Is it both? The capacity to make this distinction, rather than adopting a blanket policy in either direction, is the governance the module points toward."},
+d:{headline:"The shame that arrives when institutional feedback echoes school reports is the conditioning recognising itself &mdash; the accumulated institutional verdict arriving with its full emotional charge.",detail:"The shame is not new. It has been delivered in this language for years, by institutions from the family to the school to the workplace, accumulating weight with each delivery. The recognition that the same message has been following you through every institution is not evidence that the message is true. It is evidence that the same institutional systems have been encountering the same inconvenient qualities in you and responding with the same structural management. The shame is the accumulated weight of those encounters. The structural reading lightens the weight, not by denying the feedback but by asking: is this a truth about me, or is this an institutional pattern? The honest answer to that question is the beginning of the recovery."}
+},
+7:{
+a:{headline:"Reversing a decision because the guilt feels valid is the conditioned guilt performing its function: enforcing compliance by presenting itself as conscience.",detail:"The guilt feels like evidence of wrongdoing. The guilt arrives reliably whenever you exercise autonomy, decline obligations, or fail to perform an expected role. If the guilt were an accurate moral sensor, it would be calibrated to actual harm &mdash; to moments when your choices genuinely damaged someone. If it fires whenever you make a choice that the institution would not have approved, it is not an accurate moral sensor. It is the conditioning. The decision to decline the invitation was an exercise of ordinary human autonomy. The guilt is the institution&rsquo;s response to that exercise. Following the guilt by reversing the decision teaches the conditioning that it works, which ensures it will be stronger the next time."},
+b:{headline:"Holding the decision while observing the guilt &mdash; experiencing the guilt without obeying it &mdash; is the first and most important practice of deconditioning the compliance reflex.",detail:"The guilt does not need to be eliminated. It does not need to be argued with. It needs to be observed and named: this is conditioned guilt, activating because I exercised autonomy in a way the conditioning does not approve of. The naming does not make the guilt disappear. The naming makes the guilt a piece of data rather than an instruction. You can hold the decision and feel the guilt simultaneously. Over time, with repetition, the intensity of the conditioned guilt diminishes as the conditioning learns that autonomy does not produce the catastrophic consequences it was predicting. The holding is the practice. It is uncomfortable. It is the work."},
+c:{headline:"Contempt for the guilt eliminates it as a source of information &mdash; including the information it contains about where the conditioning is most active.",detail:"The conditioned guilt is a symptom, and symptoms are data. The locations where the guilt fires most reliably &mdash; declining social obligations, saying no at work, pursuing individual direction &mdash; are the locations where the conditioning is most deeply installed. Treating the guilt with contempt eliminates this data. It also produces a reactive non-compliance that has its own costs. The governed response treats the guilt with curiosity: where does this fire? How intense is it? What does its presence tell me about where the conditioning is operating? The curiosity produces a map. The contempt produces nothing but its own performance."},
+d:{headline:"The spiral of analysis &mdash; unable to distinguish conditioned from moral guilt &mdash; is itself a conditioned outcome: the institution&rsquo;s production of doubt as a mechanism for preventing autonomous action.",detail:"The inability to distinguish conditioned guilt from moral guilt is not a cognitive failure. It is a trained state: the institution needed you to be uncertain about your own judgements so that you would continue to defer to the institution&rsquo;s. The spiral is the uncertainty performing. A simple question cuts through it: did I actually harm someone? If the honest answer is no &mdash; if the only harm was to a social expectation, an obligation, an institutional requirement &mdash; then the guilt is conditioned. The question is not complex. The difficulty is trusting the answer. That difficulty is the conditioning. The answer, trusted anyway, is the governance."}
+},
+8:{
+a:{headline:"The commitment to immediate total transformation applies the institution&rsquo;s performance imperative to the work of undoing the institution&rsquo;s performance imperative &mdash; which is the conditioning reconstituting itself in the exact shape of its own undoing.",detail:"The urgency is real. The desire to fix this now, correctly, completely, is genuine. And the urgency is the programme. The institution taught you that correct performance requires total commitment, immediate application, and measurable outcomes. You are now trying to apply institutional performance standards to the process of recognising that you have been shaped by institutional performance standards. The irony is not accidental. The conditioning defends itself by recruiting your genuine desire for change into its own logic. The practice is slow. One pause. This week. That is enough."},
+b:{headline:"Choosing one small practice and beginning it is the governed response to the recognition &mdash; the precise opposite of the performance imperative the conditioning installs.",detail:"The conditioning wants total commitment or nothing, immediate results or failure, the entire transformation or proof that transformation is impossible. The governance says: one pause. One small thing. This week. The smallness is not a limitation. It is the entire point. The pause is a structural change in miniature &mdash; a moment of consciousness inserted between the conditioned reflex and the action. It does not require courage or resources or the right conditions. It requires only the half-second and the willingness to notice. Do it once. Notice what it feels like. That is the module&rsquo;s practice. Everything else will follow, slowly, from the noticing."},
+c:{headline:"The overwhelm that produces disengagement is the conditioning&rsquo;s final defence: making the work appear so large that beginning feels pointless.",detail:"The conditioning is deep. The work is real. And the work begins with one pause, not with the entire transformation. The scale of what has been installed does not require the scale of a single dismantling. It requires the consistent, small, incremental practice of the capacities this module names. One pause. One distinction between conditioned and moral guilt. One honest question about what you actually think, feel, and want. None of these is large. None of them requires the full dismantling. The dismantling happens through the accumulation of small moments of consciousness &mdash; and the first one is available to you in the next situation where the compliance reflex fires."},
+d:{headline:"Treating the module as intellectual content and declining to act on it is the compliance reflex in its most sophisticated form: applying the school&rsquo;s lesson that academic understanding is the goal, and that application is someone else&rsquo;s department.",detail:"The module has produced intellectual understanding. The intellectual understanding is not the module&rsquo;s goal. The module&rsquo;s goal is the pause. The distinction between conditioned and moral guilt. The one honest question asked this week about what you actually want. The institutional training produced a mind very capable of processing ideas and very reluctant to act on them without external instruction. This response &mdash; interesting, do not need to act &mdash; is the school delivering its lesson in the context of a course designed to examine the school&rsquo;s lessons. The noticing of this is itself the module&rsquo;s practice. Notice it. And then ask: what is one thing I will actually do differently this week?"}
+}
+};
+
+let currentSlide=1;const totalSlides=9;const answered={1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c6m1','1');window.location.href='course6-module-2-school-compliance.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
