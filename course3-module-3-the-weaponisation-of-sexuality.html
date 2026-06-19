@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 3 · Module 3 · The Weaponisation of Sexuality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+
+.layer{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.layer:last-of-type{border-bottom:1px solid var(--line)}.layer-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.layer-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+.layer-reversal{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:20px 0 8px;font-weight:500}.layer-quote{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.6;padding-left:20px;border-left:2px solid var(--line);color:var(--ink);margin-bottom:8px}
+
+.cost-block{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.cost-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.cost-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin:40px 0;border:1px solid var(--line)}.contrast-cell{background:var(--paper);padding:28px}.contrast-cell.right{background:var(--soft)}.contrast-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}.contrast-cell.right .contrast-label{color:var(--accent)}.contrast-list{list-style:none}.contrast-list li{font-family:var(--serif);font-size:15.5px;line-height:1.55;padding:10px 0;font-style:italic;color:var(--ink);border-bottom:1px dotted var(--line)}.contrast-list li:last-child{border-bottom:none}
+
+.practice{margin:28px 0;padding-left:28px;border-left:2px solid var(--line)}.practice-name{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.25}.practice-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.layer-name{font-size:24px}.contrast-grid{grid-template-columns:1fr}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 03 · Truth Reversal Framework · Module <strong>03</strong> · The Weaponisation of Sexuality</div>
+  <div class="progress-bar"><div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 3 &middot; Energy Body &amp; Sovereignty</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c3m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course3-module-1-the-energy-body.html">The Energy Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course3-module-2-energy-harvesting-tactics.html">Energy Harvesting Tactics</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course3-module-3-the-weaponisation-of-sexuality.html">Weaponisation of Sexuality</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course3-module-4-what-sacred-sexuality-actually-is.html">Sacred Sexuality</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course3-module-5-your-body-as-territory.html">Your Body as Territory</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course3-module-6-energy-restoration-and-sovereignty.html">Energy Restoration</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- PAGE 1 -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 · The Conversion</div>
+    <h1 class="slide-title">How the body became a <em>product.</em></h1>
+
+    <p class="lead">At some point — not a single historical moment but a slow accumulation of cultural decisions across centuries — human sexuality stopped being understood primarily as an internal experience and began being understood primarily as an external commodity. The conversion was not announced. It was installed, layer by layer, through religion, commerce, media, and social norms, until the commodity version felt so natural that anyone describing the original version sounded naïve.</p>
+
+    <p class="body-text">This module is not a moral argument about sex. It makes no claims about what sexuality should or should not be. <strong>It makes a structural claim about what happened to the fourth channel — sexual and creative presence — when it was converted from a territory you inhabit into a product you manage.</strong> The claim is that the conversion has a cost, and the cost is being paid in the currency of your life-force, daily, whether or not you are aware of the payment.</p>
+
+    <div class="section-heading">The conversion in three stages</div>
+
+    <p class="body-text"><strong>Stage one: the moral seizure.</strong> Sexuality was claimed, historically, by religious and moral systems that positioned themselves as the legitimate governors of the body. Your sexuality was not yours — it belonged to God, to the community, to your future spouse, to the moral order. The seizure was explicit. The cost was the removal of your authority over your own body's most intimate territory. <em>The seizure installed the first foundational belief: that your sexuality requires external governance, because you cannot be trusted to govern it yourself.</em></p>
+
+    <p class="body-text"><strong>Stage two: the commercial capture.</strong> As religious authority waned, commercial authority filled the gap — not by returning the territory to you, but by reframing it as a market good. Your sexuality was now a product — something with market value, something that could be enhanced, packaged, sold, consumed. The commercial capture did not liberate your sexuality from external governance. It transferred the governance from the church to the market. <em>The market's interest in your body is not your freedom. It is a different kind of harvest.</em></p>
+
+    <p class="body-text"><strong>Stage three: the internalisation.</strong> The most sophisticated stage. After enough generations of external governance — first moral, then commercial — the governance internalises. You begin governing your own sexuality by the standards of the external systems, without those systems needing to enforce anything. You manage your body for the market without the market asking. You restrict your body by moral standards without the church requiring it. <strong>The governance has been installed so deeply that it feels like your own preferences, your own choices, your own desires.</strong> The distinction between installed preference and genuine desire is the central diagnostic of this entire module.</p>
+
+    <div class="pullquote">Your sexuality was seized, then sold, then internalised — until the external governance felt like personal choice. The course does not ask you to reject your choices. It asks you to examine whether the choices were yours to begin with.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the three stages and feel a complicated mix of recognition and defensiveness.</p>
+      <p class="scenario-context">Some of your sexual choices feel entirely your own. Some of them, examined in this light, might be the internalisation stage operating — your own governance running on programming you did not install. The distinction is uncomfortable because it implicates your sense of authorship over your own desires.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Reject the framework. Your sexual choices are your own. Nobody programmed your desires.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the discomfort. Some of your choices may be genuinely yours and some may be the internalisation operating. The examination is not the same as the verdict. Sitting with the question is the work.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Accept the framework entirely. Conclude that nothing you have ever felt sexually was genuine. All of it was programming.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Engage intellectually but keep the body out of it. Interesting theory. Not relevant to your actual experience.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 · The Three Layers</div>
+    <h1 class="slide-title">What was <em>installed.</em></h1>
+
+    <p class="lead">The conversion from territory to product did not install a single programme. It installed three overlapping layers of programming, each reinforcing the others, each producing its own specific cost to the fourth channel. Most people are running all three simultaneously, and none of them is visible until it is named.</p>
+
+    <div class="layer">
+      <div class="layer-num">Layer 01</div>
+      <h2 class="layer-name">The performance layer.</h2>
+      <p class="body-text">Sex as a skill to be evaluated. Your sexual encounters are not experiences to be had — they are performances to be rated. <strong>The performance layer converts every sexual moment into a production — with an audience (the partner, or the imagined future partner, or the internal evaluator that watches you from outside your own body), a standard (what good sex looks like, as defined by media, pornography, peers, or your own curated comparison set), and a verdict (how well you performed, measured against the standard).</strong></p>
+
+      <p class="body-text">The cost is not subtle. The performance layer splits your attention during the most intimate moments of your life. Half of you is inside the experience. Half of you is watching, evaluating, calibrating. The split is the extraction. The life-force that should be available for the experience itself is being consumed by the evaluation of the experience. <em>You are, in the most embodied moments available to a human, partially disembodied — hovering above yourself, grading the performance.</em></p>
+      <div class="layer-reversal">The truth reversal</div>
+      <p class="layer-quote">You have been told that being good in bed is a form of generosity. The reversal: the performance of being good in bed is a form of self-extraction. Presence — actual, ungoverned, unperformed presence — is the generosity. The skill was never the point. The inhabiting was always the point.</p>
+    </div>
+
+    <div class="layer">
+      <div class="layer-num">Layer 02</div>
+      <h2 class="layer-name">The commodity layer.</h2>
+      <p class="body-text">Your body as a thing to be consumed. Not only in sexual contexts — in every context where your physical presence is treated as something that exists for other people's experience rather than your own. <strong>The commodity layer teaches you that your body's primary function is to be seen, assessed, desired, or consumed by others — and that your own experience of inhabiting the body is secondary to the experience others have of looking at it.</strong></p>
+
+      <p class="body-text">The cost is measured in the hours — across a lifetime — spent managing the body for external consumption. The dressing, the presenting, the calculating of how you will be perceived, the anticipation of the gaze, the adjustment of the posture, the curation of the image. Each of these is a drawing from the fourth channel. Each one converts creative life-force into the maintenance of a product. <em>The body, managed as a commodity, has less energy available for the things only you can experience from inside it — pleasure, creativity, physical presence, the felt sense of being alive in your own skin.</em></p>
+      <div class="layer-reversal">The truth reversal</div>
+      <p class="layer-quote">You have been told that taking care of your appearance is self-respect. The reversal: some of it is, and some of it is the commodity layer's maintenance schedule running. The distinction is felt in the body — the version that is self-respect feels like inhabiting. The version that is commodity maintenance feels like managing. Both may involve the same mirror. The felt sense is completely different.</p>
+    </div>
+
+    <div class="layer">
+      <div class="layer-num">Layer 03</div>
+      <h2 class="layer-name">The scarcity layer.</h2>
+      <p class="body-text">Your sexuality as a resource that depreciates. This layer teaches you — through media, through the aging industry, through the cultural narrative of declining desirability — that your sexual value has a shelf life. <strong>The scarcity layer installs a clock, and the clock is always running. You are either deploying your sexuality while it is still at peak value, or you are watching the value decline.</strong></p>
+
+      <p class="body-text">The cost is existential. The scarcity layer converts the natural ageing of the body — a process that, in the territory framing, is simply the territory changing shape over decades — into a countdown of diminishing market value. The anxiety of the countdown is itself an extraction. Years of life-force are spent monitoring the depreciation, managing the decline, purchasing products and interventions designed to slow the clock. <em>The clock is not real. The body's capacity for sexual and creative presence does not depreciate with age. What depreciates is its market value — and the market value was never yours. It was the market's.</em></p>
+      <div class="layer-reversal">The truth reversal</div>
+      <p class="layer-quote">You have been told that your desirability has a peak. The reversal: the market's assessment of your desirability has a peak. Your body's actual capacity for presence, pleasure, and creative life-force has no inherent expiry. The peak was the market's timeline, not yours. Your body operates on a different calendar entirely.</p>
+    </div>
+
+    <div class="pullquote">Three layers, all running simultaneously, all invisible until named. The performance layer splits your presence. The commodity layer redirects your maintenance. The scarcity layer installs a clock. Together, they convert the fourth channel from a territory you inhabit into a product you manage. The conversion is the weaponisation.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You recognise the performance layer operating in your most recent sexual experience — the split attention, the internal evaluator watching from above.</p>
+      <p class="scenario-context">The recognition is not abstract. You can feel, in memory, the exact moment you left the experience and began observing it. The split was invisible at the time. It is visible now.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Decide you need to become better at sex — learn new techniques, more skills, better performance — to eliminate the evaluation anxiety.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Recognise that the split is the programme, not the solution to the programme. The answer to performance anxiety is not better performance. It is the return to presence — the body as territory to inhabit, not a stage to perform on.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Conclude that sex is irreparably damaged for you. The programming is too deep. Give up on ever being fully present.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Blame the partner. If they created a safer environment, you would not need to perform.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 · The Cost</div>
+    <h1 class="slide-title">What the programming actually <em>costs.</em></h1>
+
+    <p class="lead">This is not a moral cost. This course does not care whether your sexual choices are morally correct by any standard. This is an energy cost — a measurable daily expenditure of life-force on managing, performing, and producing sexuality for external consumption, rather than inhabiting sexuality as internal experience. The cost is paid regardless of your moral position on sex. The cost is paid by people who have a lot of sex and people who have none. The cost is structural, not behavioural.</p>
+
+    <div class="cost-block">
+      <p class="cost-name">The cost to creative output.</p>
+      <p class="cost-text">The fourth channel — sexual and creative presence — is a single resource. When the performance layer, the commodity layer, and the scarcity layer are all running, they draw from the same well that feeds your creative work. The hours spent managing how the body appears, how the body performs, how the body is ageing — these hours are drawn from the same finite reserve that would otherwise be available for making things, imagining things, building things, expressing things. <strong>The creative flatness that many adults experience in their thirties and forties is not the natural consequence of ageing. It is the consequence of the three layers consuming the resource that creativity requires.</strong></p>
+    </div>
+
+    <div class="cost-block">
+      <p class="cost-name">The cost to physical presence.</p>
+      <p class="cost-text">When the commodity layer is running, you are not fully in your body. You are adjacent to it — managing it, presenting it, curating its image. The management creates a thin but persistent distance between you and your own physical experience. Food tastes slightly less. Movement feels slightly more performative. Touch arrives through a filter. <em>The distance is so familiar that most people do not experience it as distance — they experience it as normal, and they cannot remember a time when their body felt fully inhabited rather than managed.</em></p>
+    </div>
+
+    <div class="cost-block">
+      <p class="cost-name">The cost to actual sexual experience.</p>
+      <p class="cost-text">The most direct cost, and the most ironic. The programming that was supposed to make you sexually valuable — the performance skills, the body management, the awareness of your own desirability — actively degrades the quality of the sexual experience itself. The split attention reduces sensation. The performance anxiety overrides receptivity. The commodity awareness converts presence into production. <strong>The better you become at performing sexuality, the further you travel from experiencing it.</strong> The distance between the two is the cost.</p>
+    </div>
+
+    <div class="cost-block">
+      <p class="cost-name">The cost to self-governance.</p>
+      <p class="cost-text">When the three layers are running, your relationship with your own body is mediated by external standards — how the body is perceived, how it performs, how it compares. The mediation means you are not governing the territory directly. You are governing it through the proxy of external evaluation. Every sexual decision, every body decision, every creative decision passes through the filter of "how will this be received?" before it reaches the filter of "is this what I actually want?" <em>The ordering of those two questions is the cost. In a sovereign body, the second question comes first. In a weaponised body, the second question comes second, if it comes at all.</em></p>
+    </div>
+
+    <p class="body-text">The four costs are cumulative. They compound across years. A person running all three layers from adolescence will have spent, by their mid-thirties, thousands of hours of life-force on the management of a product that was never theirs. The reclamation — which begins on Page Five and continues through the rest of the course — is the redirection of that life-force back to its source: the body as territory, inhabited by you, governed by you, experienced from the inside rather than managed for the outside.</p>
+
+    <div class="pullquote">The weaponisation of sexuality does not cost you morality. It costs you presence. The presence that has been redirected to performing, managing, and producing is the same presence that would otherwise be available for creating, feeling, and being alive. The redirection is the weapon. The cost is your life.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You recognise the creative cost — the flatness, the reduced output, the sense that the well you used to draw from has become harder to reach.</p>
+      <p class="scenario-context">You had attributed the flatness to ageing, to busyness, to the natural consequence of adult responsibility. The possibility that the flatness is, in part, the three layers consuming the resource that creativity requires is new. And uncomfortable.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Dismiss the connection. Creativity declines with age. It has nothing to do with sexual programming.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the possibility without converting it into certainty. The creative flatness may have multiple causes — ageing, busyness, stress. And the three layers may also be a contributor. The examination does not require a single explanation. It requires an honest inventory of where the fourth channel's energy is actually going.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Conclude that all your creative decline is due to the programming. Expect the creativity to return immediately once the layers are dismantled.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Accept the cost as permanent. The programming has been running too long. The creative resource is depleted beyond recovery.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 · The Distinction</div>
+    <h1 class="slide-title">Expression versus <em>extraction.</em></h1>
+
+    <p class="lead">The hardest distinction in this module, and the one most likely to be misunderstood. This course is not against sexual expression. It is against sexual extraction — the production of sexuality for consumption rather than the experience of sexuality for its own sake. The two can look identical from outside. They feel completely different from inside. Learning to feel the difference is the diagnostic skill this page exists to develop.</p>
+
+    <p class="body-text">The distinction is not about what you do. It is about where the impulse originates. <strong>Sexual expression that arises from inside the body — from desire, from presence, from the felt sense of being alive and wanting to share that aliveness — is the fourth channel operating as it was designed to operate.</strong> Sexual performance that arises from the three layers — from the need to be evaluated well, from the awareness of being consumed, from the anxiety about declining value — is the fourth channel being extracted from.</p>
+
+    <p class="body-text">Both versions can involve the same acts. Both versions can occur with the same partner. Both versions can happen on the same evening. The difference is not in the behaviour. <em>The difference is in the origin of the impulse and the quality of presence available to you while the act is occurring.</em></p>
+
+    <div class="contrast-grid">
+      <div class="contrast-cell">
+        <div class="contrast-label">Expression (from governance)</div>
+        <ul class="contrast-list">
+          <li>The impulse arises from inside the body, without prompting</li>
+          <li>Your attention is inside the experience — fully present, not observing from above</li>
+          <li>You are not calculating how you are being perceived</li>
+          <li>The experience has its own rhythm, unscripted, responsive to what is actually occurring</li>
+          <li>Afterwards, you feel expanded — more alive, more in your body, more yourself</li>
+          <li>There is no evaluation. There is only the felt sense of what happened</li>
+        </ul>
+      </div>
+      <div class="contrast-cell right">
+        <div class="contrast-label">Extraction (from programming)</div>
+        <ul class="contrast-list">
+          <li>The impulse arises from the performance layer — the awareness of being watched, evaluated, consumed</li>
+          <li>Your attention is split — partly inside the experience, partly hovering above it in evaluation mode</li>
+          <li>You are aware of how you look, how you sound, how the performance is being received</li>
+          <li>The experience follows a script — explicit or implicit — that exists prior to the encounter</li>
+          <li>Afterwards, you feel depleted — tired in a way that is disproportionate, slightly emptied</li>
+          <li>There is an evaluation, even if silent — how did it go, was it good enough, what did they think</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="body-text">Read both columns slowly. <strong>The left column is experienced from inside the body. The right column is experienced from slightly outside it.</strong> The distance — that thin, persistent separation between you and your own experience — is the extraction. It is the performance layer, the commodity layer, and the scarcity layer operating in the most intimate space available to a human body. The extraction happens in the place that should be, above all others, the place where governance is absolute and external systems have no authority.</p>
+
+    <div class="section-heading">Why the distinction matters</div>
+
+    <p class="body-text">This is not a moral distinction. Both columns may involve consent, mutual desire, and genuine care. The question is not whether the sex was ethical. The question is <strong>whether you were present for it — fully, from inside, with the fourth channel operating on your behalf rather than on the behalf of the programme.</strong> A sovereign person can have sex that is wild, gentle, experimental, traditional, frequent, or rare — and all of it can be expression rather than extraction, as long as it originates from governance rather than from the three layers.</p>
+
+    <div class="pullquote">The distinction is not what you do in bed. The distinction is where you are while you are doing it. Inside the body, present, ungoverned by external evaluation — that is expression. Adjacent to the body, performing, split between experience and observation — that is extraction. Same act. Completely different channel cost.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You recognise, with uncomfortable clarity, that the last several sexual encounters you had were experienced from the right column rather than the left.</p>
+      <p class="scenario-context">Not because the partner was wrong. Not because you did not want to be there. Because the performance layer was running — the internal evaluator, the awareness of being perceived, the split attention — and the programme was operating in the space that should have been governed by your own presence alone.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Decide you need to avoid sex until the programming is fully dismantled.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the recognition without converting it into abstinence or shame. The programme was running. The programme can be addressed. The next encounter does not have to be experienced from the right column — but addressing the programme requires the practices on Page Five, not the avoidance of the experience itself.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Blame the partner for not creating conditions safe enough for you to be present.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Force yourself to be more present next time through willpower alone. Try harder. Perform presence.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 · The First Reclamation</div>
+    <h1 class="slide-title">Beginning to come <em>home.</em></h1>
+
+    <p class="lead">The reclamation of the fourth channel does not begin in the bedroom. It begins in the ordinary moments of daily life — the moments when you are in your body without it being a performance, a product, or a project. The reclamation is not a dramatic event. It is a quiet return to the experience of inhabiting the body from the inside, without the three layers mediating the experience.</p>
+
+    <p class="body-text">This page offers five practices. They are small. They are daily. They are almost embarrassingly ordinary. <strong>The ordinariness is the point.</strong> The three layers were installed through extraordinary interventions — media, culture, commerce, centuries of moral programming. The reclamation does not need to be equally extraordinary. It needs to be consistent, gentle, and directed at the felt sense of being in the body rather than managing it.</p>
+
+    <div class="practice">
+      <p class="practice-name">Spend ten minutes a day in the body without managing it.</p>
+      <p class="practice-text">Lie down. Close your eyes. Do nothing. Do not meditate — meditation, for many people, is another form of management. Simply be in the body without agenda. Notice what the body feels like from inside when nobody, including you, is watching it. The first few times, the performance layer will try to convert this into a practice — something to be done well, something to evaluate. Let it try. Let the evaluation dissolve into the ordinariness of simply lying there, breathing, feeling the weight of your own body on the surface beneath you. The ordinariness is the reclamation.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Dress for the felt sense, not the image.</p>
+      <p class="practice-text">Once a week — more often if it suits you — choose what to wear based on how the fabric feels against your skin rather than how it will be perceived. This is not about dressing down. It is about reversing the priority. The commodity layer dresses the body for external consumption. The sovereignty move dresses the body for internal experience. Some days the two will coincide. Some days they will not. The days they do not are the most informative — because the discomfort of wearing something that feels good but does not perform well reveals exactly how deeply the commodity layer has been governing your choices.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Notice when the evaluator switches on.</p>
+      <p class="practice-text">In any moment of physical experience — eating, moving, touching, being touched — notice whether the internal evaluator is present. Am I performing this, or am I experiencing it? Am I inside this moment, or am I watching myself from above? The question is the practice. You do not have to change anything. You simply notice whether you are in the body or adjacent to it. The noticing, done consistently, begins to disrupt the performance layer's automation — because the performance layer requires your unconsciousness in order to operate. Consciousness is the interruption.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Touch something for the experience of touching it.</p>
+      <p class="practice-text">Hold a cup. Feel the warmth. Notice the texture. Press your hand against a cool surface. Walk barefoot for thirty seconds. These are not spiritual exercises. They are nervous system recalibrations — moments in which the body is experiencing rather than managing, and the fourth channel is being used for its original purpose: the felt experience of being physical, alive, present in a body that is yours. Each small moment of ungoverned physical experience contradicts the commodity layer by a fraction. The fractions accumulate.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">When the scarcity clock ticks, name it.</p>
+      <p class="practice-text">When you catch yourself monitoring — the ageing, the changes, the comparison with a younger version of yourself or a younger version of someone else — name what is happening. "This is the scarcity layer." The naming does not stop the monitoring. It interrupts the monitoring's authority. The clock continues to tick. Your response to the ticking shifts from anxiety to observation. The observation is governance. The anxiety was the programme running. The two feel very different, and the difference is the reclamation of authority over the channel the scarcity layer was harvesting.</p>
+    </div>
+
+    <div class="sov-frame">
+      <div class="sov-label">The reclamation</div>
+      <p class="sov-text">You are not reclaiming your sexuality from anyone. You are reclaiming it from a programme. The programme has no feelings. It has no rights. It has no legitimate claim on the territory it has been governing. The territory is yours. The return to it is not rebellion. It is homecoming.</p>
+    </div>
+
+    <div class="pullquote">The body has been waiting for you to come back the entire time. It did not change while the programme was running. It waited. The warmth of the cup, the texture of the fabric, the weight of your own body on a surface — all of it was there, all along, underneath the management. The coming home is not dramatic. It is the most ordinary thing in the world.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You try the first practice — ten minutes lying down, no agenda, no management — and find it almost unbearable.</p>
+      <p class="scenario-context">The body, unmanaged, feels unfamiliar. The silence produces anxiety. The performance layer, with nothing to perform, cycles through restlessness, self-criticism, and the urge to do something productive. You last four minutes before getting up.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude the practice is not for you. You are not the lying-down-doing-nothing type.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Recognise that the four minutes were the practice. The unbearability is not failure — it is the three layers protesting the absence of their usual management tasks. Tomorrow, try four minutes again. The duration is not the measure. The willingness to return is.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Force yourself to lie there for the full ten minutes through willpower. Do not get up no matter how uncomfortable it becomes.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Replace the practice with something more productive — meditation, yoga, a body-scan exercise. Something with structure and measurable progress.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- COMPLETION -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module Three.</em></h1>
+
+    <p class="lead">You now have a structural account of how the fourth channel — sexual and creative presence — was converted from a territory you inhabit into a product you manage. The conversion happened in three stages. The programming installed three layers. The cost is being paid daily in creative output, physical presence, sexual experience, and self-governance. The reclamation begins with five ordinary practices that return you, slowly, to the body the programme has been governing without your consent.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">The body became a product through three stages: the moral seizure, the commercial capture, and the internalisation. The third stage is the most effective because it feels like personal choice.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Three layers of programming: the performance layer (sex as skill to be evaluated), the commodity layer (the body as thing to be consumed), the scarcity layer (sexuality as a depreciating resource). All three run simultaneously.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">The cost is not moral. It is energetic — creative output, physical presence, actual sexual experience, and self-governance. The three layers consume the resource that all four of these require.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Expression originates from inside the body. Extraction originates from the programme. Same act. Completely different channel cost. The diagnostic is where you are — inside the experience or adjacent to it.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">The reclamation begins with five ordinary practices: unmanaged time in the body, dressing for felt sense, noticing the evaluator, touching for experience, naming the scarcity clock. Consistency, not intensity.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">Choose one of the five practices from Page Five and do it daily for seven days. The ten minutes of unmanaged time in the body is the most challenging and the most foundational — but any of the five will begin the work. After seven days, notice what has changed. Not in the body — in your awareness of the body. The awareness is the first shift. The body follows.</p>
+
+    <p class="body-text">The next module — <strong>What Sacred Sexuality Actually Is</strong> — reclaims the term that has been captured by both the wellness industry and the morality industry. Not romance. Not pleasure. Not ritual. The reclamation of authority over your own energy — which is what the term always meant, underneath the centuries of appropriation.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 04 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback={
+  1:{
+    a:{headline:"Rejecting the framework on the grounds that your desires are entirely your own is the internalisation stage operating in real time.",detail:"Some of your desires are genuinely yours. The framework does not claim otherwise. What it claims is that the internalisation stage — the third and most sophisticated stage of the conversion — produces desires that feel indistinguishable from genuine ones. The rejection, delivered without examination, is the programme's most effective defence: it uses the felt authenticity of the internalised desires as evidence against the framework that would examine them. The examination is not a verdict. It is a question: which of your desires originated inside you, and which were installed so early and so deeply that they feel original?"},
+    b:{headline:"Sitting with the discomfort of not knowing which desires are genuine and which are programmed is the diagnostic posture the rest of the module requires.",detail:"Some of your sexual choices are entirely yours. Some may not be. The boundary between the two is not visible without examination, and the examination takes time — it is not resolved in a single reading but across months of noticing. The discomfort of the uncertainty is the honest position. The premature certainty — in either direction — forecloses the examination. Holding the question, without needing an immediate answer, is the practice. The answers emerge slowly, through the felt-sense work on Page Five, not through intellectual resolution on Page One."},
+    c:{headline:"Concluding that nothing you have ever felt sexually was genuine is the opposite overcorrection from the rejection — and is equally ungoverned.",detail:"The framework does not claim that all sexual experience is programming. It claims that the three layers of programming operate alongside genuine desire, often in the same moment, and that distinguishing the two requires the diagnostic skill this module teaches. Concluding that nothing was genuine collapses the complexity into a verdict that is as false as the rejection. Some of your experience was genuine. Some of it was the programme. The work is learning to tell the difference, not declaring everything one or the other."},
+    d:{headline:"Engaging intellectually while keeping the body out of it is the most common way adults process material that would change them if they let it land.",detail:"The body is where the programming lives. The intellectual engagement — interesting, correct, conceptually sound — operates at the level of the mind, which is precisely the level that the programming has already colonised. The mind can agree with the framework without the framework reaching the layers where the performance, the commodity management, and the scarcity anxiety are actually running. The body is the instrument. Keeping it out of the engagement ensures the engagement remains theoretical, which is safe and insufficient."}
+  },
+  2:{
+    a:{headline:"Becoming better at sex to eliminate performance anxiety is the performance layer responding to its own detection by intensifying the performance.",detail:"The programme, confronted with the recognition that it is producing split attention, does what programmes do — it offers a solution within its own framework. 'Become better at the performance and the anxiety will resolve.' This is the layer reinforcing itself. Better technique does not produce presence. It produces a more polished version of the same split attention. The evaluator does not go quiet when the performance improves. It raises the standard. The answer to performance anxiety is not better performance. It is the dissolution of the frame that made performance the relevant category."},
+    b:{headline:"Recognising that the split is the programme, and that addressing the programme requires a different kind of practice than improving the performance, is the module's central insight.",detail:"Presence is not a skill that can be performed. It is a state that arrives when the performance layer is not running. The practices on Page Five are designed to address the layer itself — through unmanaged time in the body, through the interruption of the evaluator, through the return to felt experience rather than observed experience. These practices do not produce better sex in the performance frame. They produce a different relationship with the body, from which sexual experience — ungoverned by the evaluator — becomes available. The change is slower and more durable than any technique."},
+    c:{headline:"Concluding that the programming is too deep and giving up is the programme's most effective long-term defence.",detail:"The programme benefits from your resignation. If you conclude that the damage is permanent, you stop examining the layers, stop practising the interruptions, and continue running the programme with the additional weight of having seen it and decided it cannot be changed. The programme, far from being threatened by this conclusion, is reinforced by it. The layers are deep. They are not permanent. The reclamation is slow. It is also real. People who have been running the performance layer for decades report, after months of the practices on Page Five, that the evaluator begins to go quiet. The quiet is not immediate. It is available."},
+    d:{headline:"Blaming the partner for the performance layer's operation places the governance of your fourth channel in someone else's hands.",detail:"The partner may indeed contribute to conditions that are more or less conducive to presence. But the performance layer is yours — it was installed in you before this partner existed, and it has operated in every sexual encounter you have ever had, regardless of partner. Blaming them for its operation is structurally identical to waiting for them to fix it: both positions place your governance outside yourself. The layer is in you. The addressing of the layer is your work. A good partner can support the work. They cannot do it for you, and expecting them to is another form of the extraction this course is designed to interrupt."}
+  },
+  3:{
+    a:{headline:"Dismissing the connection between the three layers and creative output is sometimes accurate and is often the programme defending its resource allocation.",detail:"Creativity does change across a lifetime — the relationship between age and creative output is real and complex. The framework does not claim the three layers are the only cause of creative flatness. It claims they are a contributor that has not previously been examined. The dismissal, arriving without examination, closes the inquiry before the inquiry has produced any data. The honest position is curiosity: if the three layers were consuming less of the fourth channel's resource, how much more would be available for the creative work that has felt harder to access? The question is empirical. The dismissal prevents the experiment."},
+    b:{headline:"Holding the possibility alongside other contributing causes is the honest diagnostic posture the module requires.",detail:"Multiple causes can operate simultaneously. Ageing, busyness, stress, and the three layers may all be drawing from the same resource. The examination is not about identifying the single cause — it is about mapping where the fourth channel's energy is actually going. The three layers, if they are consuming even a fraction of the resource, represent a redirectable expenditure. The ageing and the busyness are less redirectable. The layers are the part of the equation you can actually change, which makes them the most useful part to examine — regardless of whether they are the largest contributor."},
+    c:{headline:"Expecting the creativity to return immediately once the layers are named is the performance layer applying its evaluation standards to the reclamation process.",detail:"The naming is the first step. It is not the reclamation. The creative resource that has been consumed by the three layers for decades does not redirect overnight. The reclamation is slow — months, sometimes longer — and involves the practices from Page Five, sustained consistently, before the fourth channel begins to produce differently. Expecting immediate creative return is the performance layer's demand for measurable results, applied to a process that operates on a different timeline. The results come. They come slowly. The slowness is not failure. It is the actual pace of the work."},
+    d:{headline:"Accepting the cost as permanent is the programme's most elegant long-term defence — resignation disguised as realism.",detail:"The resource is not depleted beyond recovery. It is redirected — which means it can be redirected again. The three layers, when they begin to loosen through the practices on Page Five, release the resource they were consuming. The release is gradual, often experienced first as a subtle increase in creative impulse, in physical aliveness, in the felt sense of having more available for the things that matter. The permanence narrative is the programme's insurance policy: if you believe the cost is permanent, you stop examining the layers, and the layers continue to operate undisturbed."}
+  },
+  4:{
+    a:{headline:"Avoiding sex until the programming is fully dismantled waits for a state that may never fully arrive, and removes the primary context in which the reclamation is practised.",detail:"The programming loosens through practice — and some of the most important practice occurs in the very context the programming was designed to govern. Avoiding sexual experience removes the testing ground. The programme cannot be addressed only in theory. It must also be addressed in the moments where it operates — gently, without pressure, with the practices from Page Five as preparation. The avoidance, well-intentioned, often produces a different kind of anxiety (about re-entry, about the gap, about readiness) that compounds the original cost."},
+    b:{headline:"Holding the recognition without converting it into avoidance or shame is the integrated position from which the reclamation actually occurs.",detail:"The programme was running. It has been running for years. The recognition of this is not cause for shame — it is the precondition for change. The next encounter does not have to be experienced from the right column. But addressing the programme requires the daily practices from Page Five — the unmanaged time in the body, the noticing of the evaluator, the return to felt experience — applied consistently over weeks before the sexual context can be met differently. The recognition is the beginning. The practices are the path. The avoidance is a detour that delays the path without shortening it."},
+    c:{headline:"Blaming the partner for the programme's operation places the governance of your most intimate territory in someone else's hands.",detail:"The partner may indeed affect the conditions. A partner who is pressuring, evaluative, or performative themselves makes the reclamation harder. A partner who is patient, present, and ungoverning makes it easier. But the three layers — performance, commodity, scarcity — are in you. They were installed before this partner existed. They will operate with the next partner if they are not addressed. The work is yours. The partner's contribution to the conditions is secondary to your governance of the territory. Blaming them is another form of placing the fourth channel's governance outside yourself."},
+    d:{headline:"Performing presence through willpower is the performance layer applying itself to its own dissolution — which reinforces the layer rather than loosening it.",detail:"You cannot perform your way out of a performance programme. The instruction 'be more present' is, when powered by willpower and effort, another performance — a production of the appearance of presence for the internal evaluator. The evaluator grades the presence. The grading is the split attention. The split attention is the problem. Presence does not arrive through effort. It arrives through the absence of performance — which the practices on Page Five produce, slowly, by interrupting the automation of the three layers in daily life. The bedroom is where the reclamation is felt. The practices are where it is built."}
+  },
+  5:{
+    a:{headline:"Concluding the practice is not for you, after four minutes, is the three layers successfully defending their territory from the intrusion of ungoverned time.",detail:"The unbearability of four minutes of unmanaged time in the body is the diagnostic. It tells you how deeply the three layers have been governing your experience of your own physical presence. A body accustomed to being managed — performed, curated, evaluated — does not know what to do with unmanaged time. The restlessness is the management system cycling without tasks. The self-criticism is the evaluator without a performance to grade. The urge to be productive is the commodity layer insisting that unmanaged time is wasted time. All three are the programme. None of them is you."},
+    b:{headline:"Recognising that four minutes were the practice, and that the willingness to return tomorrow is the measure rather than the duration, is the reclamation's actual starting point.",detail:"The practice is not ten minutes. The practice is the willingness to return to the body without managing it, as many times as necessary, for as long as necessary. Four minutes today. Four minutes tomorrow. Perhaps five minutes next week. The duration extends naturally as the three layers gradually accept the absence of their management tasks. The unbearability diminishes. The body begins, slowly, to be inhabitable without management. This progression — measured in weeks, not days — is the reclamation of the territory. The four minutes were the first return to it."},
+    c:{headline:"Forcing yourself through the full ten minutes by willpower converts the practice into another performance and reinforces the layer it was designed to interrupt.",detail:"The practice is specifically designed to be unforced. Willpower — pushing through discomfort, demanding of yourself that you remain — is the performance layer applying itself to the reclamation process. The evaluator is now grading your capacity to lie still. The production is now the production of endurance. The management is now the management of the practice itself. All of this is the programme continuing to run inside the activity meant to interrupt it. The practice works because it is gentle. The gentleness is not optional. It is the mechanism."},
+    d:{headline:"Replacing the practice with something more structured is the performance layer's most sophisticated defence — allowing change only within frames it can evaluate.",detail:"Meditation, yoga, and body-scan exercises are all valuable practices. They are also structured — with instructions, with progressions, with standards of performance. The three layers can operate inside structured practices without being disturbed, because structure gives the evaluator something to grade and the commodity layer something to manage. The unstructured practice — lying down, no agenda, no measurement — is specifically designed to operate outside the frame the three layers can colonise. The absence of structure is not a flaw. It is the mechanism. Replacing it with structure is the layers protecting themselves by offering an alternative they can govern."}
+  }
+};
+
+let currentSlide=1;const totalSlides=6;const answered={1:false,2:false,3:false,4:false,5:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c3m2';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course3-module-2-energy-harvesting-tactics.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c3m3','1');window.location.href='course3-module-4-what-sacred-sexuality-actually-is.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

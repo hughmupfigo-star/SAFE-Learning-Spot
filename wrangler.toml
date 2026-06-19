@@ -1,0 +1,6 @@
+name = "safe-learning-spot"
+compatibility_date = "2024-09-23"
+
+# Serve everything in this folder as static assets
+[assets]
+directory = "."

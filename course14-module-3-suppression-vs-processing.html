@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module 03 · Suppression vs Processing — Safe Spot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})()</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})()</script>
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#3a7ca5;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html[data-theme="dark"]{--ink:#e8e8e4;--paper:#0f0f0d;--muted:#888884;--line:#2a2a27;--soft:#1a1a17}
+html,body{min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.module-header{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.module-tag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.progress-bar{display:flex;gap:4px;align-items:center}
+.progress-dot{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .3s}
+.progress-dot.active{background:var(--ink)}
+.progress-dot.complete{background:var(--accent)}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:4px;transition:color .2s}
+.theme-toggle:hover{color:var(--ink)}
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;border-right:1px solid var(--line);background:var(--paper);padding:80px 20px 40px;z-index:49;display:flex;flex-direction:column;scrollbar-width:none}
+@media(min-width:900px){.course-sidebar{display:flex;}}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:16px;transition:color .2s}
+.sidebar-back:hover{color:var(--ink)}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.sidebar-mod-list{list-style:none}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line)}
+.sidebar-mod-item:last-child{border-bottom:none}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);margin-right:10px}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--muted);text-decoration:none;transition:color .2s}
+.sidebar-mod-a:hover{color:var(--ink)}
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line)}
+.sidebar-mod-item.ss-now .sidebar-mod-n,.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a1a17}
+.module-container{padding:48px 40px 100px;max-width:720px;margin:0 auto}
+@media(min-width:900px){.module-container{margin-left:220px}}
+.slide{display:none}.slide.active{display:block}
+.slide-number{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:32px}
+.slide-title{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;line-height:1.25;margin-bottom:32px}
+.slide-title em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.08rem;line-height:1.78;color:var(--ink);margin-bottom:24px;font-family:var(--serif);font-weight:300}
+.body-text{font-size:.95rem;line-height:1.82;color:#3a3a36;margin-bottom:20px}
+html[data-theme="dark"] .body-text{color:#b8b8b4}
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:40px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.callout{border-left:2px solid var(--accent);padding:18px 22px;background:var(--soft);margin:28px 0;font-size:.93rem;line-height:1.75;color:#3a3a36;border-radius:0 4px 4px 0}
+html[data-theme="dark"] .callout{color:#b8b8b4}
+.term-block{border:1px solid var(--line);border-radius:4px;padding:20px 24px;margin:24px 0;background:var(--paper)}
+.term-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.term-def{font-size:.93rem;line-height:1.75;color:#3a3a36}
+html[data-theme="dark"] .term-def{color:#b8b8b4}
+.three-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:24px 0}
+.col-item{border-top:2px solid var(--line);padding-top:12px}
+.col-item.accent{border-top-color:var(--accent)}
+.col-title{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.col-text{font-size:.85rem;line-height:1.6;color:var(--muted)}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-top:56px;padding-top:28px;border-top:1px solid var(--line)}
+.nav-btn{padding:12px 28px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;font-size:.88rem;font-family:var(--sans);cursor:pointer;transition:opacity .2s;letter-spacing:.04em}
+.nav-btn:hover{opacity:.82}
+.nav-btn[disabled]{opacity:.25;cursor:default}
+.nav-counter{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em}
+.return-home-wrap{margin-top:20px;text-align:center}
+.return-home-link{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.return-home-link:hover{color:var(--ink)}
+.completion-slide{padding:48px 0 32px}
+.completion-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.completion-title{font-family:var(--serif);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:300;line-height:1.3;margin-bottom:16px}
+.completion-sub{font-size:.93rem;color:var(--muted);margin-bottom:40px}
+.summary-list{list-style:none;margin:24px 0}
+.summary-list li{padding:16px 0;border-bottom:1px solid var(--line);display:flex;gap:20px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.12em;min-width:28px}
+.summary-text{font-family:var(--serif);font-size:17px;line-height:1.5;font-weight:300}
+.practice-block{background:var(--soft);border-left:2px solid var(--accent);padding:20px 24px;margin:20px 0;border-radius:0 4px 4px 0}
+.practice-block p{font-size:.93rem;line-height:1.75;color:#3a3a36;margin-bottom:10px}
+.practice-block p:last-child{margin-bottom:0}
+html[data-theme="dark"] .practice-block p{color:#b8b8b4}
+.divider{height:1px;background:var(--line);margin:40px 0}
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent)}.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.55;pointer-events:auto}.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;cursor:default}<style>
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+<header class="module-header">
+  <div class="module-tag">Module <strong>03</strong> · Suppression vs Processing</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+    
+  </div>
+</header>
+
+</div>
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Free &middot; Emotional Regulation Fundamentals</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c14m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course14-module-1-your-nervous-system.html">Your Nervous System</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c14m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course14-module-2-what-dysregulation-looks-like.html">What Dysregulation Looks Like</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c14m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course14-module-3-suppression-vs-processing.html">Suppression vs Processing</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c14m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course14-module-4-your-regulation-toolkit.html">Your Regulation Toolkit</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+<main class="module-container">
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 08</div>
+    <h1 class="slide-title">Suppression is not the same as <em>calm.</em></h1>
+    <p class="lead">The most consequential and most consistently misunderstood distinction in the entire regulation framework is this: suppressing an emotion is not the same as being in a genuinely settled state. From the outside — and often even from the inside — they can appear identical. Physiologically, they are opposite in almost every relevant way.</p>
+<p class="body-text">A genuinely settled nervous system is one in which the emotion has completed its cycle: the physiological activation that accompanied it has risen, peaked, and discharged; the information it carried has been registered; and the system has returned, naturally and without effort, to baseline. The emotion is not absent — it can be recalled, thought about, even felt again — but it no longer has the same grip on the system. It has been processed.</p>
+<p class="body-text">A suppressed nervous system is something entirely different. The emotion has been interrupted mid-cycle — pushed down, covered over, or simply refused entry to conscious experience before it could complete. The physiological activation remains. The information was never registered. The system is not at rest. It is actively engaged in the effort of maintaining the suppression — an effort that is invisible to the person doing it and to those around them, but that consumes exactly the cognitive, emotional, and physical resources that genuine rest would otherwise restore.</p>
+<div class="callout">Suppression is not rest. It is work. Chronic suppression is chronic work — the compounding cost of a system that has never been allowed to complete its cycles, maintaining ever-larger amounts of incomplete activation at the cost of the energy, the connection capacity, and the cognitive function that could otherwise be available.</div>
+<p class="body-text">The cultural pressure toward suppression is enormous and often invisible. "Stay professional." "Don't be so sensitive." "Get over it." "You're overreacting." These instructions, delivered consistently enough, do not teach emotional regulation. They teach emotional suppression — and the two could not be more different in their long-term effects.</p>
+    <div class="nav">
+      <button class="nav-btn" disabled onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">01 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()">Continue →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 08</div>
+    <h1 class="slide-title">The physiology of <em>emotions.</em></h1>
+    <p class="lead">Understanding what emotions actually are — physiologically, not conceptually — changes the entire way you approach working with them. Most people relate to emotions as though they are states of mind: psychological events that happen in the head. They are, in fact, primarily physiological events that happen in the body and travel upward to consciousness.</p>
+<p class="body-text">An emotion begins as a physiological cascade: a change in the autonomic nervous system's state that produces measurable changes in heart rate, breath pattern, blood flow, muscle tone, and hormonal release. This cascade is initiated before conscious awareness — before you "know" you are feeling the emotion, the body is already producing it. What we experience as the emotion — the label, the feeling, the sense of "I am angry" or "I am afraid" — is the brain's interpretation of the physiological cascade after the fact.</p>
+<p class="body-text">Research by Jill Bolte Taylor suggests that the average duration of the neurochemical cascade associated with a basic emotion, if allowed to complete uninterrupted, is approximately ninety seconds. Ninety seconds from the triggering event to the natural discharge of the physiological activation. What keeps emotions alive for hours, days, or decades is not the emotion itself but the thoughts about the emotion — the stories, the ruminations, the resistance — that re-trigger the cascade continuously, preventing it from completing.</p>
+<div class="term-block"><div class="term-label">The 90-second rule</div><div class="term-def">If you can observe an emotion as a physiological event — noticing the body's response without immediately building a narrative around it — it will typically complete its physiological cycle within ninety seconds. The extension of emotional experience beyond ninety seconds is almost always the result of thought re-triggering the cascade, not the continuation of the original event.</div></div>
+<p class="body-text">This is not a licence to dismiss difficult emotions as temporary biochemistry. It is a reframe that makes it possible to work with them differently — to meet the physiological event with presence rather than resistance, to allow the wave to complete rather than fighting it.</p>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()">Continue →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 08</div>
+    <h1 class="slide-title">What genuine processing <em>involves.</em></h1>
+    <p class="lead">Processing is not catharsis. It is not crying it out, expressing the emotion loudly, or narrating the feeling at length. It is not revisiting the event that produced the emotion in elaborate detail. It is not journaling, though journaling can sometimes create the conditions for processing to occur. Genuine processing is a specific physiological event — the completion of the emotional cascade — and it requires two things: presence and non-resistance.</p>
+<p class="body-text">Presence means being in contact with the emotion as it is occurring in the body — maintaining awareness of the physical sensations, the location in the body, the quality and texture of the experience — rather than moving away from it into thought, analysis, or narrative. Not describing the emotion. Not interpreting it. Not situating it in the story of what caused it. Simply being with what is happening, in the body, right now.</p>
+<p class="body-text">Non-resistance means allowing the physiological activation to complete its cycle without interrupting it. Not fighting the tears if tears want to come. Not suppressing the trembling if the body wants to tremble. Not cutting off the anger mid-expression to check whether it is appropriate. The body's completion of the emotional cycle — the shaking that discharges trauma, the sobbing that moves grief, the trembling that releases fear — is not a loss of control. It is the system completing what it started.</p>
+<div class="section-heading">What gets in the way</div>
+<p class="body-text"><strong>Intellectualisation:</strong> moving into analysis before the physiological event has completed. The thought about the emotion replaces the emotion itself. Common in very intelligent people — the analysis becomes the escape. <strong>Catastrophising:</strong> the emotion triggers a narrative about what it means about the future, about oneself, about what will happen, and the narrative overwhelms the original feeling. <strong>Shame about the emotion:</strong> the secondary emotion — shame about feeling what is felt — interrupts the primary emotion's cycle and adds its own activation to the system. <strong>Premature resolution:</strong> reaching for meaning, lesson, or silver lining before the emotion has been allowed to complete.</p>
+<div class="callout">Genuine processing does not require understanding the emotion. It requires being willing to feel it. The understanding — when it comes — tends to arrive naturally after the completion, as a quiet clarity, not as a replacement for the completion.</div>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()">Continue →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 08</div>
+    <h1 class="slide-title">The completion <em>cycle.</em></h1>
+    <p class="lead">Peter Levine's somatic experiencing model introduces a concept that is among the most practically useful in the entire regulation literature: the completion cycle. Activation, in any organism, is designed to complete — to move from mobilisation through expression through discharge back to rest. When this cycle is interrupted, the incomplete activation is stored in the body as unfinished business. The regulation work, in significant part, is the work of allowing stored incomplete cycles to finally complete.</p>
+<p class="body-text">Levine observed that animals in the wild, after surviving a predator encounter, reliably exhibit a characteristic trembling and shaking behaviour before returning to their normal activities. This is not a sign of trauma. It is the completion of the stress cycle — the physiological discharge of the activation that the survival response produced. The animal does not carry the encounter forward. The cycle completed. The system reset.</p>
+<p class="body-text">Human beings, uniquely among animals, have the capacity to interrupt this completion process — through the prefrontal cortex's ability to suppress and override the body's impulses. We tremble and hold it in. We cry and stop ourselves. We feel the rage and manage it into professional presentation. These suppressions serve real social functions. Their cumulative cost — the accumulation of incomplete cycles — is the body burden that underlies much of what is described as chronic stress, unexplained physical symptoms, emotional numbness, and the persistent sense of being stuck.</p>
+<div class="section-heading">Allowing completion</div>
+<p class="body-text">Allowing the completion cycle does not require recreating or revisiting traumatic events. The body carries the incomplete activation regardless of whether the mind is engaged with the original experience. Physical movement, vigorous exercise, shaking (spontaneous or deliberate), deep sobbing, even significant yawning — all of these can facilitate the discharge of stored activation without requiring the narrative engagement with the original event. The body can complete what it started, if given the conditions and the permission to do so.</p>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()">Continue →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 08</div>
+    <h1 class="slide-title">Processing versus <em>rumination.</em></h1>
+    <p class="lead">The distinction between processing and rumination is the most practically important in this module — because many people are convinced they are doing the former when they are doing the latter, and the outcomes are as different as growth and erosion.</p>
+<p class="body-text">Processing is body-centred, present-timed, and finite. The physiological activation is felt, the cycle completes, and the activation discharges. Afterwards: a characteristic quality of relief, spaciousness, or quiet — not the absence of the feeling, but a change in the feeling's quality. The event that prompted the emotion feels different afterwards: further away, less charged, more integrated. Sometimes the processing produces clarity — an understanding of what the emotion was carrying — but this clarity is a byproduct of the completion, not a prerequisite for it.</p>
+<p class="body-text">Rumination is thought-centred, repetitive, and does not complete. The same event, the same feeling, the same narrative cycles through again and again — each cycle re-triggering the physiological activation, each cycle adding to the accumulated charge rather than discharging it. After rumination, the emotion has as much or more intensity than before — and the person is exhausted, having used significant resources without moving anything forward.</p>
+<div class="section-heading">The diagnostic question</div>
+<p class="body-text">If you have been "processing" something for weeks with no reduction in emotional charge — if the conversation in your head is as fresh and activated today as it was the first day — you are almost certainly ruminating rather than processing. The question to ask is: am I moving toward the feeling, or am I moving around it? Processing requires contact with the physiological event. Rumination perpetually approaches it through the narrative, which maintains the activation without allowing the discharge.</p>
+<div class="callout">The intervention for rumination is not more thinking. It is less thinking, combined with more body-directed attention. Ground the body, reduce the narrative, bring attention back to the physical sensation of the emotion itself. Let the feeling be felt rather than thought about. That shift — from the narrative level to the somatic level — is the shift from rumination to processing.</div>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()">Continue →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Page 06 / 08</div>
+    <h1 class="slide-title">What suppressed emotion actually <em>costs.</em></h1>
+    <p class="lead">The cost of suppression is not primarily psychological — it is physiological, and the research on it is consistent enough to be considered established. An emotion that is not processed does not disappear. It is stored in the body as incomplete physiological activation, and it compounds.</p>
+<p class="body-text">The research: suppressing emotional expression does not reduce the physiological arousal associated with the emotion. It maintains the arousal while reducing the person's awareness of it. The body is still activated. The person has simply stopped registering the activation consciously. The result is the worst of both worlds: the ongoing physiological cost, without the signal that would motivate addressing it.</p>
+<p class="body-text">Long-term chronic suppression is associated in the literature with: elevated inflammatory markers (chronic activation of the stress response system produces systemic inflammation, which is implicated in a wide range of serious illnesses), immune suppression, disrupted sleep and HPA axis dysregulation, elevated cardiovascular risk, and the functional impairment of interoceptive awareness. The body is not a passive container for suppressed emotion. It is an active system that the suppression is continuously costing.</p>
+<div class="section-heading">The relational cost</div>
+<p class="body-text">The suppressed person cannot be fully present in relationship. The ongoing effort of suppression uses exactly the attentional resources that genuine connection requires. The suppressed person often describes their relationships as superficial or characterised by a persistent sense of not being fully known — because the parts of them that are being suppressed are also the parts that, if expressed, would allow genuine intimacy. The suppression of vulnerability is the suppression of closeness.</p>
+<div class="callout">What you suppress, you carry. The question is not whether you will pay the cost — you are already paying it. The question is whether the suppression is protecting you from something genuinely more costly, or whether it has become a habit so automatic and so normalised that it is no longer serving any purpose at all. For many people doing this work, it is the latter.</div>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()">Continue →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <div class="slide-number">Page 07 / 08</div>
+    <h1 class="slide-title">Creating the conditions for <em>processing.</em></h1>
+    <p class="lead">Genuine processing does not happen on demand. It requires conditions — physiological, environmental, and relational conditions that most people rarely have simultaneously. Part of the regulation work is building the consistent capacity to create those conditions.</p>
+<div class="section-heading">Safety in the body</div>
+<p class="body-text">The nervous system will not open to emotional processing while it is in a high state of activation. The body needs to be within the window of tolerance for processing to occur. This means that the regulation tools in Module 4 — breath, movement, grounding — are not separate from the processing work. They are its prerequisite. They create the physiological conditions in which the nervous system is safe enough to feel.</p>
+<div class="section-heading">Absence of the narrative</div>
+<p class="body-text">Processing requires, at least initially, a reduction in narrative engagement with the emotion. The story — what caused it, what it means, who is responsible, what should have been different — maintains the activation rather than allowing its discharge. Temporarily setting the story down (not abandoning it — just setting it aside while the physiological event completes) creates the space in which the body can do what it needs to do.</p>
+<div class="section-heading">Permission</div>
+<p class="body-text">Perhaps the most overlooked condition: genuine permission to feel what is felt without it meaning something about your competence, your stability, your worth, or your identity. Many people cannot process because the processing — the tears, the trembling, the anger, the grief — feels like evidence of something catastrophic about themselves. The internal permission to feel, without interpretation, is itself a form of internal parenting — and it is often the condition that is most missing.</p>
+<div class="callout">Module 4 builds the practical toolkit for regulation — the specific physiological tools for working with the nervous system. Everything in Module 4 is also, in part, the work of creating the conditions described here: safety in the body, reduced narrative pressure, and the growing permission to be present to what is actually happening inside you.</div>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">07 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()">Continue →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="8">
+    <div class="slide-number">Page 08 / 08 · Complete</div>
+    <div class="slide-inner completion-slide">
+      <p class="completion-label">Module complete</p>
+      <h1 class="completion-title">Suppression vs Processing</h1>
+      <p class="completion-sub">You have finished this module. Here is what you now carry forward.</p>
+      <div class="section-heading">What you carry forward</div>
+      <ul class="summary-list">
+        <li><span class="summary-num">01</span><span class="summary-text">Suppression is physiologically opposite to calm — it is the active, ongoing maintenance of interrupted emotional cycles at the cost of the energy, connection, and function that processing would restore.</span></li>
+        <li><span class="summary-num">02</span><span class="summary-text">Emotions are primarily physiological events. The neurochemical cascade of a basic emotion, allowed to complete uninterrupted, lasts approximately ninety seconds. Extension beyond that is thought re-triggering, not the original emotion continuing.</span></li>
+        <li><span class="summary-num">03</span><span class="summary-text">Genuine processing requires presence (contact with the physical sensation) and non-resistance (allowing the cycle to complete). It does not require understanding the emotion — understanding is a byproduct, not a prerequisite.</span></li>
+        <li><span class="summary-num">04</span><span class="summary-text">The completion cycle (Peter Levine) — mobilisation, expression, discharge, rest — is the natural arc of activation. Stored incomplete cycles are the body burden that underlies much chronic stress and unexplained physical symptoms.</span></li>
+        <li><span class="summary-num">05</span><span class="summary-text">Rumination re-triggers the activation continuously without discharging it. Processing moves toward the somatic event. The shift from narrative engagement to body-directed attention is the shift from rumination to processing.</span></li>
+        <li><span class="summary-num">06</span><span class="summary-text">Suppression carries measurable physiological costs: inflammatory markers, immune suppression, cardiovascular stress, interoceptive impairment. The body is not a passive container for what is suppressed.</span></li>
+        <li><span class="summary-num">07</span><span class="summary-text">Processing requires conditions: safety in the body (within the window of tolerance), reduced narrative, and internal permission to feel without it meaning something about the self.</span></li>
+      </ul>
+      <div class="section-heading">Practice this week</div>
+      <div class="practice-block"><p><strong>This week:</strong> When you notice an uncomfortable emotion — frustration, sadness, anxiety, irritability — resist the first impulse to explain, analyse, or escape it. Give it thirty to sixty seconds of body-directed attention: where is it, what is its texture, what does it feel like physically? Do not narrate. Just feel.</p>
+<p>You are not trying to process everything this week. You are practising the first move: meeting the physiological event before the narrative arrives. Notice what happens when you do. Notice also what the narrative does when you try to set it down — that resistance is itself important information.</p></div>
+      <div class="divider"></div>
+    </div>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">08 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()">Continue →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+</main>
+<script>
+var currentSlide=1;
+var totalSlides=document.querySelectorAll('.slide').length;
+function showSlide(n){
+  document.querySelectorAll('.slide').forEach(function(s){s.classList.remove('active');});
+  document.querySelector('[data-slide="'+n+'"]').classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach(function(dot,i){
+    dot.classList.remove('active','complete');
+    if(i+1<n) dot.classList.add('complete');
+    else if(i+1===n) dot.classList.add('active');
+  });
+  currentSlide=n;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextSlide(){if(currentSlide<totalSlides) showSlide(currentSlide+1);}
+function prevSlide(){if(currentSlide>1) showSlide(currentSlide-1);}
+</script>
+<script>
+(function(){
+  try{
+    var prevKey='safespot_c14m2';
+    if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+      document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">&#128274; Module Locked</div><p style="font-size:.9rem;color:#6b6b66;max-width:380px;line-height:1.75;margin-bottom:32px">Complete the previous module first to unlock this one.</p><a href="course14-landing.html" style="padding:12px 28px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">&#8592; Back to Course</a></div>';
+      return;
+    }
+    var slides=document.querySelectorAll('.slide');
+    if(slides.length>0){
+      var last=slides[slides.length-1];
+      last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+        b.textContent='Begin Module 04 →';
+        b.setAttribute('onclick','');
+        b.onclick=function(){localStorage.setItem('safespot_c14m3','1');window.location.href='course14-module-4-your-regulation-toolkit.html';};
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+      else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}}
+  catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];
+      var el=document.getElementById('ss-user-greeting');
+      if(el)el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+
+
+<script>
+(function(){
+  try{
+    var items = Array.from(document.querySelectorAll('.sidebar-mod-item[data-mk]'));
+    items.forEach(function(li, idx){
+      var mk = li.getAttribute('data-mk');
+      var mn = parseInt(li.getAttribute('data-mn') || '0');
+      var done = !!localStorage.getItem(mk);
+      if(done){
+        li.classList.add('ss-done');
+      } else if(mn > 1){
+        // Locked if the immediately preceding module is not complete
+        var prev = items[idx - 1];
+        if(prev && !localStorage.getItem(prev.getAttribute('data-mk'))){
+          li.classList.add('ss-next');
+        }
+      }
+    });
+  }catch(e){}
+})();
+</script>
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body>
+</html>

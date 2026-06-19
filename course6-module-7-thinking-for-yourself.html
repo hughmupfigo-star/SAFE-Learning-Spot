@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 6 · Module 7 · Thinking For Yourself</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:860px;margin:0 auto;padding:80px 48px 120px}
+.slide-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:24px}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);
+line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-body{font-size:17px;line-height:1.75;color:var(--ink);margin-bottom:32px}
+.slide-body p{margin-bottom:20px}.slide-body p:last-child{margin-bottom:0}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}
+.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}
+.mechanism:last-of-type{border-bottom:1px solid var(--line)}
+.mechanism-name{font-family:var(--serif);font-size:28px;font-style:italic;font-weight:400;letter-spacing:-.015em;margin-bottom:16px}
+.mechanism-body{font-size:16px;line-height:1.7;color:var(--muted)}
+.cost-block{margin:28px 0;padding:24px 28px;border-left:2px solid var(--accent);background:var(--soft)}
+.cost-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.cost-body{font-size:15px;line-height:1.65;color:var(--ink)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}
+.voice-block::before{content:'"'  ;position:absolute;top:-8px;left:24px;font-family:var(--serif);
+font-size:72px;color:var(--accent);line-height:1;font-style:italic}
+.voice-text{font-family:var(--serif);font-size:18px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);margin-bottom:12px}
+.voice-attr{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.scenario-block{margin:48px 0;padding:40px;border:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.scenario-q{font-family:var(--serif);font-size:22px;line-height:1.45;font-weight:400;font-style:italic;margin-bottom:32px}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{padding:18px 24px;border:1px solid var(--line);background:var(--paper);font-family:var(--sans);
+font-size:15px;line-height:1.5;text-align:left;cursor:pointer;transition:all .2s ease;color:var(--ink)}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback-block{margin-top:28px;padding:28px 32px;background:var(--soft);border-left:3px solid var(--accent);display:none}
+.feedback-block.visible{display:block}
+.feedback-headline{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:12px;font-style:italic}
+.feedback-detail{font-size:15px;line-height:1.7;color:var(--muted)}
+.nav-row{display:flex;gap:16px;margin-top:40px;align-items:center}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--ink);
+background:none;color:var(--ink);padding:14px 28px;cursor:pointer;transition:all .2s ease;text-transform:uppercase}
+.nav-btn:hover{background:var(--soft)}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#222}.nav-btn:disabled{opacity:.3;cursor:default}
+.completion-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;
+min-height:80vh;text-align:center;padding:80px 48px}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;color:var(--accent);font-style:italic}
+.complete-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:400;margin:32px 0 20px;letter-spacing:-.02em}
+.complete-body{font-size:17px;line-height:1.7;color:var(--muted);max-width:560px}
+.divider{width:48px;height:1px;background:var(--line);margin:40px auto}
+.course-complete{margin-top:32px;padding:40px;background:var(--ink);color:var(--paper);max-width:560px;text-align:left}
+.course-complete-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.course-complete-text{font-family:var(--serif);font-size:20px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper)}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 06 &middot; Institutional Brainwashing &middot; Module <strong>07</strong> &middot; Thinking For Yourself</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 6 &middot; Institutional Conditioning</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c6m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course6-module-1-institution-training.html">Institution Training</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course6-module-2-school-compliance.html">School Compliance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course6-module-3-work-adult-school.html">Work: Adult School</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course6-module-4-religion-meaning.html">Religion and Meaning</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course6-module-5-government-governance.html">Government & Governance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course6-module-6-independence-deprogramming.html">Independence & De-Programming</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course6-module-7-thinking-for-yourself.html">Thinking for Yourself</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1: What Thinking For Yourself Is Not -->
+<section class="slide active" data-slide="1">
+<div class="slide-inner">
+<div class="slide-label">Module 07 · Slide 01</div>
+<h1 class="slide-title">What Thinking For Yourself Is Not</h1>
+<div class="slide-body">
+<p>The phrase "thinking for yourself" has been captured by several things it is not. It has been claimed by contrarians who reflexively oppose the mainstream. By people who distrust all expertise as institutional propaganda. By those who mistake strong, confident opinions for genuine thought. By movements that offer a new set of pre-packaged conclusions and call the adoption of those conclusions "waking up."</p>
+<p>All of these are, in different ways, still not thinking. They are still the retrieval of a position from a source external to genuine reflection — the source has just changed. Before examining what independent thought actually is, it is worth being precise about what it is not.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Thinking for yourself is not about what you conclude. It is about how you arrive at conclusions — and whether that process is genuinely yours or borrowed from a system that did the concluding for you.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Contrarianism is not independence</div>
+<div class="mechanism-body">The contrarian defines their position by opposition to the mainstream. This is still a dependent process — the mainstream determines the contrarian's position as surely as it determines the conformist's, just in the opposite direction. If your thinking is structured primarily by what the establishment believes, and you believe the opposite, you are still letting the establishment do your thinking. The tether is just reversed.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Distrust of expertise is not scepticism</div>
+<div class="mechanism-body">Genuine scepticism is applied consistently — to establishment claims and to counter-establishment claims alike. Distrust of expertise that is applied only to official sources while alternative sources are accepted uncritically is not scepticism. It is the same epistemological error as uncritical deference to authority, relocated to a different authority. The methodology is identical; the targets have changed.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Strong opinions are not evidence of genuine thought</div>
+<div class="mechanism-body">Confidence is not a marker of independent thought. Some of the most confidently held positions are the most thoroughly conditioned ones — they feel certain because they were installed early and reinforced heavily, not because they were arrived at through careful reflection. Genuine thinking often produces less certainty, not more: a clearer sense of what you actually know versus what you believe, and a more honest accounting of the limits of your own understanding.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 01</div>
+<div class="scenario-q">Someone describes themselves as someone who "questions everything" and "never believes what they are told." They hold strong, confident views that are the opposite of mainstream positions on most topics. Is this independent thought?</div>
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a">Yes — questioning authority and mainstream narratives is exactly what independent thought looks like</button>
+<button class="choice" data-answer="b">Not necessarily — if the positions are arrived at by systematic opposition to the mainstream rather than genuine reflection, the mainstream is still doing the thinking</button>
+<button class="choice" data-answer="c">No — independent thought means forming views that align with credible, established expertise</button>
+<button class="choice" data-answer="d">Yes, but only if they can back their views with evidence</button>
+</div>
+<div class="feedback-block" id="feedback-1">
+<div class="feedback-headline" id="feedback-text-1"></div>
+<div class="feedback-detail" id="feedback-detail-1"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn primary" id="next-1" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 2: The Architecture of a Genuine Thought -->
+<section class="slide" data-slide="2">
+<div class="slide-inner">
+<div class="slide-label">Module 07 · Slide 02</div>
+<h1 class="slide-title">The Architecture of a Genuine Thought</h1>
+<div class="slide-body">
+<p>Most of what passes for thinking is retrieval. You encounter a question, and your mind rapidly locates the position associated with your group, your identity, your conditioning — and returns it. This happens so quickly, and feels so natural, that it is almost impossible to distinguish from actual thinking without deliberate attention.</p>
+<p>A genuine thought has a different architecture. It begins with genuine contact with the question — sitting with it long enough for it to become real rather than immediately searching for the approved answer. It involves noticing your first impulse and asking what produced it. It involves tolerating the discomfort of not knowing for long enough to actually engage with the material. And it involves a willingness to arrive somewhere you did not expect.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The clearest sign that genuine thinking has occurred is surprise — arriving somewhere you did not expect, including arriving at a position you previously held but now hold for different reasons. Thinking that always confirms what you already believed probably was not thinking.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The pause before retrieval</div>
+<div class="mechanism-body">Between a question and a response, there is usually a moment — often very brief — where the response has not yet arrived. Genuine thinking begins in that moment and extends it deliberately. It asks: what is this question actually asking? What do I actually notice when I sit with it? What feels uncertain? The habit of extending this pause — even by a few seconds — begins to create the space in which genuine reflection can occur.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Following the thought to uncomfortable places</div>
+<div class="mechanism-body">Conditioned thinking has guardrails: lines of reasoning that, if followed, lead to destinations the conditioning does not permit. Genuine thinking requires the willingness to follow a thought past the guardrail — to ask the next question even when the answer is uncomfortable, implicates something you value, or contradicts a position you have held publicly. The willingness to be wrong — really wrong, not just about minor details — is a prerequisite for genuine thought.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The difference in how it feels</div>
+<div class="mechanism-body">Retrieved positions feel settled, solid, already-there. Genuine thinking often feels uncertain, provisional, slightly unsteady. It has the texture of something being worked out rather than something being confirmed. This is uncomfortable enough that most people, most of the time, prefer the retrieved position. The discomfort of genuine thinking is not a sign that something is going wrong — it is the sign that something is actually happening.</div>
+</div>
+
+<div class="voice-block">
+<div class="voice-text">I realised I had never actually thought about most of what I believed. I had opinions about everything and thoughts about almost nothing. They are completely different things.</div>
+<div class="voice-attr">— workshop participant, 38</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 02</div>
+<div class="scenario-q">You are asked what you think about a complex political issue. An answer arrives immediately, fully formed. You recognise it as the position held by most people in your social group. What is the most honest response to this moment?</div>
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a">Share the position — having a clear, immediate view is a sign of good thinking</button>
+<button class="choice" data-answer="b">Notice that what arrived was a retrieval, not a thought — and consider whether you have ever actually thought about this question rather than simply held a position on it</button>
+<button class="choice" data-answer="c">Dismiss the position because it came from your social group — group-derived views are automatically suspect</button>
+<button class="choice" data-answer="d">Research the issue more before forming a view — information is what thinking requires</button>
+</div>
+<div class="feedback-block" id="feedback-2">
+<div class="feedback-headline" id="feedback-text-2"></div>
+<div class="feedback-detail" id="feedback-detail-2"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-2" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 3: Expertise Without Deference -->
+<section class="slide" data-slide="3">
+<div class="slide-inner">
+<div class="slide-label">Module 07 · Slide 03</div>
+<h1 class="slide-title">Expertise Without Deference</h1>
+<div class="slide-body">
+<p>One of the most common errors in the pursuit of independent thought is treating expertise and independent thinking as opposites. They are not. Expertise is information — accumulated, specialised, often painstakingly verified. It is one of the most valuable resources available to a thinking person.</p>
+<p>The problem is not expertise. It is deference: the habit of outsourcing your judgement entirely to an authority, so that the expert not only informs your thinking but replaces it. Genuine independent thought uses expertise as input rather than as verdict. It asks what experts know, how they know it, where they disagree, what their frameworks assume, and what those frameworks leave out.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Using expertise well is one of the most demanding intellectual acts there is. It requires enough understanding to know what the expert is actually claiming, enough awareness to notice the limits of their framework, and enough independence to hold your own judgement alongside theirs rather than simply substituting theirs for yours.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The difference between informed and dependent</div>
+<div class="mechanism-body">An informed thinker has consulted the relevant expertise, understood it as well as they can, and then made a judgement about what to do with it — including where to accept it, where to question it, and where other considerations apply. A dependent thinker has located an authority and delegated the thinking to them. Both people may arrive at the same conclusion. The difference is not the conclusion but the process — and the capacity to revise when new information arrives.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Experts disagree — and that is information</div>
+<div class="mechanism-body">On almost every complex question of significance, genuine experts disagree. Institutional conditioning trains you to find the authoritative expert and defer to their conclusion. But the fact of expert disagreement is itself important information: it tells you the question is genuinely difficult, that certainty is not yet warranted, and that your own judgement about which evidence and which frameworks are most compelling is unavoidable. There is no escape from thinking by finding the right expert.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The framework question</div>
+<div class="mechanism-body">Every expert operates within a framework — a set of assumptions about what counts as evidence, what questions are worth asking, what methods are appropriate. These frameworks are not neutral. They produce certain kinds of knowledge and exclude others. The most sophisticated use of expertise includes asking: what does this framework assume? What would it not be able to see? Whose interests does it serve? This is not anti-expertise. It is how expertise is most usefully engaged.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 03</div>
+<div class="scenario-q">You are trying to form a view on a complex health decision. The official guidance points one way; a minority of credentialled researchers point another; and you have a clear intuition from your own experience that adds a third perspective. How do you think about this?</div>
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a">Follow the official guidance — consensus expertise exists precisely for situations like this</button>
+<button class="choice" data-answer="b">Use all three as inputs to your own judgement — understand what each is based on, where they conflict and why, and then decide what makes sense given your full situation</button>
+<button class="choice" data-answer="c">Trust your intuition — lived experience is more reliable than institutional expertise</button>
+<button class="choice" data-answer="d">Follow the minority researchers — they are more likely to be right precisely because they challenge the consensus</button>
+</div>
+<div class="feedback-block" id="feedback-3">
+<div class="feedback-headline" id="feedback-text-3"></div>
+<div class="feedback-detail" id="feedback-detail-3"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-3" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 4: Tolerance for Not Knowing -->
+<section class="slide" data-slide="4">
+<div class="slide-inner">
+<div class="slide-label">Module 07 · Slide 04</div>
+<h1 class="slide-title">Tolerance for Not Knowing</h1>
+<div class="slide-body">
+<p>Institutions provide certainty. This is one of their most powerful offerings and one of their most reliable mechanisms of control. The religion that tells you exactly what happens after death. The political movement that tells you exactly who is responsible for society's problems. The wellness system that tells you exactly what your body needs. The clarity they offer is real — and it is purchased at the cost of genuine inquiry.</p>
+<p>Independent thought requires something that institutional conditioning systematically destroys: the ability to sit with genuine uncertainty. To not know, and to remain in that not-knowing long enough to actually think — rather than reaching immediately for the nearest available certainty.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The capacity to tolerate not knowing is not intellectual weakness. It is the prerequisite for intellectual honesty — and the thing that most distinguishes genuine thinking from the performance of thinking.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Certainty as relief from the discomfort of thinking</div>
+<div class="mechanism-body">Genuine thinking is uncomfortable. It involves holding competing possibilities, sitting with contradiction, acknowledging ignorance, and resisting the pull toward premature resolution. Certainty ends this discomfort immediately. This is why certainty is so appealing, and why it is so often a sign that thinking has stopped rather than completed. The person who has genuinely worked through a complex question often becomes less certain about it, not more.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The productive use of not knowing</div>
+<div class="mechanism-body">Not knowing is not emptiness. It is a position from which genuine questions can be asked — questions that certainty forecloses. "I don't know what causes this" opens investigation. "I know what causes this" closes it. The most intellectually productive state is often one of informed uncertainty: knowing enough to know what the genuine difficulty is, knowing the landscape of views and their evidence, and remaining genuinely open about where the weight of reasoning falls.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The difference between doubt and paralysis</div>
+<div class="mechanism-body">Tolerating uncertainty does not mean being unable to act or decide. People act under genuine uncertainty all the time — the good decision under uncertainty is not the one made from false certainty but the one that accurately accounts for what is and is not known, remains open to revision as new information arrives, and does not mistake confidence of presentation for quality of reasoning. Genuine thinkers can be decisive and genuinely uncertain simultaneously.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">What this practice produces</div>
+<div class="cost-body">People who can tolerate genuine uncertainty are genuinely harder to manipulate. The mechanism by which most propaganda, most conspiracy theory, and most institutional conditioning operates is the offer of certainty — a clear enemy, a clear explanation, a clear path. The person who has learned to sit with uncertainty does not experience this offer as relief. They experience it as a signal that something is being oversimplified.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 04</div>
+<div class="scenario-q">You are discussing a complex social issue with a friend who has a clear, confident explanation for it. The explanation is neat, attributing the problem to a single cause and a clear set of responsible parties. You find it almost convincing — but something feels unresolved. What is most useful to notice?</div>
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a">The clarity and confidence of the explanation is a good sign — well-reasoned positions tend to be clear</button>
+<button class="choice" data-answer="b">The neatness of the explanation is itself worth examining — complex social problems rarely have single causes, and an explanation that forecloses further questions may be offering certainty in place of understanding</button>
+<button class="choice" data-answer="c">Trust your unresolved feeling — intuition is more reliable than reasoned argument</button>
+<button class="choice" data-answer="d">Research the topic more until you reach the same level of certainty your friend has</button>
+</div>
+<div class="feedback-block" id="feedback-4">
+<div class="feedback-headline" id="feedback-text-4"></div>
+<div class="feedback-detail" id="feedback-detail-4"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-4" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 5: Thinking in the Presence of Pressure -->
+<section class="slide" data-slide="5">
+<div class="slide-inner">
+<div class="slide-label">Module 07 · Slide 05</div>
+<h1 class="slide-title">Thinking in the Presence of Pressure</h1>
+<div class="slide-body">
+<p>Individual thinking rarely occurs in isolation. It occurs in social environments — in conversations, groups, institutions, online spaces — where the pressure to conform, to agree, to perform the expected opinion is constant and significant. The capacity that matters most is not the ability to think clearly when alone, in private, with no stakes. It is the ability to hold your own perception when the group disagrees.</p>
+<p>This is the hardest part of independent thought, and the part that institutions most effectively suppress. The threat of exclusion, the discomfort of disagreement, the fear of being wrong in public — these are not minor inconveniences. They are powerful forces that reshape what people say, and eventually what they think.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Independent thought is not primarily a solitary act. It is the capacity to maintain contact with your own perception in the presence of social pressure to abandon it — and to distinguish between updating your view because of better reasoning and abandoning it because the group disapproves.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The Asch effect</div>
+<div class="mechanism-body">Solomon Asch's famous conformity experiments showed that a significant proportion of people will give an answer they can plainly see is wrong when a group of confederates gives that wrong answer confidently. They do not merely say the wrong answer to fit in — many of them come to doubt their own perception. The group's certainty overrides their direct experience. This is not weakness or stupidity. It is a deeply human response to social pressure that independent thinking has to work against.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Updating versus capitulating</div>
+<div class="mechanism-body">There is a genuine and important distinction between changing your view because someone has offered a better argument or new evidence, and changing your view because the social environment has made holding your view uncomfortable. The first is good thinking. The second is social compliance. The difficulty is that they can feel identical from the inside — the mind produces post-hoc rationalisations for compliance that are indistinguishable from genuine reasoning. The test: did the view change because the argument changed, or because the social temperature changed?</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The practice of naming your view before the room</div>
+<div class="mechanism-body">One concrete practice: before entering a conversation where your view is likely to be challenged or to be in the minority, take a moment to know what you actually think — to name it internally, clearly, before the social environment begins to shape it. Then, in the conversation, you have a reference point: this is what I thought before the pressure arrived. You can compare what you think at the end with what you thought at the beginning, and ask whether the difference is reasoning or compliance.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 05</div>
+<div class="scenario-q">In a group discussion, you hold a view that differs from the majority. As the conversation continues and the group's position becomes clearer and more unified, you feel your own view becoming less certain — harder to hold, easier to let go. By the end you have largely agreed with the group. What is most worth examining here?</div>
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a">The group discussion worked — exposure to different views appropriately updated your position</button>
+<button class="choice" data-answer="b">Ask whether the view shifted because of better reasoning or because of social pressure — these produce the same outcome but are completely different processes</button>
+<button class="choice" data-answer="c">You were right to update — minority positions are usually held from stubbornness rather than accuracy</button>
+<button class="choice" data-answer="d">Maintain your original view regardless — changing your mind in response to group pressure is always capitulation</button>
+</div>
+<div class="feedback-block" id="feedback-5">
+<div class="feedback-headline" id="feedback-text-5"></div>
+<div class="feedback-detail" id="feedback-detail-5"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-5" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 6: The Question as the Primary Tool -->
+<section class="slide" data-slide="6">
+<div class="slide-inner">
+<div class="slide-label">Module 07 · Slide 06</div>
+<h1 class="slide-title">The Question as the Primary Tool</h1>
+<div class="slide-body">
+<p>Institutional conditioning trains you to seek and hold answers. Good students know the right answers. Good employees have the answers their managers need. Good citizens hold the right opinions. The answer is the valued currency. The question — especially a question that opens rather than closes, that admits genuine uncertainty, that does not already imply the answer — is treated as a problem to be resolved, not a tool to be used.</p>
+<p>Genuine independent thought is built more on questions than answers. Not the rhetorical question that implies a position, not the interrogation designed to discredit — but the genuine open question, asked from actual curiosity, that doesn't know where it is going and is willing to follow.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The quality of your thinking is determined more by the quality of the questions you are willing to ask than by the quality of the answers you hold. Institutions train you to collect answers. Independent thought requires learning to form questions.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Open questions versus loaded questions</div>
+<div class="mechanism-body">A loaded question already contains its answer: "Why do young people have no work ethic?" assumes the conclusion in the question itself. An open question is genuinely uncertain about what it will find: "What shapes people's relationship to work across different generations?" These feel completely different to ask and produce completely different thinking. Most of what passes for questioning in public discourse is loaded — it performs inquiry while foreclosing it.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The next question</div>
+<div class="mechanism-body">Independent thought follows the question to the next question. Every answer generates new questions — about the assumptions the answer relied on, about what it does not explain, about what would have to be true for it to be right. This chain of questioning is what genuine intellectual work feels like. Institutional thinking stops at the answer; genuine thinking asks what the answer implies and what it does not.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Questions that implicate yourself</div>
+<div class="mechanism-body">The hardest questions — and often the most productive — are the ones that turn back on the questioner. Not "why are they doing this?" but "what am I assuming that makes this question seem obvious?" Not "what is wrong with that system?" but "how am I participating in the dynamics I am criticising?" The willingness to ask questions that do not exempt yourself is the clearest marker of genuine intellectual honesty.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">The three questions worth practising</div>
+<div class="cost-body">What am I assuming here that I have not examined? Whose interests are served by me believing this? What would I need to be wrong about for the opposite to be true? These are not comfortable questions. They are generative ones — they produce thought rather than retrieve it, and they tend to reveal the shape of your conditioning more accurately than any external analysis can.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 06</div>
+<div class="scenario-q">You are reading about a social issue and feel you understand the problem clearly. You can identify the cause and who is responsible. What is the most useful question to ask yourself at this moment?</div>
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a">How can I share this understanding with others who do not yet see it?</button>
+<button class="choice" data-answer="b">What am I assuming that makes this explanation feel obvious — and what would I need to be wrong about for the picture to look different?</button>
+<button class="choice" data-answer="c">Is there more evidence I should gather to confirm and strengthen this understanding?</button>
+<button class="choice" data-answer="d">What should be done to fix the problem, given this understanding?</button>
+</div>
+<div class="feedback-block" id="feedback-6">
+<div class="feedback-headline" id="feedback-text-6"></div>
+<div class="feedback-detail" id="feedback-detail-6"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-6" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 7: Why Independent Thought Threatens Systems -->
+<section class="slide" data-slide="7">
+<div class="slide-inner">
+<div class="slide-label">Module 07 · Slide 07</div>
+<h1 class="slide-title">Why Independent Thought Threatens Systems</h1>
+<div class="slide-body">
+<p>Throughout this course, we have examined how institutions suppress genuine thinking — through compliance training, identity capture, social pressure, the pathologising of dissent. The question worth asking now is: why? Why do institutions invest so heavily in preventing genuine independent thought?</p>
+<p>The answer is not, primarily, that independent thinkers arrive at wrong conclusions. It is that independent thinkers are unpredictable. They cannot be reliably told what to think, what to buy, what to fear, who to vote for, what to value. They evaluate rather than comply. They question rather than accept. And an institution whose legitimacy depends on unreflective compliance cannot function if enough of its members begin to think genuinely.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Independent thought is not suppressed because it produces dangerous answers. It is suppressed because it produces people who cannot be reliably managed — and the manageable person is the institution's most essential resource.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The consumer who thinks</div>
+<div class="mechanism-body">Modern economies require consumers who respond predictably to marketing signals — who experience desire as spontaneous rather than manufactured, who associate products with identity rather than evaluating them on function. A person who has developed genuine independent thought evaluates advertising differently: they see the mechanism, question the manufactured desire, and make decisions from their own considered preferences rather than from the identity structures the market has provided. They are a less reliable consumer.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The citizen who thinks</div>
+<div class="mechanism-body">Political systems require citizens who respond to the available options — who experience the existing choices as natural and sufficient, who feel fear and hope in response to manufactured threat and promise. A person who thinks independently asks what conditions produced the available options, whose interests the existing choices serve, what is not on offer and why. They are a less manageable citizen — not necessarily a more disruptive one, but one who cannot be moved by the standard mechanisms of political persuasion.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The worker who thinks</div>
+<div class="mechanism-body">Workplaces require employees who deliver productivity within given frameworks, who do not raise structural questions about how those frameworks are organised and in whose interests, who experience the organisation's goals as their own. A person who thinks independently can do excellent work — and they also notice when the framework serves the organisation at their expense, when stated values and actual practice diverge, when compliance is being demanded in the name of culture. They are a more demanding employee.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 07</div>
+<div class="scenario-q">You have begun to develop more genuine independent thought. You notice that some people in your life respond to this with discomfort — not because of any specific conclusion you have reached, but because of your general tendency to ask questions and sit with uncertainty. What is most useful to understand about this response?</div>
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a">Their discomfort means you are becoming difficult — consider whether independent thinking is worth the social cost</button>
+<button class="choice" data-answer="b">The discomfort is real and worth taking seriously, but its source is often that genuine inquiry is structurally threatening to people invested in certainty — not because of anything you specifically concluded</button>
+<button class="choice" data-answer="c">Their discomfort is their problem — independent thinking is too important to moderate for social comfort</button>
+<button class="choice" data-answer="d">Share your thinking more carefully — if you explain it well enough, the discomfort will resolve</button>
+</div>
+<div class="feedback-block" id="feedback-7">
+<div class="feedback-headline" id="feedback-text-7"></div>
+<div class="feedback-detail" id="feedback-detail-7"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-7" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 8: The Life That Becomes Possible -->
+<section class="slide" data-slide="8">
+<div class="slide-inner">
+<div class="slide-label">Module 07 · Slide 08</div>
+<h1 class="slide-title">The Life That Becomes Possible</h1>
+<div class="slide-body">
+<p>Independent thought is not an end in itself. It is a capacity that makes a different kind of life possible — not a more comfortable life, not a life of greater certainty or easier belonging, but a life lived with more of yourself actually present in it.</p>
+<p>When you think genuinely, the things you value are more likely to actually be yours. The relationships you maintain are more likely to be chosen rather than defaulted into. The work you do is more likely to reflect what you actually care about. The positions you hold are more likely to survive genuine examination. The life you are living is more likely to be the one you would choose if you could choose clearly.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The deepest promise of genuine independent thought is not intellectual superiority or political clarity. It is the gradually increasing experience of living from something that is actually yours — values examined and chosen, perceptions trusted and refined, a self that is made rather than merely assigned.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">In relationships</div>
+<div class="mechanism-body">Relationships built on conditioned roles — the good child, the accommodating partner, the loyal colleague — have a specific quality: they require the maintenance of a performance. As genuine thinking develops, the performance becomes harder to sustain, and something more interesting becomes possible: relationships entered with more awareness of what you actually need and what you are genuinely able to give, chosen rather than defaulted into, built on something closer to who you actually are.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">In work and vocation</div>
+<div class="mechanism-body">Conditioned approaches to work ask: what is expected of me, what will be rewarded, what will keep me safe? Independent thinking asks a different and more demanding set of questions: what do I actually think matters? What would I choose to spend my time on if I were choosing from genuine reflection? What can I contribute that is actually mine to give? These questions do not always produce easier answers — but they tend to produce more honest ones, and work built on honest answers has a different quality of meaning.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">In your relationship with yourself</div>
+<div class="mechanism-body">Perhaps the most significant change is internal. The person who has begun to think genuinely has a different relationship with their own mind — one of more honest companionship. They know more accurately what they think and what they are uncertain about, what they value and what they were told to value, what they actually want and what they learned to want. This self-knowledge is not comfortable, but it is real. And living from something real, however incomplete and imperfect, is qualitatively different from living from something performed.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">What it actually costs</div>
+<div class="cost-body">Independent thought costs certainty. It costs some belonging — the unreflective belonging of people who have not examined what they share. It costs the comfort of having the right answers handed to you. It costs the protection of conformity. These are genuine costs, not trivial ones. The question is not whether the costs are real — they are — but what you are purchasing with the compliance that avoids them. And whether what you are purchasing is actually worth what you are paying.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 08</div>
+<div class="scenario-q">Someone asks you whether all of this — the de-programming, the questioning, the uncertainty, the social cost — is actually worth it. What is the most honest answer?</div>
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a">Yes, absolutely — independent thought leads to a better, freer, happier life</button>
+<button class="choice" data-answer="b">It depends what you mean by worth it — it costs real things and offers something real in return, and that exchange looks different to different people at different points in their lives</button>
+<button class="choice" data-answer="c">Not always — sometimes the comfort of conditioned belonging is the more humane choice</button>
+<button class="choice" data-answer="d">Yes — the alternative is a life that is not really yours, and no cost is worth accepting that</button>
+</div>
+<div class="feedback-block" id="feedback-8">
+<div class="feedback-headline" id="feedback-text-8"></div>
+<div class="feedback-detail" id="feedback-detail-8"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-8" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 9: Completion -->
+<section class="slide" data-slide="9">
+<div class="slide-inner completion-slide">
+<div class="complete-mark">&check;</div>
+<h2 class="complete-title">Module 07 complete.</h2>
+<p class="complete-body">You have examined what independent thought is and is not, the architecture of a genuine thought, how to use expertise without deferring to it, the practice of tolerating not knowing, how to hold your own perception under social pressure, the question as the primary tool, why genuine thinking threatens institutional systems, and what kind of life becomes possible when this capacity grows.</p>
+<div class="section-heading">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">Thinking for yourself is not the same as disagreeing with experts, distrusting authority, or holding contrarian positions. It is the prior capacity — to form genuine thoughts rather than to select from pre-assembled positions.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">A genuine thought follows evidence through discomfort, holds uncertainty without resolution, and changes when the evidence changes. It is not recognised by its content but by the quality of the process that produced it.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Expertise is a resource, not an authority. The expert knows more about a specific domain. What to do with that knowledge — how to apply it to your life, what weight to give it, how to hold it in relation to other considerations — remains yours.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Social pressure does not only produce compliance in weak thinkers. It produces compliance in everyone, because the human nervous system treats social exclusion as a survival threat. Recognising this does not make you immune. It makes the pressure visible before it has already changed your position.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The question is the primary tool of independent thought: not rhetorical, not performative, but genuine — asked from a position of actual not-knowing, aimed at extending understanding rather than confirming a position you already hold.</span></li>
+</ol>
+
+<div class="section-heading">Practice going forward</div>
+<p class="body-text"><strong>The daily question practice:</strong> Each day this week, identify one belief, assumption, or position you hold about how the world works and ask yourself one genuine question about it. Not a challenge — a genuine inquiry: <em>"What would I need to see to think differently about this?"</em> The willingness to hold that question open, without needing to answer it immediately, is the practice of independent thought in its most basic form. One question per day. Seven days. Notice what shifts in the texture of your thinking by the end of the week.</p>
+<p class="body-text"><strong>Monthly practice — the source audit:</strong> Once a month, identify three beliefs or positions you have expressed publicly in the past thirty days. For each one, trace the source chain: where did this come from? Who benefits from my holding it? What would I need to investigate to hold it with more precision? You are not dismantling your beliefs. You are ensuring they are yours — examined, sourced, and held with the accuracy that independent thought requires.</p>
+<p class="body-text"><strong>The institutional inventory:</strong> You have now examined six institutional systems — family, school, work, religion, government, and the conditioning they share. Choose the one that has had the most durable influence on your current thinking and relationships. Write two pages — not for anyone else — about what that institution installed in you that you are still carrying, and what you are choosing to examine, revise, or consciously retain. The writing is the beginning of the internal authority that this course has been building toward.</p>
+<div class="divider"></div>
+<div class="course-complete">
+<div class="course-complete-label">Course 06 &middot; Complete</div>
+<div class="course-complete-text">You have reached the end of Institutional Brainwashing. Seven modules. The institution as training ground. School. Work. Religion. Government. The long work of de-programming. And the capacity — always unfinished, always possible — to think for yourself. The course ends here. The work does not.</div>
+</div>
+<div class="nav-row" style="justify-content:center;margin-top:48px">
+<button class="nav-btn" onclick="prevSlide()">&larr; Review</button>
+</div>
+</div>
+</section>
+
+<script>
+const feedback = {
+  1: {
+    a: {
+      headline: "Questioning authority is part of independent thought — but systematic opposition is not the same thing.",
+      detail: "Questioning official narratives and established authorities is a necessary part of independent thought. But the person described has a systematic pattern: they oppose the mainstream on most topics. This means the mainstream is still structuring their positions — just in reverse. Genuine independent thinking does not produce a consistent pattern of opposition any more than it produces a consistent pattern of conformity. It produces varied conclusions based on varied evidence and reasoning."
+    },
+    b: {
+      headline: "Yes — the process matters as much as the content.",
+      detail: "Independent thought is defined by process, not conclusion. If the positions described are arrived at by asking 'what does the mainstream believe?' and then believing the opposite, the mainstream is still doing the thinking. What makes thinking genuinely independent is not the content of the conclusions but the quality of the process that produced them: genuine engagement with evidence, honest acknowledgement of uncertainty, willingness to arrive somewhere unexpected. Strong, confident anti-mainstream views can be just as unreflective as strong, confident mainstream ones."
+    },
+    c: {
+      headline: "Alignment with expertise is not the criterion either.",
+      detail: "Independent thought is not defined by whether conclusions match established expertise. Experts can be wrong, can operate within limited frameworks, and can reflect the biases of the institutions that produce them. The criterion for independent thought is the quality of the process — not whether it produces conclusions that agree with experts or disagree with them. A person who automatically defers to credentialled experts is not thinking more independently than a person who automatically opposes them; they are just deferring to a different authority."
+    },
+    d: {
+      headline: "Evidence is necessary but not sufficient — the process that uses it matters.",
+      detail: "Being able to cite evidence for a position is better than not being able to — but it does not resolve the question of whether the position was arrived at through genuine independent thought. Evidence can be selected, interpreted, and weighted in ways that confirm pre-existing positions. The question is not whether the person can back their views with evidence, but whether the evidence was engaged with genuinely — with openness to where it might lead — or used to support a conclusion already reached."
+    }
+  },
+  2: {
+    a: {
+      headline: "Clarity and immediacy are the features of retrieval, not necessarily good thinking.",
+      detail: "Having a clear, immediate view can feel like the mark of good thinking — decisive, well-formed, confident. But these are actually the features of a well-practised retrieval process. The position was already there, associated with your group identity, and arrived instantly. Good thinking tends to feel slower, less certain, more provisional — because it is actually engaging with the question rather than locating the pre-formed response. The fluency of retrieval is not evidence of thought."
+    },
+    b: {
+      headline: "Yes — the distinction between retrieval and thought is the central one.",
+      detail: "What arrived was a position, not a thought. It was fast, fully formed, and aligned with your group — all the signatures of retrieval rather than genuine reflection. This does not mean the position is wrong. It may be entirely defensible. But you have not yet thought about it — you have located it. These are different acts. The most honest thing to do with this recognition is to ask whether you have ever actually engaged with this question, followed its complications, considered the strongest opposing arguments, and arrived at your position through that process."
+    },
+    c: {
+      headline: "Group-derived views are not automatically suspect — unreflective retrieval of any view is the issue.",
+      detail: "A position held by your group might be entirely correct and well-reasoned. The problem is not its source but its mode of arrival — instantly, fully formed, without engagement. Dismissing the position because it came from your group is the contrarian error: using source as a substitute for evaluation in the opposite direction. The question is not where the position came from but whether you have ever genuinely engaged with it."
+    },
+    d: {
+      headline: "More information is useful — but thinking is not the same as accumulating information.",
+      detail: "Gathering more information on a topic is often valuable. But it does not automatically produce genuine thought. Information can be accumulated in ways that confirm the retrieved position rather than genuinely testing it — selecting sources that support the existing view, weighting evidence that fits and discounting evidence that does not. Genuine thinking is not primarily about quantity of information. It is about the quality of engagement with it — and with the underlying question."
+    }
+  },
+  3: {
+    a: {
+      headline: "Official consensus is valuable input — it is not the end of your thinking.",
+      detail: "Official guidance often represents the best available synthesis of relevant expertise, and it deserves serious weight. But 'follow the guidance' as the complete answer to a complex personal health decision outsources the entirety of the judgement. You have specific circumstances, a particular history, and direct experience that the guidance cannot account for. Using the official guidance as a primary input while also considering the minority view and your own experience is more complete thinking than deferring to any single source."
+    },
+    b: {
+      headline: "Yes — this is what informed independent thought actually looks like.",
+      detail: "Each of the three sources contains real information: the official guidance reflects the weight of accumulated research; the minority researchers may be tracking something the consensus has not yet integrated; your own experience is direct evidence about your particular situation. Using all three as inputs — understanding what each is based on, where they conflict and why — and then making your own judgement is not the same as dismissing expertise. It is using expertise well: as information that informs your thinking rather than replaces it."
+    },
+    c: {
+      headline: "Lived experience is real evidence — it is not automatically more reliable than other evidence.",
+      detail: "Your direct experience of your own body is genuinely important information that official guidance often cannot capture. But lived experience also has limitations: it is filtered through interpretation, affected by expectation, and can produce false pattern-recognition. The most sophisticated approach treats lived experience as real and significant input alongside research evidence, not as a trump card over it. The skill is integrating multiple forms of evidence, not privileging any one kind."
+    },
+    d: {
+      headline: "Minority researchers are not more likely to be right by virtue of challenging the consensus.",
+      detail: "The reasoning 'they are probably right because they challenge the consensus' is the mirror image of 'they are probably wrong because they challenge the consensus.' Both substitute source for evaluation. Minority researchers should be evaluated on the quality of their methodology and reasoning, not on their position relative to the consensus. Sometimes minority views are ahead of the consensus; often they are simply wrong. The answer is engagement with the actual work, not a rule about consensus versus dissent."
+    }
+  },
+  4: {
+    a: {
+      headline: "Clarity and confidence in explanation are not markers of good reasoning.",
+      detail: "Complex social phenomena almost never have single, clean causes. An explanation that is very clear and attributes a complex problem to one cause and a specific set of responsible parties may be clear because it is oversimplified rather than because it is correct. Real understanding of complex systems tends to produce more qualified, more tentative explanations that acknowledge multiple interacting causes. Clarity in explanation can be a sign of insight — but it can also be a sign that something important has been left out to produce the neatness."
+    },
+    b: {
+      headline: "Yes — neatness in complex explanations is worth examining carefully.",
+      detail: "Your sense that something is unresolved is worth attending to. Complex social problems — poverty, inequality, crime, conflict — have multiple interacting causes operating at different scales over different timeframes. An explanation that is too clean, that assigns blame clearly and resolves the complexity into a simple picture, is usually leaving something out. The neatness is often purchased by ignoring contradictory evidence, flattening complexity, or selecting for the story that confirms existing beliefs. Your unresolved feeling is not irrational — it may be tracking what the explanation is not accounting for."
+    },
+    c: {
+      headline: "The intuition is worth examining — it is not automatically more reliable than the argument.",
+      detail: "Your sense that something is unresolved is real information. But it could be tracking genuine complexity in the explanation, or it could be tracking resistance to a conclusion that challenges a belief you hold. Both produce the same feeling of something-not-quite-right. The useful move is to try to articulate what specifically feels unresolved: what does the explanation not account for? What evidence would you need to see? This converts the vague intuition into a specific question, which is more tractable."
+    },
+    d: {
+      headline: "More research to reach the same certainty is not the goal.",
+      detail: "Researching a topic more is often valuable — but 'research until you reach the same level of certainty your friend has' sets certainty as the endpoint of thinking. For complex social questions, more thorough research tends to produce more nuance and more awareness of what is genuinely uncertain, not the same clean certainty held with more evidence. If the research produces the same simple, confident explanation, it may mean the research was conducted to confirm rather than to genuinely investigate."
+    }
+  },
+  5: {
+    a: {
+      headline: "Exposure to different views can update a position — but not all updating is genuine learning.",
+      detail: "Group discussion can genuinely expose you to reasoning and evidence you had not considered, and updating in response to that is good thinking. But the specific dynamic described — the view becoming harder to hold as the group's position became more unified — is the social pressure mechanism, not the intellectual one. The test: can you identify the specific argument or evidence that shifted your view? Or did the view shift as the social environment shifted? The first is updating; the second is compliance."
+    },
+    b: {
+      headline: "Yes — the question of what produced the shift is the essential one.",
+      detail: "Changing your view and capitulating to social pressure produce identical outcomes. What distinguishes them is the process. If your view shifted because someone made an argument you had not considered, offered evidence that genuinely changed the picture, or identified a flaw in your reasoning — that is good thinking. If your view shifted because the group's certainty increased, because disagreeing became socially uncomfortable, because you felt increasingly isolated — that is compliance. Asking honestly which process occurred is the most important thing you can do after a conversation like this."
+    },
+    c: {
+      headline: "Minority positions are not held primarily from stubbornness.",
+      detail: "The idea that minority views in group discussions are mainly products of stubbornness rather than genuine reasoning is itself a form of social pressure: it pathologises the refusal to conform. Minority positions in any given group discussion may be wrong, right, or complex — exactly as majority positions may be. The size of the group holding a position within one conversation tells you very little about its accuracy. What matters is the quality of the reasoning, not the size of the coalition holding it."
+    },
+    d: {
+      headline: "Maintaining a position regardless of pressure is not the goal either.",
+      detail: "The opposite error — never changing your view in response to a group, on principle — is its own form of rigidity. The goal is not immunity to social influence but discrimination between social influence and genuine reasoning. If you have clearly identified a specific argument or piece of evidence that genuinely changes your view, updating is entirely appropriate. The principle is not 'never change your view in groups.' It is 'know why your view changed.'"
+    }
+  },
+  6: {
+    a: {
+      headline: "Sharing understanding is premature when the understanding has not yet been examined.",
+      detail: "The impulse to share understanding that feels clear and obvious is a natural one — but it is also the stage at which conditioning is most invisible. The position feels like understanding rather than retrieval, the explanation feels like insight rather than a borrowed frame, and the desire to share it can actually entrench it further rather than subjecting it to the scrutiny that would test it. The more productive first move is to examine the understanding before amplifying it."
+    },
+    b: {
+      headline: "Yes — this is the question that most often reveals the limits of apparent understanding.",
+      detail: "When an explanation of a complex social issue feels obvious and complete, the most honest thing to do is ask what you are assuming that produces the clarity. Every explanation of a complex phenomenon relies on frameworks, priorities, and selective attention — things that feel invisible from inside the explanation. 'What would I need to be wrong about for the picture to look different?' is a particularly generative question because it forces you to locate the load-bearing assumptions rather than the surface conclusions."
+    },
+    c: {
+      headline: "More evidence to confirm an existing view is not the same as thinking.",
+      detail: "Gathering more evidence is often valuable. But seeking evidence to confirm an understanding you already feel confident about tends to produce confirmation rather than examination. The more useful evidence-gathering is adversarial: actively seeking the strongest counterarguments, the best evidence against the explanation, the most compelling alternative frameworks. Genuine thinking tests its conclusions against opposition; it does not surround them with supporting evidence."
+    },
+    d: {
+      headline: "Moving to solutions before examining the understanding embeds the assumptions into action.",
+      detail: "Acting on an understanding that has not been examined means building action on possibly unexamined foundations. Solutions to complex social problems are often counterproductive precisely because they were designed from explanations that were not examined carefully enough — that attributed the problem to the wrong cause, that ignored systemic dynamics, that served the interests of the explainer rather than the complexity of the situation. Examining the understanding before designing solutions is not delay — it is the thing that makes the solution more likely to work."
+    }
+  },
+  7: {
+    a: {
+      headline: "The social cost is real — but the source of the discomfort is worth understanding.",
+      detail: "The social cost of developing independent thought is genuine and should not be minimised. Some relationships do become more difficult; some environments become less comfortable. But framing this as 'becoming difficult' locates the problem in you rather than in the dynamics producing the discomfort. Understanding why the discomfort arises — what specifically about genuine inquiry threatens people invested in certainty — helps you navigate it more precisely rather than either dismissing it or immediately modifying your thinking to avoid it."
+    },
+    b: {
+      headline: "Yes — the source of the discomfort is structural, not about specific conclusions.",
+      detail: "Genuine inquiry is structurally threatening to people who are invested in certainty, because it treats settled questions as open, models comfort with not knowing, and implicitly challenges the sufficiency of retrieved positions. This tends to produce discomfort regardless of what you conclude — because it is the mode, not the content, that is disruptive. Understanding this helps you avoid either taking the discomfort as personal rejection or imagining you can resolve it by moderating specific views. The thing that is unsettling people is the quality of attention itself."
+    },
+    c: {
+      headline: "Dismissing the social cost entirely is its own form of avoidance.",
+      detail: "The social cost of independent thought is real and worth taking seriously — not as a reason to stop thinking, but as a genuine consideration in how and where you engage. The idea that other people's discomfort is simply their problem forecloses real relationship dynamics that deserve attention. Independent thought does not require becoming indifferent to social connection; it requires developing more discernment about which social pressures to respond to and which to understand without capitulating to."
+    },
+    d: {
+      headline: "The discomfort may not resolve with better explanation.",
+      detail: "If the source of the discomfort is structural — the mode of genuine inquiry rather than any specific conclusion — then explaining your thinking more carefully is unlikely to resolve it. The discomfort may actually increase as the explanation makes the open-questioning approach more visible. What can help is genuine relationship — maintaining warmth and care alongside the intellectual difference — but this is different from assuming that communication is the problem and more of it is the solution."
+    }
+  },
+  8: {
+    a: {
+      headline: "The promise is real — but 'better, freer, happier' oversimplifies what it actually offers.",
+      detail: "Independent thought does offer something genuinely valuable. But the claim that it leads to a better, freer, happier life is too clean. It costs real things: certainty, ease of belonging, the comfort of having ready answers. It often makes certain periods of life harder, not easier. The more honest account is that it offers something different rather than straightforwardly better — a life lived with more of yourself present in it, which is a different value than happiness or comfort, and one that sometimes involves considerably more difficulty."
+    },
+    b: {
+      headline: "Yes — honesty about the exchange is more useful than advocacy for one side of it.",
+      detail: "The question 'is it worth it?' deserves an honest answer rather than a recruiting one. What independent thought costs is real: certainty, easy belonging, the comfort of received answers, the protection of conformity. What it offers is also real: a more honest relationship with your own mind, values and choices that are more genuinely yours, a life lived from something that is more actually you. Whether that exchange is worth it looks different at different times in life and for different people. The most useful answer is the honest one, not the promotional one."
+    },
+    c: {
+      headline: "Conditioned belonging is a real thing — but its comfort depends on what you know.",
+      detail: "Unreflective belonging — the warm, unexamined sense of being part of a group — has genuine value. It provides safety, community, shared meaning. The question is whether you can return to it once you have seen it clearly. For many people, you cannot: you know too much about how it was constructed and what it costs to maintain. The comfort remains visible but no longer fully accessible. The 'more humane choice' framing assumes the option is still available in the same form — which, for many people who have begun this work, it is not."
+    },
+    d: {
+      headline: "The alternative is real — but the unconditional 'no cost is worth it' is still too clean.",
+      detail: "Living from something that is more genuinely yours is a profound value, and the argument that conditioned compliance represents a kind of unlived life is real and serious. But 'no cost is worth accepting that' forecloses the genuine complexity: people face real constraints — economic, relational, physical, circumstantial — within which the cost of independent thought is not always manageable. The honest answer acknowledges both the value of the direction and the reality that the costs land differently on different people in different situations."
+    }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c6m6';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course6-module-6-independence-deprogramming.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Course Complete ✓';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c6m7','1');window.location.href='index.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+function SS_restartCourse(){
+  try{['safespot_c6m1','safespot_c6m2','safespot_c6m3','safespot_c6m4','safespot_c6m5','safespot_c6m6','safespot_c6m7'].forEach(function(k){localStorage.removeItem(k);});}catch(e){}
+  window.location.href="course6-landing.html";
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

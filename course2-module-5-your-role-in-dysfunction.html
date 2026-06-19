@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 2 · Module 5 · Your Role in Dysfunction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --paper: #fafaf7;
+  --muted: #6b6b66;
+  --line: #d9d9d3;
+  --soft: #f0f0ea;
+  --accent: #c4452d;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+.module-header { border-bottom: 1px solid var(--line); padding: 32px 48px 32px 24px; display: grid; grid-template-columns: 1fr auto 1fr; justify-items: start; align-items: baseline; position: sticky; top: 0; background: var(--paper); z-index: 100; backdrop-filter: blur(8px); }
+.module-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.module-tag strong { color: var(--ink); font-weight: 500; }
+.progress-bar { grid-column: 3; justify-self: end; display: flex; gap: 6px; align-items: center; }
+.progress-dot { width: 24px; height: 2px; background: var(--line); transition: background 0.4s ease; }
+.progress-dot.active { background: var(--ink); }
+.progress-dot.complete { background: var(--accent); }
+
+.module-container { max-width: 780px; margin: 0 auto; padding: 80px 48px 120px; }
+.slide { display: none; animation: fadeUp 0.6s ease; }
+.slide.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-number { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 24px; text-transform: uppercase; }
+.slide-title { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.5vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 40px; font-variation-settings: "opsz" 144; }
+.slide-title em { font-style: italic; font-weight: 300; }
+.lead { font-family: var(--serif); font-size: 22px; line-height: 1.5; font-weight: 300; color: var(--ink); margin-bottom: 40px; letter-spacing: -0.01em; }
+.body-text { font-size: 17px; line-height: 1.7; color: #2a2a28; margin-bottom: 24px; max-width: 62ch; }
+.body-text strong { font-weight: 500; color: var(--ink); }
+.section-heading { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 56px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.section-heading::before { content: ''; width: 24px; height: 1px; background: var(--ink); }
+.pullquote { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; font-weight: 300; border-left: 2px solid var(--ink); padding: 8px 0 8px 32px; margin: 48px 0; color: var(--ink); }
+
+/* SHAPE-WOUND CARDS — page 2 */
+.shape-card { margin: 32px 0; padding: 32px; background: var(--soft); border: 1px solid var(--line); }
+.shape-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; padding-bottom: 20px; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
+.shape-row:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+.shape-side { padding-right: 0; }
+.shape-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; font-weight: 500; }
+.shape-side.right .shape-label { color: var(--accent); }
+.shape-name { font-family: var(--serif); font-size: 19px; font-style: italic; font-weight: 400; line-height: 1.3; margin-bottom: 12px; }
+.shape-text { font-size: 14.5px; line-height: 1.6; color: #2a2a28; }
+
+/* PLEASURE CARDS — page 3 */
+.pleasure { margin: 28px 0; padding: 28px; background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--accent); }
+.pleasure-shape { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; font-weight: 500; }
+.pleasure-name { font-family: var(--serif); font-size: 22px; font-style: italic; font-weight: 400; margin-bottom: 12px; line-height: 1.25; }
+.pleasure-text { font-size: 16px; line-height: 1.65; color: #2a2a28; }
+
+/* LOSS LIST — page 4 */
+.loss-block { margin: 32px 0; padding: 28px; background: var(--soft); border-left: 2px solid var(--line); }
+.loss-name { font-family: var(--serif); font-size: 21px; font-style: italic; font-weight: 400; margin-bottom: 10px; line-height: 1.3; }
+.loss-text { font-size: 16px; line-height: 1.65; color: #2a2a28; }
+
+/* PRACTICE STEPS — page 5 */
+.practice { margin: 28px 0; padding-left: 28px; border-left: 2px solid var(--line); }
+.practice-name { font-family: var(--serif); font-size: 22px; font-style: italic; font-weight: 400; margin-bottom: 10px; line-height: 1.25; }
+.practice-text { font-size: 16px; line-height: 1.65; color: #2a2a28; }
+
+/* SCENARIO + FEEDBACK */
+.scenario { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--line); }
+.scenario-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+.scenario-prompt { font-family: var(--serif); font-size: 24px; line-height: 1.45; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+.scenario-context { font-size: 16px; color: var(--muted); margin-bottom: 32px; font-style: italic; }
+.choices { display: flex; flex-direction: column; gap: 12px; }
+.choice { display: block; width: 100%; text-align: left; background: transparent; border: 1px solid var(--line); padding: 20px 24px; font-family: var(--sans); font-size: 16px; line-height: 1.5; color: var(--ink); cursor: pointer; transition: all 0.25s ease; font-weight: 400; }
+.choice:hover { border-color: var(--ink); background: var(--soft); transform: translateX(2px); }
+.choice-letter { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 14px; letter-spacing: 0.1em; }
+.choice.selected { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.choice.selected .choice-letter { color: var(--paper); opacity: 0.6; }
+.choice:disabled { cursor: default; }
+.choice:disabled:hover { transform: none; }
+.choice.dimmed { opacity: 0.4; }
+
+.feedback { display: none; margin-top: 32px; padding: 32px; background: var(--soft); border-left: 2px solid var(--ink); animation: fadeUp 0.5s ease; }
+.feedback.visible { display: block; }
+.feedback-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.feedback-headline { font-family: var(--serif); font-size: 19px; line-height: 1.5; font-weight: 400; font-style: italic; color: var(--ink); margin-bottom: 16px; letter-spacing: -0.005em; }
+.feedback-text { font-family: var(--sans); font-size: 15.5px; line-height: 1.65; color: #2a2a28; font-weight: 400; }
+
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); }
+.nav-btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; border: none; color: var(--ink); cursor: pointer; padding: 12px 0; transition: opacity 0.2s ease; font-weight: 500; }
+.nav-btn:hover { opacity: 0.6; }
+.nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+.nav-btn.primary { background: var(--ink); color: var(--paper); padding: 16px 32px; }
+.nav-btn.primary:hover { background: #2a2a28; opacity: 1; }
+.nav-btn.primary:disabled { background: var(--line); color: var(--muted); }
+.nav-counter { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+
+.complete-mark { font-family: var(--serif); font-size: 120px; line-height: 1; font-weight: 300; margin-bottom: 32px; color: var(--accent); font-style: italic; }
+.summary-list { list-style: none; margin: 40px 0; }
+.summary-list li { padding: 20px 0; border-bottom: 1px solid var(--line); display: flex; gap: 24px; align-items: baseline; }
+.summary-list li:last-child { border-bottom: none; }
+.summary-num { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; min-width: 32px; }
+.summary-text { font-family: var(--serif); font-size: 18px; line-height: 1.5; font-weight: 400; }
+
+@media (max-width: 640px) {
+  .module-header { padding: 20px 24px; }
+  .module-container { padding: 48px 24px 80px; }
+  .slide-title { font-size: 38px; }
+  .lead { font-size: 19px; }
+  .body-text { font-size: 16px; }
+  .scenario-prompt { font-size: 20px; }
+  .pullquote { font-size: 22px; padding-left: 24px; margin: 32px 0; }
+  .progress-dot { width: 12px; }
+  .complete-mark { font-size: 80px; }
+  .shape-row { grid-template-columns: 1fr; gap: 16px; }
+  .shape-card { padding: 24px; }
+  .pleasure-name { font-size: 19px; }
+}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 02 · Module <strong>05</strong> · Your Role in Dysfunction</div>
+  <div class="progress-bar">
+    <div class="progress-dot active"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 2 &middot; Toxic Relationship Patterns</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c2m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course2-module-1-the-patterns-that-predict.html">The Patterns That Predict</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course2-module-2-love-bombing-and-the-initial-mask.html">Love Bombing & The Initial Mask</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course2-module-3-the-micro-aggressions-that-scale.html">Micro-Aggressions That Scale</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course2-module-4-dysfunction-archetypes.html">Dysfunction Archetypes</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course2-module-5-your-role-in-dysfunction.html">Your Role in Dysfunction</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course2-module-6-the-exit.html">The Exit</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course2-module-7-choosing-differently.html">Choosing Differently</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 07 · The Repetition</div>
+    <h1 class="slide-title">Why you keep choosing the same <em>shape.</em></h1>
+
+    <p class="lead">If you have had two or more relationships that ended badly, you have probably noticed something disquieting: the people were different, the contexts were different, the surface details bore almost no resemblance to one another — and yet the dynamic, somehow, was the same. The same kind of exhaustion. The same kind of erasure. The same gradual disappearance of who you were when it began. Different actors. Same script.</p>
+
+    <p class="body-text">This is the most important pattern this module addresses, and it is the one that almost everyone interprets wrongly. The popular explanations are usually one of three: you have bad luck with people, you have an unconscious attraction to dysfunction, or you are somehow attracting these partners through energy or signal. <strong>None of these is accurate enough to act on.</strong> The actual mechanism is more pedestrian and more empowering, because it can be addressed.</p>
+
+    <p class="body-text">What is happening is structural. <strong>You are not attracting these partners. You are not attracted to them in a mysterious way. You are recognising them — quickly, without conscious thought — as people whose architecture fits the role your shape was designed to play.</strong> The recognition is mutual. They are also recognising you. The match is not magical. It is two nervous systems identifying each other across a room and feeling, almost immediately, a strange and unmistakable sense of familiarity.</p>
+
+    <div class="section-heading">What "familiarity" actually is</div>
+
+    <p class="body-text">When two people meet who are well-matched for a particular kind of dysfunctional dynamic, the feeling they describe is almost always the same: <em>I felt like I'd known them my whole life.</em> This phrase, romanticised in films and songs, is rarely about good news. <strong>The familiarity is not recognition of soul-level connection. It is recognition of structural fit.</strong> Their architecture activates the part of you that knows how to play the corresponding role, and your architecture activates theirs. Both nervous systems light up at the same moment, and the lighting-up is interpreted, in the moment, as chemistry.</p>
+
+    <p class="body-text">This is why you keep choosing the same shape. Your shape was built to fit a particular kind of partner. The match is not random or cursed — it is the predictable outcome of two specific architectures meeting and recognising the dance they each know how to perform. Until the architecture changes, the match will keep occurring. This is why the partner can change — different name, different background, different surface story — and the dynamic still feels uncannily like the last one.</p>
+
+    <div class="pullquote">The chemistry you keep finding is not a sign that you have finally met the right person. It is a sign that you have found, again, the version of the wrong person who matches your particular shape. The chemistry is the recognition. The recognition is the trap.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You think back across your significant relationships and see, for the first time clearly, that the dynamics were structurally the same.</p>
+      <p class="scenario-context">Different partners. Same shape. The recognition is uncomfortable because it implies something about you — not blame, exactly, but participation. The familiar story (I just have bad luck with relationships) no longer quite holds.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude you have terrible judgement and resign yourself to repeating the pattern forever.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the recognition without converting it into self-condemnation. The repetition is structural, which means it can be addressed structurally — through the work of this module rather than through self-attack.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Decide the pattern means you should never date again. Swear off relationships indefinitely.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Reject the framework. Each relationship was unique, the pattern is your imagination, you're projecting.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 07 · The Architecture</div>
+    <h1 class="slide-title">The four wounds that produce the four <em>shapes.</em></h1>
+
+    <p class="lead">Module Four named the four shapes you take in response to the four archetypes — the pre-empter, the pursuer, the debtor, the hero. Each one developed for a reason. Each one was a survival strategy in a specific environment, almost always installed in childhood, and each one was useful in the conditions that produced it. The strategy is now operating in adult relationships that are not the conditions it was designed for.</p>
+
+    <p class="body-text">This page traces each shape back to the wound that produced it. The purpose is not blame — not of yourself, not of the people who installed the wound. Many of them were doing what they had been taught. Some of them loved you imperfectly because imperfect love was the only kind they had. <strong>The purpose is geometry: to see the exact line between the wound that was installed and the shape that has been carrying you ever since.</strong> Once the line is visible, the shape stops feeling like who you are and starts feeling like what you do — which is the precondition for changing it.</p>
+
+    <div class="shape-card">
+      <div class="shape-row">
+        <div class="shape-side">
+          <div class="shape-label">The shape</div>
+          <p class="shape-name">The pre-empter</p>
+          <p class="shape-text">With Controllers. Adjusts choices to predicted approval before the choice is even consciously made. Reads the room before entering it. Has lost reliable access to what they would have done if no one's opinion were watching.</p>
+        </div>
+        <div class="shape-side right">
+          <div class="shape-label">The wound underneath</div>
+          <p class="shape-name">The chaotic home</p>
+          <p class="shape-text">A childhood in which the emotional weather was unpredictable — where someone's mood could turn quickly, where small wrong steps produced disproportionate consequences. You learned, before language, to scan and pre-adjust. The scanning kept you safe. It now runs in every room you enter, including ones that have no weather to fear.</p>
+        </div>
+      </div>
+
+      <div class="shape-row">
+        <div class="shape-side">
+          <div class="shape-label">The shape</div>
+          <p class="shape-name">The pursuer</p>
+          <p class="shape-text">With Abandoners. Calibrates needs downward to keep the partner from retreating further. Becomes expert at reading distance. Treats their returns as proof the relationship is fine. Has trained their nervous system to survive on less attention than any healthy partner should have to.</p>
+        </div>
+        <div class="shape-side right">
+          <div class="shape-label">The wound underneath</div>
+          <p class="shape-name">The early withdrawal</p>
+          <p class="shape-text">A caregiver who was inconsistently available — sometimes warm, sometimes absent, often in ways the child could not predict or control. You learned that love was something to chase, that warmth was rationed, that the right behaviour might earn another moment of attention. The chasing is older than your conscious memory. It feels, now, like how love works.</p>
+        </div>
+      </div>
+
+      <div class="shape-row">
+        <div class="shape-side">
+          <div class="shape-label">The shape</div>
+          <p class="shape-name">The debtor</p>
+          <p class="shape-text">With Providers. Cannot receive cleanly. Refuses gifts pre-emptively to keep the ledger balanced. Lives with low-grade guilt. Knows, even before the ledger is read out, that the accounting has been running. Tries to keep up, fails, tries again.</p>
+        </div>
+        <div class="shape-side right">
+          <div class="shape-label">The wound underneath</div>
+          <p class="shape-name">The conditional love</p>
+          <p class="shape-text">A childhood in which affection was tied to performance — to good behaviour, achievements, usefulness, the producing of what the caregivers valued. You learned that love was a transaction, that nothing arrived free, that every kindness was an investment that would later require return. The transactional view of love is so deep that unconditional love, when encountered, feels suspicious to you.</p>
+        </div>
+      </div>
+
+      <div class="shape-row">
+        <div class="shape-side">
+          <div class="shape-label">The shape</div>
+          <p class="shape-name">The hero</p>
+          <p class="shape-text">With those who need saving. Heroic, exhausted, secretly proud of the difficulty. Believes their love is unusually strong because it can survive what would crush other people. Has built an identity on indispensability. Cannot leave because leaving would require being someone whose love did not save.</p>
+        </div>
+        <div class="shape-side right">
+          <div class="shape-label">The wound underneath</div>
+          <p class="shape-name">The role-reversed child</p>
+          <p class="shape-text">A childhood in which you were prematurely responsible — for a parent's emotions, a parent's stability, a sibling's care, the management of family dynamics that should have been managed by adults. You learned, before you could question it, that being needed was being valued. Your worth became inseparable from your usefulness in other people's crises. The pattern is so old it feels like devotion, not strategy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-heading">What the wound is and is not</div>
+
+    <p class="body-text"><strong>The wound is not a defect.</strong> It is not weakness, not personality flaw, not character failure. It is the predictable result of a specific environment — circumstances you did not author, decisions you did not consent to, conditions you were too young to question. Naming the wound is not self-blame. It is the opposite. It is the recognition that the shape you have been carrying for decades was installed in you before you had any say in the matter, and that the strategy worked, in the conditions it was built for, well enough that you survived to be here reading this now.</p>
+
+    <p class="body-text"><strong>The wound is also not a sentence.</strong> Many people, encountering the line between their early environment and their adult shape, conclude that the shape is therefore fixed — that they will always be the pursuer, the pre-empter, the debtor, the hero. This is not true, and the rest of this module is the evidence. The shape was learned. <em>What was learned can be loosened, slowly, with patience, and the loosening is the actual work this module exists to support.</em></p>
+
+    <div class="pullquote">The wound is not your fault. The shape is not your fault. The work, now, is your own — not because you caused this, but because you are the only one with the access to change it.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You recognise yourself in one of the four wounds — specifically, with the particular sharpness of a description that finally fits.</p>
+      <p class="scenario-context">The recognition includes some grief. Some of the grief is for the child you were. Some of it is for the time you have spent running a strategy you didn't choose. Both griefs are real. Neither is the work.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Direct the grief outward. Decide the person who installed the wound is responsible for your entire adult life. Confront them. Demand acknowledgement.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Let the grief move without converting it into a verdict. The wound is real and the work, now, is forward. Acknowledge what was lost without making the loss the central organising fact.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Decide you are now disqualified from healthy relationships because the wound is too deep. Withdraw from dating indefinitely.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the framework. You weren't a wounded child. You had a perfectly normal upbringing.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 07 · The Hidden Pleasure</div>
+    <h1 class="slide-title">The reward you have not let yourself <em>name.</em></h1>
+
+    <p class="lead">If your shape has been operating for years, possibly decades, in relationship after relationship — there is a reason it has persisted. Strategies that purely cost us are usually dropped quickly. Strategies that persist are doing something for us, even when they also cost us. This is the page nobody wants to read, and it is the page that, more than any other in the course, separates the surface understanding of patterns from the actual capacity to change them.</p>
+
+    <p class="body-text"><strong>Your shape is not only a burden. It is also a strategy that produces a particular kind of pleasure — a felt reward that your nervous system has been receiving every time the shape runs.</strong> The pleasure is not the pleasure of healthy connection. It is the pleasure of recognition, of competence, of being good at something, of occupying a familiar position in a familiar drama. Until you can name the pleasure, the shape will keep operating, because the pleasure is what makes it sustainable across years of pain.</p>
+
+    <p class="body-text">This page is harder than the previous ones. Reading it honestly may produce a particular discomfort — a sense of being uncomfortably seen in the part of yourself you have been most careful not to look at. <em>That discomfort is the page working.</em> Stay with it. The naming is the precondition for the loosening.</p>
+
+    <div class="pleasure">
+      <div class="pleasure-shape">For the pre-empter</div>
+      <p class="pleasure-name">The pleasure of safe prediction.</p>
+      <p class="pleasure-text">There is a quiet pleasure in knowing how to keep the room calm. In reading the mood and adjusting before disturbance arrives. In being good at the thing you have been doing your whole life. The pre-empter does not experience pre-empting as suffering — they experience it as competence. Each successful adjustment produces a small reward: you are still safe, you are still loved, the storm has been deflected. The pleasure is not exotic. It is the daily satisfaction of being skilled at a craft, even when the craft itself is a form of self-erasure.</p>
+    </div>
+
+    <div class="pleasure">
+      <div class="pleasure-shape">For the pursuer</div>
+      <p class="pleasure-name">The pleasure of intensity.</p>
+      <p class="pleasure-text">There is a particular kind of aliveness that comes from chasing — from the high of return after withdrawal, from the felt intensity of attention finally arriving, from the relief that washes through the body when the silence breaks. Healthy connection does not produce this pattern. It produces something quieter, more sustained, less dramatic — and to a nervous system trained on intermittent reward, the quietness can feel like absence. The pursuer is often unconsciously bored by stability. The chase is not their punishment. It is their familiar landscape of feeling alive.</p>
+    </div>
+
+    <div class="pleasure">
+      <div class="pleasure-shape">For the debtor</div>
+      <p class="pleasure-name">The pleasure of moral clarity.</p>
+      <p class="pleasure-text">The debtor is, in their own internal accounting, the one who tries. The one who is conscientious. The one who attempts, against the rigged ledger, to be fair. There is a particular kind of moral satisfaction in being the just party in an unjust system. The exhaustion is real. The pride underneath the exhaustion is also real. Some part of the debtor identifies with being more decent than the partner, more honourable, more careful about what they owe and what they take. The position is morally clean in a way few positions in adult life are. Giving it up means giving up the cleanliness.</p>
+    </div>
+
+    <div class="pleasure">
+      <div class="pleasure-shape">For the hero</div>
+      <p class="pleasure-name">The pleasure of indispensability.</p>
+      <p class="pleasure-text">The hero, more than any of the other shapes, is in danger of mistaking the structure for love. To be needed — really needed, in a way that no one else could possibly provide — is one of the deepest pleasures available to a nervous system that learned its worth was tied to its usefulness. The exhaustion of the heroic position is genuine. So is the pride. The hero often cannot leave because the leaving would dissolve an identity decades in the making. Being the one who saves is, for many heroes, the only way they have ever known to be loved. Surrendering the role feels, viscerally, like surrendering their right to exist.</p>
+    </div>
+
+    <div class="section-heading">Why naming the pleasure is required for change</div>
+
+    <p class="body-text">If you try to drop your shape without first naming the pleasure it has been giving you, you will fail. The shape will return, sometimes within weeks, sometimes within months, often in a new relationship that fits the pattern even better than the last one. The reason is structural: <strong>you cannot give up a strategy whose reward you have not consciously acknowledged.</strong> The reward operates below consciousness, and below consciousness is precisely where it has the most power.</p>
+
+    <p class="body-text">Naming the pleasure is not the same as endorsing it. You can recognise that you have been getting something from being the hero, the pursuer, the debtor, the pre-empter — and still decide that the something is not worth what it costs. <em>The naming is what makes the decision yours, rather than something happening to you.</em> Without the naming, you remain a passenger to your own pattern, even when you intellectually understand what the pattern is.</p>
+
+    <div class="pullquote">You did not stay in the shape because you were trapped. You stayed because the shape was paying you in a currency you had not yet named. Until you can name the currency, you cannot decide whether to stop spending in it.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the description of your shape's hidden pleasure and feel an immediate, almost physical resistance.</p>
+      <p class="scenario-context">The resistance is not abstract. There is something specifically uncomfortable about being told that your shape has been rewarding you all along. The resistance has a particular intensity, and the intensity is information.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Trust the resistance. Decide the framework doesn't apply because it doesn't feel true.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice that the resistance is specifically defending the pleasure from being seen. Stay with the description. Allow it to be partially true even if not entirely true.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Take the description as a total verdict. Conclude that everything you thought was love was actually self-serving manipulation.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Confront the partner from your past relationships with this framework. Demand they recognise what they were getting from your shape.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 07 · The Cost of Leaving</div>
+    <h1 class="slide-title">What you actually <em>lose</em> when you stop running the pattern.</h1>
+
+    <p class="lead">Almost every course on relationship patterns tells you that healing produces freedom, peace, better partnerships, and the kind of life you have been waiting for. This is sometimes true. It is also not the whole truth, and the missing part of the truth is what causes most people to abandon the work after a few weeks. Loosening your shape produces real losses. Naming them in advance is how you survive them.</p>
+
+    <p class="body-text">If you have spent decades organising your sense of self around being the hero, the pursuer, the pre-empter, the debtor — that organisation is not only suffering. It is also identity. <strong>Letting go of the shape means letting go of a version of yourself you have spent your entire adult life building.</strong> The version was costly. It was also you, in a way that the new version isn't yet. The grief of this is real, and most people are not warned about it before they try to do this work.</p>
+
+    <div class="loss-block">
+      <p class="loss-name">You lose the felt sense of competence.</p>
+      <p class="loss-text">For years, you have been good at something — at reading rooms, at pursuing, at managing accounts, at saving people. The skill was costly, but it was a skill. When you begin loosening the shape, you become temporarily incompetent at things you have been competent at for decades. The pre-empter who stops pre-empting will say wrong things and produce wrong reactions. The pursuer who stops pursuing will lose connections that were sustained by their pursuit. The hero who stops saving will discover that some people they were saving will, in fact, fall when not caught. The incompetence is part of the work. It is also genuinely painful.</p>
+    </div>
+
+    <div class="loss-block">
+      <p class="loss-name">You lose the moral clarity of the position.</p>
+      <p class="loss-text">Your shape almost certainly came with a small but persistent sense of being the better one — the more careful, the more attentive, the more generous, the more responsible. Loosening the shape means losing the cleanness of that position. You may discover, looking back, that your role in some past relationships was more participatory than you had let yourself see. This is not the same as concluding you were equally responsible for the harm. It is, however, an uncomfortable adjustment in how you have understood your own goodness.</p>
+    </div>
+
+    <div class="loss-block">
+      <p class="loss-name">You lose certain relationships, including some you wanted to keep.</p>
+      <p class="loss-text">When you stop running your shape, some of the people in your life will not survive the change. Friendships and family connections built on your particular pattern of accommodation, pursuit, accounting, or rescue will, in some cases, simply not function on different terms. The losses are real. Some will be people you genuinely loved. The clean version of this story — that bad relationships fall away and good ones remain — is mostly true. The part that is not true is that some of the falling-away will hurt in ways you did not anticipate, because the relationship had real parts even though it required your shape to function.</p>
+    </div>
+
+    <div class="loss-block">
+      <p class="loss-name">You lose your old internal compass for what love feels like.</p>
+      <p class="loss-text">If your shape has been operating for decades, you have associated love with a particular set of sensations — the intensity of pursuit, the satisfaction of being needed, the alertness of pre-empting, the moral satisfaction of being unjustly burdened. When healthy connection arrives, it will not feel like this. It will feel quieter, less dramatic, almost suspicious in its calm. <em>You will, in the first months of healthier relationships, likely experience them as boring.</em> This is not the relationship being wrong. It is your nervous system discovering, awkwardly, that it does not yet know how to register love that arrives without the old signatures.</p>
+    </div>
+
+    <div class="section-heading">Why people abandon the work</div>
+
+    <p class="body-text">Most people who begin this work and then quit do so because they did not realise, in advance, that the changes would feel like losses. They thought freedom would feel free. They thought peace would feel peaceful. They did not expect the new way to feel boring, the loss of competence to feel like incompetence, the giving up of moral clarity to feel like guilt. When the changes arrive disguised as costs, they interpret the costs as evidence the work is wrong and return to the familiar shape, which at least feels like themselves.</p>
+
+    <p class="body-text"><strong>Knowing this in advance is most of how you survive it.</strong> The losses are real and they are not the verdict on the work. They are the predictable shape of the transition. Months into the practice, the new way begins to feel like home. The boredom becomes peace. The incompetence becomes a different kind of skill — the skill of not-doing-what-you-have-always-done. The moral clarity returns in a different form, more honest, less defensive. <em>But the transition has to be lived through. There is no version of this work that skips it.</em></p>
+
+    <div class="pullquote">The freedom on the other side is real. The path to it does not feel free. It feels like dying, briefly, into someone you do not yet know. Most people turn back at the dying part, because they were promised the freedom and not warned about the death.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">Three weeks into trying to loosen your shape, you find yourself wondering whether the new way is making you worse.</p>
+      <p class="scenario-context">You're saying wrong things, missing connections you used to manage easily, feeling incompetent in moments you used to feel skilled in. The voice inside is saying: maybe the old way wasn't so bad. Maybe you were not supposed to change this.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Return to the old shape. Trust the voice telling you the change was wrong. The discomfort is too high.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Recognise that the discomfort is the transition the page named, not evidence the work was wrong. Stay with it for the predicted months it will take to stabilise.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Push harder. Tell yourself the discomfort means you are not changing fast enough.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Conclude that change is impossible and accept that you will always be your shape.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 07 · The Practice</div>
+    <h1 class="slide-title">Loosening the shape without <em>losing yourself.</em></h1>
+
+    <p class="lead">There is no dramatic intervention that loosens a decades-old shape. There is no single conversation, no breakthrough realisation, no transformational weekend that fundamentally changes the pattern. The actual work is small, daily, almost boring — and the boringness is part of why it works. The shape was installed through thousands of small repetitions. It loosens through thousands of small refusals.</p>
+
+    <p class="body-text">This page is the practice. The most important thing to understand before reading it is that the practice is gentle, not heroic. <strong>You do not loosen your shape by attacking it.</strong> Attacking the shape activates the wound underneath it, which intensifies the shape rather than relaxing it. The shape responds to safety, patience, and small contradictions over time. It does not respond to forced effort, dramatic announcements, or attempts to become someone different by Friday.</p>
+
+    <div class="practice">
+      <p class="practice-name">Notice the shape running, without trying to stop it.</p>
+      <p class="practice-text">For the first month of the practice, your only job is to notice. When you find yourself pre-empting, write it down. When you find yourself pursuing, write it down. When you find yourself feeling indebted or saving someone, write it down. Do not try to stop the behaviour. The noticing, alone, begins the loosening — because the shape has been operating largely below consciousness, and bringing it into consciousness changes its character. A pattern observed in real time is no longer the same pattern as one running underneath.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">When you notice the shape, do one small thing differently.</p>
+      <p class="practice-text">In the second month, begin introducing tiny variations. Not dramatic refusals. Tiny ones. The pursuer notices the urge to send a follow-up message and waits an extra hour. The pre-empter notices the urge to adjust their order at the restaurant and orders what they actually wanted. The debtor receives a small gift without immediately calculating how to reciprocate. The hero hears about a friend's crisis and waits, briefly, before stepping in. These small refusals are not the answer. They are the practice. Each one contradicts the shape by half a degree. Across months, the half-degrees accumulate.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Let other people respond. Notice what happens.</p>
+      <p class="practice-text">When you do something small differently, the people in your life will respond. Some will not notice — the variation was too small to register. Some will respond with mild confusion. Some will, in the case of partners or friends whose own structure depended on yours, respond with disproportionate distress. The responses are information. The disproportionate distress, in particular, tells you something about which relationships have been organised around your shape. You do not have to act on the information yet. You just have to gather it.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">When the old shape returns — and it will — return to it gently.</p>
+      <p class="practice-text">You will, in the third or fourth month, find yourself fully back in the old shape, sometimes with intensity. This is not failure. This is what loosening looks like. The shape returns when you are tired, under stress, encountering a new partner who fits the pattern, navigating a difficult moment. The work is not to never return to the shape. The work is to notice when you have returned, to be gentle with yourself for the return, and to resume the practice without recriminating. Each return is shorter than the last, if you do not punish yourself for it.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Build a structure of recognition outside the shape.</p>
+      <p class="practice-text">If your worth has been organised around being the hero, the pursuer, the pre-empter, the debtor — you need other sources of feeling valued while the shape is loosening. Find one or two people, contexts, or activities in which your worth has nothing to do with the shape. The friend who likes you for your sense of humour, not your usefulness. The hobby that requires nothing of you. The work that pays you for output, not for accommodation. These outside-the-shape contexts are the scaffolding that supports the loosening. Without them, the shape will reassert itself, because no nervous system can sustain identity-loss without alternative supports.</p>
+    </div>
+
+    <div class="section-heading">What this is not</div>
+
+    <p class="body-text"><strong>This is not therapy.</strong> The practice described here is a self-directed loosening that operates alongside, but not in place of, professional support. If your wound is severe, if the patterns are producing significant distress, if the recognition has surfaced material you cannot hold alone — please find a therapist. The course is a framework. The therapist is the person who can hold what the framework reveals. Both are useful. Neither is sufficient on its own.</p>
+
+    <p class="body-text"><strong>This is not a transformation programme.</strong> You will not become a different person in three months. You will, slowly, become a slightly different version of yourself — and the slight differences, accumulated across years, are how the shape eventually no longer feels like who you are. The work is durable. It is also slow. Anyone selling you faster results is selling you something other than the work this module describes.</p>
+
+    <div class="pullquote">The shape did not come on quickly. It will not leave quickly. The practice is the small ongoing refusal of who you have been to make room for who you might be. Years of half-degrees produce, eventually, an entirely different direction.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You attempt the noticing practice and find that, even with attention, the shape runs so quickly you cannot quite catch it before it has acted.</p>
+      <p class="scenario-context">You have already pre-empted, pursued, debited, or saved before the consciousness arrives. The practice feels impossible. The voice in your head is saying: see, you cannot change this.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude that change is impossible. Abandon the practice.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Lower the bar. Notice the shape after it has run, rather than before. Retroactive noticing is still the practice, and it gradually moves forward in time as the awareness deepens.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Push harder. Try to catch the shape before it runs, with more focus and willpower.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Punish yourself for not having caught it in time.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Page 06 / 07 · The Honest Limit</div>
+    <h1 class="slide-title">Healing what you cannot <em>fix.</em></h1>
+
+    <p class="lead">There is a final honesty this module owes you, and it is the one most missing from the popular literature on these patterns. Some wounds do not fully heal. The wound is not a wound because it has not yet received enough attention — it is a wound because the conditions that produced it shaped your developing nervous system in ways that have continued, structurally, into every subsequent year of your life. The shape that grew around the wound is real. The wound underneath is also still there. Pretending otherwise is one of the cruellest false promises in this entire field.</p>
+
+    <p class="body-text">This page is about what the work actually looks like once the shape has loosened — and once you have discovered that loosening the shape did not, by itself, fill the place where the wound has been. <strong>Integration is not cure. The work is not to never have the wound. The work is to know the wound so well that you can recognise when it is steering, and respond to it differently than you have been responding for the entire previous arc of your life.</strong></p>
+
+    <div class="section-heading">What integration looks like</div>
+
+    <p class="body-text"><strong>You still feel the pull of the old shape, and you no longer always obey it.</strong> The pre-empter still notices the urge to scan and adjust. The pursuer still feels the familiar ache when a partner becomes distant. The debtor still flinches at received generosity. The hero still feels the pull toward someone in crisis. The difference, after enough practice, is that the pull is now a feeling rather than an instruction. You can have the feeling without acting on it. You can notice the wound's reach without letting it choose your behaviour.</p>
+
+    <p class="body-text"><strong>You begin to recognise the wound in advance of new relationships.</strong> The familiarity that used to be interpreted as chemistry now lands differently. You meet someone, you feel the immediate spark of recognition, and a quieter voice in you asks: <em>is this connection, or is this my wound finding its match?</em> The question is the inoculation. You do not always answer correctly. You ask it more often, and the asking changes what is available to you. Some of the matches that would have once been the next relationship are now interactions you politely let pass.</p>
+
+    <p class="body-text"><strong>You build relationships that do not require your shape.</strong> The slowest part of the work, and the one that produces the most durable change. As the shape loosens, you become available to people who do not need the shape to be in relationship with you. These people, initially, are likely to feel slightly boring — they are not activating the wound, which means they are not producing the familiar chemistry. With time, the boredom becomes peace. The peace is what healthy relationships actually feel like. The earlier intensity, you discover, was almost always the wound speaking.</p>
+
+    <p class="body-text"><strong>You make peace with the wound's permanence.</strong> This is the hardest piece, and it is the one that distinguishes integration from the false promise of full healing. The wound may always be in you, in some form. The childhood that produced it cannot be relived differently. The early caregivers cannot become the ones you needed. The losses are real and they are permanent. <em>Making peace with this is not resignation. It is the precondition for living from a place that does not require the wound to be fixed before you can have a life.</em></p>
+
+    <div class="section-heading">The yin/yang at its honest limit</div>
+
+    <p class="body-text">The yin and yang principle that has run through this entire course — that you are neither victim nor villain, that both participants contribute to the system, that responsibility for the harm is not the same as responsibility for the dynamic — reaches its hardest form here. <strong>You did not cause your wound. You did not consent to your shape. You are, however, the only one who can address them now.</strong> This is not fair. It is the structural truth of being an adult with a childhood. The people who installed the wound may never acknowledge it. The previous partners may never change. The recognition is yours. The work is yours. The freedom, if it comes, will also be yours.</p>
+
+    <p class="body-text">This is the deepest meaning of taking responsibility for your role in dysfunction. <em>It is not the same as taking blame.</em> It is claiming the only piece of the system you have direct power to change, regardless of whether anyone else ever changes their own. You take responsibility not because you caused the dysfunction, but because you are the only one with access to your half of it. The asymmetry of this is uncomfortable. It is also liberating, in a way that nothing else in adult life quite is.</p>
+
+    <div class="pullquote">The wound will not vanish. The shape will not entirely dissolve. What changes is the relationship between you and them — from being run by them to recognising them, from being possessed by them to having them. This is integration. It is the most realistic freedom available.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You finish the module and feel a complicated mix of grief and relief.</p>
+      <p class="scenario-context">Grief that the wound is not fixable in the way you had been hoping. Relief that the work is not to become someone different, but to become someone who knows themselves clearly enough to live alongside what they cannot change.</p>
+
+      <div class="choices" data-scenario="6">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Reject the framework of integration. Refuse the limit. Search for the version of this work that promises full healing.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Let both feelings be true. The grief is real and the relief is real. Integration is not the consolation prize for failure to heal — it is the actual shape of mature work with old material.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Accept the limit as defeat. Resign yourself to never being fully whole. Carry the loss as identity.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the entire course as overstated. Most people are basically fine. The wound framework is an exaggeration.</button>
+      </div>
+
+      <div class="feedback" id="feedback-6">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-6"></p>
+        <p class="feedback-text" id="feedback-detail-6"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module Five.</em></h1>
+
+    <p class="lead">You have done the hardest work of the course. You have looked at your own role in the patterns that have repeated across your relationships — not as blame, but as the recovery of agency over the only half of any dysfunctional dynamic that is actually yours to change. The wound, the shape, the hidden pleasure, the cost of leaving, the practice, the honest limit. None of this work is finished. All of it is now available.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">You are not attracting dysfunctional partners. You are recognising people whose architecture fits the role your shape was designed to play. The match is structural, not magical.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Each of the four shapes traces to a specific wound — the chaotic home, the early withdrawal, the conditional love, the role-reversed child. The wound is not your fault. The shape is not your fault. The work, now, is yours.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">Your shape has been paying you in a hidden currency — safe prediction, intensity, moral clarity, indispensability. Naming the pleasure is required before the shape can be loosened.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Loosening the shape produces real losses: competence, moral clarity, certain relationships, the old internal compass for what love feels like. Knowing this in advance is most of how you survive it.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">The practice is gentle, daily, small. Notice the shape, introduce tiny variations, let others respond, return to the work when the shape returns, and build sources of worth outside the shape.</span></li>
+      <li><span class="summary-num">06</span><span class="summary-text">Integration is not cure. The wound may always be there in some form. The work is to know it well enough to recognise when it is steering — and to respond differently than you have always responded.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">Take one quiet hour. Identify your shape — pre-empter, pursuer, debtor, hero — and trace it back to the wound that produced it. Write both, in your own words, in a private place. The exercise is not a verdict. It is the establishment of the geometry. Once you can see the line between the wound and the shape, the shape stops feeling like who you are and starts feeling like what you do, which is the precondition for everything else this module described.</p>
+
+    <p class="body-text">The next module — <strong>The Exit</strong> — addresses what to do when a relationship cannot be saved. How to recognise when it is over. How to leave without destroying yourself or causing collateral damage you'll regret. How to manage the practical, emotional, and identity-level work of an ending. The work, now, gets practical.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">07 / 07</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 06 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: "Concluding you have terrible judgement converts a structural pattern into a character verdict, which prevents the structural work from being available.", detail: "If the pattern is who you are — bad at choosing partners — then the only remaining response is despair or withdrawal. If the pattern is structural, it can be changed, slowly, by addressing the structure. The self-condemnation feels honest. It is also, functionally, the most efficient way to preserve the pattern by making it feel like fate. The actual position is more difficult and more useful: the pattern is real, it is structural, and the structure is what this module exists to address." },
+    b: { headline: "Holding recognition without self-condemnation is the precondition for the actual work of this module.", detail: "The repetition is real. Naming it is not the same as concluding that you are broken, doomed, or deserving of the pattern. The architecture that produced the matches can be altered — slowly, through the work the rest of the module describes. The recognition is the threshold. What happens after the recognition depends entirely on whether you can hold it without converting it into a verdict on yourself. The verdict closes the work. The recognition opens it." },
+    c: { headline: "Swearing off relationships indefinitely as a response to the recognition is the avoidance that pretends to be wisdom.", detail: "Withdrawing from dating is a real choice some people legitimately make, and is sometimes necessary for a stable period. Indefinite withdrawal as a response to discovering you have patterns is different — it converts a pattern into a phobia, and treats avoidance as if it were healing. Avoiding the conditions that activate the pattern does not change the pattern. The pattern simply waits, dormant, for circumstances to reactivate it. The work is to address the architecture, not to avoid the relationships in which it would otherwise show up." },
+    d: { headline: "Rejecting the framework after the recognition has landed is the protective move the pattern would have prepared in advance.", detail: "When a description is accurate, the first response is often resistance — particularly when the accuracy implicates you in your own difficulty. The voice telling you that each relationship was unique, that the pattern is your imagination, that you are projecting, is doing protective work for the architecture. Notice the speed of the rejection. Notice that it arrived after the recognition rather than before. Both data points are information. You do not have to accept the framework wholesale. You do have to notice that something in you is working hard to keep it from being applied." }
+  },
+  2: {
+    a: { headline: "Directing the grief outward as a demand on the person who installed the wound rarely produces the acknowledgement that would close the grief.", detail: "Many of the people who installed wounds in childhood cannot or will not see what they did. Some are dead. Some are alive but unrecognisable. Some would respond with denial, counter-accusation, or hollow apology that produces more grief than no apology at all. Putting your healing in their hands recreates the original wound at higher resolution — you remain dependent on the response of the people who failed you in the first place. The grief is real. It is also yours to move through, possibly without their participation in the moving." },
+    b: { headline: "Letting the grief move without converting it into a verdict is how the wound becomes information rather than identity.", detail: "Grief that has space to move tends to do its own work over months. Grief that gets converted into a verdict — about them, about yourself, about your prospects — stops moving and becomes something else. The acknowledgement of what was lost can sit alongside the work of moving forward. Neither cancels the other. The wound being real does not require it to remain the centre of the life you have left to live. The grief becomes a feature of your history rather than the organising fact of your present." },
+    c: { headline: "Disqualifying yourself from relationships because the wound is too deep usually means the wound is doing exactly what wounds tend to do.", detail: "The wound's most sophisticated defence is the position that you must be entirely healed before you are eligible for love — which postpones the relationships in which healing actually accelerates, and treats love as a reward for completed work rather than as one of the contexts in which the work continues. Few people are entirely healed when they begin healthier relationships. Healing happens, in part, inside good relationships, not only in their absence. The disqualification feels noble. It is mostly the wound protecting itself by ensuring it remains undisturbed." },
+    d: { headline: "Dismissing the framework on the grounds that your upbringing was normal is sometimes true and is often the upbringing speaking.", detail: "Some upbringings really were broadly fine, with predictable minor friction that does not produce significant adult patterns. Many upbringings appear fine on the surface while installing wounds invisibly — through chronic emotional unavailability dressed as politeness, through conditional love delivered with affection, through high expectations framed as care. 'Perfectly normal' is the description some upbringings use to protect themselves from being looked at. Whether yours falls in this category is something you can examine — without forcing a conclusion either way. The dismissal arrives quickly. The examination, if it is honest, takes longer than the dismissal allowed for." }
+  },
+  3: {
+    a: { headline: "Trusting the resistance is the protective response the page warned you would experience.", detail: "The resistance is not random. It arrives specifically when something about your shape's hidden benefit has been named. Trusting it as evidence that the framework doesn't apply is the most reliable way to ensure the shape keeps operating — because the shape's continuation requires its rewards to remain unnamed. Notice the resistance without obeying it. Continue reading. Allow the description to be partially true even where it doesn't fit perfectly. The partial truths are usually what the resistance is most defending against." },
+    b: { headline: "Holding the resistance while allowing the description to be partially true is the integrated position the page was designed to enable.", detail: "The description may not fit you exactly. Some of what was described may apply, some may not, and the parts that don't apply are not what the resistance is defending. The resistance is concentrated, almost always, on the parts that do apply and that you have not previously let yourself see. Staying with the discomfort while reading on is what makes the framework useful. The shape does not loosen by being attacked. It loosens by being seen — and the seeing has to survive the first wave of defensive response in order to deepen into recognition." },
+    c: { headline: "Taking the description as a total verdict produces the opposite distortion from the resistance.", detail: "Concluding that everything you thought was love was actually self-serving manipulation is the inverse of the protective dismissal — and it is just as inaccurate. The hidden pleasure of the shape coexists with real love, real care, real generosity. The pleasure does not negate the love. The love does not erase the pleasure. The integrated position is that both have been happening, and that recognising the pleasure is not a verdict on the love but a precondition for the love continuing in a healthier form." },
+    d: { headline: "Confronting past partners with the framework converts a private recovery tool into a public accusation, which rarely produces useful response.", detail: "The framework is for your understanding of your own pattern. Demanding that previous partners recognise what they were getting from your shape requires them to do their own version of this work, which they may not be doing and may never do. The energy spent constructing the accusation, drafting the message, anticipating the response, and processing the eventual disappointing reply could go into the actual practice of loosening your own shape. Their recognition is theirs to find or not find. Yours is the work this module exists to support." }
+  },
+  4: {
+    a: { headline: "Returning to the old shape because the discomfort is too high is the predictable failure point this entire page was designed to anticipate.", detail: "The voice telling you the change was wrong arrives reliably, in the first weeks of any attempt to loosen a long-running shape. It is not new information. It is the shape's most sophisticated defence, deployed at the moment when the change has begun to threaten the architecture. Recognising the voice as the predictable response to transition — rather than as honest internal feedback — is most of what determines whether the work continues. Without that recognition, almost everyone returns. With it, the discomfort becomes survivable because it has been named in advance." },
+    b: { headline: "Recognising the discomfort as the predicted transition is the inoculation that makes the practice survivable.", detail: "The page warned that the losses would feel like losses. The first weeks, you said wrong things and produced wrong reactions, because the old skill was the shape itself. The new skill — of not running the old pattern — has to be developed, and during the development you are temporarily incompetent at things you used to be competent at. This is the path. There is no version that skips it. Months in, the new way begins to feel like home. The transition is the practice, not the obstacle to the practice." },
+    c: { headline: "Pushing harder because the discomfort means you are not changing fast enough converts the practice into another version of the old shape.", detail: "If your shape is the hero, the pursuer, or the pre-empter, you may already be inclined to read discomfort as evidence that you should try harder. The practice does not respond to effort in this way. The shape was installed through repetition over decades. It loosens through repetition over months and years. There is no intensity of effort that compresses this timeline meaningfully. Pushing harder usually produces a brief surge of apparent progress followed by collapse, and the collapse is harder to recover from than the slow steady work would have been." },
+    d: { headline: "Concluding that change is impossible is the shape returning under a different costume.", detail: "The resignation feels honest. It also accomplishes precisely what the shape needs — it forecloses the continued work, returns you to familiar ground, and protects the architecture from the slow loosening that would otherwise eventually destabilise it. The conclusion that you cannot change is rarely the truth. It is, more often, the strategic surrender that lets the existing pattern persist by reframing it as fate. Notice when the resignation arrives. Notice that it arrived after a difficult moment in the work, not before. The timing is information." }
+  },
+  5: {
+    a: { headline: "Abandoning the practice on the grounds that it is impossible is the most common exit point, and is reliably wrong.", detail: "The retroactive nature of the noticing in the early weeks is exactly what the practice produces in the first weeks. It is not failure. It is the predictable shape of the work beginning. The voice that says change is impossible arrives reliably whenever the practice is genuinely starting to function, because functioning practice produces discomfort. Most people who quit at this stage interpret the discomfort as evidence that the practice doesn't work for them. The discomfort is, in fact, the strongest evidence that the practice is working." },
+    b: { headline: "Lowering the bar to retroactive noticing is precisely the calibration the practice requires in its early phase.", detail: "Noticing the shape after it has run is the beginning. With practice, the noticing moves earlier — first to during the action, then to immediately before it, then occasionally to early enough that a small variation becomes possible. This progression takes months, not weeks. The retroactive noticing in week three is not failure. It is what week three looks like. The willingness to lower the bar to where you actually are, rather than where the practice would ideally be performed, is what makes sustainable progress possible." },
+    c: { headline: "Pushing harder to catch the shape before it runs is the over-effort response that the shape itself often produces.", detail: "If your shape is the hero or the pre-empter in particular, the response to the practice's difficulty will be to try harder, to apply more willpower, to demand of yourself that you do the practice better and faster. This is the shape continuing to operate inside the practice meant to loosen it. The willpower-based approach tends to produce a few days of intense effort followed by collapse, and the collapse becomes evidence that you cannot do the practice. The shape, under the appearance of working on itself, has prevented the work from being done." },
+    d: { headline: "Punishing yourself for not catching the shape in time installs the inner critic as the new dysfunction.", detail: "Self-punishment, even in the service of trying to change, is structurally the same energy as the original shape's harshest defences. The pre-empter who scolds themselves for not catching the pre-empting is still pre-empting, just now turned inward. The practice is gentle for a reason. Harshness toward the self does not produce loosening. It produces a tighter version of the old grip. The kindness required to hold yourself through the slow work is itself part of the work." }
+  },
+  6: {
+    a: { headline: "Rejecting the limit and searching for the version of this work that promises full healing is a familiar move with predictable cost.", detail: "There is no version of this work that produces full healing in the sense the wound's grief is demanding. The promises of complete transformation, full recovery, the dissolution of all old patterns, are mostly the marketing language of frameworks that have not been honest with their participants. Searching for the version that promises more usually produces several years of cycling through systems that fail to deliver, with each failure deepening the conviction that something must be wrong with you specifically. Integration is not the consolation prize for inadequate work. It is the actual shape of mature engagement with old material." },
+    b: { headline: "Letting both grief and relief be true is the integrated stance the entire module was designed to make available.", detail: "The grief is real. The wound will not vanish. The early caregivers cannot become who they needed to be. These losses are permanent, and acknowledging them honestly is part of what makes the relief sustainable. The relief is also real. The work is not to become someone different by an unrealistic deadline — it is to become someone who knows themselves well enough to live alongside what they cannot change. Both feelings tell you something true. Holding them simultaneously is the position from which actual life becomes possible, without the wound being either denied or worshipped." },
+    c: { headline: "Accepting the limit as defeat and carrying the loss as identity is the wound winning by appearing to be honoured.", detail: "There is a particular trap in being too honest about limits — the trap of identifying so completely with the wound that the rest of the person disappears behind it. Resignation to never being whole is structurally similar to the original wound's central claim: that you are not enough, that something is missing, that the missing thing defines you. Integration is not the same as carrying defeat. It is finding that you are larger than the wound, even with the wound present — and refusing to organise the rest of your life around the wound's continued claim on your identity." },
+    d: { headline: "Dismissing the entire course as overstated after completing five modules of recognition is the wound's last defensive move.", detail: "The work has landed. The recognition has occurred across five modules. The dismissal arrives at the end, conveniently, just as the integration would otherwise need to happen. The voice that calls the course exaggerated is the same voice that has protected the wound for decades. Notice the timing. Notice that the dismissal did not arrive before the recognition, when it might have been honest assessment. It arrived after the recognition, when its function is specifically to undo what the recognition has begun to make available. The course is not perfect. It is also not, mostly, exaggerated. The dismissal is information about the wound's response to having been seen." }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 7;
+const answered = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c2m4';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course2-module-4-dysfunction-archetypes.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c2m5','1');window.location.href='course2-module-6-the-exit.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

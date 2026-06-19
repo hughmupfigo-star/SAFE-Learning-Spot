@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign In · Safe Spot Learning Centre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+  --serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace
+}
+html[data-theme="dark"]{
+  --ink:#e8e8e4;--paper:#0f0f0d;--muted:#888884;--line:#2a2a27;--soft:#1a1a17;--accent:#4caf78
+}
+html,body{min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.site-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);padding:14px 40px;display:flex;align-items:center;justify-content:space-between}
+.header-brand{justify-self:start;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.header-brand span{color:var(--muted);font-weight:300}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:4px;transition:color .2s}
+.theme-toggle:hover{color:var(--ink)}
+.auth-page{min-height:calc(100vh - 57px);display:flex;align-items:center;justify-content:center;padding:48px 24px}
+.auth-card{width:100%;max-width:420px;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:40px 40px 36px}
+.auth-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.auth-title{font-family:var(--serif);font-size:1.85rem;font-weight:300;line-height:1.2;margin-bottom:28px;color:var(--ink)}
+.auth-title em{font-style:italic}
+.auth-tabs{display:flex;gap:0;margin-bottom:32px;border-bottom:1px solid var(--line)}
+.auth-tab{flex:1;padding:10px 0;background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
+.auth-tab.active{color:var(--ink);border-bottom-color:var(--ink)}
+.auth-tab:hover:not(.active){color:var(--ink)}
+.auth-panel{display:none}
+.auth-panel.active{display:block}
+.field{margin-bottom:20px}
+.field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:3px;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:.95rem;outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--ink)}
+html[data-theme="dark"] .field input{background:var(--soft)}
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:44px}
+.pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:.8rem;font-family:var(--mono);padding:2px 4px;transition:color .2s}
+.pw-toggle:hover{color:var(--ink)}
+.btn-submit{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:3px;font-family:var(--sans);font-size:.9rem;letter-spacing:.04em;cursor:pointer;margin-top:8px;transition:opacity .2s}
+.btn-submit:hover{opacity:.85}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+.auth-msg{margin-bottom:16px;padding:11px 14px;border-radius:3px;font-size:.875rem;line-height:1.5;display:none}
+.auth-msg.error{background:#fdf5f4;border:1px solid #e8a09a;color:#8b2020}
+.auth-msg.success{background:#f0faf4;border:1px solid #8ecfaa;color:#1a5c35}
+.auth-msg.visible{display:block}
+html[data-theme="dark"] .auth-msg.error{background:#2a1414;border-color:#6b3030;color:#f0a0a0}
+html[data-theme="dark"] .auth-msg.success{background:#142a1e;border-color:#306b4a;color:#80e0a8}
+.auth-footer{text-align:center;margin-top:24px;font-size:.8rem;color:var(--muted);line-height:1.6}
+.auth-footer a{color:var(--muted);text-decoration:underline;cursor:pointer}
+.auth-footer a:hover{color:var(--ink)}
+.pw-strength{margin-top:6px;display:none}
+.pw-strength.visible{display:block}
+.pw-strength-bar{height:3px;border-radius:2px;background:var(--line);overflow:hidden;margin-bottom:4px}
+.pw-strength-fill{height:100%;border-radius:2px;transition:width .3s,background .3s;width:0%}
+.pw-strength-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}<style>
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+</style></style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="login.html" class="header-brand">Safe Spot <span>&middot; Learning Centre</span></a>
+  <button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light" aria-label="Toggle dark mode">&#9680;</button>
+</header>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-eyebrow">Safe Spot &middot; Learning Centre</div>
+    <h1 class="auth-title" id="auth-heading">Welcome <em>back.</em></h1>
+
+    <div class="auth-tabs" role="tablist">
+      <button class="auth-tab active" id="tab-login" onclick="switchTab('login')" role="tab">Sign in</button>
+      <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')" role="tab">Create account</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="auth-panel active" id="panel-login">
+      <div class="auth-msg error" id="login-error"></div>
+      <div class="field">
+        <label for="login-email">Email address</label>
+        <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="login-pw">Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="login-pw" placeholder="Your password" autocomplete="current-password" />
+          <button type="button" class="pw-toggle" onclick="togglePw('login-pw',this)">show</button>
+        </div>
+      </div>
+      <button class="btn-submit" id="login-btn" onclick="doLogin()">Sign in</button>
+      <div class="auth-footer" style="margin-top:10px"><a onclick="showForgot()" style="cursor:pointer">Forgot password?</a></div>
+      <!-- FORGOT PASSWORD -->
+      <div id="forgot-box" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)">
+        <div class="field">
+          <label for="forgot-email">Email for your account</label>
+          <input type="email" id="forgot-email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+        <button class="btn-submit" id="forgot-btn" onclick="doForgot()">Send reset link</button>
+        <div id="forgot-msg" style="display:none;margin-top:14px;font-size:.85rem;line-height:1.6;color:var(--muted)"></div>
+      </div>
+      <div class="auth-footer">No account? <a onclick="switchTab('signup')">Create one &rarr;</a></div>
+    </div>
+
+    <!-- SIGNUP -->
+    <div class="auth-panel" id="panel-signup">
+      <div class="auth-msg error" id="signup-error"></div>
+      <div class="field">
+        <label for="signup-name">Full name</label>
+        <input type="text" id="signup-name" placeholder="Your full name" autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="signup-email">Email address</label>
+        <input type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="signup-pw">Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="signup-pw" placeholder="At least 8 characters" autocomplete="new-password" oninput="checkStrength(this.value)" />
+          <button type="button" class="pw-toggle" onclick="togglePw('signup-pw',this)">show</button>
+        </div>
+        <div class="pw-strength" id="pw-strength">
+          <div class="pw-strength-bar"><div class="pw-strength-fill" id="pw-fill"></div></div>
+          <span class="pw-strength-label" id="pw-label"></span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="signup-confirm">Confirm password</label>
+        <div class="pw-wrap">
+          <input type="password" id="signup-confirm" placeholder="Repeat password" autocomplete="new-password" />
+          <button type="button" class="pw-toggle" onclick="togglePw('signup-confirm',this)">show</button>
+        </div>
+      </div>
+      <button class="btn-submit" id="signup-btn" onclick="doSignup()">Create account</button>
+      <div class="auth-footer">Already have an account? <a onclick="switchTab('login')">Sign in &rarr;</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function SS_toggleTheme(){
+  var d=document.documentElement,cur=d.getAttribute('data-theme');
+  var next=cur==='dark'?'light':'dark';
+  d.setAttribute('data-theme',next);
+  try{localStorage.setItem('safespot_theme',next);}catch(e){}
+}
+
+function switchTab(t){
+  document.querySelectorAll('.auth-tab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.auth-panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('tab-'+t).classList.add('active');
+  document.getElementById('panel-'+t).classList.add('active');
+  document.getElementById('auth-heading').innerHTML=t==='login'?'Welcome <em>back.</em>':'Create your <em>account.</em>';
+  clearMessages();
+}
+
+function clearMessages(){
+  document.querySelectorAll('.auth-msg').forEach(function(m){m.classList.remove('visible');m.textContent='';});
+}
+
+function togglePw(id,btn){
+  var inp=document.getElementById(id);
+  if(inp.type==='password'){inp.type='text';btn.textContent='hide';}
+  else{inp.type='password';btn.textContent='show';}
+}
+
+function checkStrength(pw){
+  var el=document.getElementById('pw-strength');
+  var fill=document.getElementById('pw-fill');
+  var label=document.getElementById('pw-label');
+  if(!pw){el.classList.remove('visible');return;}
+  el.classList.add('visible');
+  var score=0;
+  if(pw.length>=8)score++;
+  if(pw.length>=12)score++;
+  if(/[A-Z]/.test(pw))score++;
+  if(/[0-9]/.test(pw))score++;
+  if(/[^A-Za-z0-9]/.test(pw))score++;
+  var pct=[0,25,50,75,90,100][score];
+  var cols=['','#e74c3c','#e67e22','#f1c40f','#27ae60','#2d7a4f'];
+  var labs=['','Weak','Fair','Good','Strong','Very strong'];
+  fill.style.width=pct+'%';
+  fill.style.background=cols[score]||cols[1];
+  label.textContent=labs[score]||'';
+}
+
+var USERS_KEY='slsc_users';
+var SESSION_KEY='slsc_session';
+
+function getUsers(){try{return JSON.parse(localStorage.getItem(USERS_KEY)||'[]');}catch(e){return[];}}
+function saveUsers(u){try{localStorage.setItem(USERS_KEY,JSON.stringify(u));}catch(e){}}
+function setSession(u){try{localStorage.setItem(SESSION_KEY,JSON.stringify({email:u.email,fullName:u.fullName}));}catch(e){}}
+function obscure(s){try{return btoa(unescape(encodeURIComponent(s)));}catch(e){return s;}}
+function isValidEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
+function showMsg(el,msg){el.textContent=msg;el.classList.add('visible');}
+
+function getRedirectDest(){
+  var params=new URLSearchParams(window.location.search);
+  var from=params.get('from');
+  if(from&&/^[a-zA-Z0-9_\-]+\.html$/.test(from)){return from;}
+  return 'index.html';
+}
+
+// Redirect if already logged in
+(function(){
+  try{if(localStorage.getItem(SESSION_KEY)){window.location.replace(getRedirectDest());}}catch(e){}
+})();
+
+function doLogin(){
+  var email=(document.getElementById('login-email').value||'').trim().toLowerCase();
+  var pw=document.getElementById('login-pw').value||'';
+  var btn=document.getElementById('login-btn');
+  var errEl=document.getElementById('login-error');
+  clearMessages();
+  if(!email||!pw){showMsg(errEl,'Please enter your email and password.');return;}
+  if(!isValidEmail(email)){showMsg(errEl,'Please enter a valid email address.');return;}
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>Signing in…';
+  var go=getRedirectDest();
+  function finish(){
+    if(window.SLSC_SYNC&&window.SLSC_SYNC.enabled&&window.SLSC_SYNC.enabled()){
+      var done=false,leave=function(){if(done)return;done=true;window.location.replace(go);};
+      window.SLSC_SYNC.pull(leave);setTimeout(leave,1800);
+    }else{window.location.replace(go);}
+  }
+  function localLogin(){
+    var users=getUsers();
+    var found=users.find(function(u){return u.email===email&&u.pw===obscure(pw);});
+    if(found){setSession(found);finish();}
+    else{showMsg(errEl,'Incorrect email or password. Please try again.');btn.disabled=false;btn.textContent='Sign in';}
+  }
+  var apiBase=(window.SLSC_SYNC&&window.SLSC_SYNC.base&&window.SLSC_SYNC.base())||'';
+  if(apiBase){
+    fetch(apiBase+'/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,password:pw})})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+      .then(function(res){
+        if(res.ok&&res.j&&res.j.token){
+          try{localStorage.setItem('slsc_token',res.j.token);}catch(e){}
+          var u=res.j.user||{};
+          setSession({email:u.email||email,fullName:[u.firstName,u.lastName].filter(Boolean).join(' ')||email});
+          finish();
+        }else{
+          showMsg(errEl,(res.j&&res.j.error)||'Incorrect email or password. Please try again.');
+          btn.disabled=false;btn.textContent='Sign in';
+        }
+      })
+      .catch(function(){ localLogin(); }); // server unreachable -> offline fallback
+  }else{ localLogin(); }
+}
+
+function doSignup(){
+  var name=(document.getElementById('signup-name').value||'').trim();
+  var email=(document.getElementById('signup-email').value||'').trim().toLowerCase();
+  var pw=document.getElementById('signup-pw').value||'';
+  var pw2=document.getElementById('signup-confirm').value||'';
+  var btn=document.getElementById('signup-btn');
+  var errEl=document.getElementById('signup-error');
+  clearMessages();
+  if(!name){showMsg(errEl,'Please enter your full name.');return;}
+  if(!email){showMsg(errEl,'Please enter your email address.');return;}
+  if(!isValidEmail(email)){showMsg(errEl,'Please enter a valid email address.');return;}
+  if(pw.length<8){showMsg(errEl,'Password must be at least 8 characters.');return;}
+  if(pw!==pw2){showMsg(errEl,'Passwords do not match.');return;}
+  var users=getUsers();
+  if(users.find(function(u){return u.email===email;})){showMsg(errEl,'An account with this email already exists. Try signing in.');return;}
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span>Creating account…';
+  var go=getRedirectDest();
+  function finish(){
+    if(window.SLSC_SYNC&&window.SLSC_SYNC.enabled&&window.SLSC_SYNC.enabled()){
+      var done=false,leave=function(){if(done)return;done=true;window.location.replace(go);};
+      window.SLSC_SYNC.pull(leave);setTimeout(leave,1800);
+    }else{window.location.replace(go);}
+  }
+  function localSignup(){
+    var nu={fullName:name,email:email,pw:obscure(pw),created:new Date().toISOString()};
+    users.push(nu);saveUsers(users);setSession(nu);finish();
+  }
+  var parts=name.split(/\s+/),firstName=parts[0]||name,lastName=parts.slice(1).join(' ')||firstName;
+  var apiBase=(window.SLSC_SYNC&&window.SLSC_SYNC.base&&window.SLSC_SYNC.base())||'';
+  if(apiBase){
+    fetch(apiBase+'/api/auth/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,password:pw,firstName:firstName,lastName:lastName})})
+      .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+      .then(function(res){
+        if(res.ok&&res.j&&res.j.token){
+          try{localStorage.setItem('slsc_token',res.j.token);}catch(e){}
+          var u=res.j.user||{};
+          setSession({email:u.email||email,fullName:[u.firstName,u.lastName].filter(Boolean).join(' ')||name});
+          finish();
+        }else{
+          var msg=(res.j&&res.j.error)||(res.j&&res.j.errors&&res.j.errors[0]&&res.j.errors[0].msg)||'Could not create your account. Please try again.';
+          showMsg(errEl,msg);btn.disabled=false;btn.textContent='Create account';
+        }
+      })
+      .catch(function(){ localSignup(); }); // server unreachable -> offline fallback
+  }else{ localSignup(); }
+}
+
+function showForgot(){
+  var b=document.getElementById('forgot-box');
+  if(!b)return;
+  b.style.display='block';
+  var fe=document.getElementById('forgot-email'),le=document.getElementById('login-email');
+  if(fe){ if(le&&le.value)fe.value=le.value; fe.focus(); }
+}
+function doForgot(){
+  var email=(document.getElementById('forgot-email').value||'').trim().toLowerCase();
+  var btn=document.getElementById('forgot-btn');
+  var msg=document.getElementById('forgot-msg');
+  function tell(t){ msg.innerHTML=t; msg.style.display='block'; }
+  if(!isValidEmail(email)){ tell('Please enter a valid email address.'); return; }
+  var base=''; try{ base=(window.SLSC_SYNC&&window.SLSC_SYNC.base&&window.SLSC_SYNC.base())||''; }catch(e){}
+  if(!base){
+    tell('Password reset will be available once our online service is live. For now, email <strong>enquiries@safespot.life</strong> from your account address and we&rsquo;ll reset it for you.');
+    return;
+  }
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Sending&hellip;';
+  fetch(base+'/api/auth/forgot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})})
+    .then(function(r){ return r.json().catch(function(){return{};}); })
+    .then(function(){
+      btn.style.display='none';
+      tell('If that email is registered, we&rsquo;ve sent a reset link. Check your inbox (and your spam folder).');
+    })
+    .catch(function(){
+      btn.disabled=false; btn.textContent='Send reset link';
+      tell('Couldn&rsquo;t reach the server just now. Please try again in a moment.');
+    });
+}
+
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Enter')return;
+  var active=document.querySelector('.auth-panel.active').id;
+  if(active==='panel-login')doLogin();
+  else if(active==='panel-signup')doSignup();
+});
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next)document.documentElement.setAttribute('data-zoom',next);
+    else document.documentElement.removeAttribute('data-zoom');
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev)document.documentElement.setAttribute('data-zoom',prev);
+    else document.documentElement.removeAttribute('data-zoom');
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+<!-- auth: backend-first with offline fallback; cross-device sync via slsc-sync.js -->
+</body>
+</html>

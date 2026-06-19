@@ -1,0 +1,977 @@
+<title>Module 04 · Fear as Information — Course 10</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display:flex;align-items:center;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);flex:1;order:1;min-width:0}
+.module-tag strong{color:var(--ink);font-weight:500}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:28px;height:2px;background:var(--line);transition:background .4s}
+.progress-dot.active{background:var(--ink)}
+.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}
+.slide{display:none;animation:fadeUp .6s ease}
+.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-title em{font-style:italic;font-weight:300}
+.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}
+.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}
+.body-text strong{font-weight:500;color:var(--ink)}
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}
+.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}
+.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s;position:relative;font-weight:400}
+.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}
+.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.selected .choice-letter{color:var(--paper);opacity:.6}
+.choice:disabled{cursor:default}
+.choice:disabled:hover{transform:none}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s}
+.feedback.visible{display:block}
+.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px;letter-spacing:-.005em}
+.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28;font-weight:400}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s;font-weight:500}
+.nav-btn:hover{opacity:.6}
+.nav-btn:disabled{opacity:.2;cursor:not-allowed}
+.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#2a2a28;opacity:1}
+.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}
+.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+.return-home-wrap{text-align:center;margin-top:20px}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s}
+.return-home-link:hover{color:var(--ink)}
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:18px}.complete-mark{font-size:80px}}
+html[data-theme="dark"]{--ink:#d8d8d4;--paper:#111110;--muted:#77776f;--line:#2c2c2a;--soft:#1c1c1a;--accent:#4aaa6f}
+html[data-theme="dark"] .body-text,html[data-theme="dark"] .lead,html[data-theme="dark"] .summary-text,html[data-theme="dark"] .pullquote,html[data-theme="dark"] .slide-title,html[data-theme="dark"] .feedback-text,html[data-theme="dark"] .scenario-context,html[data-theme="dark"] .feedback-headline{color:var(--ink)}
+html[data-theme="dark"] .choice{background:var(--soft);border-color:var(--line)}
+html[data-theme="dark"] .choice:hover:not(:disabled){background:#222220;border-color:#4a4a48}
+html[data-theme="dark"] .choice.selected{background:#141e17;border-color:var(--accent)}
+html[data-theme="dark"] .feedback{background:var(--soft)}
+html[data-theme="dark"] .nav-btn{background:var(--soft);color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .nav-btn.primary{background:var(--ink);color:var(--paper)}
+html[data-theme="dark"] .nav-btn.primary:hover{background:#b4b4b0;opacity:1}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s;z-index:10}
+.theme-toggle:hover{opacity:1}
+.header-center{display:flex;align-items:center;gap:14px;order:2;margin:0 auto}
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;z-index:49;display:none;scrollbar-width:none;flex-direction:column}
+.course-sidebar::-webkit-scrollbar{display:none}
+@media(min-width:1140px){.course-sidebar{display:flex}.module-container{margin-left:220px}}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s}
+.sidebar-back:hover{color:var(--ink)}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px}
+.sidebar-mod-list{list-style:none}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:8px}
+.sidebar-mod-item:last-child{border-bottom:none}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);flex-shrink:0;margin-top:2px;min-width:20px}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none}
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent)}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto}
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line)}
+.sidebar-mod-item.ss-now .sidebar-mod-n,.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none}
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line)}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem("safespot_theme")==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})()</script>
+<script>(function(){try{var s=localStorage.getItem("slsc_session");if(!s){var p=encodeURIComponent(location.pathname.split("/").pop()||"index.html");location.replace("login.html?from="+p);}}catch(e){}})()</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Module <strong>04</strong> &middot; Fear as Information</div>
+  <div class="progress-bar" id="progressBar"><div class="progress-dot active" data-page="1"></div><div class="progress-dot" data-page="2"></div><div class="progress-dot" data-page="3"></div><div class="progress-dot" data-page="4"></div><div class="progress-dot" data-page="5"></div><div class="progress-dot" data-page="6"></div></div>
+  <div class="header-center">
+    <button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">&#9680;</button>
+    <span class="zoom-ctrl">
+      <button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A&minus;</button>
+      <button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button>
+    </span>
+  </div>
+</header>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">&larr; Homepage</a>
+  <div class="sidebar-course-label">Course 10 &middot; The Uncharted Mind</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c10m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course10-module-1-the-10-percent-myth.html">The 10% Myth</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course10-module-2-the-three-layers.html">The Three Layers</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course10-module-3-belief-architecture.html">Belief Architecture</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course10-module-4-fear-as-information.html">Fear as Information</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course10-module-5-the-death-question.html">The Death Question</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course10-module-6-neuroplasticity.html">Neuroplasticity</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course10-module-7-stillness-and-superconscious.html">Stillness & Superconscious Access</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course10-module-8-path-discovery.html">Path Discovery</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- ===== SLIDE 1 ===== -->
+  <section class="slide  active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 &middot; The Signal</div>
+    <h1 class="slide-title">Fear is the mind's <em>most urgent signal</em> — and its most frequently <em>misread one.</em></h1>
+    <p class="lead">The fear response evolved for a world where the main threats were physical and immediate. In the modern world, it fires for psychological threats, social threats, and imagined futures — often with the same intensity as genuine physical danger.</p>
+    <p class="body-text">The amygdala — the brain structure primarily responsible for generating the fear response — cannot reliably distinguish between a physical threat and a psychological one. A genuinely dangerous situation and an embarrassing situation activate the same emergency system. A real predator and a difficult conversation with your manager trigger the same cascade of physiological responses. <strong>The system is not calibrated for the threats it most frequently encounters in modern life.</strong></p>
+    <p class="body-text">This miscalibration has significant consequences for access to the deeper mind. The fear state suppresses the prefrontal cortex — the brain region responsible for creative thinking, long-term planning, nuanced judgment, and access to the kinds of insight this course is exploring. <strong>A chronically activated fear response is not just unpleasant — it is neurologically incompatible with the deeper access you are trying to develop.</strong></p>
+    <div class="section-heading">Reading Fear Correctly</div>
+    <p class="body-text">The first step in working with fear is developing the capacity to read it accurately: to distinguish genuine danger from threat-to-the-ego from fear-of-the-unknown from the specific kind of fear that signals you are approaching something important. These are different experiences dressed in the same physiological clothes. <strong>Developing discrimination — reading which kind of fear is present — is one of the most practically important skills available.</strong></p>
+    <div class="pullquote">Your fear is not your enemy. It is a signal. The question is always: what is it actually signalling?</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You feel a significant fear response in the presence of an opportunity that excites you — a creative project, a new direction, a relationship.</p>
+      <p class="scenario-context">The fear is real. But the opportunity is not dangerous. The fear seems to be measuring significance, not threat.</p>
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Let the fear be the deciding factor. It is there for a reason.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Read the fear as a signal of significance. The question is not whether to feel it but what it is indicating.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Suppress the fear and proceed as if it were not present.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Wait until the fear subsides before engaging with the opportunity.</button>
+      </div>
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" disabled>&larr; Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 2 ===== -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 &middot; The Protection</div>
+    <h1 class="slide-title">Much of what you call fear is actually the mind <em>protecting a self-concept.</em></h1>
+    <p class="lead">The most common form of fear you will encounter on the path to deeper mind access is not danger fear. It is ego fear — the mind protecting its existing picture of who you are from information that might require revision.</p>
+    <p class="body-text">The ego — the self-concept, the story of who you are — has a strong self-preservation drive. It filters experience to confirm the existing story and resists information that would require the story to change. When you approach the deeper mind, you approach the place where many of the ego's foundational stories can be examined and found wanting. The fear that arises in this approach is not danger fear. It is the ego's resistance to the examination.</p>
+    <p class="body-text">This fear presents as: "I am not ready," "this is not for me," "what if I find something disturbing," "what if nothing is there," "what if everything I believe about myself is wrong." All of these are the ego defending its current territory. <strong>None of them are genuine danger. All of them can stop the expedition if they are mistaken for danger signals rather than ego-protection mechanisms.</strong></p>
+    <div class="section-heading">Distinguishing the Types</div>
+    <p class="body-text">Genuine danger fear: immediate, specific, physical. Proportionate to an actual threat. Ego protection fear: chronic, vague, triggered by potential change to self-concept. Social fear: the threat of being seen, judged, or excluded. Significance fear: the specific quality of fear that arises in the presence of something that genuinely matters — often felt as excitement and fear simultaneously. <strong>Each type calls for a different response. The discrimination begins with the question: what exactly am I afraid of, and is it actually dangerous?</strong></p>
+    <div class="pullquote">The thing you are afraid of on the path to your deeper mind is rarely as dangerous as it presents. It is usually the ego, saying goodbye.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You begin a practice aimed at deeper self-knowledge — meditation, journaling, contemplation. Shortly after beginning, a vague but significant resistance arises.</p>
+      <p class="scenario-context">Not boredom. Something more like unease. A sense that the direction of travel might reveal something you would prefer not to find.</p>
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Stop. The unease is a signal to be respected.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Continue. The unease is ego protection — the thing that is protecting you from what you are trying to reach.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Ask what specifically you are afraid of finding. The answer is usually more useful than either stopping or continuing blindly.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Distract yourself until the unease passes, then return to the practice.</button>
+      </div>
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 3 ===== -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 &middot; The Avoidance</div>
+    <h1 class="slide-title">The mind has <em>hundreds of strategies</em> for avoiding what it fears.</h1>
+    <p class="lead">Procrastination, perfectionism, busyness, intellectual over-analysis, planning that never becomes action, researching instead of doing — these are all fear-avoidance in disguise.</p>
+    <p class="body-text">The avoidance strategies are sophisticated because they are not experienced as avoidance. They are experienced as prudence, preparation, practicality, or responsible behaviour. The person who endlessly researches instead of beginning is not aware of the fear driving the research. The person whose standards are too high to allow anything to be finished is not conscious of the fear of completion that makes finishing unsafe. <strong>Avoidance works by disguising itself as something more respectable than fear.</strong></p>
+    <p class="body-text">The most common disguises: <em>Perfectionism</em> — the standard is too high to meet, so the project never reaches the point of being judged. <em>Procrastination</em> — the task is deferred until the fear can no longer be avoided, and then rushed through under pressure. <em>Busyness</em> — the schedule is full enough that the important thing never has space. <em>Over-preparation</em> — more preparation is always needed before beginning the thing itself. <strong>Each of these is a sophisticated response to a fear that cannot be acknowledged directly.</strong></p>
+    <div class="section-heading">The Diagnostic Question</div>
+    <p class="body-text">The diagnostic question for avoidance is simple: <em>If I knew I could not fail, and no one would judge the result, what would I do?</em> The gap between the answer to this question and what you are actually doing reveals the shape of the fear. The gap is not trivial. In most people, it is where the most important work of their lives is waiting. <strong>The fear is not protecting you from danger. It is protecting the present arrangement from the future that is trying to arrive.</strong></p>
+    <div class="pullquote">The thing you have been preparing to do for three years does not require more preparation. It requires the fear to be named.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You have been "about to start" something important for longer than you can justify with genuine preparation needs.</p>
+      <p class="scenario-context">The preparation continues. The conditions are never quite right. Something else always needs to be addressed first.</p>
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Continue preparing. Rushed beginnings produce poor results.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Name the fear that the preparation is serving. What would happen if you began today, imperfectly?</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Abandon the project. If it were right, you would have started by now.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Set a firm future start date, which will allow adequate additional preparation.</button>
+      </div>
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 4 ===== -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 &middot; The Through-Line</div>
+    <h1 class="slide-title">The path through fear is <em>not around it</em> — it is <em>through the specific thing you are afraid of.</em></h1>
+    <p class="lead">The fear tells you where to go. Not because everything you fear is important, but because the things that are most important to you are almost always attended by fear.</p>
+    <p class="body-text">There is a useful heuristic: the things that matter most tend to produce the most fear, and the avoidance of the things that matter most tends to be the most creative and convincing. This means that the items on the "someday" list, the projects that have been deferred for years, the conversations that have never been had, the directions that have never been taken — <strong>these are frequently the things that fear is protecting most vigorously, which means they are frequently the most important.</strong></p>
+    <p class="body-text">This does not mean all fear points toward important things. Not every avoided task is a calling. Not every procrastinated project is deeply meaningful. Discrimination is still required. But the pattern is clear enough that when something has been consistently avoided for a long time, accompanied by the specific quality of fear that dresses itself as prudence and preparation, <strong>the avoidance itself is strong evidence of significance.</strong></p>
+    <div class="section-heading">Moving Through</div>
+    <p class="body-text">Moving through fear does not require the absence of fear. It requires action in the presence of fear — the learned capacity to feel the fear without being instructed by it to stop. This capacity is built through incremental exposure. <strong>Each time you move toward what you fear without the feared consequence materialising, the nervous system updates its assessment of danger.</strong> The fear does not disappear — but it becomes a signal you can work with rather than a command you must obey.</p>
+    <div class="pullquote">On the other side of the fear is not the absence of fear. On the other side is what the fear was protecting — which is usually the most important work of your life.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You identify something you have been avoiding — something significant, something that produces the specific quality of fear that disguises itself as prudence.</p>
+      <p class="scenario-context">The fear is real. The avoidance has been going on long enough that the preparation narrative no longer fully convinces even you.</p>
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Continue the preparation a little longer. The timing is not right yet.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Take the smallest possible action in the direction of the feared thing. Today. Imperfectly.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Wait until you feel ready. Acting while afraid produces poor outcomes.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Examine the worst-case scenario in detail and decide whether the fear is proportionate.</button>
+      </div>
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 5 ===== -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 &middot; The Freedom</div>
+    <h1 class="slide-title">On the other side of the fear that has been stopping you is <em>the thing that has been waiting.</em></h1>
+    <p class="lead">Fear that is worked with rather than obeyed becomes a navigation system — pointing consistently toward what matters, what is undone, what is yours to do.</p>
+    <p class="body-text">People who have learned to work with fear rather than be governed by it report a particular quality of freedom that is not the absence of fear but a different relationship to it. The fear is still present — they have not become fearless. But they have developed the capacity to read it accurately, to distinguish signal from noise, and to move toward what matters even when the fear says to stop. <strong>This is what courage actually is: not fearlessness, but the learned relationship to fear that allows forward movement.</strong></p>
+    <p class="body-text">This freedom is directly related to access to the deeper mind. Chronic fear suppresses the deeper layers of awareness. As the relationship to fear becomes less governed by automatic avoidance, the space that opens in the nervous system is precisely the space in which the deeper mind becomes more accessible. <strong>Working with fear is not only a psychological development — it is a direct path to the expanded mind access this course is about.</strong></p>
+    <div class="section-heading">Fear as Navigation</div>
+    <p class="body-text">The invitation, as you move through this course, is to begin treating fear as navigation data rather than as instruction. When you notice fear, ask: what is this measuring? Is it measuring danger, ego-threat, social risk, or significance? Each answer points toward a different response. <strong>Over time, the question becomes automatic — and the automatic obedience to the stop signal becomes increasingly rare.</strong></p>
+    <div class="pullquote">The mind that has learned to read its own fear clearly is a mind that can go anywhere. Including the uncharted territory it was always capable of reaching.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You approach the deeper levels of your own mind — through a practice, through a dream, through a moment of unusual insight — and encounter something that surprises you.</p>
+      <p class="scenario-context">Not frightening, exactly. But unfamiliar. The familiar self is not quite present here. Something quieter and larger is.</p>
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Retreat to familiar territory. The unfamiliarity feels unsafe.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Stay. Recognise the unfamiliarity as the edge of the known — and the beginning of the uncharted.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Try to make the experience fit a familiar framework immediately.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Seek external confirmation that what you are experiencing is valid.</button>
+      </div>
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== COMPLETION SLIDE ===== -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">&#10003;</div>
+    <h1 class="slide-title">You've completed <em>Module 04.</em></h1>
+    <p class="lead">This knowledge does not stay on the page. It follows you out.</p>
+    <div class="section-heading">What You Carry Forward</div>
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">The fear response is miscalibrated for modern life — firing for psychological and ego threats with the same intensity as physical danger.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Chronic fear suppresses the prefrontal cortex and is neurologically incompatible with the deeper mind access this course develops.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">Ego-protection fear is the most common obstacle on the path to deeper self-knowledge — the mind defending its existing story against examination.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Avoidance strategies — perfectionism, procrastination, over-preparation — are fear in disguise, dressed as prudence and practicality.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">Fear as navigation: what you have consistently avoided for the longest time is often the most important work. Moving toward it, imperfectly, is the practice.</span></li>
+    </ol>
+    <div class="section-heading">Practice This Week</div>
+    <p class="body-text">This week, identify one thing you have been avoiding for a significant period of time. Write what you are afraid of specifically — not vaguely ("I'm afraid it won't work") but precisely ("I am afraid that if I try and fail, it will confirm the belief that I am not capable of this"). Then take the single smallest action toward the avoided thing. One action. Imperfect. Today.</p>
+    <p class="body-text">The next module &mdash; <strong>The Death Question</strong> &mdash; continues this thread deeper.</p>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" id="btn-complete">Begin Module 05 →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: 'The fear is always there for a reason — the question is what reason.', detail: 'Fear that arises in the presence of a genuine opportunity is real fear. It is not produced by nothing. But what it is produced by is significance, not danger. The thing that matters most to you is the thing the nervous system monitors most carefully — and produces the strongest alarm in response to. Letting the alarm stop the approach means letting the monitor of significance be the instrument of avoidance. The fear was pointing at the importance. Obeying it meant not going.' },
+    b: { headline: 'Reading what the fear is signalling is the complete skill.', detail: 'The question is never whether to feel the fear. It will be felt regardless. The question is what information it contains, and what is the appropriate response to that information. When the fear is measuring significance rather than danger, the appropriate response is to proceed while feeling it — to use it as confirmation that you are approaching something real. This is a learnable capacity. Each time it is practised, the capacity strengthens.' },
+    c: { headline: 'Suppression cuts off the signal while the signal continues sending.', detail: 'Suppressing the fear does not remove the information it contains. It removes your access to that information while the fear continues operating — now underground, shaping choices through avoidance strategies rather than through the direct signal you have suppressed. The suppressed fear is not gone. It is working in the dark, producing caution and retreat through mechanisms that no longer announce themselves as fear.' },
+    d: { headline: 'Waiting for the fear to subside before engaging means waiting for significance to diminish.', detail: 'The fear that arises in the presence of something important does not typically subside before you engage — it subsides through the engagement. The nervous system updates its threat assessment through actual encounter with the thing, not through advance reassurance. Waiting for the fear to leave before approaching the significant thing is structurally the same as deciding not to approach it.' }
+  },
+  2: {
+    a: { headline: 'Ego protection fear and genuine danger feel similar — but the investigation reveals the difference.', detail: 'The unease that arises when you approach deeper self-knowledge deserves respect in the sense that it deserves attention, not in the sense that it deserves automatic compliance. Stopping when the unease arises, without examining what the unease is about, gives ego-protection the same weight as genuine danger. They are not the same. The investigation — what specifically am I afraid of finding here? — is the tool that makes the distinction available.' },
+    b: { headline: 'Continuing in the face of ego-protection is precisely the practice.', detail: 'The unease that arises early in deeper self-knowledge practices is almost invariably ego-protection — the organised resistance of the self-concept to examination that might require revision. Recognising it as such and continuing is not suppression. It is the capacity to distinguish between what is protecting you from genuine harm and what is protecting the existing arrangement from the future that is asking to come in. The practice that builds this capacity requires exactly this kind of encounter.' },
+    c: { headline: 'Asking what specifically you are afraid of is the most useful single question.', detail: 'The answer to "what specifically am I afraid of finding?" tends to reveal the belief operating beneath the resistance. "I am afraid of finding that I have wasted my potential" — that is a belief about yourself that is afraid of confirmation. "I am afraid of finding nothing there" — that is a belief about what exists below the surface. The specific fear, once named, becomes workable. The vague unease, unexamined, simply stops the exploration.' },
+    d: { headline: 'The unease does not typically pass while you are distracted — it returns when you return to the practice.', detail: 'Distraction provides temporary relief from the unease without addressing what it is about. The practice is still there when you return. The unease is still there. What has changed is only that more time has elapsed. The unease that arises in the approach to deeper self-knowledge is the work — it is the material you are there to engage with. Waiting for it to pass is waiting for the practice to no longer require anything.' }
+  },
+  3: {
+    a: { headline: 'The preparation that has already taken three years will not reach sufficient completion through more preparation.', detail: "The preparation narrative is the fear's most effective tool. It provides indefinite delay with complete social and internal legitimacy. Of course more preparation is better. Of course conditions could be better. Of course the timing is not ideal. These things are always true, which is why they can always be deployed. The question is not whether more preparation would help. It is whether more preparation is the reason for the delay or the excuse for it." },
+    b: { headline: 'Naming the fear and taking imperfect action is the complete practice.', detail: 'The smallest possible action, taken today, imperfectly — this breaks the preparation loop by producing actual experience rather than anticipated experience. The fear imagines the worst. The actual beginning almost never produces the worst. The nervous system updates. The second action is easier than the first. The spiral runs in the productive direction. None of this is available from inside the preparation. It is only available through the beginning.' },
+    c: { headline: 'The length of the delay is evidence of the significance, not evidence of the wrongness.', detail: "Things that should not be started do not typically produce years of preparation avoidance — they simply lose their grip. The things that continue to loom, that continue to attract the organising of deferral strategies, are the things that still matter. The persistence of the project in your mind, despite the consistent deferral, is evidence that it is important. Which means the non-starting is not evidence of the project's wrongness but of the fear's organisation." },
+    d: { headline: 'The future start date extends the preparation loop rather than breaking it.', detail: 'Setting a future start date provides the relief of having made a decision without requiring the vulnerability of actually beginning. The date will arrive, and the preparation will not feel complete, and a new date will be set, or the project will be rushed through in the final hours before the deadline. The only start date that breaks the loop is now — not as the right time, but as the time when the fear is named and the beginning is made anyway.' }
+  },
+  4: {
+    a: { headline: 'The timing will never be right — and the timing narrative is the preparation narrative by another name.', detail: "The sense that the timing is not quite right is always available. There is always a better time coming — when the current difficulty has resolved, when the conditions are more favourable, when you are more ready. This sense is real. It is also the fear's most persistent and most legitimate-sounding argument. The question that cuts through it: if not now, specifically when? And what exactly needs to be different? If the answers are vague, the timing narrative is serving the avoidance." },
+    b: { headline: 'The smallest possible imperfect action today is the only action that breaks the cycle.', detail: "The smallest action does not need to be impressive. It needs to be real — an actual movement toward the feared thing, however small, however imperfect. The imperfection is not a concession. It is the point. The fear requires a perfect beginning that will never arrive. The imperfect beginning that actually happens defeats the fear's strategy entirely. What follows the imperfect beginning is almost always better than what the fear predicted." },
+    c: { headline: 'Readiness is produced by action, not by waiting.', detail: 'The sense of readiness that would indicate the right time to begin is not a state that precedes the action. It is a state the action produces. You will not feel ready before you begin. You will feel progressively more ready after the beginning, as the nervous system updates its threat assessment through actual rather than anticipated experience. Waiting for the feeling that the action will produce before the action is waiting for a condition that is structurally impossible.' },
+    d: { headline: 'The worst-case scenario examination is a useful practice — but it is more likely to produce better preparation than actual beginning.', detail: 'Examining the worst case can reduce the fear by making it specific rather than vague — and specific fears are more manageable than diffuse ones. But the examination tends to extend rather than end the preparation phase. You now know what you are afraid of, which is useful information. The next step is the smallest action in the direction of the feared thing, not a more thorough examination of what might go wrong.' }
+  },
+  5: {
+    a: { headline: 'Retreating from the edge of the known is the most common outcome — and the most limiting one.', detail: 'The unfamiliarity that arises at the edge of the known self is the specific experience that this entire course is moving toward. It is not dangerous. It does not resemble the fear of genuine danger when examined carefully. It is the experience of having moved beyond the familiar territory of the ego — which is, by definition, the experience of the uncharted. Retreating from it preserves the comfort of the known and postpones the access that is the point.' },
+    b: { headline: 'Staying at the edge — recognising it for what it is and remaining with it — is the practice itself.', detail: 'The unfamiliar quality of the experience at the edge of the known self is not a warning. It is confirmation that you have arrived at the territory this course is about. The familiar self steps back and something quieter and larger becomes available. Staying in this experience, even briefly, even incompletely, builds the capacity for the access that the whole course is working toward. The edge, once touched, can be returned to — and each return makes it less unfamiliar.' },
+    c: { headline: 'Making the unfamiliar fit a familiar framework immediately collapses the experience into the already-known.', detail: "The reflex to fit new experience into existing categories — to name it, to locate it in a familiar map, to explain it through existing frameworks — is the ego's method of domesticating whatever emerges from the deeper layers. It has the advantage of reducing the unfamiliarity and maintaining the sense of coherent understanding. It has the disadvantage of losing precisely what was unfamiliar — the specific quality of deeper-mind experience that does not fit the existing map." },
+    d: { headline: 'External confirmation of a deeper-mind experience is not available from external sources.', detail: "The deeper mind's communications are direct experiences, not claims that require external validation. Seeking confirmation that the experience was valid imports the standard of the conscious mind — where claims need evidence and evidence needs witnesses — into a domain where those standards do not apply. The experience is its own evidence. The question is not whether others would validate it but what to do with what it offered." }
+  }
+};
+
+var currentSlide=1;
+var totalSlides=document.querySelectorAll(".slide").length;
+function showSlide(n){
+  document.querySelectorAll(".slide").forEach(function(s){s.classList.remove("active");});
+  var t=document.querySelector("[data-slide=\""+n+"\"]");
+  if(t)t.classList.add("active");
+  document.querySelectorAll(".progress-dot").forEach(function(dot,i){
+    dot.classList.remove("active","complete");
+    if(i+1<n)dot.classList.add("complete");
+    else if(i+1===n)dot.classList.add("active");
+  });
+  currentSlide=n;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1);}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1);}
+document.addEventListener("DOMContentLoaded",function(){
+  document.querySelectorAll(".choices").forEach(function(group){
+    var sn=parseInt(group.getAttribute("data-scenario"));
+    group.querySelectorAll(".choice").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        group.querySelectorAll(".choice").forEach(function(b){b.classList.remove("selected");});
+        btn.classList.add("selected");
+        var answer=btn.getAttribute("data-answer");
+        var f=feedback[sn]&&feedback[sn][answer];
+        if(f){
+          var hl=document.getElementById("feedback-text-"+sn);
+          var dt=document.getElementById("feedback-detail-"+sn);
+          var box=document.getElementById("feedback-"+sn);
+          if(hl)hl.textContent=f.headline;
+          if(dt)dt.textContent=f.detail;
+          if(box){box.style.display="block";setTimeout(function(){box.classList.add("visible");},20);}
+        }
+        var nb=document.getElementById("next-"+sn);
+        if(nb)nb.removeAttribute("disabled");
+      });
+    });
+  });
+});
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute("data-theme")==="dark";
+  try{if(dark){h.removeAttribute("data-theme");localStorage.removeItem("safespot_theme");}
+      else{h.setAttribute("data-theme","dark");localStorage.setItem("safespot_theme","dark");}}
+  catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var prevKey='safespot_c10m3';
+    if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+      document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+      return;
+    }
+    var btn=document.getElementById("btn-complete");
+    if(btn){
+      btn.onclick=function(){
+        localStorage.setItem('safespot_c10m4',"1");
+        window.location.href='course10-module-5-the-death-question.html';
+      };
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll(".sidebar-mod-item").forEach(function(li){
+        if(parseInt(li.getAttribute("data-mn"))===mn)li.classList.add("ss-now");
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem("slsc_session")||"null");
+    if(s&&s.fullName){
+      var nm=s.fullName&&s.fullName.indexOf("@")<0?s.fullName.split(" ")[0]:(s.email||s.fullName||"").split("@")[0];
+      var el=document.getElementById("ss-user-greeting");
+      if(el)el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem("slsc_session");localStorage.removeItem("slsc_token");localStorage.removeItem("slsc_sync_since");}catch(e){}
+  location.replace("login.html");
+}
+</script>
+<script>
+(function(){
+  var levels=["","lg","xl"];
+  function getLevel(){return document.documentElement.getAttribute("data-zoom")||"";}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next)document.documentElement.setAttribute("data-zoom",next);
+    else document.documentElement.removeAttribute("data-zoom");
+    try{localStorage.setItem("slsc_zoom",next||"");}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev)document.documentElement.setAttribute("data-zoom",prev);
+    else document.documentElement.removeAttribute("data-zoom");
+    try{localStorage.setItem("slsc_zoom",prev||"");}catch(e){}
+  };
+})();
+</script>
+<script>
+if("serviceWorker" in navigator){
+  window.addEventListener("load",function(){
+    navigator.serviceWorker.register("./sw.js").catch(function(){});
+  });
+}
+</script>
+
+<!-- TTS READER -->
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+
+<script>
+(function(){
+  try{
+    var items = Array.from(document.querySelectorAll('.sidebar-mod-item[data-mk]'));
+    items.forEach(function(li, idx){
+      var mk = li.getAttribute('data-mk');
+      var mn = parseInt(li.getAttribute('data-mn') || '0');
+      var done = !!localStorage.getItem(mk);
+      if(done){
+        li.classList.add('ss-done');
+      } else if(mn > 1){
+        // Locked if the immediately preceding module is not complete
+        var prev = items[idx - 1];
+        if(prev && !localStorage.getItem(prev.getAttribute('data-mk'))){
+          li.classList.add('ss-next');
+        }
+      }
+    });
+  }catch(e){}
+})();
+</script>
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

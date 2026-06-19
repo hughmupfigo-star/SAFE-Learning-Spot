@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Help — SAFE Learning Spot Centre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})()</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.site-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);
+  padding:14px 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px}
+.site-logo{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.site-logo strong{color:var(--ink);font-weight:500}
+.header-back{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;transition:color .2s;justify-self:end}
+.header-back:hover{color:var(--ink)}
+.theme-toggle{grid-column:2;justify-self:center;background:none;border:none;
+  cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;line-height:1;
+  opacity:.55;transition:opacity .2s}
+.theme-toggle:hover{opacity:1}
+.page-wrap{max-width:720px;margin:0 auto;padding:56px 32px 100px}
+.page-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px}
+.page-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:300;line-height:1.2;
+  margin-bottom:40px}
+.page-body h2{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.page-body p{font-size:.95rem;line-height:1.8;color:#2a2a28;margin-bottom:16px}
+.page-body p:last-child{margin-bottom:0}
+.page-body ul{padding-left:0;list-style:none;margin-bottom:16px}
+.page-body ul li{font-size:.93rem;line-height:1.75;color:#2a2a28;padding:8px 0;
+  border-bottom:1px solid var(--line);display:flex;gap:12px}
+.page-body ul li::before{content:"—";font-family:var(--mono);color:var(--muted);flex-shrink:0}
+.page-body ul li:last-child{border-bottom:none}
+.page-body a{color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor}
+.page-body a:hover{opacity:.75}
+.page-body .notice{background:var(--soft);border-left:3px solid var(--accent);padding:16px 20px;
+  margin:24px 0;font-size:.9rem;line-height:1.7;color:var(--muted)}
+.site-footer{background:#050505;border-top:1px solid #111;padding:18px 32px}
+.footer-bar{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;
+  align-items:center;gap:24px;flex-wrap:wrap}
+.footer-copy{font-family:var(--mono);font-size:.7rem;color:#3a3a38;letter-spacing:.06em;text-transform:uppercase}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;
+  text-decoration:none;text-transform:uppercase;transition:color .2s}
+.footer-links a:hover{color:#888}
+html[data-theme="dark"]{--ink:#d8d8d4;--paper:#111110;--muted:#77776f;--line:#2c2c2a;--soft:#1c1c1a;--accent:#4aaa6f}
+html[data-theme="dark"] .page-body p,
+html[data-theme="dark"] .page-body ul li{color:var(--ink)}<style>
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+</style></style>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-logo"><strong>SAFE</strong> Learning Spot Centre</div>
+  <button class="theme-toggle" onclick="SS_toggleTheme()" aria-label="Toggle dark mode">&#9680;</button>
+  <a href="index.html" class="header-back">&larr; Home</a>
+</header>
+
+<main class="page-wrap">
+  <div class="page-eyebrow">Support</div>
+  <h1 class="page-title">Help & support</h1>
+  <div class="page-body">
+
+    <h2>Getting started</h2>
+    <p>If you are new to the platform, we recommend taking the <a href="assessment.html">Healing Stage Assessment</a> first. It will show you which course aligns most with where you are right now. Alternatively, browse the courses on the <a href="index.html">homepage</a> and start with whatever calls to you.</p>
+
+    <h2>Technical issues</h2>
+    <p>This is a browser-based platform. If something does not load or behave as expected:</p>
+    <ul>
+      <li>Refresh the page and try again</li>
+      <li>Try a different browser (Chrome, Firefox, Safari, or Edge)</li>
+      <li>Clear your browser cache and cookies</li>
+      <li>Check that JavaScript is enabled in your browser settings</li>
+    </ul>
+
+    <h2>Progress &amp; saving</h2>
+    <p>Your course progress is saved automatically in your browser. It is stored locally on your device — this means if you switch to a different device or browser, your progress will not carry over. To avoid losing progress, use the same browser and device throughout a course.</p>
+
+    <h2>Contact us</h2>
+    <p>If you cannot find an answer here or in the <a href="faq.html">FAQ</a>, please reach out:</p>
+    <div class="notice">Email: <a href="mailto:enquiries@safespot.life">enquiries@safespot.life</a><br>We aim to respond within 2 working days.</div>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bar">
+    <div class="footer-copy">SAFE Learning Spot Centre &middot; All Rights Reserved</div>
+    <nav class="footer-links">
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="help.html">Help</a>
+      <div class="footer-legal-wrap" style="position:relative;display:inline-block">
+        <button onclick="(function(b){var d=b.nextElementSibling;d.style.display=d.style.display==='flex'?'none':'flex';})(this)" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-transform:uppercase;background:none;border:none;cursor:pointer;padding:0;transition:color .2s" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Legal &#9662;</button>
+        <div class="footer-legal-menu" style="display:none;position:absolute;bottom:calc(100% + 8px);right:0;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:8px 0;flex-direction:column;min-width:140px;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.08)">
+          <a href="privacy.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Privacy</a>
+          <a href="terms.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Terms</a>
+          <a href="privacy-choices.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Choices</a>
+          <a href="accessibility.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Access</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+      else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}}
+  catch(e){}
+}
+</script>
+
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];
+      var el=document.getElementById('ss-user-greeting');
+      if(el)el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next)document.documentElement.setAttribute('data-zoom',next);
+    else document.documentElement.removeAttribute('data-zoom');
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev)document.documentElement.setAttribute('data-zoom',prev);
+    else document.documentElement.removeAttribute('data-zoom');
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>

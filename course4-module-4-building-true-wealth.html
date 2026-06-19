@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 4 · Module 4 · Building True Wealth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+
+.asset-block{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.asset-block:last-of-type{border-bottom:1px solid var(--line)}.asset-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.asset-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+
+.contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin:40px 0;border:1px solid var(--line)}.contrast-cell{background:var(--paper);padding:28px}.contrast-cell.right{background:var(--soft)}.contrast-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}.contrast-cell.right .contrast-label{color:var(--accent)}.contrast-list{list-style:none}.contrast-list li{font-family:var(--serif);font-size:15.5px;line-height:1.55;padding:10px 0;font-style:italic;color:var(--ink);border-bottom:1px dotted var(--line)}.contrast-list li:last-child{border-bottom:none}
+
+.trap-block{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.trap-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.trap-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.practice{margin:28px 0;padding-left:28px;border-left:2px solid var(--line)}.practice-name{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.25}.practice-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.asset-name{font-size:24px}.contrast-grid{grid-template-columns:1fr}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 04 · Financial Truth & Reversal · Module <strong>04</strong> · Building True Wealth</div>
+  <div class="progress-bar"><div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 4 &middot; Financial Sovereignty</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c4m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course4-module-1-the-language-of-money.html">The Language of Money</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course4-module-2-how-the-system-keeps-you-poor.html">How the System Keeps You Poor</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course4-module-3-the-debt-trap-architecture.html">The Debt Trap</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course4-module-4-building-true-wealth.html">Building True Wealth</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course4-module-5-the-frequency-of-abundance.html">The Frequency of Abundance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course4-module-6-money-as-sovereignty.html">Money as Sovereignty</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course4-module-7-the-next-economy.html">The Next Economy</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- PAGE 1 -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 · The Distinction</div>
+    <h1 class="slide-title">Income is not <em>wealth.</em></h1>
+
+    <p class="lead">This is the single most important financial distinction most people never learn, and the absence of this distinction is the primary reason most people never build wealth regardless of how much they earn. Income is the money that flows through your life. Wealth is the money that stays. The two are entirely different systems, and confusing them — which the system actively encourages — ensures that increasing your income never produces lasting financial change.</p>
+
+    <p class="body-text">A person earning £100,000 a year with no assets is not wealthy. They are well-paid. The money arrives each month and departs each month — to rent, to lifestyle, to servicing debts, to the status function from Module One. If the income stops, the person has nothing. <strong>Wealth is what remains when the income stops.</strong> Wealth is the accumulated result of income being converted into things that hold or increase value over time. Without the conversion, income is a river — it passes through. With the conversion, income becomes a reservoir — it accumulates.</p>
+
+    <p class="body-text">The system does not teach this distinction because the system profits from the confusion. <strong>A person who confuses income with wealth spends their entire career chasing higher income</strong> — working more hours, seeking promotions, changing jobs for salary increases — while never converting any of the increased income into assets. The income rises. The lifestyle rises to match. The wealth remains zero. The system captures the surplus through the mechanisms Module Two described.</p>
+
+    <div class="section-heading">Why the confusion persists</div>
+
+    <p class="body-text"><strong>The culture measures success by income, not by wealth.</strong> "What do you earn?" is the question. "What do you own?" is almost never asked. The measurement by income keeps the focus on the flow — which is visible, comparable, and socially legible — rather than on the stock — which is private, harder to measure, and not available for status signalling. <em>The measurement itself is a truth reversal: it directs your ambition toward the metric that does not produce sovereignty (income) and away from the metric that does (assets).</em></p>
+
+    <p class="body-text"><strong>The financial products available to most people are designed for income management, not wealth building.</strong> Current accounts, savings accounts with negligible interest, budgeting tools, salary sacrifice schemes — these are all income-management products. They help you manage the river. They do not help you build the reservoir. The asset-building products — investment platforms, equity participation, business structures, property acquisition tools — are designed for, marketed to, and accessible by people who have already crossed the asset gate. <em>The product architecture ensures that the person inside the income loop is served with income-management tools, which keeps them inside the income loop.</em></p>
+
+    <div class="sov-frame">
+      <div class="sov-label">The wealth distinction</div>
+      <p class="sov-text">Income is what you earn. Wealth is what you own. Income stops when you stop working. Wealth continues whether you work or not. The entire financial system is designed to keep your attention on income. The entire work of financial sovereignty is to redirect your attention to wealth.</p>
+    </div>
+
+    <div class="pullquote">You have been taught to pursue higher income as the path to financial security. The truth reversal: income is the path to higher spending. Assets are the path to financial security. The two paths diverge at the point most people never reach — the point where income is converted into ownership.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You receive a significant pay rise — the one you have been working toward for two years.</p>
+      <p class="scenario-context">The number is meaningful. The first impulse is to celebrate — and the second impulse, arriving close behind, is to calculate what the increased income makes possible: the better flat, the better car, the holiday, the lifestyle upgrade. The conversion from income to lifestyle is already in motion before the first increased paycheque arrives.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Upgrade the lifestyle. You earned this. The better flat, the better car, the holiday — this is what the raise was for.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Pause before the lifestyle adjusts. Direct the entire difference between the old income and the new income toward the asset gate — savings, investment, the first asset purchase. Live on the old income. Build on the new. The lifestyle upgrade can come from the assets, later, sustainably.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Save all of it. Do not spend any of the increase. Maximum austerity until the assets are built.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Spend half, save half. A reasonable compromise between enjoyment and building.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 · The Four Forms</div>
+    <h1 class="slide-title">What actually produces <em>wealth.</em></h1>
+
+    <p class="lead">Wealth is produced by assets — things you own that either increase in value over time or produce income without requiring your direct labour. There are four forms of assets, and understanding the distinction between them is the structural literacy that separates the person inside the income loop from the person approaching the asset gate.</p>
+
+    <div class="asset-block">
+      <div class="asset-num">Form 01</div>
+      <h2 class="asset-name">Appreciating assets.</h2>
+      <p class="body-text">Things that increase in value over time. Property is the most common example — purchased at one price, held, and eventually worth more than the purchase price. But appreciation is not limited to property. <strong>Any asset that reliably increases in value over time produces wealth through the gap between the purchase price and the current value.</strong> The gap is wealth you did not earn through labour. It is wealth that was produced by ownership — by the simple structural fact that you held the asset while it appreciated.</p>
+
+      <p class="body-text">The critical principle: <strong>appreciation requires time.</strong> An appreciating asset purchased today and sold tomorrow produces nothing. The same asset held for a decade may have doubled. Time is the mechanism. <em>The income loop prevents most people from ever holding an appreciating asset long enough for the appreciation to become meaningful — because the income loop requires all available money for current expenses, leaving nothing to hold.</em></p>
+    </div>
+
+    <div class="asset-block">
+      <div class="asset-num">Form 02</div>
+      <h2 class="asset-name">Income-producing assets.</h2>
+      <p class="body-text">Things that produce regular income without requiring your direct labour. A rental property produces rent. A dividend-paying investment produces dividends. A business with employees produces profit. A digital product produces sales. <strong>The income from these assets arrives whether or not you are working.</strong> The income is not payment for your time. It is payment for your ownership.</p>
+
+      <p class="body-text">Income-producing assets are the structural mechanism for the transition from active to passive income that Page Three will describe. Each income-producing asset, however small, creates a stream — a flow of money that is not dependent on you trading your hours. <em>The streams compound. A single stream is trivial. Ten streams are noticeable. Twenty streams begin to replace the need for active labour. The replacement is the sovereignty.</em></p>
+    </div>
+
+    <div class="asset-block">
+      <div class="asset-num">Form 03</div>
+      <h2 class="asset-name">Equity.</h2>
+      <p class="body-text">Ownership stakes in enterprises that create value. Shares in a company. A percentage of a business. A partnership in an enterprise. <strong>Equity is ownership of the value-creation process itself</strong> — not payment for labour within the process, but a share of the value the process produces. The wage-productivity gap from Module Two operates in reverse for the equity holder: the gap between what the enterprise's workers produce and what they are paid is the value that flows to the equity.</p>
+
+      <p class="body-text">Equity is the most powerful form of asset because it compounds at the rate of the enterprise's growth rather than at the rate of individual labour. <em>A person earning wages grows their income linearly — a small percentage each year. A person holding equity in a growing enterprise grows their wealth exponentially — at the rate the enterprise itself is growing.</em> The difference between linear and exponential is the difference between income and wealth.</p>
+    </div>
+
+    <div class="asset-block">
+      <div class="asset-num">Form 04</div>
+      <h2 class="asset-name">Intellectual property.</h2>
+      <p class="body-text">Ideas, creations, systems, and content that produce value after the initial creation. A book that produces royalties. A course that produces ongoing sales. A patent that produces licence fees. A brand that produces recognition and the capacity to charge premium. <strong>Intellectual property is the most accessible form of asset for most people</strong> — because it requires knowledge, skill, and time rather than capital. You do not need money to create intellectual property. You need the fourth channel from Course Three: creative life-force directed toward something that persists beyond the moment of creation.</p>
+
+      <p class="body-text">Intellectual property is the form of asset most directly connected to the sovereignty work of the previous courses. <em>The creative energy that was being consumed by the three layers from Course Three — the performance, the commodity management, the scarcity monitoring — is the same energy that produces intellectual property when redirected.</em> The reclamation of the fourth channel is, in this context, a financial act. The creative energy reclaimed becomes the raw material for asset building.</p>
+    </div>
+
+    <div class="pullquote">Four forms of assets. Each one produces wealth without requiring your direct labour. Each one converts income from a river into a reservoir. The conversion is the single most important structural move in financial sovereignty. Everything else — the budgeting, the saving, the discipline — is preparation for this conversion.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the four forms and recognise that you currently own none of them — or own only a small fraction of one.</p>
+      <p class="scenario-context">Your financial life has been entirely inside the income loop: earn, spend, earn, spend. The word "assets" has always felt like something that belongs to other people — people with capital, people with inheritance, people in a different financial category. The recognition that assets are what produce wealth, and that you have no assets, is the clearest reading of your position the course has yet produced.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Feel defeated. Assets require capital you don't have. The asset gate from Module Two is as real as described, and you are on the wrong side of it.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the recognition as the starting coordinate. You are inside the income loop with no assets. The position is clear. The governed response — beginning with Page Five's practices — starts the conversion from where you actually are, not from where you wish you were. The first asset does not require significant capital. It requires direction.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Decide you need to earn significantly more before assets become relevant. The income must rise first.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Research complex investment strategies immediately. The more sophisticated the strategy, the faster the asset building.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 · The Transition</div>
+    <h1 class="slide-title">Active versus <em>passive.</em></h1>
+
+    <p class="lead">Every pound you have ever earned has come from one of two sources: your direct labour (active income) or your ownership of something that produces value (passive income). The ratio between these two sources is the most consequential number in your financial life — more consequential than your salary, your savings rate, or your net worth. The ratio tells you how much of your financial existence depends on you continuing to work.</p>
+
+    <div class="contrast-grid">
+      <div class="contrast-cell">
+        <div class="contrast-label">Active income</div>
+        <ul class="contrast-list">
+          <li>You trade time for money — an hour of labour for a unit of payment</li>
+          <li>The income stops when you stop working</li>
+          <li>The ceiling is determined by the number of hours you can sell and the rate per hour</li>
+          <li>Growth is linear — small percentage increases through raises, promotions, job changes</li>
+          <li>You are the engine — without you, no income is produced</li>
+          <li>The system captures most of the value you produce and pays you a fraction</li>
+        </ul>
+      </div>
+      <div class="contrast-cell right">
+        <div class="contrast-label">Passive income</div>
+        <ul class="contrast-list">
+          <li>Assets produce money — ownership generates payment without direct labour</li>
+          <li>The income continues whether or not you are working</li>
+          <li>The ceiling is determined by the number and quality of assets you own</li>
+          <li>Growth can be exponential — assets compound, multiply, and scale beyond your individual capacity</li>
+          <li>The assets are the engine — they produce whether or not you are present</li>
+          <li>You capture the value directly because you own the source of the value</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="body-text">Read both columns. <strong>The left column is how most people earn their entire income for their entire lives.</strong> The right column is how wealth is actually produced. The transition from left to right — from active income as your sole source to passive income as an increasing portion — is the single most important structural move available in financial sovereignty.</p>
+
+    <div class="section-heading">Why the transition is difficult</div>
+
+    <p class="body-text"><strong>The transition requires surplus.</strong> Building assets requires capital, time, or creative energy that is not being consumed by current expenses. The income loop — earn, spend, earn, spend — leaves no surplus. The first surplus, however small, is the seed of the transition. <em>The transition does not begin when you have "enough." It begins when you redirect any amount — however trivial it appears — from the flow of income into the stock of assets.</em></p>
+
+    <p class="body-text"><strong>The transition produces results slowly.</strong> The first passive income stream — the first dividend payment, the first royalty cheque, the first rental income — is almost always embarrassingly small. The smallness is the most common point of abandonment. The person sees the small return, compares it to their active income, concludes the effort is not worth the result, and returns to the income loop. <strong>The smallness is the beginning, not the verdict.</strong> The first stream is trivial. The fifteenth is significant. The thirtieth may exceed the active income. The trajectory is exponential, but exponential growth is invisible in its early stages.</p>
+
+    <p class="body-text"><strong>The transition changes your relationship with time.</strong> Active income values time as a commodity — each hour has a price. Passive income values time as a multiplier — each hour invested in building an asset produces returns for years or decades. <em>The shift from time-as-commodity to time-as-multiplier changes how you spend your hours, which hours you protect, and which activities you prioritise.</em> An hour spent building an asset is an hour whose return extends indefinitely. An hour traded for wages produces a single payment and then is gone.</p>
+
+    <div class="pullquote">The transition from active to passive is not a single event. It is a gradual shift in ratio — from 100% active / 0% passive toward a position where passive income provides enough to make active labour optional. The optionality is the sovereignty. The sovereignty is the entire point.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You calculate your current ratio: 100% active, 0% passive. Every pound of your income depends on you continuing to work.</p>
+      <p class="scenario-context">The number is not surprising, but seeing it written down is clarifying. If you stopped working tomorrow — through choice, illness, redundancy, or any other cause — your income would drop to zero. The sovereignty cost of 100% active income is total dependence on continued labour.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the ratio. Most people are 100% active. This is normal. Focus on increasing the active income instead.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Name the ratio as the starting coordinate. The goal is not to reach 0% active tomorrow. The goal is to move the ratio — even by 1% — toward passive. The first 1% is the structural shift. Everything after is iteration.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Quit your job and focus entirely on building passive income. The active income is the trap.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Research passive income ideas obsessively. Consume every course, every podcast, every book on the subject before taking any action.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 · The Income Trap</div>
+    <h1 class="slide-title">Why most people's relationship with money is designed to <em>fail.</em></h1>
+
+    <p class="lead">The income trap is not a personal failure. It is an architectural feature — a set of structural conditions that ensure most people's financial lives operate as a loop rather than as a progression. The loop is: earn, spend, earn, spend. The progression would be: earn, convert, build, earn, convert, build. The loop is the default. The progression requires governed disruption of the default.</p>
+
+    <div class="trap-block">
+      <p class="trap-name">The lifestyle inflation mechanism.</p>
+      <p class="trap-text">As income rises, spending rises to match — automatically, without conscious decision. The raise produces the better flat. The promotion produces the better car. The bonus produces the holiday. Each increase in income is absorbed by an equivalent increase in lifestyle. <strong>The mechanism ensures that no surplus is ever available for asset conversion, regardless of how much the income grows.</strong> A person earning £30,000 and a person earning £100,000 can both be inside the same loop — the only difference is the quality of the lifestyle the loop produces, not the wealth it generates.</p>
+    </div>
+
+    <div class="trap-block">
+      <p class="trap-name">The consumption infrastructure.</p>
+      <p class="trap-text">The entire consumer economy is designed to capture income at the point it enters your account. Marketing, advertising, social pressure, subscription models, convenience pricing, the status function — all of these are mechanisms for converting your income into someone else's revenue before the income has had the chance to be redirected toward assets. <strong>The infrastructure is not passive. It is actively engineered to intercept the surplus that the asset conversion requires.</strong> The interception is the design. Your discipline is the variable the design is working to overcome.</p>
+    </div>
+
+    <div class="trap-block">
+      <p class="trap-name">The financial product gap.</p>
+      <p class="trap-text">The financial products available to most people are income-management products: current accounts, budgeting apps, savings accounts with rates below inflation. These products manage the flow. They do not build the stock. <strong>The wealth-building products — investment platforms with meaningful returns, equity participation schemes, business capitalisation tools — are either unavailable below certain thresholds or marketed exclusively to people who already have wealth.</strong> The gap in product access is the asset gate from Module Two operating at the product level.</p>
+    </div>
+
+    <div class="trap-block">
+      <p class="trap-name">The knowledge gap.</p>
+      <p class="trap-text">The transition from income to assets requires specific knowledge — about investment, about property, about business structures, about tax efficiency, about the mechanics of compound growth. This knowledge is not taught in schools, is rarely discussed in families without existing wealth, and is primarily available through advisers who charge fees that require wealth to pay. <strong>The knowledge gap ensures that the people who most need the information about asset building are the people with least access to it.</strong> The information asymmetry from Module Two, operating specifically in the domain of wealth construction.</p>
+    </div>
+
+    <p class="body-text">The four features of the income trap are not conspiracies. They are the predictable consequences of an economy designed around consumption rather than accumulation — for most of the population. <em>The people for whom the economy is designed around accumulation — through inheritance, through institutional access, through inter-generational wealth transfer — are not inside the income trap. They were born on the other side of the asset gate.</em> The trap is structural. Understanding its features is the precondition for the governed disruption that Page Five describes.</p>
+
+    <div class="pullquote">The income trap is not a character flaw. It is an architecture — designed to ensure that rising income produces rising spending, that consumption captures surplus, that financial products manage the flow rather than building the stock, and that the knowledge required for the transition remains out of reach. The architecture is the trap. Understanding the architecture is the exit.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You trace your financial history and recognise the lifestyle inflation mechanism operating across your entire career — each pay rise absorbed by a corresponding lifestyle increase, with no net change in wealth.</p>
+      <p class="scenario-context">You earn significantly more than you earned ten years ago. You own no more than you owned ten years ago. The income has risen. The wealth has not. The mechanism was invisible until this page described it.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Blame yourself. You should have been more disciplined. The lifestyle inflation was your weakness.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Name the mechanism as architecture operating on you, not as a character failing. The lifestyle inflation is the consumption infrastructure doing its job. The governed disruption — redirecting the next increase toward assets rather than lifestyle — is the structural response the architecture was designed to prevent.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Cut all lifestyle spending immediately. Return to the income level of ten years ago. Maximum surplus for maximum asset building.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Accept lifestyle inflation as inevitable. Everyone's spending rises with their income. This is natural human behaviour.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 · The Governed Approach</div>
+    <h1 class="slide-title">Building from wherever you <em>stand.</em></h1>
+
+    <p class="lead">The governed approach to wealth building does not require you to have capital, inheritance, or a high income. It requires you to redirect — however small the redirection — from the income loop toward the asset gate. The redirection is the structural move. The amount is secondary. The direction is everything.</p>
+
+    <p class="body-text">This page is not a comprehensive investment guide. Modules Five, Six, and Seven will deepen the financial work. This page gives you the five structural practices that begin the transition from income to assets — from wherever you currently stand, with whatever you currently have.</p>
+
+    <div class="sov-frame">
+      <div class="sov-label">The building principle</div>
+      <p class="sov-text">The first asset is more important than the size of the first asset. The direction is more important than the speed. The conversion from income to ownership — however small the first conversion — is the structural shift that changes the trajectory. Everything after is iteration on the first move.</p>
+    </div>
+
+    <div class="section-heading">Five practices for the transition</div>
+
+    <div class="practice">
+      <p class="practice-name">Capture the next increase.</p>
+      <p class="practice-text">The next time your income rises — through a raise, a bonus, a new contract, a side project — redirect the entire increase toward assets before the lifestyle has time to inflate. Automate the redirection so it occurs before the increase reaches your spending account. <strong>Living on the old income while building on the new is the most painless entry point into asset building</strong> — because you are not reducing your current lifestyle, you are simply preventing the next expansion. The expansion was going to be absorbed by the consumption infrastructure anyway. Redirect it before the infrastructure captures it.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Start the smallest possible investment.</p>
+      <p class="practice-text">Open an investment account and direct a regular, automated amount into a broad index fund. The amount can be genuinely small — £25 per month is a structural shift if it was previously £0. <strong>The purpose of the first investment is not to produce returns. It is to cross the asset gate.</strong> You are now, structurally, on the other side — you own an asset that appreciates over time. The emotional and structural significance of this crossing exceeds the financial significance of the amount. The amount grows later. The crossing happens once.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Build one income-producing asset.</p>
+      <p class="practice-text">Identify one thing you can create, own, or acquire that produces income without your direct ongoing labour. A digital product (a guide, a template, a course). A piece of content that generates revenue. A skill converted into a productised service that others deliver. A small property that produces rent. <strong>The first income-producing asset changes your ratio from 100/0 to 99/1.</strong> The 1% is trivial financially. The 1% is revolutionary structurally — because you now have income that does not depend on you trading your hours. <em>The intellectual property form from Page Two is the most accessible starting point for most people — because it requires creative energy rather than capital.</em></p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Redirect the status spend.</p>
+      <p class="practice-text">From Module One's thirty-day tracking exercise, identify your largest category of status spending — the spending that performs the fourth function (signal) rather than the first three (power, access, time). Redirect half of it — not all, half — toward asset building. <strong>The redirection is not austerity. It is governed reallocation from a function that produces display to a function that produces sovereignty.</strong> You are still signalling. You are signalling with the half that remains. The other half is now building something that will eventually make the signalling unnecessary.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Learn one wealth-building concept per month.</p>
+      <p class="practice-text">Close the knowledge gap from Page Four by learning one concept per month: compound interest, index investing, equity structures, property leverage, tax-efficient wrappers (ISAs, pensions), business incorporation, intellectual property licensing. <strong>Each concept learned is a piece of the information asymmetry closed.</strong> The closing is cumulative. After a year, you have twelve concepts that were previously operating on you from inside the information gap. After two years, twenty-four. <em>The knowledge, accumulated, changes what you can see in the financial system — which changes what you can do inside it.</em></p>
+    </div>
+
+    <div class="pullquote">You do not need to be wealthy to begin building wealth. You need to begin converting income into ownership — however small the first conversion. The first £25 invested is more structurally significant than the first £25,000 earned, because the £25 changed your position in the architecture from consumer to owner. The position is the sovereignty.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You set up an automated monthly investment of £50 into a broad index fund. The amount feels embarrassingly small compared to your monthly expenses.</p>
+      <p class="scenario-context">£50 per month will not make you wealthy on any reasonable timeline. The voice in your head says: this is pointless, this amount is too small to matter, you should wait until you can invest a meaningful amount. The voice is the income trap's most effective defence — the insistence that small structural moves are not worth making.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Cancel the investment. The amount is too small to matter. Wait until you can invest properly.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Keep the investment running. The amount is not the point. The direction is the point. You are now on the other side of the asset gate — however narrowly. The amount can increase over time. The structural position cannot be un-crossed. The crossing was the move.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Increase the amount dramatically to make it feel more significant. £500 per month, even if it strains the budget.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Research more sophisticated investment strategies before committing even the £50. The strategy must be optimal before you begin.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- COMPLETION -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module Four.</em></h1>
+
+    <p class="lead">You now have the structural vocabulary for wealth building: the distinction between income and wealth, the four forms of assets, the transition from active to passive, the features of the income trap, and the five governed practices that begin the conversion from wherever you stand. The conversion is the single most important structural move in financial sovereignty. Everything else is preparation for it or iteration on it.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">Income is not wealth. Income is the money that flows through your life. Wealth is the money that stays. The confusion between the two is the primary reason most people never build wealth.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Four forms of assets produce wealth: appreciating assets, income-producing assets, equity, and intellectual property. Each one generates value without requiring your direct ongoing labour.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">The transition from active to passive income is the single most important structural move. The ratio between active and passive tells you how much of your financial existence depends on you continuing to work.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">The income trap operates through four features: lifestyle inflation, the consumption infrastructure, the financial product gap, and the knowledge gap. The trap is architecture, not character.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">Five governed practices: capture the next increase, start the smallest possible investment, build one income-producing asset, redirect the status spend, learn one wealth-building concept per month. Direction over amount. Conversion over accumulation.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">Execute one of the five practices from Page Five this week. The most structurally significant is the second: open an investment account and set up a regular, automated contribution — any amount. The crossing of the asset gate, however narrow, is the structural shift the entire module was designed to produce. The amount can increase. The crossing happens once. Make it this week.</p>
+
+    <p class="body-text">The next module — <strong>The Frequency of Abundance</strong> — moves from the external architecture to the internal relationship. How your internal relationship with money determines what you can receive and hold. Why some people unconsciously repel wealth even when the structural conditions are in place. The work shifts from the system to the self — familiar territory for readers of Courses One through Three.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 05 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback={
+  1:{
+    a:{headline:"Upgrading the lifestyle with the entire raise is the lifestyle inflation mechanism from Page Four operating in real time.",detail:"The raise was earned. The enjoyment is legitimate. The upgrade, however, absorbs the surplus that the asset conversion requires — and once the lifestyle has adjusted to the new income level, it cannot easily be reduced. You are now living at the new level, requiring the new income, with no surplus available for building. The raise produced a better lifestyle. It did not produce wealth. The difference between the two is the distinction this entire module was built to teach. A portion of the raise — even a fraction — directed toward assets before the lifestyle adjusts is the governed alternative."},
+    b:{headline:"Directing the entire increase toward assets while living on the old income is the most structurally powerful move available at the moment of a pay rise.",detail:"The raise has not yet changed your lifestyle. Your body and your habits are still calibrated to the old income. The window between the raise and the lifestyle inflation is the highest-leverage moment for the asset conversion — because the redirection requires no sacrifice. You are not reducing your lifestyle. You are preventing its expansion. The prevention is painless. The prevention, sustained across multiple raises over years, produces a widening gap between income and expenses — and the gap is the surplus that builds the reservoir. The surplus, invested, compounds. The compounding is the wealth."},
+    c:{headline:"Saving all of the increase through maximum austerity produces the performance layer from Course Three applied to financial behaviour.",detail:"Maximum austerity is the financial version of the dramatic intervention the curriculum has repeatedly warned against. The austerity produces short-term results and medium-term burnout — the same cycle as aggressive debt reduction from Module Three. The governed approach directs the full increase toward assets, which is structurally identical to austerity on the increase but not on the existing lifestyle. You continue living as you were. You build on what is new. The distinction between austerity (reducing what you have) and redirection (capturing what is new) is the governance."},
+    d:{headline:"Spending half and saving half sounds reasonable and is usually the compromise the lifestyle inflation mechanism produces to ensure partial capture of the surplus.",detail:"Half is better than none. The structural observation, however, is that the half directed toward lifestyle will inflate the lifestyle by the amount saved — and once the lifestyle has inflated, the new baseline becomes the expectation. The next raise will face the same 50/50 split from the higher baseline, and the lifestyle will inflate again. Over multiple raises, the 50/50 approach produces steadily rising lifestyle with modest asset building — which is better than the income trap but significantly less effective than the full-increase-to-assets approach. The full redirection is available because the lifestyle has not yet adjusted. Once it adjusts, the full redirection becomes sacrifice. The window is now."}
+  },
+  2:{
+    a:{headline:"Defeat at the absence of assets is the asset gate from Module Two producing its intended emotional response.",detail:"The gate is real. Capital is required for most forms of asset acquisition. You may not have the capital. The defeat is understandable. But the defeat, if accepted, prevents the examination of the fourth form — intellectual property — which does not require capital. It requires creative energy. Creative energy, after the work of Course Three, is being reclaimed from the three layers. The reclaimed energy is the raw material for the most accessible form of asset building. The gate exists for forms one through three. Form four has a different entrance. The entrance is your own creativity, directed toward something that persists."},
+    b:{headline:"Holding the recognition as the starting coordinate and beginning from where you actually are is the governed response the module was designed to produce.",detail:"You are inside the income loop with no assets. The position is clear. The governed response does not require you to have capital, inheritance, or a high income. It requires you to begin the conversion — any conversion, however small — from income to ownership. The first £25 invested. The first digital product created. The first concept learned. Each one changes the structural position from 'no assets' to 'one asset, small.' The small is the beginning. The beginning, sustained, compounds. The compounding, given time, crosses the asset gate that felt impassable from this side."},
+    c:{headline:"Waiting to earn more before building assets is the income trap's most effective self-reinforcing narrative.",detail:"The narrative says: first increase the income, then build the assets. The reality: increased income without asset conversion produces increased lifestyle, not increased wealth. The person who waits to earn more before building assets will, at every income level, find a reason to wait for the next level. The waiting is the trap. The building begins where you are, with what you have. The amount is secondary. The direction — from income toward ownership — is what changes the trajectory. The trajectory changes at any income level, including yours."},
+    d:{headline:"Researching complex strategies before taking action is the information-gathering version of financial avoidance.",detail:"Sophisticated strategies have a place — later, when the structural foundation has been built. The first asset does not require a sophisticated strategy. It requires a simple action: open an account, direct a regular amount, invest in a broad index fund. The sophistication the research is seeking is the performance layer from Course Three applied to finances — the need to do it perfectly before doing it at all. The perfect strategy, researched for six months, produces zero returns. The simple strategy, executed this week, produces the first return — however small — and the structural crossing of the asset gate. Begin simply. Sophisticate later."}
+  },
+  3:{
+    a:{headline:"Accepting the 100/0 ratio as normal because most people share it is the normalisation engine from Module Three operating in the wealth domain.",detail:"Most people are 100% active, 0% passive. The normalisation of this ratio is what sustains it — if everyone is in the same position, the position feels inevitable rather than structural. But the position is structural, which means it is changeable. The change begins with the recognition that 100/0 is not a permanent condition but a starting coordinate. The coordinate can shift — through the practices on Page Five, through the creation of the first passive stream, through the first investment. Each shift, however small, moves the ratio. The movement is the governed response. The normalisation of the current ratio is what prevents the movement."},
+    b:{headline:"Naming the ratio as the starting coordinate and targeting even a 1% shift toward passive is the structural governance the page was designed to enable.",detail:"The 1% shift — from 100/0 to 99/1 — is financially trivial. It is structurally revolutionary. The 1% means you now have income that does not depend on your direct labour. The income may be £5 per month. The £5 is proof of concept — proof that the passive side of the ratio can exist, that it can be built, that it can grow. The growth from 1% to 5% is easier than the growth from 0% to 1%, because the structural position has already been established. The first percentage is the hardest. Every subsequent percentage is iteration."},
+    c:{headline:"Quitting your job to focus entirely on passive income before the passive income exists is a decision from depletion disguised as a decision from sovereignty.",detail:"The active income is currently funding your life. Eliminating it before the passive income can replace even a fraction of it produces a financial crisis that will consume all available energy for survival rather than for building. The governed transition is gradual: build the passive streams alongside the active income, using the active income to fund the building. When the passive income reaches a level that can sustain a reduced need for active labour, the active labour can be reduced. The reduction, governed and gradual, is sustainable. The dramatic exit is the urgency-driven decision Module One warned against."},
+    d:{headline:"Researching obsessively before taking action is the most common substitute for action in the passive income space.",detail:"The passive income industry produces enormous volumes of content — courses, podcasts, books, strategies, case studies. The consumption of this content feels productive. It is not productive. It is consumption. Consumption of passive income content does not produce passive income. Building produces passive income. The building requires less research than the industry suggests. The first digital product does not require a course on digital products. The first investment does not require a course on investing. It requires opening an account and directing money. The research, beyond a basic foundation, is the avoidance of the building. Begin. Research as you build. The building teaches faster than the content."}
+  },
+  4:{
+    a:{headline:"Self-blame for lifestyle inflation converts an architectural feature into a character verdict, preventing the structural response that would change the trajectory.",detail:"Lifestyle inflation is not weakness. It is the consumption infrastructure doing its job — intercepting surplus at the point of income increase, converting the surplus into lifestyle expansion before the surplus can be redirected toward assets. The infrastructure is designed to produce this outcome. The discipline that would prevent it is competing against an entire industry of marketing, social pressure, and product design calibrated to capture precisely this surplus. The governed response is not more discipline applied to the same architecture. It is the structural redirection of the increase before the architecture captures it — the automation from Practice One on Page Five."},
+    b:{headline:"Naming lifestyle inflation as architecture and redirecting the next increase is the governed disruption of the income trap.",detail:"The past inflation cannot be reversed — the lifestyle has adjusted and reducing it feels like loss. The future inflation can be prevented — by capturing the next increase before the lifestyle adjusts. The capture is the governed disruption. The disruption is automated — the increase is redirected to assets before it enters the spending account. The automation removes the decision point, which is where the consumption infrastructure is most effective. Without the decision point, the infrastructure cannot intercept the surplus. The surplus flows to assets. The assets build. The building is the exit from the income trap."},
+    c:{headline:"Cutting all lifestyle spending immediately to return to a decade-old income level is the austerity overcorrection the curriculum has repeatedly warned against.",detail:"Dramatic austerity produces dramatic results in the short term and dramatic reversal in the medium term. The reversal is more expensive than the austerity saved, because the compensatory spending that follows the austerity period typically exceeds the amount that was saved. The governed approach is incremental: capture the next increase, redirect half of the status spend, begin the smallest possible investment. The increments, sustained, produce durable structural change. The dramatic cut produces a brief sprint followed by collapse. The sprint is not the governance."},
+    d:{headline:"Accepting lifestyle inflation as inevitable is the normalisation engine converting an architectural feature into a natural law.",detail:"Lifestyle inflation is not inevitable. It is the default — the outcome the consumption infrastructure produces when no governance intervenes. Defaults can be overridden by governance. The governance is the automation of the redirection: setting up the capture of the increase before the increase arrives, so that the lifestyle never has the chance to inflate to the new level. People who implement this practice — often called 'paying yourself first' in simpler financial language — report that the lifestyle does not miss the increase it never received. The absence of what was never spent is not felt as deprivation. It is the architecture being governed rather than governing."}
+  },
+  5:{
+    a:{headline:"Cancelling the investment because the amount is too small is the income trap's most effective defence — the insistence that small structural moves are not worth making.",detail:"£50 per month, invested in a broad index fund, produces approximately £7,500 after ten years at average market returns — without increasing the contribution. With increasing contributions as income rises, the figure grows substantially. The amount is not the point. The direction is the point. The direction — from consumption to ownership — is the structural shift. The shift, once made, compounds. The compounding is invisible in year one. It is noticeable in year five. It is significant in year ten. The voice that says 'too small to matter' is the voice of the income loop defending its territory. The loop does not want you to cross the gate, even narrowly."},
+    b:{headline:"Keeping the investment running because the direction matters more than the amount is the structural governance the entire module was built to produce.",detail:"You are now on the other side of the asset gate. The gate was not a wall — it was the structural transition from consumer to owner. You own an asset. The asset is small. The asset will grow — through contributions, through returns, through compound growth over time. The growth is slow at first. The growth accelerates. The acceleration is the mechanism by which £50 per month becomes significant. The significance is not visible today. The significance emerges across years. The years require only one thing: that you do not cancel the investment because the early returns appear trivial. The trivial is the beginning of the significant."},
+    c:{headline:"Increasing to £500 per month to make it feel significant is the performance layer applying itself to investment — demanding dramatic action where consistent action is what produces results.",detail:"£500 per month may strain the budget. Strained budgets produce financial stress. Financial stress produces the reactive decision-making that Module One warned against. The stress may cause the investment to be cancelled within months — producing a net result worse than the sustainable £50. The governed approach is to begin at the amount you can sustain indefinitely without strain, and to increase the amount only when increases in income or reductions in expense make the increase painless. Sustainability is the mechanism. The £50, sustained for a decade, outperforms the £500 sustained for six months."},
+    d:{headline:"Researching the optimal strategy before committing even £50 is the most common substitute for the structural crossing the module was designed to produce.",detail:"The optimal strategy, researched perfectly, invested in never, produces zero returns. The suboptimal strategy, invested in this week, produces returns from this week forward. The broad index fund is not the optimal strategy. It is the sufficient strategy — diversified, low-cost, historically reliable, and available to anyone with any amount. The optimal can be pursued later, once the structural crossing has been made and the basic mechanics of ownership have been experienced. The experience of owning an asset — watching it fluctuate, understanding what returns feel like, learning the mechanics through participation rather than through study — is worth more than any amount of pre-investment research. Begin. Optimise later."}
+  }
+};
+
+let currentSlide=1;const totalSlides=6;const answered={1:false,2:false,3:false,4:false,5:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c4m3';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course4-module-3-the-debt-trap-architecture.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c4m4','1');window.location.href='course4-module-5-the-frequency-of-abundance.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

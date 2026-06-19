@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 7 · Module 4 · The Hero &amp; The Villain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:860px;margin:0 auto;padding:80px 48px 120px}
+.slide-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:24px}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);
+line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-body{font-size:17px;line-height:1.75;color:var(--ink);margin-bottom:32px}
+.slide-body p{margin-bottom:20px}.slide-body p:last-child{margin-bottom:0}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}
+.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}
+.mechanism:last-of-type{border-bottom:1px solid var(--line)}
+.mechanism-name{font-family:var(--serif);font-size:28px;font-style:italic;font-weight:400;letter-spacing:-.015em;margin-bottom:16px}
+.mechanism-body{font-size:16px;line-height:1.7;color:var(--muted)}
+.cost-block{margin:28px 0;padding:24px 28px;border-left:2px solid var(--accent);background:var(--soft)}
+.cost-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.cost-body{font-size:15px;line-height:1.65;color:var(--ink)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}
+.voice-block::before{content:'"'  ;position:absolute;top:-8px;left:24px;font-family:var(--serif);
+font-size:72px;color:var(--accent);line-height:1;font-style:italic}
+.voice-text{font-family:var(--serif);font-size:18px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);margin-bottom:12px}
+.voice-attr{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.scenario-block{margin:48px 0;padding:40px;border:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.scenario-q{font-family:var(--serif);font-size:22px;line-height:1.45;font-weight:400;font-style:italic;margin-bottom:32px}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{padding:18px 24px;border:1px solid var(--line);background:var(--paper);font-family:var(--sans);
+font-size:15px;line-height:1.5;text-align:left;cursor:pointer;transition:all .2s ease;color:var(--ink)}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback-block{margin-top:28px;padding:28px 32px;background:var(--soft);border-left:3px solid var(--accent);display:none}
+.feedback-block.visible{display:block}
+.feedback-headline{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:12px;font-style:italic}
+.feedback-detail{font-size:15px;line-height:1.7;color:var(--muted)}
+.nav-row{display:flex;gap:16px;margin-top:40px;align-items:center}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--ink);
+background:none;color:var(--ink);padding:14px 28px;cursor:pointer;transition:all .2s ease;text-transform:uppercase}
+.nav-btn:hover{background:var(--soft)}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#222}.nav-btn:disabled{opacity:.3;cursor:default}
+.completion-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;
+min-height:80vh;text-align:center;padding:80px 48px}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;color:var(--accent);font-style:italic}
+.complete-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:400;margin:32px 0 20px;letter-spacing:-.02em}
+.complete-body{font-size:17px;line-height:1.7;color:var(--muted);max-width:560px}
+.divider{width:48px;height:1px;background:var(--line);margin:40px auto}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 07 &middot; Media &amp; Narrative Control &middot; Module <strong>04</strong> &middot; The Hero &amp; The Villain</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 7 &middot; Media &amp; Narrative Control</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c7m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course7-module-1-narratives-as-weapons.html">Narratives as Weapons</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course7-module-2-architecture-of-propaganda.html">Architecture of Propaganda</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course7-module-3-media-literacy.html">Media Literacy</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course7-module-4-hero-villain.html">Hero and Villain</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course7-module-5-algorithmic-narratives.html">Algorithmic Narratives</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course7-module-6-building-narrative-immunity.html">Narrative Immunity</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1: The Narrative Role System -->
+<section class="slide active" data-slide="1">
+<div class="slide-inner">
+<div class="slide-label">Module 04 · Slide 01</div>
+<h1 class="slide-title">The Narrative Role System</h1>
+<div class="slide-body">
+<p>Stories need characters with functions. The hero acts and is morally elevated. The villain threatens and is morally condemned. The victim suffers and generates sympathy. The rescuer arrives and is authorised. These are not descriptions of people — they are narrative slots, roles that stories assign to people in order to produce a coherent emotional and moral structure.</p>
+<p>In fiction, we understand this. We know the villain in a film is a character constructed to serve narrative purposes, not a complete human being. In news, political messaging, and social media, the same role system operates — but we forget that it is operating. The politician, the immigrant, the whistleblower, the corporation, the activist are assigned roles before we have assessed them, and those roles determine what we believe about them before any evidence arrives.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The role a person or group is assigned in a narrative is not a description of who they are. It is a decision about what function they will serve in the story — and that decision is made by whoever controls the narrative, in service of their interests.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Roles precede facts</div>
+<div class="mechanism-body">In any established narrative, the role assignment often precedes the specific facts being reported. When a government has been cast as villain in the dominant narrative about a conflict, individual events are interpreted through that casting: their actions confirm villainy, their statements are treated as lies, their victims are foregrounded and their justifications are dismissed. The same events, occurring within a narrative where the government is cast as hero, would be interpreted entirely differently. The role determines what the facts mean — which is why changing the narrative role is often more powerful than changing the facts.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Roles collapse complexity</div>
+<div class="mechanism-body">Real people and real institutions are irreducibly complex — they contain contradictory qualities, act from mixed motives, produce both harmful and beneficial outcomes, and change over time. Narrative roles cannot accommodate this complexity. The villain cannot have genuine grievances; the hero cannot be genuinely self-interested; the victim cannot have contributed to their situation. The role system flattens human complexity into functional simplicity, which is emotionally satisfying and analytically destructive.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Role assignment is contested</div>
+<div class="mechanism-body">The most significant conflicts in public discourse are often not about facts — they are about role assignment. Who is the victim and who is the aggressor. Who is protecting freedom and who is threatening it. Who deserves sympathy and who deserves condemnation. These contests over roles are more fundamental than contests over facts because they determine how facts will be interpreted. Controlling the role assignment in a narrative is more powerful than controlling any individual piece of information within it.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 01</div>
+<div class="scenario-q">Two news outlets cover the same protest. Outlet A describes "demonstrators demanding justice." Outlet B describes "agitators disrupting order." The events covered are identical. What is the most important thing to understand about this difference?</div>
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a">One outlet is reporting accurately and the other is using loaded language — the facts will determine which is right</button>
+<button class="choice" data-answer="b">The outlets have assigned different narrative roles to the same people — and those role assignments determine what every subsequent fact about the protest will appear to mean</button>
+<button class="choice" data-answer="c">Both descriptions may be partially accurate — the truth is probably somewhere between the two accounts</button>
+<button class="choice" data-answer="d">Readers should find a third outlet that uses neutral language and follow that account instead</button>
+</div>
+<div class="feedback-block" id="feedback-1">
+<div class="feedback-headline" id="feedback-text-1"></div>
+<div class="feedback-detail" id="feedback-detail-1"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn primary" id="next-1" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 2: The Hero Slot -->
+<section class="slide" data-slide="2">
+<div class="slide-inner">
+<div class="slide-label">Module 04 · Slide 02</div>
+<h1 class="slide-title">The Hero Slot</h1>
+<div class="slide-body">
+<p>Every narrative has a protagonist — a perspective that structures the account, whose interests define what the problem is, and whose wellbeing determines what counts as a good outcome. In news and political narrative, this protagonist slot is almost never made explicit. It does not need to be. It is built into whose suffering is rendered visible, whose account is taken seriously, whose experts are quoted, and whose frame determines the questions being asked.</p>
+<p>Understanding who occupies the hero slot in any narrative tells you whose interests the narrative is designed to serve — because the hero's goals are what the story is moving toward. Everything else is context, obstacle, or threat to the hero's purpose.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The hero slot is the most powerful position in any narrative — not because it is the most visible, but because it is the most invisible. We see the story through the hero's eyes without noticing that we have been given the hero's eyes to see with.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The default protagonist in economic news</div>
+<div class="mechanism-body">In most mainstream economic journalism, the default protagonist is the investor, the market, or "the economy" as an abstraction. When markets fall, the news reports concern and anxiety; when they rise, relief and optimism. The suffering of workers during the same periods is reported as context, as data, as consequence — not as the primary story. The feelings attributed to the market are foregrounded; the feelings of the people the market affects are backgrounded. This is not neutral. It is a protagonist assignment that systematically centres one set of interests above all others.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The hero's goals as natural goals</div>
+<div class="mechanism-body">Once a protagonist slot is established, the hero's objectives become the natural objectives of the story. If the hero is the government managing a crisis, the natural question is "how is the government managing?" If the hero is a community under threat, the natural question is "how is the community responding?" The objectives of whoever is not in the hero slot — the crisis's underlying causes, the government's own role in creating the threat — become secondary considerations, obstacles, or complications rather than the point. The hero's goals are the story's goals.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Humanisation and the hero slot</div>
+<div class="mechanism-body">People in the hero slot are humanised: their internal lives, their feelings, their individual stories are presented. People outside the hero slot are often presented as categories — statistics, representatives of groups, functions rather than full people. This humanisation differential is one of the most powerful effects of the role system. It determines whose suffering generates empathy and whose generates policy debate. Whose deaths produce grief and whose produce concern. Whose children are individual children and whose are a social phenomenon.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 02</div>
+<div class="scenario-q">Coverage of a corporate merger focuses on investor returns, executive strategy, and share price movement. Workers at the affected companies who will lose their jobs appear briefly as a line about "restructuring costs." What narrative role assignment is operating here?</div>
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a">This is appropriate business journalism — investors and executives are the relevant actors in a corporate merger</button>
+<button class="choice" data-answer="b">Investors and executives have been assigned the hero slot — their perspective structures the story, their goals define success, and the workers appear as cost items rather than as human beings with stakes in the outcome</button>
+<button class="choice" data-answer="c">The coverage is incomplete — it should include both perspectives equally to achieve balance</button>
+<button class="choice" data-answer="d">Business journalism has a specific audience — investor-focused coverage is appropriate for that audience</button>
+</div>
+<div class="feedback-block" id="feedback-2">
+<div class="feedback-headline" id="feedback-text-2"></div>
+<div class="feedback-detail" id="feedback-detail-2"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-2" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 3: The Villain Slot -->
+<section class="slide" data-slide="3">
+<div class="slide-inner">
+<div class="slide-label">Module 04 · Slide 03</div>
+<h1 class="slide-title">The Villain Slot</h1>
+<div class="slide-body">
+<p>The villain slot is defined by three narrative operations applied to a person, group, or institution: dehumanisation (removal of interior life, complexity, and legitimate grievance), total agency attribution (the villain is fully responsible for the problems assigned to them, unaffected by structural conditions), and context removal (the villain's actions are presented without the historical, political, or social conditions that produced them).</p>
+<p>These operations are not descriptions of a genuinely evil actor. They are the narrative technology used to construct one — to produce a figure whose function in the story is to be hated, blamed, and defeated. A real person who does genuinely harmful things is not the same as a narrative villain. The difference matters because the narrative villain cannot be negotiated with, cannot have legitimate interests, and cannot be the subject of policies short of defeat. The construction of villains forecloses options as well as understanding.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The villain slot is not a description of a person's character. It is a set of narrative operations that remove everything about a person that would complicate the story — their humanity, their context, their reasons, their legitimate interests. What remains is a function: the thing to be defeated.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Dehumanisation as narrative technology</div>
+<div class="mechanism-body">Dehumanisation in narrative does not require overt slurs or explicit denial of humanity. It operates through omission: not showing the villain's interior life, not reporting on their families, their fears, their histories, their ordinary experiences. The hero's interior life is rendered; the villain's is not. This asymmetry is the technical mechanism of dehumanisation in journalism and political narrative — and it produces the same psychological effect as explicit dehumanisation, more efficiently and with greater deniability.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Context removal and manufactured monstrosity</div>
+<div class="mechanism-body">Every harmful action has a context — historical, political, social, psychological — that does not excuse the action but is necessary for understanding it. The villain slot strips this context away. The terrorist's actions are reported without the colonial history that shaped their political formation. The criminal's actions are reported without the poverty, trauma, or structural failure that shaped their life. This does not mean the context excuses the harm — it means the harm cannot be understood, and therefore cannot be addressed, without it. Context removal produces villains that are satisfying to hate and useless to learn from.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The villain's legitimate interests</div>
+<div class="mechanism-body">Perhaps the most consequential effect of the villain slot is that it makes it narratively impossible to acknowledge that the villain has legitimate interests. This forecloses negotiated resolutions, makes policy options that would address those interests invisible, and ensures that conflicts continue because the conditions producing them cannot be acknowledged. The history of successful conflict resolution almost always involves the discovery — awkward, politically costly, narratively disruptive — that the designated villain had interests that were real, and that addressing them was the only path to ending the conflict.</div>
+</div>
+
+<div class="voice-block">
+<div class="voice-text">When I finally read about the history from the other side — not to agree with it, just to understand it — I realised I had been given a cartoon. A cartoon designed to make certain responses feel obvious. The actual situation was nothing like the cartoon.</div>
+<div class="voice-attr">— workshop participant, former military intelligence analyst</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 03</div>
+<div class="scenario-q">Media coverage of a militant group presents their attacks in detail but never reports on the political conditions — territorial dispossession, decades of military occupation, failed peace negotiations — that preceded and shaped the group's formation. What effect does this omission produce?</div>
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a">None significant — attacks should be reported regardless of political context</button>
+<button class="choice" data-answer="b">The group is assigned the villain slot through context removal — their actions are rendered as pure malevolence rather than as responses to conditions, which forecloses understanding and narrows the apparent solution space to defeat rather than resolution</button>
+<button class="choice" data-answer="c">The omission balances the coverage — reporting on political conditions would risk justifying the attacks</button>
+<button class="choice" data-answer="d">Political context is too complex for news coverage — attacks are the newsworthy element</button>
+</div>
+<div class="feedback-block" id="feedback-3">
+<div class="feedback-headline" id="feedback-text-3"></div>
+<div class="feedback-detail" id="feedback-detail-3"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-3" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 4: The Victim Slot -->
+<section class="slide" data-slide="4">
+<div class="slide-inner">
+<div class="slide-label">Module 04 · Slide 04</div>
+<h1 class="slide-title">The Victim Slot</h1>
+<div class="slide-body">
+<p>The victim slot generates the emotional engine of any narrative. It is the figure whose suffering makes the hero's action necessary, the villain's action condemnable, and the audience's emotional response legitimate. The victim is not simply the person who was harmed — they are the person whose harm is made visible, rendered humanly, and placed at the centre of the story in a way that produces the specific emotional response the narrative requires.</p>
+<p>The victim slot is among the most contested positions in public discourse, because it determines whose suffering counts — whose pain generates policy responses, media attention, public grief, and political will. And because it is contested, it is among the most strategically deployed. The assignment of victimhood is always a political act, even when it appears to be a humanitarian one.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Whose suffering is made visible and whose is not is one of the most consequential editorial decisions in any media environment — and it is almost never presented as a decision at all. It presents itself as obvious: of course these are the victims. That obviousness is the politics.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The hierarchy of grievability</div>
+<div class="mechanism-body">Not all deaths, not all suffering, not all displacement generate equal media coverage or equivalent emotional responses. The deaths of people from wealthy, Western, culturally proximate countries receive extensive coverage; the deaths of comparable numbers of people from poorer, more distant, less culturally familiar places receive little. This differential is not about the objective significance of the suffering — it is about the hierarchy of who counts as a full victim, whose suffering is treated as fully human and therefore fully grievable. The hierarchy is not stated. It is performed, every day, through coverage decisions.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The victim who cannot also be an agent</div>
+<div class="mechanism-body">The victim slot, like the villain slot, collapses complexity. A person assigned the victim role in a narrative cannot simultaneously be an agent with choices, a person with complicated history, or a participant in conditions that contributed to their situation. The pure victim — innocent, passive, fully deserving of sympathy — is narratively useful but analytically limiting. Real people who have been genuinely harmed are also agents, also have complex histories, and also exist within conditions they have shaped as well as been shaped by. Acknowledging this is not victim-blaming. It is what understanding requires.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Strategic victimhood claims</div>
+<div class="mechanism-body">Because the victim slot generates sympathy, resources, and political permission, it is actively competed for by actors who have interests in occupying it. Governments frame their military actions as responses to victimisation. Corporations frame regulation as persecution. Dominant cultural groups frame demographic change as cultural victimisation. These claims are not always false — genuine victimhood is real. But the competition for the victim slot means it cannot be accepted uncritically. The question is always: what follows from this victimhood claim, and whose interests does the assignment serve?</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 04</div>
+<div class="scenario-q">A conflict receives extensive coverage of civilian casualties on one side and minimal coverage of comparable civilian casualties on the other side. Both sets of casualties are documented and verified. What is the most complete analysis of what this pattern produces?</div>
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a">The covered casualties are more newsworthy — editorial judgement determines which events warrant coverage</button>
+<button class="choice" data-answer="b">The differential assigns the victim slot to one side and withholds it from the other — the uncovered casualties are not less real, but they are less human in the narrative, which shapes which deaths generate grief and which generate policy debate</button>
+<button class="choice" data-answer="c">All casualties are tragic — coverage decisions reflect practical limitations, not political decisions</button>
+<button class="choice" data-answer="d">The pattern reflects journalistic access — it is harder to cover casualties in some conflict zones than others</button>
+</div>
+<div class="feedback-block" id="feedback-4">
+<div class="feedback-headline" id="feedback-text-4"></div>
+<div class="feedback-detail" id="feedback-detail-4"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-4" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 5: You Are Always Being Cast -->
+<section class="slide" data-slide="5">
+<div class="slide-inner">
+<div class="slide-label">Module 04 · Slide 05</div>
+<h1 class="slide-title">You Are Always Being Cast</h1>
+<div class="slide-body">
+<p>The role system does not only assign parts to politicians, corporations, and foreign governments. It assigns parts to you — the audience. Every narrative positions its audience somewhere in the story: as members of the threatened in-group (your way of life is under attack), as righteous opponents of the villain (your anger is justified), as potential heroes (your action is needed), or as witnesses whose sympathy is being recruited for a cause.</p>
+<p>Accepting the role assigned to you in a narrative is not a neutral act. It shapes how you interpret subsequent events, which responses feel obvious, which solutions feel impossible, and whose interests you find yourself serving through your emotional and political responses. The casting happens before you have evaluated the narrative — and its effects persist even after you have noticed what happened.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The question to ask of any narrative is not only "who is the hero and who is the villain?" It is "what role is this story assigning to me — and what does accepting that role commit me to?"</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The threatened in-group</div>
+<div class="mechanism-body">The most common audience role in political and media narrative is membership of a threatened in-group: your community, your culture, your way of life, your economic security is under threat from the designated villain. This role assignment is effective because the threat activates genuine concern for things that matter — community, culture, security are real values. The role does not create these values; it hijacks them, directing the concern they generate toward the villain assignment rather than toward a full analysis of what the actual threat is and where it comes from.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The righteous opponent</div>
+<div class="mechanism-body">Once a villain has been assigned, the audience is often positioned as the righteous opponent — the person whose anger at the villain is morally justified, politically necessary, and socially approved. This role is emotionally satisfying because it converts frustration into legitimated outrage and individual feeling into collective purpose. It is also analytically damaging: righteous opposition to a designated villain does not require understanding the situation, because the villain's culpability is already established. The role provides purpose without requiring thought.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The witness whose sympathy is recruited</div>
+<div class="mechanism-body">Humanitarian and advocacy narratives often position the audience as witnesses to suffering — people whose sympathy for the assigned victim is being recruited in service of a specific response. This role generates genuine compassion for genuine suffering. It also guides that compassion toward pre-determined conclusions: this is the response that will help, this is the actor that will rescue, this is the solution that the suffering requires. The compassion is real; its direction has been shaped before it arrived.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 05</div>
+<div class="scenario-q">A political advertisement shows images of crime and disorder, then states: "Your family is not safe. [Candidate] will restore order." What role is being assigned to the viewer, and what does accepting that role commit them to?</div>
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a">The ad is simply informing voters about a candidate's platform — the viewer is free to evaluate it critically</button>
+<button class="choice" data-answer="b">The viewer is cast as a member of a threatened family in need of protection — accepting the role commits them to experiencing the candidate as protector and the current situation as threat, before any evidence has been evaluated</button>
+<button class="choice" data-answer="c">The ad is manipulative but ineffective — sophisticated voters can see through emotional appeals</button>
+<button class="choice" data-answer="d">Political advertising always uses emotional appeals — this is normal and not worth special analysis</button>
+</div>
+<div class="feedback-block" id="feedback-5">
+<div class="feedback-headline" id="feedback-text-5"></div>
+<div class="feedback-detail" id="feedback-detail-5"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-5" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 6: The Rescuer Slot -->
+<section class="slide" data-slide="6">
+<div class="slide-inner">
+<div class="slide-label">Module 04 · Slide 06</div>
+<h1 class="slide-title">The Rescuer Slot</h1>
+<div class="slide-body">
+<p>Every narrative that assigns a victim needs a rescuer — the figure whose intervention will resolve the threat, end the suffering, and restore order. The rescuer slot is one of the most politically consequential positions in the narrative system, because it authorises specific actors to act on behalf of the victim and specific responses as the appropriate solution.</p>
+<p>The rescuer is not simply the person who helps. They are the person the narrative has pre-authorised as the legitimate agent of resolution — which means that other potential responses, other potential actors, and other potential paths to resolution are positioned as inadequate, misguided, or threatening. The rescuer slot determines what counts as help and what counts as interference.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The rescuer slot is where the narrative's politics become most explicit — because it names who has the right to act, in what way, on whose behalf. Whoever controls the rescuer casting controls the solution space.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Military intervention as rescue narrative</div>
+<div class="mechanism-body">The humanitarian intervention narrative follows a precise template: a victim population (rendered as helpless, sympathetic, fully innocent), a villain (rendered as purely malevolent, unresponsive to negotiation), and a rescuer (the intervening power, positioned as acting from pure humanitarian concern). This narrative structure pre-authorises military action by casting it as rescue rather than as intervention with its own interests and likely consequences. The template has been used to justify interventions whose actual effects on the victim population were deeply harmful — because the narrative's function was to authorise the action, not to accurately predict its consequences.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The expert as designated rescuer</div>
+<div class="mechanism-body">In technical and policy narratives, the rescuer slot is often occupied by the designated expert — the economist, the medical authority, the security specialist — whose intervention is framed as the appropriate and sufficient response to the problem. This positioning forecloses lay participation, community-based solutions, and approaches from outside the expert's framework. The expert's authority is real and often legitimate. The narrative function of the rescuer slot is to make that authority seem not just useful but exclusively appropriate — and to make other approaches seem dangerously amateurish.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Corporate rescue narratives</div>
+<div class="mechanism-body">Commercial entities regularly occupy the rescuer slot in narratives about social problems. Technology companies are positioned as rescuers from inefficiency and disconnection. Pharmaceutical companies are positioned as rescuers from disease. Financial companies are positioned as rescuers from poverty and exclusion. These rescue narratives serve the commercial interests of the rescuer while positioning structural solutions — regulation, public provision, redistribution — as threats to the rescue operation. The rescuer's business model becomes the solution, and anything that interferes with the business model becomes the obstacle.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 06</div>
+<div class="scenario-q">Coverage of a public health crisis consistently positions pharmaceutical companies as the primary solution — emphasising vaccine and drug development — while giving minimal coverage to public health infrastructure, nutrition, housing, and inequality as determinants of population health. What narrative function is this coverage performing?</div>
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a">The coverage reflects scientific consensus — vaccines and drugs are the evidence-based interventions</button>
+<button class="choice" data-answer="b">Pharmaceutical companies have been assigned the rescuer slot — which positions their solutions as the story and makes structural health determinants invisible as alternative or complementary responses</button>
+<button class="choice" data-answer="c">The coverage is incomplete — it should include both pharmaceutical and public health perspectives</button>
+<button class="choice" data-answer="d">Commercial solutions to health crises are more newsworthy than structural factors — the coverage reflects genuine public interest</button>
+</div>
+<div class="feedback-block" id="feedback-6">
+<div class="feedback-headline" id="feedback-text-6"></div>
+<div class="feedback-detail" id="feedback-detail-6"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-6" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 7: When Good People Are Cast as Villains -->
+<section class="slide" data-slide="7">
+<div class="slide-inner">
+<div class="slide-label">Module 04 · Slide 07</div>
+<h1 class="slide-title">When Good People Are Cast as Villains</h1>
+<div class="slide-body">
+<p>The villain slot is not reserved for people who do genuinely harmful things. It is a narrative tool available to whoever controls the story, and it has been used systematically against people who threaten power rather than people who exercise it harmfully: whistleblowers, investigative journalists, dissidents, reformers, union organisers, inconvenient scientists, community activists.</p>
+<p>The same three operations apply regardless of whether the target is genuinely harmful or genuinely threatening to power. Dehumanisation: their personal failings, real or invented, are foregrounded. Context removal: their actions are stripped of the institutional failures, abuses, or injustices they were responding to. Total agency: they are positioned as the problem, rather than as people responding to a problem. The result is the same whether the target deserves the slot or not — which is why recognising the operations is more important than trusting the assignment.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The villain slot is assigned most reliably not to the most harmful actors but to the most threatening ones — and threatening power and threatening people are different things. Learning to distinguish them is one of the most important things media literacy can offer.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The whistleblower as villain</div>
+<div class="mechanism-body">Whistleblowers who expose institutional wrongdoing are almost invariably assigned the villain slot by the institutions they expose. Their personal history is excavated for failings. Their motives are questioned. Their character is attacked. The wrongdoing they revealed is backgrounded while their own actions are foregrounded. The media often participates in this construction — because institutions are better-resourced sources than individuals, because the institutional narrative is more convenient, and because the whistleblower's story requires complexity that is harder to tell than the character-attack story the institution provides.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The dissident as unstable or dangerous</div>
+<div class="mechanism-body">People who challenge dominant narratives — political dissidents, counter-cultural voices, people who question official accounts — are routinely assigned villain-adjacent roles: the conspiracy theorist, the radical, the troublemaker. This role assignment performs a specific function: it removes the content of their challenge from serious consideration by relocating the problem from what they are saying to who they are. The question of whether their claims are accurate or their analysis is sound is replaced by a question about their character, sanity, or motives. The challenge is neutralised without being engaged.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The reverse villain slot: heroes of convenience</div>
+<div class="mechanism-body">The hero slot can be assigned equally strategically. People who serve power are elevated to hero status — scientists who provide convenient findings, journalists who amplify preferred narratives, dissidents from enemy states whose criticism serves geopolitical purposes. The hero slot, like the villain slot, is assigned based on narrative function, not character assessment. Someone can be assigned the hero slot by one narrative and the villain slot by another covering the same actions — depending entirely on whose interests the assignment serves in each case.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 07</div>
+<div class="scenario-q">A government contractor reveals that the organisation she works for has been conducting illegal surveillance on citizens. Coverage focuses primarily on how she obtained the documents, her personal life, and her psychological stability — rather than on the substance of what she revealed. What narrative operation is being performed?</div>
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a">The coverage is appropriate — how she obtained the documents is a legitimate legal and ethical question</button>
+<button class="choice" data-answer="b">The villain slot construction is operating: her character is being foregrounded and the institutional wrongdoing is being backgrounded — shifting the story from what was revealed to who revealed it</button>
+<button class="choice" data-answer="c">Both angles are newsworthy — the methods and the revelations are both legitimate subjects of coverage</button>
+<button class="choice" data-answer="d">The coverage reflects public interest — readers find personal stories more engaging than institutional analysis</button>
+</div>
+<div class="feedback-block" id="feedback-7">
+<div class="feedback-headline" id="feedback-text-7"></div>
+<div class="feedback-detail" id="feedback-detail-7"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-7" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 8: Reading the Casting -->
+<section class="slide" data-slide="8">
+<div class="slide-inner">
+<div class="slide-label">Module 04 · Slide 08</div>
+<h1 class="slide-title">Reading the Casting</h1>
+<div class="slide-body">
+<p>The practical skill this module is building is the ability to identify role assignments in narratives before accepting them — to see the casting decisions as decisions, rather than as obvious descriptions of reality. This does not mean refusing to have moral responses to events. It means ensuring those responses are produced by genuine assessment rather than by narrative positioning that happened before assessment began.</p>
+<p>Reading the casting requires a specific set of questions applied to any narrative you encounter. The questions are not complex. They are just consistently avoided, because the roles feel like facts, and questioning facts feels like either naivety or bad faith. The discomfort of asking them is a feature, not a problem — it is the feeling of refusing to accept a part without reading the script.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">You are not obligated to play the role a narrative assigns you. Noticing the assignment — seeing that a role has been offered, and pausing before accepting it — is the first and most important act of narrative independence.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The four casting questions</div>
+<div class="mechanism-body">Four questions, applied to any narrative, begin to make the casting visible. First: who is being humanised and who is being presented as a category? Second: whose suffering is being rendered visible and whose is absent? Third: what role am I being offered in this story, and what does accepting it commit me to? Fourth: who controls this narrative, and whose interests does the role assignment serve? These questions do not produce alternative facts. They produce awareness of the choices that produced the story you are inside.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Humanising the villain as analysis, not excuse</div>
+<div class="mechanism-body">One of the most reliable ways to test a villain construction is to deliberately seek out the villain's own account — their stated reasons, their historical context, their legitimate grievances. This is not the same as accepting their account as accurate or treating their actions as justified. It is the analytic practice of restoring the complexity that the villain slot removed. A person whose actions you understand — contextually, historically, motivationally — is someone you can think about accurately. A pure villain is someone you can only react to. Understanding is more useful than reaction in almost every practical context.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The role you were assigned in your own story</div>
+<div class="mechanism-body">The most personal application of this module is the examination of the role you have been assigned in the narratives about your own life — your family's story, your community's story, your political identity's story. Who is the villain of the story you were raised inside? Who is the hero? What role were you given, and what does that role commit you to emotionally and politically? These are the most durable castings, the ones that feel least like narratives and most like reality — and therefore the ones that most deserve the questions this module has been practising.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 08</div>
+<div class="scenario-q">You notice that in the political narrative you find most convincing, your side is always the victim or the hero, and the other side is always the villain. Every new event confirms the existing role assignments. What is the most rigorous response to this pattern?</div>
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a">The pattern confirms that your analysis is accurate — consistent confirmation across events is evidence of correct role assessment</button>
+<button class="choice" data-answer="b">A narrative in which every event confirms the same role assignments is almost certainly functioning as a closed system — genuine analysis produces occasional disconfirmation, because reality is more complex than any narrative role system can capture</button>
+<button class="choice" data-answer="c">Adopt the opposite view — if your narrative always confirms itself, the other side's narrative must be more accurate</button>
+<button class="choice" data-answer="d">Find more evidence to support your narrative — the pattern may be accurate but needs stronger documentation</button>
+</div>
+<div class="feedback-block" id="feedback-8">
+<div class="feedback-headline" id="feedback-text-8"></div>
+<div class="feedback-detail" id="feedback-detail-8"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-8" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 9: Completion -->
+<section class="slide" data-slide="9">
+<div class="slide-inner completion-slide">
+<div class="complete-mark">&check;</div>
+<h2 class="complete-title">Module 04 complete.</h2>
+<p class="complete-body">You have examined the narrative role system and how it operates in news, political messaging, and the stories we live inside: the hero slot and how it determines whose interests the story serves; the villain slot and the three operations that construct it; the victim slot and the politics of whose suffering counts; the rescuer slot and how it pre-authorises specific solutions; how you are always being cast; how good people are assigned villain roles to protect power; and the four questions that let you read the casting before accepting the part.</p>
+
+<div class="section-heading">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">The hero slot determines whose interests the story serves. Whoever occupies it receives the narrative&rsquo;s moral energy: their suffering counts, their agency is foregrounded, their goals structure the resolution.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">The villain slot is constructed through three operations: attribution of intention, decontextualisation of action, and denial of legitimate grievance. All three are rhetorical moves, not factual findings.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">The victim slot is political. Whose suffering counts, whose trauma receives the narrative&rsquo;s attention, whose loss authorises a response &mdash; these are editorial decisions that reflect power, not simply proportion.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">The rescuer slot pre-authorises a specific solution. Whoever is cast as rescuer arrives with the solution already implied by their role. The narrative decides what help looks like before the problem is examined.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">You are always being cast. The role assigned to you by a narrative determines whether your actions are read as heroism or villainy, regardless of their content.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">Good people are assigned villain roles to protect power. The role assignment is a structural move that requires no malice and no conspiracy &mdash; only that the person challenges something the narrative has designated as legitimate.</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+
+<p class="body-text">Take one political or social story you hold strong views on. Write down who occupies each role slot in the version you believe &mdash; hero, villain, victim, rescuer. Then write the same story with the hero and villain slots swapped. You do not have to believe the swap. You have to write it seriously enough that it holds together. Note what becomes visible that was invisible before.</p>
+
+<p class="body-text">Monthly: for one recurring conflict you follow &mdash; political, cultural, or personal &mdash; identify which slot you habitually occupy in your own telling of it. Ask what the story looks like from the slot you do not occupy. The answer is not that you are wrong. It is that the story is larger than your position inside it.</p>
+<div class="divider"></div>
+<p class="complete-body" style="font-style:italic;font-family:var(--serif);font-size:19px;">Next: Module 05 — Algorithmic Narratives.</p>
+<div class="nav-row" style="justify-content:center;margin-top:48px">
+<button class="nav-btn" onclick="prevSlide()">&larr; Review</button>
+</div>
+</div>
+</section>
+
+<script>
+const feedback = {
+  1: {
+    a: {
+      headline: "The facts will not resolve this — because the role assignment determines what the facts mean.",
+      detail: "Both descriptions may select facts accurately. But the role assignment — demonstrators versus agitators, demanding versus disrupting — shapes how every subsequent fact will be interpreted. If the police use force, it is either suppression of legitimate protest or restoration of order, depending on which role assignment is in place. The role precedes the facts and determines their meaning. Finding the 'accurate' description requires examining the role assignment itself, not just checking whether specific factual claims are correct."
+    },
+    b: {
+      headline: "Yes — the role assignment is more consequential than any individual fact the coverage contains.",
+      detail: "Once 'demonstrators demanding justice' or 'agitators disrupting order' is established, the interpretive framework for every subsequent development is set. The same police response, the same crowd behaviour, the same official statement will mean different things inside each frame. Understanding that a role assignment has been made — and asking whose interests it serves, what it makes invisible, and what response it makes obvious — is more analytically useful than trying to adjudicate which description is more accurate. Both may be accurate in ways the role system makes look like a simple binary."
+    },
+    c: {
+      headline: "The truth is not between the two descriptions — it requires stepping outside both role assignments.",
+      detail: "Averaging two role-assigned accounts does not produce an unframed view. If one describes the protesters as heroes and the other as villains, the midpoint is a confused account, not an accurate one. Understanding what actually happened requires stepping outside the role system entirely — asking what occurred, why, in what context, with what consequences — rather than splitting the difference between two pre-loaded interpretations. Role assignments do not average into truth; they compound into confusion."
+    },
+    d: {
+      headline: "Neutral language is an aspiration that conceals its own role assignments.",
+      detail: "All language about social events makes choices — about what to name, what to foreground, what causal relationships to imply. A 'neutral' outlet still makes role-assignment choices; it just makes them less visibly. The search for the perfectly neutral source is both practically futile and analytically misleading — it suggests the problem is one outlet's bias rather than the structural fact that all coverage involves framing choices. The more useful skill is reading the framing choices in whatever source you use, not finding the source that appears not to be making them."
+    }
+  },
+  2: {
+    a: {
+      headline: "Relevance is determined by the narrative frame — which is precisely what is worth examining.",
+      detail: "The claim that investors and executives are 'the relevant actors in a corporate merger' is itself a role assignment. It treats the investor perspective as the natural centre of gravity for business coverage and the worker perspective as outside the story's relevant frame. This feels obvious from inside the conventional business journalism framework — but that framework is not neutral. It was built by and for the interests it now centres. Calling it appropriate because it reflects its own assumptions is circular."
+    },
+    b: {
+      headline: "Yes — the hero slot is operating here through the hierarchy of whose stakes are foregrounded.",
+      detail: "The narrative structure is precise: the merger's success is measured in investor and executive terms; workers' job losses appear as 'restructuring costs' — an accounting category, not a human experience. This is the humanisation differential in action: the heroes' interior lives (executive strategy, investor confidence) are rendered; the workers are rendered as a line item. The coverage is not inaccurate — these are real facts about a merger. The role assignment determines which facts are the story and which are the context."
+    },
+    c: {
+      headline: "Balance is a useful aspiration — but the more fundamental question is whose interests the existing frame serves.",
+      detail: "Including worker perspectives alongside investor perspectives is better than not including them. Balance framing treats the problem as one of completeness: add the missing voices and the coverage becomes adequate. The deeper question is why the frame was investor-centred in the first place, what structural factors produce that default, and whose interests those structural factors serve. Balance as the solution leaves the default frame unchallenged and asks for additions to it; the more analytically useful response is to examine what produced the frame."
+    },
+    d: {
+      headline: "Audience targeting and role assignment are separate questions — and conflating them obscures what is happening.",
+      detail: "It is true that certain audiences are primarily interested in investor returns. And: the framing of a merger as primarily an investment event, with workers as cost factors, is still a role assignment with consequences for how the event is understood and what policy responses it makes seem obvious. Investor-focused coverage of labour market events consistently produces an understanding of those events in which worker interests are secondary — which has political and policy consequences that extend beyond the specific audience being served."
+    }
+  },
+  3: {
+    a: {
+      headline: "Reporting attacks without context is itself a significant editorial choice — not a neutral default.",
+      detail: "The choice to report attacks without the political conditions that produced them is not a neutral decision to report what happened. It is an active editorial choice to strip the context that would be necessary for understanding what happened. That choice has a specific and predictable effect on how the attacks are understood and what responses seem appropriate. Calling it simply 'reporting the attacks' treats the context removal as neutral when it is the most consequential editorial decision being made."
+    },
+    b: {
+      headline: "Yes — context removal is the mechanism that assigns the villain slot and narrows the apparent solution space.",
+      detail: "Without the political context — territorial dispossession, occupation, failed negotiations — the attacks can only be understood as expressions of pure hostility, incapable of political explanation or resolution. This is the villain slot construction precisely: actions stripped of context become evidence of malevolence rather than responses to conditions. The solution space that follows from this construction is defeat or suppression — because a purely malevolent actor cannot be negotiated with or have their conditions addressed. The context removal forecloses the paths to resolution before they can be considered."
+    },
+    c: {
+      headline: "Reporting context is not the same as justifying attacks.",
+      detail: "The conflation of explanation with justification is one of the most reliable mechanisms for preventing genuine understanding of political violence. Reporting on the political conditions that shaped the formation of a militant group does not require treating their attacks as justified — it provides the information necessary to understand what produced the situation and what might address it. The claim that context risks justifying attacks is itself a narrative move: it positions understanding as morally dangerous, which keeps the villain slot intact by making it politically costly to examine."
+    },
+    d: {
+      headline: "Complexity is harder to tell — and the difficulty is worth the effort for the understanding it produces.",
+      detail: "Political context is genuinely complex and requires sustained attention to convey. This is a real journalistic challenge. It is not an explanation for consistent absence. Many outlets do successfully convey complex political contexts in accessible reporting — the absence of this context in specific coverage reflects editorial choices about what is worth the effort, shaped by the frameworks and interests that determine what counts as the story. Difficulty of reporting is a reason to invest more, not a justification for systematic omission."
+    }
+  },
+  4: {
+    a: {
+      headline: "Newsworthiness is a decision made within frameworks that include the role system.",
+      detail: "The assessment that certain casualties are more newsworthy is itself a role-assignment decision — it determines whose deaths are events and whose are data. This is not a neutral application of editorial criteria. The criteria that produce this differential — proximity, cultural familiarity, narrative fit with established role assignments — are themselves shaped by interests and frameworks. Calling the result 'appropriate editorial judgement' treats the framework that produced the differential as self-evidently correct."
+    },
+    b: {
+      headline: "Yes — the victim slot is assigned through coverage volume, and its assignment has real political consequences.",
+      detail: "The uncovered casualties are not less real, less numerous, or less tragic. They are less human in the narrative — not reported, not given names and faces, not rendered as the suffering of fully grievable people. This differential determines which deaths generate grief responses, which deaths generate policy debates, which deaths produce demands for accountability, and which deaths are treated as the unfortunate costs of necessary operations. The victim slot assignment in conflict coverage is one of the most politically consequential editorial decisions made — and one of the least examined."
+    },
+    c: {
+      headline: "Coverage decisions are practical and political simultaneously — the practical framing does not dissolve the political consequences.",
+      detail: "Access limitations are real. They do not explain systematic differentials between coverage of comparable casualties on different sides of a conflict that persist across years, across multiple outlets, and across varying levels of access difficulty. When the pattern is consistent and the differential is large, the practical explanation becomes less convincing than a structural one: which casualties fit the established role assignments and which do not. The practical and the political are not mutually exclusive, and acknowledging the practical does not dissolve the need to examine the political."
+    },
+    d: {
+      headline: "Access challenges are real — they do not fully explain consistent, large-scale coverage differentials.",
+      detail: "Journalist access to conflict zones does vary significantly and affects coverage. It cannot explain why comparable casualties on opposite sides of the same conflict — in the same geographic area, at the same time — receive dramatically different coverage. When access is similar and coverage is still systematically differential, the explanation lies elsewhere: in the role assignments that have already determined whose deaths are the story and whose are the background. Access is a genuine factor; it is not sufficient to explain what the pattern reveals."
+    }
+  },
+  5: {
+    a: {
+      headline: "The viewer is free to evaluate critically — and the role assignment has already happened before evaluation begins.",
+      detail: "Critical evaluation is always possible and always valuable. The role assignment does not prevent it. What the role assignment does is shape the emotional and cognitive starting point from which evaluation occurs. If the viewer has already been positioned as a threatened family member in need of protection, the evaluation of the candidate's actual security record and the actual crime statistics begins from inside that frame. The role assignment does not prevent critical thought — it shapes what critical thought has to work against."
+    },
+    b: {
+      headline: "Yes — the casting commits the viewer to a specific emotional and interpretive position before evaluation begins.",
+      detail: "The ad performs three operations simultaneously: it assigns the viewer the role of threatened family member (fear activation), assigns the current situation the role of threat (problem definition), and assigns the candidate the role of protector (solution pre-authorisation). A viewer who accepts this casting has already decided that they need protection, that the current situation is threatening, and that a strong authority figure is the appropriate response — before evaluating whether crime rates actually support the fear, whether the candidate's policies actually address the causes, or whether the 'order' being promised serves their actual interests."
+    },
+    c: {
+      headline: "Emotional appeals in political advertising work on most people most of the time — including sophisticated ones.",
+      detail: "The belief that sophisticated viewers are immune to emotional appeals is itself a product of the third-person effect examined in Module 2: people believe media effects affect others more than themselves. Research consistently shows that political advertising influences voting behaviour across education levels and self-reported media literacy. The emotional role assignment operates at a level below the conscious evaluation that 'seeing through' it requires. Awareness of the technique does not reliably prevent its effects — which is why structural responses (not watching the ad, pausing before the emotional response arrives) are more effective than cognitive ones."
+    },
+    d: {
+      headline: "Normalcy does not reduce the significance of the mechanism — it increases it.",
+      detail: "The fact that all political advertising uses emotional appeals makes the mechanism more important to analyse, not less. If emotional role assignment is routine and universal in political communication, then the influence it exerts is cumulative, systematic, and defining of the political environment. Calling it normal and not worth special analysis is the response the technique is designed to produce — the normalisation of the mechanism is part of how it avoids scrutiny. The more routine it is, the more important it is to understand."
+    }
+  },
+  6: {
+    a: {
+      headline: "Scientific consensus on specific interventions does not determine which interventions receive narrative prominence.",
+      detail: "Evidence-based medicine does support vaccine and pharmaceutical interventions for many health conditions — this is not in dispute. The question is why the coverage gives these interventions the rescuer slot while giving minimal coverage to the social determinants of health, which are also well-supported by evidence. The evidence base for housing, nutrition, inequality, and public health infrastructure as health determinants is robust. Their absence from the dominant coverage is not explained by lack of evidence. It is explained by narrative structure and the interests that shape it."
+    },
+    b: {
+      headline: "Yes — the rescuer slot assignment makes certain solutions the story and others invisible.",
+      detail: "Pharmaceutical companies in the rescuer slot means: their solutions are the active story, their resource needs are centred, their obstacles (regulatory, supply chain, pricing) generate concern, and their successes are the resolution. Structural health determinants — housing quality, air pollution, food access, work stress — exist in the coverage as context or background, not as interventions being deployed. This is not because they are less effective; the evidence for their impact is extensive. It is because they do not fit the narrative slot that has been assigned to commercial actors as the legitimate agents of health rescue."
+    },
+    c: {
+      headline: "Including both perspectives is better — and the frame that produces the default is still worth examining.",
+      detail: "Adding public health perspectives to pharmaceutical coverage would improve the picture. Balance framing treats the problem as a matter of completeness — add the missing angle and the coverage becomes adequate. The deeper question is what structural factors produced the default frame in which pharmaceutical companies occupy the rescuer slot and structural factors are background. Those structural factors — media funding from pharmaceutical advertising, the commercial interests of major media owners, the PR infrastructure of the pharmaceutical industry — are not resolved by adding a public health sidebar."
+    },
+    d: {
+      headline: "The claim that commercial health solutions are more newsworthy is itself a product of the narrative frame.",
+      detail: "The feeling that pharmaceutical breakthroughs are more engaging than housing policy or nutrition infrastructure is partly genuine — individual interventions are more narratively tractable than structural conditions. And partly it is a product of the narrative frame: decades of coverage that positions commercial medical interventions as the primary health story has shaped what audiences find interesting. Audience interest is not independent of the coverage that produced it. The coverage and the interest co-produce each other within a system that happens to align with significant commercial interests."
+    }
+  },
+  7: {
+    a: {
+      headline: "How she obtained the documents is a legitimate question — and making it the primary story is a narrative choice.",
+      detail: "The legality and ethics of how classified information is obtained is genuinely worth examining. What the coverage is doing is making that question the primary story — foregrounding it to the extent that the content of what was revealed receives secondary treatment. This is the villain slot construction: the messenger's methods replace the message as the subject of inquiry. The legal question about the leak is real. Its prominence relative to the substance of the surveillance revelation is an editorial choice with a specific effect: it shifts public attention from what the institution did to what the individual did."
+    },
+    b: {
+      headline: "Yes — the villain slot construction is operating precisely as described in this module.",
+      detail: "The three operations are visible: her character is foregrounded (personal life, psychological stability) while the institutional wrongdoing is backgrounded; her individual agency is totalled (she is the subject of the story) while the institutional context that produced the wrongdoing is minimised; her interior life is examined for weakness while the institution is treated as the stable authority whose operations she disrupted. This is the standard template for constructing the whistleblower as villain — and its function is to shift the public debate from the content of the disclosure to the character of the discloser."
+    },
+    c: {
+      headline: "Both angles may be newsworthy — their relative prominence is the question worth examining.",
+      detail: "The methods used to obtain and transmit classified documents are legitimate subjects of journalistic and legal inquiry. The substance of illegal government surveillance is also a legitimate subject — and, given its direct impact on millions of citizens, arguably the more significant one. The question is not whether both angles exist but which receives primary coverage. When personal character and methods dominate and the institutional wrongdoing is treated as context, the coverage is performing a specific narrative function: relocating the story from what power did to what the person who challenged power did."
+    },
+    d: {
+      headline: "The coverage reflects what generates engagement — and what generates engagement is shaped by narrative choices.",
+      detail: "Personal stories do generate more engagement than institutional analysis — this is consistent with the attention economy dynamics examined in Module 3. And: what counts as a personal story worth covering is itself a narrative decision. The whistleblower's personal life and psychological history are a personal story that serves the villain construction. The illegal surveillance's effect on actual people whose communications were monitored is also a personal story — but it requires positioning those people as victims rather than background. The engagement differential is real; it is produced by narrative choices, not by the inherent interest of the material."
+    }
+  },
+  8: {
+    a: {
+      headline: "Consistent confirmation is the signature of a closed system, not of accurate analysis.",
+      detail: "In genuine analysis of a complex world, your framework will sometimes be wrong — events will occur that challenge your role assignments, require revision, produce discomfort. A narrative in which every event confirms the existing hero-villain-victim structure is almost certainly operating as a closed interpretive system: it is filtering events through the framework rather than testing the framework against events. This is the pattern examined in the enemy narrative section of Module 2 — the self-sealing structure that makes counterevidence impossible by absorbing it into the existing frame."
+    },
+    b: {
+      headline: "Yes — consistent confirmation across all events is a diagnostic signal, not evidence of accuracy.",
+      detail: "Reality is complex enough that a genuinely accurate analysis of any ongoing political situation will occasionally produce results that complicate, challenge, or disconfirm the prevailing framework. When every new development confirms the same role assignments — the same side always victimised, the same side always culpable — the framework is not being tested by reality. It is producing reality, by determining in advance what events mean before they are examined. The rigorous response is to actively look for the events, angles, or evidence that would require revising the role assignments — and to take seriously what you find."
+    },
+    c: {
+      headline: "Adopting the opposite view is the same error in reverse.",
+      detail: "If your narrative always confirms itself, the problem is the closed structure of the narrative — not the specific role assignments it makes. Adopting the opposite side's narrative does not solve the structural problem; it moves you from one self-confirming closed system to another. The opposite narrative likely has the same problem: every event confirms its own role assignments just as consistently. The rigorous response is not to switch teams — it is to develop a more genuinely open relationship to evidence, one that can produce disconfirmation as well as confirmation."
+    },
+    d: {
+      headline: "More evidence for a self-confirming narrative makes the closed system more entrenched, not more accurate.",
+      detail: "Within a closed narrative system, additional evidence is filtered through the existing frame and absorbed as confirmation. The more evidence accumulated, the more entrenched the framework becomes, and the more disconfirming evidence must be discounted or explained away. Strengthening documentation for a self-confirming narrative is not the same as testing the narrative's accuracy. The genuinely rigorous response is to look for evidence that would require revising the role assignments — and to hold the framework lightly enough that such evidence can actually change it."
+    }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c7m3';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course7-module-3-media-literacy.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c7m4','1');window.location.href='course7-module-5-algorithmic-narratives.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

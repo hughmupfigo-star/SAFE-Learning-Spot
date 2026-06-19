@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1 · Energy as Currency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --paper: #fafaf7;
+  --muted: #6b6b66;
+  --line: #d9d9d3;
+  --soft: #f0f0ea;
+  --accent: #c4452d;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============ HEADER ============ */
+.module-header {
+  border-bottom: 1px solid var(--line);
+  padding: 32px 48px 32px 24px;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  justify-items: start;
+  align-items: baseline;
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.module-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.module-tag strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.progress-bar {
+  grid-column: 3; justify-self: end; display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.progress-dot {
+  width: 28px;
+  height: 2px;
+  background: var(--line);
+  transition: background 0.4s ease;
+}
+
+.progress-dot.active { background: var(--ink); }
+.progress-dot.complete { background: var(--accent); }
+
+/* ============ CONTAINER ============ */
+.module-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 80px 48px 120px;
+}
+
+.slide {
+  display: none;
+  animation: fadeUp 0.6s ease;
+}
+
+.slide.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ TYPOGRAPHY ============ */
+.slide-number {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.slide-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 5.5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+  font-variation-settings: "opsz" 144;
+}
+
+.slide-title em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.lead {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
+
+.body-text {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #2a2a28;
+  margin-bottom: 24px;
+  max-width: 62ch;
+}
+
+.body-text strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.section-heading {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 56px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-heading::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.pullquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.4;
+  font-weight: 300;
+  border-left: 2px solid var(--ink);
+  padding: 8px 0 8px 32px;
+  margin: 48px 0;
+  color: var(--ink);
+}
+
+/* ============ SCENARIO BLOCK ============ */
+.scenario {
+  margin-top: 72px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line);
+}
+
+.scenario-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.scenario-prompt {
+  font-family: var(--serif);
+  font-size: 24px;
+  line-height: 1.45;
+  font-weight: 400;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.scenario-context {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.choice {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 20px 24px;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  font-weight: 400;
+}
+
+.choice:hover {
+  border-color: var(--ink);
+  background: var(--soft);
+  transform: translateX(2px);
+}
+
+.choice-letter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  margin-right: 14px;
+  letter-spacing: 0.1em;
+}
+
+.choice.selected {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.choice.selected .choice-letter {
+  color: var(--paper);
+  opacity: 0.6;
+}
+
+.choice:disabled {
+  cursor: default;
+}
+
+.choice:disabled:hover {
+  transform: none;
+}
+
+.choice.dimmed {
+  opacity: 0.4;
+}
+
+/* ============ FEEDBACK ============ */
+.feedback {
+  display: none;
+  margin-top: 32px;
+  padding: 32px;
+  background: var(--soft);
+  border-left: 2px solid var(--ink);
+  animation: fadeUp 0.5s ease;
+}
+
+.feedback.visible { display: block; }
+
+.feedback-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.feedback-headline {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: -0.005em;
+}
+
+.feedback-text {
+  font-family: var(--sans);
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #2a2a28;
+  font-weight: 400;
+}
+
+/* ============ NAVIGATION ============ */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.nav-btn {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 12px 0;
+  transition: opacity 0.2s ease;
+  font-weight: 500;
+}
+
+.nav-btn:hover { opacity: 0.6; }
+
+.nav-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.nav-btn.primary {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 16px 32px;
+}
+
+.nav-btn.primary:hover {
+  background: #2a2a28;
+  opacity: 1;
+}
+
+.nav-btn.primary:disabled {
+  background: var(--line);
+  color: var(--muted);
+}
+
+.nav-counter {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ============ FINAL SLIDE ============ */
+.complete-mark {
+  font-family: var(--serif);
+  font-size: 120px;
+  line-height: 1;
+  font-weight: 300;
+  margin-bottom: 32px;
+  color: var(--accent);
+  font-style: italic;
+}
+
+.summary-list {
+  list-style: none;
+  margin: 40px 0;
+}
+
+.summary-list li {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 24px;
+  align-items: baseline;
+}
+
+.summary-list li:last-child { border-bottom: none; }
+
+.summary-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  min-width: 32px;
+}
+
+.summary-text {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ============ MOBILE ============ */
+@media (max-width: 640px) {
+  .module-header { padding: 20px 24px; }
+  .module-container { padding: 48px 24px 80px; }
+  .slide-title { font-size: 38px; }
+  .lead { font-size: 19px; }
+  .body-text { font-size: 16px; }
+  .scenario-prompt { font-size: 20px; }
+  .pullquote { font-size: 22px; padding-left: 24px; margin: 32px 0; }
+  .progress-dot { width: 18px; }
+  .complete-mark { font-size: 80px; }
+}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+
+<header class="module-header">
+  <div class="module-tag">Module <strong>01</strong> · Energy as Currency</div>
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-dot active" data-page="1"></div>
+    <div class="progress-dot" data-page="2"></div>
+    <div class="progress-dot" data-page="3"></div>
+    <div class="progress-dot" data-page="4"></div>
+    <div class="progress-dot" data-page="5"></div>
+    <div class="progress-dot" data-page="6"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 1 &middot; Energy &amp; Relationships</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c1m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course1-module-1-energy-as-currency.html">Energy as Currency</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course1-module-2-energy-vampire-archetype.html">The Energy Vampire Archetype</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course1-module-3-boundaries-that-stick.html">Boundaries That Stick</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course1-module-4-the-cost-of-nice.html">The Cost of Nice</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course1-module-5-reclaiming-your-space.html">Reclaiming Your Space</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c1m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course1-module-6-friendship-without-weaponry.html">Friendship Without Weaponry</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- ============ SLIDE 1: THE PRINCIPLE ============ -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 · The Principle</div>
+    <h1 class="slide-title">Your energy is <em>finite.</em></h1>
+
+    <p class="lead">Whether emotional, psychological, or spiritual — your capacity to give, care, and engage is a resource that depletes with use and requires recovery time.</p>
+
+    <p class="body-text">This single recognition changes everything. Once you understand that your energy has a cost, every relationship becomes a transaction. Not every transaction is malicious — but every transaction has a price, and <strong>you need to decide whether the exchange is fair.</strong></p>
+
+    <div class="section-heading">The Invisible Exchange</div>
+
+    <p class="body-text">In every interaction there is an invisible movement of energy. Someone is either adding to your reserves or drawing from them. Some relationships are neutral. Many are quietly extractive.</p>
+
+    <p class="body-text">The problem begins when you were taught that your energy should be limitless — especially in relationships. You absorbed the message that loving means giving until there's nothing left. That caring means sacrificing your own stores. That friendship means being available regardless of the cost to yourself.</p>
+
+    <div class="pullquote">This belief — that infinite giving is synonymous with love — is how people learned to mine you.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · What would you do?</div>
+      <p class="scenario-prompt">It's Sunday evening. You've finally sat down with a book after a draining week.</p>
+      <p class="scenario-context">Your phone lights up. A friend who only calls when they need something is ringing. You know this conversation will last at least an hour and will be entirely about their problems.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Pick up. They might really need you, and you can rest later.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Let it go to voicemail. You'll call back tomorrow when you have capacity.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Answer, but tell them upfront you only have 15 minutes.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Pick up and silently resent them the entire conversation.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 2: COST OF DEPLETION ============ -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 · The Cost</div>
+    <h1 class="slide-title">When the reserves run <em>dry.</em></h1>
+
+    <p class="lead">When your energy is chronically depleted, everything suffers. Your immune system weakens. Your judgement becomes impaired. Your work loses its edge. Your patience evaporates.</p>
+
+    <p class="body-text">But the deepest cost is not what depletion does to your body or your output. It is what depletion does to your <strong>discernment</strong>.</p>
+
+    <p class="body-text">A depleted person cannot tell the difference between someone who loves them and someone who needs them. They cannot tell the difference between a relationship that nourishes and one that consumes. They lose the ability to register their own warning signals — the tight chest, the dread before a phone call, the way certain people's names make the room feel smaller.</p>
+
+    <div class="section-heading">The Slow Disappearance</div>
+
+    <p class="body-text">This is the insidious nature of energy extraction. It doesn't happen in one dramatic event. It happens <strong>gradually, imperceptibly</strong>, until you realise you've become a shell that looks occupied but feels hollowed out.</p>
+
+    <p class="body-text">You will not notice the day you stopped laughing at small things. You will not notice the day you started flinching at your own phone. You will only notice, eventually, that the person you used to be is no longer accessible to you — and you cannot quite remember when she left.</p>
+
+    <div class="pullquote">Learning to measure and protect your energy is not selfish. It is survival.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · What would you do?</div>
+      <p class="scenario-prompt">You notice you've been exhausted for three weeks straight.</p>
+      <p class="scenario-context">Sleep isn't fixing it. Weekends aren't fixing it. Looking back at your calendar, you realise you've had six emotional support conversations this week — all initiated by other people.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Push through. You can rest when things calm down.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Audit who's drawing from you. Notice the pattern before deciding anything.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Cancel every plan this weekend without explanation.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Tell everyone you're "fine" and book a holiday in three months.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 3: RECOGNISING THE EXCHANGE ============ -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 · Recognition</div>
+    <h1 class="slide-title">Reading the <em>exchange</em>.</h1>
+
+    <p class="lead">Once you accept that energy is currency, the next skill is learning to read the ledger — to feel, in real time, whether an interaction is adding to your reserves or drawing from them.</p>
+
+    <p class="body-text">Most people cannot do this. They were trained to override the signal. They were taught that the discomfort they feel around certain people is their own failure — they should be more patient, more understanding, more generous. So they suppress the data their body is giving them, and they keep paying.</p>
+
+    <div class="section-heading">Three Signals to Trust</div>
+
+    <p class="body-text"><strong>The body knows first.</strong> Before your mind has worked out what's happening, your shoulders have tightened. Your breathing has changed. There is a heaviness in your chest that wasn't there twenty minutes ago. Your body is not betraying you. It is reporting.</p>
+
+    <p class="body-text"><strong>The aftermath tells the truth.</strong> After some people, you feel energised, clearer, more yourself. After others, you feel small, anxious, foggy. You may even feel ashamed without being able to identify what you did wrong. <em>That feeling is the price tag.</em></p>
+
+    <p class="body-text"><strong>The asymmetry compounds.</strong> Notice who reaches out when they need something and who reaches out simply because they were thinking of you. Notice who asks how you are and stays for the answer. Notice who remembers what you said last time.</p>
+
+    <div class="pullquote">You don't have to label someone a villain to recognise that the exchange is uneven. You only have to be honest about the cost.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · What would you do?</div>
+      <p class="scenario-prompt">After every coffee with a particular colleague, you feel inexplicably drained for the rest of the day.</p>
+      <p class="scenario-context">They've never done anything obviously wrong. They're "nice." But you can't focus afterwards, and you find yourself replaying the conversation in your head with a low, queasy feeling.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Dismiss it. You're probably just being oversensitive.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Trust the signal. Start tracking how you feel after every encounter for two weeks.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Confront them directly about being draining.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Block them on everything and never speak to them again.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 4: THE FIRST DECISION ============ -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 · The First Decision</div>
+    <h1 class="slide-title">Deciding what the exchange is <em>worth.</em></h1>
+
+    <p class="lead">You will not be able to remove every extractive person from your life. You will not always have that luxury. But you can begin to make conscious decisions about what each exchange costs you — and what you are willing to pay.</p>
+
+    <p class="body-text">This is the beginning of sovereignty. Not cutting everyone off. Not building a fortress. But moving from <strong>unconscious payment</strong> — giving energy without registering the cost — to <strong>conscious exchange</strong> — knowing what something will take from you, and deciding, on purpose, whether to spend.</p>
+
+    <div class="section-heading">A New Internal Question</div>
+
+    <p class="body-text">Before every interaction that you suspect will be costly, ask yourself one question: <em>"Am I choosing to pay this, or am I being mined?"</em></p>
+
+    <p class="body-text">If you are choosing to pay — because the person matters, because the situation calls for it, because love sometimes asks for sacrifice — then pay with your whole chest and do not resent it.</p>
+
+    <p class="body-text">If you are being mined — if the payment is automatic, expected, never reciprocated, and resented — then the exchange must change. Not all at once. Not with announcements or ultimatums. But the ledger has to be acknowledged, first to yourself.</p>
+
+    <div class="pullquote">Awareness is not the end of the work. Awareness is the beginning of every decision that follows.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · What would you do?</div>
+      <p class="scenario-prompt">You've recognised that a long-standing friendship is extractive. What is the most sovereign first move?</p>
+      <p class="scenario-context">This person isn't cruel. They're not even aware of what they're doing. But the exchange has been uneven for years, and you're finally able to see it clearly.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Send a long message explaining everything they've done wrong.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Ghost them. The cleanest exit is no exit at all.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Quietly recalibrate. Reduce your output. Stop volunteering energy you don't owe. Watch what happens.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Wait for them to change on their own.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 5: THE OTHER SIDE ============ -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 · The Other Side</div>
+    <h1 class="slide-title">What exchange feels like when it's <em>right.</em></h1>
+
+    <p class="lead">The work of this module is not only about identifying extraction. It is equally about learning to recognise the opposite — exchanges that replenish rather than deplete.</p>
+
+    <p class="body-text">These relationships exist. They may be fewer than you would like, and they may be quieter than the extractive ones, but they are present in most lives if you know what to look for. The problem is that people trained to over-give often cannot identify nourishment when it is offered. They distrust it. They find it bland compared to the intensity of extraction.</p>
+
+    <div class="section-heading">What Reciprocal Exchange Feels Like</div>
+
+    <p class="body-text"><strong>You leave more yourself, not less.</strong> After a genuine exchange, you feel settled rather than scattered. Your thoughts are cleaner. There is a quality of being met — not just heard, but actually encountered by someone who was present for the whole of you, not just the parts that serve them.</p>
+
+    <p class="body-text"><strong>The cost is acknowledged, even if not spoken.</strong> Both people are aware they are bringing something and receiving something. There is no performance of infinite availability, no pretence that giving costs nothing. The exchange is honest about its weight.</p>
+
+    <p class="body-text"><strong>You are remembered between interactions.</strong> They bring back things you said last time. They notice changes in you. They are interested in your interior — not as material for their own processing, but as a genuine curiosity about who you are becoming.</p>
+
+    <div class="pullquote">The goal is not relationships free of cost. It is relationships where the cost is mutual, acknowledged, and worth it.</div>
+
+    <!-- SCENARIO -->
+    <div class="scenario">
+      <div class="scenario-label">Scenario · What would you do?</div>
+      <p class="scenario-prompt">After a long phone call with a close friend, you notice something unexpected — you feel lighter than before you picked up.</p>
+      <p class="scenario-context">The conversation covered difficult things. You talked about real problems. But when it ended, your chest felt open rather than compressed, and you found yourself wanting to call them again soon.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a">
+          <span class="choice-letter">A</span>Dismiss it as a fluke. All friendships feel like this sometimes.
+        </button>
+        <button class="choice" data-answer="b">
+          <span class="choice-letter">B</span>Notice it carefully. This is the data — the baseline you are building toward.
+        </button>
+        <button class="choice" data-answer="c">
+          <span class="choice-letter">C</span>Feel guilty. You talked about your problems too, which means you probably drained them.
+        </button>
+        <button class="choice" data-answer="d">
+          <span class="choice-letter">D</span>Immediately text to ask if they are okay and apologise for being too much.
+        </button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 6: COMPLETE ============ -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module One.</em></h1>
+
+    <p class="lead">You now have a new internal vocabulary. The cost. The exchange. The ledger. These words will follow you out of this module and into every interaction this week.</p>
+
+    <div class="section-heading">What You Carry Forward</div>
+
+    <ol class="summary-list">
+      <li>
+        <span class="summary-num">01</span>
+        <span class="summary-text">Your energy is a finite resource. Treat it accordingly.</span>
+      </li>
+      <li>
+        <span class="summary-num">02</span>
+        <span class="summary-text">Every interaction is an exchange. Some add. Some extract. Most reveal themselves over time.</span>
+      </li>
+      <li>
+        <span class="summary-num">03</span>
+        <span class="summary-text">Your body knows before your mind does. The signal is data, not weakness.</span>
+      </li>
+      <li>
+        <span class="summary-num">04</span>
+        <span class="summary-text">Sovereignty begins with conscious payment, not with cutting people off.</span>
+      </li>
+    </ol>
+
+    <div class="section-heading">Practice This Week</div>
+
+    <p class="body-text">Before three different interactions this week, ask yourself the new question: <em>"Am I choosing to pay this, or am I being mined?"</em> You don't have to act on the answer yet. Just notice it. Write it down somewhere private.</p>
+
+    <p class="body-text">The next module — <strong>The Energy Vampire Archetype</strong> — names the specific patterns of extraction so you can recognise them faster, in real time, without needing weeks of evidence.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 02 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ============ FEEDBACK CONTENT ============
+// Each response describes what the choice tends to produce — energetically,
+// emotionally, relationally. No grading. The reader decides the meaning.
+
+const feedback = {
+  1: {
+    a: {
+      headline: "Picking up costs you the evening you were rebuilding with.",
+      detail: "When the call ends, the book stays closed. The rest you were giving yourself becomes rest you gave to someone else. Notice whether this leaves you connected to them or quietly resentful. Both are possible — the difference is whether you chose the cost consciously, or whether your body answered before you did."
+    },
+    b: {
+      headline: "The voicemail buys you the rest of the night.",
+      detail: "You'll likely feel a flicker of guilt when the ringing stops. That guilt is old training, not evidence of harm. Whether you call back tomorrow with full presence — or never call back at all — will tell you something honest about what the friendship actually is to you."
+    },
+    c: {
+      headline: "Bounded giving keeps you in the conversation without disappearing into it.",
+      detail: "The fifteen-minute frame protects something in you, but it also tests them. Some people accept the limit and adapt. Others escalate, push past it, or punish you with mood shifts. How they respond to a small boundary tells you what a larger one would cost."
+    },
+    d: {
+      headline: "The conversation ends, but the resentment stays.",
+      detail: "Resentment is the receipt for energy you didn't agree to spend. It tends to accumulate quietly until it changes how you feel about the person entirely — often more than the original interaction warranted. The cost here isn't the hour. It's the slow corrosion of the relationship in your own mind, without them ever knowing."
+    }
+  },
+  2: {
+    a: {
+      headline: "The exhaustion deepens and the body starts speaking louder.",
+      detail: "When the signal is ignored, it doesn't disappear — it escalates. Sleep stops restoring. Small irritations become unbearable. Eventually the body finds a way to force the rest you wouldn't take voluntarily, usually through illness or breakdown. 'Pushing through' postpones the cost; it doesn't cancel it."
+    },
+    b: {
+      headline: "Looking at the pattern, without acting on it yet, changes what you can see.",
+      detail: "Most people skip this step and go straight to reaction. But the audit itself is the intervention — once you can name who is drawing from you and how often, the relationships begin to look different even before you've done anything. Clarity arrives before strategy does."
+    },
+    c: {
+      headline: "The weekend is yours, but the silence costs something.",
+      detail: "Cancelling without explanation gives you immediate relief and creates a small ripple of confusion in everyone you cancelled on. Some will understand. Others will assume the worst. You'll feel both freer and slightly more alone. Whether that trade-off is right depends on whether the cancelled plans were costing you more than the rest is worth."
+    },
+    d: {
+      headline: "Three more months of the same pattern, with a holiday at the end.",
+      detail: "Performing wellness to avoid the conversation lets the depletion continue uninterrupted. The holiday will help briefly. Within two weeks of returning, the exhaustion will be back. The thing that needed to change wasn't your location — it was the exchange you kept agreeing to."
+    }
+  },
+  3: {
+    a: {
+      headline: "Dismissing the signal trains your body to stop sending it.",
+      detail: "Over time, the warnings get quieter. This sounds like peace but isn't — it's just disconnection from your own data. You'll still feel drained, but you'll lose the ability to trace the source. The colleague keeps drawing, and you keep paying without knowing why you're tired."
+    },
+    b: {
+      headline: "Two weeks of honest tracking gives you something you can't argue with.",
+      detail: "Patterns are slippery when you only feel them. They become undeniable when you write them down. After fourteen days you'll either see a clear cost — same drain, same colleague, same aftermath — or you'll see it was actually about something else entirely. Either answer ends the confusion."
+    },
+    c: {
+      headline: "The confrontation lands before you have language for what's wrong.",
+      detail: "When you accuse someone of something you can't quite name, they usually defend, and you usually walk away feeling crazier than before. The interaction also tends to mark the relationship — even if you reconcile, something shifts. Sometimes that shift is necessary. It's just useful to know it happens."
+    },
+    d: {
+      headline: "The total cut feels powerful for about three days.",
+      detail: "After that, you'll likely cycle through doubt, guilt, and a quiet wondering whether you overreacted. The dramatic exit skips the part where you actually learn to feel exchanges in real time — and the next person with the same pattern will be just as invisible to you, because the skill didn't get built."
+    }
+  },
+  5: {
+    a: {
+      headline: "Dismissing the evidence loses the lesson it was trying to teach.",
+      detail: "The feeling you had after that call is not random. It is your nervous system recognising a quality of exchange it has been rationed from. Calling it a fluke protects you from wanting more of it — which feels safer, but keeps you calibrated to the wrong baseline."
+    },
+    b: {
+      headline: "Noticing it carefully gives you the standard to measure everything else against.",
+      detail: "This is the data you have been missing — not just evidence of what is costing you, but evidence of what is possible. The feeling of expansion after a real exchange becomes a reference point. Over time, you will find you can feel the difference before a conversation ends, not just after."
+    },
+    c: {
+      headline: "Guilt converts a real exchange into a transaction you owe them for.",
+      detail: "In a genuinely reciprocal conversation, both people bring and both people leave with something. Guilt is the trained response to that — the mechanism by which you have learned to invalidate evidence of what genuine relationship actually feels like. The guilt is not the signal. The guilt is the interference."
+    },
+    d: {
+      headline: "Redistributing your replenishment is worth examining carefully.",
+      detail: "The impulse to immediately text and apologise — to give the restored energy straight back — means you have been trained to treat your own restoration as something that requires justification. The good exchange was real. It belongs to you. You do not owe it back."
+    }
+  },
+  4: {
+    a: {
+      headline: "The long message almost always makes the sender feel worse.",
+      detail: "Writing everything down and sending it tends to produce a defence, not a reckoning. They now have something to argue with rather than something to sit with. The clarity you achieved in writing usually does not transfer — it diffuses into counter-claims and emotional management of their reaction."
+    },
+    b: {
+      headline: "Ghosting closes the door without closing the loop.",
+      detail: "There is no exit without some form of reckoning — even internal. Ghosting delays it, sometimes indefinitely, and leaves the cost sitting inside you rather than being processed. It also tends to generate guilt and confusion in the other person that you will carry awareness of."
+    },
+    c: {
+      headline: "Quiet recalibration is often the most energetically efficient move.",
+      detail: "You do not have to announce a reckoning to conduct one. Reducing your availability, stopping the volunteered energy, letting the relationship find its natural level — these often communicate what a confrontation would, without the aftermath. The relationship adjusts or it ends. Either is an answer."
+    },
+    d: {
+      headline: "Waiting for them to change is not a strategy. It is a postponement.",
+      detail: "People who extract energy from others tend not to change without significant external pressure — and your continued availability removes that pressure. Waiting while staying available generally produces the same dynamic, repeated, for as long as you wait."
+    }
+  }
+};
+
+// ============ RENDERING ============
+var currentSlide = 1;
+var totalSlides = document.querySelectorAll('.slide').length;
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(function(s){ s.classList.remove('active'); });
+  var target = document.querySelector('[data-slide="' + n + '"]');
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach(function(dot, i){
+    dot.classList.remove('active','complete');
+    if(i + 1 < n) dot.classList.add('complete');
+    else if(i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSlide(){ if(currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide(){ if(currentSlide > 1) showSlide(currentSlide - 1); }
+
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.choices').forEach(function(group){
+    var sn = parseInt(group.getAttribute('data-scenario'));
+    group.querySelectorAll('.choice').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        group.querySelectorAll('.choice').forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        var answer = btn.getAttribute('data-answer');
+        var f = feedback[sn] && feedback[sn][answer];
+        if(f){
+          var hl = document.getElementById('feedback-text-' + sn);
+          var dt = document.getElementById('feedback-detail-' + sn);
+          var box = document.getElementById('feedback-' + sn);
+          if(hl) hl.textContent = f.headline;
+          if(dt) dt.textContent = f.detail;
+          if(box){ box.style.display = 'block'; setTimeout(function(){ box.classList.add('visible'); }, 20); }
+        }
+        var nextBtn = document.getElementById('next-' + sn);
+        if(nextBtn) nextBtn.removeAttribute('disabled');
+      });
+    });
+  });
+});
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var prevKey='';
+    if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+      document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+      return;
+    }
+    var slides=document.querySelectorAll('.slide');
+    if(slides.length>0){
+      var last=slides[slides.length-1];
+      last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+        b.textContent='Begin Module 02 →';
+        b.setAttribute('onclick','');
+        b.onclick=function(){localStorage.setItem('safespot_c1m1','1');window.location.href='course1-module-2-energy-vampire-archetype.html';};
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html

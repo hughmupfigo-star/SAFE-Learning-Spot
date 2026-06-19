@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 5 &middot; Module 6 &middot; Rebuilding Family or Exiting Completely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+.cost-block{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.cost-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.cost-text{font-size:16px;line-height:1.65;color:#2a2a28}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.safety-note{margin:40px 0;padding:28px;border:1px solid var(--accent);background:var(--paper)}.safety-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}.safety-text{font-size:15px;line-height:1.65;color:#2a2a28}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}.voice-block::before{content:'\201C';position:absolute;top:-8px;left:24px;font-family:var(--serif);font-size:72px;color:var(--accent);line-height:1;font-style:italic}.voice-text{font-family:var(--serif);font-size:19px;font-style:italic;font-weight:300;line-height:1.5;color:var(--paper);margin-top:8px}.voice-label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#999;margin-top:20px;padding-top:16px;border-top:1px solid #333}.voice-label strong{color:var(--paper)}
+.reflection{margin:40px 0;padding:32px;border:1px solid var(--line);background:var(--paper)}.reflection-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}.reflection-prompt{font-family:var(--serif);font-size:20px;line-height:1.45;font-weight:400;font-style:italic;margin-bottom:20px;letter-spacing:-.005em}.reflection-area{width:100%;min-height:120px;background:var(--paper);border:1px solid var(--line);padding:16px;font-family:var(--sans);font-size:15.5px;line-height:1.6;color:var(--ink);resize:vertical;transition:border-color .2s ease}.reflection-area:focus{outline:none;border-color:var(--ink)}.reflection-note{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.1em;margin-top:10px;text-transform:uppercase}
+.pattern-card{margin:24px 0;padding:28px;background:var(--paper);border:1px solid var(--line);transition:border-color .2s ease}.pattern-card:hover{border-color:var(--muted)}.pattern-tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:500}.pattern-name{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:400;line-height:1.3;margin-bottom:14px;letter-spacing:-.01em}.pattern-desc{font-size:15.5px;line-height:1.65;color:#2a2a28}.pattern-desc strong{font-weight:500;color:var(--ink)}
+.condition-card{margin:20px 0;padding:24px 28px;background:var(--paper);border:1px solid var(--line);display:flex;gap:20px;align-items:flex-start}.condition-indicator{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}.condition-indicator.present{background:#4a7c59}.condition-indicator.absent{background:var(--accent)}.condition-body h4{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:500}.condition-body p{font-size:15.5px;line-height:1.65;color:#2a2a28}
+.path-card{margin:24px 0;padding:28px;background:var(--soft);border-left:3px solid var(--ink)}.path-card.exit{border-left-color:var(--accent)}.path-card h3{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:400;margin-bottom:12px;letter-spacing:-.01em}.path-card p{font-size:15.5px;line-height:1.65;color:#2a2a28}.path-card p+p{margin-top:12px}
+.audit-block{margin:40px 0;padding:32px;border:1px solid var(--line)}.audit-title{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:500}.audit-desc{font-size:15px;color:var(--muted);margin-bottom:24px;font-style:italic}.audit-item{margin-bottom:20px}.audit-item-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:500}.audit-item textarea{width:100%;min-height:80px;background:var(--paper);border:1px solid var(--line);padding:14px;font-family:var(--sans);font-size:15px;line-height:1.6;color:var(--ink);resize:vertical;transition:border-color .2s ease}.audit-item textarea:focus{outline:none;border-color:var(--ink)}
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.sov-frame{padding:28px}.sov-text{font-size:19px}.reflection{padding:24px}.reflection-prompt{font-size:18px}.pattern-card{padding:22px}.pattern-name{font-size:20px}.voice-block{padding:24px}.voice-text{font-size:17px}.audit-block{padding:24px}.condition-card{flex-direction:column;gap:10px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"]{--ink:#d8d8d4;--paper:#111110;--muted:#77776f;--line:#2c2c2a;--soft:#1c1c1a;--accent:#4aaa6f}
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .sov-text,
+html[data-theme="dark"] .reflection-prompt,
+html[data-theme="dark"] .voice-text,
+html[data-theme="dark"] .pattern-desc,
+html[data-theme="dark"] .cost-text,
+html[data-theme="dark"] .condition-text,
+html[data-theme="dark"] .audit-text   { color: var(--ink); }
+html[data-theme="dark"] .choice       { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled){ background:#222220; border-color:#4a4a48; }
+html[data-theme="dark"] .choice.selected{ background:#141e17; border-color:var(--accent); }
+html[data-theme="dark"] .feedback     { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline{ color: var(--ink); }
+html[data-theme="dark"] .nav-btn      { background:var(--soft);color:var(--ink);border-color:var(--line); }
+html[data-theme="dark"] .nav-btn:disabled{ opacity:.22; }
+html[data-theme="dark"] .nav-btn.primary{ background:var(--ink);color:var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover{ background:#b4b4b0;opacity:1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter  { color:var(--muted); }
+html[data-theme="dark"] .summary-list li{ border-color:var(--line); }
+html[data-theme="dark"] .summary-num  { color:var(--muted); }
+html[data-theme="dark"] .complete-mark{ color:var(--accent); }
+html[data-theme="dark"] .sov-frame,
+html[data-theme="dark"] .reflection,
+html[data-theme="dark"] .pattern-card,
+html[data-theme="dark"] .voice-block,
+html[data-theme="dark"] .audit-block,
+html[data-theme="dark"] .condition-card{ background:var(--soft);border-color:var(--line); }
+html[data-theme="dark"] .cost-name    { color:var(--accent); }
+
+.theme-toggle{grid-column:2;justify-self:center;background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;line-height:1;opacity:.5;transition:opacity .2s;z-index:10}
+.theme-toggle:hover{opacity:1}
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+<header class="module-header">
+<div class="module-tag">Course 05 &middot; Family Patterns &amp; Scapegoating &middot; Module <strong>06</strong> &middot; Rebuilding Family or Exiting Completely</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+<div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+<div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 5 &middot; Generational Patterns &amp; Family</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c5m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course5-module-1-the-scapegoat-role.html">The Scapegoat Role</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course5-module-2-am-i-the-scapegoat.html">Am I the Scapegoat?</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course5-module-3-the-purpose-of-scapegoating.html">Purpose of Scapegoating</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course5-module-4-generational-wounding.html">Generational Wounding</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course5-module-5-breaking-the-cycle.html">Breaking the Cycle</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c5m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course5-module-6-rebuilding-or-exiting.html">Rebuilding or Exiting</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+<main class="module-container">
+
+<!-- PAGE 1 -->
+<section class="slide active" data-slide="1">
+<div class="slide-number">Page 01 / 09 &middot; The Two Paths</div>
+<h1 class="slide-title">The choice that the exit <em>eventually produces.</em></h1>
+<p class="lead">This module addresses the most consequential decision the exit work requires: whether to remain in contact with the family in a restructured form, or to remove yourself from the system entirely. Neither is a failure of the exit work. Both are complete.</p>
+<p class="body-text">The framing that makes this decision badly is the moral one: staying is forgiveness; leaving is abandonment. Neither is accurate. Staying connected to a family that cannot change perpetuates the wound. Exiting a family that could change forecloses a genuine possibility. The choice is structural, not moral &mdash; and it depends on an honest assessment of the family&rsquo;s actual capacity, not on what you wish were true or what the family insists is true.</p>
+<p class="body-text">The exit from the scapegoat <em>role</em> is already accomplished &mdash; the role has been identified, the system understood, the cycle interrupted. What this module addresses is not whether you exit the role, but what structure your relationship to the family takes after you have.</p>
+<div class="cost-block">
+<p class="cost-name">What this module does not do.</p>
+<p class="cost-text">It does not tell you which path to take. It gives you the structural criteria by which to assess each option honestly, the realistic picture of what each path costs and produces over time, and the practices that allow you to live with whichever decision you make &mdash; without requiring external validation that you chose correctly.</p>
+</div>
+<div class="path-card">
+<h3>The rebuilding path.</h3>
+<p>Continued contact on new terms &mdash; terms the family has genuinely accepted rather than strategically accommodated. The scapegoat role does not run in rebuilt contact. The family has reorganised around the absence of a container for its dysfunction. This requires changes in the family members who ran the system, not just changes in you.</p>
+</div>
+<div class="path-card exit">
+<h3>The exit path.</h3>
+<p>Permanent or indefinite removal from the family system. Not because you are angry, not because you have given up, not as punishment &mdash; but because the structural assessment of the family&rsquo;s capacity has found that continued contact produces ongoing harm that outweighs the cost of the exit&rsquo;s grief. The exit is a structural conclusion, not an emotional verdict.</p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 01</div>
+<p class="scenario-prompt">You are assessing which path to take. A trusted person who has watched your family interactions for years says: &ldquo;Your family will never change &mdash; you need to leave for good.&rdquo; You notice this advice lands as a <em>relief</em> rather than a loss. What does that landing tell you?</p>
+<p class="scenario-context">The felt register in which advice lands is diagnostic information &mdash; but it requires careful reading before it becomes a decision.</p>
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>It confirms the exit is the right decision &mdash; the relief means the exit is what you actually want.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>It tells you that part of you has already completed the structural assessment &mdash; and the assessment&rsquo;s conclusion is producing relief because it aligns with what the honest picture shows.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>It tells you that you are exhausted, and exhaustion is producing the relief rather than genuine structural assessment.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>It means you have given up, and the relief is the giving-up feeling rather than genuine resolution.</button>
+</div>
+<div class="feedback" id="feedback-1">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-1"></p>
+<p class="feedback-text" id="feedback-detail-1"></p>
+</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 01</div>
+<p class="scenario-prompt">The same trusted person says the same thing, but this time it lands as a <em>loss</em> &mdash; a grief &mdash; rather than a relief. What does that tell you?</p>
+<p class="scenario-context">Both relief and grief at the same advice carry structural information. Neither is the decision itself.</p>
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>It confirms the rebuilding path is right &mdash; the grief means you want the family to change.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>It tells you that part of you has not completed the structural assessment &mdash; and the grief is the honest recognition that something genuinely worth having might still be possible in this family.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>It means the exit is wrong for you and you should remain connected regardless of the structural assessment.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>It means you are in denial about how bad the family actually is.</button>
+</div>
+<div class="feedback" id="feedback-2">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-2"></p>
+<p class="feedback-text" id="feedback-detail-2"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" disabled>&larr; Previous</button>
+<span class="nav-counter">01 / 09</span>
+<button class="nav-btn primary" id="next-1" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="slide" data-slide="2">
+<div class="slide-number">Page 02 / 09 &middot; What Transformation Actually Requires</div>
+<h1 class="slide-title">Your exit is necessary. <em>It is not sufficient.</em></h1>
+<p class="lead">The most common error in assessing the rebuilding path is locating all the required change in yourself. You have exited the role, you have changed &mdash; therefore the family can be rebuilt. This is the exit fantasy applied to the family system: the belief that your individual transformation transforms the system.</p>
+<p class="body-text">The system has its own architecture. Your exit from the scapegoat role disrupts that architecture &mdash; it removes the container that was holding the family&rsquo;s dysfunction in a named location. What the architecture does with that disruption determines whether transformation is possible.</p>
+
+<div class="section-heading">Required conditions</div>
+<div class="condition-card">
+<div class="condition-indicator present"></div>
+<div class="condition-body">
+<h4>The primary scapegoater acknowledges the projection</h4>
+<p>The person who assigned and enforced the scapegoat role must, at minimum, acknowledge that the role was assigned rather than deserved. Not a full reckoning &mdash; but some acknowledgment that the blame they placed was not an accurate account of who you are. Without this, the rebuilding path is the accommodation path: you accept less activation in exchange for performing a more subtle version of the role.</p>
+</div>
+</div>
+<div class="condition-card">
+<div class="condition-indicator present"></div>
+<div class="condition-body">
+<h4>At least one other family member holds the change</h4>
+<p>The scapegoat cannot be the only person in the family system doing work. At least one other member must have changed their position relative to the role &mdash; no longer performing the contrast, no longer delivering allied messages, no longer enforcing the family&rsquo;s official account of who you are.</p>
+</div>
+</div>
+<div class="condition-card">
+<div class="condition-indicator present"></div>
+<div class="condition-body">
+<h4>The family system tolerates your changed position</h4>
+<p>When you refuse the role, the family&rsquo;s response is diagnostic. A system with transformation capacity will, after the initial disruption, begin to reorganise &mdash; awkwardly, imperfectly &mdash; around the absence of the scapegoat&rsquo;s function. What the family has done since your exit is the clearest evidence of which capacity it has.</p>
+</div>
+</div>
+<div class="condition-card">
+<div class="condition-indicator absent"></div>
+<div class="condition-body">
+<h4>Not sufficient: surface accommodation</h4>
+<p>The family stops overtly blaming you. The primary scapegoater becomes warmer. Family gatherings are less fraught. These changes can be real adjustments &mdash; or they can be the system recalibrating its enforcement strategy: reducing the pressure that was driving you away in order to bring you close enough for the role to resume at a lower intensity.</p>
+</div>
+</div>
+
+<div class="reflection">
+<div class="reflection-label">Sit with this</div>
+<p class="reflection-prompt">What has your family done since your exit began? Describe specifically &mdash; not what you hope has changed, but what has actually changed in their behaviour toward you.</p>
+<textarea class="reflection-area" placeholder="Write what your observation shows, not what you wish it showed. The distinction is the assessment."></textarea>
+<div class="reflection-note">&mdash; This text remains private and is not stored or transmitted &mdash;</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 02</div>
+<p class="scenario-prompt">Your mother &mdash; the primary scapegoater &mdash; has become noticeably warmer since you began refusing the role six months ago. She calls more often and asks about your life with apparent interest. However, she has never referenced any of the specific accusations and blame patterns that defined your role. What is the most structurally accurate reading of this change?</p>
+<p class="scenario-context">Tone and structure are different diagnostics. The assessment requires distinguishing between them.</p>
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>The warmth is evidence that the exit is working and the rebuilding path is viable.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>The warmth without acknowledgment is surface accommodation &mdash; the system recalibrating to reduce the pressure that was driving the exit, without the structural change the rebuilding path requires.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>The warmth is meaningless &mdash; nothing the primary scapegoater does can be trusted.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>The warmth means the rebuilding path is possible, but only if you avoid any conversation about the past.</button>
+</div>
+<div class="feedback" id="feedback-3">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-3"></p>
+<p class="feedback-text" id="feedback-detail-3"></p>
+</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 02</div>
+<p class="scenario-prompt">Your sibling &mdash; who held the golden child position &mdash; contacts you unprompted and says: &ldquo;I&rsquo;ve been thinking about how things were when we were growing up. I think you got treated differently and it wasn&rsquo;t fair. I&rsquo;m sorry I didn&rsquo;t say something.&rdquo; How do you hold this?</p>
+<p class="scenario-context">An unprompted, specific acknowledgment from the golden child is structurally significant. It is also not the whole picture.</p>
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>As proof the family is changing and the rebuilding path is confirmed.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>As one of the required conditions being genuinely met &mdash; significant and real, while noting that the sibling&rsquo;s acknowledgment alone does not constitute full structural transformation.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>With suspicion &mdash; the sibling is probably doing this for their own reasons and it doesn&rsquo;t mean anything real.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>As an invitation to replay the whole history with the sibling as mediator.</button>
+</div>
+<div class="feedback" id="feedback-4">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-4"></p>
+<p class="feedback-text" id="feedback-detail-4"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">02 / 09</span>
+<button class="nav-btn primary" id="next-2" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="slide" data-slide="3">
+<div class="slide-number">Page 03 / 09 &middot; Assessing Your Family&rsquo;s Capacity</div>
+<h1 class="slide-title">The question is not whether you <em>want</em> them to change.</h1>
+<p class="lead">The structural assessment is not a verdict on the family&rsquo;s worth or the family members as people. It is an honest evaluation of the evidence: what has the family done since you began the exit work?</p>
+<p class="body-text">The assessment has two distinct error modes. The first is motivated optimism: the desire for the family to be transformable produces an overreading of surface accommodation as structural change. The second is motivated pessimism: the pain of the exit work produces a foreclosure of the rebuilding path before the evidence is honestly examined. Both errors produce decisions made for the wrong reasons.</p>
+
+<div class="section-heading">Signs the family system has transformation capacity</div>
+<div class="pattern-card">
+<div class="pattern-tag">Indicator</div>
+<p class="pattern-name">The dysfunction migrated without finding a new container.</p>
+<p class="pattern-desc">When you left the scapegoat role, the family&rsquo;s unprocessed shame did not immediately attach to another family member. The family tolerated the undifferentiated discomfort rather than resolving it by assigning a new holder. This is the most significant structural indicator &mdash; it suggests the system has some capacity to hold its dysfunction without externalising it.</p>
+</div>
+<div class="pattern-card">
+<div class="pattern-tag">Indicator</div>
+<p class="pattern-name">The family&rsquo;s account of the past has become more complex.</p>
+<p class="pattern-desc">Individual members have begun to acknowledge, in small ways, that the family had difficulties that were not attributable to a single person. The narrative has cracks in it now &mdash; not full honesty, but enough complexity to suggest the system can tolerate some accountability.</p>
+</div>
+<div class="pattern-card">
+<div class="pattern-tag">Indicator</div>
+<p class="pattern-name">At least one family member has sought their own help.</p>
+<p class="pattern-desc">A sibling in therapy. A parent attending to their own history. Not required for transformation &mdash; but its presence is a strong indicator that the system is doing more than surface recalibration.</p>
+</div>
+
+<div class="section-heading">Signs the family system lacks transformation capacity</div>
+<div class="pattern-card">
+<div class="pattern-tag">Indicator</div>
+<p class="pattern-name">A new scapegoat has been found.</p>
+<p class="pattern-desc">The most unambiguous diagnostic. When you left the role, the family rapidly assigned a new container &mdash; a different sibling, a new partner, a grandchild. The dysfunction found a new location without being examined. The architecture is intact; only its occupant has changed. The rebuilding path in this system means re-entering a functioning scapegoating mechanism.</p>
+</div>
+<div class="pattern-card">
+<div class="pattern-tag">Indicator</div>
+<p class="pattern-name">The escalation has continued without reduction.</p>
+<p class="pattern-desc">Since your exit began, the family&rsquo;s pressure has not reduced, diversified, or evolved. The same enforcement strategies are in use &mdash; the same allied messages, the same guilt deployment, the same official account of who you are. The system is waiting for the exit to fail and the role to be resumed.</p>
+</div>
+<div class="pattern-card">
+<div class="pattern-tag">Indicator</div>
+<p class="pattern-name">Every attempted conversation about the past produces the original dynamics.</p>
+<p class="pattern-desc">You have tried, at some point, to name what happened and what it cost. The family&rsquo;s response has been denial, reframing it as your misperception, or rapid escalation into blame. The past is not available to be held honestly in this system. Rebuilding requires the past to be <em>holdable</em> &mdash; not fully processed, but at minimum nameable without triggering the full enforcement mechanism.</p>
+</div>
+
+<div class="reflection">
+<div class="reflection-label">Sit with this</div>
+<p class="reflection-prompt">Using the indicators above, what is the honest structural assessment of your family&rsquo;s capacity? Write it plainly &mdash; the reading the evidence actually supports.</p>
+<textarea class="reflection-area" placeholder="Not what you wish were true, not the most generous or harshest reading. The reading the evidence supports."></textarea>
+<div class="reflection-note">&mdash; This text remains private and is not stored or transmitted &mdash;</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 03</div>
+<p class="scenario-prompt">Since you began refusing the role two years ago, your younger sibling has become the family&rsquo;s primary problem &mdash; described in the same terms you once were: dramatic, ungrateful, always causing trouble. What does this mean for your assessment?</p>
+<p class="scenario-context">The new occupant&rsquo;s situation is structurally connected to yours through the shared mechanism.</p>
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>It means the family is changing &mdash; the focus has moved off you, which is progress.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>It means the system&rsquo;s scapegoating architecture is intact and operational &mdash; it has found a new container rather than examining what the container was holding. The rebuilding assessment must account for this directly.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>It means your sibling is now the real problem and was always more difficult than you.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>It means nothing for your personal rebuilding assessment &mdash; their situation and yours are separate.</button>
+</div>
+<div class="feedback" id="feedback-5">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-5"></p>
+<p class="feedback-text" id="feedback-detail-5"></p>
+</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 03</div>
+<p class="scenario-prompt">You attempt a direct conversation with your parent about a specific incident from your childhood. Your parent listens, does not immediately deny, becomes visibly uncomfortable, and says: &ldquo;I didn&rsquo;t realise I was doing that. I don&rsquo;t know what to say right now.&rdquo; They end the conversation shortly after. How do you read this response?</p>
+<p class="scenario-context">A single conversation&rsquo;s content and its outcome are different parts of the structural assessment.</p>
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>As failure &mdash; they ended the conversation without resolution or apology.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>As a structurally significant response &mdash; discomfort without denial, and an acknowledgment of not knowing what to say, are the beginning of the acknowledgment the rebuilding path requires.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>As manipulation &mdash; the discomfort is performed to avoid a real reckoning.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>As confirmation that the rebuilding path is complete &mdash; they&rsquo;ve acknowledged it.</button>
+</div>
+<div class="feedback" id="feedback-6">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-6"></p>
+<p class="feedback-text" id="feedback-detail-6"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">03 / 09</span>
+<button class="nav-btn primary" id="next-3" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="slide" data-slide="4">
+<div class="slide-number">Page 04 / 09 &middot; What Complete Exit Means</div>
+<h1 class="slide-title">A structural conclusion, <em>not an emotional verdict.</em></h1>
+<p class="lead">No-contact is the most misunderstood option in the family systems literature and in popular culture equally. It is framed as either the most courageous act of self-preservation or the most selfish abandonment of family obligation. Both framings are wrong for the same reason: they locate the decision in the realm of character rather than structural assessment.</p>
+<p class="body-text">Complete exit is the appropriate structural conclusion when the honest assessment shows that continued contact produces ongoing harm that consistently outweighs the cost of the exit &mdash; and that the family&rsquo;s capacity for the change required to reduce that harm is not present.</p>
+<div class="cost-block">
+<p class="cost-name">What complete exit is not.</p>
+<p class="cost-text">It is not punishment. The family experiences it as punishment &mdash; that is the role&rsquo;s punishment narrative, which the family system uses to produce guilt that brings the scapegoat back. The decision to exit is not designed to change the family. It does not require the family to understand or accept it. It is a structural decision about what conditions are necessary for your continued wellbeing &mdash; and the observation that those conditions are not present in the current family system.</p>
+</div>
+<div class="cost-block">
+<p class="cost-name">What complete exit is not.</p>
+<p class="cost-text">It is not permanent in the sense of irrevocable. The family&rsquo;s capacity can change over years &mdash; through individual members doing their own work, through generational shift, through crisis that produces genuine accountability. Complete exit is the <em>current</em> structural conclusion based on the current evidence. If the evidence changes &mdash; if the conditions shift &mdash; the assessment can be revisited.</p>
+</div>
+<div class="voice-block">
+<p class="voice-text">You&rsquo;re destroying the family. You&rsquo;re choosing yourself over everyone else. You&rsquo;ll regret this when it&rsquo;s too late. You&rsquo;re being selfish and dramatic. We never did anything that bad. Every family has problems &mdash; you&rsquo;re not special.</p>
+<div class="voice-label"><strong>The guilt narrative the family produces.</strong> &middot; The system&rsquo;s self-preservation mechanism, not an accurate account of the exit&rsquo;s ethics.</div>
+</div>
+<div class="sov-frame">
+<div class="sov-label">The structural response</div>
+<p class="sov-text">The family is experiencing the loss of the scapegoat function &mdash; the container that was holding its dysfunction &mdash; and the loss is real and painful for the system. That pain does not constitute evidence that the exit is wrong. A system that requires one of its members to carry everyone else&rsquo;s shame in order to remain intact is a system whose demand cannot be ethically met.</p>
+</div>
+<div class="section-heading">The forms complete exit takes</div>
+<div class="pattern-card">
+<div class="pattern-tag">Form 01</div>
+<p class="pattern-name">No-contact.</p>
+<p class="pattern-desc">No communication of any kind &mdash; calls, texts, letters, social media, through third parties. The cleanest boundary structurally, and the most likely to be maintained without the erosion that partial contact produces. The hardest to hold against the family&rsquo;s various approaches. The one that produces the most unambiguous grief.</p>
+</div>
+<div class="pattern-card">
+<div class="pattern-tag">Form 02</div>
+<p class="pattern-name">Structured minimal contact.</p>
+<p class="pattern-desc">Contact only on your defined terms: specific occasions, specific formats, specific content boundaries. Not responding to the family&rsquo;s contact outside those terms. The distinction from the rebuilding path: structured minimal contact does not require the family to change. It requires only that you define and maintain the structure, regardless of the family&rsquo;s compliance.</p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 04</div>
+<p class="scenario-prompt">Three months after going no-contact, a family member you were not in conflict with &mdash; an aunt who treated you with some warmth &mdash; sends a handwritten letter saying she misses you and would like to hear from you. She does not mention the primary scapegoater or the family dynamics. What do you do?</p>
+<p class="scenario-context">The question is whether contact with her is structurally separable from contact with the wider system &mdash; and whether the answer can be assessed before the pull of the letter drives the action.</p>
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Respond immediately &mdash; she&rsquo;s done nothing wrong and the no-contact was about the primary family, not her.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Assess whether contact with her is structurally separable from contact with the wider system &mdash; and hold the boundary while making that assessment rather than acting from the immediate pull of the letter&rsquo;s warmth.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Ignore it &mdash; any response reopens the system&rsquo;s access to you.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Use her as a channel to communicate your position to the wider family.</button>
+</div>
+<div class="feedback" id="feedback-7">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-7"></p>
+<p class="feedback-text" id="feedback-detail-7"></p>
+</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 04</div>
+<p class="scenario-prompt">A year into no-contact, the primary scapegoater is diagnosed with a serious illness. You learn about it through a sibling who does not ask you to return &mdash; they simply tell you. You feel the full weight of anticipatory grief: this person may die and you will not have reconciled. What is the governed response to this moment?</p>
+<p class="scenario-context">Illness does not automatically change the structural conditions that produced the no-contact decision &mdash; but it changes the emotional register of holding that decision.</p>
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Return to contact immediately &mdash; the illness changes the structural calculus entirely.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the grief without converting it into a structural decision made from the activated grief-state &mdash; and assess, from a more regulated state, whether the structural conditions for contact have genuinely changed.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Treat the grief as evidence that the exit was wrong all along.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Suppress the grief &mdash; you made the decision and you need to hold it.</button>
+</div>
+<div class="feedback" id="feedback-8">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-8"></p>
+<p class="feedback-text" id="feedback-detail-8"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">04 / 09</span>
+<button class="nav-btn primary" id="next-4" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- PAGE 5 -->
+<section class="slide" data-slide="5">
+<div class="slide-number">Page 05 / 09 &middot; The Costs &mdash; An Honest Accounting</div>
+<h1 class="slide-title">Neither path avoids <em>all cost.</em></h1>
+<p class="lead">The choice is not between a painful option and a painless one. It is between two different kinds of pain over two different time horizons. The costs of one path are most visible immediately. The costs of the other accumulate. Deciding from the immediate costs produces the wrong decision in both directions.</p>
+
+<div class="section-heading">The costs of continued contact</div>
+<div class="cost-block">
+<p class="cost-name">Ongoing activation management.</p>
+<p class="cost-text">Every family interaction, regardless of its outcome, requires a management load: preparation, the interaction itself, and the discharge aftermath. The activation management load across years of continued contact accumulates into a significant portion of your cognitive and somatic resources. This cost is invisible in any single interaction and only becomes visible across the full span of the contact.</p>
+</div>
+<div class="cost-block">
+<p class="cost-name">The role&rsquo;s residual pull.</p>
+<p class="cost-text">The role is most accessible in the family&rsquo;s presence. Continued contact means continued exposure to the context in which the role is most easily activated &mdash; and the ongoing management of the role&rsquo;s residual pull as a maintenance cost that does not fully resolve while the contact continues. For some people, this cost prevents the exit work from consolidating in non-family contexts because the family contact is resetting the activation baseline.</p>
+</div>
+<div class="cost-block">
+<p class="cost-name">The partial accommodation trap.</p>
+<p class="cost-text">Continued contact with a family that has not fully transformed creates ongoing pressure to accommodate the role&rsquo;s partial continuation &mdash; the subtle version, the occasional regression. Each accommodation is small. Across years, the accumulation of small accommodations produces the partial role resumption that looks, from outside, like the exit never fully happened.</p>
+</div>
+
+<div class="section-heading">The costs of complete exit</div>
+<div class="cost-block">
+<p class="cost-name">The grief that does not resolve on a schedule.</p>
+<p class="cost-text">The grief of the complete exit recurs: at family holidays spent elsewhere, at milestones the family does not witness, at the parent&rsquo;s declining health, at the eventual death without reconciliation. It does not mean the exit was wrong. It means the exit&rsquo;s cost is real and will be paid in instalments across the years.</p>
+</div>
+<div class="cost-block">
+<p class="cost-name">The social cost of the family&rsquo;s narrative.</p>
+<p class="cost-text">The family will produce and distribute a narrative about the exit. The narrative will not be accurate &mdash; it will be the system&rsquo;s self-protective account, in which your exit is evidence of your dysfunction. Extended family, family friends, some mutual relationships will hear the narrative before they hear yours. The social cost is the ongoing toll of being the villain in a story that circulates without you present to contest it.</p>
+</div>
+<div class="cost-block">
+<p class="cost-name">The identity cost of family absence.</p>
+<p class="cost-text">Family &mdash; even a family that scapegoated you &mdash; provided a location in a story. The complete exit requires building a new story in which your place does not depend on that structure. The identity cost is the disorientation of being locationless in the early period of the exit, before the new story is built. It is real, temporary, and resolves as the chosen family and the self-authored story consolidate.</p>
+</div>
+
+<div class="reflection">
+<div class="reflection-label">Sit with this</div>
+<p class="reflection-prompt">Of the costs above &mdash; on both sides &mdash; which specific ones are most present in your own honest assessment? Which ones are you underestimating?</p>
+<textarea class="reflection-area" placeholder="Name the costs you are underweighting. The ones that feel distant or manageable in the abstract tend to be the ones that arrive unexpectedly."></textarea>
+<div class="reflection-note">&mdash; This text remains private and is not stored or transmitted &mdash;</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 05</div>
+<p class="scenario-prompt">You have been in continued contact with your family for two years since the exit work began. The role rarely runs at full activation now. But you notice that you spend roughly three days preparing for and recovering from every family gathering, and that each gathering resets a low-grade hypervigilance that takes a week to discharge. You have adapted to this cost so completely that it no longer registers as abnormal. What is the structural observation here?</p>
+<p class="scenario-context">Adaptation to a cost does not eliminate the cost. It makes the cost invisible.</p>
+<div class="choices" data-scenario="9">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>The cost is manageable &mdash; you&rsquo;ve adapted, which means the continued contact is working.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>The adaptation to the cost has made it invisible, but the cost is still present and accumulating &mdash; the honest accounting requires making it visible rather than normalising it.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>The cost is too high and means you should immediately exit completely.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>The hypervigilance is a personal issue unrelated to the family contact.</button>
+</div>
+<div class="feedback" id="feedback-9">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-9"></p>
+<p class="feedback-text" id="feedback-detail-9"></p>
+</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 05</div>
+<p class="scenario-prompt">Six months after going no-contact, you learn from a mutual friend that your family is telling people you &ldquo;abandoned the family&rdquo; and had &ldquo;a breakdown.&rdquo; You feel the pull to contact family members to correct the record. What is the governed response?</p>
+<p class="scenario-context">The family&rsquo;s narrative is predictable and was assessed as a cost before the exit. The question is which relationships it actually threatens.</p>
+<div class="choices" data-scenario="10">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Contact the family immediately &mdash; the narrative is damaging and you have to address it.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Recognise the narrative as predictable, and assess which relationships in your actual life are genuinely at risk from it &mdash; addressing those directly rather than re-entering the family system to correct the family&rsquo;s account.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Contact everyone who might have heard the narrative and provide a full account of what happened.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Accept the narrative as the price of the exit and do nothing.</button>
+</div>
+<div class="feedback" id="feedback-10">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-10"></p>
+<p class="feedback-text" id="feedback-detail-10"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">05 / 09</span>
+<button class="nav-btn primary" id="next-5" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- PAGE 6 -->
+<section class="slide" data-slide="6">
+<div class="slide-number">Page 06 / 09 &middot; Living With the Rebuilding Choice</div>
+<h1 class="slide-title">The rebuilt relationship is not the old relationship <em>with the bad parts removed.</em></h1>
+<p class="lead">It is a new structure built on new terms &mdash; and those terms require ongoing maintenance. The architecture does not disappear because the scapegoating has stopped. It is present in the room at every gathering. The rebuilt relationship is the continuous practice of holding your position inside a system that still remembers, structurally, where you used to stand.</p>
+
+<div class="condition-card">
+<div class="condition-indicator present"></div>
+<div class="condition-body">
+<h4>The new terms must be explicit, not assumed</h4>
+<p>The rebuilt relationship requires that the new terms be named &mdash; not as an ultimatum, but as a statement of what the contact now requires. What topics are not available in the old framing. What responses you will and will not provide. The new terms do not require the family&rsquo;s agreement. Their compliance with them over time is what builds the rebuilt relationship.</p>
+</div>
+</div>
+<div class="condition-card">
+<div class="condition-indicator present"></div>
+<div class="condition-body">
+<h4>Regressions are predictable and not catastrophic</h4>
+<p>The family will regress &mdash; in moments of stress, at gatherings where the original dynamics are most concentrated. The regressions are not evidence that the rebuilding has failed. They are evidence that the system&rsquo;s architecture is still present and becomes active under certain conditions. The governed response to regression is the refusal practice applied consistently, until the regression resolves without the role resuming.</p>
+</div>
+</div>
+<div class="condition-card">
+<div class="condition-indicator present"></div>
+<div class="condition-body">
+<h4>The rebuilt relationship is not the relationship you needed as a child</h4>
+<p>The most reliable source of continued pain in the rebuilt relationship is the expectation &mdash; usually unconscious &mdash; that the rebuilt contact will provide what the scapegoat role denied: the parental recognition, the sibling solidarity, the belonging that was withheld. The rebuilt relationship cannot deliver this. The grief of this recognition is the hardest part of the rebuilding path, and it arrives when the contact is going well and <em>still</em> does not produce the feeling of being unconditionally held.</p>
+</div>
+</div>
+
+<div class="voice-block">
+<p class="voice-text">Nothing has changed. This is exactly what always happens. I should never have come. The exit work was wasted. They will never really change and I am a fool for thinking they would.</p>
+<div class="voice-label"><strong>The inner voice during a regression.</strong> &middot; A single regression is not the rebuilt relationship&rsquo;s assessment. The pattern across the year is.</div>
+</div>
+<div class="sov-frame">
+<div class="sov-label">The structural response to regression</div>
+<p class="sov-text">The regression is not evidence that nothing has changed. It is evidence that this specific context, at this specific activation level, has returned the system to its oldest available pattern. Apply the refusal practice, hold the position, and reassess after the gathering from a discharged state.</p>
+</div>
+
+<div class="audit-block">
+<div class="audit-title">Rebuilding maintenance check</div>
+<div class="audit-desc">These are the practices that hold the rebuilt relationship&rsquo;s structure. Review each one honestly.</div>
+<div class="audit-item">
+<div class="audit-item-label">After each family interaction, I discharge before assessing.</div>
+<textarea placeholder="How consistently are you doing this, and what prevents it when it doesn't happen?"></textarea>
+</div>
+<div class="audit-item">
+<div class="audit-item-label">I know what the new terms are and I hold them under pressure.</div>
+<textarea placeholder="Where are the new terms held well? Where do they erode?"></textarea>
+</div>
+<div class="audit-item">
+<div class="audit-item-label">I have at least one relationship outside the family that can hold my account of family interactions honestly.</div>
+<textarea placeholder="Who is that person? What happens when that support is not available?"></textarea>
+</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 06</div>
+<p class="scenario-prompt">You have been on the rebuilding path for eighteen months. At a family gathering, your parent &mdash; who has been genuinely warmer and has made some acknowledgment of the past &mdash; makes an offhand comment that contains the old framing: attributes a family problem to &ldquo;how you always were.&rdquo; The comment is small. Nobody else notices. What do you do?</p>
+<p class="scenario-context">The calibration of the response matters as much as the response itself.</p>
+<div class="choices" data-scenario="11">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Address it immediately and publicly &mdash; the family needs to know this framing is not acceptable.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the position without drama &mdash; note internally that the regression occurred, do not absorb the framing, and address it directly with the parent in a separate, lower-activation moment if it continues.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Let it go &mdash; confronting small comments will exhaust the rebuilt relationship.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Treat it as evidence that the rebuilding has failed and the exit path is the correct one after all.</button>
+</div>
+<div class="feedback" id="feedback-11">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-11"></p>
+<p class="feedback-text" id="feedback-detail-11"></p>
+</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 06</div>
+<p class="scenario-prompt">Two years into the rebuilding path, you realise that your relationship with your parent has become genuinely better &mdash; warmer, less managed, occasionally even easy. But you notice a persistent low sadness around it: the warmth is real and still does not feel like enough. You find yourself grieving the relationship you wanted rather than the one you now have. What is this grief telling you?</p>
+<p class="scenario-context">The rebuilt relationship&rsquo;s grief and the rebuilt relationship&rsquo;s genuine improvement are not contradictions.</p>
+<div class="choices" data-scenario="12">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>That the rebuilding path has failed &mdash; the relationship will never give you what you needed.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>That the rebuilt relationship is real and limited &mdash; the grief is the honest recognition of what the relationship can now provide and what the original wound cost that cannot be recovered from this source.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>That you want too much and need to lower your expectations further.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>That you should return to the exit path, since the grief means you&rsquo;re not getting what you need.</button>
+</div>
+<div class="feedback" id="feedback-12">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-12"></p>
+<p class="feedback-text" id="feedback-detail-12"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">06 / 09</span>
+<button class="nav-btn primary" id="next-6" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- PAGE 7 -->
+<section class="slide" data-slide="7">
+<div class="slide-number">Page 07 / 09 &middot; Living With the Exit Choice</div>
+<h1 class="slide-title">The grief is not a sign <em>you chose wrong.</em></h1>
+<p class="lead">The complete exit is not a relief that arrives when the decision is made and then sustains itself. The decision produces relief &mdash; and then grief &mdash; and then both simultaneously, in proportions that shift over months and years without ever fully resolving into one or the other.</p>
+<p class="body-text">The family continues to exist in time; the family members age and die and have children; the family story continues to develop without you in it. The exit does not end the family. It ends your participation in it &mdash; and the grief of that distinction is what the exit choice asks you to carry.</p>
+
+<div class="section-heading">The grief&rsquo;s specific forms</div>
+<div class="pattern-card">
+<div class="pattern-tag">Form 01</div>
+<p class="pattern-name">The holiday grief.</p>
+<p class="pattern-desc">Holidays and family occasions produce the grief most acutely because these are the moments the family structure is most present in the culture&rsquo;s imagery. This grief is not evidence that you miss the family you actually had &mdash; it is the grief for the family you needed, which the holidays activate most intensely. It is the grief for what was possible in principle and not delivered in practice.</p>
+</div>
+<div class="pattern-card">
+<div class="pattern-tag">Form 02</div>
+<p class="pattern-name">The anticipatory grief of death.</p>
+<p class="pattern-desc">The parent or sibling will die. If you are in no-contact, you will not have had the reconciliation. The anticipatory grief of this &mdash; the ongoing awareness that death will come before the reconciliation that was not possible &mdash; is one of the exit&rsquo;s most sustained costs. The reconciliation was not available in the family&rsquo;s current form. The death does not retroactively make it available. The grief is real. The decision was not therefore wrong.</p>
+</div>
+<div class="pattern-card">
+<div class="pattern-tag">Form 03</div>
+<p class="pattern-name">The identity grief.</p>
+<p class="pattern-desc">For a period after the exit, there is identity disorientation: you are no longer located in the family structure. The scapegoat role was painful and harmful, but it was a <em>position</em> &mdash; a defined place in a defined system. The exit removes the position. Until the new story is built, the exit produces a groundlessness that is its own distinct grief. It resolves as the self-authored story consolidates.</p>
+</div>
+
+<div class="section-heading">Building chosen family</div>
+<p class="body-text">The exit&rsquo;s grief is most manageable when held within a structure of chosen relationships &mdash; people who have earned the position the family could not hold. The chosen family is not a replacement for the family of origin. It is a different structure entirely: built from alignment rather than genetics, from demonstrated reliability rather than obligation.</p>
+<div class="condition-card">
+<div class="condition-indicator present"></div>
+<div class="condition-body">
+<h4>The chosen family is built slowly</h4>
+<p>The scapegoat&rsquo;s relational fingerprint does not disappear at the exit. It is present in the early chosen family relationships and must be held consciously. The chosen family is built over years of the exit work&rsquo;s application in non-family contexts &mdash; the gradual consolidation of relationships in which the role does not run and genuine presence is possible. These relationships are identifiable by the specific quality of ease they produce: the ease of not being managed.</p>
+</div>
+</div>
+
+<div class="reflection">
+<div class="reflection-label">Sit with this</div>
+<p class="reflection-prompt">Who are the people in your life who hold the position of chosen family &mdash; or who have the potential to? What does your relationship with each of them look like when the scapegoat fingerprint is not running?</p>
+<textarea class="reflection-area" placeholder="Name them. Describe the specific quality of ease that is possible with each one. That quality is what the exit is building toward."></textarea>
+<div class="reflection-note">&mdash; This text remains private and is not stored or transmitted &mdash;</div>
+</div>
+<div class="reflection">
+<div class="reflection-label">Sit with this</div>
+<p class="reflection-prompt">What specific form does the exit&rsquo;s grief take for you? When does it arrive most forcefully?</p>
+<textarea class="reflection-area" placeholder="The holiday grief, the anticipatory grief, the identity grief, or another form. Name it specifically. The specific form is the one the practices need to be built around."></textarea>
+<div class="reflection-note">&mdash; This text remains private and is not stored or transmitted &mdash;</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 07</div>
+<p class="scenario-prompt">It is the first major holiday after the complete exit. You have made plans with close friends. The day arrives and you find yourself unable to be fully present &mdash; aware, throughout, of the family gathering happening without you. A friend notices and asks if you are okay. What do you say?</p>
+<p class="scenario-context">The chosen family&rsquo;s capacity to hold the grief requires the grief to be named for them to hold it.</p>
+<div class="choices" data-scenario="13">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Nothing &mdash; the grief is too complicated to explain and it will make the gathering worse for everyone.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Tell them honestly: this is the first holiday after a major family decision and you are aware of the grief of it. Allow the chosen family to hold what it is built to hold.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Dismiss it &mdash; say you are fine and redirect the conversation.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Leave early &mdash; you shouldn&rsquo;t be around people while you feel like this.</button>
+</div>
+<div class="feedback" id="feedback-13">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-13"></p>
+<p class="feedback-text" id="feedback-detail-13"></p>
+</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 07</div>
+<p class="scenario-prompt">Two years into the complete exit, you notice that the grief has become less constant but has not disappeared. You are building a life that is genuinely good &mdash; close relationships, meaningful work, a growing sense of self. And the grief is still there, smaller but present. You find yourself wondering when it will stop. What is the most accurate answer to that question?</p>
+<p class="scenario-context">The question &ldquo;when will it stop&rdquo; contains a hidden assumption about what grief&rsquo;s resolution looks like.</p>
+<div class="choices" data-scenario="14">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>When you have processed it fully &mdash; the grief persisting means you haven&rsquo;t finished the work.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>The grief of losing what you needed but never had does not stop on a schedule &mdash; it becomes part of the life rather than the centre of it. The question is not when it stops but when it no longer prevents the life from being fully inhabited.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>When you reconnect with the family &mdash; the grief is the exit&rsquo;s signal that the decision was wrong.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>The grief means you are depressed and need clinical intervention rather than continued exit work.</button>
+</div>
+<div class="feedback" id="feedback-14">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-14"></p>
+<p class="feedback-text" id="feedback-detail-14"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">07 / 09</span>
+<button class="nav-btn primary" id="next-7" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- PAGE 8 -->
+<section class="slide" data-slide="8">
+<div class="slide-number">Page 08 / 09 &middot; The Transmission Forward</div>
+<h1 class="slide-title">What you pass to the next generation <em>depends on how consciously you hold your choice.</em></h1>
+<p class="lead">The most fundamental reason the exit work matters is generational. Both the rebuilding path and the exit path can carry or interrupt the transmission. The interruption is not determined by the path chosen &mdash; it is determined by the consciousness with which the path is held.</p>
+<p class="body-text">The scapegoat who becomes a parent carries the full installation of the family&rsquo;s projection mechanism. The exit work reduces this. It does not eliminate it. The forward practice is the ongoing monitoring of the projection&rsquo;s activation: the moments when a child or partner becomes the repository for shame or frustration that belongs elsewhere.</p>
+
+<div class="section-heading">What each path transmits</div>
+<div class="path-card">
+<h3>The rebuilding path &mdash; what it transmits.</h3>
+<p><strong>If held consciously:</strong> the demonstration that relationships can be restructured after damage, that accountability is possible, that people can change &mdash; slowly, imperfectly, and genuinely. The children in your life see someone holding a difficult relationship on new terms without either abandoning it or being consumed by it.</p>
+<p><strong>If held unconsciously:</strong> the subtle continuation of the family system&rsquo;s dynamics, which the next generation inherits through proximity. The scapegoating mechanism passes through the relational air of a family that has changed its surface without changing its structure.</p>
+</div>
+<div class="path-card exit">
+<h3>The exit path &mdash; what it transmits.</h3>
+<p><strong>If held consciously:</strong> the demonstration that some relationships cannot be held on terms that preserve your integrity &mdash; and that exiting those relationships is a legitimate structural decision. The children in your life see someone who knows the difference between a relationship that can be rebuilt and one that cannot.</p>
+<p><strong>If held unconsciously:</strong> the exit as pattern &mdash; the tendency to leave relationships when they become difficult, applied to relationships that do not warrant the exit. The next generation learns that relationships end under pressure, rather than that <em>specific</em> relationships end when the structural assessment supports ending them.</p>
+</div>
+
+<div class="section-heading">The forward practices &mdash; regardless of path</div>
+<div class="pattern-card">
+<div class="pattern-tag">Practice 01</div>
+<p class="pattern-name">Name the mechanism to children in your life.</p>
+<p class="pattern-desc">You do not need to give a psychology lecture. You need to provide a different account than the one you received: one in which family difficulty is named honestly, in which blame is not assigned to a single person, in which the children are told that family dynamics are complex and that they are not the reason for the difficulty.</p>
+</div>
+<div class="pattern-card">
+<div class="pattern-tag">Practice 02</div>
+<p class="pattern-name">Monitor your own projection.</p>
+<p class="pattern-desc">The exit work reduces the projection mechanism. It does not eliminate it. The forward practice is the ongoing monitoring: the moments when a child or partner or colleague becomes the repository for shame that belongs elsewhere. Catching the projection before it completes its assignment is the transmission&rsquo;s interruption from inside.</p>
+</div>
+<div class="pattern-card">
+<div class="pattern-tag">Practice 03</div>
+<p class="pattern-name">Maintain the somatic practices.</p>
+<p class="pattern-desc">The role&rsquo;s installation is somatic. The interruption of its transmission is also somatic. The practices from Module 5 &mdash; the breath, the posture, the discharge &mdash; are the body-level maintenance of the exit work. They are not dramatic. They are daily. Their continuity is what prevents the role&rsquo;s reinstallation in new contexts that, without the practices, will simply reproduce the old ones.</p>
+</div>
+
+<div class="reflection">
+<div class="reflection-label">Sit with this</div>
+<p class="reflection-prompt">What do you want the children in your life to learn from watching how you hold your family situation? What would that transmission require of you that you are not currently doing?</p>
+<textarea class="reflection-area" placeholder="Name what you are transmitting now versus what you want to transmit. The gap between the two is the next layer of the work."></textarea>
+<div class="reflection-note">&mdash; This text remains private and is not stored or transmitted &mdash;</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 08</div>
+<p class="scenario-prompt">Your child asks why they never see their grandparents. You are on the complete exit path. What do you say?</p>
+<p class="scenario-context">The answer must be honest enough not to produce the anxious unspoken &mdash; and appropriately bounded for the child&rsquo;s developmental stage.</p>
+<div class="choices" data-scenario="15">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Nothing &mdash; they are too young to understand and the truth would be damaging.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>An age-appropriate honest account: some families have problems that make it hard to spend time together, this is one of them &mdash; but it is not the child&rsquo;s fault and it does not mean there is something wrong with family in general.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Tell them the full history of the family dysfunction &mdash; they deserve to know the truth.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Tell them the grandparents are too busy or too far away &mdash; keep it simple and avoid the topic.</button>
+</div>
+<div class="feedback" id="feedback-15">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-15"></p>
+<p class="feedback-text" id="feedback-detail-15"></p>
+</div>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Page 08</div>
+<p class="scenario-prompt">During a conflict with your partner, you notice you have gone silent, become hypervigilant, and are working very hard to manage the conflict&rsquo;s outcome rather than expressing what you actually think. You recognise this as the role&rsquo;s autopilot running in an intimate relationship. What is the governed response?</p>
+<p class="scenario-context">The role&rsquo;s fingerprint in intimate relationships is a signal about the exit work&rsquo;s next layer &mdash; not about the relationship&rsquo;s viability.</p>
+<div class="choices" data-scenario="16">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Push through it and finish the conflict &mdash; stopping will make things worse.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Name it &mdash; tell your partner you&rsquo;ve gone into management mode and need a moment to find your actual position, then take that moment before continuing.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Accept it as permanent &mdash; this is simply how you are in conflict situations and it won&rsquo;t change.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>End the relationship &mdash; it&rsquo;s triggering the role and that means it&rsquo;s the wrong relationship.</button>
+</div>
+<div class="feedback" id="feedback-16">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-16"></p>
+<p class="feedback-text" id="feedback-detail-16"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">08 / 09</span>
+<button class="nav-btn primary" id="next-8" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- PAGE 9: COMPLETION -->
+<section class="slide" data-slide="9">
+<div class="slide-number">Page 09 / 09 &middot; Course Complete</div>
+<div class="complete-mark">&#10022;</div>
+<h1 class="slide-title">The diagnostic is complete. <em>The work continues.</em></h1>
+<p class="lead">You have worked through the full structure of the scapegoat role &mdash; how it forms, how it operates, what it costs, and what it takes to exit it. The role has been named. The mechanism has been made visible. The generational chain has been identified. The exit practices have been established.</p>
+
+<div class="section-heading">What this course covered</div>
+<ul class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">How families identify and assign the scapegoat &mdash; the structural necessity of the role, not the personal deservingness of its holder.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">The signs of the scapegoat position &mdash; the specific costs it imposes over decades and the way those costs become invisible through normalisation.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Why families need the scapegoat &mdash; what the role conceals about the system&rsquo;s actual dysfunction and who benefits from the concealment.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">How the role compounds across generations &mdash; the inheritance mechanisms, the founding material, and the generational wounding that precedes your own.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">How to exit the role &mdash; the practices, the body-level work, the villain narrative, and what the exit makes possible in every relationship the role was running in.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">The choice between rebuilding and exiting &mdash; the structural criteria, the honest costs of each path, and how to live with whichever decision the evidence supports.</span></li>
+</ul>
+
+<div class="sov-frame">
+<div class="sov-label">The transmission interrupted</div>
+<p class="sov-text">The role has been named. The mechanism is no longer unconscious. The transmission is no longer automatic. What changes is not the difficulty of the material but your relationship to it &mdash; and that relationship is what the next generation inherits from you now.</p>
+</div>
+
+<p class="body-text">The scapegoat role was assigned to you by a system that needed someone to carry what it could not hold. You did not deserve the assignment. You were placed in it by forces that predate your birth and operate across generations. The exit from it is not a correction of your character. It is the refusal of a structural demand that was never ethically yours to meet.</p>
+
+<div class="safety-note">
+<div class="safety-label">A note on professional support</div>
+<p class="safety-text">This course is educational material &mdash; it names structures and offers frameworks. It is not therapy and does not replace it. If the material has activated significant distress, has surfaced experiences that feel unmanageable, or has raised questions about current safety, please consider working with a therapist who specialises in family systems, complex trauma, or attachment. The work described in this course is real work and benefits from professional support. Samaritans: 116 123 (free, 24/7). Mind: 0300 123 3393. Text SHOUT to 85258.</p>
+</div>
+
+<div class="section-heading">Practice going forward</div>
+<p class="body-text"><strong>In the next thirty days:</strong> If you are in the process of assessing the path — rebuilding versus complete exit — do not make the decision from the current emotional state. Give yourself thirty days of the exit practices from Module Five before returning to the structural assessment. The assessment made from the governed position will be more accurate and more durable than the assessment made from the activation of the role. Note the date. Return to the structural markers from this module in thirty days and apply them again from wherever you are standing then.</p>
+<p class="body-text"><strong>The grief practice.</strong> Set aside one session this month — not ongoing, not daily, one contained session — to grieve specifically what the rebuilt path will not give you and what the complete exit will not give you. Both paths involve loss. The grief is not a sign you chose wrong; it is evidence that you understood the actual cost of both options rather than the fantasy version. Grieve the loss that belongs to each path. Then choose from the governed position, not from the desire to avoid the grief.</p>
+<p class="body-text"><strong>The generational practice.</strong> Whether you have children or not, write one paragraph addressed to the next generation in your line — children, nieces and nephews, future people you will influence — describing what you have chosen to stop passing forward. Not what you suffered. What you chose to interrupt. The act of writing it makes the interruption intentional rather than incidental. Intentional interruptions hold. Incidental ones require the same work again in the next generation.</p>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">09 / 09</span>
+<button class="nav-btn primary" disabled>Course Complete &#10022;</button>
+</div>
+</section>
+
+</main>
+
+<script>
+const feedback = {
+ 1:{
+  a:{headline:"Treating the relief as confirmation conflates an emotional signal with a structural conclusion.",detail:"The relief is real and matters as diagnostic information. It suggests that some part of you has already done enough of the structural assessment to have arrived at a conclusion. But the relief is not itself the structural assessment. The governance move is to hold the relief as one piece of data and conduct the structural assessment explicitly before converting it into a decision."},
+  b:{headline:"Holding the relief as a signal that part of you has already completed the structural assessment &mdash; without treating it as the assessment itself &mdash; is the governed response.",detail:"The relief at the advice to exit is significant diagnostic information. The question is whether that conclusion is the product of the explicit, evidence-based structural assessment or the product of exhaustion or the demoralization of the exit work's difficulty. Both can produce relief at the same advice. The distinction is made by conducting the explicit structural assessment: examining the family's actual response to your exit, the presence or absence of the required conditions for rebuilding, the honest accounting of the costs. If the explicit assessment confirms the relief's direction, the decision is made on the right basis."},
+  c:{headline:"Exhaustion as the source of relief is a real possibility worth examining &mdash; and the examination is the structural assessment, not a reason to delay the decision indefinitely.",detail:"The scapegoat who has been doing exit work for months or years accumulates genuine fatigue from the management load, the activation cost, and the grief of the work. That fatigue can produce a relief at any advice that promises the load will end. The governance move is not to dismiss the exhaustion but to distinguish between the relief that comes from accumulated fatigue and the relief that comes from structural alignment. The assessment provides this distinction."},
+  d:{headline:"Giving up and structural assessment produce different felt qualities &mdash; the two can be distinguished if attended to carefully.",detail:"The giving-up relief has a characteristic quality: it is slightly hollow, slightly shameful, accompanied by a sense of defeat rather than completion. The structural conclusion's relief is different: quieter, more solid, accompanied by grief rather than defeat. The scapegoat who has done the exit work can usually distinguish these two reliefs if they attend to the specific quality of the feeling rather than its presence alone."}
+ },
+ 2:{
+  a:{headline:"The grief at the advice does not confirm the rebuilding path &mdash; it indicates that part of you has not completed the structural assessment.",detail:"The grief is real and matters as diagnostic information. It is the felt-sense's registration that the exit would cost something of genuine value. That registration deserves to be held honestly. What it does not constitute is a structural conclusion. The grief does not mean the family has the capacity for transformation. It means you want it to have that capacity &mdash; which is different. The governed move is to hold the grief as information about what you value, and then conduct the structural assessment using the evidence rather than the grief."},
+  b:{headline:"Holding the grief as an indicator that the structural assessment is not yet complete &mdash; rather than as a direction for the decision &mdash; is the governed response.",detail:"The grief at the advice to exit tells you that part of you has not finished the assessment. There is still genuine uncertainty about the family's capacity, or genuine hope that has not yet been tested against the evidence, or both. The governed move is to hold the grief as that indicator rather than as a decision. The grief is also telling you that the exit's cost will be real and significant if that is where the assessment concludes. Both pieces of information are valuable. Neither is the decision."},
+  c:{headline:"Grief at the advice does not confirm or disconfirm the path &mdash; it is information about what you value, not a verdict on what the evidence shows.",detail:"The grief tells you something real and important: you want the family to be transformable. You have not foreclosed the rebuilding possibility. None of this is evidence about what the family is actually capable of. The path choice is made on the basis of the structural assessment &mdash; the evidence of what the family has done, what it can do, whether the required conditions are present. The grief is a fully legitimate input. It is not the assessment itself."},
+  d:{headline:"Grief at the exit advice is not denial about the family's severity &mdash; it is the honest recognition that the exit would cost something real.",detail:"The denial hypothesis assumes that grief means you are underestimating how bad the family is. But the grief can also be an accurate registration of the genuine cost the exit would produce: the loss of what the family might have become, the grief of holiday absences, the anticipatory grief of death without reconciliation. Accuracy about the family's severity and grief at the exit's cost are not mutually exclusive."}
+ },
+ 3:{
+  a:{headline:"The warmth alone is not evidence that the rebuilding path is viable &mdash; the required conditions are structural, not tonal.",detail:"The governance question is whether the tonal change reflects the structural changes the rebuilding path requires: acknowledgment of the projection, the family system's tolerance of your changed position, at least one other family member holding the change. Warmth without these structural conditions is the system recalibrating its approach &mdash; becoming warmer in contexts that were producing friction, without the underlying examination that would make the warmth structurally significant."},
+  b:{headline:"Surface accommodation without acknowledgment of the projection is the rebuilding assessment's most common trap &mdash; and the most accurate structural reading of this change.",detail:"The specific signal the rebuilding path's structural requirement identifies is acknowledgment of the projection: the primary scapegoater demonstrating, in some form, that the blame they placed was not an accurate account of who you are. Warmth without that acknowledgment is the system learning that the former enforcement strategies were producing a friction that was driving the exit further, and reducing that friction by adjusting the tone. The mechanism is still in place beneath the warmer surface."},
+  c:{headline:"Treating the primary scapegoater's warmth as meaningless forecloses the honest assessment in the other direction &mdash; surface accommodation is not nothing, even if it is not sufficient.",detail:"After years of experiencing the enforcement mechanism, the default becomes to read every change in behavior as strategy. This default is understandable and sometimes accurate. It can also prevent the accurate assessment of a genuine shift that is not yet accompanied by the acknowledgment the rebuilding path requires. The structural assessment holds both possibilities and distinguishes between them by looking for the accompanying conditions."},
+  d:{headline:"The rebuilding path does not require avoiding the past &mdash; it requires the past to be holdable. An arrangement that requires avoiding the past is the accommodation path, not the rebuilding path.",detail:"The suggestion that rebuilding is possible only if the past is avoided identifies the structure of the accommodation path clearly: continued contact in which the scapegoating's history is quarantined rather than examined. The rebuilt relationship requires the past to be available to be held honestly when it is relevant &mdash; without the enforcement mechanism activating to suppress it."}
+ },
+ 4:{
+  a:{headline:"The sibling's acknowledgment is one of the required conditions being met &mdash; treating it as confirmation of the full structural transformation overreads what it provides.",detail:"The sibling's unprompted acknowledgment is genuinely significant. It is the golden child holding the cost-contrast that defined their position &mdash; saying, in effect, that the differential treatment was real and was not your fault. This is one of the required conditions for the rebuilding path. It is not all of them. The primary scapegoater has not yet acknowledged the projection. The sibling's acknowledgment is a genuine building block &mdash; not the path's completion."},
+  b:{headline:"Holding the acknowledgment as one required condition being genuinely met &mdash; significant and partial &mdash; is the governed response.",detail:"The sibling's acknowledgment meets one of the three required structural conditions: at least one other family member has changed their position relative to the role. The acknowledgment was unprompted, specific, and included recognition of the sibling's own failure to act &mdash; all indicators of genuine rather than strategic change. What remains: the primary scapegoater's acknowledgment, and the evidence of the system's tolerance for your changed position. The sibling's acknowledgment makes the rebuilding path more viable than it was before. It does not make it complete."},
+  c:{headline:"Suspicion of the sibling's motive is the role's self-protective reading applied to a genuine change.",detail:"People address the past for mixed motives. The presence of personal motivation does not make the acknowledgment inauthentic. The structural question is not whether the sibling's motives were purely altruistic. The structural question is whether the acknowledgment was specific, whether it acknowledged the differential treatment as real, and whether it came unprompted. This one meets all three criteria."},
+  d:{headline:"Using the sibling as a mediator would redirect the work onto the sibling rather than building the direct acknowledgment the rebuilding path requires.",detail:"The impulse to replay the family history through the sibling who has acknowledged it is understandable. The structural consequence is to make the sibling the repository and messenger of your account &mdash; placing them in a structurally complicated position inside the family system. The sibling's acknowledgment is most valuable as what it is: a genuine shift in their own position relative to the role."}
+ },
+ 5:{
+  a:{headline:"The focus moving off you is not progress in itself &mdash; the mechanism that assigned the focus has reproduced, not dissolved.",detail:"The relief of no longer being the family's primary problem is real. But the structural observation is that the mechanism that made you the primary problem is still operational &mdash; it has simply found a different host. The system's architecture is intact. For the rebuilding assessment, this is the most significant indicator of the system's transformation capacity &mdash; or the absence of it."},
+  b:{headline:"The new scapegoat is the clearest structural indicator that the system's architecture is intact and the rebuilding path requires the most rigorous honest assessment.",detail:"The identification of a new scapegoat is the single most unambiguous indicator the structural assessment can encounter. It means the family system's response to losing its original scapegoat was not examination of what the role was holding but rapid assignment of the role to a new holder. This does not categorically foreclose the rebuilding path. It does mean the family has demonstrated, by its response to your exit, that the scapegoating mechanism is intact and active."},
+  c:{headline:"Your sibling's current experience is the same structural mechanism applied to a new holder &mdash; not evidence of their character.",detail:"The attribution of the scapegoat role to the sibling's actual difficulty is the family system's self-presentation &mdash; the same account it gave of you. The structural observation is that the family's assignment of the scapegoat role precedes and shapes the account rather than following from it. Given that you have personal knowledge of how the mechanism operates in this family, the structural reading is the more accurate one."},
+  d:{headline:"The new scapegoat's situation is directly relevant to your rebuilding assessment &mdash; the two situations are structurally connected through the shared mechanism.",detail:"The family system that scapegoated you has now scapegoated your sibling. The mechanism is demonstrably intact and operational. What happens to your sibling is happening through the same architecture that happened to you. For the rebuilding assessment, this is directly relevant: the family has demonstrated what it does with the scapegoat function when its original holder refuses it."}
+ },
+ 6:{
+  a:{headline:"The absence of immediate resolution or apology does not make the response a failure &mdash; the discomfort without denial is structurally significant in itself.",detail:"The assessment of the rebuilding path's viability is not measured by whether a difficult conversation produces immediate resolution or explicit apology. What the structural assessment identifies as significant is whether the past can be named without the full enforcement mechanism activating: without denial, without reframing as your misperception, without rapid escalation into blame. This conversation produced discomfort, an acknowledgment of not knowing, and an ending &mdash; but not denial and not blame. That response is structurally different from the enforcement mechanism's characteristic response."},
+  b:{headline:"The discomfort without denial, combined with the acknowledgment of uncertainty, is the beginning of the acknowledgment the rebuilding path requires.",detail:"The specific indicators the structural assessment identifies: the past being nameable without producing immediate denial, the parent registering the event's weight rather than dismissing it, and some acknowledgment that the impact was real even if its full accounting is not yet available. This response contains all three. The conversation is not the completion of the structural condition. It is the first evidence that the condition may be buildable."},
+  c:{headline:"The manipulation hypothesis assumes a performance of discomfort specifically designed to avoid the real reckoning &mdash; but this reading requires evidence beyond the discomfort itself.",detail:"A performed discomfort strategy typically includes deflection &mdash; 'I didn't realise you felt that way' or 'things were different then.' This response did neither. The parent acknowledged not knowing what to say &mdash; a response that is less useful as strategic deflection and more consistent with genuine uncertainty about how to hold the event's weight. The manipulation reading is not impossible. It is not the reading the available evidence most strongly supports."},
+  d:{headline:"The conversation's content does not constitute the structural condition's completion &mdash; it constitutes its beginning, which is significant and limited in precise proportion.",detail:"The acknowledgment the rebuilding path's structural condition requires is not a single moment of honesty in a single conversation. It is a pattern &mdash; the beginning of the parent's examination of what the projection actually was, conducted across interactions over time. A single conversation in which the parent became uncomfortable and acknowledged uncertainty is the first evidence that the pattern might be buildable. Treating it as the condition's completion would produce the rebuilding path's next trap."}
+ },
+ 7:{
+  a:{headline:"Responding immediately from the warmth of the letter acts on the pull before assessing whether contact with her is structurally separable from contact with the wider system.",detail:"The aunt's warmth is real and her situation is structurally different from the primary scapegoater's. These things can be true and still require examination before acting on the pull to respond. The structural question is whether contact with the aunt is actually separable from the wider system: whether she will remain a discrete point of contact or whether contact with her will produce contact with the wider family through her."},
+  b:{headline:"Assessing whether contact with her is structurally separable from the wider system &mdash; before acting on the pull &mdash; is the governed response.",detail:"The aunt's letter is a genuine invitation from someone who may be structurally distinct from the primary scapegoating dynamic. The assessment question is whether that structural distinctness is real in practice: can you maintain contact with her without that contact becoming a channel through which the family system resumes its access? Some extended family members can genuinely hold this separation. Others cannot &mdash; their proximity to the primary figures means any contact becomes part of the family system's information flow."},
+  c:{headline:"Treating any response as a full reopening of the system's access is a structural overcorrection &mdash; the question is whether her specific contact is separable.",detail:"The no-contact decision was based on the structural assessment of the family system. That assessment does not necessarily apply equally to every person in the extended family. The governance question is not 'does any response break the no-contact rule' but 'is this specific contact separable from the primary system in a way that allows it to be held without re-exposing you to the system's original harm.' The categorical non-response forecloses the assessment."},
+  d:{headline:"Using the aunt as a channel to the wider family reintroduces the system's access through the contact that was being assessed as potentially separable from it.",detail:"The assessment of whether contact with her is separable from the wider system would be answered definitively in the negative by this choice: you would have made her the messenger, the bridge, the carrier of the account. If contact with the aunt is the right structural choice, it should be held as the relationship it is &mdash; not as a strategic communication point with the family the no-contact was designed to separate you from."}
+ },
+ 8:{
+  a:{headline:"The illness changes the emotional register of the no-contact decision &mdash; it does not automatically change the structural conditions that produced it.",detail:"The parent's illness is a genuine shift in the family situation. The anticipatory grief is real and deserves to be held fully. None of this is a reason to dismiss the structural conditions that led to the no-contact decision. The question the illness raises is whether those conditions have changed: has the illness produced acknowledgment, genuine examination, or a different kind of access to the family members? If it has, the reassessment may conclude differently. If it has not, the return to contact is driven by urgency rather than assessment."},
+  b:{headline:"Holding the grief without converting it into a structural decision made from the activated grief-state is the governed response &mdash; and the hardest governance move this module contains.",detail:"This is the situation in which the exit's cost is most acutely present: the parent is dying, the reconciliation has not happened and will not happen in the form you needed, and the full weight of the anticipatory grief is activated. The governance move is not to feel less. It is to defer the structural decision &mdash; whether to resume contact, in what form, under what conditions &mdash; until the grief's most acute phase has had some time to settle. The deferral is not avoidance. It is the creation of the conditions in which an honest assessment is possible."},
+  c:{headline:"The grief of anticipating death without reconciliation is the exit's honest cost &mdash; it is not evidence that the decision was wrong.",detail:"The exit work does not protect you from this grief &mdash; it names it as one of the exit's predictable costs, because the family as it was could not provide the reconciliation the scapegoat needed. The question the grief raises is not whether the exit was wrong but whether it was made honestly and on the right structural basis. The grief and the decision can coexist: you can grieve fully and accurately and still have made the right structural choice."},
+  d:{headline:"The grief of anticipating death without reconciliation is not something to suppress &mdash; it is the honest registration of the exit's most significant cost.",detail:"Suppressing this grief in the name of holding the decision produces the unprocessed grief that the role's original carriers have been transmitting across generations. The governed response is the opposite: hold the grief fully, without using it to make a structural decision from an activated state. The grief deserves to be felt. It does not deserve to be the driver of a decision that should be made from a regulated state, or the target of a suppression that would add it to the list of unprocessed material the exit work is trying to clear."}
+ },
+ 9:{
+  a:{headline:"Adaptation to a cost does not eliminate the cost &mdash; it makes the cost invisible, which is the mechanism by which the cost accumulates without being assessed.",detail:"The three days of preparation and recovery time, plus the week of hypervigilance discharge, is a significant cognitive and somatic load. It has become invisible because the adaptation has normalised it. The honest accounting requires stepping outside the adapted baseline and assessing the raw cost across the year, across the years. Whether that cost is worth the continued contact's benefits is the honest question the adaptation has been preventing."},
+  b:{headline:"Making the adapted cost visible &mdash; naming its specific dimensions and assessing it against the continued contact's genuine benefits &mdash; is the governed response.",detail:"The honest accounting requires this cost to be stated explicitly and assessed against the continued contact's genuine benefits: what is the family relationship actually producing, at this contact level and with these management costs, that would not be produced by a lower contact level or by no contact? For some people, the continued contact's benefits genuinely outweigh the management costs. For others, the honest assessment produces the opposite conclusion. The adaptation cannot perform this assessment because it has made the cost invisible. The assessment requires making the cost explicit first."},
+  c:{headline:"The high cost does not automatically mandate the complete exit &mdash; it mandates the honest assessment of whether the cost outweighs the continued contact's genuine benefits.",detail:"The management load is real and significant. Its presence does not automatically conclude the case for complete exit. It is strong evidence for at minimum reducing the contact level. The appropriate response to the evidence is the full assessment rather than the immediate action. The cost's visibility is the necessary first step."},
+  d:{headline:"The hypervigilance's consistent association with family contact &mdash; its activation before, during, and for a week after &mdash; is the strongest possible evidence of a causal relationship, not a coincidence.",detail:"The attribution of the hypervigilance to a personal issue unrelated to the family contact would require explanation for why the personal issue activates specifically in anticipation of family gatherings, during them, and for one week following them &mdash; and then reduces to baseline until the next gathering approaches. The temporal pattern is not coincidental. The hypervigilance is the body's response to the context that historically produced the most intense activation."}
+ },
+ 10:{
+  a:{headline:"Contacting the family to correct the narrative re-enters the system to address the system's self-protective account &mdash; and is unlikely to produce the correction it aims for.",detail:"The family's narrative will not be corrected by contact: the contact produces the system's access to you, which it will use to escalate the narrative's complexity or to apply pressure for the return. The people who have heard and believed the narrative are not accessible through contact with the family. They are accessible only through your direct relationships with them."},
+  b:{headline:"Identifying which relationships in your actual life are genuinely at risk from the narrative &mdash; and addressing those directly &mdash; is the governed response.",detail:"The governance move is not to contest the narrative everywhere it circulates but to protect the relationships that actually matter to your life. These are the people who know you directly, who have observed your behavior across time, and whose opinion of you is not determined primarily by the family's account. For these people, your direct relationship with them is the relevant context. For people you do not have a direct relationship with, the family's narrative will reach them in a form that your response cannot effectively contest."},
+  c:{headline:"Contacting everyone who might have heard the narrative turns the exit into a public argument &mdash; which is the narrative's most useful development from the family system's perspective.",detail:"Attempting to contact everyone who might have heard it turns the exit into a public dispute in which the family's version and yours are circulating simultaneously and people in the network are positioned as arbiters of which is correct. This serves the family system's purpose of making the exit a drama rather than a structural decision."},
+  d:{headline:"Accepting the narrative without any response to the relationships it affects treats the social cost as having no addressable component &mdash; which undershoots what the governance move allows.",detail:"The exit's social cost does have an addressable component: the specific relationships in your actual life that matter to you and that the narrative might reach. These are best addressed by the direct maintenance of those relationships, which constitutes your actual response to the narrative in the contexts that matter. The narrative's circulation in the extended social network may not be addressable and may need to be held as the unaddressable portion of the exit's cost."}
+ },
+ 11:{
+  a:{headline:"The public address of a small offhand comment is likely to produce a disproportionate disruption that converts the regression into the full-scale family dynamic it was trying to avoid.",detail:"The governance question is not whether the comment deserves addressing &mdash; it does &mdash; but whether the immediate public address serves the exit work or simply converts the gathering into the family dynamic the rebuilding path has been building against. The comment can be addressed. The calibrated approach is to hold the position without absorbing the framing, and to address the comment directly with the parent in a lower-activation, separate moment."},
+  b:{headline:"Holding the position without drama and addressing the comment directly with the parent in a separate, lower-activation moment is the governed response to the small regression.",detail:"The comment is a small regression &mdash; the parent's architecture still has the old framing available and it surfaced in an unguarded moment. Hold the position (do not absorb the framing, do not respond as if it were accurate), note internally that the regression occurred and requires addressing, and find a moment with the parent separately &mdash; not during the gathering, not with the family as audience &mdash; to name it directly. This approach maintains the new terms without producing a public confrontation that activates the family system's full defensive response."},
+  c:{headline:"Letting the small comment go without internal noting and without future address is the accommodation path's mechanism &mdash; the accumulation of small letting-gos that produces the partial role resumption over time.",detail:"The rebuilding path's maintenance requires that small regressions be held, internally at minimum, as the data they are. The 'let it go' approach applied consistently across small regressions produces the accumulated accommodation the rebuilding path's maintenance is specifically designed to prevent."},
+  d:{headline:"A single small comment in a context in which the overall dynamic has genuinely shifted is not the rebuilding path's failure &mdash; it is its ongoing maintenance challenge.",detail:"The rebuilding path is the continuous practice of holding your position inside a system that still carries its original architecture. The architecture does not disappear. It surfaces in specific contexts, in specific moments of reduced guard. A single offhand comment &mdash; small, unnoticed by others, occurring in the context of a relationship that has been genuinely warmer for eighteen months &mdash; is the architecture surfacing, not the architecture reasserting control."}
+ },
+ 12:{
+  a:{headline:"The persistence of grief in a genuinely improved relationship is not the relationship's failure &mdash; it is the honest cost of the gap between the relationship the child needed and the relationship the adult can now have.",detail:"The relationship has changed and is genuinely warmer. The grief that persists within it is not evidence that the relationship has failed. The grief is the recognition of what the relationship cannot provide: the retroactive parental recognition, the childhood belonging, the unconditional holding that the scapegoat role denied and that the rebuilt adult relationship cannot restore. These are not failures of the rebuilt relationship. They are the permanent gap between what the child needed and what the adult relationship can offer."},
+  b:{headline:"The rebuilt relationship is real and limited &mdash; the grief is the honest recognition of both dimensions simultaneously.",detail:"The low sadness around the genuinely improved relationship is the honest registration of the rebuilt relationship's nature: it is real, it is warmer, it is no longer structured around the role, and it still cannot give you what was withheld when the giving would have mattered most. These are not contradictions. They are the two true things about the rebuilt relationship that must be held simultaneously without requiring one to erase the other. The grief does not mean the relationship is insufficient. The warmth does not mean the grief is exaggerated."},
+  c:{headline:"Lowering the expectations further than the relationship can genuinely satisfy produces the accommodation path's characteristic texture: a relationship maintained through the managed reduction of what you allow yourself to want from it.",detail:"The instruction to want less from the relationship is the family system's recalibration mechanism applied internally: reduce your expectations until the relationship's output meets them, and call the gap closed. The governed alternative is to acknowledge the gap accurately: this relationship can provide genuine adult warmth. It cannot provide the unconditional recognition that the child needed. The grief of that specific absence is proportionate and real. It is not managed away by reducing expectations."},
+  d:{headline:"The grief within a genuinely improved relationship is not the exit path's signal &mdash; it is the rebuilding path's characteristic texture, and it does not constitute evidence that the path was wrong.",detail:"Both the rebuilding path and the exit path carry grief &mdash; different kinds, in different proportions, over different time horizons. The rebuilding path's grief is internal to the continued relationship: the grief of the gap between what the relationship now provides and what the child needed. The presence of grief in the rebuilding path is not evidence that the exit path would have been grief-free."}
+ },
+ 13:{
+  a:{headline:"Protecting the chosen family gathering from the grief &mdash; by not naming it &mdash; leaves the grief unwitnessed and the chosen family's capacity to hold it unused.",detail:"The silence about the grief is the role's isolation mechanism reproduced in the chosen family context: the self-management of difficulty so that it does not burden others, does not make you the problem. This is exactly what the role trained for &mdash; the disappearance of internal experience in the interest of managing the relational space. The chosen family is built to hold exactly what the family of origin could not. Naming the grief honestly is the use of the chosen family that the exit work has been building toward."},
+  b:{headline:"Telling them honestly and allowing the chosen family to hold what it is built to hold is the governed response &mdash; and the exit work's relational practice in action.",detail:"The chosen family is not built to provide a distraction from the grief of the exit &mdash; it is built to hold the grief with you, as chosen witnesses to the life you are building in the exit's wake. The honest naming &mdash; 'this is the first holiday after a major family decision and I am aware of the grief of it' &mdash; is an invitation for the chosen family to be what it is: the people who know your situation and can hold your honest experience of it."},
+  c:{headline:"Dismissing it with 'I'm fine' is the role's isolation strategy running in the chosen family context &mdash; the context in which it is least warranted and most costly.",detail:"The chosen family is built on the opposite terms from the family of origin: on the genuine presence that the role was suppressing. 'I'm fine' in this context is the role's management strategy applied to the relationship that was chosen specifically because it could hold something more honest. The cost is not just the immediate isolation &mdash; it is the failure to allow the chosen family to build its capacity to hold you."},
+  d:{headline:"Leaving to protect the gathering from your grief is the disappearing-self strategy from the role's repertoire.",detail:"The role trained for exactly this: the removal of the self's authentic experience from the shared space in order to manage the relational environment. The chosen family has chosen your presence, including the dimensions of your presence that include grief. Leaving to protect them from the grief is a gift they did not ask for and do not require."}
+ },
+ 14:{
+  a:{headline:"The grief's persistence is not evidence that it hasn't been processed &mdash; it is evidence that the loss it mourns is real and proportionate.",detail:"The assumption that fully processed grief stops is the most common misconception about the grief of the complete exit. The grief of losing the family you needed does not have a fixed resolution point. It does not stop in the sense of ceasing to exist. It changes in the sense of becoming smaller, less central, less capable of preventing the full inhabitation of the life. The grief's continuity is proportionate to the loss's reality."},
+  b:{headline:"The grief becoming part of the life rather than the centre of it &mdash; and the question shifting from 'when will it stop' to 'is it preventing me from fully inhabiting this life' &mdash; is the governed orientation at two years.",detail:"What changes is not the grief's existence but its proportion relative to the rest of the life: the life grows around it, the grief occupies less of the total space. At two years, with close relationships, meaningful work, and a growing sense of self, the life appears to be filling in around the grief in the way the exit work produces over time. The grief is still there, proportionate and honest. It is not the centre. That is the exit's product at two years."},
+  c:{headline:"The grief of the exit and the exit's correctness are two distinct assessments &mdash; and the grief cannot be used to produce a structural conclusion about the decision's validity.",detail:"The grief is real and consistent with having made the right structural decision. The exit was the right structural conclusion for the specific reasons the assessment identified. None of those structural realities have changed because the grief persists at two years. Using the grief's persistence to reopen the structural question requires new structural evidence &mdash; not simply the grief's continuing presence, which the exit's honest accounting always included."},
+  d:{headline:"The grief of losing the family you needed is distinguishable from clinical depression by its specific object, its variation with context, and its coexistence with a genuinely good life.",detail:"The grief of the complete exit is contextually specific: it arrives most intensely at holidays, at milestones, at thoughts of the parent's eventual death. It coexists with genuine positive experience &mdash; close relationships, meaningful work, periods of ease and enjoyment. Clinical depression has a different phenomenology: pervasive, less contextually specific, more resistant to positive experience. If the grief is genuinely impairing &mdash; preventing sleep, preventing work, preventing the maintenance of close relationships &mdash; professional support is always appropriate."}
+ },
+ 15:{
+  a:{headline:"Children hold what is withheld from them &mdash; silence about the family situation does not protect them; it produces the anxiety of an unexplained absence.",detail:"Children are acutely sensitive to topics that are not available to be discussed. The silence about why the grandparents are not present does not produce protection. It produces, instead, the child's awareness that there is something here that is not safe to ask about &mdash; which is the exact dynamic the scapegoating mechanism produces in the family of origin. The age-appropriate honest account is not a burden. It is the provision of a framework that makes the absence nameable rather than an anxious unspoken."},
+  b:{headline:"An age-appropriate honest account &mdash; naming the situation simply, placing no blame on the child, and providing a framework for understanding the absence &mdash; is the governed response and the transmission's interruption.",detail:"The age-appropriate account tells the child: families can have real problems; adults sometimes need to make hard decisions about those problems; the decision is the adult's, not the child's burden; the absence of the grandparents is explicable rather than mysteriously fraught. This account provides what the scapegoat's own childhood was denied: a framework for understanding family difficulty that does not locate the cause in the child's character or behavior."},
+  c:{headline:"The full history of the family dysfunction is not the child's to carry &mdash; the age-appropriate account provides a framework without transferring the family's material to the next generation.",detail:"Children carry what adults give them to carry. A full account of the family dysfunction, the scapegoating mechanism, the specific accusations and the specific harm, is the adult's material placed in a child's hands. The child's appropriate burden is the honest framework: families can be hard, adults make hard decisions about hard families, you are not the cause and you are loved. The full material belongs in the adult's processing contexts."},
+  d:{headline:"The vague deflection produces the same dynamic the scapegoating mechanism produced: an unexplained absence that the child learns is not safe to ask about.",detail:"Children have a reliable sense of when adults are not being honest with them about things that matter. When the child discovers that the grandparents were not busy or far but absent because of a decision, the discovery produces the question of why the adult deflected rather than told the truth. The deflection, held over the years of the child's development, becomes the topic-that-cannot-be-named: the family secret of the second generation."}
+ },
+ 16:{
+  a:{headline:"Pushing through the activated management state to finish the conflict conducts the conflict from the role's position rather than from yours.",detail:"The conflict conducted from the management-and-hypervigilance state is the role's conflict: outcomes managed, positions accommodated, genuine view suppressed in the interest of controlling the interaction's direction. The conflict may finish. The resolution it produces will be the one the role's management strategy arrived at &mdash; not the one your actual position would have produced."},
+  b:{headline:"Naming the management mode to your partner and taking the moment to find your actual position before continuing is the governed response &mdash; and the exit work's relational practice in intimate context.",detail:"The naming serves two functions. First, it interrupts the role's autopilot by making it visible. Second, it tells your partner what is happening &mdash; that you have gone into a state that prevents genuine engagement, and that you need a moment to find the position that is actually yours. The moment taken to find the actual position produces a different continuation of the conflict than the management state would have. The resolution from the actual position is the exit work's relational product."},
+  c:{headline:"The management state in conflict is the role's installation in intimate relationships &mdash; and the exit work has demonstrated that installed patterns change through the specific practices that interrupt them.",detail:"The role's installation in intimate relationships is the same mechanism as in the family context, running in a lower-activation context. The same somatic practices that build capacity in the family context build capacity in the intimate context. The same naming practice that interrupts the role in family interactions interrupts it in intimate ones. The change is gradual and requires the consistent practice of the interruption across the many intimate conflicts that produce the management state's activation."},
+  d:{headline:"The management state's activation in intimate conflict is a signal about the exit work's next layer &mdash; not about the relationship's viability.",detail:"A relationship that activates the role's management state is a relationship in which the exit work has more to do. A relationship that consistently activates the role's management state and in which the naming practice consistently fails to produce a different engagement &mdash; that is the relationship whose assessment belongs at a different point in the work. A single recognised activation in a relationship that is otherwise built for genuine presence is the exit work doing its job."}
+ }
+};
+
+const pageScenarios = {1:[1,2],2:[3,4],3:[5,6],4:[7,8],5:[9,10],6:[11,12],7:[13,14],8:[15,16]};
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {};
+for(let i=1;i<=16;i++) answered[i]=false;
+
+document.querySelectorAll('.choices').forEach(group=>{
+ const scenarioNum = parseInt(group.dataset.scenario);
+ const choices = group.querySelectorAll('.choice');
+ choices.forEach(choice=>{
+  choice.addEventListener('click',()=>{
+   if(answered[scenarioNum]) return;
+   const answer = choice.dataset.answer;
+   const fb = feedback[scenarioNum][answer];
+   choices.forEach(c=>{
+    if(c===choice) c.classList.add('selected');
+    else c.classList.add('dimmed');
+    c.disabled=true;
+   });
+   document.getElementById('feedback-text-'+scenarioNum).innerHTML = fb.headline;
+   document.getElementById('feedback-detail-'+scenarioNum).innerHTML = fb.detail;
+   document.getElementById('feedback-'+scenarioNum).classList.add('visible');
+   answered[scenarioNum]=true;
+   checkPageComplete(currentSlide);
+  });
+ });
+});
+
+function checkPageComplete(n){
+ const scenarios = pageScenarios[n];
+ if(!scenarios) return;
+ if(scenarios.every(s=>answered[s])){
+  const btn = document.getElementById('next-'+n);
+  if(btn) btn.disabled=false;
+ }
+}
+
+function showSlide(n){
+ document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+ document.querySelector('[data-slide="'+n+'"]').classList.add('active');
+ document.querySelectorAll('.progress-dot').forEach((dot,i)=>{
+  dot.classList.remove('active','complete');
+  if(i+1<n) dot.classList.add('complete');
+  else if(i+1===n) dot.classList.add('active');
+ });
+ currentSlide=n;
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1);}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1);}
+</script>
+<script>
+(function(){
+  try{
+    var prevKey='safespot_c5m5';
+    if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+      document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="' + PREV_URL + '" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+      return;
+    }
+    var slides=document.querySelectorAll('.slide');
+    if(slides.length>0){
+      var last=slides[slides.length-1];
+      last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+        b.textContent='Course Complete ✓';
+        b.setAttribute('onclick','');
+        b.onclick=function(){localStorage.setItem('safespot_c5m6','1');window.location.href='index.html';};
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+function SS_restartCourse(){
+  try{['safespot_c5m1','safespot_c5m2','safespot_c5m3','safespot_c5m4','safespot_c5m5','safespot_c5m6'].forEach(function(k){localStorage.removeItem(k);});}catch(e){}
+  window.location.href="course5-landing.html";
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

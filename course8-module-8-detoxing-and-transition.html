@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Course 8 · Module 8 · Detoxing & Transition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.module-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);
+padding:14px 32px 14px 16px;display: grid; grid-template-columns: 1fr auto 1fr;align-items:baseline;justify-items: start;gap:24px}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;font-family:var(--mono)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:5px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);border-radius:1px;transition:background .3s}
+.progress-dot.done{background:var(--accent)}
+.progress-dot.active{background:var(--ink)}
+.stage{max-width:720px;margin:0 auto;padding:48px 32px 80px}
+.slide{display:none;animation:fadeUp .45s ease both}
+.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:24px;letter-spacing:.06em}
+.question-text{font-family:var(--serif);font-size:clamp(1.35rem,3vw,1.75rem);font-weight:300;line-height:1.45;
+margin-bottom:12px;color:var(--ink)}
+.question-context{font-size:.93rem;color:var(--muted);margin-bottom:36px;line-height:1.6;font-style:italic}
+.choices{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.choice{padding:16px 20px;border:1px solid var(--line);border-radius:4px;cursor:pointer;font-size:.95rem;
+line-height:1.5;transition:border-color .2s,background .2s;background:var(--paper);text-align:left;font-family:var(--sans);
+display:flex;gap:14px;align-items:flex-start}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice-letter{font-family:var(--mono);font-size:.8rem;color:var(--muted);min-width:16px;margin-top:2px}
+.choice.correct{border-color:var(--accent);background:#f0faf4}
+.choice.incorrect{border-color:#c0392b;background:#fdf5f4}
+.choice:disabled{cursor:default}
+.feedback{border-left:3px solid var(--accent);padding:20px 24px;background:var(--soft);margin-top:8px;
+border-radius:0 4px 4px 0;display:none}
+.feedback.visible{display:block}
+.feedback-head{font-weight:500;font-size:.95rem;margin-bottom:6px;color:var(--ink)}
+.feedback-body{font-size:.9rem;color:#3a3a36;line-height:1.65}
+.next-btn{margin-top:28px;padding:14px 32px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;
+font-size:.9rem;font-family:var(--sans);letter-spacing:.04em;cursor:pointer;display:none;transition:opacity .2s}
+.next-btn:hover{opacity:.85}
+.complete-block{text-align:center;padding:64px 32px}
+.complete-icon{font-size:2.5rem;margin-bottom:24px}
+.complete-title{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:16px;line-height:1.3}
+.complete-sub{font-size:1rem;color:var(--muted);max-width:440px;margin:0 auto 40px;line-height:1.7}
+.complete-line{width:48px;height:2px;background:var(--accent);margin:0 auto}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 08 &middot; Food Is Medicine &middot; Module <strong>08</strong> &middot; Detoxing &amp; Transition</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 8 &middot; Food Is Medicine</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c8m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course8-module-6-healing-foods-and-herbs.html">Healing Foods & Herbs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course8-module-7-children-and-family-nutrition.html">Children & Family Nutrition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course8-module-8-detoxing-and-transition.html">Detoxing & Transition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m9" data-mn="9">
+      <span class="sidebar-mod-n">09</span>
+      <a class="sidebar-mod-a" href="course8-module-9-building-your-alkaline-life.html">Your Alkaline Life</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<div class="stage">
+
+<!-- SLIDE 1 -->
+<div class="slide" data-slide="1">
+  <div class="slide-number">01 / 08</div>
+  <div class="question-text">Why does someone feel worse before they feel better when changing their diet?</div>
+  <div class="question-context">Marcus switches from processed food to whole alkaline foods. Three days in he has headaches, fatigue, and mild nausea. He is ready to quit — convinced the new diet is making him sick.</div>
+  <div class="choices">
+    <button class="choice" data-q="1" data-v="a"><span class="choice-letter">a</span>The new food lacks the nutrients his body needs</button>
+    <button class="choice" data-q="1" data-v="b"><span class="choice-letter">b</span>His body is releasing stored toxins faster than they can exit, causing temporary symptoms</button>
+    <button class="choice" data-q="1" data-v="c"><span class="choice-letter">c</span>He has developed a food allergy to the new ingredients</button>
+    <button class="choice" data-q="1" data-v="d"><span class="choice-letter">d</span>The previous diet was healthier than he thought</button>
+  </div>
+  <div class="feedback" id="fb-1-a">
+    <div class="feedback-head">The body knows how to extract nutrition — that is not the issue here</div>
+    <div class="feedback-body">Whole alkaline foods are mineral-dense and nutrient-complete. The symptoms Marcus is experiencing are not deficiency — they are the body mobilising what was stored. When the liver and lymph system begin releasing accumulated waste, and exit pathways are not yet fully open, the toxins circulate briefly before leaving. This is called a healing crisis. It is a sign the body is working.</div>
+  </div>
+  <div class="feedback" id="fb-1-b">
+    <div class="feedback-head">This is the healing crisis — and it is a good sign</div>
+    <div class="feedback-body">When the body receives real nutrition for the first time in years, the liver activates, lymph begins moving, and cells start releasing what they have been holding onto. That stored waste enters the bloodstream on its way out. Headaches, fatigue, and mild nausea are the exit symptoms of accumulated toxicity — not a reaction to the new food. Healers across traditions have documented this process. The body that feels worse briefly is a body that has started cleaning house.</div>
+  </div>
+  <div class="feedback" id="fb-1-c">
+    <div class="feedback-head">Food allergies produce consistent, specific reactions — not detox timing</div>
+    <div class="feedback-body">A true food allergy triggers the immune system on contact with a specific compound. It does not follow a three-day pattern tied to a wholesale diet change. Marcus is not reacting to avocado or figs. He is reacting to what is leaving his body — not what is entering it. Recognising the difference between detox symptoms and actual allergic reactions is important. Detox is temporary and follows a curve; allergy is repeatable and tied to a specific food.</div>
+  </div>
+  <div class="feedback" id="fb-1-d">
+    <div class="feedback-head">Comfort is not the same as health</div>
+    <div class="feedback-body">The previous diet felt comfortable because the body had adapted to managing its toxicity — suppressing symptoms rather than resolving them. When the suppression lifts and real healing begins, the body finally does what it was waiting to do. Feeling worse in the short term does not mean the old way was better. It means the old way created a backlog that is now being addressed. Marcus needs to understand what is happening so he does not abandon a process that has only just begun.</div>
+  </div>
+  <button class="next-btn" id="next-1">Continue →</button>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" data-slide="2">
+  <div class="slide-number">02 / 08</div>
+  <div class="question-text">What is the liver's role in detoxification, and how does food support or suppress it?</div>
+  <div class="question-context">Diane reads that the liver "cleans the blood." She wonders why, if the liver is always working, she still feels sluggish and heavy even when she eats reasonably well by mainstream standards.</div>
+  <div class="choices">
+    <button class="choice" data-q="2" data-v="a"><span class="choice-letter">a</span>The liver processes toxins but needs rest periods — eating less helps</button>
+    <button class="choice" data-q="2" data-v="b"><span class="choice-letter">b</span>The liver runs two phases of detox; if Phase 2 is under-supported by nutrients, Phase 1 intermediates accumulate and cause symptoms</button>
+    <button class="choice" data-q="2" data-v="c"><span class="choice-letter">c</span>The liver only detoxes alcohol — other issues are handled by the kidneys</button>
+    <button class="choice" data-q="2" data-v="d"><span class="choice-letter">d</span>Sluggishness is caused by low iron, not liver function</button>
+  </div>
+  <div class="feedback" id="fb-2-a">
+    <div class="feedback-head">Rest matters, but the liver needs nutrients more than it needs emptiness</div>
+    <div class="feedback-body">Intermittent fasting does give the liver breathing room — and that has real value. But the deeper issue is not how often you eat. It is whether what you eat provides the compounds the liver needs to complete detoxification properly. Sulphur-rich foods, antioxidants, B vitamins, and minerals like zinc and selenium are required for the liver's enzyme pathways to function. Without them, the liver is working with one hand tied behind its back regardless of meal timing.</div>
+  </div>
+  <div class="feedback" id="fb-2-b">
+    <div class="feedback-head">Phase 1 and Phase 2 must be balanced — most people only feed one</div>
+    <div class="feedback-body">The liver's detox pathway has two phases. Phase 1 (cytochrome P450 enzymes) converts toxins into intermediate compounds — which are often more reactive than the original. Phase 2 then conjugates those intermediates with amino acids or sulphur compounds so they can be safely excreted. If Phase 2 is under-supported — which it is when the diet lacks dark greens, brassica vegetables, garlic, or adequate protein — those Phase 1 intermediates build up. Diane feels sluggish because her liver is generating waste but cannot finish the job of removing it.</div>
+  </div>
+  <div class="feedback" id="fb-2-c">
+    <div class="feedback-head">The liver handles a far wider spectrum than alcohol</div>
+    <div class="feedback-body">The liver processes environmental pollutants, pharmaceutical residues, pesticide metabolites, synthetic hormones, food additives, and the normal waste products of cellular metabolism — every single day. Alcohol is one input among thousands. The kidneys handle water-soluble waste; the liver handles fat-soluble toxins that must first be transformed before the kidneys or bowel can excrete them. The two organs work in sequence, not separately.</div>
+  </div>
+  <div class="feedback" id="fb-2-d">
+    <div class="feedback-head">Iron deficiency is one cause of fatigue — but liver overload is another entirely</div>
+    <div class="feedback-body">Low iron does cause fatigue, and it is worth investigating. But sluggishness and heaviness after eating, brain fog that clears in the morning, difficulty processing fatty foods, and skin that breaks out or looks dull — these cluster around liver congestion, not anaemia. The two conditions have different signatures. Diane's symptoms point to a liver that is working hard but not completing the detox cycle — a nutritional problem that alkaline, mineral-rich food can address directly.</div>
+  </div>
+  <button class="next-btn" id="next-2">Continue →</button>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" data-slide="3">
+  <div class="slide-number">03 / 08</div>
+  <div class="question-text">What is the lymphatic system's role in detox, and why does it often get overlooked?</div>
+  <div class="question-context">Jerome has chronic swelling in his legs, recurring skin breakouts, and a feeling of stagnation he cannot explain. His doctor says his blood tests are normal. A friend suggests his lymphatic system might be congested.</div>
+  <div class="choices">
+    <button class="choice" data-q="3" data-v="a"><span class="choice-letter">a</span>The lymph system only fights infection — it has no role in everyday detoxification</button>
+    <button class="choice" data-q="3" data-v="b"><span class="choice-letter">b</span>The lymphatic system drains cellular waste but has no pump — it moves only through muscle, breath, and food choices</button>
+    <button class="choice" data-q="3" data-v="c"><span class="choice-letter">c</span>Lymph congestion can only be treated by surgery or medication</button>
+    <button class="choice" data-q="3" data-v="d"><span class="choice-letter">d</span>Swelling in the legs is always a circulation problem, not a lymph problem</button>
+  </div>
+  <div class="feedback" id="fb-3-a">
+    <div class="feedback-head">The lymph is the body's cellular sewage system — not just an immune organ</div>
+    <div class="feedback-body">The lymphatic system does carry immune cells — but that is only part of its work. Every cell in the body releases waste products into the interstitial fluid surrounding it. The lymph vessels collect that fluid and the cellular debris within it, move it toward lymph nodes where pathogens are screened, and eventually return it to the bloodstream for final processing. When the lymph stagnates, cellular waste accumulates at the tissue level. Blood tests do not capture this — they measure what is in circulation, not what is sitting in tissue.</div>
+  </div>
+  <div class="feedback" id="fb-3-b">
+    <div class="feedback-head">Unlike the heart, the lymph has no pump — it depends entirely on you</div>
+    <div class="feedback-body">The cardiovascular system has the heart. The lymphatic system has nothing. It moves through skeletal muscle contracting during exercise, through the diaphragm expanding during deep breathing, through rebounding or dry brushing, and through foods that support lymph flow — burdock root, red clover, cleavers, and sea moss among them. Jerome's swelling, skin breakouts, and stagnation feeling are classic lymph congestion signs. The solution is movement, breath, and food — not medication. The tradition that identified this connection also gave us the herbs that directly address it.</div>
+  </div>
+  <div class="feedback" id="fb-3-c">
+    <div class="feedback-head">Congestion is not disease — it is stagnation, and it is reversible</div>
+    <div class="feedback-body">Surgical intervention is appropriate for structural lymphatic damage (lymphoedema after cancer surgery, for example). But everyday lymph congestion — caused by sedentary lifestyle, mucus-forming diet, shallow breathing, and chronic dehydration — responds to lifestyle and food changes without any medical procedure. Jerome does not need surgery. He needs to move his body, drink enough clean water, breathe fully, and eat the foods that activate lymph flow. The herbs that have been used to clean the blood and lymph for generations are available today.</div>
+  </div>
+  <div class="feedback" id="fb-3-d">
+    <div class="feedback-head">Swelling has multiple causes — and lymph is one of the most common and most overlooked</div>
+    <div class="feedback-body">Venous insufficiency does cause leg swelling — but so does lymph congestion, and so does both together. In venous problems, swelling tends to be worse at the end of the day and improves with elevation. In lymph congestion, swelling is more persistent, often accompanied by skin changes and a feeling of heaviness rather than pain, and does not respond as clearly to elevation. Jerome's full symptom picture — swelling, breakouts, and stagnation — points to lymph. Addressing it with the right foods and movement is the place to start.</div>
+  </div>
+  <button class="next-btn" id="next-3">Continue →</button>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" data-slide="4">
+  <div class="slide-number">04 / 08</div>
+  <div class="question-text">What is a realistic timeline for the body to detox and begin functioning differently?</div>
+  <div class="question-context">Priya has committed to a full alkaline transition. She wants to know what to expect and when, so she does not give up too early or become discouraged if she does not feel radically different after a week.</div>
+  <div class="choices">
+    <button class="choice" data-q="4" data-v="a"><span class="choice-letter">a</span>Detox is complete within 72 hours and benefits are felt immediately after</button>
+    <button class="choice" data-q="4" data-v="b"><span class="choice-letter">b</span>Most people feel worse for days 1–7, begin stabilising at 2–4 weeks, and notice deeper changes at 3–6 months</button>
+    <button class="choice" data-q="4" data-v="c"><span class="choice-letter">c</span>The body does not detox — it simply adapts to whatever it receives</button>
+    <button class="choice" data-q="4" data-v="d"><span class="choice-letter">d</span>Results only come after a full year of strict adherence</button>
+  </div>
+  <div class="feedback" id="fb-4-a">
+    <div class="feedback-head">Three days clears the surface — the deeper layers take longer</div>
+    <div class="feedback-body">A 72-hour period can flush recent dietary residue and reduce inflammation from the last few meals. But the body accumulates toxicity across years. Fat-soluble compounds stored in adipose tissue, heavy metals lodged in bone and nerve tissue, and mucus compaction in the intestinal walls do not resolve in a weekend. Priya would be setting herself up for disappointment — or for abandoning real progress — if she expected complete transformation in days. Some benefits come early; the meaningful ones require consistency.</div>
+  </div>
+  <div class="feedback" id="fb-4-b">
+    <div class="feedback-head">This is the honest timeline — and understanding it changes everything</div>
+    <div class="feedback-body">Days 1–7: withdrawal-like symptoms are common as the body releases what it was suppressing. Cravings, headaches, fatigue, and mood dips are the most frequently reported. Weeks 2–4: the immediate storm passes, energy begins to even out, digestion improves, and sleep often deepens. Months 1–3: skin clarity, mental sharpness, and reduced inflammation become noticeable. Months 3–6: old chronic symptoms — joint pain, hormonal irregularity, recurring infections — begin to shift. A year in: people describe feeling like a different person. Priya is not starting a diet. She is starting a regeneration.</div>
+  </div>
+  <div class="feedback" id="fb-4-c">
+    <div class="feedback-head">Adaptation and detoxification are two different processes</div>
+    <div class="feedback-body">The body does adapt — that is how people survive on poor diets for decades without immediately collapsing. But adaptation means suppressing, compensating, and managing. Detoxification means actively releasing and clearing. When Priya switches to alkaline whole food, she stops feeding the conditions that required constant compensatory management, and the body finally has the resources and the freedom to start releasing what was held in storage. That process is real, measurable, and documented — in cellular biology and in the living testimony of people who have done it.</div>
+  </div>
+  <div class="feedback" id="fb-4-d">
+    <div class="feedback-head">Measurable changes begin far sooner than a year — and this matters for motivation</div>
+    <div class="feedback-body">Waiting a year before expecting anything would cause most people to abandon the process before it had a chance to work. The honest truth is that perceptible changes — better sleep, clearer skin, reduced bloating, improved mental clarity — begin within weeks for most people. Deeper structural changes, like improved hormonal balance, reduced chronic inflammation, and cellular regeneration, unfold over months. A year of consistency produces transformation. But Priya needs to know that the journey rewards her long before the year is up.</div>
+  </div>
+  <button class="next-btn" id="next-4">Continue →</button>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" data-slide="5">
+  <div class="slide-number">05 / 08</div>
+  <div class="question-text">How do you support the body's exit pathways during a transition so detox symptoms stay manageable?</div>
+  <div class="question-context">Tommy started a juice cleanse and on day three felt so bad — skin erupting, headaches intense, bowels locked — that he stopped and went back to eating normally. He wonders if cleansing is simply not for him.</div>
+  <div class="choices">
+    <button class="choice" data-q="5" data-v="a"><span class="choice-letter">a</span>The exit pathways need to be open before mobilising toxins — bowels moving, kidneys flushed, skin sweating</button>
+    <button class="choice" data-q="5" data-v="b"><span class="choice-letter">b</span>Cleansing is too extreme for most people and should be avoided</button>
+    <button class="choice" data-q="5" data-v="c"><span class="choice-letter">c</span>Tommy's symptoms mean he has a medical condition that requires testing</button>
+    <button class="choice" data-q="5" data-v="d"><span class="choice-letter">d</span>He should have used pharmaceutical laxatives to speed up the process</button>
+  </div>
+  <div class="feedback" id="fb-5-a">
+    <div class="feedback-head">Open the drain before releasing the blockage — that is the sequence</div>
+    <div class="feedback-body">Tommy's experience is not uncommon — and it is not evidence that cleansing failed him. What failed him was jumping into mobilisation without first opening the exit pathways. If the bowels are not moving well (ideally 2–3 times daily during a cleanse), the colon cannot remove what the liver is releasing. If water intake is insufficient, the kidneys cannot flush the soluble metabolites. If the skin is not supported — sauna, dry brushing, exercise — a detox exit route goes unused. The body has five pathways: bowels, kidneys, lungs, skin, and lymph. All five need to be functioning before intensive detox begins.</div>
+  </div>
+  <div class="feedback" id="fb-5-b">
+    <div class="feedback-head">Cleansing is not the problem — preparation is</div>
+    <div class="feedback-body">Millions of people have cleansed without crisis — not because they were different from Tommy, but because they prepared differently. Transitioning the diet gradually before cleansing, ensuring regular bowel movements, hydrating fully, and introducing gentle herbs before intensive protocols are the variables that separate a productive cleanse from a crisis. The body is designed to detoxify. It has been doing so for the entire history of human life. The question is whether we support that process or overwhelm it by mobilising more than the exit pathways can handle at once.</div>
+  </div>
+  <div class="feedback" id="fb-5-c">
+    <div class="feedback-head">These symptoms are textbook detox — not a medical emergency</div>
+    <div class="feedback-body">Skin eruptions during a cleanse are the skin acting as an exit pathway — releasing what the bowels were not moving fast enough. Headaches are often caffeine withdrawal, sugar withdrawal, or the circulatory effect of toxins in the bloodstream. Constipation during a juice cleanse happens when fibre intake drops suddenly and the bowel slows in response. None of these symptoms require medical investigation in an otherwise healthy adult. They require understanding, adjustment, and support — not abandonment or medication.</div>
+  </div>
+  <div class="feedback" id="fb-5-d">
+    <div class="feedback-head">Forcing is not the same as supporting</div>
+    <div class="feedback-body">Stimulant laxatives (the pharmaceutical kind) force peristalsis by irritating the bowel wall — which is useful in acute situations but counterproductive during a sustained cleanse. They deplete electrolytes, disturb the microbiome, and can create dependency. The alternative is to support natural bowel function with adequate water, magnesium, herbs like cascara or senna used sparingly and appropriately, sea moss, and fibre-rich foods like figs and flaxseed. Supporting the body and forcing the body produce very different outcomes.</div>
+  </div>
+  <button class="next-btn" id="next-5">Continue →</button>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" data-slide="6">
+  <div class="slide-number">06 / 08</div>
+  <div class="question-text">Why is the emotional and psychological dimension of dietary transition so often underestimated?</div>
+  <div class="question-context">Simone is two weeks into her alkaline transition. She notices that certain foods are tied to comfort, reward, and memory — pizza on Friday nights, her mother's cooking, sweets when stressed. She does not feel addicted exactly, but something pulls her back.</div>
+  <div class="choices">
+    <button class="choice" data-q="6" data-v="a"><span class="choice-letter">a</span>She lacks willpower — the solution is stricter discipline</button>
+    <button class="choice" data-q="6" data-v="b"><span class="choice-letter">b</span>Food is woven into identity, love, memory, and belonging — transitioning it is an emotional process, not just a nutritional one</button>
+    <button class="choice" data-q="6" data-v="c"><span class="choice-letter">c</span>The pull she feels is purely biochemical addiction to sugar and fat</button>
+    <button class="choice" data-q="6" data-v="d"><span class="choice-letter">d</span>She should avoid all social situations involving food until the transition is complete</button>
+  </div>
+  <div class="feedback" id="fb-6-a">
+    <div class="feedback-head">Willpower frames it as weakness — it is not weakness, it is complexity</div>
+    <div class="feedback-body">Simone is not failing a discipline test. She is navigating something that runs through the deepest layers of how she experiences love, safety, and belonging. Food is one of the first ways human beings receive care — and those associations are laid down before the conscious mind can interrogate them. Telling her to try harder ignores everything that is actually happening. What she needs is understanding, not pressure. When the emotional architecture of food is acknowledged, transition becomes gentler and far more sustainable.</div>
+  </div>
+  <div class="feedback" id="fb-6-b">
+    <div class="feedback-head">Food carries memory, love, and identity — transitioning it changes more than the plate</div>
+    <div class="feedback-body">The pull Simone feels is not weakness or addiction alone. It is the accumulated weight of every Friday night that pizza meant the week was over and she was safe; every time her mother's cooking meant she was loved; every time sugar meant relief from pain. These associations are built over years and stored in the body's nervous system. Transitioning food is one of the most psychologically complex changes a person can make. Acknowledging this is not an excuse to stop — it is the understanding that makes it possible to continue without self-judgment and without shame.</div>
+  </div>
+  <div class="feedback" id="fb-6-c">
+    <div class="feedback-head">Biochemistry is part of it — but the story is larger than dopamine</div>
+    <div class="feedback-body">Yes, sugar triggers dopamine, and yes, ultra-processed food is engineered to be hard to stop eating. That biochemistry is real and it matters. But Simone's description — Friday nights, her mother's cooking, stress — is about something deeper than receptor activation. The emotional dimension of food is why people who understand nutrition perfectly still struggle to change. Addressing the biochemistry alone (cut the sugar, retrain the gut) leaves the emotional architecture intact and waiting. Both layers need attention.</div>
+  </div>
+  <div class="feedback" id="fb-6-d">
+    <div class="feedback-head">Avoidance is a temporary strategy — presence with understanding is the long-term one</div>
+    <div class="feedback-body">Withdrawing from all social food environments during transition is impractical and often creates isolation, which then triggers the emotional eating patterns Simone is trying to move through. The more sustainable approach is learning to navigate those environments — bringing her own food, eating before arriving, making peace with occasionally eating something imperfect, and finding ways to honour the emotional meaning of food occasions without being controlled by them. Transition is not a prison sentence. It is a reorientation.</div>
+  </div>
+  <button class="next-btn" id="next-6">Continue →</button>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" data-slide="7">
+  <div class="slide-number">07 / 08</div>
+  <div class="question-text">What does a practical kitchen and routine transition look like — and what makes it stick?</div>
+  <div class="question-context">Raymond wants to transition but feels overwhelmed. His cupboards are full of processed food. He does not know what to cook. He lives alone and is not sure whole food cooking fits his schedule or budget.</div>
+  <div class="choices">
+    <button class="choice" data-q="7" data-v="a"><span class="choice-letter">a</span>He should throw everything out immediately and start fresh</button>
+    <button class="choice" data-q="7" data-v="b"><span class="choice-letter">b</span>A gradual approach — clearing and replacing one category at a time, building a small repertoire of simple meals — is more sustainable than an overnight overhaul</button>
+    <button class="choice" data-q="7" data-v="c"><span class="choice-letter">c</span>Whole food eating is too expensive for anyone on a limited budget</button>
+    <button class="choice" data-q="7" data-v="d"><span class="choice-letter">d</span>He should only change his dinner — breakfast and lunch can stay the same</button>
+  </div>
+  <div class="feedback" id="fb-7-a">
+    <div class="feedback-head">Wholesale clearance sounds decisive — but it often triggers relapse</div>
+    <div class="feedback-body">Emptying the kitchen in one sweep creates two problems: it is wasteful, and it removes the gradual familiarity that helps new habits root. When people remove everything at once and then face an empty fridge, a long shopping list of unfamiliar items, and no practised recipes, the path of least resistance is to order takeaway. Transition works better when it builds on itself — one substitution leading to another, one meal mastered before the next is attempted. Raymond needs to build confidence and competence, not just a clean kitchen.</div>
+  </div>
+  <div class="feedback" id="fb-7-b">
+    <div class="feedback-head">One category at a time, one meal at a time — this is how it sticks</div>
+    <div class="feedback-body">Raymond can start by replacing the most harmful category first — seed oil cooking sprays swapped for coconut or avocado oil; white rice swapped for spelt or wild rice; refined snacks removed first since they are the easiest to stop buying. Then he builds a repertoire of five meals he can make reliably: a grain bowl, a blended soup, a stir-fry with greens, a smoothie with sea moss, a simple salad. Five meals that take thirty minutes or less. Budget objections dissolve when he sees that dried grains, seasonal vegetables, legumes, and fresh herbs cost less per meal than the processed food they replace. Whole food eating is not expensive — the premium branded health food store version is.</div>
+  </div>
+  <div class="feedback" id="fb-7-c">
+    <div class="feedback-head">The premium health food myth does not represent how most people eat whole food</div>
+    <div class="feedback-body">Whole food eating has been the default diet of most of human history — in communities that did not have supermarkets, supplement shops, or health food premiums. Dried lentils, whole grains, seasonal vegetables, bananas, sweet potato, green leaves, and herbs are among the most affordable foods available. The processed food that replaced them costs more per calorie and produces more harm per pound. Raymond's budget concern is real and worth taking seriously — but the solution is smart buying, not abandoning the transition. Farmers markets, bulk grains, and seasonal produce make alkaline eating accessible.</div>
+  </div>
+  <div class="feedback" id="fb-7-d">
+    <div class="feedback-head">Partial change produces partial results — but partial change is still a start</div>
+    <div class="feedback-body">Changing dinner only is better than changing nothing — and if that is Raymond's honest capacity right now, it is worth doing. But the idea that only one meal matters misunderstands how the body works across the whole day. Breakfast determines blood sugar and energy for the morning. Lunch determines whether the afternoon brings clarity or a crash. What happens in the morning affects the evening. The body runs as one continuous system, not three separate meal slots. Raymond can start wherever he can start — just not with the belief that the rest of the day is irrelevant.</div>
+  </div>
+  <button class="next-btn" id="next-7">Continue →</button>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" data-slide="8">
+  <div class="slide-number">08 / 08</div>
+  <div class="question-text">What does it mean to truly complete a detox — and how do you know when you have arrived at a new baseline?</div>
+  <div class="question-context">After four months of consistent alkaline eating, Nadia feels genuinely different — lighter, clearer, less reactive emotionally, sleeping deeply. She asks: is this the destination, or is there more? She wants to understand what sustained health actually looks like from the inside.</div>
+  <div class="choices">
+    <button class="choice" data-q="8" data-v="a"><span class="choice-letter">a</span>A completed detox is a permanent state — she no longer needs to maintain her diet strictly</button>
+    <button class="choice" data-q="8" data-v="b"><span class="choice-letter">b</span>There is no final destination — health is a continuous relationship with the body, and what Nadia feels is a new baseline to maintain and build from</button>
+    <button class="choice" data-q="8" data-v="c"><span class="choice-letter">c</span>Her emotional improvements are unrelated to diet</div>
+    <button class="choice" data-q="8" data-v="d"><span class="choice-letter">d</span>She should now pursue more extreme protocols to go deeper</button>
+  </div>
+  <div class="feedback" id="fb-8-a">
+    <div class="feedback-head">The body is never in a static state — maintenance is the continued practice</div>
+    <div class="feedback-body">A detox is not like finishing a course of antibiotics where the treatment ends and the outcome persists regardless of what comes next. The body is continuously processing new inputs — food, air, water, stress, environment. When Nadia returns to poor food choices, the liver is burdened again, the lymph slows again, and the inflammation returns. What she has achieved is a new relationship with her body — one she maintains by continuing to feed it as well as she has. The good news is that maintenance is far easier than the initial transition. The habits are built. The palate has changed.</div>
+  </div>
+  <div class="feedback" id="fb-8-b">
+    <div class="feedback-head">A new baseline — and it is also a beginning</div>
+    <div class="feedback-body">What Nadia feels at four months is the body functioning closer to its original design. Lighter because chronic inflammation has reduced. Clearer because the brain is receiving clean blood and proper minerals. Less emotionally reactive because gut-brain signalling has improved — the gut produces 90% of the body's serotonin, and a healed gut changes mood more reliably than most pharmaceutical interventions. Deeper sleep because the nervous system has reduced its background alarm state. This is not the end. It is the foundation from which she can now listen more carefully to her body, refine further, and understand more specifically what it needs across seasons, life stages, and circumstances. Health is a living conversation.</div>
+  </div>
+  <div class="feedback" id="fb-8-c">
+    <div class="feedback-head">The gut-brain connection makes emotional improvement one of the most consistent outcomes of dietary change</div>
+    <div class="feedback-body">The gut and the brain are in constant bidirectional communication through the vagus nerve and through the neurotransmitters the gut produces. When the gut microbiome shifts — from dysbiosis to balance — the signals it sends to the brain change. Inflammation that drives anxiety and depression reduces. Serotonin production increases. The nervous system, no longer in a state of chronic low-grade threat response, can rest. Nadia is not imagining her emotional changes. She is experiencing one of the most well-documented outcomes of whole food, plant-rich alkaline eating. Her emotional system and her digestive system were never separate.</div>
+  </div>
+  <div class="feedback" id="fb-8-d">
+    <div class="feedback-head">Depth comes from consistency, not from escalation</div>
+    <div class="feedback-body">There is always more the body can do when given the right conditions — and there are extended fasts, deeper herbal protocols, and more specific therapeutic approaches available to those who want to go further. But the mistake is thinking that intensity is the next step. Nadia does not need a harder cleanse. She needs to deepen the quality of what she is already doing — the minerals in her water, the diversity of her greens, the quality of her sleep, the way she manages stress. The most powerful thing she can do is exactly what she is already doing, but done with greater understanding and care.</div>
+  </div>
+  <button class="next-btn" id="next-8">Continue →</button>
+</div>
+
+<!-- SLIDE 9 — MODULE COMPLETE -->
+<div class="slide" data-slide="9">
+  <div class="complete-block">
+    <div class="complete-icon">🌿</div>
+    <div class="complete-title">Module 8 Complete</div>
+    <div class="complete-sub">You now understand what detoxification actually is — not a trend or a shortcut, but the body's own intelligence finally given room to work. The healing crisis is real. The timeline is honest. The exit pathways are yours to support. Transition is not only physical — it carries the weight of memory, habit, and identity. And on the other side: a new baseline. A body that communicates clearly and a self that listens.</div>
+
+    <div class="section-heading" style="margin-top:48px;text-align:left">What you carry forward</div>
+    <ol class="summary-list" style="text-align:left">
+<li><span class="summary-num">01</span><span class="summary-text">The healing crisis is real. When the body begins to detox in earnest, symptoms often intensify before they improve. This is elimination at work, not failure. The direction is correct even when the process is uncomfortable.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">The liver is the body&rsquo;s primary chemical processing plant. Supporting it with bitter herbs, cruciferous vegetables, and adequate hydration is not optional during transition &mdash; it is the foundation of safe detoxification.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">The lymphatic system is the body&rsquo;s waste collection network. Unlike the blood, it has no pump. It moves through breath, movement, and hydration &mdash; and it becomes congested when those inputs are absent.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Transition is not only physical. The foods being released carry emotional and identity weight. Grief, resistance, and social friction are normal parts of the process &mdash; they are not evidence that the change is wrong.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">A practical kitchen transition is more sustainable than a philosophical one. What is in your cupboard determines what you eat under stress. Changing the environment changes the default &mdash; before willpower is required.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">A completed detox is not the absence of all symptoms &mdash; it is the establishment of a new baseline: better energy, clearer communication from the body, and a reduced inflammatory load that the body is no longer working to manage.</span></li>
+</ol>
+    <div class="section-heading" style="margin-top:48px;text-align:left">Practice this week</div>
+    <p class="complete-sub" style="text-align:left;max-width:100%;color:var(--ink)">Support one exit pathway this week. Choose lymph, liver, or kidney &mdash; and for seven days, give it specific attention. For lymph: daily movement and deep breathing, dry body brushing, adequate water. For liver: dandelion root tea or burdock, minimise alcohol and processed fats. For kidney: two litres of spring water daily, watermelon or cucumber as a morning food. One pathway, one week, consistent attention.</p>
+    <p class="complete-sub" style="text-align:left;max-width:100%;color:var(--ink)">Monthly: if you are in active dietary transition, schedule one honest check-in with yourself each month. What has changed physically? What emotional weight has the transition carried? What resistance remains and where does it live? The monthly review is not to evaluate progress against a target &mdash; it is to stay conscious of the full dimension of what transition involves.</p>
+    <div class="complete-line"></div>
+  </div>
+</div>
+
+</div><!-- /stage -->
+
+<script>
+const feedbacks={
+"1":{"a":"fb-1-a","b":"fb-1-b","c":"fb-1-c","d":"fb-1-d"},
+"2":{"a":"fb-2-a","b":"fb-2-b","c":"fb-2-c","d":"fb-2-d"},
+"3":{"a":"fb-3-a","b":"fb-3-b","c":"fb-3-c","d":"fb-3-d"},
+"4":{"a":"fb-4-a","b":"fb-4-b","c":"fb-4-c","d":"fb-4-d"},
+"5":{"a":"fb-5-a","b":"fb-5-b","c":"fb-5-c","d":"fb-5-d"},
+"6":{"a":"fb-6-a","b":"fb-6-b","c":"fb-6-c","d":"fb-6-d"},
+"7":{"a":"fb-7-a","b":"fb-7-b","c":"fb-7-c","d":"fb-7-d"},
+"8":{"a":"fb-8-a","b":"fb-8-b","c":"fb-8-c","d":"fb-8-d"}
+};
+const correct={"1":"b","2":"b","3":"b","4":"b","5":"a","6":"b","7":"b","8":"b"};
+let current=1;
+function showSlide(n){
+  document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+  const sl=document.querySelector('[data-slide="'+n+'"]');
+  if(sl)sl.classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((d,i)=>{
+    d.classList.remove('done','active');
+    if(i+1<n)d.classList.add('done');
+    else if(i+1===n)d.classList.add('active');
+  });
+}
+document.querySelectorAll('.choice').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const q=this.dataset.q;
+    const v=this.dataset.v;
+    const allChoices=document.querySelectorAll('[data-q="'+q+'"]');
+    allChoices.forEach(b=>b.disabled=true);
+    document.querySelectorAll('[id^="fb-'+q+'-"]').forEach(f=>f.classList.remove('visible'));
+    const fbId=feedbacks[q][v];
+    if(fbId){const fb=document.getElementById(fbId);if(fb)fb.classList.add('visible');}
+    if(v===correct[q])this.classList.add('correct');
+    else{
+      this.classList.add('incorrect');
+      const cb=document.querySelector('[data-q="'+q+'"][data-v="'+correct[q]+'"]');
+      if(cb)cb.classList.add('correct');
+    }
+    const nb=document.getElementById('next-'+q);
+    if(nb)nb.style.display='inline-block';
+  });
+});
+document.querySelectorAll('.next-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    current++;
+    showSlide(current);
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+showSlide(1);
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c8m7';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course8-module-7-children-and-family-nutrition.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c8m8','1');window.location.href='course8-module-9-building-your-alkaline-life.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

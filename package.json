@@ -1,0 +1,8 @@
+{
+  "name": "safe-learning-spot",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "wrangler": "^3.99.0"
+  }
+}

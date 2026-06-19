@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Healing Stage Assessment — Safe Spot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent('assessment.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html[data-theme="dark"]{--ink:#e8e8e4;--paper:#0f0f0d;--muted:#888884;--line:#2a2a27;--soft:#1a1a17;--accent:#4caf78}
+html,body{min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.site-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);padding:14px 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;align-items:center;gap:24px}
+.site-logo{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.site-logo strong{color:var(--ink)}
+.header-right{display:flex;align-items:center;gap:16px}
+.header-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:4px;transition:color .2s}
+.theme-toggle:hover{color:var(--ink)}
+.progress-strip{background:var(--line);height:2px;width:100%}
+.progress-fill{height:2px;background:var(--ink);transition:width .5s ease}
+.screen{display:none;max-width:760px;margin:0 auto;padding:56px 32px 100px}
+.screen.active{display:block;animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.welcome-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.welcome-title{font-family:var(--serif);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:300;line-height:1.25;margin-bottom:20px}
+.welcome-intro{font-size:.95rem;color:#3a3a36;line-height:1.8;margin-bottom:32px;max-width:640px}
+html[data-theme="dark"] .welcome-intro{color:#b8b8b4}
+.therapy-notice{border:1px solid var(--line);border-left:3px solid var(--ink);padding:20px 24px;background:var(--soft);border-radius:0 4px 4px 0;margin-bottom:28px}
+.therapy-notice p{font-size:.9rem;line-height:1.7;color:#3a3a36}
+html[data-theme="dark"] .therapy-notice p{color:#b8b8b4}
+.therapy-notice strong{font-weight:500;color:var(--ink)}
+.time-notice{background:var(--paper);border:1px solid var(--line);padding:16px 20px;border-radius:4px;margin-bottom:40px;font-size:.88rem;color:var(--muted);line-height:1.65}
+.time-notice strong{color:var(--ink);font-weight:500}
+.start-btn{padding:14px 36px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;font-size:.9rem;font-family:var(--sans);letter-spacing:.04em;cursor:pointer;transition:opacity .2s}
+.start-btn:hover{opacity:.85}
+.section-meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.section-title{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2rem);font-weight:300;line-height:1.3;margin-bottom:12px}
+.section-intro{font-size:.93rem;color:var(--muted);line-height:1.75;margin-bottom:40px;border-bottom:1px solid var(--line);padding-bottom:28px;max-width:640px}
+.question-block{margin-bottom:44px}
+.question-number{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em;margin-bottom:8px}
+.question-text{font-size:1.05rem;font-weight:400;line-height:1.6;margin-bottom:16px;color:var(--ink);font-family:var(--serif)}
+.answers{display:flex;flex-direction:column;gap:10px}
+.answer-btn{padding:16px 20px;border:1px solid var(--line);border-radius:4px;cursor:pointer;font-size:.93rem;line-height:1.55;text-align:left;font-family:var(--sans);background:var(--paper);color:var(--ink);transition:border-color .2s,background .2s;display:flex;gap:14px;align-items:flex-start}
+.answer-btn:hover{border-color:var(--ink);background:var(--soft)}
+.answer-btn.selected{border-color:var(--accent);background:#f0faf4}
+html[data-theme="dark"] .answer-btn.selected{background:#142a1e}
+.answer-letter{font-family:var(--mono);font-size:.8rem;color:var(--muted);min-width:16px;margin-top:3px;flex-shrink:0}
+.answer-btn.selected .answer-letter{color:var(--accent)}
+.section-nav{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+.nav-note{font-size:.82rem;color:var(--muted);font-style:italic}
+.nav-btn{padding:14px 32px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;font-size:.9rem;font-family:var(--sans);letter-spacing:.04em;cursor:pointer;transition:opacity .2s}
+.nav-btn:hover:not(:disabled){opacity:.85}
+.nav-btn:disabled{opacity:.3;cursor:default}
+.results-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.results-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:300;line-height:1.25;margin-bottom:16px}
+.results-intro{font-size:.95rem;color:#3a3a36;line-height:1.8;margin-bottom:40px;max-width:640px}
+html[data-theme="dark"] .results-intro{color:#b8b8b4}
+.results-grid{display:flex;flex-direction:column;gap:16px;margin-bottom:48px}
+.course-result{border:1px solid var(--line);border-radius:4px;padding:24px 28px;background:var(--paper)}
+.course-result.priority{background:var(--soft)}
+.course-result.priority-high{border-color:var(--accent);background:#f0faf4}
+html[data-theme="dark"] .course-result.priority-high{background:#142a1e}
+.result-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:16px}
+.result-course-name{font-weight:500;font-size:.95rem}
+.result-course-sub{font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-top:3px;letter-spacing:.06em}
+.result-label{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;padding:3px 9px;border-radius:2px;white-space:nowrap;flex-shrink:0;text-transform:uppercase}
+.label-strong{background:var(--soft);color:var(--muted)}
+.label-active{background:var(--soft);color:var(--ink)}
+.label-priority{background:#f0faf4;color:var(--accent)}
+.label-high{background:#f0faf4;color:var(--accent);font-weight:500}
+.result-bar-bg{height:2px;background:var(--line);border-radius:1px;overflow:hidden;margin-bottom:16px}
+.result-bar-fill{height:2px;border-radius:1px;transition:width 1.2s ease}
+.fill-strong{background:var(--muted)}
+.fill-active{background:var(--ink)}
+.fill-priority{background:var(--accent)}
+.fill-high{background:var(--accent)}
+.result-insight{font-size:.9rem;color:#3a3a36;line-height:1.7;margin-bottom:10px;font-style:italic}
+html[data-theme="dark"] .result-insight{color:#9a9a96}
+.result-desc{font-size:.88rem;color:#4a4a46;line-height:1.7}
+html[data-theme="dark"] .result-desc{color:#8a8a86}
+.result-steps{margin-top:16px;border-top:1px solid var(--line);padding-top:16px}
+.result-steps-title{font-family:var(--mono);font-size:.73rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.step-item{font-size:.88rem;color:#3a3a36;line-height:1.65;padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:14px}
+html[data-theme="dark"] .step-item{color:#a8a8a4}
+.step-item:last-child{border-bottom:none}
+.step-num{font-family:var(--mono);font-size:.73rem;color:var(--muted);flex-shrink:0;margin-top:3px}
+.therapy-reminder{background:var(--soft);border:1px solid var(--line);border-left:3px solid var(--ink);padding:20px 24px;border-radius:0 4px 4px 0;margin:40px 0}
+.therapy-reminder p{font-size:.88rem;color:#3a3a36;line-height:1.7}
+html[data-theme="dark"] .therapy-reminder p{color:#a8a8a4}
+.feedback-section{border-top:1px solid var(--line);padding-top:48px;margin-top:48px}
+.feedback-title{font-family:var(--serif);font-size:1.6rem;font-weight:300;margin-bottom:8px}
+.feedback-sub{font-size:.9rem;color:var(--muted);line-height:1.65;margin-bottom:28px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:.85rem;font-weight:500;color:var(--ink);margin-bottom:6px}
+.form-optional{font-weight:300;color:var(--muted);font-size:.8rem}
+.form-input,.form-textarea,.form-select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:4px;font-size:.9rem;font-family:var(--sans);background:var(--paper);color:var(--ink);transition:border-color .2s}
+.form-input:focus,.form-textarea:focus,.form-select:focus{outline:none;border-color:var(--ink)}
+.form-textarea{min-height:100px;resize:vertical;line-height:1.6}
+.form-select{appearance:none;cursor:pointer}
+.submit-btn{padding:14px 36px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;font-size:.9rem;font-family:var(--sans);letter-spacing:.04em;cursor:pointer;transition:opacity .2s}
+.submit-btn:hover{opacity:.85}
+.form-success{padding:20px 24px;background:#f0faf4;border:1px solid #a8d5b8;border-radius:4px;color:#1a5c34;font-size:.9rem;line-height:1.65;display:none}
+.form-key-note{font-size:.78rem;color:var(--muted);margin-top:8px;line-height:1.5}
+@media(max-width:600px){.screen{padding:40px 20px 80px}.site-header{padding:14px 20px}}<style>
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+</style></style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-access.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-logo">Safe Spot &middot; <strong>Healing Stage Assessment</strong></div>
+  <div class="header-right">
+    <div class="header-tag" id="header-progress-tag">Introduction</div>
+    <button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light" aria-label="Toggle dark mode">&#9680;</button>
+  </div>
+</header>
+<div class="progress-strip"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+
+<!-- SCREEN 0: WELCOME -->
+<div class="screen active" id="screen-0">
+  <div class="welcome-eyebrow">Safe Spot &middot; Healing Stage Assessment</div>
+  <div class="welcome-title">Where are you<br>in your healing?</div>
+  <div class="welcome-intro">
+    This assessment moves through all ten areas of the Safe Spot curriculum: energy and relationships, toxic relationship patterns, the sacred energy body, financial sovereignty, generational wounding, institutional conditioning, media and narrative literacy, body and food wisdom, the art of becoming, and the uncharted mind. It is not a quiz. It is a mirror &mdash; built to show you, with some precision, where the most alive and unresolved work in your life sits right now.
+    <br><br>
+    There are no right answers. There are no wrong answers. There are only honest ones. The more honestly you answer, the more useful the picture at the end will be. Every question asks you to locate yourself as you actually are &mdash; not as you wish you were, not as you believe you should be. The wish and the should are the noise. Your actual position is the signal. Even the parts of you that would prefer to skip a question are information.
+    <br><br>
+    At the end you will receive a map &mdash; ten areas, ordered by where the most active patterns live. Each will carry a description of what that level of activation typically looks like, suggested first steps, and guidance for where to begin and why. These results are private and are never transmitted or stored anywhere. They belong entirely to you.
+  </div>
+
+  <div class="therapy-notice">
+    <p><strong>Before you begin.</strong> This is a self-reflection tool, not a clinical assessment. It does not replace therapy, counselling, or medical support. Some of what it surfaces may be difficult. If what comes up is heavy &mdash; stop. Take a breath. A day. A week. Come back when you are ready. If any section raises something that feels too large to carry alone, please seek professional support alongside this work. Awareness is the first step. A trained practitioner can help you take the ones that follow.</p>
+  </div>
+
+  <div class="time-notice">
+    <strong>Allow between one and two hours.</strong> There is no time limit and no deadline. You can work through it across multiple sessions &mdash; simply return to this page and continue from where you stopped. Answer what you can today. The questions will wait. Your healing is not on a schedule.
+  </div>
+
+  <button class="start-btn" onclick="goTo(1)">Begin the Assessment &rarr;</button>
+</div>
+
+<!-- Sections rendered by JS -->
+<div id="section-screens"></div>
+
+<!-- RESULTS SCREEN -->
+<div class="screen" id="screen-11">
+  <div class="results-eyebrow">Your Results</div>
+  <div class="results-title">Your Healing Map</div>
+  <div class="results-intro" id="results-intro"></div>
+  <div class="results-grid" id="results-grid"></div>
+
+  <div class="therapy-reminder">
+    <p><strong>This map shows you where active patterns live &mdash; not how far you have fallen, or how much further you have to go.</strong> Many people who score highly in an area have been carrying it for decades without any map at all. You now have one. Use it at whatever pace is honest for you. And where any area feels too large to approach alone, please reach out to a therapist, counsellor, or trusted professional. These courses are tools. Skilled support is its own form of medicine, and this assessment does not replace it.</p>
+  </div>
+
+  <div class="feedback-section">
+    <div class="feedback-title">Help us improve this</div>
+    <div class="feedback-sub">This assessment is part of your £11 investment in yourself. If there is anything that would make it more useful, more honest, or more precise &mdash; tell us. Your feedback goes directly to the Safe Spot team.</div>
+    <form id="feedback-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+      <input type="hidden" name="subject" value="Safe Spot Assessment Feedback">
+      <input type="hidden" name="from_name" value="Safe Spot Assessment">
+      <input type="hidden" name="redirect" value="false">
+      <div class="form-group">
+        <label class="form-label" for="fb-name">Your name <span class="form-optional">(optional)</span></label>
+        <input class="form-input" type="text" id="fb-name" name="name" placeholder="First name or initials">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="fb-email">Your email <span class="form-optional">(optional &mdash; only if you&rsquo;d like a response)</span></label>
+        <input class="form-input" type="email" id="fb-email" name="email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="fb-useful">What landed most accurately?</label>
+        <textarea class="form-textarea" id="fb-useful" name="most_useful" placeholder="A question that made you stop, a result that felt precise, something that showed you something new..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="fb-improve">What would make this sharper?</label>
+        <textarea class="form-textarea" id="fb-improve" name="improvements" placeholder="Questions you felt were missing, results that felt off, anything that would make this more useful or more honest..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="fb-rating">Overall, how useful was this?</label>
+        <select class="form-select" id="fb-rating" name="rating">
+          <option value="">Select one</option>
+          <option value="Very useful — it showed me something I didn't fully see before">Very useful &mdash; it showed me something I didn&rsquo;t fully see before</option>
+          <option value="Useful — it confirmed things I suspected">Useful &mdash; it confirmed things I suspected</option>
+          <option value="Somewhat useful — a few things landed">Somewhat useful &mdash; a few things landed</option>
+          <option value="Not very useful — it didn't feel relevant">Not very useful &mdash; it didn&rsquo;t feel relevant</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-btn">Send Feedback</button>
+      <p class="form-key-note">To activate this form: visit <strong>web3forms.com</strong>, enter <strong>enquiries@safespot.life</strong> to receive your access key, then replace <em>YOUR_WEB3FORMS_KEY</em> in this file&rsquo;s source code.</p>
+    </form>
+    <div class="form-success" id="form-success">Thank you. Your feedback has been received by the Safe Spot team. We read every response and use it to make these tools sharper.</div>
+  </div>
+</div>
+
+<script>
+function SS_toggleTheme(){
+  var d=document.documentElement,cur=d.getAttribute('data-theme');
+  var next=cur==='dark'?'light':'dark';
+  d.setAttribute('data-theme',next);
+  try{localStorage.setItem('safespot_theme',next);}catch(e){}
+}
+
+// =====================================================================
+// QUESTION DATA  — 8 questions × 10 sections = 80 total
+// =====================================================================
+const sections = [
+  {
+    course: 1,
+    label: "Course 01",
+    title: "Energy & Relationships",
+    intro: "This section asks you to sit with the invisible economy of your daily life — what you give, what you receive, what it costs you to be around certain people, and what happens to you when you try to hold a line. Answer from the body, not from the mind. Not from who you think you should be, but from who you actually have been.",
+    courseDesc: "Explores energy as a finite and trackable resource, the patterns that drain versus restore it, the difference between genuine care and obligatory giving, how to set and hold limits without collapsing, and the architecture of truly reciprocal connection.",
+    insights: {
+      strong: "Your energy relationships appear largely governed. You give from genuine choice, your limits hold, and you have real awareness of the exchange in your connections. This course would deepen what you already understand.",
+      active: "There are live patterns here. You are noticing things &mdash; the depletion after certain interactions, the difficulty holding a limit, the reflexive giving. You are at the stage where naming it produces real movement.",
+      priority: "Energy dynamics are significantly active in your life right now. The patterns of over-giving, collapsed limits, and difficulty receiving are costing you in ways that are probably not abstract. This course was built for exactly where you are.",
+      high: "This is your most pressing area. The patterns around energy, giving, and relational obligation are running at high cost. Begin here. The course will land hard and it will produce real change precisely because the ground is already activated."
+    },
+    steps: [
+      "For one week, note how you feel &mdash; expanded or depleted &mdash; after every significant interaction. Build the data before you draw conclusions. What you find will be the beginning of something.",
+      "Identify one limit you have been unable to hold with a specific person and practise holding it once, without over-explaining or apologising for it. Notice what happens in the seconds before you speak it.",
+      "Ask yourself honestly: what would I do with two hours of time that were genuinely mine, with no obligations and no one to account to? The answer to that question is information about where you have been, and where you might begin."
+    ],
+    questions: [
+      {
+        q: "When you walk away from a conversation with someone you care about, what does your body tell you before your mind has decided what to think about it?",
+        answers: [
+          {t: "I feel roughly as I did before &mdash; perhaps even lighter. The exchange was real and left something.", s: 0},
+          {t: "Sometimes replenished, sometimes depleted &mdash; and I am beginning to know which people produce which.", s: 1},
+          {t: "Usually drained, even when nothing explicitly went wrong. There is a cost I cannot always name.", s: 2},
+          {t: "Hollowed. Like something moved from me to them without my conscious agreement.", s: 3}
+        ]
+      },
+      {
+        q: "There is someone in your life &mdash; or there has been &mdash; whose mood, needs, or satisfaction with you you monitor even when you are not with them. Is this familiar?",
+        answers: [
+          {t: "Not particularly. I am present to my own state and I do not carry others' states when we are apart.", s: 0},
+          {t: "With one or two people, in specific circumstances, occasionally.", s: 1},
+          {t: "Yes &mdash; there is someone whose emotional temperature I track like a background process. It has been running so long I sometimes forget it is not normal.", s: 2},
+          {t: "This is my baseline. I have lived this way with multiple people simultaneously since I was very young. I do not know what my own state feels like without someone else's inside it.", s: 3}
+        ]
+      },
+      {
+        q: "When you say no &mdash; to a request, an obligation, something that would cost you &mdash; what happens in your body in the seconds before the word comes out?",
+        answers: [
+          {t: "Very little. I have learned to hold the discomfort of a clear limit and it no longer rattles me the way it used to.", s: 0},
+          {t: "A contraction, a scan of their likely reaction, a calculation that runs faster than thinking. I usually hold it.", s: 1},
+          {t: "Something close to dread. I rehearse it, soften it, add apologies to reduce the impact before I have even spoken.", s: 2},
+          {t: "I almost never get there. I talk myself out of it before the no can form &mdash; and then carry the weight of what I agreed to instead.", s: 3}
+        ]
+      },
+      {
+        q: "When someone offers you genuine care &mdash; listens deeply, prioritises you, gives without asking for anything in return &mdash; what moves through you first?",
+        answers: [
+          {t: "Warmth and ease. I can receive care without complexity or debt.", s: 0},
+          {t: "Pleasure, then a small movement of wanting to repay it. I am working on just letting it land.", s: 1},
+          {t: "Gratitude followed quickly by discomfort &mdash; a sense that I should not need this, or that something will eventually be required.", s: 2},
+          {t: "Anxiety. Being truly cared for produces more discomfort than being needed does.", s: 3}
+        ]
+      },
+      {
+        q: "What do you do with time that is genuinely yours &mdash; no obligations, no one to tend to, no tasks that serve anyone but you?",
+        answers: [
+          {t: "I protect and use it. It is where I restore and think most clearly.", s: 0},
+          {t: "I can find it, though I sometimes need to resist filling it with productivity or someone else's needs first.", s: 1},
+          {t: "I rarely find it &mdash; and when I do, something in me moves quickly to fill it. Being still and purposeless for myself feels uncomfortable.", s: 2},
+          {t: "I do not know what that time is for. The idea of it produces a low-level anxiety. There is a version of me that does not know how to exist without someone to be needed by.", s: 3}
+        ]
+      },
+      {
+        q: "When you imagine a relationship where someone truly knows you &mdash; your full interior life, your contradictions, your needs &mdash; and chooses you fully anyway, how close to possible does that feel?",
+        answers: [
+          {t: "Possible, and something I have experienced in some form. Being known is not frightening to me.", s: 0},
+          {t: "Possible but currently distant. I want it and something in me still pulls away at the last step.", s: 1},
+          {t: "Desirable in theory and terrifying in practice. Being fully known means being fully rejected &mdash; which feels like a risk too large to take.", s: 2},
+          {t: "I do not fully know myself, so I cannot imagine being known by another. The interior landscape is partially closed even to me.", s: 3}
+        ]
+      },
+      {
+        q: "If you were to map the relationships where you give the most &mdash; how many of those people would describe you as someone they give back to in equal measure?",
+        answers: [
+          {t: "Most of them. The exchange is genuinely reciprocal across my close relationships.", s: 0},
+          {t: "Some &mdash; I have made progress here and a few relationships have become genuinely mutual.", s: 1},
+          {t: "Few. I am usually the one who gives more, adjusts more, tracks more &mdash; and I have often chosen people who allow that arrangement.", s: 2},
+          {t: "Almost none. The people I give the most to have never been required to return it &mdash; and on some level I have arranged it this way.", s: 3}
+        ]
+      },
+      {
+        q: "How much of what drives you &mdash; your care, your helpfulness, your giving &mdash; comes from genuine love versus the need to be needed, to be valuable, or to prevent the consequences of not giving?",
+        answers: [
+          {t: "Mostly from genuine love. I have separated this well enough that I can feel the difference.", s: 0},
+          {t: "A real mix &mdash; some genuine, some habitual, some fear-shaped. I am in the process of untangling them.", s: 1},
+          {t: "I am not sure I know the difference any more. The giving has been so automatic for so long that its motivation is invisible to me.", s: 2},
+          {t: "I suspect most of it is fear. The love is real but it is wrapped around a structure where being needed is the only thing that makes me feel safe.", s: 3}
+        ]
+      }
+    ]
+  },
+  {
+    course: 2,
+    label: "Course 02",
+    title: "Toxic Relationship Patterns",
+    intro: "This section asks you to sit with the shape of your most significant relationships &mdash; not the story you tell about them, but the pattern underneath the story. What has repeated. What has cost you. What you already knew and stayed with anyway. Answer from your history, not from loyalty.",
+    courseDesc: "Examines the patterns that predict dysfunction, love-bombing and the initial mask, the mechanics of trauma bonding, the four dysfunction archetypes, your role in the system, what kept you in it, how to exit safely, and how to choose from a genuinely different place.",
+    insights: {
+      strong: "Your relational patterns appear largely clear. You understand what has happened in your significant relationships, your perceptions hold, and you are entering new ones from a more informed place.",
+      active: "There are live patterns here. You are seeing things you did not see before &mdash; the recurring shape, what the early intensity signalled, what your automatic response in conflict has been. This awareness is where the real work begins.",
+      priority: "Relational patterns are significantly active. The shapes keep repeating, your self-perception gets destabilised, and something about the dynamic has been hard to exit or understand clearly from inside it. This course gives structure to what you have been feeling.",
+      high: "This is your most pressing area. The patterns are deep, the cost is ongoing, and the difficulty is that the most familiar is often the most confusing from inside it. Begin here. The course was built precisely for this level of activation."
+    },
+    steps: [
+      "Write down the emotional shape of your last two significant relationships &mdash; not what happened, but how you felt and what role you occupied inside them. Look for what they have in common rather than how they differed.",
+      "Identify one pattern &mdash; a recurring feeling, dynamic, or choice &mdash; and trace it back to its earliest version. Where did you first learn this was how relationships worked?",
+      "Consider working with a therapist specifically trained in attachment and relational trauma. This area of work is rarely completed fully alone, and the right support can make visible what the pattern itself has been hiding."
+    ],
+    questions: [
+      {
+        q: "When you look back at your two most significant relationships &mdash; not the people, but the shape &mdash; what do you find?",
+        answers: [
+          {t: "Different people, genuinely different dynamics. What I needed and who I became inside them have changed.", s: 0},
+          {t: "Similarities I am only now beginning to see &mdash; in the emotional texture, in who I became, in what was required of me.", s: 1},
+          {t: "A clear pattern. I have been in variations of the same place more than once &mdash; and the realisation is both clarifying and painful.", s: 2},
+          {t: "The same relationship. A different person each time, but the same emotional architecture, the same surrender, the same point where I stopped recognising myself.", s: 3}
+        ]
+      },
+      {
+        q: "There is a moment in certain relationships &mdash; before things went wrong &mdash; where the intensity was extraordinary. The attention felt like sunlight. Is this familiar?",
+        answers: [
+          {t: "No. My significant relationships developed at an even pace &mdash; warmth that built steadily rather than arriving all at once.", s: 0},
+          {t: "Once. I have thought carefully about what that early intensity was signalling and what it cost me to explain it away.", s: 1},
+          {t: "More than once. The heat at the beginning has always been part of what made the later confusion so complete.", s: 2},
+          {t: "This is the template. The extraordinary beginning is part of what makes me stay when everything changes &mdash; the early intensity becomes proof that it was real, and I have used that proof against my own later judgment.", s: 3}
+        ]
+      },
+      {
+        q: "When something in a close relationship confuses or hurts you &mdash; a shift in their behaviour, a moment that felt wrong &mdash; how reliable are your own perceptions in the hours and days that follow?",
+        answers: [
+          {t: "Generally reliable. I trust what I experienced and my self-trust holds even under pressure.", s: 0},
+          {t: "Mostly reliable, though certain people can shake it temporarily before I return to my own read.", s: 1},
+          {t: "Shaky. I often leave those interactions uncertain whether what I felt was real &mdash; or whether their version of events is more accurate than mine.", s: 2},
+          {t: "Deeply unreliable. I spent years convinced my perceptions were distorted, that I was too sensitive, that my reading was the problem. I was told this often enough that I eventually agreed with it.", s: 3}
+        ]
+      },
+      {
+        q: "When conflict ends in a close relationship &mdash; when the storm passes &mdash; where does responsibility typically land by the time it is over?",
+        answers: [
+          {t: "Where it belongs. Both of us hold our parts. The resolution is real, not just a performance of peace.", s: 0},
+          {t: "Roughly fairly &mdash; though I sometimes carry more than my share, and I am aware of the tendency.", s: 1},
+          {t: "With me, more often than makes sense. I apologise before I understand what I am apologising for. The relief of the peace is worth the cost of the accuracy.", s: 2},
+          {t: "Always with me. I absorb blame as a reflex, faster than thought, because the conflict ending feels more urgent than knowing who actually broke what.", s: 3}
+        ]
+      },
+      {
+        q: "Have you ever stayed in a relationship &mdash; longer than made sense, past the point where something in you already knew &mdash; because leaving felt more dangerous than the cost of remaining?",
+        answers: [
+          {t: "No. My exits have been clean enough. I left when I knew, and I chose when I stayed.", s: 0},
+          {t: "Once, and I understand now what kept me. I can trace the pull back to something older than the relationship itself.", s: 1},
+          {t: "Yes. Something kept me past my own knowing. I called it hope or love, but in truth I was more afraid of leaving than I was harmed by staying.", s: 2},
+          {t: "This is my pattern. I leave in my mind years before I leave in my body, if I leave at all. The gap between knowing and going has been one of the defining costs of my adult life.", s: 3}
+        ]
+      },
+      {
+        q: "Is there a person in your past &mdash; or present &mdash; whose opinion of you still governs something in how you see yourself, even now, even though you may not want it to?",
+        answers: [
+          {t: "Not in a way that runs my life. I have largely separated my sense of self from any one person's assessment.", s: 0},
+          {t: "One or two &mdash; and I am actively working on where that comes from and what it requires of me.", s: 1},
+          {t: "Yes. Someone's voice plays inside my own head and I often cannot tell where their judgment ends and my self-assessment begins.", s: 2},
+          {t: "This is my inner world. I carry the assessments of certain people so thoroughly that I have mistaken their voice for my own. My self-concept was largely built inside what certain people decided I was.", s: 3}
+        ]
+      },
+      {
+        q: "When a relationship ends &mdash; whether you left or were left &mdash; what is the predominant shape of the weeks that follow?",
+        answers: [
+          {t: "Grief that moves, and eventually clears. The loss is real, and then it resolves.", s: 0},
+          {t: "Grief, and underneath it a quiet relief I sometimes feel guilty for.", s: 1},
+          {t: "Something complicated &mdash; grief, but also a disorientation about who I am without it, and sometimes a pull to reconnect I have to talk myself out of.", s: 2},
+          {t: "A kind of collapse. When the relationship was the primary structure of my identity, its ending feels like the removal of the floor. The grief is not only for them but for a version of myself I do not know how to locate outside of it.", s: 3}
+        ]
+      },
+      {
+        q: "If you were to describe what love felt like before you examined it &mdash; not love as a concept, but love as you first absorbed it &mdash; how would you characterise its shape?",
+        answers: [
+          {t: "As something relatively safe and relatively steady. Love, in my formation, was associated with something I could trust.", s: 0},
+          {t: "As warm but conditional &mdash; real in moments, but with limits I had to navigate.", s: 1},
+          {t: "As something to be earned &mdash; through performance, through care, through not being too much or too little. Love arrived when I was being what was needed.", s: 2},
+          {t: "As dangerous, or absent, or arriving with a cost that outweighed the warmth. What I learned love was has shaped every relationship since, and I have spent my adult life both seeking it and dreading what it will eventually require of me.", s: 3}
+        ]
+      }
+    ]
+  },
+  {
+    course: 3,
+    label: "Course 03",
+    title: "Sacred Sexuality & The Energy Body",
+    intro: "These questions ask you to look at your relationship with your own body &mdash; not as a medical object but as the primary site of your experience, your aliveness, and your sovereignty. They ask what has been taken, trained away, or buried there. Answer honestly, and without judgment toward any version of your history.",
+    courseDesc: "Explores energy across four physical and spiritual channels, the weaponisation of sexuality and how to reclaim it, somatic sovereignty and body trust, what sacred creative expression looks and feels like, the path back to genuine restoration, and practices for embodied wholeness.",
+    insights: {
+      strong: "Your relationship to your body and energy appears largely grounded. You have real somatic awareness, a sense of bodily authority, and genuine restoration practices. This course would deepen and systematise what you already hold.",
+      active: "There are live threads here &mdash; in body trust, in the relationship between your presented self and your experienced self, in what restoration actually feels like. This is the stage where naming produces movement.",
+      priority: "The body and energy domain is significantly active. Disconnection, performed self, distrust of somatic signals, or the absence of genuine rest are costing you at a structural level. This course addresses exactly that.",
+      high: "Begin here. The cost of running disconnected from your body, or in chronic depletion, is high and compounding. This course is built for exactly this level of activation and it will produce real change."
+    },
+    steps: [
+      "For one week: before you get out of bed each morning, take ninety seconds to ask your body what it is carrying today and what it needs. Do not fix anything yet &mdash; just ask and listen.",
+      "Identify one way your sexuality, expressiveness, or creative aliveness has been shaped by external judgment, expectation, or shame rather than your own genuine experience. Name it plainly on paper.",
+      "Choose one act each day this week that you do purely for your own pleasure, restoration, or creative expression &mdash; with no audience, no justification, and no productivity attached to it."
+    ],
+    questions: [
+      {
+        q: "At rest, in an ordinary moment &mdash; not during effort or activity, but simply existing &mdash; how present are you inside your body?",
+        answers: [
+          {t: "Mostly present. I inhabit my body. It is where I live, not something I manage from outside.", s: 0},
+          {t: "Variable &mdash; I am more present than I used to be, though I still notice myself leaving during stress or intense emotion.", s: 1},
+          {t: "Partially absent. There is a gap between my body and my awareness that I have learned to call normal.", s: 2},
+          {t: "Almost entirely absent in most moments. I live in my head and visit my body mostly when something demands attention &mdash; pain, desire, illness, exhaustion.", s: 3}
+        ]
+      },
+      {
+        q: "Your body communicates constantly &mdash; through sensation, unease, desire, excitement, signals that precede thought. How much do you trust that communication?",
+        answers: [
+          {t: "I trust it, and I treat somatic signals as real information before I let my mind override them.", s: 0},
+          {t: "More than I used to &mdash; I am learning to feel before I think, and it is shifting things.", s: 1},
+          {t: "I hear it but I often override it when it is inconvenient or in conflict with what I think I should want.", s: 2},
+          {t: "I fundamentally distrust my body's signals. I was taught &mdash; explicitly or through lived experience &mdash; that what my body felt was unreliable, embarrassing, or dangerous.", s: 3}
+        ]
+      },
+      {
+        q: "Your sexuality &mdash; the fullness of it, not just what you act on &mdash; is it something you have been able to inhabit as genuinely your own, or has it been shaped, constrained, or shadowed by something else?",
+        answers: [
+          {t: "Largely my own. I have found my way to an experience of sexuality that belongs to me.", s: 0},
+          {t: "Partly mine, partly shaped. I am in the process of distinguishing what is genuinely mine from what was installed or taken.", s: 1},
+          {t: "Largely shaped by others &mdash; by what I learned was acceptable, by experiences that left their mark, by a shame or confusion I have not fully worked through.", s: 2},
+          {t: "Almost entirely shadowed. There are significant parts of my desire and my body's full range that I cannot access freely, and the closing of that space has a specific history.", s: 3}
+        ]
+      },
+      {
+        q: "Is there a part of your energy, your expressiveness, your full aliveness &mdash; the version of you that is most vivid, most electric &mdash; that you have learned to dim or hide in the presence of others?",
+        answers: [
+          {t: "Less than I used to. I have been reclaiming that part and I inhabit more of my full range in more contexts.", s: 0},
+          {t: "In some settings. I am working on distinguishing genuine social adaptation from habitual self-suppression.", s: 1},
+          {t: "In most settings. I learned early that being too much or too bright had consequences. I have been managing that ever since.", s: 2},
+          {t: "In almost all settings. The full, animated, unguarded version of me appears rarely and only when I feel completely safe &mdash; which is almost never.", s: 3}
+        ]
+      },
+      {
+        q: "When you look at your relationship with physical pleasure &mdash; rest, sensation, beauty, physical joy &mdash; what do you find?",
+        answers: [
+          {t: "Genuine ease. I can receive and inhabit pleasure without needing to justify or earn it.", s: 0},
+          {t: "Some ease, some guilt. I am learning that pleasure is not a reward and rest is not failure &mdash; but this is still a practice, not a baseline.", s: 1},
+          {t: "Pleasure feels like something I access around the edges &mdash; when I have been productive enough, good enough, or attended to everyone important to me first.", s: 2},
+          {t: "Pleasure feels largely out of reach, or accompanied by a guilt or self-denial I cannot fully trace. My body's enjoyment has rarely been something I have been fully permitted.", s: 3}
+        ]
+      },
+      {
+        q: "Have you ever been in a relationship where your energy &mdash; not your attention or effort, but your fundamental aliveness &mdash; was being drawn upon in a way that left you diminished?",
+        answers: [
+          {t: "Not significantly &mdash; or I recognised it early enough to move.", s: 0},
+          {t: "Once, and I have spent real time understanding the mechanism &mdash; what it looked like, what kept me in it, what it cost.", s: 1},
+          {t: "More than once &mdash; and the common thread has been a confusion between feeling intensely alive within the dynamic and being genuinely nourished by it.", s: 2},
+          {t: "This is a significant thread in my relational history. The people who moved through my life with the greatest intensity often left me less &mdash; less certain, less energised, less recognisable to myself.", s: 3}
+        ]
+      },
+      {
+        q: "Your body carries its history &mdash; the places it learned to brace, the things it never fully processed. How much of that history have you consciously engaged with?",
+        answers: [
+          {t: "A meaningful amount &mdash; I have done somatic work, therapy, or practice that has helped the body release what the mind alone could not reach.", s: 0},
+          {t: "Some &mdash; I am beginning to notice where the body holds things and I have started to work with that.", s: 1},
+          {t: "Little. I have engaged with my history intellectually but I have largely left the body out of the work.", s: 2},
+          {t: "Almost none. My history lives in my body in ways I suspect but have not yet been willing or able to approach &mdash; because to go there would require something I am not yet ready for.", s: 3}
+        ]
+      },
+      {
+        q: "If the version of you that has never experienced shame about your body, your desire, or your pleasure had been the one to grow up &mdash; how different would you be?",
+        answers: [
+          {t: "Somewhat different in the edges, but not radically &mdash; I was fortunate in this domain.", s: 0},
+          {t: "Meaningfully different in a few specific areas I can name.", s: 1},
+          {t: "Significantly different &mdash; freer, more present, less defended, less careful about how much space my aliveness is allowed to take up.", s: 2},
+          {t: "Almost unrecognisably different. The suppression of that domain has been one of the quiet architectures of my entire life, and I have rarely let myself sit with how much it has shaped.", s: 3}
+        ]
+      }
+    ]
+  },
+  {
+    course: 4,
+    label: "Course 04",
+    title: "Financial Sovereignty",
+    intro: "These questions ask you to examine your relationship with money at the level of felt experience &mdash; the shame or safety it carries, what was modelled for you, what your financial position costs you in real freedom, and how much of your daily life is governed by financial pressure versus genuine choice.",
+    courseDesc: "Explores money as an energetic system, the emotional architecture of financial patterns (shame, inherited scarcity, class conditioning), the difference between income and genuine freedom, building independent value streams, and what real financial sovereignty looks and feels like.",
+    insights: {
+      strong: "Your relationship with money appears largely functional. It operates as a tool rather than a source of chronic anxiety, and you have meaningful movement toward real financial freedom.",
+      active: "There are live patterns here &mdash; in the inherited emotional relationship with money, in the distance between where you are and where you want to be. The awareness is beginning. That is where the real work starts.",
+      priority: "Financial patterns are significantly active. The emotional weight of money &mdash; the anxiety, the shame, the distance between your current position and genuine freedom &mdash; is shaping major decisions. This course addresses the root, not the surface.",
+      high: "Begin here. Financial captivity is one of the most compounding forms of constraint, and the emotional and spiritual cost of it is rarely spoken about honestly. This course was built for exactly this level of activation."
+    },
+    steps: [
+      "Write down, without softening, three beliefs about money that were given to you before you were old enough to examine them. Then write where each one came from and whether you have ever consciously chosen to keep it.",
+      "Calculate &mdash; honestly &mdash; how many significant decisions in your life are primarily shaped by financial pressure rather than genuine choice. Hold that number. It is the cost of the current pattern.",
+      "Identify one specific thing you would begin building &mdash; a skill, an asset, a secondary income stream &mdash; if you genuinely believed it were possible for someone in your circumstances. Then examine what it would take to begin."
+    ],
+    questions: [
+      {
+        q: "In the daily texture of your life, what does money feel like?",
+        answers: [
+          {t: "A tool I govern. It functions for me. It does not carry excessive weight.", s: 0},
+          {t: "Something I am actively working to understand and direct &mdash; more ordered than it was, with a plan that is moving.", s: 1},
+          {t: "A source of low-level anxiety that lives in the background of most decisions. Not acute, but constant.", s: 2},
+          {t: "A site of shame, dread, or paralysis. Something I avoid thinking about because thinking about it makes the weight worse.", s: 3}
+        ]
+      },
+      {
+        q: "What do you genuinely believe &mdash; in the place beneath argument &mdash; about the relationship between how hard you work and how much wealth you are permitted to have?",
+        answers: [
+          {t: "Very little. I understand that wealth has structural dimensions that individual effort cannot explain or compensate for.", s: 0},
+          {t: "Less than I used to &mdash; I can see the structural story even if some of the effort narrative still runs in me.", s: 1},
+          {t: "I was given the effort narrative and have largely lived inside it, which means financial difficulty has often felt like a personal failure.", s: 2},
+          {t: "Completely. Hard work should produce wealth &mdash; and its absence in my case says something specific and damning about me.", s: 3}
+        ]
+      },
+      {
+        q: "When money arrives unexpectedly &mdash; a windfall, a gift, something unearned &mdash; what moves through you before you decide what to do with it?",
+        answers: [
+          {t: "Clarity and relative calm. Receiving money does not produce complexity in me.", s: 0},
+          {t: "Pleasure and mild uncertainty about strategy &mdash; I am building a clearer plan.", s: 1},
+          {t: "Urgency and a compulsion to move it somewhere quickly &mdash; spend it, give it, discharge it. Holding it feels uncomfortable.", s: 2},
+          {t: "Guilt, suspicion, or a strange compulsion to lose it. As if receiving it was a mistake that needs to be corrected. As if wealth is not permitted for someone like me.", s: 3}
+        ]
+      },
+      {
+        q: "What did your family teach you about money &mdash; not in words, but in what they did, what they argued about, what they modelled, what was never spoken?",
+        answers: [
+          {t: "Something broadly functional &mdash; money as a tool, not a site of shame or terror.", s: 0},
+          {t: "A mix &mdash; some useful, some limiting. I can trace the unhelpful parts and I have actively revised them.", s: 1},
+          {t: "Scarcity, anxiety, or class-based limitation. The message &mdash; unspoken but clear &mdash; was that financial ease was not available to people like us.", s: 2},
+          {t: "Shame, secrecy, or explosive fear around money. What I absorbed about my relationship to wealth is running in the background of every financial decision I make, and I have rarely examined it directly.", s: 3}
+        ]
+      },
+      {
+        q: "How many significant life decisions &mdash; where you live, what work you do, whether you stay or leave, what you do not pursue &mdash; are primarily shaped by financial constraint rather than genuine choice?",
+        answers: [
+          {t: "Few. I have real options and meaningful freedom in my significant decisions.", s: 0},
+          {t: "Some, and I am actively working to expand that freedom.", s: 1},
+          {t: "Many. Financial pressure sits at the centre of most major decisions and the cost of that in terms of actual autonomy is considerable.", s: 2},
+          {t: "Nearly all of them. Financial captivity is the primary organising force of what my life can and cannot be.", s: 3}
+        ]
+      },
+      {
+        q: "Are you building anything &mdash; skills, assets, income streams, independent capacity &mdash; that would generate value independently of your direct labour or a single source of income?",
+        answers: [
+          {t: "Yes &mdash; I have multiple streams, real assets, or a concrete strategy that is actively developing.", s: 0},
+          {t: "I am beginning to &mdash; the understanding is growing and I am taking initial concrete steps.", s: 1},
+          {t: "Not yet. I want to, but it has felt aspirational rather than actionable.", s: 2},
+          {t: "No, and the question produces a kind of helplessness &mdash; a sense that financial independence is available to other kinds of people, but not someone in my circumstances.", s: 3}
+        ]
+      },
+      {
+        q: "If you imagine a year &mdash; twelve months in which you did not have to work for survival &mdash; what does your body do when you sit with that image?",
+        answers: [
+          {t: "Expand. The image is not frightening &mdash; it is something I have planned toward or am close to.", s: 0},
+          {t: "Something between longing and mild anxiety &mdash; desirable and not yet real, but I can feel the path.", s: 1},
+          {t: "Grief for its impossibility, or panic when I begin to calculate how far away it actually is.", s: 2},
+          {t: "Nothing &mdash; because the mind immediately moves to why it is impossible for someone in my situation, and the image does not get to land before it is dismissed.", s: 3}
+        ]
+      },
+      {
+        q: "What would genuine financial freedom allow you to do, be, or stop being &mdash; and how long has that vision existed, and how much has the distance between it and your current reality closed?",
+        answers: [
+          {t: "I am relatively close. The distance is measurable and it is narrowing with a plan.", s: 0},
+          {t: "The vision is clear and I am taking real steps toward it, though it is still some distance away.", s: 1},
+          {t: "I can name it, but it has felt like a fantasy more than a plan &mdash; and the distance has not closed in the way I hoped.", s: 2},
+          {t: "I can barely let myself name it. Because naming what is truly possible for a free version of my life, and then looking at the distance, produces a grief I have learned to keep closed.", s: 3}
+        ]
+      }
+    ]
+  },
+  {
+    course: 5,
+    label: "Course 05",
+    title: "Generational Patterns & Family",
+    intro: "This section asks you to look at what was given to you before you were old enough to examine it &mdash; the roles, the silences, the emotional architecture of the family you came from. It asks what it has cost you to carry it, and what it has cost you to try to put it down. Answer from your actual history, not from loyalty.",
+    courseDesc: "Explores the inheritance of emotional pattern, trauma across generations, the role you occupied in your family system and what it required, how that role followed you into adult life, what it means to want something different, and the grief of seeing your parents clearly and choosing yourself anyway.",
+    insights: {
+      strong: "Your generational inheritance appears largely worked through. You have been able to see what was given, name what it was, and choose consciously what to keep and what to put down.",
+      active: "There are live threads here &mdash; in the inherited patterns, the roles that followed you, the grief that has not yet been fully felt. The recognition is beginning. That is where the work starts.",
+      priority: "Generational patterns are significantly active. The inheritance is still running &mdash; in your emotional responses, your relational habits, your relationship with your own worth. This course makes it visible so you can work with it.",
+      high: "Begin here. The patterns from your family of origin may be the primary architecture of your current life, and they operate below the level of intention. This course was built for exactly this depth of activation."
+    },
+    steps: [
+      "Write down the role you occupied in your family &mdash; the peacemaker, the responsible one, the invisible one, the one who held it together. Then write what that role required you to sacrifice about yourself to fill it.",
+      "Identify one emotional pattern in yourself &mdash; a response, a habit, a relational move &mdash; that you can trace to one of your parents. Name it plainly. Recognition is the beginning of choice.",
+      "Allow yourself to sit with this question: is there grief in your history that you have not yet fully let yourself feel? If yes, what has been keeping you from it? Writing this down, without solving it, is itself a real step."
+    ],
+    questions: [
+      {
+        q: "When you try to describe, plainly and without minimising, the role you occupied in your family as a child &mdash; what is the closest word?",
+        answers: [
+          {t: "I did not have a fixed role. I was largely permitted to be a child.", s: 0},
+          {t: "There was a role, but it was broadly positive and gave me real room within it.", s: 1},
+          {t: "A functional role I did not choose &mdash; the responsible one, the invisible one, the peacemaker, the one who held it together.", s: 2},
+          {t: "A role that required significant self-erasure. I learned very young that my family needed me to be something other than fully myself, and I became it.", s: 3}
+        ]
+      },
+      {
+        q: "Can you recognise, in your own emotional patterns and relational habits, the specific signature of one of your parents?",
+        answers: [
+          {t: "Some similarities, but I have worked on them enough that the inheritance feels integrated rather than running me.", s: 0},
+          {t: "Yes &mdash; and I see them clearly enough that the recognition is useful rather than just painful.", s: 1},
+          {t: "Yes &mdash; and the depth of the inheritance is uncomfortable. It operates before I have chosen anything.", s: 2},
+          {t: "Yes &mdash; and there are moments where I wonder whether real change is possible for someone whose early formation was this complete.", s: 3}
+        ]
+      },
+      {
+        q: "Is there grief in your history &mdash; for a childhood that should have been different, a parent who could not give what you needed, a version of yourself that did not get to exist &mdash; that you have not yet let yourself fully feel?",
+        answers: [
+          {t: "Mostly felt and integrated. The grief has been real, and it has moved.", s: 0},
+          {t: "Present but partially held back &mdash; I have begun to access it but there is more underneath than I have let myself reach.", s: 1},
+          {t: "Significant and largely unfelt. I have functioned around it rather than through it.", s: 2},
+          {t: "So large I have kept it sealed. To feel it fully would require a collapse I am afraid I would not recover from &mdash; so I carry it in motion and do not stop long enough to let it arrive.", s: 3}
+        ]
+      },
+      {
+        q: "Were there significant things in your childhood &mdash; violence, addiction, loss, neglect, instability &mdash; that were never named by the adults responsible for you, as if the naming would have made them real?",
+        answers: [
+          {t: "My childhood was relatively stable and the difficult things were largely acknowledged and addressed.", s: 0},
+          {t: "Some things were never fully acknowledged, but they have been worked through since.", s: 1},
+          {t: "Yes &mdash; significant things happened that were absorbed in silence. The demand that I not see what I clearly saw became part of what shaped me.", s: 2},
+          {t: "Yes &mdash; and the silencing was as formative as the events themselves. I learned that certain things were not permitted to exist, and I learned it in my body long before I had words for it.", s: 3}
+        ]
+      },
+      {
+        q: "When you try to live differently from your family &mdash; to want different things, to build a different life &mdash; what is the force that pulls back?",
+        answers: [
+          {t: "Manageable and diminishing. I have made real changes and they have held.", s: 0},
+          {t: "Real but workable &mdash; I can feel the pull and I can mostly work with it rather than against it.", s: 1},
+          {t: "Strong enough that it requires constant attention. The old pattern has a gravity that activates under stress, in family contact, in certain emotional states.", s: 2},
+          {t: "At times, nearly irresistible. There are moments where everything I have built since leaving can collapse in an hour.", s: 3}
+        ]
+      },
+      {
+        q: "What permission have you given yourself to want a life that is recognisably different from what your family of origin modelled?",
+        answers: [
+          {t: "Full permission. I have claimed that right and I live from it without regular guilt.", s: 0},
+          {t: "Growing permission &mdash; I am claiming more than I had, and the guilt is lighter than it was.", s: 1},
+          {t: "Limited permission &mdash; the wanting still produces guilt, and family judgment or withdrawal is a consequence I have not been able to stop fearing.", s: 2},
+          {t: "Almost none. On some deep level, choosing a life my family would not recognise still feels like an act of betrayal I have not resolved.", s: 3}
+        ]
+      },
+      {
+        q: "If you were to look at the primary emotion that actually governs your relationship with your family of origin &mdash; not what you say it is, but what you feel when you think about going there, when you arrive, when you leave &mdash; what is it?",
+        answers: [
+          {t: "Something close to genuine warmth, or at least peace. I have found a way to be present there that does not cost me myself.", s: 0},
+          {t: "Complicated &mdash; real affection alongside grief or frustration that I manage with growing skill.", s: 1},
+          {t: "Something I brace for. Duty, sadness, the thinning of myself that happens inside the contact.", s: 2},
+          {t: "Dread, grief, or a kind of self-loss that takes days to recover from. Or, if I have created distance, a guilt so constant it functions like a presence.", s: 3}
+        ]
+      },
+      {
+        q: "When you look at what has been passed down from the generation above you &mdash; your parents, your grandparents, what you know of them &mdash; what has been passed on that was never meant to be passed on?",
+        answers: [
+          {t: "Some things, but they feel like they came with me rather than running me &mdash; threads I have picked up and examined.", s: 0},
+          {t: "Specific patterns I can name &mdash; and naming them is the beginning of something different.", s: 1},
+          {t: "A significant inheritance that I am only now beginning to see clearly as inheritance rather than character.", s: 2},
+          {t: "Something that sometimes feels like the primary architecture of who I am &mdash; emotional habits, relational patterns, a relationship with my own worth that I am only now examining as something given, not chosen.", s: 3}
+        ]
+      }
+    ]
+  },
+  {
+    course: 6,
+    label: "Course 06",
+    title: "Institutional Conditioning",
+    intro: "These questions ask you to look at what the systems that processed you &mdash; school, work, religion, government &mdash; actually installed. Not what they taught, but what they trained you to do, believe, and comply with before you were old enough to examine any of it. What you call your own thought may have a different origin.",
+    courseDesc: "Explores the hidden curriculum of schools, workplaces, and organised religion, the difference between compliance and genuine belief, where your worldview actually came from, the cost of original thought, and what it means to think &mdash; and live &mdash; without permission.",
+    insights: {
+      strong: "Your relationship with institutional conditioning appears largely examined. You have separated your genuine beliefs from what was installed, and you operate with a meaningful degree of independent thought.",
+      active: "There are live threads here &mdash; in the beliefs that have not yet been examined, in the compliance patterns that still run, in what institutional authority still does to your critical capacity. The awareness is beginning.",
+      priority: "Institutional conditioning is significantly active. The beliefs, the compliance habits, the inability to question certain things &mdash; are shaping your life in ways that feel natural because they have been there so long. This course makes the installation visible.",
+      high: "Begin here. The most comprehensive cage is the one whose walls you cannot see. This course is built for exactly this level of activation and it will produce genuine intellectual and spiritual liberation."
+    },
+    steps: [
+      "Choose one belief you hold with certainty &mdash; political, religious, social &mdash; and trace it to its actual source. Not why it seems true, but who gave it to you, when, and what the context was. Write this honestly.",
+      "For one week, notice any moment where you comply &mdash; with a system, a professional, an institution &mdash; before you have examined whether the compliance is warranted. You do not need to resist. Just notice.",
+      "Ask yourself: what would I believe, right now, if I had been given no instruction? Sit with the question even if it produces discomfort. The discomfort is the installation detecting the examination."
+    ],
+    questions: [
+      {
+        q: "When an authority &mdash; an institution, a doctor, an expert, a system &mdash; gives you a conclusion you do not fully believe, what moves through you before you decide how to respond?",
+        answers: [
+          {t: "Genuine examination. I consider the basis before I decide whether to accept or reject it.", s: 0},
+          {t: "Compliance followed by internal processing. I comply first, examine later, and sometimes act on what I find.", s: 1},
+          {t: "Compliance followed by rationalisation &mdash; an internal process that convinces me my resistance was incorrect.", s: 2},
+          {t: "Automatic compliance. Questioning institutional authority still produces something that functions like fear in my body, whatever I may believe about it intellectually.", s: 3}
+        ]
+      },
+      {
+        q: "If you were to trace the most significant beliefs you hold &mdash; about what is possible, what you deserve, how the world works, what success looks like &mdash; to their actual source, what would you find?",
+        answers: [
+          {t: "Deliberate examination. Most of my significant beliefs have been revisited, tested, and either retained or revised.", s: 0},
+          {t: "A mix &mdash; some examined, some absorbed. I can generally distinguish between the two.", s: 1},
+          {t: "Mostly absorption. The source of most of what I believe is the environment I was processed through, not genuine inquiry.", s: 2},
+          {t: "Authority. I have treated the conclusions of certain institutions or people as my own without examining their origins &mdash; and I have sometimes suspected this without looking directly at it.", s: 3}
+        ]
+      },
+      {
+        q: "At work &mdash; in professional environments, in the daily performance of employment &mdash; how much of who you actually are is visible?",
+        answers: [
+          {t: "Most of me. I have found a way to work that does not require a significant performance.", s: 0},
+          {t: "A portion &mdash; I adapt in some areas, but the core of who I am is not hidden.", s: 1},
+          {t: "A managed version. I have suppressed opinions, softened edges, and performed competence in a register that does not always match who I am.", s: 2},
+          {t: "Almost none. The person who occupies my professional life is a performance so consistent and different from my private self that I have sometimes lost track of where the performance ends.", s: 3}
+        ]
+      },
+      {
+        q: "When you look back at what your formal education actually trained you for &mdash; not the content, but the conditioning &mdash; what were its deepest and most durable lessons?",
+        answers: [
+          {t: "Genuine curiosity, critical thinking, and something approaching intellectual freedom.", s: 0},
+          {t: "A mixture &mdash; real value alongside clear conditioning, and I can separate the two.", s: 1},
+          {t: "That worth is measured by performance, compliance is rewarded, and disruption carries a cost not worth paying.", s: 2},
+          {t: "That I was a unit to be processed. That my function was to produce acceptable output. That the most effective way to survive was to learn exactly what was required and provide it, regardless of whether it had anything to do with my actual nature or interests.", s: 3}
+        ]
+      },
+      {
+        q: "Where does your deepest sense of ethics, meaning, or spiritual orientation come from &mdash; and has that origin ever been genuinely examined by you?",
+        answers: [
+          {t: "From direct experience and genuine inquiry. It feels chosen and it has been tested.", s: 0},
+          {t: "From tradition and reflection in combination &mdash; I have shaped it consciously from what I was given.", s: 1},
+          {t: "Mostly from what I was given. I have operated inside it rather than examined it.", s: 2},
+          {t: "From authority I was instructed not to question. And the questioning itself &mdash; even now, intellectually &mdash; still produces something that functions like guilt or fear.", s: 3}
+        ]
+      },
+      {
+        q: "When evidence appears that contradicts something you have believed &mdash; something important, something identity-adjacent &mdash; what happens before you have consciously decided how to respond?",
+        answers: [
+          {t: "Genuine interest. Contradiction is information, and I investigate before I dismiss.", s: 0},
+          {t: "Brief resistance and then real openness. I have trained this and it mostly holds.", s: 1},
+          {t: "A search for the flaw in the evidence before I consider that it might be correct.", s: 2},
+          {t: "A strong emotional response &mdash; a sense of being attacked, of the ground moving. The certainty is not intellectual; it is existential.", s: 3}
+        ]
+      },
+      {
+        q: "The version of you that had never been processed through formal education, institutional employment, or organised religion &mdash; who formed their understanding entirely through direct experience and genuine inquiry &mdash; how different are their beliefs from yours?",
+        answers: [
+          {t: "Not very different. I have examined enough to feel that most of what I hold is genuinely mine.", s: 0},
+          {t: "Meaningfully different in specific areas I can name, and I am working on those.", s: 1},
+          {t: "Significantly different. Sitting with that question honestly produces an uncomfortable amount of space.", s: 2},
+          {t: "Unrecognisably different. I suspect that what I call my worldview is largely an installation &mdash; and the question of what my actual beliefs are, when separated from what was given, is something I have not yet been willing to sit with.", s: 3}
+        ]
+      },
+      {
+        q: "What would it mean for you &mdash; in practice, in your daily life &mdash; to think without permission?",
+        answers: [
+          {t: "Not much. I already do this more often than not.", s: 0},
+          {t: "Something I am moving toward. I can feel where the permissions are and I am working at them.", s: 1},
+          {t: "A significant shift. There are domains &mdash; political, religious, relational &mdash; where I still require a consensus or authority structure before I feel safe in my conclusions.", s: 2},
+          {t: "Something vertiginous. Beneath the installed beliefs is something I am not sure I know yet. And the permission structure &mdash; the sense that certain thoughts require authorisation before I am allowed to have them &mdash; is so embedded I rarely notice it running.", s: 3}
+        ]
+      }
+    ]
+  },
+  {
+    course: 7,
+    label: "Course 07",
+    title: "Media & Narrative Literacy",
+    intro: "These questions ask you to examine your relationship with the stories you are given &mdash; not their content, but their function: the mechanism by which they shape your attention, your fear, and your understanding of what is real. The question is not what you believe, but how your believing works.",
+    courseDesc: "Explores media as an attention economy and fear management system, the difference between information and formation, how narratives are structured to produce specific emotional states, the architecture of consensus reality, primary-source literacy, and how to navigate an information environment that has been deliberately designed.",
+    insights: {
+      strong: "Your media and narrative literacy appears largely developed. You have a consistent practice of examining the function of emotional responses produced by media and you draw from a range of sources and frameworks.",
+      active: "There are live threads here &mdash; in the sources you consume, in the emotional responses that move before examination, in the positions you hold with certainty. The awareness is beginning.",
+      priority: "Media and narrative patterns are significantly active. The emotional and intellectual formation you have received through the information environment is shaping your understanding of the world in ways that have not yet been fully examined. This course addresses that directly.",
+      high: "Begin here. The most comprehensive control is the one that does not feel like control. This course is built for exactly this level of activation and it will produce a fundamentally different relationship with how you understand reality."
+    },
+    steps: [
+      "For one week, before you share or repeat a news story, pause and ask: who produced this, who benefits from my emotional response to it, and what am I not being shown? You do not need to answer &mdash; just ask.",
+      "Identify one position you hold with high certainty and trace it to its actual origin. Not why it seems true, but where you first encountered it, who gave it to you, and what the emotional charge around it suggests.",
+      "Introduce one source &mdash; a book, a long-form journalist, an academic primary source &mdash; that is structurally outside your current information diet. Read it for thirty minutes before you evaluate whether you agree with it."
+    ],
+    questions: [
+      {
+        q: "When a major news story produces a strong emotional response in you &mdash; fear, outrage, urgency &mdash; how often do you pause to examine who benefits from that particular emotional state in you?",
+        answers: [
+          {t: "Often. I have a consistent practice of examining the function of emotional responses produced by media.", s: 0},
+          {t: "Sometimes &mdash; I catch myself in it and trace it back, though I do not always get there immediately.", s: 1},
+          {t: "Rarely. The response usually moves me before I have had the chance to examine it.", s: 2},
+          {t: "Never, or almost never. The emotion feels like the appropriate response to the event, not like a managed output.", s: 3}
+        ]
+      },
+      {
+        q: "If you surveyed the information you consume &mdash; the sources, the platforms, the formats &mdash; how much of it is genuinely expanding your understanding versus confirming what you already believe?",
+        answers: [
+          {t: "A real balance. I actively seek material that challenges my current frame.", s: 0},
+          {t: "More confirming than expanding, and I am aware of it and actively changing the ratio.", s: 1},
+          {t: "Mostly confirming. My information environment is largely a reflection of conclusions I already hold.", s: 2},
+          {t: "Almost entirely confirming. The idea of regularly consuming material that fundamentally challenges my worldview produces a resistance I have not yet examined.", s: 3}
+        ]
+      },
+      {
+        q: "When a narrative &mdash; a political position, a social movement, a cultural story &mdash; is presented as obviously correct, so correct that questioning it is treated as moral failure, what does that framing do to your critical capacity?",
+        answers: [
+          {t: "Activate it. The construction of moral inevitability around a position is itself a signal worth examining.", s: 0},
+          {t: "Slow it &mdash; there is a pull to agree before I have examined it, but I notice that pull and work with it.", s: 1},
+          {t: "Largely silence it. The social cost of questioning something held as morally certain is often too high for me to pay.", s: 2},
+          {t: "Shut it down entirely. There are positions I hold with complete certainty whose origins I have never examined &mdash; because the examination itself feels like a form of harm.", s: 3}
+        ]
+      },
+      {
+        q: "How much of what you understand to be true about the world &mdash; how power functions, what major events mean, what deserves attention &mdash; was formed primarily by institutional media?",
+        answers: [
+          {t: "A small fraction. I have built my understanding from a range of sources that include but are not limited to institutional media.", s: 0},
+          {t: "A significant portion, though I have been actively expanding the sources and frameworks I draw from.", s: 1},
+          {t: "Most of it. My understanding of major events, of power, of what is real, comes primarily from sources I did not choose and have not examined.", s: 2},
+          {t: "Essentially all of it. The frame through which I understand the world was built by the same institutions that benefit from my seeing it in a particular way &mdash; and this is something I have not yet looked at directly.", s: 3}
+        ]
+      },
+      {
+        q: "Your attention &mdash; what you look at, click on, follow, consume &mdash; is being traded commercially. How much do you govern that attention versus being governed by the design of the platforms that hold it?",
+        answers: [
+          {t: "I govern it more than most. I have deliberate practices around how I use information environments.", s: 0},
+          {t: "A real mix. I am more aware than I used to be and I have made real changes, but the design still gets me sometimes.", s: 1},
+          {t: "The platforms largely govern me. I know this and I have not done enough about it.", s: 2},
+          {t: "I am governed by it almost entirely. My attention is pulled and directed in ways I do not choose, and the understanding that this is structural has not yet produced real change.", s: 3}
+        ]
+      },
+      {
+        q: "Is there a version of events &mdash; a different explanation, an alternative account, a history that does not appear in mainstream sources &mdash; that you have dismissed without examining, because dismissing it felt safer than engaging with it?",
+        answers: [
+          {t: "I engage with alternative accounts as a matter of practice, even when they are uncomfortable.", s: 0},
+          {t: "Sometimes &mdash; I have specific domains where alternative accounts feel more threatening than I can explain through logic alone.", s: 1},
+          {t: "Often. The reflex to dismiss is faster than examination, and the social safety of aligning with consensus is a real variable in my responses.", s: 2},
+          {t: "This is my default. I have a strong reaction to certain alternative accounts before I have considered their contents &mdash; and the strength of that reaction has sometimes made me suspect I should look at them more carefully.", s: 3}
+        ]
+      },
+      {
+        q: "How much of what you feel, fear, or find urgently important on a given week has been given to you by an external source &mdash; rather than arising from direct experience or deliberate inquiry?",
+        answers: [
+          {t: "A small amount. My emotional and intellectual priorities are largely internally generated.", s: 0},
+          {t: "Some &mdash; I can see the external input and I filter it with increasing skill.", s: 1},
+          {t: "Much of it. The emotional texture of my week is largely shaped by what the information environment has been feeding me.", s: 2},
+          {t: "Almost all of it. If I were honest about where my fears, my outrage, my sense of urgency, and my idea of what matters most actually come from &mdash; very little of it arose in me independently.", s: 3}
+        ]
+      },
+      {
+        q: "If the information environment you have been surrounded by your entire life had been deliberately constructed to make certain things visible and certain things invisible &mdash; what would be your method for discovering what has been kept invisible?",
+        answers: [
+          {t: "I have a practice for this: primary sources, adversarial reading, lateral investigation, long-form and non-institutional material.", s: 0},
+          {t: "I am building one &mdash; I have recognised the question as real and I am developing the practice.", s: 1},
+          {t: "I do not have one yet. The question is unsettling and I have not known where to begin.", s: 2},
+          {t: "I am not sure I believe the premise strongly enough to act on it. Or the premise produces an anxiety that closes down rather than opens up my inquiry.", s: 3}
+        ]
+      }
+    ]
+  },
+  {
+    course: 8,
+    label: "Course 08",
+    title: "Body, Food & The Alkaline Life",
+    intro: "These questions ask about your relationship with your body as a living system &mdash; what you put into it, how you listen to it, what it has been trying to say that you have not yet been ready to hear. This is not about weight, appearance, or performance. It is about the relationship between your body and your sovereignty.",
+    courseDesc: "Explores the body as an alkaline and energetic system, what industrially produced food actually does at the cellular level, the emotional architecture of eating habits, what genuine physical vitality feels and looks like, and how to build a lasting relationship with your body that is rooted in care rather than control.",
+    insights: {
+      strong: "Your relationship with your body as a living system appears largely healthy. You listen to it, nourish it with intention, and the gap between knowing and doing in this domain is relatively small.",
+      active: "There are live threads here &mdash; in the emotional architecture of eating, in the gap between what you know and what you do, in what your body has been trying to say. The awareness is beginning.",
+      priority: "The body and food domain is significantly active. The cost of years of something &mdash; stress, neglect, poor nourishment, or a relationship with the body that has not been kind &mdash; is present. This course addresses it at the root.",
+      high: "Begin here. The body is the primary vehicle of your entire life and it has been carrying something for a long time. This course is built for exactly this level of activation and it will produce real physical and emotional change."
+    },
+    steps: [
+      "For three days, keep an honest record of what you eat and the emotional state you were in when you chose it. Do not judge what you find. Just look. The data is information, not a verdict.",
+      "Research one ingredient in something you consume regularly &mdash; not its calories or macros, but what it does at the cellular level and what its production process involves. Begin with what is most familiar to you.",
+      "Choose one thing you would change about how you nourish your body if you genuinely believed your body's wellbeing was as important as your obligations to other people. Begin with one small, concrete change."
+    ],
+    questions: [
+      {
+        q: "In the most honest accounting you can give &mdash; how does your body feel, right now, in this period of your life?",
+        answers: [
+          {t: "Largely well. I have a body that functions and I treat it with something approaching real care.", s: 0},
+          {t: "Mixed &mdash; there are areas that need attention and I am beginning to address them with some seriousness.", s: 1},
+          {t: "Depleted or diminished. My body carries the cost of years of something I have not yet fully addressed.", s: 2},
+          {t: "Like something I manage from a distance. My body is the container I inhabit, but its wellbeing has not been my priority, and it shows.", s: 3}
+        ]
+      },
+      {
+        q: "When you are stressed, overwhelmed, or in emotional pain &mdash; what is your default move with food?",
+        answers: [
+          {t: "I eat according to my genuine needs. My food choices are not significantly altered by emotional states.", s: 0},
+          {t: "I notice a pull toward certain foods in certain states and I work with it consciously.", s: 1},
+          {t: "Food becomes comfort, numbing, reward, or punishment depending on the emotional state &mdash; and my body knows the difference between the two, even when my mind pretends otherwise.", s: 2},
+          {t: "Food and emotional states are deeply entangled in ways I do not fully understand and have not fully examined. What I eat when I am not feeling difficult things is very different from what I eat when I am.", s: 3}
+        ]
+      },
+      {
+        q: "What do you understand about what is actually in the food you consume most regularly &mdash; not the marketing, but what it does inside the body at the cellular level?",
+        answers: [
+          {t: "Quite a lot &mdash; I have a working understanding of how different foods affect inflammation, acidity, the nervous system, and cellular function.", s: 0},
+          {t: "A growing understanding. I know more than I did and I am actively extending it.", s: 1},
+          {t: "A general sense without much depth. I operate on rough nutritional principles but have not gone below the surface.", s: 2},
+          {t: "Very little &mdash; and the question of what processed or industrially produced food does to the body at a detailed level is something I have not examined, or have examined and not acted on.", s: 3}
+        ]
+      },
+      {
+        q: "Is there a version of your physical energy &mdash; more vital, more present, more electric &mdash; that you sense is available but that you have not accessed?",
+        answers: [
+          {t: "I am largely in that energy, or actively moving toward it.", s: 0},
+          {t: "Yes &mdash; I can feel the gap between where I am and where I sense I could be, and I am beginning to close it.", s: 1},
+          {t: "Yes, and the gap has been there long enough that I have started to accept my current state as the baseline rather than something improvable.", s: 2},
+          {t: "I am not sure. I have been in this body's current state for long enough that I have lost the comparison point. What is available to me is not clear any more.", s: 3}
+        ]
+      },
+      {
+        q: "If your body could speak plainly about what it needs &mdash; without filters, without your defences, without the habits that have been overriding its signals &mdash; what would it say?",
+        answers: [
+          {t: "Something I have mostly heard and responded to. The body's communication and my responses are in reasonable alignment.", s: 0},
+          {t: "More rest than I give it. More nourishment. Less of certain things that have become habits.", s: 1},
+          {t: "Something I have been avoiding hearing &mdash; because hearing it would require changes I have been postponing.", s: 2},
+          {t: "Something I am afraid to let it say, because the gap between what it needs and what I have been giving it is large enough that hearing it clearly would produce a grief I am not ready for.", s: 3}
+        ]
+      },
+      {
+        q: "How consistent is the gap between what you know about nourishing your body well and what you actually do day to day?",
+        answers: [
+          {t: "Small. My knowledge and my practice are largely aligned.", s: 0},
+          {t: "Noticeable but closing. I am taking the gap seriously and it is narrowing.", s: 1},
+          {t: "Significant. I carry a considerable amount of knowledge that I have not translated into consistent action.", s: 2},
+          {t: "The gap is one of the ongoing painful facts of my life in this domain. I know more than I live, and I have not yet found the bridge between them.", s: 3}
+        ]
+      },
+      {
+        q: "What has your relationship with food cost you &mdash; not physically, but in terms of energy, emotional bandwidth, and the relationship with your own body?",
+        answers: [
+          {t: "Not much. This relationship is broadly functional for me.", s: 0},
+          {t: "Something I am beginning to account for and address.", s: 1},
+          {t: "A meaningful cost in energy and in the maintenance of habits I know are not serving me.", s: 2},
+          {t: "Something I have not allowed myself to calculate, because the number would be too large. The relationship with food has been tangled with enough pain, numbing, comfort, and self-punishment that its full accounting is a reckoning I have been postponing.", s: 3}
+        ]
+      },
+      {
+        q: "If your body's wellbeing became as important to you as your obligations to other people &mdash; given the same priority as the people and responsibilities that make demands on you &mdash; what would you change first?",
+        answers: [
+          {t: "Not much. My body's wellbeing is already a genuine priority in my daily choices.", s: 0},
+          {t: "Specific things I can name &mdash; and I am in the process of making those changes.", s: 1},
+          {t: "A significant number of things. The honest answer is that my body is one of the last things on the list rather than one of the first.", s: 2},
+          {t: "Almost everything. I have placed my body's needs so far down the priority structure for so long that I am not sure I know what attending to them with genuine seriousness would look like.", s: 3}
+        ]
+      }
+    ]
+  },
+  {
+    course: 9,
+    label: "Course 09",
+    title: "The Art of Becoming",
+    intro: "This section is about the part of you that is not yet fully here &mdash; the version of yourself you sense but have not yet permitted to land. It is not about what you have not achieved. It is about the relationship between who you are right now, and who you were before you learned to make yourself smaller. Answer from what you actually feel, not from what sounds right.",
+    courseDesc: "Explores spiritual evolution and identity as a living process, the art of conscious becoming, the relationship with the unknown future, what grows when you stop trying to stay the same, the courage of authentic purpose, surrender and expansion, and how to build a life that reflects the person you are genuinely called to become.",
+    insights: {
+      strong: "The art of becoming appears to be an active and conscious practice in your life. You have real momentum toward who you are called to be and the gap between your current life and your deepest signal is closing.",
+      active: "There are live threads here &mdash; the call that has been on hold, the version of you waiting at the threshold. The awareness is present. This course is about turning that awareness into motion.",
+      priority: "The becoming process is significantly active. There is a version of you &mdash; more alive, more expressed, more aligned with your deepest call &mdash; that is close and not yet here. This course is built for exactly this threshold.",
+      high: "Begin here. The distance between who you are and who you sense you are called to be is a live wound, and carrying it without moving costs more than the becoming would. This course is your most pressing invitation."
+    },
+    steps: [
+      "Write down, in a single paragraph, who you sense you are becoming &mdash; not who you think you should be, not who others would approve of, but the version your own deepest signal is pointing toward. Do not censor it. Read it back.",
+      "Identify the single most significant thing you are protecting by staying where you are &mdash; the specific loss, the specific person, the specific version of yourself that would need to change. Name it honestly.",
+      "Choose one small, concrete act this week that belongs to the version of you you are becoming rather than to the version of you you have been. It does not need to be large. It needs to be real."
+    ],
+    questions: [
+      {
+        q: "There is a version of you &mdash; not an imagined better self, but one that has always been there, watching &mdash; who knows something about what your life is for. When was the last time you made a decision from that place?",
+        answers: [
+          {t: "Recently. That voice is not silent in my life &mdash; it is part of how I navigate.", s: 0},
+          {t: "Sometimes. I can access it and I sometimes act from it, though other voices are often louder.", s: 1},
+          {t: "Rarely. That version exists &mdash; I can feel it at the periphery &mdash; but I have learned to move past it rather than stop and listen.", s: 2},
+          {t: "I am not sure I remember the last time. Or I am not sure I believe that voice has reliable access to anything I should act on.", s: 3}
+        ]
+      },
+      {
+        q: "Is there something you have been called toward &mdash; a creative direction, a spiritual practice, a way of living, a version of yourself &mdash; that you have been postponing?",
+        answers: [
+          {t: "I am living it, or I am consciously moving toward it with a real plan.", s: 0},
+          {t: "Yes, and the distance between me and it is closing &mdash; I have made real movement and it is momentum.", s: 1},
+          {t: "Yes. It has been there for a long time. I return to it in quiet moments, move briefly toward it, and then withdraw.", s: 2},
+          {t: "Yes, and I have learned to keep it at a distance &mdash; because the grief of wanting it and the fear of trying and failing are together large enough that not looking directly at it has become a survival strategy.", s: 3}
+        ]
+      },
+      {
+        q: "When you imagine the person you could become &mdash; the full version of your own potential &mdash; does that image feel like something possible, or like evidence of how far you are from it?",
+        answers: [
+          {t: "Possible and in motion. The gap between me and that version is real and it is closing.", s: 0},
+          {t: "Possible, though the route is not always clear and there are moments where it feels more like aspiration than trajectory.", s: 1},
+          {t: "Mostly like evidence of distance. The image is vivid; the belief in the path toward it is fragile.", s: 2},
+          {t: "The image has become difficult to hold. I have been disappointed enough by the gap that I have stopped letting myself see the full version clearly, because seeing it and not moving is its own kind of pain.", s: 3}
+        ]
+      },
+      {
+        q: "Who would you have to stop being in order to become who you sense you are meant to be?",
+        answers: [
+          {t: "A version of me that was never fully honest &mdash; and the transition is mostly one I have made or am consciously making.", s: 0},
+          {t: "Someone more familiar and more defended than who I want to become. The transition costs something and I am in it.", s: 1},
+          {t: "A version of myself that specific people in my life would recognise and feel comfortable with. The becoming I am called toward would require disappointing certain people in ways I have not yet found the courage for.", s: 2},
+          {t: "Someone that the people closest to me have built their understanding of the world around. Becoming who I am called to be would reorder things others have arranged their lives in relation to &mdash; and I carry that weight as my responsibility.", s: 3}
+        ]
+      },
+      {
+        q: "Do you have a practice &mdash; spiritual, contemplative, somatic, creative &mdash; that returns you to yourself? Something genuinely yours, not performed for anyone, not earned through productivity?",
+        answers: [
+          {t: "Yes &mdash; it is a real and consistent part of my life.", s: 0},
+          {t: "Something partial &mdash; I have the seeds of it and I am giving them more attention than I used to.", s: 1},
+          {t: "Not consistently. I can name what it would be, but I have not committed to it in a way that has made it stable.", s: 2},
+          {t: "No. The idea of a practice that exists purely for the restoration and deepening of my own self &mdash; not to make me more useful or functional for others &mdash; does not yet feel permitted.", s: 3}
+        ]
+      },
+      {
+        q: "What is your relationship with the unknown &mdash; with the part of your future that has not yet been determined, with the space that has not yet been filled?",
+        answers: [
+          {t: "Largely like territory. I can hold uncertainty without it collapsing my capacity to move.", s: 0},
+          {t: "Both &mdash; anxiety at the edge of the unknown, and underneath it a real sense of what might be possible there.", s: 1},
+          {t: "Primarily like a threat. Not knowing is uncomfortable enough that I have often chosen a certain smaller outcome over the uncertainty of reaching for something larger.", s: 2},
+          {t: "A threat large enough to stop movement. I have organised significant portions of my life to minimise exposure to the unknown &mdash; often at the cost of the very growth I would choose if I were not afraid.", s: 3}
+        ]
+      },
+      {
+        q: "Is there a version of you that has been waiting &mdash; not for permission, not for conditions to improve, not for the right time, but simply waiting, because something about beginning feels too large to hold?",
+        answers: [
+          {t: "I have faced this and I have largely begun. The movement is real even when it is slow.", s: 0},
+          {t: "Yes, and I am beginning to distinguish the genuine waiting from the avoidance &mdash; and to act on what I distinguish.", s: 1},
+          {t: "Yes. There is a version of me that has been in a threshold state for a long time &mdash; close but not through. And I have not been fully honest with myself about which part of me is choosing that.", s: 2},
+          {t: "Yes, and I have learned not to ask myself too directly about it, because the distance between where I am and where the waiting is pointing is large enough to produce a despair I do not know how to hold.", s: 3}
+        ]
+      },
+      {
+        q: "The person you are becoming &mdash; not who you think you should become, but the version your own deepest signal is pointing toward &mdash; what is the most honest thing you can say about the relationship between that person and your current life?",
+        answers: [
+          {t: "I am in that direction. My current life is a genuine expression of who I am becoming.", s: 0},
+          {t: "My current life is mostly aligned, with specific areas where the gap is visible and being addressed.", s: 1},
+          {t: "My current life is the life of the person I was comfortable being, not the person I sense I am called to become. The distance is real and I have been looking at it indirectly for some time.", s: 2},
+          {t: "My current life was built as a protection &mdash; a structure that keeps the deeper becoming at bay, because the person I sense I could be would require dismantling things I do not yet know how to dismantle, and letting go of things I am not sure I can survive without.", s: 3}
+        ]
+      }
+    ]
+  },
+  {
+    course: 10,
+    label: "Course 10",
+    title: "The Uncharted Mind",
+    intro: "This section asks about the relationship between your mind and your life &mdash; not your intelligence or abilities, but the beliefs that shape what you approach, what you avoid, and what you permit yourself to imagine as possible. The ceiling on your life is largely a ceiling on your mind, and these questions are designed to show you where it sits.",
+    courseDesc: "Explores the untapped capacity of the human mind, how limiting beliefs function as structural constraints, the relationship between thought, attention, and the direction of your life, the neuroscience and spiritual science of conscious reality-shaping, and what becomes available when the ceiling is genuinely examined and raised.",
+    insights: {
+      strong: "Your relationship with the power and capacity of your own mind appears largely open. You work with your inner world consciously and the ceiling on your life is not primarily set by your beliefs about what is possible for you.",
+      active: "There are live threads here &mdash; in what you believe is possible for someone like you, in the inner voice that narrows the field before you have examined it. The awareness is beginning. This course makes those threads visible.",
+      priority: "The relationship with your own mind's capacity is significantly active. The ceiling may be close, the self-limiting narrative may be running at volume, and the distance between what you want and what you believe is available to you may be large. This course is built to address that directly.",
+      high: "Begin here. The most consequential work is the work on the mind that is doing all the other work. This course is your most pressing invitation &mdash; because everything else you want to change will be shaped by what you do here."
+    },
+    steps: [
+      "Write down, without filtering, the full version of what you actually want &mdash; the life, the freedom, the work, the love, the body, the meaning. Read it back. Notice the first internal movement toward naming why it is not available to you. That movement is what this course is about.",
+      "Identify one belief you hold about your own capacity &mdash; your intelligence, your worth, your right to produce significant work &mdash; that you inherited rather than chose. Trace it back to where it came from. Someone gave it to you at a specific moment. It is not a fact.",
+      "For one week, when you notice the inner voice that narrows possibility &mdash; that says &lsquo;not for someone like me&rsquo; or &lsquo;that is not realistic&rsquo; &mdash; write down what it says and when it appears. You are not fighting it yet. You are mapping it."
+    ],
+    questions: [
+      {
+        q: "When you imagine having what you actually want &mdash; the life, the freedom, the love, the work, the meaning &mdash; what is the first movement inside you?",
+        answers: [
+          {t: "Orientation. The imagining is functional and it connects to action.", s: 0},
+          {t: "Longing and possibility &mdash; I can feel both the wanting and the path toward it.", s: 1},
+          {t: "A quick internal correction &mdash; something that moves to name why it is not available, not realistic, or not for someone in my situation.", s: 2},
+          {t: "Something close to shutdown. The full vision of what I want is too close to a wound to hold openly &mdash; and I have learned to want only within the range of what I already believe is possible for me.", s: 3}
+        ]
+      },
+      {
+        q: "What do you believe, in the place beneath argument, about your own capacity &mdash; your intelligence, your worth, your right to occupy space and produce significant work in the world?",
+        answers: [
+          {t: "That my capacity is real and sufficient. Self-doubt exists, but it does not govern me.", s: 0},
+          {t: "That my capacity is real, though I have a voice that regularly challenges this and I do not always win the argument.", s: 1},
+          {t: "That there are limits specific to me &mdash; intelligence, background, personality, timing &mdash; that place certain things outside my reach.", s: 2},
+          {t: "That I am fundamentally limited in ways that are not improvable &mdash; that the capacity available to me is the capacity I have already demonstrated, and the ceiling is close to where I currently sit.", s: 3}
+        ]
+      },
+      {
+        q: "Is there a version of your story you tell yourself about why your life is the shape it is &mdash; one that explains the gap between what you have and what you want by attributing it to forces outside your control?",
+        answers: [
+          {t: "Partially &mdash; I can see where external forces have shaped things, and I can also see where I have made choices that reinforced those shapes.", s: 0},
+          {t: "Yes, and I am in the process of examining what is genuinely structural and what is self-reinforcing.", s: 1},
+          {t: "Yes, and the story is convincing enough that I rarely question it. It may be accurate. It may also be the most comfortable available explanation for not acting.", s: 2},
+          {t: "Yes, and I have lived inside it for long enough that it has stopped feeling like a story and started feeling like reality.", s: 3}
+        ]
+      },
+      {
+        q: "What happens in you when you encounter someone who seems to be living at a level of freedom, creativity, or aliveness that you want but do not currently have?",
+        answers: [
+          {t: "Inspiration &mdash; their existence is evidence that the thing is possible.", s: 0},
+          {t: "Inspiration and some comparison, which I have learned to trace back to desire rather than inadequacy.", s: 1},
+          {t: "A complicated mix &mdash; some admiration, some pain, and sometimes an internal movement that names reasons why their life is not applicable to mine.", s: 2},
+          {t: "Something that looks like dismissal or resentment from outside but is closer to grief &mdash; because seeing someone live in the space I want, and having a strong story about why that space is not available to me, produces a pain I have learned to convert into another form.", s: 3}
+        ]
+      },
+      {
+        q: "Is there a thought, a direction, a line of inquiry &mdash; something your mind has moved toward more than once &mdash; that you have learned to move away from? Something your brain reaches for and then decides is too large, too strange, or too much?",
+        answers: [
+          {t: "I follow those thoughts. They are usually where the most significant things are.", s: 0},
+          {t: "Sometimes &mdash; I notice the reach and the retreat, and I am getting better at staying with what the reach is pointing toward.", s: 1},
+          {t: "Often. There are directions my mind moves toward that I have learned to classify as impractical or beyond the scope of someone like me.", s: 2},
+          {t: "Yes. There is a specific thing my mind reaches for that I have spent considerable energy keeping at a manageable distance &mdash; because to follow it seriously would require admitting something about who I am or what I want that would change things I am not ready to change.", s: 3}
+        ]
+      },
+      {
+        q: "What do you believe about the relationship between your thoughts, your attention, and the shape your life takes? Do you believe your inner world has a structuring relationship with your outer one?",
+        answers: [
+          {t: "Deeply, and I work with this actively. The mind is the primary site of change for me.", s: 0},
+          {t: "Substantially &mdash; I can see the connection in my own history and I act on it more than I used to.", s: 1},
+          {t: "Somewhat &mdash; I accept it intellectually but I have not made it a genuine practice, which means I believe it in theory more than I live it.", s: 2},
+          {t: "Very little, or not at all. I understand my life as shaped primarily by external forces &mdash; and the idea that my inner world structures my outer one is either unconvincing or too frightening to take seriously, because to accept it would require a level of responsibility for my current circumstances that I am not prepared to hold.", s: 3}
+        ]
+      },
+      {
+        q: "The version of you ten years from now, if the current trajectory continues without significant change &mdash; the mental patterns, the beliefs, the ceilings, the habitual thoughts &mdash; what does that person look like?",
+        answers: [
+          {t: "Recognisably evolved &mdash; there is a clear arc of development that continues.", s: 0},
+          {t: "Better in some areas, with specific patterns I need to address to change the overall direction.", s: 1},
+          {t: "A version of me I do not want to fully sit with. The trajectory is not where I want to be headed, and I have not done enough to change it.", s: 2},
+          {t: "Something I actively avoid imagining. The honest projection of the current trajectory is painful enough that I have learned not to look down the road too directly.", s: 3}
+        ]
+      },
+      {
+        q: "What would you be thinking about, building, pursuing, if you genuinely believed your mind was capable of more than it has currently demonstrated, and that the ceiling was neither fixed nor close to where you currently sit?",
+        answers: [
+          {t: "More or less what I am already doing, but with less friction from self-doubt.", s: 0},
+          {t: "Something more specific, more ambitious, more in line with the call I feel than what I currently pursue.", s: 1},
+          {t: "Something significantly different. The life I would be building if I genuinely believed in my own capacity is not the life I am currently building.", s: 2},
+          {t: "I cannot answer this question without grief. Because to name what I would be doing if I believed in myself fully, and then to look at how little of it is present in my current life, is the most honest accounting of what the ceiling has cost me &mdash; and I have kept it at a distance for a reason.", s: 3}
+        ]
+      }
+    ]
+  }
+];
+
+// =====================================================================
+// STATE
+// =====================================================================
+let currentScreen = 0;
+const answers = {};
+const courseMax = sections.map(s => s.questions.length * 3);
+const totalQ = sections.reduce((n, s) => n + s.questions.length, 0);
+
+// =====================================================================
+// RENDER SECTIONS
+// =====================================================================
+function renderSections() {
+  const container = document.getElementById('section-screens');
+  sections.forEach((sec, si) => {
+    const div = document.createElement('div');
+    div.className = 'screen';
+    div.id = 'screen-' + (si + 1);
+
+    let qHtml = '';
+    sec.questions.forEach((q, qi) => {
+      let aHtml = q.answers.map((a, ai) =>
+        `<button class="answer-btn" data-si="${si}" data-qi="${qi}" data-score="${a.s}" onclick="selectAnswer(this)">
+          <span class="answer-letter">${['a','b','c','d'][ai]}</span>${a.t}
+        </button>`
+      ).join('');
+      qHtml += `<div class="question-block" id="qblock-${si}-${qi}">
+        <div class="question-number">Question ${getGlobalQ(si, qi)} of ${totalQ}</div>
+        <div class="question-text">${q.q}</div>
+        <div class="answers">${aHtml}</div>
+      </div>`;
+    });
+
+    div.innerHTML = `
+      <div class="section-meta">${sec.label} &middot; Section ${si + 1} of ${sections.length}</div>
+      <div class="section-title">${sec.title}</div>
+      <div class="section-intro">${sec.intro}</div>
+      ${qHtml}
+      <div class="section-nav">
+        <div class="nav-note" id="nav-note-${si}">Please answer all questions to continue.</div>
+        <button class="nav-btn" id="nav-btn-${si}" onclick="nextSection(${si})" disabled>
+          ${si < sections.length - 1 ? 'Next Section &rarr;' : 'See My Results &rarr;'}
+        </button>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function getGlobalQ(si, qi) {
+  let n = 1;
+  for (let i = 0; i < si; i++) n += sections[i].questions.length;
+  return n + qi;
+}
+
+// =====================================================================
+// INTERACTION
+// =====================================================================
+function selectAnswer(btn) {
+  const si = parseInt(btn.dataset.si), qi = parseInt(btn.dataset.qi);
+  document.querySelectorAll(`[data-si="${si}"][data-qi="${qi}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  if (!answers[si]) answers[si] = {};
+  answers[si][qi] = parseInt(btn.dataset.score);
+  checkSectionComplete(si);
+}
+
+function checkSectionComplete(si) {
+  const total = sections[si].questions.length;
+  const done = answers[si] ? Object.keys(answers[si]).length : 0;
+  const btn = document.getElementById('nav-btn-' + si);
+  const note = document.getElementById('nav-note-' + si);
+  btn.disabled = done < total;
+  note.textContent = done < total
+    ? `${total - done} question${total - done !== 1 ? 's' : ''} remaining.`
+    : 'All questions answered. Ready to continue.';
+}
+
+function nextSection(si) {
+  si < sections.length - 1 ? goTo(si + 2) : showResults();
+}
+
+function goTo(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + n).classList.add('active');
+  currentScreen = n;
+  updateProgress();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function updateProgress() {
+  const pct = currentScreen === 0 ? 0 : currentScreen >= sections.length + 1 ? 100 : Math.round((currentScreen / sections.length) * 90);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  const tag = document.getElementById('header-progress-tag');
+  if (currentScreen === 0) tag.textContent = 'Introduction';
+  else if (currentScreen >= sections.length + 1) tag.textContent = 'Results';
+  else tag.textContent = 'Section ' + currentScreen + ' of ' + sections.length;
+}
+
+// =====================================================================
+// RESULTS
+// =====================================================================
+function showResults() {
+  const scores = sections.map((sec, si) => {
+    let t = 0;
+    if (answers[si]) Object.values(answers[si]).forEach(v => { t += v; });
+    return t;
+  });
+  const pcts = scores.map((s, i) => Math.round((s / courseMax[i]) * 100));
+  const ranked = pcts.map((p, i) => ({i, p})).sort((a, b) => b.p - a.p);
+
+  const grid = document.getElementById('results-grid');
+  grid.innerHTML = '';
+
+  ranked.forEach(({i, p}) => {
+    const sec = sections[i];
+    let tier, tierLabel, barClass, cardClass;
+    if (p <= 20) {
+      tier = 'strong'; tierLabel = 'Strong foundations'; barClass = 'fill-strong'; cardClass = '';
+    } else if (p <= 45) {
+      tier = 'active'; tierLabel = 'Active threads'; barClass = 'fill-active'; cardClass = 'priority';
+    } else if (p <= 70) {
+      tier = 'priority'; tierLabel = 'Priority area'; barClass = 'fill-priority'; cardClass = 'priority';
+    } else {
+      tier = 'high'; tierLabel = 'Where to begin'; barClass = 'fill-high'; cardClass = 'priority-high';
+    }
+
+    const labelClass = {strong:'label-strong',active:'label-active',priority:'label-priority',high:'label-high'}[tier];
+    const insight = sec.insights[tier];
+    let stepsHtml = '';
+    if (p > 25) {
+      stepsHtml = `<div class="result-steps">
+        <div class="result-steps-title">First steps</div>
+        ${sec.steps.map((st, idx) => `<div class="step-item"><span class="step-num">0${idx+1}</span>${st}</div>`).join('')}
+      </div>`;
+    }
+
+    grid.innerHTML += `<div class="course-result ${cardClass}">
+      <div class="result-header">
+        <div>
+          <div class="result-course-name">${sec.title}</div>
+          <div class="result-course-sub">${sec.label}</div>
+        </div>
+        <div class="result-label ${labelClass}">${tierLabel}</div>
+      </div>
+      <div class="result-bar-bg"><div class="result-bar-fill ${barClass}" style="width:0%" data-target="${p}"></div></div>
+      <div class="result-insight">${insight}</div>
+      <div class="result-desc">${sec.courseDesc}</div>
+      ${stepsHtml}
+    </div>`;
+  });
+
+  const top = sections[ranked[0].i];
+  document.getElementById('results-intro').innerHTML =
+    `You have completed all ${totalQ} questions. Below is a picture of where you are across the ten areas of this curriculum &mdash; ordered by where the most active patterns live right now. Your highest-priority area is <strong>${top.title}</strong>. Read each section carefully and use what lands. Not everything will apply with equal weight &mdash; trust what resonates. This map belongs to you and is not shared with anyone.`;
+
+  goTo(sections.length + 1);
+  setTimeout(() => {
+    document.querySelectorAll('.result-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+  }, 300);
+}
+
+// =====================================================================
+// FEEDBACK FORM + INIT
+// =====================================================================
+document.addEventListener('DOMContentLoaded', function() {
+  renderSections();
+});
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next)document.documentElement.setAttribute('data-zoom',next);
+    else document.documentElement.removeAttribute('data-zoom');
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev)document.documentElement.setAttribute('data-zoom',prev);
+    else document.documentElement.removeAttribute('data-zoom');
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

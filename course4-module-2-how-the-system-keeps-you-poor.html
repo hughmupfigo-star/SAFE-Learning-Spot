@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 4 · Module 2 · How the System Keeps You Poor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.mechanism:last-of-type{border-bottom:1px solid var(--line)}.mechanism-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.mechanism-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+.mechanism-how{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:20px 0 8px;font-weight:500}.mechanism-quote{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.6;padding-left:20px;border-left:2px solid var(--line);color:var(--ink);margin-bottom:8px}
+
+.narrative{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.narrative-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;font-weight:500}.narrative-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.narrative-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.diagnostic{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.diagnostic-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.diagnostic-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.practice{margin:28px 0;padding-left:28px;border-left:2px solid var(--line)}.practice-name{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.25}.practice-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.mechanism-name{font-size:24px}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 04 · Financial Truth & Reversal · Module <strong>02</strong> · How the System Keeps You Poor</div>
+  <div class="progress-bar"><div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 4 &middot; Financial Sovereignty</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c4m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course4-module-1-the-language-of-money.html">The Language of Money</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course4-module-2-how-the-system-keeps-you-poor.html">How the System Keeps You Poor</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course4-module-3-the-debt-trap-architecture.html">The Debt Trap</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course4-module-4-building-true-wealth.html">Building True Wealth</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course4-module-5-the-frequency-of-abundance.html">The Frequency of Abundance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course4-module-6-money-as-sovereignty.html">Money as Sovereignty</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course4-module-7-the-next-economy.html">The Next Economy</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- PAGE 1 -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 · The Design</div>
+    <h1 class="slide-title">The system is not <em>broken.</em></h1>
+
+    <p class="lead">The most common explanation for why most people struggle financially is that the system has problems — flaws, oversights, unintended consequences that disadvantage certain populations. This explanation is comforting and incorrect. The system does not have flaws that produce poverty. The system has features that produce poverty. The poverty is not a bug. It is a function of the architecture.</p>
+
+    <p class="body-text">This is not conspiracy theory. Conspiracy requires coordination, secrecy, and centralised planning. <strong>What this module describes is architecture — the structural design of economic systems that produce predictable outcomes without requiring anyone to be in a back room directing the outcome.</strong> The architecture does not need a villain. It needs only the continuation of rules, incentives, and structures that were designed, at each historical point, to serve the interests of the people who wrote them.</p>
+
+    <p class="body-text">The architecture operates through five mechanisms. Each one is observable, measurable, and documented. Each one produces a specific kind of extraction — a transfer of wealth from populations that are already under-resourced to populations that are already over-resourced. <strong>The transfer is not occasional or accidental. It is continuous, systematic, and operates whether or not any individual within the system intends it.</strong></p>
+
+    <div class="section-heading">Why this matters for you specifically</div>
+
+    <p class="body-text">Understanding the architecture is not an academic exercise. It is a practical one. <strong>You cannot navigate a system you do not understand.</strong> The person who believes the system rewards hard work will work harder within a structure that captures most of the value of their labour. The person who understands the architecture will work differently — positioning themselves in relation to the mechanisms rather than simply running inside them.</p>
+
+    <p class="body-text">This module is not designed to make you angry, although it may. It is designed to make you literate — to give you the structural vocabulary for reading how money moves through the system you are operating inside, so that the governed financial decisions from Module One can be made from accurate information rather than from the truth reversals that the system provided.</p>
+
+    <div class="pullquote">The system is not failing. The system is functioning exactly as designed. The design produces a specific distribution of wealth. Understanding the design is the precondition for changing your position within it.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You hear someone say "the system is broken" and feel, for the first time, the inadequacy of that framing.</p>
+      <p class="scenario-context">If the system is broken, it can be fixed — by better policies, better leaders, better intentions. If the system is working as designed, the fix is different: you need to understand the design and position yourself in relation to it. The two framings produce completely different responses.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Hold onto the "broken" framing. It preserves the possibility that the system could be made fair with enough reform.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Sit with the "designed" framing. The system may be reformable and it is also operating as intended. Both truths can coexist. Understanding the design gives you information that the "broken" framing obscures.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Conclude the system is malicious and withdraw from it entirely. Refuse to participate in a rigged game.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the framing as cynical. The system has problems but calling it "designed" implies intentional harm that overstates the case.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 · The Five Mechanisms</div>
+    <h1 class="slide-title">How the extraction <em>works.</em></h1>
+
+    <p class="lead">Five mechanisms operate continuously in the financial system to transfer wealth from lower-resource populations to higher-resource populations. Each one is legal, visible, and structurally embedded. None of them requires a conspiracy to function. All of them require your ignorance to function optimally.</p>
+
+    <div class="mechanism">
+      <div class="mechanism-num">Mechanism 01</div>
+      <h2 class="mechanism-name">The poverty premium.</h2>
+      <p class="body-text">Being poor costs more than being wealthy. <strong>The person with less money pays more for the same goods and services — not occasionally, but systematically, across every domain of daily life.</strong> Higher interest rates on borrowing. Higher insurance premiums. Higher cost-per-unit on smaller quantities. Higher fees for basic financial services. Less access to bulk buying, to long-term contracts, to the discounts that require capital upfront.</p>
+
+      <p class="body-text">The poverty premium is the most direct extraction mechanism: it transfers wealth from the person who has least to the institutions that have most, through the simple structural fact that access to lower costs requires capital the person does not have. <em>The premium is not a market failure. It is a market feature. The market charges more for poverty because poverty has less bargaining power, and the market responds to bargaining power, not to need.</em></p>
+      <div class="mechanism-how">How it operates on you</div>
+      <p class="mechanism-quote">Every time you pay a higher rate because you could not access the lower rate — every overdraft fee, every short-term loan premium, every insurance surcharge, every per-unit cost that bulk buying would have avoided — the poverty premium is extracting wealth from your position and transferring it upward.</p>
+    </div>
+
+    <div class="mechanism">
+      <div class="mechanism-num">Mechanism 02</div>
+      <h2 class="mechanism-name">The wage-productivity gap.</h2>
+      <p class="body-text">Your labour produces value. Your wages capture a fraction of that value. The gap between what your labour produces and what your wages pay is the primary mechanism of wealth transfer in any employment relationship. <strong>The gap has been widening for decades — productivity has risen steadily while real wages have stagnated or declined relative to the cost of living.</strong></p>
+
+      <p class="body-text">The surplus — the difference between what your work creates and what you are paid — does not vanish. It is captured: by shareholders, by executives, by the capital structure that sits above the labour. The capture is legal, ordinary, and presented as the natural functioning of the economy. <em>The truth reversal from Module One — "hard work leads to wealth" — is structurally maintained by the wage-productivity gap. You work hard. The wealth goes elsewhere. The narrative tells you to work harder.</em></p>
+      <div class="mechanism-how">How it operates on you</div>
+      <p class="mechanism-quote">If you are employed, the value you produce each day exceeds your daily wage. The difference is the extraction. The difference funds the profits, the dividends, the executive compensation, and the capital growth of the entity that employs you. The difference is not theft — it is the architecture of employment. Understanding it changes what you do with the knowledge.</p>
+    </div>
+
+    <div class="mechanism">
+      <div class="mechanism-num">Mechanism 03</div>
+      <h2 class="mechanism-name">The asset gate.</h2>
+      <p class="body-text">Wealth is not produced by income. Wealth is produced by assets — property, investments, equity, intellectual property, ownership stakes in things that appreciate over time. <strong>The gate between income and assets is the most consequential structural barrier in the financial system.</strong> Income pays for living. Assets produce wealth. The system is designed so that converting income into assets requires a surplus that most income levels do not produce.</p>
+
+      <p class="body-text">The asset gate is self-reinforcing. Assets produce returns. Returns produce more assets. More assets produce more returns. The person who enters the gate accelerates. The person who does not enters a different loop — income to expenses, expenses to income, with no surplus available for the conversion. <em>The gate is not visible from inside the income loop. It becomes visible only when you understand that income is not the mechanism of wealth — ownership is.</em></p>
+      <div class="mechanism-how">How it operates on you</div>
+      <p class="mechanism-quote">If the majority of your financial life is income-to-expenses with little or no asset accumulation, you are inside the income loop. The loop is stable. It does not produce wealth. It produces survival, sometimes comfort, and the continuation of the loop. The gate into assets is what Module Four of this course will address. For now, the recognition that the gate exists is enough.</p>
+    </div>
+
+    <div class="mechanism">
+      <div class="mechanism-num">Mechanism 04</div>
+      <h2 class="mechanism-name">The information asymmetry.</h2>
+      <p class="body-text">The people who have wealth also have access to information about how to build, protect, and multiply wealth. The people who do not have wealth also do not have access to this information — not because it is secret, but because it is distributed through channels that require wealth to access. <strong>Financial advisers, tax strategists, investment opportunities, legal structures, estate planning — all of these are available, at quality, only to people who already have enough to pay for them.</strong></p>
+
+      <p class="body-text">The information asymmetry compounds over time. Each generation that has access to the information uses it to build wealth, and passes both the wealth and the information to the next generation. Each generation that does not have access fails to build wealth, and passes neither the wealth nor the information forward. <em>The asymmetry is not a conspiracy of silence. It is the natural consequence of a system in which financial education is a product rather than a right.</em></p>
+      <div class="mechanism-how">How it operates on you</div>
+      <p class="mechanism-quote">The financial decisions you are making are being made with less information than the decisions being made by people with more wealth. Not because you are less intelligent. Because the information was distributed according to who could pay for it, and the distribution reinforced the gap it was supposed to be closing.</p>
+    </div>
+
+    <div class="mechanism">
+      <div class="mechanism-num">Mechanism 05</div>
+      <h2 class="mechanism-name">The complexity tax.</h2>
+      <p class="body-text">The financial system is complex — tax codes, legal structures, investment vehicles, regulatory frameworks, contractual terms. <strong>The complexity is not accidental. Complexity benefits the people who can afford to navigate it and penalises the people who cannot.</strong> The person with a tax adviser pays less tax. The person without one pays more. The person with a solicitor reads the contract. The person without one signs it.</p>
+
+      <p class="body-text">The complexity tax is the most insidious of the five mechanisms because it operates through the appearance of equal access. The tax code is, technically, available to everyone. The investment vehicles are, technically, open to all. The contracts are, technically, readable by anyone. <em>The "technically" is the extraction. The technical availability disguises the practical inaccessibility, and the practical inaccessibility is where the wealth transfer occurs.</em></p>
+      <div class="mechanism-how">How it operates on you</div>
+      <p class="mechanism-quote">Every time you overpay on tax because you did not know about a relief, every time you accept unfavourable terms because the contract was impenetrable, every time you miss an opportunity because the vehicle was too complex to evaluate — the complexity tax has extracted from your position and transferred the value to someone who could navigate what you could not.</p>
+    </div>
+
+    <div class="pullquote">Five mechanisms. All legal. All visible. All operating continuously. The extraction does not require malice. It requires only the continuation of structures that were designed to produce exactly the distribution they are producing.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the five mechanisms and recognise that at least three of them have been operating on your financial position for your entire adult life.</p>
+      <p class="scenario-context">The poverty premium on your borrowing. The wage-productivity gap in your employment. The asset gate you have never been able to pass through. The recognition is not abstract. You can calculate, roughly, what the mechanisms have cost you across the years.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Feel rage. The system has been extracting from you your entire life and nobody told you.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Let the recognition settle into structural understanding. The rage is valid and the understanding is more useful. The mechanisms are now visible. Visible mechanisms can be navigated. Invisible ones could not.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Dismiss the mechanisms as overstated. The system has problems but this framing makes it sound worse than it is.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel helpless. If the architecture is this comprehensive, what can one person do?</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 · The Disguise</div>
+    <h1 class="slide-title">How extraction becomes <em>invisible.</em></h1>
+
+    <p class="lead">The five mechanisms from Page Two are not hidden. They are operating in plain sight. What makes them invisible is not secrecy — it is narrative. Specific stories, repeated across generations, convert the extraction into something that looks like opportunity, choice, or personal responsibility. The stories are the disguise. The disguise is more effective than any secrecy could be, because the stories are believed by the people being extracted from.</p>
+
+    <div class="narrative">
+      <div class="narrative-label">Disguise 01</div>
+      <p class="narrative-name">"Anyone can make it."</p>
+      <p class="narrative-text"><strong>The narrative:</strong> the system is open. With enough talent, effort, and determination, anyone can rise from any starting position to wealth. The examples are held up — the self-made millionaire, the rags-to-riches entrepreneur, the person who started with nothing and built an empire. <strong>The structural function:</strong> the narrative converts a statistical anomaly into a general principle. The people who "made it" from disadvantaged positions are genuinely exceptional — and their exceptionality is used to argue that the system works for everyone, when in fact the system worked for them despite its design, not because of it. <em>The narrative's function is to keep the majority labouring inside a system that will not produce wealth for them, by pointing to the minority for whom it accidentally did.</em></p>
+    </div>
+
+    <div class="narrative">
+      <div class="narrative-label">Disguise 02</div>
+      <p class="narrative-name">"You have choices."</p>
+      <p class="narrative-text"><strong>The narrative:</strong> the financial system offers choice — where to bank, what to buy, how to invest, where to work. The existence of choice is equated with the existence of freedom. <strong>The structural function:</strong> the choices are presented as equivalent when they are not. The "choice" between a high-interest lender and a bank that will not approve your application is not a real choice. The "choice" between an underpaying job and no job is not a real choice. The narrative of choice disguises the constraint by framing it as a menu. <em>When all the options on the menu extract from you, the choice between them is the choice of which extraction to accept, not the choice to avoid extraction.</em></p>
+    </div>
+
+    <div class="narrative">
+      <div class="narrative-label">Disguise 03</div>
+      <p class="narrative-name">"It's your responsibility."</p>
+      <p class="narrative-text"><strong>The narrative:</strong> your financial position is the result of your decisions. If you are in debt, you borrowed too much. If you have no savings, you spent too much. If you have no assets, you did not invest. The responsibility is yours, and the structural mechanisms that shaped your position are either invisible or irrelevant. <strong>The structural function:</strong> the personal responsibility narrative converts a systemic outcome into an individual failure. The conversion prevents the system from being examined — because if the problem is your spending, the solution is your discipline, and the architecture that produced the outcome is never addressed. <em>The narrative is the most effective of the three disguises because it is partially true: your decisions do matter. The partial truth disguises the structural truth that the decisions were made inside a system designed to produce the outcome regardless of the decisions.</em></p>
+    </div>
+
+    <div class="section-heading">Why the disguises work</div>
+
+    <p class="body-text">The disguises work because they contain partial truths. Some people do make it. You do have some choices. Your decisions do matter. <strong>The partial truths are what make the disguises durable.</strong> A narrative that was entirely false would be easy to reject. A narrative that is partially true and partially structural is far harder to see through — because the partial truth feels like the whole truth, and the structural element disappears into the feeling of accuracy.</p>
+
+    <p class="body-text">The work of this page is not to reject the partial truths. It is to hold them alongside the structural truths — to see that effort matters and that the system captures most of its value, that choices exist and that the choices are constrained, that responsibility is real and that the architecture shapes the outcome more than the responsibility does. <em>Both halves are true. The disguise collapses them into one. The literacy separates them back out.</em></p>
+
+    <div class="pullquote">The most effective disguise is the one that contains enough truth to feel accurate. The narratives that hide the extraction are not lies. They are partial truths that have been promoted to the status of complete explanations. The promotion is the disguise.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">A friend who is struggling financially says: "I just need to be more disciplined. If I budgeted better, I'd be fine."</p>
+      <p class="scenario-context">The statement is partly true — budgeting would help. But you can now see that the statement is also the personal responsibility disguise operating: converting a structural position into a character failure, preventing the examination of which mechanisms are actually producing the difficulty.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Agree. Budgeting really would help. Better discipline is always the answer to financial difficulty.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold both truths. "Budgeting would help, and it might also be worth looking at where the money is going before it reaches you — what the system is taking before the budgeting even begins." Offer the structural view alongside the personal one, without dismissing either.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Lecture them on the five mechanisms. Explain why personal responsibility is a disguise for systemic extraction.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Say nothing. It's not your place to challenge how someone understands their own financial situation.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 · Your Position</div>
+    <h1 class="slide-title">Where you sit in the <em>architecture.</em></h1>
+
+    <p class="lead">The five mechanisms from Page Two are not operating on everyone equally. They extract at different rates depending on your position — your income level, your asset base, your geographic location, your access to information, and the starting position you inherited. This page is a diagnostic for identifying which mechanisms are operating most heavily on your specific financial position, and what the cumulative cost has been.</p>
+
+    <p class="body-text">The diagnostic is not designed to produce despair. It is designed to produce accuracy — the same structural accuracy that Course Three's body diagnostics produced. <strong>You cannot govern what you cannot see. The mechanisms that are extracting from your position are currently invisible. Making them visible is the first act of financial governance at the structural level.</strong></p>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">Are you paying the poverty premium?</p>
+      <p class="diagnostic-text">Look at your borrowing rates, your insurance premiums, your banking fees. Compare them, where possible, to the rates available to people with more capital. If you are paying more for the same services — higher interest, higher fees, fewer discounts — the poverty premium is actively extracting from your position. <strong>The premium is not your fault. It is the structural cost of your current position in the system.</strong> The extraction can be reduced — through credit improvement, through switching providers, through accessing community finance — but it cannot be eliminated while the position remains the same.</p>
+    </div>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">Is the wage-productivity gap operating on your labour?</p>
+      <p class="diagnostic-text">If you are employed, estimate the value your work produces relative to your compensation. In most employment relationships, the gap is significant — often two to five times your salary in value produced for the employer. <strong>The gap is the architecture of employment, not a moral failure of your employer.</strong> Understanding the gap changes what you do with the knowledge — negotiation, positioning, and eventually the question of whether employment is the optimal structure for your labour. Module Four will address this.</p>
+    </div>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">Are you inside the income loop or approaching the asset gate?</p>
+      <p class="diagnostic-text">If the majority of your financial life is income-to-expenses — earning, spending, earning, spending — with little or no surplus converting into assets, you are inside the income loop. The loop is stable. It does not produce wealth. <strong>The question is not whether you are in the loop — most people are. The question is whether your current trajectory includes a plausible path to the asset gate</strong> — whether any portion of your income is being directed toward ownership (property, investments, business equity, intellectual property) or whether the full amount is being consumed by living costs and extraction.</p>
+    </div>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">What is the information gap costing you?</p>
+      <p class="diagnostic-text">Identify one financial decision you made in the last two years where better information would have produced a different outcome — a better interest rate, a tax relief you missed, an investment opportunity you didn't know existed, a contract term you didn't understand. <strong>That single decision is the information asymmetry producing its cost.</strong> Multiply it across a lifetime of decisions and the cumulative cost becomes visible. The visibility is not meant to produce regret. It is meant to produce the recognition that closing the information gap is one of the highest-return investments available to you.</p>
+    </div>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">How much is the complexity tax costing you?</p>
+      <p class="diagnostic-text">Think about the financial structures you interact with that you do not fully understand — your pension scheme, your tax position, your mortgage terms, your insurance policies. Each area of non-understanding is a potential extraction point. <strong>The complexity tax does not announce itself. It operates in the gap between what you signed and what you understood.</strong> The gap, across multiple financial products and across years, produces a cumulative transfer that is significant, invisible, and addressable through the literacy this course is building.</p>
+    </div>
+
+    <div class="pullquote">Your position in the architecture is not a moral reflection. It is a structural coordinate — shaped by forces that were in motion before you arrived, extracting at rates you are now learning to read. The reading is the first governance. The governance is what changes the position.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You complete the five diagnostics and calculate, roughly, that the mechanisms have extracted tens of thousands of pounds from your position over the last decade.</p>
+      <p class="scenario-context">The number is not precise. It doesn't need to be. Even the rough estimate is larger than you expected. The extraction was continuous, silent, and operating across every domain of your financial life simultaneously.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Feel defeated. The number is too large. The extraction is too comprehensive. There is nothing meaningful you can do.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the number as the cost of the previous decade's ungoverned position. The extraction was real. The extraction going forward is now governable — because the mechanisms are visible, the information gap is closing, and the literacy is building. The next decade's number can be different.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Get angry and demand structural change. The system should not be allowed to extract this way.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Doubt the calculation. The number is probably exaggerated. The mechanisms are not as comprehensive as the module suggests.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 · The Governed Response</div>
+    <h1 class="slide-title">What you can actually <em>do.</em></h1>
+
+    <p class="lead">The five mechanisms are structural. You cannot dismantle them individually. You can, however, reduce your exposure to them — through specific, practical, governed actions that change your position relative to the architecture. This page is not about fixing the system. It is about navigating it — with the literacy you are building, from the position you currently hold, toward a position where the extraction operates on you less.</p>
+
+    <p class="body-text">The governed response is not rage (which consumes energy without changing position) and it is not helplessness (which accepts the position as permanent). <strong>The governed response is the strategic, ongoing reduction of your exposure to each mechanism, using the tools available to you from your current position.</strong> The tools are not dramatic. They are incremental. The increments, sustained across years, produce structural change in your personal financial architecture.</p>
+
+    <div class="sov-frame">
+      <div class="sov-label">The financial sovereignty position</div>
+      <p class="sov-text">I cannot dismantle the architecture. I can reduce my exposure to it. Each reduction is a governed act — a decision made from literacy rather than from confusion, from understanding rather than from the narratives that disguise the extraction. The reductions accumulate. The accumulation is the sovereignty.</p>
+    </div>
+
+    <div class="section-heading">Five governed responses to the five mechanisms</div>
+
+    <div class="practice">
+      <p class="practice-name">Against the poverty premium: reduce the cost of being in your current position.</p>
+      <p class="practice-text">Audit your borrowing rates, insurance premiums, and banking fees. Switch providers where a lower rate is accessible. Improve your credit score, which reduces the premium the system charges for your position. Access community finance, credit unions, or mutual aid where available. Each reduction in the premium is money that was being extracted and is now retained. <strong>The poverty premium cannot be eliminated from your current position. It can be reduced, and each reduction compounds.</strong></p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Against the wage-productivity gap: understand the value you produce and negotiate from that understanding.</p>
+      <p class="practice-text">Know what your work generates — in revenue, in value, in outcome. Use that knowledge in salary negotiations, in requests for equity or profit-sharing, in decisions about whether to continue trading time for a fixed wage. Begin asking, with the language of Module One: is employment the structure that best serves my financial sovereignty, or is there a structure that captures more of the value I produce? The question does not require an immediate answer. The question changes what you see.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Against the asset gate: begin the conversion from income to ownership, however small.</p>
+      <p class="practice-text">Any amount — genuinely any amount — directed from income toward assets begins the conversion. A pension contribution. A small, regular investment. A savings pot earmarked for an eventual asset purchase. <strong>The amount matters less than the direction.</strong> The direction is what changes the loop from income-to-expenses (which does not produce wealth) to income-to-assets (which does). Module Four will address this in detail. For now, the structural move is enough: redirect any amount, however small, from consumption to ownership.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Against the information asymmetry: close one gap per month.</p>
+      <p class="practice-text">Identify one area of financial ignorance — your pension structure, your tax position, your mortgage terms, the basic mechanics of investment — and close the gap. Read one reliable source. Ask one informed person. Understand one structure you currently interact with blindly. The information gap closed this month is the extraction reduced next year. <em>The gap does not close all at once. It closes one topic at a time, across months and years, until the information asymmetry that has been costing you is no longer operating unopposed.</em></p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Against the complexity tax: understand before you sign.</p>
+      <p class="practice-text">Before the next financial commitment — contract, policy, loan, subscription, terms of service — understand the terms. Not every line of every contract. The material terms: what you are paying, what you are receiving, what the penalties are, what the exit costs are. If the terms are impenetrable, that impenetrability is the complexity tax operating in real time. Ask for plain-language explanation. Use free resources. <strong>The thirty minutes spent understanding the terms before signing may be the highest-return time investment available to you.</strong></p>
+    </div>
+
+    <div class="pullquote">The system was designed to extract. The extraction is reduced — not by dismantling the system, but by navigating it with literacy. Each governed response reduces the flow. The reductions, accumulated across years, produce a structurally different position. The position is the sovereignty.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You sit down to audit your borrowing rates and discover that you have been paying significantly above the rate available to someone with your current credit profile.</p>
+      <p class="scenario-context">The overpayment has been running for years. The cumulative cost is substantial. The switch to a better rate is available, straightforward, and will take less than an hour to initiate. The hour has been available for years. The audit had not been performed because the avoidance programme was running.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Feel angry at the lender for not offering you the better rate automatically.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Make the switch. The past overpayment is a sunk cost — it cannot be recovered. The future overpayment can be stopped, today, with one hour of governed action. The hour is the sovereignty move applied to the poverty premium.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Berate yourself for not having done this years ago. The wasted money is evidence of your financial negligence.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Decide it's probably not worth the hassle. The difference per month is small. Switching providers is effort you don't have.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- COMPLETION -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module Two.</em></h1>
+
+    <p class="lead">You now have the structural vocabulary for reading how the financial system extracts wealth from your position. Five mechanisms, three disguises, your specific position in the architecture, and five governed responses that reduce the extraction from where you stand. The system is not broken. The system is designed. Understanding the design is how you begin to navigate it differently.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">The system is not broken. It is working as designed. The design produces a specific distribution of wealth through five structural mechanisms.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Five mechanisms of extraction: the poverty premium, the wage-productivity gap, the asset gate, the information asymmetry, and the complexity tax. All legal. All continuous. All reducible.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">Three disguises convert the extraction into narratives of opportunity, choice, and personal responsibility. Each disguise contains a partial truth that makes the full extraction invisible.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Your position in the architecture is shaped by which mechanisms are operating on you most heavily. The diagnostic makes the extraction visible. The visibility is the precondition for governance.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">Five governed responses: reduce the poverty premium, understand your value, begin the income-to-asset conversion, close one information gap per month, understand before you sign.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">Choose one of the five governed responses and execute it this week. Audit one borrowing rate. Estimate the value of one week's work. Direct one small amount toward an asset. Close one information gap. Read one set of terms before signing. The action is small. The action is governed. The governance, applied consistently, changes the position. The position is everything.</p>
+
+    <p class="body-text">The next module — <strong>The Debt Trap Architecture</strong> — examines the specific structure of debt: how it is weaponised, why it is the primary tool of control in modern economies, and how the architecture of borrowing is designed to keep you in the income loop permanently. The language of money continues to speak. The literacy continues to build.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 03 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback={
+  1:{
+    a:{headline:"The 'broken' framing preserves hope for reform and prevents you from reading the system as it actually operates.",detail:"Reform is possible and may be desirable. The system can be changed through policy, legislation, and collective action. But the 'broken' framing assumes the system is trying to produce fairness and failing. The 'designed' framing recognises that the system is producing exactly what it was built to produce — and that your position within it requires a different response than waiting for reform. You can advocate for reform and also navigate the existing design. The two are not in conflict. The navigation is what this course teaches. The reform is a separate, longer-term project."},
+    b:{headline:"Holding both framings — that the system may be reformable and is also operating as designed — is the structural literacy the module was built to produce.",detail:"The system can be both designed to produce the current distribution and capable of being redesigned. Both truths hold simultaneously. Understanding the current design gives you information the 'broken' framing obscures — specifically, which mechanisms are extracting from your position and how to reduce your exposure to them. The reform work, if you choose it, benefits from the same understanding: you cannot redesign what you do not understand. The literacy serves both the personal navigation and the structural advocacy."},
+    c:{headline:"Withdrawing from the system entirely is rarely possible and, where possible, produces a different kind of extraction.",detail:"Total withdrawal from the financial system — no bank account, no employment, no participation in the formal economy — is a position some people adopt. The position has costs: no access to credit, no legal protections, no institutional support. The withdrawal does not eliminate extraction — it changes the form. The informal economy has its own extraction mechanisms, often more severe than the formal one's. The governed response is not withdrawal. It is navigation — participating in the system with enough literacy to reduce the extraction while using the system's structures to build sovereignty."},
+    d:{headline:"Dismissing the 'designed' framing as cynical prevents the structural reading the module was built to enable.",detail:"The framing may feel overstated. The word 'designed' may suggest more intentionality than any single actor possessed. But the outcomes are consistent, measurable, and predictable — which is the definition of a system operating as designed, regardless of whether any individual designed it with those outcomes in mind. Tax codes are written by people who benefit from tax codes. Financial regulations are shaped by the institutions they regulate. Employment law is influenced by the employers it governs. The design is not a secret meeting. It is the cumulative effect of each rule being written by the people best positioned to influence the writing. The cynicism label prevents the observation."}
+  },
+  2:{
+    a:{headline:"Rage is a valid response to the recognition of structural extraction. Rage, by itself, does not change your position in the architecture.",detail:"The anger is earned. The mechanisms have been operating on your financial position for your entire adult life, and the disguises from Page Three ensured you could not see the extraction while it was occurring. The anger, felt and processed, has value — it energises the decision to navigate differently. The anger, maintained as the primary response, consumes the energy that the navigation requires. The navigation is the governed response. The anger is the fuel. The question is whether the fuel is being converted into movement or into heat."},
+    b:{headline:"Letting the recognition settle into structural understanding is the response that converts literacy into governed action.",detail:"The mechanisms are now visible. The visibility is the change. The mechanisms were operating on your position regardless of whether you could see them. Now that you can see them, you can respond — not by dismantling them (that is structural work beyond any individual) but by reducing your exposure to each one, incrementally, through the governed responses on Page Five. The understanding is the foundation. The governed responses are the architecture of your navigation. The navigation, sustained across years, produces a structurally different position. The different position is the sovereignty."},
+    c:{headline:"Dismissing the mechanisms as overstated prevents the examination of how they are specifically operating on your financial position.",detail:"The mechanisms may or may not be as comprehensive as the module describes — the severity varies by position, by geography, by specific circumstances. The appropriate response to potential overstatement is not dismissal but examination: look at your own borrowing rates, your own wage-to-value ratio, your own asset trajectory, your own information access, your own encounters with complexity. The examination will tell you, with your own data, whether the mechanisms are overstated or accurately described. The dismissal prevents the examination. The examination is the only honest response."},
+    d:{headline:"Helplessness is the architecture's most effective emotional product — the felt sense that the extraction is too comprehensive to resist.",detail:"The helplessness is understandable. Five mechanisms, all operating simultaneously, all structural, all legal — the comprehensiveness is real. But the helplessness is also the architecture's most useful emotional output, because a person who feels helpless does not navigate. They remain in their current position, continue paying the poverty premium, continue trading labour for wages, continue inside the income loop. The governed response — which Page Five describes — is incremental, not heroic. Each increment reduces the extraction by a small amount. The small amounts, compounded across years, produce a different position. The helplessness says this is not enough. The mathematics says it is."}
+  },
+  3:{
+    a:{headline:"Agreeing that budgeting is the complete answer reinforces the personal responsibility disguise while leaving the structural extraction unexamined.",detail:"Budgeting does help. Discipline does matter. The personal contribution to financial position is real. But the agreement, without the structural context, reinforces the narrative that the difficulty is entirely personal — which prevents your friend from ever examining the poverty premium they are paying, the wage gap that is capturing their value, or the information asymmetry that is costing them in every financial decision. The partial truth, presented as the whole truth, is the disguise operating. Agreeing with it is participating in the disguise."},
+    b:{headline:"Offering both the personal and structural views without dismissing either is the most useful intervention available in ordinary conversation.",detail:"'Budgeting would help, and it might also be worth looking at where the money is going before it reaches you.' The sentence holds both truths. The budgeting is real. The structural extraction is also real. Most people have never been offered the structural view — not because it is secret, but because the personal responsibility narrative is so dominant that the structural view never gets aired. Offering it alongside the personal view, without dismissing the personal, begins the financial literacy that the taboo from Module One was designed to prevent."},
+    c:{headline:"Lecturing them on the five mechanisms converts a conversation into a classroom and usually produces defensiveness rather than literacy.",detail:"The structural analysis is accurate. Delivering it as a lecture — in response to a friend's vulnerable admission about their financial difficulties — is the wrong context for the delivery. The friend is not asking for a structural analysis. They are expressing a felt difficulty. The structural view can be offered gently, as an additional perspective, without converting the conversation into a seminar. The seminar produces defensiveness. The gentle offering produces curiosity. The curiosity is what eventually leads to the literacy. The lecture produces resistance to it."},
+    d:{headline:"Saying nothing preserves the friendship's comfort and leaves your friend inside the personal responsibility narrative unopposed.",detail:"Sometimes saying nothing is correct — when the friend is not ready, when the context is wrong, when the relationship cannot hold the structural view. Sometimes saying nothing is the avoidance programme running in a different domain — the financial taboo from Module One, which says discussing money honestly is vulgar, operating as a barrier to a conversation that would genuinely help. The distinction between appropriate silence and programmed silence is the governance. In this case, a single sentence offering the structural view alongside the personal one costs very little and potentially opens something that the personal responsibility narrative has been closing."}
+  },
+  4:{
+    a:{headline:"Defeat is the architecture's most useful emotional product — the recognition of the extraction producing the paralysis that ensures its continuation.",detail:"The number is large. The extraction has been comprehensive. Both are true. The defeat is the response the architecture predicts and requires — because a person who feels defeated does not navigate, does not audit, does not switch, does not redirect. They remain in position, and the extraction continues. The governed response — which is not heroic, not dramatic, just incremental — begins with one action from Page Five. One rate switched. One gap closed. One small amount redirected. Each action is small. Each action changes the next decade's number by a fraction. The fractions compound. The compounding is what the defeat prevents."},
+    b:{headline:"Holding the number as the cost of the previous decade's ungoverned position, while recognising that the next decade is now governable, is the financial sovereignty move.",detail:"The past extraction is a sunk cost. It cannot be recovered. The past decade's number is information about what ungoverned exposure to the five mechanisms produces. The next decade's number is governed — by the literacy you are building, by the mechanisms you can now see, by the practices you can now apply. The difference between the two decades will not be the elimination of the extraction. It will be the reduction of the extraction, compounded across years. The reduction is the governance. The governance is what changes the position."},
+    c:{headline:"Demanding structural change is valid advocacy and does not, by itself, change your position in the current architecture.",detail:"The system should be reformed. The mechanisms should be addressed through policy, regulation, and structural change. Advocacy for this change is legitimate and important. But the advocacy operates on a timeline of years to decades, and the extraction operates on a timeline of today. The governed response addresses today's extraction while the advocacy addresses tomorrow's architecture. Both are needed. Substituting the advocacy for the personal governance — waiting for the system to change before changing your position within it — ensures the extraction continues at its current rate for the duration of the wait."},
+    d:{headline:"Doubting the calculation before examining your own data prevents the examination that would confirm or refute the module's claims.",detail:"The number may be overstated. It may be understated. The rough estimate is not a precise accounting — it is an approximation designed to make the cumulative scale of the extraction visible. The appropriate response to doubt is not dismissal but examination: audit one borrowing rate, calculate one wage-to-value ratio, identify one information gap that cost you. The examination, using your own data, will produce a more accurate number than the rough estimate. If the number is smaller, you are better positioned than you thought. If it is larger, the governance is more urgent than you thought. Either way, the data is yours."}
+  },
+  5:{
+    a:{headline:"Anger at the lender for not offering the better rate assumes the lender's interest is aligned with yours — which is the fundamental misunderstanding the module exists to correct.",detail:"The lender's interest is in revenue from your payments. A lower rate produces less revenue. The lender will not offer you a lower rate because it is not in their interest to do so — regardless of whether a lower rate is available or whether you qualify for it. This is not malice. It is architecture. The lender is operating as designed. Your governed response is not to expect the lender to act against their own interest. It is to understand the architecture and navigate it — which means auditing your rates, finding better ones, and switching. The anger at the lender delays the switch. The switch is the governance."},
+    b:{headline:"Making the switch — today, with one hour of governed action — is the sovereignty move applied to the poverty premium in its most practical form.",detail:"The past overpayment cannot be recovered. The future overpayment can be stopped. The stopping requires one hour. The hour has been available for years. The avoidance programme — from Module One's truth reversal about money being too shameful to engage with — prevented the hour from being used. The programme has now been named. The hour can now be used. The switch, made today, reduces the extraction from this point forward. The reduction, compounded across months and years, produces a measurably different position. One hour. One switch. The governance is not heroic. It is practical. The practical is what changes the number."},
+    c:{headline:"Self-blame for not having acted earlier is the personal responsibility disguise operating on your response to the module itself.",detail:"You did not act because you did not know. You did not know because the information asymmetry was operating. The information asymmetry was operating because the system benefits from your ignorance about your own extractable position. The self-blame converts a structural condition (the information was not available to you) into a personal failure (you should have sought it out). The conversion is the third disguise from Page Three, operating in real time. Notice it. Name it. Then make the switch. The switch is the governed action. The self-blame is the disguise preventing the governed action."},
+    d:{headline:"Deciding the switch is not worth the effort is the poverty premium's most effective defence — the felt sense that each individual extraction is too small to address.",detail:"The difference per month may be small. Across a year, it is less small. Across five years, it is significant. Across a decade, it may be thousands of pounds — thousands that were transferred from your position to the lender's because the effort of switching felt disproportionate to the monthly saving. The poverty premium operates precisely through this felt sense: each individual extraction is small enough to tolerate. The tolerance, accumulated across years and across multiple extraction points, produces the cumulative cost you calculated on Page Four. The switch is one hour. The cost of not switching is measured in years."}
+  }
+};
+
+let currentSlide=1;const totalSlides=6;const answered={1:false,2:false,3:false,4:false,5:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c4m1';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course4-module-1-the-language-of-money.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c4m2','1');window.location.href='course4-module-3-the-debt-trap-architecture.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

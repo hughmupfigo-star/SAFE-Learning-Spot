@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 6 · Module 3 · Work: The Adult School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.mechanism:last-of-type{border-bottom:1px solid var(--line)}.mechanism-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.mechanism-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+.cost-block{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.cost-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.cost-text{font-size:16px;line-height:1.65;color:#2a2a28}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}.voice-block::before{content:'"';position:absolute;top:-8px;left:24px;font-family:var(--serif);font-size:72px;color:var(--accent);line-height:1;font-style:italic}.voice-name{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.voice-text{font-family:var(--serif);font-size:19px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);padding-top:8px}
+.safety-note{margin:40px 0;padding:28px;border:1px solid var(--accent);background:var(--paper)}.safety-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}.safety-text{font-size:15px;line-height:1.65;color:#2a2a28}
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.mechanism-name{font-size:24px}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 06 &middot; Institutional Brainwashing &middot; Module <strong>03</strong> &middot; Work: The Adult School</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 6 &middot; Institutional Conditioning</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c6m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course6-module-1-institution-training.html">Institution Training</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course6-module-2-school-compliance.html">School Compliance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course6-module-3-work-adult-school.html">Work: Adult School</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course6-module-4-religion-meaning.html">Religion and Meaning</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course6-module-5-government-governance.html">Government & Governance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course6-module-6-independence-deprogramming.html">Independence & De-Programming</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course6-module-7-thinking-for-yourself.html">Thinking for Yourself</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+<!-- SLIDE 1 -->
+<section class="slide active" data-slide="1">
+<div class="slide-number">Page 01 / 09 &middot; The Structural Continuity</div>
+<h1 class="slide-title">School never <em>ended.</em></h1>
+
+<p class="lead">You left school. You entered employment. And you sat down, in a new building, at a new desk, facing a new authority figure, inside a new hierarchy with new rules and new assessments &mdash; and the transition felt entirely natural, because it was. The workplace did not ask you to learn a new way of existing. It asked you to continue the way you had already been trained. School did not end when you left. It restructured as work.</p>
+
+<p class="body-text"><strong>The structural continuities are not metaphorical.</strong> They are precise replications of the school&rsquo;s architecture in an adult form. The manager replicates the teacher: the person who sets the tasks, assesses the performance, controls the information, determines the consequences of compliance and non-compliance. The appraisal replicates the grade: the external measurement of performance against institutional standards, delivered periodically, that determines your position in the hierarchy and your access to its rewards. The organisational culture replicates the peer group: the social enforcement mechanism that operates continuously to maintain conformity of behaviour, opinion, and presentation.</p>
+
+<p class="body-text"><em>The workplace&rsquo;s genius, from the conditioning perspective, is that it presents the continuation of school as liberation from it.</em> You are no longer required to attend. You are paid. You have, the story goes, chosen to be here. The choice creates the impression of freedom while delivering you to a structure that replicates, almost point for point, the one you spent thirteen years being conditioned by. <strong>The conditioning does not feel like conditioning because it feels like adult life.</strong> Adult life is what conditioning looks like when it has been fully successful.</p>
+
+<div class="section-heading">The key structural replications</div>
+
+<p class="body-text"><strong>Fixed time as belonging:</strong> the school bell reappears as the clock-in time, the meeting schedule, the nine-to-five, the expectation of presence regardless of the individual&rsquo;s internal rhythms or actual productive capacity. <strong>Hierarchy as knowledge:</strong> the teacher at the front reappears as the senior who knows more, the manager whose judgement overrides yours, the organisation&rsquo;s authority as the arbiter of correct procedure. <strong>Assessment as worth:</strong> the grade reappears as the appraisal, the review, the promotion decision, the pay rise withheld or awarded. <strong>The peer group as enforcement:</strong> the school&rsquo;s social dynamics reappear in every office, every team, every professional social environment &mdash; with the same bandwidth of acceptable visibility and the same consequences for departing from it.</p>
+
+<div class="pullquote">The workplace did not need to train you. You arrived already trained. The school had produced, over thirteen years, precisely the human the workplace required: accustomed to hierarchy, responsive to assessment, motivated by approval, and uncertain enough about their own worth to accept the institution&rsquo;s measurement of it without prolonged resistance.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You think of your first job and the speed with which the environment felt familiar. The hierarchy, the unspoken rules, the social dynamics of the team, the sense of being assessed &mdash; none of it required explanation because all of it had been explained, over a decade, in a different building.</p>
+<p class="scenario-context">The familiarity was not comfort. It was recognition. The school had built a template, and the workplace confirmed it. The template is what makes institutional life feel like reality rather than a specific arrangement that could have been otherwise.</p>
+
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the parallel as inevitable. Hierarchy and assessment are features of any organised human activity. The workplace has to work somehow. The school was simply preparing you for reality.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Distinguish between the necessity of some structure and the specific structure that was installed. All organised activity requires some coordination. It does not require the specific hierarchy-assessment-compliance architecture that school and work share. That architecture was chosen, not inevitable &mdash; and recognising it as chosen is what makes the examination of it possible.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Conclude that employment is inherently exploitative and all institutional participation is a form of self-betrayal.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel nostalgic for the familiarity. The structure, however constraining, provided a certainty that is difficult to find outside it.</button>
+</div>
+
+<div class="feedback" id="feedback-1">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-1"></p>
+<p class="feedback-text" id="feedback-detail-1"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" disabled>&larr; Previous</button>
+<span class="nav-counter">01 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide" data-slide="2">
+<div class="slide-number">Page 02 / 09 &middot; The Contract</div>
+<h1 class="slide-title">What you actually <em>agreed to.</em></h1>
+
+<p class="lead">The employment contract specifies hours, salary, role, and obligations. It is a legal document that describes a particular exchange. What it does not specify &mdash; what it cannot specify, because the most important terms are not written anywhere &mdash; is the full scope of what employment actually requires. Alongside the hours and the salary, the employment relationship requires something the contract never names: the subordination of your own direction, judgement, and sense of purpose to the institution&rsquo;s, for the duration of the employment, in exchange for money and the social identity that belonging to the organisation provides.</p>
+
+<p class="body-text"><strong>The unwritten terms are the most significant ones.</strong> You agreed to be present on the employer&rsquo;s schedule rather than your own. You agreed to direct your attention toward the employer&rsquo;s priorities rather than your own. You agreed to accept the employer&rsquo;s assessment of the value of your contribution rather than your own. You agreed to perform the institutional identity &mdash; the professional self, the team player, the company representative &mdash; rather than your own. And you agreed to these terms without reading them, because the terms were already installed by school before the contract was signed. <em>The signature on the employment contract was the formal ratification of a conditioning that had been operating for over a decade.</em></p>
+
+<div class="section-heading">The exchange in full</div>
+
+<div class="cost-block">
+<p class="cost-name">Time for money.</p>
+<p class="cost-text">The visible exchange. You give the employer units of your finite, non-renewable life &mdash; hours, days, years &mdash; and receive money in return. The exchange is rational when the money enables a life worth living outside the hours sold. <strong>The exchange becomes problematic when the hours consumed leave insufficient life outside them; when the money earned is spent recovering from the hours sold; when the years accumulate into a career that was the employer&rsquo;s project rather than your own.</strong> Most people, examining the exchange honestly, find that the terms are less favourable than they appeared when they signed &mdash; because the full cost of the time was not visible at signing, and the full value of the money was not as significant as the scarcity of the time became.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">Identity for belonging.</p>
+<p class="cost-text">The invisible exchange. You give the employer your authentic self &mdash; your genuine opinions, the full range of your personality, your actual values where they diverge from the organisation&rsquo;s &mdash; and receive in return a social identity and the belonging that comes with it. <em>The professional self &mdash; the managed, presented, organisation-compatible version of you &mdash; is the price of admission to the social world that work provides.</em> <strong>For many people, the workplace is the primary community of adult life, which makes the identity exchange feel not like a cost but like a reasonable social compact.</strong> The cost only becomes visible when you consider what was suppressed in the exchange &mdash; and how long it has been suppressed.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">Direction for security.</p>
+<p class="cost-text">The deepest exchange. You give the employer your capacity for self-direction &mdash; the ability to determine what you work on, how, when, toward what end &mdash; and receive in return the security of a defined role, a predictable income, and freedom from the responsibility of generating your own direction. <strong>The exchange is attractive, especially to people trained by school to be dependent on external direction.</strong> The self-directed person experiences employment as constraint. The institutionally conditioned person experiences it as relief &mdash; the reassurance of being told what to do, which is exactly what the school trained them to need. <em>The relief is real. The cost of the relief &mdash; the atrophy of the self-direction capacity that was never fully developed and is now being actively suppressed &mdash; accumulates invisibly across years.</em></p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You are asked, in a social setting, what you do. You name your job title. For a moment, before answering, you notice that the job title is not an answer to the question that was asked. The question was what you do. The answer was who the institution says you are.</p>
+<p class="scenario-context">The conflation of employment role with personal identity is so complete, in most adults, that the job title feels like a genuine answer to &ldquo;who are you?&rdquo; The institution has been named. Your contribution to it has been named. The person who existed before the institution, and who will exist after it, has been briefly set aside.</p>
+
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the conflation as practical. People ask about your job because it is the easiest social shorthand for who you are. The answer is useful even if incomplete.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice the moment of noticing. The awareness &mdash; that the job title is not the full answer, that the institution&rsquo;s name is not your name &mdash; is already the beginning of the distinction. You do not need to answer differently in the social moment. You need to stay with the recognition that the job title is a role, and that you are not the role, however convenient the conflation has become.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Feel distress at not having a more developed answer. If the job is not who you are, and you cannot answer otherwise, then the question reveals an emptiness.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the observation. Identity is always partial and contextual. Naming your job is appropriate in a social context. There is nothing more to examine here.</button>
+</div>
+
+<div class="feedback" id="feedback-2">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-2"></p>
+<p class="feedback-text" id="feedback-detail-2"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">02 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 3 -->
+<section class="slide" data-slide="3">
+<div class="slide-number">Page 03 / 09 &middot; The Appraisal</div>
+<h1 class="slide-title">The grade that never <em>stopped.</em></h1>
+
+<p class="lead">The school grade was supposed to end when school ended. It did not. It restructured as the performance review, the appraisal, the 360-degree feedback, the promotion decision, the pay band. The mechanism is identical: an authority external to you measures your performance against institutional standards and delivers a verdict that determines your position in the hierarchy, your access to rewards, and &mdash; most significantly &mdash; your sense of your own worth. The examiner changed. The exam continued.</p>
+
+<p class="body-text"><strong>The appraisal is the school&rsquo;s assessment machine in its adult form,</strong> and it carries the same structural properties that made the school grade so damaging. It measures a narrow slice of your contribution &mdash; the slice that is visible, quantifiable, and relevant to the organisation&rsquo;s current priorities &mdash; and treats that measurement as a comprehensive assessment of your professional worth. It is delivered by a person who may or may not understand your work, your context, or your actual contribution, but whose authority to assess is structurally guaranteed by their position in the hierarchy. And it is internalised by most people as objective self-knowledge rather than as the organisation&rsquo;s measurement of how well you serve its current needs.</p>
+
+<div class="mechanism">
+<div class="mechanism-num">Appraisal mechanism 01</div>
+<h2 class="mechanism-name">The rating system and what it does to the self.</h2>
+<p class="body-text">The numerical or categorical rating &mdash; exceeds expectations, meets expectations, below expectations; the five-point scale; the ranking against peers &mdash; delivers the school&rsquo;s grade in professional language. <strong>The person rated &ldquo;exceeds expectations&rdquo; experiences a surge of the same approval-reward that the A-grade produced. The person rated &ldquo;meets expectations&rdquo; experiences the same dull deflation as the B.</strong> The person rated &ldquo;below expectations&rdquo; experiences the same shame as the failing grade &mdash; and carries it forward, into the next performance cycle, as a self-assessment that the institutional measurement installed. <em>The rating system does not just measure performance. It manufactures the emotional states that keep people responsive to institutional approval &mdash; the anxiety before the review, the relief at a good rating, the determination to do better that the bad rating produces. All of these are the school&rsquo;s reward-and-punishment mechanism, running without interruption into adult professional life.</em></p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Appraisal mechanism 02</div>
+<h2 class="mechanism-name">Feedback as management.</h2>
+<p class="body-text">The developmental feedback section of the appraisal &mdash; the &ldquo;areas for growth,&rdquo; the &ldquo;development needs,&rdquo; the &ldquo;behaviours to work on&rdquo; &mdash; is the institutional equivalent of the school report&rsquo;s &ldquo;could do better&rdquo; and &ldquo;needs to apply themselves more.&rdquo; Like its school equivalent, the developmental feedback is primarily structural management: the identification and redirection of qualities the institution finds inconvenient, framed as the individual&rsquo;s professional development. <strong>The employee who is told they &ldquo;need to be more strategic&rdquo; is being told to think in the way the institution finds useful rather than the way they naturally think.</strong> The employee told they &ldquo;need to be more collaborative&rdquo; is being told to suppress their independent working preference. The frame is development. The function is compliance. <em>The person who takes all appraisal feedback as developmental truth without first asking &ldquo;what quality is being managed here, and why?&rdquo; is still inside the school&rsquo;s dynamic: the teacher&rsquo;s assessment as objective self-knowledge.</em></p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Appraisal mechanism 03</div>
+<h2 class="mechanism-name">The annual cycle and the anxiety it produces.</h2>
+<p class="body-text">The school&rsquo;s examination period &mdash; with its concentrated anxiety, its cramming, its specific performance pressure &mdash; reappears as the appraisal cycle: the months of heightened visibility management, the accumulation of evidence of contribution, the performance before the review that the review is partly designed to produce. <strong>The appraisal cycle trains the employee, as the examination trained the student, to perform optimally in the assessment period rather than to work optimally throughout the year.</strong> The contributions that are visible, documentable, and attributable to the individual are emphasised. The contributions that are invisible, structural, or collaborative &mdash; and therefore harder to assess &mdash; are undervalued by the same mechanism that undervalued them in school. <em>The system measures what it can measure and mistakes measurability for significance. The employee who internalises the measurement as an accurate account of their contribution is making the same mistake the student made with their grades.</em></p>
+</div>
+
+<div class="pullquote">The appraisal does not tell you how good you are at your work. It tells you how well your work serves the institution&rsquo;s current measurable priorities. These are not the same thing. They have never been the same thing. The school did not teach you the difference, because the school needed you not to know it.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You receive a good appraisal rating. For a few days, you feel genuinely better about yourself &mdash; more confident, more settled, more certain of your value. The feeling is disproportionate to what actually happened: a manager ticked a box.</p>
+<p class="scenario-context">The disproportionality is evidence of the mechanism. Your sense of your own value was, for those days, supplied by the institutional rating. It was not generated from your own assessment of your work. The manager did not add anything real. The rating activated the school&rsquo;s reward circuit &mdash; and the relief you felt was the relief of having been graded acceptable, again, for another year.</p>
+
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the feeling as appropriate. Positive feedback is genuinely positive. Feeling good after a good appraisal is a healthy response to recognition.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice the disproportionality and examine it. The feeling is real. Its source is the mechanism. Noticing that your sense of worth was, for those days, being supplied by the institution&rsquo;s rating rather than by your own assessment &mdash; and that the institution&rsquo;s rating can just as easily be withheld &mdash; is the recognition that begins the development of a self-assessment that does not depend on the appraisal cycle to provide it.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Reject the feeling entirely. It was manufactured by an institutional mechanism. The feeling is false and should be dismissed.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Aim for the feeling consistently. Appraisal ratings are controllable through the right performance management. Optimise for the feeling by optimising for the rating.</button>
+</div>
+
+<div class="feedback" id="feedback-3">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-3"></p>
+<p class="feedback-text" id="feedback-detail-1"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">03 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 4 -->
+<section class="slide" data-slide="4">
+<div class="slide-number">Page 04 / 09 &middot; Office Culture</div>
+<h1 class="slide-title">The peer group never <em>left.</em></h1>
+
+<p class="lead">The school peer group was the most effective enforcement mechanism in the conditioning architecture because it operated continuously, granularly, and through the people whose approval mattered most. The adult workplace provides the identical conditions: a group of people in enforced daily proximity, with shared stakes in the institution&rsquo;s approval, enforcing the norms of behaviour, presentation, and opinion that the culture requires. The specific people changed. The mechanism did not.</p>
+
+<p class="body-text"><strong>Office culture is the peer group in professional clothing.</strong> It enforces what it enforces through the same mechanisms as the school peer group: approval and withdrawal of approval, inclusion and exclusion, the social cost of visibility that exceeds the acceptable bandwidth, and the social reward of conformity that stays within it. The adult knows, as the child knew, what the group requires &mdash; and manages themselves accordingly, suppressing the inconvenient opinion, moderating the distinguishing quality, performing the culture&rsquo;s version of the acceptable self.</p>
+
+<div class="section-heading">What workplace culture enforces</div>
+
+<div class="cost-block">
+<p class="cost-name">The performed enthusiasm.</p>
+<p class="cost-text">Workplace culture requires a specific emotional presentation: engaged, positive, aligned with the organisation&rsquo;s direction, enthusiastic about its projects. <strong>The employee who is genuinely unenthusiastic about the current project, who disagrees with the strategic direction, who finds the work meaningless or the culture toxic &mdash; this employee performs enthusiasm anyway, because the alternative is social and professional risk.</strong> The performance is not occasional. It is the sustained maintenance of an emotional presentation that may bear no relationship to the employee&rsquo;s actual experience. The energy this maintenance requires &mdash; continuous, daily, across years &mdash; is extracted invisibly from the person who is performing it, producing the peculiar exhaustion of people who appear to have easy jobs but arrive home drained of everything.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">The suppressed dissent.</p>
+<p class="cost-text"><em>The employee who disagrees with a decision, who sees a problem the organisation is not seeing, who has a perspective that diverges from the prevailing one &mdash; this employee is at social and professional risk if they express the disagreement.</em> Not because disagreement is formally prohibited &mdash; most organisations nominally value challenge and critical thinking &mdash; but because the peer group enforces a specific norm around the expression of dissent: <strong>dissent is acceptable when it is mild, when it is expressed within approved channels, and when it does not challenge the authority of the people who control the peer group&rsquo;s social rewards.</strong> The structural dissent &mdash; the kind that says the process itself is wrong, the strategy itself is flawed, the culture itself is the problem &mdash; is the dissent that the peer group cannot accommodate and that the individual has learned, through school and work, to keep private.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">The identity audit.</p>
+<p class="cost-text">The continuous, largely unconscious scanning of the social environment for signals about which aspects of the authentic self are acceptable in this specific workplace context, and the management of self-presentation accordingly. <strong>The employee who is funny at home and serious at work. Who is creative in private and procedural in the office. Who holds views in their personal life that they would never express in a meeting.</strong> The audit is not dishonesty. It is the trained management of the acceptable self that the peer group requires &mdash; the same management the school peer group required, applied now to the professional social environment with adult-level sophistication. <em>The cost is not the audit itself. The cost is the cumulative erosion of the sense of a coherent self &mdash; the person who has managed different versions in different contexts for so long that they are no longer certain which version, if any, is the actual one.</em></p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">Your organisation makes a decision you believe is wrong &mdash; not slightly wrong, genuinely wrong, in a way you could articulate clearly if asked. You do not raise it. You mention it to a trusted colleague privately and then perform alignment with the decision in every public context.</p>
+<p class="scenario-context">The private dissent and the public compliance are not hypocrisy. They are the precise strategy the peer group trained you to use: dissent is permitted in private, where it is safe; compliance is required in public, where the group can see. The strategy was successful in school. It is successful at work. Its cost is the slow accumulation of unexpressed truth &mdash; and what that accumulation does to a person over time.</p>
+
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the strategy as professionally sophisticated. Expressing every disagreement publicly is naïve and damaging. Managing your dissent is a sign of political intelligence.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Distinguish between strategic communication and chronic suppression. Sometimes withholding a dissenting view is a considered tactical choice. When withholding is the consistent pattern &mdash; when public alignment is always performed regardless of private view, when the authentic perspective never enters the room &mdash; the strategy has become suppression. And suppression, accumulated across years, produces specific costs: to integrity, to energy, and to the capacity to trust your own perception in any context.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Express the dissent publicly and immediately. The organisation needs to hear it. Silence is complicity.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Leave the organisation. If you cannot be honest about what you think, the environment is incompatible with integrity.</button>
+</div>
+
+<div class="feedback" id="feedback-4">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-4"></p>
+<p class="feedback-text" id="feedback-detail-4"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">04 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 5 -->
+<section class="slide" data-slide="5">
+<div class="slide-number">Page 05 / 09 &middot; The Career Narrative</div>
+<h1 class="slide-title">The story that replaces <em>your own.</em></h1>
+
+<p class="lead">The career is the workplace&rsquo;s most sophisticated conditioning tool &mdash; not because it constrains, but because it provides meaning. The career narrative &mdash; the arc of progression, the accumulation of seniority and credential and status, the story of professional development and achievement &mdash; gives the institutional life a shape that feels like personal fulfilment. It borrows the language of self-realisation while delivering institutional compliance. It makes the exchange of your life&rsquo;s direction for the institution&rsquo;s direction feel like the natural unfolding of who you are.</p>
+
+<p class="body-text"><strong>The career is a brilliant solution to the problem of meaning in institutional life.</strong> The problem is real: most employment, most of the time, requires the individual to subordinate their own direction to the institution&rsquo;s. This is not intrinsically meaningful. It requires a narrative to become meaningful. The career narrative provides it: you are not subordinating your direction; you are building something. You are not serving the institution&rsquo;s interests; you are developing your capabilities. You are not trading your life for money; you are investing in your future self. <em>The narrative is not false. It is incomplete. The part it omits is the exchange being made &mdash; the direction surrendered, the time sold, the authentic self managed &mdash; in order to maintain the career&rsquo;s progression.</em></p>
+
+<div class="section-heading">How the career narrative operates</div>
+
+<p class="body-text"><strong>It converts compliance into ambition.</strong> The employee who works long hours, accepts difficult assignments, tolerates poor management, and suppresses their own direction in service of the organisation&rsquo;s priorities is not described as compliant. They are described as ambitious, dedicated, committed, a high performer. The same behaviour that would be described as excessive compliance in any other context is relabelled, within the career narrative, as the qualities of a successful person. <em>The relabelling is the career narrative&rsquo;s primary function: it converts institutional compliance into personal virtue, so that the more thoroughly you serve the institution, the more you appear to be succeeding at your own life.</em></p>
+
+<p class="body-text"><strong>It defers the life.</strong> The career&rsquo;s structure is always future-oriented: the current sacrifice is for the future reward. The current role is the investment in the next one. The current suppression of your own direction is the price of the future freedom that senior roles, financial security, or the completed career will provide. <strong>The future freedom is perpetually deferred.</strong> The senior role brings its own demands. The financial security requires its own maintenance. The completed career arrives, in most cases, at an age when the energy and the time to use the freedom have been substantially consumed by the career that was supposed to provide it. The deferral is not accidental. The deferred life is the institutional exchange&rsquo;s most reliable product.</p>
+
+<div class="voice-block">
+<div class="voice-name">The career in summary</div>
+<p class="voice-text">You traded your twenties for experience. Your thirties for advancement. Your forties for stability. At each stage the trade felt reasonable &mdash; the future was coming, the reward was approaching, the investment was almost mature. The career told you a story about your life in which the institution was the vehicle and you were the beneficiary. The story was the most expensive thing you bought. You paid for it in time.</p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You think of something you have genuinely wanted to do &mdash; create, build, learn, go somewhere, change something &mdash; that you have been postponing until conditions are right: until you have more financial security, until the current project is finished, until you have reached the next level in your role.</p>
+<p class="scenario-context">The conditions have been almost right for some time. The thing has been almost possible for some time. The career has been providing reasons for the postponement for some time. At some point, the postponement becomes the permanent condition and the almost-possible thing remains permanently almost possible. That point may already have passed for some things. It has not passed for everything.</p>
+
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the postponement as rational. Financial security and career progression are real prerequisites for the things you want to do. The sequencing is correct: career first, life later.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Examine the postponement honestly. Some prerequisites are real. Some are the career narrative providing rationale for the deferral. The question worth asking: is the condition that must be met genuinely required, or is it the next condition in a sequence that has always generated the next condition? If the condition keeps moving, the prerequisite is not real. It is the deferral mechanism.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Act immediately. Leave the job, start the thing, stop deferring. The career has taken enough.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel grief at the years already spent in the postponement and conclude that it is now too late for the thing anyway.</button>
+</div>
+
+<div class="feedback" id="feedback-5">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-5"></p>
+<p class="feedback-text" id="feedback-detail-5"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">05 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 6 -->
+<section class="slide" data-slide="6">
+<div class="slide-number">Page 06 / 09 &middot; The Overwork Compulsion</div>
+<h1 class="slide-title">More than you <em>agreed to give.</em></h1>
+
+<p class="lead">The employment contract specifies an exchange. The overwork compulsion is the mechanism by which the employer extracts more than the contract specifies, from employees who have been conditioned to give more than the contract requires. It operates not through coercion but through the school&rsquo;s most efficient technology: the internalisation of the institution&rsquo;s requirements as the individual&rsquo;s own standards. The employee who works evenings and weekends, who answers emails at midnight, who sacrifices health and relationships for a project deadline &mdash; this employee is not being forced. They have been trained to force themselves.</p>
+
+<p class="body-text"><strong>The overwork compulsion is the school&rsquo;s performance-equals-worth equation, applied to employment hours.</strong> The student who studied longest was the most committed. The employee who works longest is the most dedicated. The student who sacrificed leisure for grades was admirable. The employee who sacrifices weekends for deliverables is a high performer. The equation is identical. The currency has changed from grades to hours, and the reward has changed from teacher approval to managerial recognition &mdash; but the mechanism is the same conditioned association between sacrifice and virtue that school installed twenty years earlier.</p>
+
+<div class="mechanism">
+<div class="mechanism-num">Overwork mechanism 01</div>
+<h2 class="mechanism-name">The always-available expectation.</h2>
+<p class="body-text">The smartphone made the employee available outside contracted hours, and the organisation rapidly converted the availability from an exception into an expectation. <strong>The employee who does not respond to evening emails is, in most workplace cultures, implicitly marking themselves as less committed than the employee who does.</strong> The expectation is rarely stated. It is enforced through the peer group: the visibility of who responds and who does not, the social cost of absence from the thread, the performance of commitment that availability signals. <em>The school taught the student that the good student studied at home as well as at school. The workplace teaches the employee that the good employee is available at home as well as at work. The boundary between the institutional time and the personal time &mdash; which school began eroding with homework &mdash; disappears entirely in the always-available workplace.</em></p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Overwork mechanism 02</div>
+<h2 class="mechanism-name">The internalised standard.</h2>
+<p class="body-text">The most efficient form of overwork extraction does not require external pressure at all. <strong>The employee who has internalised the performance-equals-worth equation sets their own hours, polices their own availability, and punishes themselves for insufficient dedication &mdash; all without any manager needing to ask.</strong> The internalised standard produces an employee who is more reliably overworked than any external management system could achieve, because the enforcement comes from inside and cannot be switched off by leaving the building. <em>The person who feels guilty about leaving at the contracted time, who cannot take a holiday without monitoring their work email, who experiences rest as a failure of commitment &mdash; this person is managing themselves on the institution&rsquo;s behalf, using standards the institution never had to state because school already installed them.</em></p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Overwork mechanism 03</div>
+<h2 class="mechanism-name">The meaning substitution.</h2>
+<p class="body-text">The overwork compulsion is particularly powerful in work that is presented as meaningful &mdash; the purpose-driven organisation, the mission-led company, the cause that genuinely matters. <strong>When the work is meaningful, the boundary between professional commitment and personal identity becomes especially porous.</strong> Working extra hours for an organisation whose cause you believe in does not feel like exploitation. It feels like contribution to something important. The exploitation operates through the meaning rather than despite it &mdash; using the individual&rsquo;s genuine values and genuine care to extract more than the contract specifies, in exchange for the continued access to the meaning that the work provides. <em>The person who cannot set boundaries with a meaningful employer is not failing to be professional. They are the conditioning&rsquo;s most complete product: someone whose own values have been recruited into the service of the institution&rsquo;s extraction.</em></p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">It is 9 p.m. on a Thursday. You are still working. The contracted hours ended at six. No one asked you to continue. You are continuing because the work is not finished, and unfinished work produces a specific uncomfortable feeling that finished work resolves.</p>
+<p class="scenario-context">The uncomfortable feeling is not professional conscience. It is the performance-equals-worth equation producing discomfort at the absence of output, which the continued working resolves. The resolution feels like commitment. It is the conditioning reinforcing itself through the relief it provides when you comply with it.</p>
+
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the continued working as appropriate professional commitment. Work has deadlines. Sometimes the hours required exceed the contracted ones. This is the reality of professional life.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice the source of the uncomfortable feeling before deciding to continue. Is the work genuinely urgent &mdash; will something fail tomorrow if it is not completed tonight? Or is the discomfort the internalised standard activating, independent of any actual external requirement? The distinction matters enormously for what the continued working means and what it costs. Choosing to continue from genuine urgency is professional. Continuing to relieve the conditioning&rsquo;s discomfort is the institution extracting from you on its own behalf.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Stop immediately and set a permanent boundary at contracted hours. The institution does not own your evenings. Full stop.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Continue, and feel good about it. The productivity at this hour confirms your dedication. This is who you are.</button>
+</div>
+
+<div class="feedback" id="feedback-6">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-6"></p>
+<p class="feedback-text" id="feedback-detail-6"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">06 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 7 -->
+<section class="slide" data-slide="7">
+<div class="slide-number">Page 07 / 09 &middot; The Good Employee</div>
+<h1 class="slide-title">What the institution calls <em>excellent.</em></h1>
+
+<p class="lead">Every institution has an ideal member &mdash; the person who embodies most completely what the institution requires. The school&rsquo;s ideal student is compliant, responsive to assessment, well-behaved in the peer group, and productive within the given structure. The workplace&rsquo;s ideal employee is compliant, responsive to appraisal, culturally aligned, and productive within the given role. The two ideals are the same person, at different ages, in different buildings. Understanding what the institution calls excellent &mdash; and what it leaves out of that description &mdash; is the key to understanding what the conditioning has been optimising for across your entire institutional life.</p>
+
+<div class="cost-block">
+<p class="cost-name">Reliable over original.</p>
+<p class="cost-text">The institution values reliability &mdash; the consistent production of expected outputs in expected formats at expected times &mdash; over originality, which is unpredictable, structurally inconvenient, and difficult to manage. <strong>The reliable employee who produces adequate work consistently is more institutionally valuable than the original thinker whose contributions are sporadic, unconventional, and require the organisation to adapt to them.</strong> The conditioning optimised for reliability. The school rewarded consistent performance over unconventional insight. The workplace rewards consistent performance over unconventional insight. <em>The person who has been reliably producing adequate work for decades and who has a dormant original capacity that the institution never developed &mdash; this person is not uncommon. They are the conditioning&rsquo;s modal output.</em></p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">Agreeable over honest.</p>
+<p class="cost-text">The institution values agreeableness &mdash; the consistent management of relationships within the acceptable bandwidth, the avoidance of unnecessary friction, the maintenance of the social environment that the institution requires to function. <strong>The honest employee who surfaces uncomfortable truths, challenges prevailing assumptions, and refuses to perform alignment they do not feel is a structural problem.</strong> The agreeable employee who performs alignment, manages dissent privately, and produces a smooth social surface is an institutional asset. <em>The conditioning optimised for agreeableness. The school rewarded the student who got along with the teacher and the peer group. The workplace rewards the employee who gets along with the manager and the team.</em> The honest person, wherever they appear, is inconvenient to the institution &mdash; and the institution&rsquo;s assessment of their character reflects the inconvenience, not the quality.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">Institutionally literate over genuinely capable.</p>
+<p class="cost-text">The person who understands how to navigate the institution &mdash; how to manage their visibility, read the political dynamics, produce the right signals of commitment and alignment &mdash; advances in institutional life regardless of the quality of their actual contribution. The person who is genuinely capable but institutionally illegible &mdash; who does not manage their visibility, who expresses genuine views rather than politically correct ones, who produces excellent work without the institutional performance that accompanies it &mdash; stalls. <strong>The institution rewards institutional literacy, which is precisely the skill that the school spent thirteen years developing: the ability to operate successfully within an institutional environment.</strong> <em>Institutional literacy is not the same as genuine capability. The conflation of the two is the institution&rsquo;s most consequential lie, and the one most thoroughly installed by the education system that certified you for entry to it.</em></p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">What &ldquo;excellent&rdquo; actually measures</div>
+<p class="sov-text">The excellent employee, as the institution defines them, is the excellent student as the school defined them: responsive to assessment, compliant with structure, aligned with the prevailing culture, and producing the outputs the institution requires in the formats it can accommodate. None of this is the same as excellent at your work. None of it is the same as excellent as a person. The institution&rsquo;s assessment of excellence is the institution&rsquo;s assessment of how well you serve the institution. That was always what the grade measured. It is what the appraisal measures now.</p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">A colleague who is less capable than you but more politically skilled advances past you in the organisation. You feel the familiar compound of frustration, confusion, and a specific kind of self-doubt: perhaps you are not as good as you thought.</p>
+<p class="scenario-context">The advancement is institutional literacy advancing over genuine capability. The self-doubt is the institution&rsquo;s assessment arriving to replace your own. The confusion is the gap between what you were told the institution rewards &mdash; excellence, capability, contribution &mdash; and what it actually rewards, which is institutional literacy. The gap is not an anomaly. It is the institution operating as designed.</p>
+
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Develop your political skills. If institutional literacy is what advances people, acquire institutional literacy. Play the game better.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Read the situation structurally before deciding how to respond. What happened is not evidence that you are less capable. It is evidence of what this specific institution rewards. You can decide, from a clear-eyed reading of that, whether you want to develop institutional literacy within this institution, seek an environment that rewards different qualities, or examine whether some degree of institutional legibility is genuinely missing from your repertoire &mdash; without accepting the institution&rsquo;s advancement decision as a verdict on your worth.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Leave. An institution that advances political skill over genuine capability is not worth your contribution.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Accept the self-doubt. If the institution rewards what it rewards and you are not advancing, the gap is yours to close. Work harder, be more visible, manage your relationships better.</button>
+</div>
+
+<div class="feedback" id="feedback-7">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-7"></p>
+<p class="feedback-text" id="feedback-detail-7"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">07 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 8 -->
+<section class="slide" data-slide="8">
+<div class="slide-number">Page 08 / 09 &middot; What Work Could Be</div>
+<h1 class="slide-title">The difference between work and <em>employment.</em></h1>
+
+<p class="lead">This module is not an argument against work. It is an argument against the conflation of work &mdash; the human capacity for purposeful effort, contribution, creation, and the satisfaction of applied skill &mdash; with employment, which is a specific institutional arrangement for the exchange of that capacity for money. Work, in the full sense, is one of the most deeply human activities available. Employment is one specific way of organising it. The conditioning trains people to experience the institutional arrangement as the only available one &mdash; which is precisely the condition under which the institution&rsquo;s terms are accepted without examination.</p>
+
+<p class="body-text"><strong>Work in the full sense is self-directed.</strong> The person who works on something they chose, toward an end they set, in a way that draws on capacities they have genuinely developed, and that produces a result they can assess against their own standards &mdash; this person is doing something qualitatively different from the employee performing the role the institution assigned. <em>Both involve effort. Both may produce valuable outputs. They have fundamentally different relationships to the person doing them.</em> One is the person directing their own capacities. The other is the institution directing the person&rsquo;s capacities on its own behalf, in exchange for compensation.</p>
+
+<div class="section-heading">What the distinction enables</div>
+
+<p class="body-text"><strong>The governed relationship to employment.</strong> The person who understands the distinction can participate in employment from a position of conscious exchange rather than conditioned compliance. They can accept the institutional direction where the exchange is genuinely favourable. They can decline where it is not. They can maintain the distinction between the role and the self &mdash; performing the institutional identity in the institutional context without losing the sense of the self that exists outside it. <strong>This is not a refusal of institutional life. It is the capacity to engage with it from outside the conditioning, which makes the engagement genuinely chosen rather than structurally compelled.</strong></p>
+
+<p class="body-text"><strong>The recovery of work as a genuine human activity.</strong> Outside the employment relationship &mdash; in the projects pursued outside contracted hours, in the skills developed for their own sake, in the contributions made from genuine motivation rather than institutional requirement &mdash; the person who understands the distinction begins to recover the experience of self-directed work. <em>The recovery is not always immediately possible. It begins with the recognition that the institutional arrangement is not the only arrangement, and that the capacity for purposeful, self-directed effort is present &mdash; suppressed by years of institutional direction, but not eliminated by it.</em></p>
+
+<p class="body-text"><strong>The honest renegotiation of the exchange.</strong> Many people, examining the employment exchange honestly, find that the terms they accepted are not the terms they would consciously choose. The hours, the direction surrendered, the identity managed, the authentic self suppressed &mdash; the full cost, examined, may exceed the compensation. This examination is not a call to resign. It is the precondition for renegotiating the exchange from a position of genuine understanding &mdash; seeking terms that reflect the full value of what is being exchanged, in environments that require less of the self to be suppressed, toward work that is genuinely worth the hours sold for it.</p>
+
+<div class="pullquote">You were trained to be an employee. You were not born one. The capacity for self-directed, meaningful work &mdash; the capacity that the institution needed to redirect toward its own requirements &mdash; is yours. It has been waiting under the conditioning. The conditioning can be seen. What is seen can be worked with. What is worked with can be changed.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You think of the work you do outside employment &mdash; the thing you build, make, organise, or contribute to that no institution pays you for &mdash; and notice that the quality of engagement is different from the quality of engagement at work. More absorbed. More genuinely motivated. Less monitored. Less managed.</p>
+<p class="scenario-context">The difference in quality is not about the stakes or the difficulty. It is about direction. The unpaid work is yours to direct. The employment is the institution&rsquo;s to direct. The quality of engagement reflects the difference. If no such unpaid work exists in your life &mdash; if everything you do with effort is institutionally directed &mdash; then the absence is itself the most significant finding of this module.</p>
+
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the difference as the natural consequence of professional stakes. Work matters more than hobbies. The higher engagement at work reflects appropriate prioritisation.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Take the difference seriously as data about where genuine motivation lives. The absorbed, intrinsically motivated engagement of self-directed work is not a hobby. It is evidence of what work feels like when the conditioning is not running it. That quality of engagement is available in employment too, under conditions that permit genuine direction and genuine contribution. Knowing what it feels like is the beginning of seeking those conditions.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Conclude that employment is incompatible with meaningful work and plan to exit it.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel the absence of self-directed work as a loss too large to address at this point in life. The conditions for it are not available right now. Maybe later.</button>
+</div>
+
+<div class="feedback" id="feedback-8">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-8"></p>
+<p class="feedback-text" id="feedback-detail-8"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">08 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Complete Module &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 9: COMPLETION -->
+<section class="slide" data-slide="9">
+<div class="slide-number">Module Complete</div>
+<div class="complete-mark">&#10003;</div>
+<h1 class="slide-title">You&rsquo;ve completed <em>Module Three.</em></h1>
+
+<p class="lead">You now have the structural account of work as the adult school &mdash; the continuation of institutional conditioning in a professional form. The manager, the appraisal, the office culture, the career narrative, the overwork compulsion, and the institution&rsquo;s definition of excellence are all the school&rsquo;s mechanisms, restructured for the adult. The conditioning did not end when school ended. It found new premises. The premises can be examined. The examination changes the relationship to the institution &mdash; from conditioned compliance to conscious exchange.</p>
+
+<div class="section-heading">What you carry forward</div>
+
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">The workplace replicates the school&rsquo;s architecture with precision: manager as teacher, appraisal as grade, office culture as peer group. You arrived trained. The institution simply continued the training.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">The employment contract specifies the visible exchange. The unwritten terms &mdash; direction surrendered, identity managed, self suppressed &mdash; are the more significant ones, and they were agreed to by a person already conditioned to accept them.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">The appraisal is the grade in adult form: the rating system, the developmental feedback, and the appraisal cycle all replicate the school&rsquo;s assessment machine and continue the externalisation of self-worth.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Office culture enforces performed enthusiasm, suppressed dissent, and the continuous identity audit. The peer group mechanism operates identically in the professional social environment.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The career narrative converts compliance into ambition and defers the life. The person who is always almost ready to begin the thing they want to do is inside a deferral mechanism that the career provides the rationale for.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">The overwork compulsion extracts more than the contract specifies through the always-available expectation, the internalised standard, and the meaning substitution. The most thoroughly exploited employees manage themselves on the institution&rsquo;s behalf.</span></li>
+<li><span class="summary-num">07</span><span class="summary-text">The institution&rsquo;s definition of excellence rewards reliability over originality, agreeableness over honesty, and institutional literacy over genuine capability. Its assessments are assessments of service to the institution, not of human quality.</span></li>
+<li><span class="summary-num">08</span><span class="summary-text">Work and employment are not the same thing. The capacity for self-directed, intrinsically motivated work is yours. The employment arrangement is one way of organising it. The conditioning trained you to experience it as the only way. It is not.</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+
+<p class="body-text">This week, notice the internalised standard: the moments when you are working not because the work is genuinely required but because stopping produces discomfort that the conditioning manufactures. Notice the feeling &mdash; not the work, not the external requirement, but the internal pressure. Notice where it comes from. Notice what it is actually asking. And once, this week, choose to stop at the point where the external requirement has genuinely been met &mdash; and sit with the discomfort of the internalised standard receiving no compliance. That discomfort is the conditioning. Feeling it consciously, without resolving it through work, is the practice.</p>
+
+<p class="body-text">The next module &mdash; <strong>Religion &amp; Spirituality: Weaponised Meaning</strong> &mdash; examines the third great institutional conditioning system: the frameworks of meaning, identity, community, and transcendence that religious and spiritual institutions provide &mdash; and the specific mechanisms by which those frameworks become tools of self-abandonment and control rather than genuine sources of the meaning they promise.</p>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">09 / 09</span>
+<button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 04 &rarr;</button>
+</div>
+</section>
+
+</main>
+
+<script>
+const feedback={
+1:{
+a:{headline:"Accepting the workplace&rsquo;s structural replication of school as inevitable naturalises the specific architecture that was chosen and prevents its examination.",detail:"All organised activity requires some coordination. It does not require the specific hierarchy-assessment-compliance architecture that school and work share. There are organisations with flat hierarchies, with self-assessment rather than external appraisal, with cultural norms that value honest dissent over performed alignment. These are not utopian fantasies. They exist. The fact that they are less common than the conventional architecture tells you something about what the dominant institutions were optimised to produce &mdash; not the most effective human organisations, but the most compliant human members. Naturalising the architecture prevents asking whether different architectures are possible. They are."},
+b:{headline:"Distinguishing between the necessity of coordination and the specific compliance architecture that was installed opens the examination without collapsing into either acceptance or rejection.",detail:"The governed position holds both truths: some structure is required, and the specific structure that was installed was chosen rather than inevitable. The choice can be examined. The examination does not require the rejection of all institutional participation. It requires the capacity to see the architecture clearly enough to engage with it consciously rather than to accept it as nature. The person who can see the architecture can also assess, for each specific institutional context, what it actually requires and what the genuine cost of participation is &mdash; rather than accepting the conditioning&rsquo;s version, which is that the architecture is how human life works."},
+c:{headline:"Concluding that all institutional participation is inherently exploitative produces a position as reflexive as the uncritical acceptance of institutional life.",detail:"Some institutional participation is exploitative. Some is genuinely mutually beneficial. Some institutions are more extractive than others. Some roles within institutions are more aligned with genuine capacity than others. The blanket condemnation prevents the specific examination that produces useful guidance about which institutional contexts to engage with, on what terms, and with what protections for the self that the institution would prefer to manage on its behalf. The governed response is specific, not sweeping."},
+d:{headline:"Nostalgia for the certainty of institutional structure is the conditioned person&rsquo;s most honest response to the examination of the conditioning &mdash; and the most important one to examine.",detail:"The certainty was real. The structure provided a clarity about what was expected, what was rewarded, what would happen next. The clarity was comforting. It was also a managed condition &mdash; the comfort of knowing your place in a hierarchy that someone else designed for their own requirements. The discomfort of the alternative &mdash; self-direction, ungiven structure, the uncertainty of determining your own measures &mdash; is real. It is also the price of the recovery. The nostalgia for the institutional certainty is the conditioning naming what it would cost to leave it."}
+},
+2:{
+a:{headline:"Accepting the job title as a practical social shorthand is accurate &mdash; and the observation is not about the social moment. It is about what happens internally before the answer leaves your mouth.",detail:"The job title is a useful answer in a social context. The observation the scenario names is not about whether to answer differently. It is about the speed with which the institutional identity arrives as the answer to &lsquo;who are you?&rsquo; &mdash; before any other answer forms, before the person outside the role has a chance to speak. The automatic arrival of the institutional identity is evidence of how completely the institution has been internalised as the self. The social moment does not need to change. The internal recognition &mdash; that the title is a role, not the self &mdash; is the beginning of the distinction."},
+b:{headline:"Staying with the recognition &mdash; that the job title is a role held by the self rather than the identity of the self &mdash; is the precise and useful response the scenario is designed to produce.",detail:"The distinction is not a crisis and does not require a new social answer. It requires only the internal recognition: here is the role, and here, distinct from the role, is the person who holds it. The person who holds the role has qualities, perspectives, histories, and capacities that precede the role and that will follow it. The role is not those things. The role is the institution&rsquo;s assignment. The self is the person who accepted the assignment &mdash; and who is more than the assignment, regardless of how completely the assignment has come to feel like identity."},
+c:{headline:"Interpreting the recognition as revealing an emptiness converts a structural observation into a personal verdict &mdash; and the verdict is the conditioning speaking.",detail:"The absence of a fuller answer to &lsquo;who are you?&rsquo; in the moment of the scenario is not evidence of emptiness. It is evidence of how thoroughly the institutional identity has been installed as the primary available answer. The fuller answer exists. It is not currently accessible in the social moment because the institutional identity was installed there by years of conditioning. The recovery of the fuller answer is not the discovery of something new. It is the recovery of what was always there, under the institutional identity that was placed on top of it."},
+d:{headline:"Dismissing the observation as appropriately contextual is the conditioning protecting its most important achievement: the conflation of the institutional role with personal identity.",detail:"Identity is indeed partial and contextual. And the specific partiality the scenario names &mdash; the automatic substitution of the institutional role for the full self &mdash; is worth examining precisely because it is so automatic, so complete, and so unexamined. The observation is not that you should answer social questions differently. It is that the automatic nature of the substitution tells you something about the relative weight of the institutional identity and the personal one in the architecture of how you understand yourself. That weight can be examined. The examination is not a social intervention. It is an internal one."}
+},
+3:{
+a:{headline:"Accepting the good feeling after a good appraisal as a healthy response to recognition does not distinguish between genuine recognition and the activation of a conditioned reward circuit.",detail:"Genuine recognition &mdash; from someone who knows your work, sees your contribution, and expresses genuine appreciation of its value &mdash; produces a real and appropriate positive feeling. The appraisal rating is something different: a categorical assessment delivered periodically by a person who may or may not have detailed knowledge of your actual contribution, against institutional standards that may or may not be relevant to the quality of your work. The positive feeling in both cases may be similar in intensity. The source is different. Noticing the source &mdash; noticing that the feeling was produced by the rating rather than by genuine recognition of actual value &mdash; is the examination the scenario points toward."},
+b:{headline:"Noticing the disproportionality and its source &mdash; the institutional rating activating the school&rsquo;s reward circuit rather than genuine self-assessment producing genuine confidence &mdash; is the governed response.",detail:"The feeling was real. Its source was the mechanism. The important recognition is not that the feeling was false &mdash; it was not &mdash; but that its production depended on the institution&rsquo;s periodic delivery of an acceptable rating. The same mechanism that produced the relief at a good rating will produce the anxiety before the next one, and the deflation at a poor one. The self-assessment that is independent of the appraisal cycle &mdash; the capacity to know the quality of your work from your own assessment rather than from the institution&rsquo;s &mdash; is the alternative that the module is pointing toward building."},
+c:{headline:"Rejecting the feeling as manufactured eliminates useful data about where the self-worth dependency is operating and prevents the examination of the mechanism.",detail:"The feeling is evidence. Its content is: your sense of professional worth was, for several days, supplied by the institution&rsquo;s rating. This is information. The rejection of the feeling as false bypasses the information. The governed response uses the feeling as diagnostic data: where does my sense of professional worth come from? To what degree does it depend on the appraisal cycle rather than on my own assessment of my contribution? The answers to these questions are more useful than the rejection of the feeling that allowed the questions to be asked."},
+d:{headline:"Optimising for the appraisal rating as the source of the desired feeling is the school&rsquo;s reward mechanism fully internalised as a career strategy.",detail:"The appraisal rating can be optimised for. The practices that produce high ratings &mdash; visibility management, alignment performance, documentation of measurable contributions &mdash; are learnable. The person who optimises for the rating will, in many organisations, receive it. And the receipt of the rating will produce the feeling. The cycle is self-reinforcing, efficient, and completely external: the sense of worth is permanently dependent on the institutional rating, which requires permanent performance management to maintain. The person in this cycle is the school&rsquo;s student in permanent examination mode &mdash; never assessing themselves, always waiting to be assessed."}
+},
+4:{
+a:{headline:"Accepting consistent dissent-suppression as political intelligence is professional sophistication presenting itself to prevent the examination of what the suppression costs.",detail:"Political intelligence is a real and valuable skill. The question is what the chronic suppression of genuine perspective costs &mdash; not in a single instance, but accumulated across the years of a career in which the authentic view consistently enters only the private conversation and never the public one. The costs are specific: the integrity cost of performing alignment you do not feel; the energy cost of maintaining the performance; the trust cost of a gap between expressed view and actual view that colleagues sense even when they cannot name it; and the slow erosion of the conviction that your own perspective is worth expressing. Political intelligence that produces these costs is not sophisticated. It is expensive."},
+b:{headline:"Distinguishing between strategic communication and chronic suppression &mdash; and naming the specific costs of the chronic version &mdash; is the precise governed response to this scenario.",detail:"The strategic withholding of a specific dissenting view in a specific context is a considered professional choice. The pattern of never expressing authentic perspective in public, of always performing alignment regardless of private view, is a different thing. It is the peer group mechanism from school operating at full efficiency in a professional context &mdash; producing a person whose public self and private self have diverged so completely that the gap itself becomes a source of professional and personal exhaustion. The examination asks: is this a specific tactical choice or a chronic pattern? The answer determines what the appropriate next step is."},
+c:{headline:"Expressing every dissent publicly and immediately produces its own costs without developing the governed capacity for choosing when and how to introduce challenging perspectives.",detail:"Some dissenting views need to enter the room. Some need to be introduced carefully, in the right context, with the appropriate framing. Some are genuinely not worth the cost of expression in a specific context. The capacity to make these distinctions is the political intelligence the option A was defending &mdash; genuine political intelligence rather than the conditioning&rsquo;s version of it. The immediate public expression of every dissent collapses this capacity and produces a different set of institutional consequences. The governed version neither suppresses everything nor expresses everything. It develops the capacity to distinguish, context by context, what the situation actually requires."},
+d:{headline:"Leaving the organisation because you cannot be fully honest is the most extreme response to a situation that, in most cases, calls for a more granular examination of where the genuine cost lies.",detail:"Some organisations are genuinely incompatible with honest engagement. In those cases, leaving may be the governed response. Most organisational cultures, however, contain more space for authentic expression than the conditioned person uses &mdash; because the conditioning trained the person to suppress far in advance of the actual social risk. The question before leaving is: have I distinguished between the actual social cost of honest expression in this specific context and the conditioned flinch that tells me the cost is higher than it is? The answer may be that the cost is genuinely prohibitive. It may also be that the conditioning has been doing the suppression that the organisation never actually required."}
+},
+5:{
+a:{headline:"Accepting the sequencing &mdash; career first, life later &mdash; as rational is the deferral mechanism presenting itself as responsible long-term planning.",detail:"Some prerequisites are genuine. Financial security sufficient to enable a life worth living is a real requirement. The question is whether the specific conditions being waited for are genuinely required or whether they are the next item in a sequence that perpetually generates the next item. The person who has been waiting for the right conditions for five years, and who is waiting for conditions that are structurally similar to the conditions they were waiting for five years ago, is not engaged in rational sequencing. They are inside a deferral mechanism that recruits the language of prudence. The distinction between genuine prerequisite and deferral mechanism is worth making honestly."},
+b:{headline:"Examining the postponement honestly &mdash; asking whether the condition is genuinely required or perpetually generated &mdash; is the governed response that makes the distinction available.",detail:"The examination does not require immediate action. It requires honest assessment: what specifically am I waiting for? Has this condition been met before and replaced with a new condition? Is the thing I am waiting for a genuine prerequisite or a comfortable reason to delay? The answers may vary. Some postponements are rational. Some are the career narrative&rsquo;s deferral mechanism, operating efficiently, recruiting the language of responsibility to ensure that the life outside the institution remains permanently deferred. The examination makes the distinction visible. Visible conditions can be addressed. Invisible ones only accumulate."},
+c:{headline:"Immediate, total action &mdash; leaving the job, starting the thing immediately &mdash; is the reactive response to a structural recognition that is more useful as the basis for a governed plan than as the trigger for an immediate crisis.",detail:"The recognition that the career has been deferring a genuine life priority is important. The response to that recognition does not need to be immediate departure. It needs to be honest examination of the exchange: what is genuinely required before the thing can begin? What can begin now, in some form, without all conditions being in place? What would need to change in the employment arrangement for the exchange to become more favourable? These questions produce governed responses. The immediate departure may be the right answer to some of them. It is not the automatic answer to the recognition."},
+d:{headline:"Concluding that it is too late for the thing is the career narrative&rsquo;s final product: using the years already spent in the postponement to justify continuing the postponement indefinitely.",detail:"It may genuinely be too late for some specific things. It is almost certainly not too late for all of them. The grief at the years already spent is real and should be felt. The conclusion that the loss of the years makes the remaining time similarly lost is the deferral mechanism adding one more rationale to the already long list of reasons why the thing should not be started. The recognition that years have been spent in postponement is the most powerful reason to begin now rather than to continue the postponement under a new rationale."}
+},
+6:{
+a:{headline:"Accepting the continued working as professional reality naturalises the overwork compulsion and prevents the examination of what is actually driving it.",detail:"Some work genuinely requires hours beyond the contracted ones in specific circumstances. The question is not whether this ever happens. The question is whether, in this specific moment, the continuation is genuinely required by external circumstances or generated by the internal standard that the conditioning installed. The test is simple: will something fail tomorrow if this work is not completed tonight? If the honest answer is no &mdash; if the only consequence of stopping is the discomfort of the internalised standard receiving no compliance &mdash; then the continuation is not professional reality. It is the conditioning operating. The examination is quick and honest and most people, conducting it, know the answer before they finish asking."},
+b:{headline:"Distinguishing between genuine urgency and the internalised standard activating independently of external requirement is the precise practice the scenario is designed to introduce.",detail:"The distinction matters enormously for what the continued working means. Work continued from genuine urgency is professional. Work continued to relieve the discomfort of the internalised standard is the institution extracting from you after hours, through the mechanism the school installed, with no external party having to ask for anything. Making the distinction does not require stopping every time. It requires knowing, in each specific instance, which of the two is actually present. The knowledge changes the nature of the work even when the behaviour is the same &mdash; because the knowledge is the difference between a conscious choice and a conditioned reflex."},
+c:{headline:"Setting a permanent, total boundary at contracted hours is the reactive overcorrection that produces its own professional costs without developing the governed capacity for situational assessment.",detail:"Some work genuinely requires effort beyond contracted hours in specific circumstances. The governed response is not a blanket rule but a developed capacity to assess, in each specific situation, what is genuinely required and what is the conditioning manufacturing pressure. The blanket rule replaces one automatic response &mdash; always continue &mdash; with another &mdash; always stop. The governance being developed is the capacity to assess rather than to apply a rule. The rule is easier. The assessment is what actually changes the relationship to the internalised standard."},
+d:{headline:"Identifying with the overwork &mdash; &lsquo;this is who you are&rsquo; &mdash; is the conditioning&rsquo;s most complete form: the institutional standard fully converted into personal identity.",detail:"The dedication is real. The work produced in those hours may be good. And the identification of the self with the overwork pattern is the conditioning&rsquo;s ideal outcome: the person who not only works beyond requirement but experiences the working as self-expression rather than as extraction. The person who is proud of how much they work, who references their hours as evidence of who they are, who would feel diminished by working less &mdash; this person is the institution&rsquo;s most efficient production: someone who has internalised the institutional requirement so completely that maintaining it feels like integrity. The identification, examined, is the clearest evidence that the standard is installed rather than chosen."}
+},
+7:{
+a:{headline:"Developing political skills in response to a structural observation about what the institution rewards produces a more institutionally successful person rather than a more genuinely capable one.",detail:"Political skill can be developed. Some degree of institutional literacy is genuinely useful in navigating any complex human environment. The question is what is being optimised for &mdash; advancement within this specific institution&rsquo;s specific reward structure, or genuine capability and contribution in the broader sense. These are not always the same direction. The person who develops political skill to advance in an institution that rewards institutional literacy over genuine capability is becoming better at serving the institution&rsquo;s requirements. That may be a worthwhile choice. It should be a conscious one rather than the automatic response to being passed over."},
+b:{headline:"Reading the advancement decision structurally &mdash; as information about this institution&rsquo;s specific reward structure rather than as a verdict on your worth &mdash; is the governed response that preserves the capacity to make a genuine choice.",detail:"The structural reading produces genuine options: develop some institutional literacy because some of it is genuinely useful and the deficit is real; seek an environment that rewards different qualities because this specific environment is structurally misaligned with what you do best; or examine whether the advancement actually matters to you relative to the exchange it would require. All three are possible responses. None of them requires accepting the institution&rsquo;s advancement decision as an accurate assessment of your professional worth. The assessment is of institutional literacy. That is not the same as worth."},
+c:{headline:"Leaving when the institution&rsquo;s reward structure does not align with your qualities may be the right response &mdash; and is worth examining carefully before acting on.",detail:"Some institutional environments are genuinely incompatible with certain people&rsquo;s best work. In those cases, finding a better-matched environment is a genuinely governed choice. The examination before leaving includes: is this institution&rsquo;s reward structure atypical, or is it characteristic of the field? Would a different institution in the same field reward different qualities? Is some degree of the gap between my qualities and the institution&rsquo;s rewards genuinely addressable rather than structural? The answers may point toward leaving. They may also point toward a more targeted adjustment rather than departure."},
+d:{headline:"Accepting the institution&rsquo;s advancement decision as a personal deficit &mdash; and working harder, being more visible, managing relationships better in response &mdash; is the school&rsquo;s dynamic fully intact: the grade arrived, it was not favourable, therefore work harder for the next grade.",detail:"The response is rational within the institution&rsquo;s logic. Within the institution&rsquo;s logic, advancement requires institutional literacy, and more effort toward institutional literacy will produce more institutional advancement. The question is whether institutional advancement is the goal you actually chose, or the goal the conditioning installed as the available option. The person who works harder to advance in an institution that rewards institutional literacy over genuine capability is not failing. They are succeeding at someone else&rsquo;s project. Whether that project is worth the effort is the examined question."}
+},
+8:{
+a:{headline:"Accepting that work matters more than the self-directed project because work has higher professional stakes inverts the actual relationship between institutional direction and personal meaning.",detail:"The professional stakes are not higher. They are more consequential within the institutional reward structure &mdash; which is the structure the conditioning trains you to treat as the primary measure of significance. The absorbed engagement of self-directed work is evidence of genuine intrinsic motivation &mdash; the kind of motivation that produces the deepest and most sustained productive effort. The employment may produce better institutional rewards. It does not, in most cases, produce deeper engagement. The higher engagement of the self-directed work is not a function of its lower stakes. It is a function of its genuine direction."},
+b:{headline:"Taking the difference in engagement quality seriously as data about where genuine motivation lives &mdash; and as evidence of what work feels like outside the conditioning &mdash; is the response that connects the structural analysis to actual lived experience.",detail:"The difference in engagement is not a small thing. It is the felt experience of the distinction between institutionally directed effort and self-directed effort &mdash; the distinction the entire module was describing in structural terms. The absorbed quality of the self-directed work is what work is like when the conditioning is not running it. That quality is not exclusive to the unpaid project. It is available in employment contexts that permit genuine direction and genuine contribution. Knowing what it feels like is the most useful compass for seeking those contexts."},
+c:{headline:"Concluding that employment is incompatible with meaningful work collapses a structural distinction into a blanket verdict that is neither accurate nor useful.",detail:"Some employment is genuinely incompatible with meaningful work. Some employment permits genuine direction, genuine contribution, and genuine development. The distinction is not between employment and self-directed work as categories. It is between specific employment contexts and the degree to which they permit the qualities that self-directed work provides: direction, genuine contribution, intrinsic motivation, the absence of managed performance. These qualities are present to varying degrees in different employment contexts. The examination of which contexts permit them &mdash; and the pursuit of those contexts &mdash; is more useful than the categorical rejection of employment."},
+d:{headline:"Deferring the self-directed work to conditions that are perpetually not quite right is the career narrative&rsquo;s mechanism appearing at the end of the module about the career narrative.",detail:"The conditions for self-directed work are never fully right. They become right when the self-directed work begins &mdash; not when the right conditions are achieved. The conditions the person is waiting for are, in most cases, conditions of sufficient security, time, and permission that the conditioning requires before sanctioning autonomous action. The conditions will not arrive from outside. They are produced by the act of beginning: the security that beginning creates, the time that commitment generates, the permission that the act of starting provides to itself. The deferral mechanism is recognisable. It has been named. That it appears here, at the end of a module designed to name it, is not evidence that the conditions are genuinely insufficient. It is evidence that the mechanism is thorough."}
+}
+};
+
+let currentSlide=1;const totalSlides=9;const answered={1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c6m2';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course6-module-2-school-compliance.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c6m3','1');window.location.href='course6-module-4-religion-meaning.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

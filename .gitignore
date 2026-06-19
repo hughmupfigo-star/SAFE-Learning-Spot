@@ -1,0 +1,49 @@
+# ── Secrets & environment (NEVER commit these) ────────────────────────────────
+.env
+.env.*
+.env.txt
+.env.local
+.env.*.local
+*.env
+secrets.json
+secrets.js
+credentials.json
+
+# ── Capacitor (local only — not needed on Cloudflare) ────────────────────────
+capacitor.config.json
+
+# ── Node — package.json, package-lock.json and wrangler.toml ARE committed ────
+# Cloudflare Workers Assets needs them to run: npm ci + npx wrangler deploy
+# node_modules itself stays local
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Build outputs ─────────────────────────────────────────────────────────────
+dist/
+build/
+.cache/
+
+# ── OS / editor junk ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Dev-only utility scripts (not needed in production repo) ──────────────────
+debug-users.js
+verify-setup.js
+check-env.js
+
+# ── Large binary / generated files ───────────────────────────────────────────
+*.zip
+*.tar.gz
