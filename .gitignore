@@ -9,12 +9,16 @@ secrets.json
 secrets.js
 credentials.json
 
-# ── Node ──────────────────────────────────────────────────────────────────────
+# ── Capacitor (local only — not needed on Cloudflare) ────────────────────────
+capacitor.config.json
+
+# ── Node — package.json, package-lock.json and wrangler.toml ARE committed ────
+# Cloudflare Workers Assets needs them to run: npm ci + npx wrangler deploy
+# node_modules itself stays local
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
 
 # ── Build outputs ─────────────────────────────────────────────────────────────
 dist/
@@ -41,6 +45,5 @@ verify-setup.js
 check-env.js
 
 # ── Large binary / generated files ───────────────────────────────────────────
-*.docx
 *.zip
 *.tar.gz

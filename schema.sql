@@ -62,3 +62,13 @@ CREATE TABLE IF NOT EXISTS user_state (
   PRIMARY KEY (user_id, k)
 );
 CREATE INDEX IF NOT EXISTS idx_user_state_user ON user_state(user_id);
+
+-- Password reset tokens (forgot-password flow)
+CREATE TABLE IF NOT EXISTS password_resets (
+  id         SERIAL PRIMARY KEY,
+  user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  token_hash VARCHAR(64) NOT NULL,
+  expires_at TIMESTAMP NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_password_resets_token ON password_resets(token_hash);

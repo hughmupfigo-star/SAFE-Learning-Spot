@@ -1,12 +1,13 @@
 // SAFE Learning Spot Centre — Service Worker
-const CACHE_NAME = 'safe-learning-v11';
-const SHELL_CACHE = 'safe-shell-v8';
+const CACHE_NAME = 'safe-learning-v12';
+const SHELL_CACHE = 'safe-shell-v9';
 
 // Core shell files cached on install
 const SHELL_FILES = [
   './',
   './index.html',
   './login.html',
+  './reset-password.html',
   './manifest.json',
   './tts.js',
   './app.css',

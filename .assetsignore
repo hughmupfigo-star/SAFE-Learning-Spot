@@ -1,3 +1,23 @@
+# Dependencies — never upload these as site assets
 node_modules/
-.git/
-.wrangler/
+
+# Wrangler/build config
+wrangler.toml
+package.json
+package-lock.json
+.gitignore
+
+# Push script
+push-to-github.ps1
+push-to-github.bat
+
+# Backend/server files (not part of the static site)
+*.sql
+routes/
+lib/
+.env*
+*.env
+
+# Misc
+*.md
+*.log
