@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 3 · Module 6 · Energy Restoration & Sovereignty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+
+.restore{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.restore:last-of-type{border-bottom:1px solid var(--line)}.restore-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.restore-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+.restore-channel{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:20px 0 8px;font-weight:500}
+
+.contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin:40px 0;border:1px solid var(--line)}.contrast-cell{background:var(--paper);padding:28px}.contrast-cell.right{background:var(--soft)}.contrast-label{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}.contrast-cell.right .contrast-label{color:var(--accent)}.contrast-list{list-style:none}.contrast-list li{font-family:var(--serif);font-size:15.5px;line-height:1.55;padding:10px 0;font-style:italic;color:var(--ink);border-bottom:1px dotted var(--line)}.contrast-list li:last-child{border-bottom:none}
+
+.practice{margin:28px 0;padding-left:28px;border-left:2px solid var(--line)}.practice-name{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.25}.practice-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.restore-name{font-size:24px}.contrast-grid{grid-template-columns:1fr}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 03 · Truth Reversal Framework · Module <strong>06</strong> · Energy Restoration & Sovereignty</div>
+  <div class="progress-bar"><div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 3 &middot; Energy Body &amp; Sovereignty</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c3m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course3-module-1-the-energy-body.html">The Energy Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course3-module-2-energy-harvesting-tactics.html">Energy Harvesting Tactics</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course3-module-3-the-weaponisation-of-sexuality.html">Weaponisation of Sexuality</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course3-module-4-what-sacred-sexuality-actually-is.html">Sacred Sexuality</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course3-module-5-your-body-as-territory.html">Your Body as Territory</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c3m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course3-module-6-energy-restoration-and-sovereignty.html">Energy Restoration</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- PAGE 1 -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 · The Deficit</div>
+    <h1 class="slide-title">Governance stops the bleeding. It does not fill the <em>well.</em></h1>
+
+    <p class="lead">If you have been practising the governance from the previous modules — the sovereignty move, the border awareness, the daily arrival, the evening accounting — you may have noticed something counterintuitive. The depletion has slowed. The extraction has diminished. The daily cost has reduced. And yet you still feel, underneath the improvement, a deeper tiredness that the governance alone has not addressed.</p>
+
+    <p class="body-text">This is the deficit. <strong>The deficit is not the cost of today's extractions. It is the accumulated cost of years of extractions that were never replenished.</strong> The governance stopped the ongoing withdrawal. The well, however, was already low when the governance began — depleted across months, years, sometimes decades of energy leaving the four channels without being restored. The governance prevents further withdrawal. The restoration fills what was already spent.</p>
+
+    <p class="body-text">This distinction matters because many people begin the governance work, experience the initial improvement, and then wonder why they still feel fundamentally tired. The tiredness is not evidence that the governance isn't working. <em>It is evidence that the governance is working well enough to reveal the deficit that was underneath the ongoing extraction all along.</em> The extraction was so constant that it masked the deficit. Now that the extraction has slowed, the deficit is visible — perhaps for the first time.</p>
+
+    <div class="section-heading">How long restoration takes</div>
+
+    <p class="body-text">There is no precise formula. The deficit has been accumulating for as long as the extraction has been running, and restoration does not operate on a symmetrical timeline — you cannot replenish twenty years of depletion in twenty months. <strong>What you can do is create the daily conditions under which the body's natural restoration systems can operate without interference.</strong> The body knows how to restore itself. It has been trying to do so throughout the years of extraction. What it has lacked is the conditions — the space, the safety, the ungoverned time — in which the restoration can actually occur.</p>
+
+    <p class="body-text">Most people who begin deliberate restoration work report feeling a noticeable shift within three to six months — not full restoration, but a measurable increase in available energy, creative capacity, and the felt sense of having reserves rather than running on empty. The restoration continues beyond six months, slowly, for years. <em>The restoration is not a project with a completion date. It is a change in how the body is allowed to operate — and the change, once established, compounds.</em></p>
+
+    <div class="pullquote">You have been running on fumes for so long that fumes feel like fuel. The governance reveals that the tank has been near-empty for years. The revelation is not bad news. It is the precondition for the filling to begin.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">Three months into the governance practice, you feel better — but not as much better as you expected. The deeper tiredness is still there.</p>
+      <p class="scenario-context">The expectation was that governance would produce vitality. The reality is that governance has produced the visibility of the deficit. The deeper tiredness is not the failure of the work. It is what was underneath the extraction all along, now visible because the extraction has slowed.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude the governance isn't working. If three months of practice hasn't eliminated the tiredness, the framework is insufficient.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Recognise the deeper tiredness as the deficit the page just described — years of accumulated depletion now visible because the ongoing extraction has slowed. The governance is working. The restoration is the next phase.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Push harder. More governance, more practice, more effort. Force the restoration through intensity.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Accept the tiredness as permanent. You are depleted beyond recovery. The well will never refill.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 · The Four Restorations</div>
+    <h1 class="slide-title">One practice for each <em>channel.</em></h1>
+
+    <p class="lead">Each of the four channels has its own restoration practice — a specific daily condition that allows the channel to replenish. The practices are not exercises. They are conditions — things you create in your day that allow the body's natural restoration systems to operate. The body does the restoration. You provide the conditions.</p>
+
+    <div class="restore">
+      <div class="restore-num">Restoration 01</div>
+      <h2 class="restore-name">Attention recovery.</h2>
+      <div class="restore-channel">Channel: attention</div>
+      <p class="body-text"><strong>The condition: undirected time.</strong> Time in which your attention is not captured by anything — not a screen, not a conversation, not a task, not even a deliberate meditation. The attention is simply loose, moving wherever it moves, settling wherever it settles. Walking without a destination. Sitting without a purpose. Looking out of a window without interpreting what you see. <em>The attention channel depletes through capture and restores through release.</em> The release requires genuine absence of demand on the attention — which, for most modern adults, occurs approximately never.</p>
+
+      <p class="body-text">The practice: twenty minutes of undirected time, daily. Not guided. Not productive. Not timed with the intention of returning to productivity afterwards. Simply loose. The attention, released from capture, begins to deepen of its own accord — producing a quality of focus that is richer and more sustainable than the forced focus of a captured attention. The deepening is the restoration.</p>
+    </div>
+
+    <div class="restore">
+      <div class="restore-num">Restoration 02</div>
+      <h2 class="restore-name">Nervous system restoration.</h2>
+      <div class="restore-channel">Channel: nervous system capacity</div>
+      <p class="body-text"><strong>The condition: genuine safety.</strong> Time in which the nervous system is not managing, anticipating, calibrating, or performing. This requires physical safety (a space where nobody can make demands), social safety (absence of anyone whose mood you would automatically manage), and temporal safety (no upcoming obligation that the nervous system is already preparing for). <em>The nervous system depletes through chronic activation and restores through genuine deactivation.</em> Deactivation is not relaxation — you can be relaxed and still activated, if the relaxation is a performance or if it occurs in a context where demands could arrive at any moment.</p>
+
+      <p class="body-text">The practice: one hour of genuine safety, daily. An hour in which you are alone, physically safe, with no obligation in the next ninety minutes. The hour may not feel productive. It may feel like waste. The felt sense of waste is the productivity programme protesting the loss of its scheduling authority. The nervous system, given the hour, begins its own repair — lowering the baseline activation level that has been elevated, for many adults, since childhood.</p>
+    </div>
+
+    <div class="restore">
+      <div class="restore-num">Restoration 03</div>
+      <h2 class="restore-name">Emotional replenishment.</h2>
+      <div class="restore-channel">Channel: emotional bandwidth</div>
+      <p class="body-text"><strong>The condition: emotions that are yours.</strong> Time in which you are feeling your own feelings — not holding someone else's distress, not absorbing ambient mood, not performing an emotional state for social compliance. The emotional bandwidth channel depletes through carrying others' emotions and restores through the experience of your own. <em>The restoration is not the absence of emotion. It is the presence of emotion that actually belongs to you.</em></p>
+
+      <p class="body-text">The practice: a daily check — brief, honest, private — in which you ask: what am I actually feeling right now, underneath what I have been carrying for other people? The answer may be surprising. Underneath the absorbed anxiety, the managed moods, the performed contentment, there is usually something simpler — a specific sadness, a quiet contentment, a desire for something you had not let yourself notice. The simple feeling, felt without management, is the restoration. The channel replenishes through the experience of its own genuine content.</p>
+    </div>
+
+    <div class="restore">
+      <div class="restore-num">Restoration 04</div>
+      <h2 class="restore-name">Fourth-channel rebuilding.</h2>
+      <div class="restore-channel">Channel: sexual / creative presence</div>
+      <p class="body-text"><strong>The condition: creation without consumption.</strong> Time in which you are making something — anything — that is not for anyone else's evaluation or consumption. Writing that will not be read. Drawing that will not be shown. Cooking that prioritises your pleasure over anyone else's preference. Movement that has no fitness goal. <em>The fourth channel depletes through production-for-consumption and restores through creation-for-its-own-sake.</em> The restoration requires the absence of an audience, even an imagined one.</p>
+
+      <p class="body-text">The practice: thirty minutes a week of creation with no audience. Not shared. Not photographed. Not uploaded. Not evaluated. The creation exists only in the act of its making and in the felt experience of having made it. The fourth channel, given this condition, begins to rebuild — often producing, within weeks, a subtle increase in creative impulse, in physical vitality, in the felt sense of having something to offer that is genuinely yours rather than a product managed for the market.</p>
+    </div>
+
+    <div class="pullquote">The four restorations are not self-care. Self-care, in its commercial form, is another consumption. The four restorations are the conditions under which the body's own systems can operate without interference. The body does the work. You provide the space.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the four restoration practices and notice that you currently have conditions for approximately none of them in your daily life.</p>
+      <p class="scenario-context">No undirected time. No genuine safety hour. No space for your own emotions separate from what you carry for others. No creation without an audience. The conditions do not exist — not because you are lazy or disorganised, but because the entire architecture of your daily life has been built around availability and production.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Restructure everything immediately. Clear the schedule. Create the conditions. Full commitment starting tomorrow.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Start with one. Choose the restoration that feels most accessible — even fifteen minutes of one — and create the condition once this week. The conditions do not need to arrive simultaneously. They need to arrive at all.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Conclude the restorations are impractical. Your life does not have space for them. The framework assumes a kind of privilege you do not have.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Add the four restorations to your existing schedule as tasks to be completed. Restoration as productivity.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 · The Quality of Decision</div>
+    <h1 class="slide-title">Deciding from fullness versus deciding from <em>depletion.</em></h1>
+
+    <p class="lead">Every decision you have ever made has been made from a specific energy state — from reserves that were either full or depleted, from a body that was either governed or extracted from, from channels that were either available or already spent. The quality of the decision is inseparable from the quality of the energy state it was made from. This is one of the most consequential and least discussed facts about adult life.</p>
+
+    <div class="contrast-grid">
+      <div class="contrast-cell">
+        <div class="contrast-label">Decisions from depletion</div>
+        <ul class="contrast-list">
+          <li>Reactive — responding to whatever is most urgent rather than what is most important</li>
+          <li>Defensive — chosen to avoid the worst outcome rather than to pursue the best one</li>
+          <li>Short-term — solving today's problem without considering what is being built across months</li>
+          <li>People-shaped — calibrated to what others want from you rather than what you want for yourself</li>
+          <li>Fear-based — driven by the scarcity of energy, time, or options rather than by genuine desire</li>
+          <li>Familiar — defaulting to the known pattern because the energy for the unknown is not available</li>
+        </ul>
+      </div>
+      <div class="contrast-cell right">
+        <div class="contrast-label">Decisions from fullness</div>
+        <ul class="contrast-list">
+          <li>Responsive — engaging with what matters rather than reacting to what is loudest</li>
+          <li>Creative — choosing from the range of what is possible rather than from the narrowing of what is safe</li>
+          <li>Long-term — considering what is being built, not only what is being survived</li>
+          <li>Self-shaped — originating from your own governance rather than from the expectations of others</li>
+          <li>Desire-based — moving toward what you actually want rather than away from what you fear</li>
+          <li>Unfamiliar — willing to step into the new because the reserves exist to handle the discomfort</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="body-text">Read both columns. <strong>Almost every significant decision most adults make — about relationships, careers, living situations, creative projects, health, identity — is made from the left column.</strong> Not because the person is unintelligent or lacking in self-awareness. Because the energy state they are deciding from does not have the reserves for the right column. The right column requires fullness. The left column is what depletion produces.</p>
+
+    <p class="body-text">This is why the restoration work matters beyond the personal — beyond feeling better, beyond having more energy, beyond the daily quality of life. <strong>The decisions you make from restored reserves are structurally different decisions from the ones you make from depleted reserves.</strong> The career you choose from fullness is a different career. The relationship you choose from fullness is a different relationship. The life you build from fullness is a different life. The restoration is not self-indulgence. It is the precondition for every consequential decision in your adult existence being made from a position of genuine choice rather than from the narrow options that depletion provides.</p>
+
+    <div class="pullquote">You have been making decisions from depletion and calling them your choices. They were choices — but they were made from a position so depleted that the range of available options was a fraction of what was actually possible. Fullness does not change who you are. It changes what is available to you. The available options, from fullness, are unrecognisable from where you have been standing.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You look back at a major decision you made recently — about work, a relationship, a living situation — and recognise it as a decision from depletion.</p>
+      <p class="scenario-context">Not wrong, exactly. But narrow. Made from the options that depletion made visible rather than from the full range of what was possible. You can see, from where you are now, other options that were not available to you from where you were then. The options were always there. The energy to see them was not.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Regret the decision. You should have waited. You should have restored first. The decision was a mistake born of depletion.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the recognition without regret. The decision was made from the energy state that was available at the time. Depletion-decisions are not mistakes — they are the predictable output of a depleted system. The work, now, is restoration — so that the next consequential decision is made from a different position.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Reverse the decision immediately. Now that you can see the full range, choose again.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the framework. Decisions are decisions. Energy state is irrelevant. You chose what you chose.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 · The Long Game</div>
+    <h1 class="slide-title">Sustaining the governance across <em>years.</em></h1>
+
+    <p class="lead">The governance will lapse. Not once — repeatedly. In moments of stress, of fatigue, of encountering someone who activates the old patterns. The lapse is not failure. It is the predictable behaviour of a system that was running for decades before the governance began. The question is not whether the lapse will occur. The question is what you do when it does.</p>
+
+    <p class="body-text">This page is honest about what long-term governance looks like — not the idealised version, but the actual texture of sustaining this work across years of ordinary life. The texture is imperfect, inconsistent, and durable. <strong>The durability comes not from perfection but from the return — the repeated, unglamorous, daily return to the governed position after each lapse.</strong></p>
+
+    <div class="section-heading">What to expect across years</div>
+
+    <p class="body-text"><strong>Year one.</strong> The governance is conscious and effortful. You notice the sovereignty move, the border awareness, the daily arrival, the restoration practices — but each one requires active attention. The old patterns reassert themselves regularly, often in the contexts where they were most deeply installed (family, intimate relationships, work). The ratio of governed-to-extracted shifts slowly in favour of governance. The shift is measurable by the end of the year, even though individual weeks may feel unchanged.</p>
+
+    <p class="body-text"><strong>Year two.</strong> The governance begins to automate. Some of the practices that required conscious effort in year one now run with less attention — the body has learned the morning arrival, the evening accounting, the sovereignty move in familiar contexts. New contexts still produce lapses, but the return from lapse is faster. The deeper restoration becomes visible — not as dramatic improvement but as a quiet, cumulative sense of having more available. Decisions begin to be made from a different energy state.</p>
+
+    <p class="body-text"><strong>Year three and beyond.</strong> The governance becomes a stance rather than a practice. It is how you live, not what you do. The old patterns still surface, sometimes with surprising intensity — a particular person, a particular context, a particular stress can reactivate the full extraction architecture. <em>But the reactivation is recognised faster, the return is more automatic, and the overall direction of the life is governed rather than extracted from.</em> The sovereign life is not the life without extraction. It is the life in which extraction is recognised, named, and returned from — reliably, imperfectly, for as long as you are alive.</p>
+
+    <div class="section-heading">When the governance lapses</div>
+
+    <div class="practice">
+      <p class="practice-name">Notice without punishing.</p>
+      <p class="practice-text">The lapse does not require self-criticism. It requires noticing. You were governed. Now you are not. The noticing is the beginning of the return. The self-criticism is the old pattern converting the lapse into evidence of your inadequacy, which is itself an extraction — from the emotional bandwidth channel, by the management system, for no productive purpose.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Return to the body.</p>
+      <p class="practice-text">The simplest return is the physical one. One breath. Drop the shoulders. Feel the weight. Arrive. The return does not require a full review of the governance framework. It requires sixty seconds of physical re-inhabitation. The body, returned to, begins the governance automatically — because the governance has been practised enough that the body knows the sequence. The mind follows the body. Not the other way round.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Resume the restoration.</p>
+      <p class="practice-text">After a lapse, the channels that were being restored may have been drawn from again. The undirected time, the safety hour, the emotional check, the audience-free creation — resume whichever was interrupted. The resumption is the practice. The resumption, each time, is slightly easier than the last time. The governance becomes durable not through unbroken consistency but through the accumulation of resumptions.</p>
+    </div>
+
+    <div class="pullquote">The sovereign life is not the unbroken life. It is the life that knows how to return — to the body, to the governance, to the territory — after each departure. The return is the practice. The return is the sovereignty. The departures are what make the returns meaningful.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">After several months of consistent governance, you find yourself, in a single afternoon, fully back in the old patterns — performing, managing, absorbing, extracted from across all four channels.</p>
+      <p class="scenario-context">The trigger was a specific person in a specific context — someone whose architecture is precisely calibrated to the extraction patterns you thought you had outgrown. The governance dissolved in minutes. The old system ran as though it had never been interrupted.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude the governance was an illusion. If it can dissolve this quickly, it was never real.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice the lapse without converting it into a verdict. The governance was real. The old pattern is also still in you. Both are true. The return — which can begin right now, with one breath — is the practice the lapse was designed to activate.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Avoid the person permanently. If they can dissolve the governance, they must never be encountered again.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Push through with intensified governance. Override the lapse through willpower. Do not allow the old pattern any space.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 · The Sovereign Life</div>
+    <h1 class="slide-title">What was always available <em>underneath.</em></h1>
+
+    <p class="lead">This is the final page of the final module of the final course. It is not a summary. It is a description — honest, unembellished, and less dramatic than you might expect — of what becomes available when the energy body is understood, the harvesting is named, the weaponisation is dismantled, the sacred is reclaimed, the territory is inhabited, and the reserves are restored. What becomes available is not a new life. It is the life that was always underneath the extraction — waiting, intact, for the governor to come home.</p>
+
+    <p class="body-text"><strong>You are not a different person.</strong> You are the same person — with the same history, the same wounds, the same tendencies, the same particular configuration of strength and vulnerability that has defined you since childhood. What has changed is not who you are. It is how much of who you are is available. The extraction consumed a portion of your life-force every day, and the portion, redirected through performance and commodity management and scarcity monitoring, was unavailable for the actual business of being alive. That portion is now yours again. The person has not changed. The resource available to the person has.</p>
+
+    <div class="section-heading">What becomes available</div>
+
+    <p class="body-text"><strong>Presence.</strong> The simple, unmystical experience of being in your body, in a room, in a conversation, in a moment — without a percentage of your attention being siphoned off by the management system. Presence is not a spiritual achievement. It is what happens when the four channels are available for the present moment rather than being consumed by the programme. The difference between the managed version of you and the present version of you is not visible to most people. It is felt by everyone who encounters you.</p>
+
+    <p class="body-text"><strong>Creative capacity.</strong> The fourth channel, restored, produces differently. Ideas arrive with less friction. The blank page is less frightening. The felt sense of having something to say, something to make, something to contribute returns — not as a performance for external validation, but as an internal pressure that expresses itself because expression is what the fourth channel does when it is not being consumed by the three layers. The capacity was never lost. It was redirected. The redirection has been reversed.</p>
+
+    <p class="body-text"><strong>The ability to rest.</strong> Not rest as collapse — not the exhausted shutdown that follows depletion. Rest as a chosen state, entered from governance, in which the body is allowed to repair without the management system immediately reactivating. The ability to rest, for many adults, is the first sign that the restoration is working — because rest was previously impossible, not due to external demands but due to the internal system that converted all ungoverned time into anxiety about what should be produced.</p>
+
+    <p class="body-text"><strong>Relationships that are exchange rather than extraction.</strong> The governed person, meeting another governed person, produces something that Module Four described as presence-based closeness — the meeting of two self-governing territories, each choosing to open borders to the other, each maintaining the governance while offering the openness. This is not available to the ungoverned person, because the ungoverned person's borders are not theirs to open. <em>The sovereign relationship is not the perfect relationship. It is the relationship in which both people are present from inside their own bodies, choosing what they share, governing what they keep, and meeting each other in the space between the two territories.</em></p>
+
+    <div class="sov-frame">
+      <div class="sov-label">The curriculum's final position</div>
+      <p class="sov-text">Nineteen modules across three courses. You have named the energy body and its four channels. You have identified the vampires, the boundaries, the cost of nice, the territories, the friendships. You have mapped the patterns, the programme, the micro-aggressions, the archetypes, your own role, the exit, the choosing differently. You have traced the harvesting, the weaponisation, the captures, the borders, the occupation, the restoration. None of this work is finished. All of it is now available. The body is yours. The territory is governed. The reserves are filling. The life, sovereign, is finally yours to live.</p>
+    </div>
+
+    <div class="pullquote">You did not take these courses to be fixed. You were never broken. You took them to see — clearly and for the first time — what was being taken from you, how the taking was normalised, and what becomes available when the taking stops and the governance begins. The governance has begun. The rest is the life.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You have finished the curriculum. The work continues.</p>
+      <p class="scenario-context">You know things you did not know nineteen modules ago. You have language for experiences you carried without words. You have a morning arrival, an evening accounting, a sovereignty move, five borders, four restorations, and the ongoing, imperfect, daily practice of governing a body that is, at last, recognised as yours.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Close the curriculum and proceed as if the knowledge is enough.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Carry the practices forward. The morning arrival continues. The evening accounting continues. The restoration practices continue. The governance continues. The work is not an event. It is a way of inhabiting the body you were given.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Return to the beginning and take all three courses again, immediately.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Decide the curriculum was interesting but ultimately theoretical.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Course →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- FULL CURRICULUM COMPLETION -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Curriculum Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>the curriculum.</em></h1>
+
+    <p class="lead">Three courses. Nineteen modules. Sovereignty as a way of knowing your own energy. Relationship patterns as a way of knowing your own participation. The truth reversal framework as a way of knowing what was taken and reclaiming what remains. The body is the territory. The territory is governed. The governor is home.</p>
+
+    <div class="section-heading">What you carry forward from Module Six</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">Governance stops the extraction. Restoration fills the deficit. Both are necessary. The deficit, accumulated across years, becomes visible only after the governance reveals it.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Four restoration practices, one for each channel: undirected time (attention), genuine safety (nervous system), your own emotions (emotional bandwidth), creation without audience (fourth channel).</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">The energy state you decide from determines the quality of every consequential decision in your life. Fullness produces a different range of options than depletion. The restoration is the precondition for genuine choice.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">The governance will lapse. The lapse is not failure. The return — notice, return to the body, resume the restoration — is the practice. Sovereignty is sustained not through perfection but through the accumulation of returns.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">What becomes available: presence, creative capacity, the ability to rest, and relationships built on exchange rather than extraction. None of it is new. All of it was underneath the extraction, waiting.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice going forward</div>
+
+    <p class="body-text"><strong>This week — the morning arrival:</strong> For the next seven mornings, before you reach for your phone or speak to anyone, spend two minutes in the body. Feet on the floor. Breath in the chest. Scan: where is the tension held today? Where does it feel open? You are not fixing anything. You are only arriving — practising the act of inhabiting the territory before the day's demands begin extracting from it. Two minutes. Seven days. Notice what changes in the quality of the day that follows.</p>
+
+    <p class="body-text"><strong>One restoration to establish this month:</strong> From the four restorations — undirected time, genuine safety, your own emotions, creation without audience — choose the one your life most lacks and protect one instance of it this week. Not daily yet. Once. Create the condition. Notice what the body does when the condition is present. The noticing is the beginning of the body's request for more of it. Let the request build before you decide how often to answer it.</p>
+
+    <p class="body-text"><strong>The sovereignty move as a daily hinge:</strong> Identify one regular moment in your day — a transition between tasks, a pause before a meeting, the moment before a difficult conversation — and make it a fixed point for the sovereignty move. Drop the shoulders. Feel the weight. Arrive. The same moment, every day, until the move becomes automatic in that context. Automaticity in one context trains the nervous system to recognise the move as available. It begins to reach for it in other contexts without being instructed. This is how the governance becomes the body's default rather than the mind's intention.</p>
+
+    <div class="section-heading">The closing practice</div>
+
+    <p class="body-text">Return to Course One, Module One, Page One. Read the opening line — about energy as a finite resource. Notice how differently it reads now, with nineteen modules behind you. The distance between who you were when you began and who you are now is not measured in knowledge. It is measured in the felt sense of inhabiting your own body — a felt sense that did not exist, or existed only in fragments, before the work began. The distance is real. It is felt. It is yours.</p>
+
+    <p class="body-text">The morning arrival continues. The evening accounting continues. The four restorations continue. The sovereignty move continues. The borders remain visible. The territory remains governed. The work is not an event that ends. It is the daily, ordinary, unglamorous practice of being at home in the body you were given — which is, when all the language has been stripped away, the only body you will ever have, and the only territory that is entirely, non-negotiably, irrevocably yours.</p>
+
+    <p class="body-text">Go well.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Return to Beginning</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+    <div class="restart-wrap">
+      <button class="restart-btn" onclick="SS_restartCourse()">↺ Restart This Course</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback={
+  1:{
+    a:{headline:"Concluding the governance isn't working because the deeper tiredness persists is the deficit being mistaken for a governance failure.",detail:"The governance is working — the daily extraction has slowed, the borders are being governed, the sovereignty move is operating. What the governance has revealed is the deficit — the accumulated depletion of years of extraction that was invisible while the extraction was still running. The deeper tiredness is not the framework's failure. It is the framework's success at revealing what was underneath. The restoration, which this module teaches, is the phase that addresses the deficit directly. The governance was phase one. The restoration is phase two. Both are needed. Neither alone is sufficient."},
+    b:{headline:"Recognising the deeper tiredness as the accumulated deficit is the diagnostic that allows the restoration phase to begin from an accurate starting point.",detail:"The governance stopped the withdrawal. The well was already low. The tiredness you feel is the well's current level — revealed, finally, because the ongoing withdrawal has slowed enough for the actual level to be visible. This is good news disguised as discouraging news. The visibility of the deficit is the precondition for the restoration. You cannot fill what you cannot see. The restoration practices on Page Two are designed for exactly this — the slow, daily, unglamorous refilling of reserves that have been low for longer than you knew."},
+    c:{headline:"Pushing harder to force the restoration through intensity is the performance layer applying itself to the recovery process.",detail:"The deficit was accumulated slowly, across years, and it will not be reversed by intensity applied across weeks. The restoration requires conditions — undirected time, genuine safety, your own emotions, creation without audience — and conditions cannot be forced. They can only be created. The intensity tends to produce a brief surge of apparent improvement followed by collapse, because the body's restoration systems do not respond to demand. They respond to conditions. The conditions are gentle. The gentleness is the mechanism."},
+    d:{headline:"Accepting the tiredness as permanent is the deficit's most effective defence against the restoration that would address it.",detail:"The reserves are not permanently depleted. They are depleted — which means they can be replenished, given the conditions. The permanence narrative serves the deficit by preventing the restoration from being attempted. People who begin the restoration practices report measurable improvement within three to six months. The improvement is not dramatic. It is cumulative. The permanence narrative, believed, prevents the first three months from occurring. The first three months, allowed to occur, disprove the narrative."}
+  },
+  2:{
+    a:{headline:"Restructuring everything immediately is the performance layer converting the restoration into a productivity project.",detail:"The restoration is not a project. It is a change in the conditions of your daily life — a change that must be sustainable over years, not intensive over weeks. Full restructuring attempted in a single day tends to collapse within two weeks, because the daily life that was restructured had its own architecture that resists sudden demolition. The sustainable approach begins with one condition, established once, repeated until it becomes part of the day's architecture rather than an imposition on it. The single condition, sustained, produces more restoration than the full restructuring attempted and abandoned."},
+    b:{headline:"Starting with one restoration, at whatever scale is available, is how the conditions are built sustainably.",detail:"Fifteen minutes of undirected time. One evening of audience-free creation. A single emotional check-in. The scale does not matter. The establishment of the condition matters. The condition, once established, tends to expand — fifteen minutes becomes twenty, one evening becomes two, the check-in becomes a daily practice. The expansion is natural, not forced. The body, given the condition, recognises what it has been missing and begins to protect the condition instinctively. The protection is the governance operating at the level of the day's architecture."},
+    c:{headline:"Concluding the restorations are impractical because your life has no space for them is an honest observation that deserves a honest response.",detail:"The observation may be accurate. Many lives — particularly lives organised around care, production, and availability — genuinely have no unoccupied space. The framework does not deny this. What it offers is a reframe: the absence of space for restoration is itself a symptom of the extraction. A life with no space for the person living it is a life organised around other people's access to your energy. The first restoration may require something to be removed — not added. The removal is the governance. The space that opens is the condition."},
+    d:{headline:"Scheduling the restorations as tasks to be completed converts the conditions into the productivity system that was consuming the energy in the first place.",detail:"Undirected time, scheduled as a task, is no longer undirected. The safety hour, timed against the next obligation, is no longer genuinely safe. Creation without audience, logged in a productivity system, has acquired an audience — the system itself. The restorations require the absence of the productivity frame, not its application. The conditions are created not by scheduling but by de-scheduling — by removing the productivity frame from a portion of the day and letting the portion exist without structure, measurement, or evaluation. The de-scheduling is the harder practice. It is also the only one that produces genuine restoration."}
+  },
+  3:{
+    a:{headline:"Regretting the decision converts the framework's recognition into a punishment of the self that was doing the best it could from the position it was in.",detail:"The decision was made from depletion. The depletion was not your fault — it was the accumulated result of years of extraction that you did not have language for and did not have governance over. The decision, made from that position, was the best available decision from the options that depletion made visible. Regret assumes you should have known better. You could not have known better without the framework. The framework has now arrived. The next decision can be made from a different position. The previous decision deserves the compassion that the restored version of you can now offer to the depleted version that made it."},
+    b:{headline:"Holding the recognition without regret and directing the energy toward restoration for the next decision is the sovereign response to seeing a past decision clearly.",detail:"The decision was made from the energy state that was available. The energy state was depleted. The decision was, therefore, shaped by depletion — narrower, more defensive, more familiar than the decision you would have made from fullness. The recognition of this is not cause for regret. It is cause for the restoration that will produce a different energy state for the next decision. The work is forward. The past decision cannot be un-made. The next one can be made differently — and the difference is entirely a function of the energy state you have built between now and then."},
+    c:{headline:"Reversing the decision immediately, before the restoration has had time to fill the reserves, risks making another depletion-decision from the excitement of the recognition.",detail:"The recognition that the original decision was made from depletion does not mean the right decision is now visible. The right decision requires fullness — and fullness requires the restoration practices, sustained across months, before the reserves are sufficient for a consequential decision to be made from a genuinely different position. Reversing immediately, from the energy of the recognition, tends to produce another depletion-decision — different in content but identical in quality. The different position takes time to build. The building is the restoration. The decision, when it comes, will come from the position the restoration has produced."},
+    d:{headline:"Dismissing the framework's claim that energy state affects decision quality ignores one of the most documented findings in decision science.",detail:"The relationship between physiological state and decision quality is extensively documented — decision fatigue, cognitive depletion, the effect of stress hormones on risk assessment, the narrowing of options under chronic cortisol elevation. The framework is not making a mystical claim. It is making a physiological one: the state of your body's energy systems at the time of a decision measurably affects the quality of that decision. The framework gives this finding a practical application — the restoration practices that change the energy state from which future decisions are made. The dismissal is intellectually defensible and practically costly."}
+  },
+  4:{
+    a:{headline:"Concluding the governance was an illusion because it dissolved quickly is the lapse's most persuasive argument — and the one the page specifically warned against.",detail:"The governance was real. It was practised, felt, embodied across months. The dissolution, in the presence of a specific person in a specific context, does not retroactively negate the months of practice. It reveals that the old pattern is still installed — dormant, not deleted. The governance does not delete the pattern. It builds an alternative that, with practice, becomes the more automatic response. The alternative, in the presence of a powerful enough trigger, can be temporarily overridden by the older system. The override is temporary. The governance, returned to, resumes. The resumption is the practice."},
+    b:{headline:"Noticing the lapse and beginning the return with one breath is the sovereignty move applied to the sovereignty practice itself.",detail:"The governance was real. The old pattern is also still in you. Both are true simultaneously, and both will be true for a long time — possibly permanently. The return is the practice. One breath. Drop the shoulders. Feel the weight. Arrive. The governance, resumed, does not need to be rebuilt from scratch. It was not destroyed by the lapse. It was temporarily offline. The return brings it back online. Each return, practised, makes the next return faster. The speed of the return — not the absence of lapses — is the measure of the governance's durability."},
+    c:{headline:"Avoiding the person permanently may sometimes be the right move but is usually the fortification response from Module Five rather than the governed one.",detail:"Some people are genuinely dangerous to your governance — people whose architecture is so precisely calibrated to your extraction patterns that governance in their presence is not yet possible. Avoidance of these people may be the governed choice. But avoidance decided in the heat of the lapse, rather than from a settled position after the return, tends to be the fortification response — the reactive closure of all borders to prevent future pain. The governed decision about this person can be made later, from the restored position, after the lapse has been processed. The decision made from the lapse is a depletion-decision. The decision made after the return is a governance-decision."},
+    d:{headline:"Overriding the lapse through willpower is the performance layer attempting to govern the governance, which produces a brittle version that shatters under the next trigger.",detail:"Willpower-based governance — forcing the sovereignty move, demanding the borders hold, refusing to allow the old pattern any expression — produces a rigid version of the governance that is more fragile than the version built through gentle practice. The governance that holds under pressure is the governance that has been practised gently enough to become part of the body's automatic response. The willpower version is held by the mind rather than by the body. The next trigger, when it arrives, will bypass the mind — because extraction patterns operate at the nervous system level, which willpower does not directly control. The gentle version, practised into the body, holds at the level where the trigger operates."}
+  },
+  5:{
+    a:{headline:"Closing the curriculum as if knowledge is enough underestimates the distance between knowing and embodying.",detail:"You know things you did not know nineteen modules ago. The knowing is real and it is insufficient. The patterns you have named — the extractions, the layers, the borders, the shapes — are decades old and they do not yield to knowledge alone. They yield to practice — the daily arrival, the evening accounting, the sovereignty move, the restoration conditions. Knowledge without practice is the curriculum as entertainment. Practice without knowledge is effort without direction. Both are needed. The curriculum gave you the knowledge. The practice is what you take with you. The two, combined over years, produce the governed life the curriculum described."},
+    b:{headline:"Carrying the practices forward as an ongoing way of inhabiting the body is how the curriculum becomes a permanent change rather than a completed course.",detail:"The morning arrival continues. The evening accounting continues. The four restorations continue. The sovereignty move continues. The borders remain visible. The territory remains governed. The practices are not tasks. They are the architecture of a day that is governed rather than extracted from. The architecture, sustained across years, produces the life the curriculum described — not perfectly, not without lapses, but with the durability that comes from the repeated return. The curriculum is not a destination. It is a change in how you inhabit the body you were given. The inhabiting is the work, and the work continues."},
+    c:{headline:"Returning immediately to the beginning may produce new recognitions and is often the avoidance of the harder work of embodiment.",detail:"Re-reading will produce value — material that did not land the first time will land differently now. The re-reading can be done alongside the practice, not instead of it. The curriculum was designed for application, not repeated study. At some point, the re-reading must give way to the daily practices that change the body's actual governance. The body does not change through re-reading. It changes through the arrival, the accounting, the restoration, the sovereignty move — practised daily, imperfectly, for years. The re-reading is the mind's contribution. The body's contribution is the practice."},
+    d:{headline:"Deciding the curriculum was theoretical after completing nineteen modules of recognition is the final form of the programme's defence against the embodied change that would end its operation.",detail:"The curriculum applied to you or it did not. If you completed nineteen modules, encountering recognition in the body — not just in the mind — across courses on energy, relationships, and sovereignty, and are now concluding that it was theoretical, notice what is happening. The conclusion arrives at the end, at the precise moment when embodiment would begin. The conclusion is the programme's final move — allowing the intellectual engagement (which is safe and changes nothing) while preventing the embodied engagement (which would change everything). The curriculum was not theoretical. The embodiment is what the programme is defending against. Notice the defence. Then arrive in the body. The body is where the work was always meant to land."}
+  }
+};
+
+let currentSlide=1;const totalSlides=6;const answered={1:false,2:false,3:false,4:false,5:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+    var slides=document.querySelectorAll('.slide');
+    if(slides.length>0){
+      var last=slides[slides.length-1];
+      last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+        b.textContent='Begin Course 4 →';
+        b.setAttribute('onclick','');
+        b.onclick=function(){localStorage.setItem('safespot_c3m6','1');window.location.href='course4-landing.html';};
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

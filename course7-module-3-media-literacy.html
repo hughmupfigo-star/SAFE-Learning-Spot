@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 7 · Module 3 · Media Literacy in the Attention Economy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:860px;margin:0 auto;padding:80px 48px 120px}
+.slide-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:24px}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);
+line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-body{font-size:17px;line-height:1.75;color:var(--ink);margin-bottom:32px}
+.slide-body p{margin-bottom:20px}.slide-body p:last-child{margin-bottom:0}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}
+.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}
+.mechanism:last-of-type{border-bottom:1px solid var(--line)}
+.mechanism-name{font-family:var(--serif);font-size:28px;font-style:italic;font-weight:400;letter-spacing:-.015em;margin-bottom:16px}
+.mechanism-body{font-size:16px;line-height:1.7;color:var(--muted)}
+.cost-block{margin:28px 0;padding:24px 28px;border-left:2px solid var(--accent);background:var(--soft)}
+.cost-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.cost-body{font-size:15px;line-height:1.65;color:var(--ink)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}
+.voice-block::before{content:'"'  ;position:absolute;top:-8px;left:24px;font-family:var(--serif);
+font-size:72px;color:var(--accent);line-height:1;font-style:italic}
+.voice-text{font-family:var(--serif);font-size:18px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);margin-bottom:12px}
+.voice-attr{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.scenario-block{margin:48px 0;padding:40px;border:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.scenario-q{font-family:var(--serif);font-size:22px;line-height:1.45;font-weight:400;font-style:italic;margin-bottom:32px}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{padding:18px 24px;border:1px solid var(--line);background:var(--paper);font-family:var(--sans);
+font-size:15px;line-height:1.5;text-align:left;cursor:pointer;transition:all .2s ease;color:var(--ink)}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback-block{margin-top:28px;padding:28px 32px;background:var(--soft);border-left:3px solid var(--accent);display:none}
+.feedback-block.visible{display:block}
+.feedback-headline{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:12px;font-style:italic}
+.feedback-detail{font-size:15px;line-height:1.7;color:var(--muted)}
+.nav-row{display:flex;gap:16px;margin-top:40px;align-items:center}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--ink);
+background:none;color:var(--ink);padding:14px 28px;cursor:pointer;transition:all .2s ease;text-transform:uppercase}
+.nav-btn:hover{background:var(--soft)}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#222}.nav-btn:disabled{opacity:.3;cursor:default}
+.completion-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;
+min-height:80vh;text-align:center;padding:80px 48px}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;color:var(--accent);font-style:italic}
+.complete-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:400;margin:32px 0 20px;letter-spacing:-.02em}
+.complete-body{font-size:17px;line-height:1.7;color:var(--muted);max-width:560px}
+.divider{width:48px;height:1px;background:var(--line);margin:40px auto}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 07 &middot; Media &amp; Narrative Control &middot; Module <strong>03</strong> &middot; Media Literacy in the Attention Economy</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 7 &middot; Media &amp; Narrative Control</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c7m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course7-module-1-narratives-as-weapons.html">Narratives as Weapons</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course7-module-2-architecture-of-propaganda.html">Architecture of Propaganda</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course7-module-3-media-literacy.html">Media Literacy</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course7-module-4-hero-villain.html">Hero and Villain</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course7-module-5-algorithmic-narratives.html">Algorithmic Narratives</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course7-module-6-building-narrative-immunity.html">Narrative Immunity</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1: The Attention Economy -->
+<section class="slide active" data-slide="1">
+<div class="slide-inner">
+<div class="slide-label">Module 03 · Slide 01</div>
+<h1 class="slide-title">The Attention Economy</h1>
+<div class="slide-body">
+<p>For most of human history, the scarce resource in information environments was information itself — it was difficult to produce, expensive to distribute, and limited in supply. The digital revolution eliminated that scarcity. Information is now effectively infinite. What is scarce is attention — the finite capacity of human minds to engage with the available content.</p>
+<p>This shift produced a new economic model: the attention economy. In this model, the product is not information but the directed attention of human beings, which is then sold to advertisers. Every platform, every outlet, every feed competing for your attention is operating inside this model — and the model has a specific and consistent effect on what gets produced. Content that captures and holds attention is rewarded. Content that informs without stimulating is not.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">When your attention is the product being sold, the media environment is not designed to inform you. It is designed to capture you — and the emotions most reliable for capture are fear, outrage, and the tribal intensity of us-versus-them.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Engagement as the metric that replaced truth</div>
+<div class="mechanism-body">In the attention economy, the primary metric of content success is engagement — clicks, shares, time-on-page, comments. Accurate but undramatic information scores poorly on engagement metrics. Emotionally charged, identity-activating, conflict-centred content scores well. Over time, the selection pressure of these metrics does not produce a media environment designed around truth. It produces one designed around the reliable stimulation of the emotional states that generate engagement. Truth is incidental to this process, not its goal.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The business model of outrage</div>
+<div class="mechanism-body">Outrage is the attention economy's highest-value product. An outraged person clicks, shares, returns, comments, and recruits others to the content. An informed but calm person does none of these things at comparable rates. This creates a systematic economic incentive to produce content that generates outrage — about political opponents, cultural change, threatening groups, institutional failures. The outrage is not incidental to media economics. It is, in many cases, the actual product being manufactured and sold.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The cost of free</div>
+<div class="mechanism-body">The perception that free media — free social media, free news websites, free search — is a public good obscures what is actually being exchanged. The user is not the customer of these services. The user is the product: their attention, their behavioural data, their psychological profile — all are extracted and sold. "Free" media that is funded by advertising has a structural incentive to produce whatever content most reliably captures attention for the longest periods, regardless of whether that content serves the interests of the people consuming it.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 01</div>
+<div class="scenario-q">A major news website publishes two stories on the same day. One is a careful analysis of pension reform that will affect millions of people. The other is an outrage-generating story about a celebrity's controversial statement. The celebrity story receives fifty times the traffic. What does the website learn from this?</div>
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a">That audiences prefer entertainment to serious news — this reflects genuine public interest</button>
+<button class="choice" data-answer="b">That outrage-generating content is economically rewarded — and the website will produce more of it, regardless of its informational value, because the business model incentivises engagement over importance</button>
+<button class="choice" data-answer="c">That the pension analysis was poorly written — better journalism on serious topics would attract comparable traffic</button>
+<button class="choice" data-answer="d">That it should focus on celebrity content — giving audiences what they want is good editorial practice</button>
+</div>
+<div class="feedback-block" id="feedback-1">
+<div class="feedback-headline" id="feedback-text-1"></div>
+<div class="feedback-detail" id="feedback-detail-1"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn primary" id="next-1" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 2: Who Pays for the Story -->
+<section class="slide" data-slide="2">
+<div class="slide-inner">
+<div class="slide-label">Module 03 · Slide 02</div>
+<h1 class="slide-title">Who Pays for the Story</h1>
+<div class="slide-body">
+<p>Every piece of journalism, every media outlet, every platform exists within an economic structure that shapes what it can and cannot say. Understanding that structure is not a conspiracy theory. It is the most basic form of media literacy — the same kind of analysis applied routinely to any other industry whose products affect public life.</p>
+<p>Following the money in media does not require assuming bad intent. Economic structures shape editorial decisions through incentive, culture, and the gradual selection of people and content that fit the model — not primarily through direct editorial interference. The result is a systematic pattern of coverage that serves the interests of whoever funds the media, without any individual journalist needing to be corrupt, and without any editor needing to issue explicit instructions.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">You do not need to know who owns a media outlet to understand how ownership shapes its coverage. You need to understand whose interests are structurally aligned with its economic survival — and ask what coverage those interests would discourage.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Advertising dependency</div>
+<div class="mechanism-body">A media outlet dependent on advertising revenue from a particular industry sector will consistently produce coverage that does not seriously threaten that sector's interests — not because editors receive calls from advertisers, but because journalists who produce threatening coverage find their stories deprioritised, their beats reassigned, and their career advancement slowed. The selection is gradual and largely invisible. The pattern it produces is reliable: advertising-dependent media covers the industries that fund it with consistent softness, without any individual instance of corruption being provable.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Ownership and editorial alignment</div>
+<div class="mechanism-body">Media ownership concentrates — in most major markets, a small number of corporations and wealthy individuals own the majority of significant media outlets. Owners do not need to issue editorial directives for ownership to shape coverage. Editors who consistently produce coverage misaligned with ownership interests are replaced. Journalists learn what kinds of stories advance their careers and what kinds do not. The ideological alignment between media output and ownership interest is produced by selection and cultural transmission, not by instruction. It is more reliable as a result.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The funding of the free</div>
+<div class="mechanism-body">Social media platforms are funded by advertising and data extraction. Their economic model requires maximising time-on-platform, which requires maximising emotional engagement, which rewards content that generates fear, outrage, and tribal intensity. This is not incidental to the funding model — it is produced by it. Understanding who pays for the free social media environment you use tells you what that environment is actually optimised to produce, and why the content you encounter there has the emotional texture it does.</div>
+</div>
+
+<div class="voice-block">
+<div class="voice-text">I used to think media bias was about individual journalists having opinions. Then I looked at who owned the outlets and who advertised in them, and I realised individual opinion was the smallest part of it. The shape of the coverage was built into the economics long before anyone wrote a word.</div>
+<div class="voice-attr">— workshop participant, former editor</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 02</div>
+<div class="scenario-q">A newspaper chain is bought by a private equity firm with significant investments in the fossil fuel industry. The editorial staff remains entirely the same. Over the following two years, coverage of climate policy becomes noticeably softer. No editorial memo is ever issued. What is most likely producing the shift?</div>
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a">Coincidence — editorial decisions are made by journalists, not owners</button>
+<button class="choice" data-answer="b">Structural editorial alignment — the gradual selection of stories, angles, and journalists that fit the new ownership's interests, without any explicit instruction needed</button>
+<button class="choice" data-answer="c">Evidence-based editorial change — perhaps the climate science coverage was genuinely improving in balance</button>
+<button class="choice" data-answer="d">This would require proof of direct interference — without that, ownership change cannot explain editorial shift</button>
+</div>
+<div class="feedback-block" id="feedback-2">
+<div class="feedback-headline" id="feedback-text-2"></div>
+<div class="feedback-detail" id="feedback-detail-2"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-2" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 3: Reading Who Benefits -->
+<section class="slide" data-slide="3">
+<div class="slide-inner">
+<div class="slide-label">Module 03 · Slide 03</div>
+<h1 class="slide-title">Reading Who Benefits</h1>
+<div class="slide-body">
+<p><em>Cui bono</em> — who benefits? — is one of the oldest tools of critical analysis, used in law, philosophy, and investigative journalism. Applied to media, it asks: whose interests are served by this story being told this way, with this framing, at this time? It is not a question that assumes a hidden hand behind every story. It is a structural question about the alignment between content and interest.</p>
+<p>The answer is rarely a single identifiable actor. Usually it is a pattern: stories that consistently serve certain interests over time, framings that consistently make certain questions unaskable, sources that consistently represent certain perspectives as expert while excluding others. The pattern, not the individual instance, is what the question reveals.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Asking who benefits from a story does not require assuming anyone intended the benefit. Structural interests shape coverage without conspiracies. The question is analytic, not accusatory — and it should be applied to stories you agree with as readily as to stories you distrust.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The timing question</div>
+<div class="mechanism-body">When a story appears matters as much as what it says. A damaging story about a political candidate published the day before an election serves different interests than the same story published six months earlier. A story about government corruption published during a period of social unrest that the government wants to distract from serves different interests than the same story in a stable period. The timing of stories is an editorial decision that rarely gets analysed — but it is often where the most revealing alignment between content and interest can be found.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The framing question</div>
+<div class="mechanism-body">The same event can be framed to serve very different interests depending on what is foregrounded and what is backgrounded. A labour strike framed as "workers demanding better conditions" serves worker interests. The same strike framed as "disruption to commuters" serves management interests. Neither framing is necessarily false — both may accurately describe aspects of the situation. But the choice of which aspect to centre is an editorial decision with consistent patterns that reveal whose interests the outlet structurally serves.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The source question</div>
+<div class="mechanism-body">Journalism depends on sources — people with knowledge, access, or authority who provide information and perspective. The consistent pattern of which sources are treated as credible and which are treated as fringe, which voices are presented as expert and which as partisan, reveals the editorial framework that determines whose interests get represented as objective reality and whose interests get represented as special pleading. Government ministers are "officials." Trade union representatives are "union leaders." The language of sourcing encodes a hierarchy of credibility that consistently advantages certain interests over others.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 03</div>
+<div class="scenario-q">A major outlet runs an in-depth investigation into welfare fraud, citing costs to taxpayers of £500 million. The same outlet has never run a comparable investigation into tax avoidance by large corporations, estimated at ten times the cost. Both are matters of public interest. What does this pattern reveal?</div>
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a">Welfare fraud is a more pressing issue — the coverage reflects genuine editorial judgement about public interest</button>
+<button class="choice" data-answer="b">The pattern of which financial misconduct gets investigated and which does not reveals whose interests the outlet structurally serves — and whose behaviour it treats as deserving scrutiny</button>
+<button class="choice" data-answer="c">Tax avoidance is a more complex story — the editorial decision reflects practical difficulty, not bias</button>
+<button class="choice" data-answer="d">Both issues deserve coverage — the outlet should simply add tax avoidance investigations to its output</button>
+</div>
+<div class="feedback-block" id="feedback-3">
+<div class="feedback-headline" id="feedback-text-3"></div>
+<div class="feedback-detail" id="feedback-detail-3"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-3" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 4: What Is Being Hidden -->
+<section class="slide" data-slide="4">
+<div class="slide-inner">
+<div class="slide-label">Module 03 · Slide 04</div>
+<h1 class="slide-title">What Is Being Hidden</h1>
+<div class="slide-body">
+<p>The most significant editorial decisions in any media environment are not the ones about what to say — they are the ones about what not to cover. Omission is the most powerful and least visible tool of narrative management, because you cannot fact-check what is not there. You cannot challenge a perspective that is never presented. You cannot ask about a question that the coverage never raises.</p>
+<p>This is not primarily about active concealment — about stories being suppressed or journalists being silenced, though these things do occur. It is about the structural tendency of any media system to cover some things extensively and others barely at all, based on the economic, political, and cultural interests that shape what counts as news.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The map is not the territory — and the media map of the world leaves out more than it includes. What is consistently absent from the map is not random. The pattern of absence tells you whose interests the map is drawn to serve.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The gap analysis</div>
+<div class="mechanism-body">Media literacy applied to omission requires developing the habit of asking: what is not here? Which perspectives have not been sought? Which consequences have not been examined? Which affected groups have not been asked for comment? Which alternative explanations have not been considered? This gap analysis is more demanding than fact-checking present claims, because it requires knowing enough about a topic to notice what is missing — which in turn requires consuming media across a wider range than most people do.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The scale inversion</div>
+<div class="mechanism-body">Media coverage is often inversely related to significance. Events that are visually dramatic, emotionally immediate, and involve identifiable individuals attract enormous coverage. Events that are structurally significant but visually undramatic, affect large populations diffusely, or require sustained attention to understand attract little. The result is a systematic distortion of public understanding: people are very well informed about vivid, emotionally engaging events and very poorly informed about the structural conditions that shape their lives in more consequential ways.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The perspective deficit</div>
+<div class="mechanism-body">Most mainstream media in any country systematically underrepresents the perspectives of people without institutional access — the poor, the marginalised, the geographically peripheral, the culturally non-dominant. Their experiences are covered when they become subjects of stories about social problems. They are rarely consulted as sources of analysis, expertise, or perspective on the conditions that shape their lives. The perspective deficit means that public understanding of social reality is systematically filtered through the experience of people who are not representative of most people's lives.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">The practice</div>
+<div class="cost-body">Regularly ask: who is not in this story? What would this situation look like from the perspective of the person least likely to be quoted as a source? What would a journalist need to know, and have access to, to cover what is not being covered here? These questions do not produce alternative facts — they produce awareness of the shape of what you are not being shown.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 04</div>
+<div class="scenario-q">Extensive media coverage of a violent crime committed by a member of a particular immigrant community runs for two weeks. During the same period, there is no comparable coverage of statistical data showing that the community in question has lower average crime rates than the general population. What is the gap revealing?</div>
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a">Individual stories are more newsworthy than statistics — narrative journalism is how people understand the world</button>
+<button class="choice" data-answer="b">The pattern of coverage — extensive for the individual crime, absent for the contextual data — systematically constructs a false picture that serves particular narrative interests, regardless of whether any single story is inaccurate</button>
+<button class="choice" data-answer="c">Statistical data is difficult to report engagingly — the gap reflects a practical challenge, not a bias</button>
+<button class="choice" data-answer="d">The individual story is accurate — reporting accurate events is journalism's primary function</button>
+</div>
+<div class="feedback-block" id="feedback-4">
+<div class="feedback-headline" id="feedback-text-4"></div>
+<div class="feedback-detail" id="feedback-detail-4"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-4" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 5: What You Are Being Made to Fear -->
+<section class="slide" data-slide="5">
+<div class="slide-inner">
+<div class="slide-label">Module 03 · Slide 05</div>
+<h1 class="slide-title">What You Are Being Made to Fear</h1>
+<div class="slide-body">
+<p>Fear is the attention economy's premium product. A frightened audience is an engaged audience — they return for updates, they share alerts, they recruit others to the source of the warning. Fear also has a specific political utility: it makes people more receptive to authority, more tolerant of restrictions on civil liberties, more willing to accept simplistic explanations and punitive solutions, and less able to engage in the deliberative complexity that genuine democratic participation requires.</p>
+<p>This does not mean all media fear is manufactured or illegitimate. Some things genuinely warrant fear. The question is not whether fear is ever appropriate — it is how to distinguish between fear that is proportionate to actual risk and fear that is being engineered to serve economic or political interests that have nothing to do with your safety.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The fears that dominate media coverage are rarely the fears proportionate to actual risk. They are the fears that are economically and politically most useful — which is a different criterion entirely.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Risk distortion</div>
+<div class="mechanism-body">Psychological research consistently shows that people dramatically overestimate the risks of dramatic, vivid, memorable events — plane crashes, terrorist attacks, stranger violence — and dramatically underestimate the risks of mundane, statistical, diffuse events — car accidents, preventable disease, structural poverty. Media coverage amplifies this distortion: dramatic events receive extensive, emotionally vivid coverage; statistical risks receive occasional, low-engagement coverage. The result is a public whose fear is systematically misdirected away from the risks most likely to actually harm them.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Who benefits from your fear</div>
+<div class="mechanism-body">Every manufactured fear serves someone's interests. Fear of crime benefits politicians who campaign on law and order, private security companies, and media outlets that attract frightened audiences. Fear of immigration benefits nationalist political movements and the media ecosystems that sustain them. Fear of economic collapse benefits financial institutions that can be positioned as necessary stabilisers. Asking who benefits from the specific fear being produced — not from protecting you from the threat, but from your being afraid of it — is one of the most clarifying questions in media literacy.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The chronically frightened citizen</div>
+<div class="mechanism-body">A person in a sustained state of fear is less capable of the reflective, long-term, complexity-tolerant thinking that genuine civic participation requires — and more dependent on the sources of information and authority that appear to manage the threat. Chronic media-induced fear produces a population that is politically anxious, cognitively narrowed, and more susceptible to simple explanations and authoritarian solutions. This outcome serves certain political and economic interests so reliably that it is worth asking whether it is, in some contexts, an intended feature rather than an accidental byproduct.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 05</div>
+<div class="scenario-q">You live in a country where violent crime rates have been falling steadily for twenty years. Yet surveys consistently show that the public believes crime is getting worse. Media coverage of violent crime has increased significantly over the same period. What is the most complete analysis of this situation?</div>
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a">The public is probably right — official statistics often undercount crime</button>
+<button class="choice" data-answer="b">Increased media coverage of violent crime has manufactured fear disproportionate to actual risk — the public's perception reflects the coverage, not the reality, and this misperception serves identifiable interests</button>
+<button class="choice" data-answer="c">Public perception of crime is a legitimate source of information that should be taken as seriously as statistics</button>
+<button class="choice" data-answer="d">The crime statistics may be falling because of factors unrelated to the coverage — the two trends are probably coincidental</button>
+</div>
+<div class="feedback-block" id="feedback-5">
+<div class="feedback-headline" id="feedback-text-5"></div>
+<div class="feedback-detail" id="feedback-detail-5"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-5" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 6: Source Literacy -->
+<section class="slide" data-slide="6">
+<div class="slide-inner">
+<div class="slide-label">Module 03 · Slide 06</div>
+<h1 class="slide-title">Source Literacy</h1>
+<div class="slide-body">
+<p>Media literacy depends substantially on source literacy — the capacity to evaluate not just what a source is saying but what kind of source it is, what interests it serves, what its track record looks like, and what its methodology for arriving at claims actually is. Most people evaluate sources primarily on whether they agree with the source's conclusions. This is the opposite of useful.</p>
+<p>A source that tells you what you already believe is the source you least need to scrutinise — you will do that automatically. The sources that require the most active evaluation are the ones whose conclusions you find most convincing: the ones aligned with your existing views, your tribal identity, your emotional needs. Those are the sources where your scrutiny is lowest and where the influence is therefore highest.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The question is not "do I trust this source?" Trust is a feeling. The question is "what is this source's funding, methodology, track record of accuracy, and conflicts of interest?" Those are facts — and they apply regardless of whether you happen to agree with the source's current conclusions.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The four source questions</div>
+<div class="mechanism-body">Four questions applied to any source begin to make its reliability and interests visible. First: who funds this source, and whose interests does that funding align with? Second: what is its methodology — how does it gather and verify information, and is that methodology described and auditable? Third: what is its track record — has it been accurate in the past, and how does it handle corrections when it is wrong? Fourth: what conflicts of interest might shape its conclusions — does it have financial, political, or reputational stakes in particular outcomes? None of these questions produces a verdict. Together they produce a profile that allows more calibrated trust.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Primary sources versus secondary reporting</div>
+<div class="mechanism-body">Most media consumption involves secondary reporting — journalists describing what other sources said, summarising research they read, paraphrasing officials they spoke to. Each layer of secondary reporting introduces selection and interpretation. A claim that becomes widely known through secondary reporting may bear little resemblance to the primary source it originated from — a research paper may have been misread, a quote taken out of context, a nuanced finding simplified into a headline. Tracing claims to primary sources — the original research, the actual document, the full quote — is one of the most reliably informative media literacy practices available.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The credibility transfer problem</div>
+<div class="mechanism-body">Credibility transfers between adjacent claims in ways that can be deliberately exploited. A source with a strong track record on one kind of claim is treated as reliable on adjacent claims where its track record is weaker or its conflicts of interest are greater. A respected scientist commenting on policy. A credible journalist reporting outside their area of expertise. A reliable outlet publishing opinion alongside news. The credibility earned in one domain does not automatically extend to others — but it regularly does in how audiences receive the content. This is why partisan and commercial actors invest in building credibility in non-contested areas before using it in contested ones.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 06</div>
+<div class="scenario-q">You encounter a viral claim shared by a source you generally trust. The claim cites a study from an institute you have not heard of, and no link to the original study is provided. What is the most rigorous response?</div>
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a">Trust it — your source has been reliable before and is unlikely to share misinformation</button>
+<button class="choice" data-answer="b">Trace the claim to the original study, examine the institute's funding and methodology, and evaluate the finding on its own merits — independent of your trust in the sharing source</button>
+<button class="choice" data-answer="c">Distrust it — unverified citations are a common feature of misinformation</button>
+<button class="choice" data-answer="d">Share it with a caveat that you have not verified the original source</button>
+</div>
+<div class="feedback-block" id="feedback-6">
+<div class="feedback-headline" id="feedback-text-6"></div>
+<div class="feedback-detail" id="feedback-detail-6"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-6" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 7: The Scroll as Participation -->
+<section class="slide" data-slide="7">
+<div class="slide-inner">
+<div class="slide-label">Module 03 · Slide 07</div>
+<h1 class="slide-title">The Scroll as Participation</h1>
+<div class="slide-body">
+<p>Scrolling through a social media feed feels passive. It is not. Every moment you spend on the platform, every post you pause on, every link you click, every reaction you leave — all of this is data that trains the algorithm to show you more of what kept you engaged. The scroll is not neutral information consumption. It is active participation in shaping what you see next, in a system designed to show you what keeps you most engaged for the longest time.</p>
+<p>This means that the information environment you inhabit is not the product of journalism or editorial decisions alone. It is substantially a product of your own past emotional responses, recorded and processed by systems designed to maximise engagement rather than to inform. You are, in a specific and literal sense, co-authoring the propaganda environment you consume.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The algorithm does not show you the world. It shows you a model of you — built from your past emotional responses — reflected back at you. The longer you scroll, the more the model tightens, and the further the reflection moves from anything outside your existing responses.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The filter bubble as self-construction</div>
+<div class="mechanism-body">Filter bubbles — information environments curated to show you content aligned with your existing views — are not primarily the product of deliberate manipulation by platform operators. They are substantially the product of your own engagement patterns, amplified by algorithms optimised for retention. Content that confirms your existing views generates more engagement than content that challenges them. The algorithm learns this and produces more confirming content. Over time the bubble tightens, not because someone is censoring alternatives, but because your own responses have selected them out.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Emotional engagement as algorithm training</div>
+<div class="mechanism-body">Every emotional response you have to content — anger, fear, joy, disgust, tribal pride — trains the algorithm to show you more content that generates that response. This creates a feedback loop between your emotional states and your information environment: the more outraged you become at the content you see, the more outrage-generating content the algorithm serves you; the more frightened you become, the more fear-producing content arrives. Your emotional life and your information diet are locked in a mutually escalating relationship that the platform profits from.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The attention cost of awareness</div>
+<div class="mechanism-body">Simply knowing that algorithms shape your feed does not break the feedback loop. The emotional responses that train the algorithm happen faster than conscious awareness — you feel the outrage before you notice you are being shown outrage-generating content. The loop operates at a level below the cognitive engagement that media literacy training addresses. This is why the most effective interventions are structural — changing the conditions of consumption (time limits, deliberate diversification of sources, removing apps from phone) — rather than purely cognitive (knowing how it works but continuing to scroll).</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 07</div>
+<div class="scenario-q">You notice that your social media feed has become increasingly filled with content that makes you feel angry about political opponents. You are aware that algorithms curate your feed based on engagement. You decide to consciously engage less with political content for a week. What is actually happening when you do this?</div>
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a">You are exercising your right to control your information diet — this is straightforward personal choice</button>
+<button class="choice" data-answer="b">You are actively retraining the algorithm by changing the emotional response data you provide — breaking the feedback loop requires structural intervention, not just intention</button>
+<button class="choice" data-answer="c">It will not work — algorithms are designed to pull you back regardless of your intentions</button>
+<button class="choice" data-answer="d">You are avoiding important political information — reduced engagement with political content reduces civic awareness</button>
+</div>
+<div class="feedback-block" id="feedback-7">
+<div class="feedback-headline" id="feedback-text-7"></div>
+<div class="feedback-detail" id="feedback-detail-7"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-7" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 8: Practical Media Literacy -->
+<section class="slide" data-slide="8">
+<div class="slide-inner">
+<div class="slide-label">Module 03 · Slide 08</div>
+<h1 class="slide-title">Practical Media Literacy</h1>
+<div class="slide-body">
+<p>Media literacy is not primarily an intellectual achievement. It is a set of habits — daily practices applied consistently to the actual information environment you inhabit. The gap between understanding how media works and actually changing how you relate to it is significant, and it is not closed by knowledge alone. It requires the deliberate construction of new practices and the gradual modification of existing ones.</p>
+<p>None of the practices below produce certainty or perfect information. They produce something more modest and more durable: a slightly more accurate picture of the territory behind the map, and a slightly less automatic relationship to the emotional states that media environments are designed to produce.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The goal of practical media literacy is not to consume less media or to find the one reliable source. It is to consume media with more of yourself present in the act — noticing what is happening to you as you encounter it, rather than being carried along by it.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The three questions before sharing</div>
+<div class="mechanism-body">Before sharing any piece of content, three questions interrupt the automatic propagation loop. First: have I read beyond the headline? (Most sharing occurs without reading the full article, which is the primary mechanism by which misleading headlines spread true stories.) Second: do I know what kind of source this is, and what its funding and methodology look like? Third: am I sharing because this is accurate and important, or because it confirms something I already believed and generated a feeling I wanted to pass on? The third question is the hardest and the most useful.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Deliberate source diversification</div>
+<div class="mechanism-body">Reading only sources that confirm your existing views produces information that feels like knowledge but functions like propaganda — it produces high confidence in a narrow picture. Deliberate source diversification means regularly reading the strongest versions of perspectives that challenge your own — not fringe or bad-faith sources, but the most credible outlets representing different frameworks. The goal is not balance for its own sake but to maintain enough contact with alternative perspectives that your existing views remain genuinely held rather than reflexively performed.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The emotion-as-signal practice</div>
+<div class="mechanism-body">Treating your emotional response to media content as data about the content rather than simply experiencing it is one of the most valuable practices available. When you notice strong fear, outrage, or tribal pride arriving in response to a story, pause and ask: what in this content produced this feeling, and what does that feeling make me want to do? This is not about suppressing the emotion — it is about using it as a signal that the propagandistic mechanics may be running, and that slowing down to look at the architecture of what you are experiencing is warranted.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 08</div>
+<div class="scenario-q">You have decided to take your media literacy more seriously. What is the single most impactful change you could make to your daily media consumption habits?</div>
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a">Consume less media overall — reducing volume reduces exposure to manipulation</button>
+<button class="choice" data-answer="b">Insert a consistent pause between encountering content and responding to it — in that pause, ask what emotion is being produced and what that emotion is directing you toward</button>
+<button class="choice" data-answer="c">Switch to higher-quality sources — the problem is low-quality media, which better sources resolve</button>
+<button class="choice" data-answer="d">Fact-check everything before accepting it — rigorous verification is the foundation of media literacy</button>
+</div>
+<div class="feedback-block" id="feedback-8">
+<div class="feedback-headline" id="feedback-text-8"></div>
+<div class="feedback-detail" id="feedback-detail-8"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-8" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 9: Completion -->
+<section class="slide" data-slide="9">
+<div class="slide-inner completion-slide">
+<div class="complete-mark">&check;</div>
+<h2 class="complete-title">Module 03 complete.</h2>
+<p class="complete-body">You have examined the attention economy and what it is actually optimised to produce, how to follow the money in media, how to read who benefits from a story, how to analyse what is being hidden through omission, how fear is manufactured and who profits from it, how to evaluate sources rather than just trust or distrust them, how the scroll is not passive consumption but active algorithm training, and the practical habits that build genuine media literacy over time.</p>
+
+<div class="section-heading">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">The attention economy optimises for engagement, not information. The metric is time on platform and emotional activation; truth is irrelevant to the optimisation target.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Following the money means asking: who funds this outlet, who advertises in it, and what narratives align with those interests? Coverage and funding are not independent variables.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">The most revealing part of a story is often what it does not say. Omission is an editorial choice that reflects the narrative frame more honestly than the content that appears.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Fear is manufactured as a product. It is reliable, highly engaging, and drives consumption. The threat does not need to be proportionate to the coverage for the manufacture to succeed.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Source evaluation is a skill, not a list. It requires examining a source&rsquo;s track record, funding, errors, and incentive structure &mdash; applied consistently, including to sources you trust and stories that confirm what you already believe.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">The scroll is not passive consumption &mdash; it is active algorithm training. Every pause and engagement teaches the system what to amplify next.</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+
+<p class="body-text">Before reading any news story this week, identify three things first: who published it, who funds the outlet, and what narrative frame is established in the first two paragraphs. Do this once per day for seven days &mdash; not as a research exercise but as a reading habit. The frame is visible before the facts if you look first.</p>
+
+<p class="body-text">Monthly: pick one topic you feel well-informed about. Find two or three sources whose funding and ownership differ from your usual outlets. Spend thirty minutes reading only those sources on that topic. Note what they see that yours does not, and what they miss that yours covers. The gaps between sources are the curriculum.</p>
+<div class="divider"></div>
+<p class="complete-body" style="font-style:italic;font-family:var(--serif);font-size:19px;">Next: Module 04 — The Hero &amp; The Villain.</p>
+<div class="nav-row" style="justify-content:center;margin-top:48px">
+<button class="nav-btn" onclick="prevSlide()">&larr; Review</button>
+</div>
+</div>
+</section>
+
+<script>
+const feedback = {
+  1: {
+    a: {
+      headline: "Audience preference and economic incentive are not the same thing — and conflating them has consequences.",
+      detail: "People do click more on celebrity content than pension analysis — this is true. But describing this as 'genuine public interest' treats the result of the attention economy's design as an expression of authentic preference. The attention economy is specifically engineered to make certain kinds of content more compelling than others, through emotional intensity, social validation mechanics, and the compulsive design of feeds. The click differential is not a measurement of what audiences care about in any deep sense. It is a measurement of what the system is designed to make irresistible."
+    },
+    b: {
+      headline: "Yes — the economic lesson is the one that shapes future content.",
+      detail: "The website learns precisely one thing from this differential: outrage-generating content produces more revenue than careful analysis. That lesson will be applied consistently, across editorial decisions about what to commission, what to headline, what to promote through the site's own channels, and what to invest in long-term. No individual editorial decision needs to be corrupt. The business model itself is the instruction. Over time, the cumulative effect is a media environment that systematically underproduces important but unengaging content and overproduces emotionally stimulating but less important content."
+    },
+    c: {
+      headline: "Writing quality matters — but it does not explain a fifty-to-one traffic differential.",
+      detail: "Good journalism on serious topics can attract significant audiences. But the structural engagement differential between emotionally vivid content and careful analysis is not primarily a function of writing quality. It is a function of what the attention economy's design makes compelling. A beautifully written pension analysis will attract more traffic than a poorly written one — but it will not attract fifty times the traffic of a mediocre celebrity outrage story, because the engagement mechanics that drive traffic are structural, not qualitative."
+    },
+    d: {
+      headline: "Giving audiences what engagement metrics reveal is not the same as giving them what they want or need.",
+      detail: "The engagement metrics reveal what the attention economy's design makes people click on — which is heavily shaped by emotional intensity, social validation, and the compulsive mechanics of platform design. This is different from what people, asked directly and reflectively, say they want from their information environment. Surveys consistently show that people want more serious, accurate, substantive journalism than they actually consume — the gap between stated preference and actual behaviour is produced by the design of the consumption environment, not by the irrelevance of serious information."
+    }
+  },
+  2: {
+    a: {
+      headline: "Editorial decisions are made by journalists within structures shaped by ownership — these are not independent.",
+      detail: "Individual journalists do make editorial decisions, and most do so in good faith within the frameworks their institutions provide. But those frameworks — what counts as a story, which sources are credible, which angles are appropriate to pursue — are shaped by the institutional culture that ownership produces over time. Ownership change does not need to produce direct editorial interference to produce editorial change. It changes the institutional culture gradually, through hiring, promotion, prioritisation, and the gradual attrition of journalists who do not fit the new environment."
+    },
+    b: {
+      headline: "Yes — structural alignment is how ownership influence operates without instruction.",
+      detail: "The mechanism is gradual and largely invisible: stories that create problems for the new ownership's interests are de-emphasised; the journalists who produce them find their pitches less successful; editors who champion them find themselves less favoured; over time, the institutional culture shifts toward producing content that creates fewer problems for ownership interests. No memo is needed. The selection pressure is sufficient. This is how most real-world ownership influence operates — not through explicit interference but through the slow shaping of what is rewarded and what is not."
+    },
+    c: {
+      headline: "The direction of change being toward less critical coverage of an industry in which the new owner has investments is unlikely to reflect improved balance.",
+      detail: "It is theoretically possible that climate coverage was previously overcritical and the shift represents genuine balance improvement. In the scenario described — ownership by a firm with fossil fuel investments, coverage becoming softer on climate policy — this explanation requires ignoring the structural alignment between the ownership's financial interests and the editorial direction of change. The direction and timing of the shift are relevant context that makes the coincidence explanation very weak."
+    },
+    d: {
+      headline: "Waiting for proof of direct interference applies the wrong standard to how structural influence works.",
+      detail: "Direct editorial interference — documented instructions from owners to editors — is relatively rare and easy to deny. Structural editorial influence — the gradual shaping of institutional culture through selection, reward, and the implicit understanding of what creates problems — produces the same effects without generating evidence of explicit interference. Requiring proof of direct interference before recognising ownership influence means the standard of evidence required is precisely the one that structural influence is designed not to produce. The pattern of change is itself the evidence."
+    }
+  },
+  3: {
+    a: {
+      headline: "Editorial judgement about public interest is not formed in a vacuum.",
+      detail: "The decision that welfare fraud is a more pressing public interest story than tax avoidance many times larger in scale is itself an editorial judgement with a consistent pattern across certain types of outlets. That pattern — scrutiny directed at people at the bottom of the economic hierarchy rather than those at the top — serves identifiable interests and aligns with identifiable ownership and advertiser profiles. Calling it 'genuine editorial judgement' is accurate — and the question of whose interests that judgement consistently serves is still worth asking."
+    },
+    b: {
+      headline: "Yes — the pattern of which misconduct attracts investigation is the most revealing thing here.",
+      detail: "The individual welfare fraud story may be entirely legitimate journalism. The pattern — consistent, sustained investigation of one form of financial misconduct while another form ten times larger receives no comparable scrutiny — reveals the structural framework within which editorial judgement operates. That framework determines whose behaviour is treated as deserving public accountability and whose is treated as unremarkable or too complex to investigate. The pattern is not random. It consistently aligns with the interests of the economic class most represented in media ownership and advertising."
+    },
+    c: {
+      headline: "Tax avoidance investigations have been conducted successfully by many outlets — practical difficulty is not the primary explanation.",
+      detail: "Investigative journalism into corporate tax avoidance is complex and resource-intensive — this is true. It has also been done successfully by numerous outlets, producing significant findings and public impact. The claim that practical difficulty explains the absence of this coverage at outlets that do investigate welfare fraud at comparable resource cost is not convincing. Practical difficulty is often real and often also serves as a convenient explanation for editorial decisions that serve structural interests."
+    },
+    d: {
+      headline: "The question is not whether to add coverage but what the existing pattern reveals.",
+      detail: "Suggesting the outlet should simply add tax avoidance investigations treats the pattern as an oversight rather than a structural feature. The more useful question is why the pattern exists — what about the outlet's ownership, funding, and institutional culture produces consistent scrutiny of one population's financial misconduct and consistent absence of scrutiny of another's. The answer to that question reveals something about whose interests the outlet structurally serves, which is more useful information than a recommendation for editorial expansion."
+    }
+  },
+  4: {
+    a: {
+      headline: "Individual stories are more engaging — and that is precisely how systematic distortion operates.",
+      detail: "Individual narrative stories do help people understand the world — human stories are how we process information and develop empathy. This is not in dispute. The problem is not that individual stories exist but that when individual stories from one group dominate coverage and statistical context is consistently absent, the picture produced is false even though each individual story is true. The mechanism of distortion is not the story — it is the absence of the context that would allow the story to be understood accurately."
+    },
+    b: {
+      headline: "Yes — accurate individual stories combined with absent context produce a systematically false picture.",
+      detail: "No single story in the coverage needs to be inaccurate for the overall picture produced to be false. If the crime was committed, reporting it is accurate journalism. If the statistical context showing lower average crime rates for this community is never reported, the audience has no way to place the individual story in an accurate frame. The pattern of extensive individual coverage combined with absent contextual data systematically constructs the impression of higher criminality without any individual lie. This is how omission works as a narrative tool."
+    },
+    c: {
+      headline: "Statistical data has been reported engagingly when outlets choose to invest in it — practical challenge does not explain consistent absence.",
+      detail: "Statistical journalism, data visualisation, and evidence-based reporting on crime and demographics have been done effectively by many outlets. The claim that the absence of contextual crime statistics reflects practical difficulty rather than editorial choice does not account for why the practical difficulty applies selectively — extensively for contextual data about this group, apparently not for the individual crime story that ran for two weeks. Selective practical difficulty is worth examining as a possible expression of editorial interest."
+    },
+    d: {
+      headline: "Accuracy of the individual story and accuracy of the overall picture are not the same thing.",
+      detail: "The individual story being accurate is the starting point for the analysis, not its conclusion. The question is what picture the pattern of coverage produces — and whether that picture is accurate to the underlying reality. A pattern of accurate individual crime stories combined with consistent absence of the statistical context that would allow those stories to be understood accurately produces a false overall impression without a single false story. Journalism's primary function includes providing accurate overall pictures, not only accurate individual accounts."
+    }
+  },
+  5: {
+    a: {
+      headline: "Official statistics do have limitations — but a systematic twenty-year divergence between statistics and perception requires a different explanation.",
+      detail: "Statistical undercounting of crime is a real methodological issue worth understanding. It does not explain a systematic, long-term divergence between falling recorded crime and rising public perception of danger — particularly when the divergence tracks closely with increased media coverage of violent crime. If undercounting were the explanation, we would expect the statistics to be corrected when more accurate methods are applied. The persistent gap between falling crime and rising fear over two decades points toward a different mechanism: the systematic production of fear by media coverage that serves economic and political interests."
+    },
+    b: {
+      headline: "Yes — this is a textbook case of fear manufacture disproportionate to actual risk.",
+      detail: "The pattern is precisely what the literature on risk perception and media effects would predict: dramatic, vivid, emotionally engaging crime coverage produces fear responses; those responses are tracked in surveys as public perception; the perception diverges from statistical reality because the coverage is not calibrated to statistical risk but to audience engagement. The misperception serves identifiable interests: media outlets gain audiences, politicians gain traction with law-and-order platforms, private security industries gain customers. The fear is not incidental to these interests. It is the product."
+    },
+    c: {
+      headline: "Public perception is important data — about media effects, not about crime rates.",
+      detail: "Public perception of crime is genuinely important information — about what people experience, about community trust, about the political and social consequences of fear. It is not reliable information about actual crime rates, particularly when it has been produced by a media environment systematically optimised to generate engagement through fear. Treating public fear as equivalent to statistical evidence about crime rates conflates the effect of media coverage with evidence about the underlying reality the coverage claims to describe."
+    },
+    d: {
+      headline: "The timing and tracking of the two trends makes coincidence an implausible explanation.",
+      detail: "The correlation between increased media coverage of violent crime and increased public perception of danger, occurring simultaneously with falling actual crime rates, over two decades, is too consistent and too well-documented to be explained by coincidence. The mechanism is well-understood from media effects research: coverage volume and emotional intensity shape perception of prevalence and risk, independently of statistical reality. Describing this as probably coincidental requires ignoring the research literature on how media shapes risk perception."
+    }
+  },
+  6: {
+    a: {
+      headline: "Prior reliability of the sharing source is not a substitute for evaluation of the specific claim.",
+      detail: "A source that has been reliable in the past can share inaccurate information — through their own error, through being misled by a bad source, or through being in a domain where their previous reliability does not apply. More importantly, trust in a source produces exactly the reduction in scrutiny that makes that source the most effective vector for misinformation to reach you. The content most likely to bypass your critical evaluation is the content from sources you already trust. That is when the evaluation is most necessary."
+    },
+    b: {
+      headline: "Yes — this is what source literacy looks like in practice.",
+      detail: "Tracing the claim to the original study tests whether the claim accurately represents what the study actually found — a gap that is frequently significant and sometimes transformative. Examining the institute's funding reveals whose interests are structurally aligned with the research conclusions. Examining the methodology reveals whether the findings are based on rigorous or questionable processes. Evaluating the finding on its own merits rather than on trust in the sharer means applying the analysis to the claim itself rather than to your relationship with whoever passed it on. This is time-consuming and worth doing before the claim travels further."
+    },
+    c: {
+      headline: "Unverified citations are common in legitimate research as well as misinformation — distrust on those grounds alone is too broad.",
+      detail: "The absence of a direct link to the original study is a reason to look for it — not automatically a reason to distrust the claim. Many legitimate pieces of journalism and commentary cite research without linking directly to the primary source. The appropriate response is to locate the primary source and evaluate it, not to conclude on the basis of citation format alone. Automatic distrust of anything that does not provide links applies the wrong criterion and will reject legitimate content along with unreliable content."
+    },
+    d: {
+      headline: "Sharing with a caveat perpetuates the claim's reach without resolving the evaluation problem.",
+      detail: "Adding 'I haven't verified this' to a share seems like responsible hedging but functions differently in practice: the claim travels with its emotional charge intact, reaches a new audience, and the caveat is typically disregarded or forgotten. The share is the mechanism by which unverified claims spread. If the claim is not verified, the responsible action is not to share it with a caveat but to verify it before sharing or not to share it until you can. Caveats are frequently a way to feel responsible while behaving irresponsibly."
+    }
+  },
+  7: {
+    a: {
+      headline: "Personal choice is the right frame — and understanding what the choice is actually doing gives it more effect.",
+      detail: "Describing this as straightforward personal choice is accurate and undersells it. The choice to engage less with political content is not only an assertion of preference — it is an active intervention in a technical system that has been learning from your emotional responses. Understanding that you are retraining an algorithm rather than simply choosing to look away gives the choice more intentionality and makes the structural nature of the intervention clearer. This is not just preference exercise. It is a specific and meaningful action within a system designed to resist it."
+    },
+    b: {
+      headline: "Yes — breaking the loop requires understanding it as a technical system, not just an information environment.",
+      detail: "When you reduce emotional engagement with political content, you are changing the training data that the algorithm uses to model your interests. The algorithm will respond — gradually, over days or weeks — by showing you less of what you have stopped engaging with and more of what you do engage with. This is a structural intervention: you are not just choosing to see less of something, you are actively modifying the system that decides what to show you. That understanding makes the practice more precise and more intentional than 'I'll just scroll less.'"
+    },
+    c: {
+      headline: "Algorithms are designed to maximise engagement — they are not designed to be inescapable.",
+      detail: "The design of algorithmic feeds does include mechanics intended to pull users back — notifications, variable reward schedules, social validation prompts. These are significant and deliberately engineered. They are not insurmountable. Reduced engagement does change what the algorithm serves, over time. The claim that it will not work regardless of intention overstates algorithmic power and understates the genuine effect of changed engagement patterns. The change is gradual, not immediate, which is why structural interventions — removing apps, setting time limits — are often more effective than purely intentional ones."
+    },
+    d: {
+      headline: "A feed engineered to produce outrage about political opponents is not the same as political information.",
+      detail: "The content described — increasingly anger-generating material about political opponents — is engagement-optimised emotional content, not a reliable political information environment. Reducing engagement with it does not reduce civic awareness — it reduces exposure to algorithmically amplified outrage. Genuine civic information is available through many channels that are not dependent on engagement algorithms: direct subscription to news sources, reading primary documents, engaging with local civic institutions. The conflation of algorithmic political feeds with political information is itself a product of the system being described."
+    }
+  },
+  8: {
+    a: {
+      headline: "Reduced volume helps — but less media consumed in the same mode still has the same effects.",
+      detail: "Consuming less media does reduce total exposure to manipulation. It does not change the quality of the engagement with the media consumed. A person who scrolls for one hour instead of three, in the same automatic, unreflective mode, has reduced their exposure but has not changed their relationship to the content they do consume. Volume reduction is a useful first step and does not address the core habit — the automatic, emotionally driven relationship to content — that makes media most effective as a shaping mechanism."
+    },
+    b: {
+      headline: "Yes — the pause is the practice that makes all other media literacy possible.",
+      detail: "The pause between encountering content and responding to it is where everything else in media literacy happens. Without it, knowledge of propaganda mechanics, source literacy, and the attention economy all remain theoretical — the automatic processing has already occurred before the conscious evaluation begins. The pause creates the space in which the questions can actually be asked: what emotion is this producing, what is it directing me toward, whose interests does that direction serve? It does not need to be long. It needs to be consistent. And it needs to come before the share, the click, the emotional investment — not after."
+    },
+    c: {
+      headline: "Higher-quality sources are better — and they do not resolve the habits that make any media consumption unreflective.",
+      detail: "Switching to more credible, methodologically rigorous sources produces better information. It does not change the mode of consumption — the automatic, emotionally driven processing that media literacy is trying to address. A person who consumes high-quality journalism in the same unreflective, emotionally reactive way they consumed low-quality media has better inputs going into the same problematic process. The problem is not only what you read. It is how you read — the presence or absence of the pause that creates space for genuine evaluation rather than automatic absorption."
+    },
+    d: {
+      headline: "Fact-checking is necessary and addresses only one dimension of the problem.",
+      detail: "Fact-checking specific claims is a valuable practice and addresses the question of whether individual assertions are accurate. It does not address narrative architecture (accurate facts in misleading frames), omission (what is not being said), emotional engineering (what states the content is producing and toward what ends), or source interests (whose interests are served by this content). These dimensions of the media literacy problem are not resolved by verifying individual claims. The pause that creates space for all of these questions is more foundational than fact-checking any specific claim."
+    }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c7m2';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course7-module-2-architecture-of-propaganda.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c7m3','1');window.location.href='course7-module-4-hero-villain.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

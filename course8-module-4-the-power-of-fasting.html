@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 8 · Module 4 · The Power of Fasting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:500}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:720px;margin:0 auto;padding:72px 48px 120px}
+.slide-num{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:40px;letter-spacing:.06em}
+.slide h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:32px}
+.slide h1 em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.15rem;line-height:1.75;color:var(--ink);margin-bottom:32px;font-weight:300}
+.body-text{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:24px}
+.divider{width:40px;height:1px;background:var(--accent);margin:40px 0}
+.scenario-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;font-family:var(--sans)}
+.scenario-text{font-family:var(--serif);font-size:1.3rem;font-weight:300;line-height:1.6;margin-bottom:36px;padding-left:20px;border-left:2px solid var(--line)}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.choice{background:transparent;border:1px solid var(--line);padding:18px 22px;text-align:left;cursor:pointer;
+font-family:var(--sans);font-size:.95rem;line-height:1.5;color:var(--ink);transition:all .2s ease;border-radius:2px}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--soft)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback{display:none;border-top:1px solid var(--line);padding-top:28px;margin-top:8px}
+.feedback.visible{display:block;animation:fadeUp .4s ease}
+.feedback-headline{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:10px}
+.feedback-detail{font-size:.95rem;line-height:1.75;color:var(--muted)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{background:none;border:none;font-family:var(--sans);font-size:.9rem;color:var(--muted);cursor:pointer;
+letter-spacing:.04em;padding:8px 0;transition:color .2s}
+.nav-btn:hover:not(:disabled){color:var(--ink)}.nav-btn:disabled{opacity:.2;cursor:default}
+.nav-btn.primary{color:var(--ink);font-weight:500}
+.completion{text-align:center;padding:80px 48px}
+.completion-icon{font-size:3rem;margin-bottom:32px}
+.completion h2{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:20px}
+.completion p{font-size:1rem;line-height:1.8;color:var(--muted);max-width:480px;margin:0 auto 40px}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 08 &middot; Food Is Medicine &middot; Module <strong>04</strong> &middot; The Power of Fasting</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 8 &middot; Food Is Medicine</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c8m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course8-module-6-healing-foods-and-herbs.html">Healing Foods & Herbs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course8-module-7-children-and-family-nutrition.html">Children & Family Nutrition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course8-module-8-detoxing-and-transition.html">Detoxing & Transition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m9" data-mn="9">
+      <span class="sidebar-mod-n">09</span>
+      <a class="sidebar-mod-a" href="course8-module-9-building-your-alkaline-life.html">Your Alkaline Life</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide-1" data-slide="1">
+  <div class="slide-inner">
+    <div class="slide-num">01 / 09</div>
+    <h1>Fasting Is Not <em>Starvation</em></h1>
+    <p class="lead">Every healing tradition in human history has included fasting. Not as punishment. Not as deprivation. As medicine — the body's oldest and most powerful tool for repair, renewal, and restoration.</p>
+    <div class="divider"></div>
+    <p class="body-text">Starvation is involuntary, prolonged, and accompanied by severe nutritional depletion. Fasting is deliberate, time-bounded, and — when approached with knowledge and preparation — an act of profound respect for the body's intelligence. The body knows how to fast. It has been doing it for as long as humans have existed, through the natural cycles of feast and rest that preceded the modern world of constant eating.</p>
+    <p class="body-text">The body in a fed state is a body busy with digestion. The body in a fasted state is a body free to do something it cannot do while digesting: clean, repair, reset. Fasting gives the body what it has rarely had in the modern era — uninterrupted time to heal.</p>
+    <div class="scenario-label">Scenario 01</div>
+    <p class="scenario-text">A friend tells you that fasting is dangerous and the body needs a steady supply of food every few hours to function properly. They have heard that skipping meals causes the body to "go into starvation mode" and store fat. How accurate is this?</p>
+    <div class="choices" data-scenario="1">
+      <button class="choice" data-answer="a">Completely accurate — the body requires food every few hours and fasting triggers fat storage</button>
+      <button class="choice" data-answer="b">Largely a myth — the body has sophisticated mechanisms for managing extended periods without food; "starvation mode" as popularly described does not occur during typical fasting periods and the body uses stored fat effectively during a fast</button>
+      <button class="choice" data-answer="c">Partially true — fasting is fine but must always be accompanied by protein shakes to prevent muscle loss</button>
+      <button class="choice" data-answer="d">True for women but not for men — women's bodies cannot fast safely</button>
+    </div>
+    <div class="feedback" id="feedback-1">
+      <p class="feedback-headline" id="feedback-text-1"></p>
+      <p class="feedback-detail" id="feedback-detail-1"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()" disabled>← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="slide-2" data-slide="2">
+  <div class="slide-inner">
+    <div class="slide-num">02 / 09</div>
+    <h1>Autophagy: The Body <em>Cleans Itself</em></h1>
+    <p class="lead">When you fast, the body does something extraordinary: it turns inward and begins consuming its own damaged cells, broken proteins, and cellular debris. This process — autophagy — is one of the most powerful regenerative mechanisms in the human body.</p>
+    <div class="divider"></div>
+    <p class="body-text">Autophagy means "self-eating" in Greek. When food is absent and insulin levels drop, the body activates this cellular housekeeping programme: it identifies damaged organelles, misfolded proteins, and dysfunctional cells and breaks them down for parts — recycling what is useful and eliminating what is not. The result is cleaner, more efficient cells and the removal of the cellular detritus associated with ageing and disease.</p>
+    <p class="body-text">The discovery and mapping of autophagy won the Nobel Prize in Physiology or Medicine in 2016. Fasting is the primary trigger. Typically, meaningful autophagy begins after 16–18 hours of fasting and deepens significantly after 24 hours. This is not a spiritual claim — it is cellular biology, now one of the most active areas of medical research.</p>
+    <div class="scenario-label">Scenario 02</div>
+    <p class="scenario-text">A sceptic argues that fasting has no proven health benefit and is just a wellness trend. They eat six small meals a day, believing this keeps metabolism high. What does the science of autophagy say in response?</p>
+    <div class="choices" data-scenario="2">
+      <button class="choice" data-answer="a">The sceptic is right — autophagy is a theoretical process with no clinical relevance</button>
+      <button class="choice" data-answer="b">Eating six meals a day keeps insulin elevated continuously, suppressing autophagy entirely — the cellular repair and regeneration that fasting triggers simply cannot occur in a state of constant eating</button>
+      <button class="choice" data-answer="c">Autophagy occurs equally whether you fast or eat frequently — meal timing does not affect it</button>
+      <button class="choice" data-answer="d">Autophagy only occurs during sleep, not during waking fasts</button>
+    </div>
+    <div class="feedback" id="feedback-2">
+      <p class="feedback-headline" id="feedback-text-2"></p>
+      <p class="feedback-detail" id="feedback-detail-2"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="slide-3" data-slide="3">
+  <div class="slide-inner">
+    <div class="slide-num">03 / 09</div>
+    <h1>Intermittent Fasting: <em>The Daily Practice</em></h1>
+    <p class="lead">Intermittent fasting is the most accessible entry point — a daily eating pattern that gives the body a consistent window of repair without requiring prolonged abstention from food.</p>
+    <div class="divider"></div>
+    <p class="body-text">The most common approach is the 16:8 method — a 16-hour fasting window and an 8-hour eating window each day. For most people this simply means finishing the last meal of the day by 7 or 8pm and not eating again until 11am or noon the next day. The sleeping hours count toward the fast, so the adjustment is smaller than it sounds.</p>
+    <p class="body-text">During the fasting window, water, herbal teas, and coconut water are encouraged — hydration supports the detoxification work the body is doing. Within the eating window, the quality of food matters: the deeper the alkaline, natural diet, the more the fasting window is working with rather than against the body's repair processes. Intermittent fasting combined with alkaline eating is one of the most powerful daily practices available.</p>
+    <div class="scenario-label">Scenario 03</div>
+    <p class="scenario-text">Sandra has always eaten breakfast immediately upon waking, believing it is the most important meal of the day. She is interested in intermittent fasting but worried that skipping breakfast will leave her fatigued and unable to concentrate at work. What should she understand?</p>
+    <div class="choices" data-scenario="3">
+      <button class="choice" data-answer="a">Her concern is valid — breakfast is essential for morning cognitive function and skipping it will impair her performance</button>
+      <button class="choice" data-answer="b">The initial adjustment period may involve some hunger, but once the body adapts — typically within one to two weeks — most people report sustained energy and improved mental clarity in the morning fasting state, fuelled by stable fat metabolism rather than glucose spikes</button>
+      <button class="choice" data-answer="c">She should take glucose tablets to maintain blood sugar during the fast</button>
+      <button class="choice" data-answer="d">Intermittent fasting only works for people who are already metabolically healthy — it is not suitable for beginners</button>
+    </div>
+    <div class="feedback" id="feedback-3">
+      <p class="feedback-headline" id="feedback-text-3"></p>
+      <p class="feedback-detail" id="feedback-detail-3"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide-4" data-slide="4">
+  <div class="slide-inner">
+    <div class="slide-num">04 / 09</div>
+    <h1>Extended Fasting: <em>The Deep Clean</em></h1>
+    <p class="lead">Beyond the daily intermittent fast lies deeper territory — the 24, 48, or 72-hour extended fast, where the body moves into a state of profound repair that no supplement or treatment can replicate.</p>
+    <div class="divider"></div>
+    <p class="body-text">After roughly 18–24 hours without food, the body's glycogen reserves are depleted and it shifts fully into fat-burning mode — a metabolic state called ketosis. At this point, the liver converts fat into ketone bodies, which become the primary fuel for the brain and body. Autophagy deepens significantly. Growth hormone levels rise, protecting muscle tissue. The digestive system — rarely given complete rest in modern life — has uninterrupted time to heal its lining.</p>
+    <p class="body-text">Preparation matters for extended fasting: transitioning to lighter, alkaline food in the days before the fast reduces the discomfort of the transition. Staying well hydrated with spring water and herbal teas throughout is essential. And how the fast is broken — gently, with living food — is as important as the fast itself.</p>
+    <div class="scenario-label">Scenario 04</div>
+    <p class="scenario-text">After completing a 48-hour fast, Darius feels exceptional — clear-headed, light, and energised. His gym-going friend insists he must have lost significant muscle mass and warns him never to fast again. Is his friend's concern well-founded?</p>
+    <div class="choices" data-scenario="4">
+      <button class="choice" data-answer="a">Yes — the body begins breaking down muscle after 24 hours without food</button>
+      <button class="choice" data-answer="b">No — during fasting, elevated growth hormone specifically protects lean muscle mass while the body preferentially burns fat and cellular debris; significant muscle loss from a 48-hour fast in a well-nourished person is not supported by evidence</button>
+      <button class="choice" data-answer="c">His friend is correct — extended fasting should only be done with protein supplementation to prevent muscle breakdown</button>
+      <button class="choice" data-answer="d">The clarity and energy he feels are signs of low blood sugar affecting his judgment</button>
+    </div>
+    <div class="feedback" id="feedback-4">
+      <p class="feedback-headline" id="feedback-text-4"></p>
+      <p class="feedback-detail" id="feedback-detail-4"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide-5" data-slide="5">
+  <div class="slide-inner">
+    <div class="slide-num">05 / 09</div>
+    <h1>Dry Fasting: <em>Advanced Territory</em></h1>
+    <p class="lead">Dry fasting — abstaining from both food and water — is the most advanced and powerful form of fasting. It has been practised in spiritual traditions across the world for millennia. It is not for beginners, and it is not to be approached casually.</p>
+    <div class="divider"></div>
+    <p class="body-text">During a dry fast, the body produces what is known as metabolic or endogenous water — water generated from the burning of fat and cellular material. The healing tradition holds that this endogenous water is the purest water the body can receive, coming from within rather than without. It is this internal production of water that some traditions believe accelerates the body's healing processes beyond what wet fasting achieves.</p>
+    <p class="body-text">Short dry fasts — 12 to 24 hours — are practised in Ramadan, Yom Kippur, and numerous indigenous traditions globally. Longer dry fasts exist in more advanced spiritual and healing contexts and should only be undertaken with experience, preparation, and if possible, guidance from someone who has done them safely. The body's response to dry fasting is powerful — which is precisely why wisdom and preparation are essential.</p>
+    <div class="scenario-label">Scenario 05</div>
+    <p class="scenario-text">Having read about dry fasting online, Tomás decides to attempt a 72-hour dry fast with no prior fasting experience. He has not changed his diet beforehand and plans to immediately return to his normal eating habits afterward. What are the primary risks in his approach?</p>
+    <div class="choices" data-scenario="5">
+      <button class="choice" data-answer="a">There are no risks — dry fasting is safe for anyone at any duration</button>
+      <button class="choice" data-answer="b">Without prior fasting experience, dietary preparation, or knowledge of how to read the body's signals, a 72-hour dry fast poses serious risks including severe dehydration, electrolyte imbalance, and inability to recognise when to stop — extended dry fasting requires a foundation of experience</button>
+      <button class="choice" data-answer="c">The only risk is mild discomfort — he should push through it</button>
+      <button class="choice" data-answer="d">Dry fasting is only dangerous if done for more than a week — 72 hours is universally safe</button>
+    </div>
+    <div class="feedback" id="feedback-5">
+      <p class="feedback-headline" id="feedback-text-5"></p>
+      <p class="feedback-detail" id="feedback-detail-5"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="slide-6" data-slide="6">
+  <div class="slide-inner">
+    <div class="slide-num">06 / 09</div>
+    <h1>The Mind During <em>the Fast</em></h1>
+    <p class="lead">Ask anyone who has fasted with intention and they will often describe the same thing: a quality of mental clarity, emotional stillness, and heightened perception that does not come at any other time. This is not coincidence.</p>
+    <div class="divider"></div>
+    <p class="body-text">When the body shifts from glucose to ketones as its primary fuel source, the brain often functions differently — and for many people, better. Ketones are a clean, stable fuel that produces less oxidative stress than glucose. Inflammation decreases. The digestive system's demands on the nervous system quiet down. The result is frequently a state of unusual clarity and focus.</p>
+    <p class="body-text">Every major spiritual tradition has understood this connection between fasting and elevated consciousness — from the 40-day fasts of prophets to the Ramadan fast to the vision quests of indigenous traditions to the meditative fasts of Buddhist and Hindu practice. The body stilled from the labour of digestion turns its energy inward. What is accessed in that space — clarity, insight, connection — has been valued across all of human history. The biology and the spirituality are telling the same story.</p>
+    <div class="scenario-label">Scenario 06</div>
+    <p class="scenario-text">On the second day of a 3-day fast, Yemi reports feeling an unexpected sense of clarity and emotional calm — her thoughts feel sharper and she feels more present than usual. She expected to feel weak and miserable. What explains this?</p>
+    <div class="choices" data-scenario="6">
+      <button class="choice" data-answer="a">She is experiencing the early stages of hypoglycaemia — the clarity is a warning sign she should eat immediately</button>
+      <button class="choice" data-answer="b">Once the body has adapted to fat-burning and ketone production, many people experience reduced inflammation, stable energy, and notable mental clarity — the expectation of misery comes from a glucose-dependent experience; ketone-fuelled experience is often genuinely different</button>
+      <button class="choice" data-answer="c">The feeling is a placebo effect from believing fasting is beneficial</button>
+      <button class="choice" data-answer="d">Clarity during fasting is only experienced by people who are already spiritually advanced</button>
+    </div>
+    <div class="feedback" id="feedback-6">
+      <p class="feedback-headline" id="feedback-text-6"></p>
+      <p class="feedback-detail" id="feedback-detail-6"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="slide-7" data-slide="7">
+  <div class="slide-inner">
+    <div class="slide-num">07 / 09</div>
+    <h1>Breaking the Fast: <em>The Art of the Return</em></h1>
+    <p class="lead">How you break a fast is as important as the fast itself. The body has been in a deeply receptive, repaired state — what you give it first sets the tone for everything that follows.</p>
+    <div class="divider"></div>
+    <p class="body-text">After an extended fast, the digestive system has been at rest and the gut lining is in a sensitive, renewed state. Breaking a fast with heavy, acid-forming food — a burger, a full cooked meal — can cause significant discomfort, digestive distress, and in extreme cases of very prolonged fasting, serious harm (refeeding syndrome). The return to eating should be as gradual and gentle as the fast itself.</p>
+    <p class="body-text">The healing tradition offers clear guidance: begin with fresh fruit juice or coconut water to gently reintroduce sugar and electrolytes. Follow with soft, water-rich fruits — watermelon, papaya, ripe mango. Sea moss gel is an ideal fast-breaker: it is gentle on the gut, rich in minerals, and supports the gut lining directly. Then gradually return to more complex food over the following day. The fast is not truly complete until the return has been done with the same care as the fast.</p>
+    <div class="scenario-label">Scenario 07</div>
+    <p class="scenario-text">After completing a 36-hour fast, Priya celebrates by eating a large meal of rice, beans, fried plantain, and a heavy stew. An hour later she feels bloated, nauseous, and uncomfortable. What went wrong?</p>
+    <div class="choices" data-scenario="7">
+      <button class="choice" data-answer="a">Nothing went wrong — discomfort after breaking a fast is normal and should be ignored</button>
+      <button class="choice" data-answer="b">After 36 hours, her digestive system was in a resting state and her gut lining was sensitised — introducing heavy, complex food immediately overwhelmed a system that needed a gentle, gradual reintroduction beginning with living liquids and soft fruit</button>
+      <button class="choice" data-answer="c">The meal itself was the problem — fried food should never be eaten after fasting</button>
+      <button class="choice" data-answer="d">She broke the fast too soon — 36 hours is not long enough to have required a careful re-feeding approach</button>
+    </div>
+    <div class="feedback" id="feedback-7">
+      <p class="feedback-headline" id="feedback-text-7"></p>
+      <p class="feedback-detail" id="feedback-detail-7"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="slide-8" data-slide="8">
+  <div class="slide-inner">
+    <div class="slide-num">08 / 09</div>
+    <h1>Who Should <em>Approach with Care</em></h1>
+    <p class="lead">Fasting is powerful medicine — and like all powerful medicine, it is not one-size-fits-all. Knowing who benefits and who should proceed with caution is part of the knowledge.</p>
+    <div class="divider"></div>
+    <p class="body-text">Fasting is not appropriate during pregnancy or breastfeeding — the developing child and the nursing body require consistent nourishment that fasting interrupts. Children and adolescents whose bodies are actively growing should not undertake extended fasts. People who are severely underweight or have a history of eating disorders should approach fasting only with professional guidance. Those managing conditions such as Type 1 diabetes, adrenal fatigue, or kidney disease require medical supervision before fasting.</p>
+    <p class="body-text">People taking medication should be particularly careful — certain medications must be taken with food, and others affect blood glucose in ways that fasting can make dangerous. The body's signals during a fast are information: persistent dizziness, heart palpitations, severe weakness, or confusion are signals to break the fast gently and seek guidance — not signals to push through. The fast should always serve the body. The moment it does not, it ends.</p>
+    <div class="scenario-label">Scenario 08</div>
+    <p class="scenario-text">Jerome is enthusiastic about fasting after learning about its benefits. He is managing Type 2 diabetes with medication and wants to begin a 3-day extended fast immediately, without telling his doctor. What is the most important thing he should understand before proceeding?</p>
+    <div class="choices" data-scenario="8">
+      <button class="choice" data-answer="a">His enthusiasm is well-placed — fasting is particularly beneficial for Type 2 diabetes and he should start immediately</button>
+      <button class="choice" data-answer="b">Fasting powerfully affects blood glucose levels, and his diabetes medication is calibrated to his current eating pattern — fasting without medical supervision creates a serious risk of dangerous hypoglycaemia; his doctor needs to be involved in adjusting his medication before he begins</button>
+      <button class="choice" data-answer="c">He should replace his medication with herbal remedies before attempting the fast</button>
+      <button class="choice" data-answer="d">Type 2 diabetes disqualifies him from fasting entirely — he should not attempt it under any circumstances</button>
+    </div>
+    <div class="feedback" id="feedback-8">
+      <p class="feedback-headline" id="feedback-text-8"></p>
+      <p class="feedback-detail" id="feedback-detail-8"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: COMPLETION -->
+<div class="slide" id="slide-9" data-slide="9">
+  <div class="slide-inner">
+    <div class="completion">
+      <div class="completion-icon">◈</div>
+      <h2>Module 4 Complete</h2>
+      <p>You now understand fasting as the body's oldest medicine — what autophagy is and why it matters, how intermittent and extended fasting work, what the fast does to the mind, how to break it with care, and who should approach it thoughtfully. This is knowledge that has been passed down across every healing tradition on earth.</p>
+      <p style="margin-top:16px;font-size:.9rem;color:var(--muted)">Course 08 &middot; Food Is Medicine &middot; Module 04 of 09</p>
+
+<div class="section-heading" style="margin-top:40px">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">Fasting is not starvation &mdash; it is the deliberate creation of a window in which the body shifts from digestion to repair. These are different metabolic states, and the body needs both.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Autophagy &mdash; the body&rsquo;s cellular self-cleaning process &mdash; is activated during fasting. Old, damaged, and dysfunctional cellular material is broken down and recycled. This cannot happen effectively in a constant state of feeding.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Intermittent fasting is a daily practice of time-restricted eating. Extending the overnight fast to sixteen hours gives the body a reliable, recurring repair window without requiring extended deprivation.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Extended fasting goes deeper. Beyond twenty-four hours, the body enters more intensive repair states &mdash; addressing cellular debris, recalibrating hormones, and resetting inflammatory baselines.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The mind changes during a fast. The initial discomfort gives way to clarity, reduced noise, and a different quality of awareness. This is not coincidence &mdash; it is a shift in the body&rsquo;s metabolic and neurochemical state.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">Breaking the fast correctly matters as much as the fast itself. What you eat first, and how much, determines whether the repair window closes gently or is overwhelmed.</span></li>
+</ol>
+<div class="section-heading">Practice this week</div>
+<p class="body-text">This week, extend your overnight fast by two hours &mdash; simply delay your first meal by two hours from when you would normally eat. Do this for five days. Notice the quality of your hunger when you do eat, any changes in mental clarity in the extended morning window, and whether the adjustment is easier or harder than you expected. You are not committing to anything beyond this week.</p>
+<p class="body-text">Monthly: if the weekly extension feels sustainable, extend the eating window to an eight-hour period once a week. Note the physical and mental texture of the fasting hours. The body has a great deal to communicate when it is not occupied with digestion &mdash; learning to read that communication is the ongoing practice.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const feedback = {
+  1:{
+    a:{headline:"The 'starvation mode' myth has been significantly overstated.",detail:"The idea that missing a meal causes the body to panic and store fat is not supported by physiology. The body has extensive glycogen stores in the liver and muscles, plus virtually unlimited fat reserves, to draw on during periods without food. Metabolic adaptation does occur during very prolonged fasting — weeks, not hours — but during typical fasting periods the body burns stored fuel efficiently without triggering meaningful muscle breakdown or fat storage."},
+    b:{headline:"Correct. The body is designed for periods without food — it manages them with remarkable sophistication.",detail:"The human body evolved in conditions where food was not always available. It developed precise mechanisms for burning stored glycogen, then fat, then — as a last resort after prolonged deprivation — muscle tissue. During fasting periods of 16 to 72 hours, a well-nourished body primarily burns fat, produces ketones for brain fuel, and activates autophagy. Far from 'starvation mode,' this is the body operating in one of its most well-designed states."},
+    c:{headline:"Protein shakes during a fast defeat the purpose — the fast requires absence of food, including protein.",detail:"Consuming protein during a fasting window stimulates insulin and mTOR pathways that suppress autophagy — precisely the mechanism fasting is intended to activate. The concern about muscle loss during typical fasting periods is largely unfounded in well-nourished people, and adding protein to 'protect' muscles interrupts the cellular repair processes that make fasting valuable."},
+    d:{headline:"There is no meaningful biological basis for a sex-based difference in fasting safety.",detail:"Both male and female bodies have glycogen stores and fat reserves. Both benefit from autophagy. Both can fast safely. There are some considerations — hormonal sensitivity in women with certain conditions may warrant a more gradual approach — but the blanket claim that women cannot fast safely is not supported by evidence and has discouraged many women from a practice with genuine benefits for them."}
+  },
+  2:{
+    a:{headline:"Autophagy's clinical relevance is why it won the Nobel Prize.",detail:"The 2016 Nobel Prize in Physiology or Medicine was awarded specifically for the discovery of autophagy mechanisms. This is not a fringe or theoretical finding — it is central to understanding cellular ageing, neurodegeneration, cancer, and immunity. The clinical relevance is established and actively being researched for therapeutic applications."},
+    b:{headline:"Correct. Constant eating keeps the body in a state that permanently suppresses cellular repair.",detail:"Insulin — elevated whenever carbohydrates or protein are eaten — directly inhibits autophagy. Eating six small meals a day, while often promoted for metabolic health, keeps insulin elevated throughout the day with minimal gaps. The cellular housekeeping that requires low insulin and fasted conditions never has an opportunity to run. This is not about the six-meal approach being harmful in other ways — it is specifically about what it prevents: the regular cellular reset that fasting enables."},
+    c:{headline:"Autophagy is directly regulated by feeding state — it does not occur equally at all times.",detail:"The primary switches for autophagy are nutrient sensors — mTOR (activated by protein and carbohydrates) and AMPK (activated by energy depletion). When nutrients are present and mTOR is active, autophagy is suppressed. When nutrients are absent and AMPK is elevated, autophagy is activated. Meal timing is one of the most direct regulators of this process."},
+    d:{headline:"Autophagy occurs during waking fasts as well as sleep — it is triggered by nutrient absence, not sleep itself.",detail:"Sleep does contribute to autophagy because the body is typically in a fasted state during sleep. But the trigger is the fasted state, not sleep specifically. Extending the fasting window beyond sleep — as in intermittent fasting — extends and deepens the autophagic process. The mechanism is nutrient sensing, not circadian rhythm, though the two work together."}
+  },
+  3:{
+    a:{headline:"The 'breakfast is most important' claim has weaker scientific support than its marketing would suggest.",detail:"The widespread belief that breakfast is essential for cognitive function originated largely from studies funded by cereal companies. Independent research has found that many people function at least as well, and often better, after an overnight fast extended into the morning. The brain in a fasted state running on ketones often experiences more stable energy than the glucose-spike-and-crash pattern of an early carbohydrate-heavy breakfast."},
+    b:{headline:"Correct. Adaptation takes weeks, not months — and what emerges is often superior to the previous state.",detail:"The initial adjustment to intermittent fasting typically involves some hunger signals in the first one to two weeks as the body recalibrates its expectations and hormone patterns. Once adapted, most people report that the morning fasting period is characterised by stable, clean energy — fuelled by fat metabolism rather than the blood sugar fluctuations of habitual early eating. The cognitive clarity that often accompanies this adapted state is one of the most commonly reported and valued benefits."},
+    c:{headline:"Glucose tablets during a fast defeat its purpose and are unnecessary in a healthy person.",detail:"A healthy person who has not eaten for 16 hours is not at risk of hypoglycaemia — the body's gluconeogenesis and fat metabolism systems maintain adequate blood glucose without external supplementation. Glucose tablets are for medical emergencies involving insulin overdose or Type 1 diabetes, not for managing typical morning fasting."},
+    d:{headline:"Intermittent fasting is often most beneficial as an entry point for people new to fasting.",detail:"The 16:8 approach is specifically designed as an accessible, low-barrier introduction to fasting that does not require dramatic disruption of daily life. It is appropriate for most healthy adults as a starting practice. People with specific medical conditions should seek guidance, but 'metabolic health' is not a prerequisite for beginning a modest daily fasting practice."}
+  },
+  4:{
+    a:{headline:"The body does not preferentially break down muscle during short-to-medium duration fasting.",detail:"Muscle protein breakdown does occur during fasting, but it is not the first or primary fuel source. The body preferentially burns glycogen, then fat. Significant muscle catabolism from short-term fasting is not supported by evidence in well-nourished individuals — and the elevation of growth hormone during fasting actively works to preserve lean tissue. The fear of muscle loss from 48 hours of fasting is disproportionate to the actual physiology."},
+    b:{headline:"Correct. Growth hormone specifically protects muscle while fat and cellular debris are burned.",detail:"One of the well-documented physiological responses to fasting is a significant increase in growth hormone — by as much as fivefold during the first 24 hours. Growth hormone preferentially signals muscle preservation while fat mobilisation increases. The body's priority during a moderate fast is to preserve functional tissue while clearing damaged material and burning stored fuel. Darius's friend's concern, while common, misrepresents the physiology."},
+    c:{headline:"Protein during an extended fast interrupts ketosis and autophagy — the very mechanisms producing Darius's results.",detail:"Adding protein supplementation to an extended fast converts it into something else — the elevated amino acids trigger insulin and mTOR responses that suppress both ketosis and autophagy. The profound repair and clarity Darius experienced at 48 hours would not have been possible with regular protein intake throughout."},
+    d:{headline:"Mental clarity and physical lightness at 48 hours are consistent with ketosis, not hypoglycaemia.",detail:"Hypoglycaemia produces confusion, trembling, cold sweats, and anxiety — a very different experience from the clear, light, energised state Darius describes. By 48 hours into a fast, a healthy body is deeply ketogenic: the brain is running on stable ketone fuel and blood glucose is maintained via gluconeogenesis. The clarity is not a warning sign — it is a well-documented feature of extended fasting."}
+  },
+  5:{
+    a:{headline:"Dry fasting carries genuine physiological risks that escalate with duration and inexperience.",detail:"Without water, the body's ability to regulate temperature, flush metabolic waste, and maintain blood pressure is significantly reduced. Severe dehydration can develop within 24 hours in hot conditions or with physical activity. For someone with no fasting experience, no dietary preparation, and no knowledge of the body's signals during a fast, 72 hours without water is a serious risk regardless of the tradition's ultimate validity."},
+    b:{headline:"Correct. Advanced practices require a foundation — jumping to the deep end without preparation is not courage, it is risk.",detail:"Extended dry fasting is practised safely in traditions that build toward it gradually — beginning with shorter wet fasts, developing body awareness, preparing through dietary change, and undertaking longer fasts in appropriate conditions with guidance. Tomás is attempting to skip every step of that progression. The tradition that validates dry fasting also validates the preparation it requires. The power of the practice and the danger of the unprepared approach are not contradictions — they are the same truth from two angles."},
+    c:{headline:"Discomfort during dry fasting is not always harmless — some signals require stopping.",detail:"The healing tradition distinguishes between the discomfort of the body releasing stored toxins — which is expected and can be moved through — and the distress signals of the body approaching a physiological limit. Persistent dizziness, heart palpitations, confusion, and extreme weakness during a dry fast are signals to break the fast, not push through. Inexperience makes it impossible to reliably distinguish between these two states."},
+    d:{headline:"There is no universally safe duration for dry fasting in an unprepared person.",detail:"Safety in dry fasting depends on prior fasting experience, dietary preparation, body condition, ambient temperature, hydration status before beginning, and the ability to read the body's signals. A blanket duration claim — '72 hours is universally safe' — is not accurate and ignores all of these variables. Duration alone does not determine safety."}
+  },
+  6:{
+    a:{headline:"The clarity of ketosis is neurologically distinct from hypoglycaemia.",detail:"Hypoglycaemia produces urgency, anxiety, confusion, and impaired judgment — the body's crisis response to insufficient glucose. What Yemi is experiencing is neurologically the opposite: the stable, clean-burning state of a brain running on ketones with reduced inflammatory load. These are measurably different states. The clarity at day two of a fast, in a person who has adapted to it, is not a warning sign."},
+    b:{headline:"Correct. Ketone-fuelled brain function is genuinely different — and often superior — to glucose-dependent function.",detail:"When the body has shifted into ketosis, the brain receives a consistent, inflammation-reducing fuel source that does not fluctuate with meals. The digestive nervous system — which consumes significant neural resources when active — is quiet. Systemic inflammation is reduced. Many people who have only ever eaten regularly have never experienced their brain in this state. Yemi is not imagining it. She is experiencing what the ancient traditions have always described: the mind that emerges when the body is freed from the work of constant digestion."},
+    c:{headline:"The placebo effect does not explain the consistent physiology of ketosis and reduced inflammation.",detail:"While positive expectation can contribute to subjective experience, the neurological and metabolic changes during extended fasting are measurable and consistent across people regardless of prior beliefs about fasting. Ketone levels can be tested. Inflammatory markers decrease measurably. The brain's fuel source literally changes. These are not placebo effects — they are physiological shifts with subjective consequences."},
+    d:{headline:"Mental clarity during fasting is a physiological phenomenon available to anyone whose body has adapted to fat metabolism.",detail:"The clarity of the fasted state is not a spiritual achievement requiring prior spiritual development. It is a metabolic state — accessible to any healthy person who has gone long enough without food and adapted to ketone metabolism. The spiritual traditions that valued fasting recognised this connection between the physiological and the spiritual, but the physiology does not require spiritual credentials."}
+  },
+  7:{
+    a:{headline:"Post-fast discomfort from inappropriate refeeding is not normal — it is avoidable with care.",detail:"Bloating, nausea, and significant discomfort after breaking a fast are signals that the digestive system was overwhelmed. This is not an inherent consequence of fasting — it is a consequence of how the fast was broken. A gentle, graduated return to eating produces none of these symptoms and allows the body to receive the full benefit of the repaired state the fast created."},
+    b:{headline:"Correct. The digestive system needs a graduated return — it cannot go from complete rest to full activity in one meal.",detail:"After 36 hours, the gut lining has been resting and renewing. Digestive enzyme production is reduced. The muscular activity of the intestines has slowed. Introducing a large, complex, mixed meal immediately asks this resting system to perform at full capacity without preparation. The result is exactly what Priya experienced. A fast broken with fresh fruit juice, then soft fruit, then gradually more complex food over the following day, produces a very different experience — and preserves the benefits the fast created."},
+    c:{headline:"It is not just the fried food — the volume and complexity of the entire meal is the issue.",detail:"While fried food is not ideal for breaking a fast, the primary problem is that any large, complex, heavy meal was the wrong choice. The issue is the jump from no food to maximum food, not the specific composition of the meal. Rice and beans alone, in a large quantity, would have produced similar distress."},
+    d:{headline:"Any fast of 12 hours or more warrants care in how it is broken.",detail:"The gut lining begins its rest and renewal process relatively quickly once digestion is complete. Even after an overnight fast of 12–14 hours, breaking with a light, gentle food — fresh fruit rather than a heavy fry-up — produces a better outcome. At 36 hours, the case for a careful return is significantly stronger. Duration matters, but the principle applies to all fasts."}
+  },
+  8:{
+    a:{headline:"Fasting is beneficial for Type 2 diabetes — but medication management during fasting requires medical supervision.",detail:"The enthusiasm is well-placed: fasting and dietary change are among the most effective interventions for Type 2 diabetes and have produced full remission in many cases. But Jerome's current medication is calibrated to his current eating pattern. When he fasts and his blood glucose drops naturally, his medication may push it further — potentially to dangerous levels. This is a known and serious risk. The answer is not to avoid fasting; it is to involve his doctor in safely adjusting his medication as he transitions."},
+    b:{headline:"Correct. Fasting and diabetes medication are a combination that requires medical coordination.",detail:"Drugs like metformin and insulin sensitisers affect how the body responds to blood glucose. During fasting, blood glucose drops through natural fat metabolism. The combination can produce hypoglycaemia — dangerously low blood sugar — in ways that neither fasting nor the medication would produce separately. Jerome's doctor needs to be part of this plan: reducing or temporarily holding certain medications as the fast begins, and monitoring his response. This is not a reason not to fast — it is a reason to fast smartly."},
+    c:{headline:"Replacing medication with herbs without medical involvement while fasting is a dangerous combination.",detail:"Some herbs do influence blood glucose and may be valuable as part of a long-term transition. But replacing medication without medical oversight during a fast creates unpredictable and potentially dangerous blood glucose fluctuations. The transition from pharmaceutical management of Type 2 diabetes toward dietary and herbal management is a legitimate goal — but it requires careful, supervised steps, not abrupt substitution."},
+    d:{headline:"Type 2 diabetes does not disqualify Jerome from fasting — it requires that fasting be done under medical supervision.",detail:"People with Type 2 diabetes can fast, and many have benefited enormously from it. The condition does not prohibit fasting; it adds a layer of responsibility around medication management. With appropriate medical coordination — adjusting medication doses as blood glucose naturally improves during a fast — Jerome can fast safely and may find it one of the most powerful interventions for his condition."}
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById('feedback-text-' + scenarioNum).textContent = fb.headline;
+      document.getElementById('feedback-detail-' + scenarioNum).textContent = fb.detail;
+      document.getElementById('feedback-' + scenarioNum).classList.add('visible');
+      const nextBtn = document.getElementById('next-' + scenarioNum);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function updateProgress() {
+  for (let i = 1; i <= totalSlides; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active','complete');
+    if (i === currentSlide) dot.classList.add('active');
+    else if (i < currentSlide) dot.classList.add('complete');
+  }
+}
+function showSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+updateProgress();
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c8m3';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course8-module-3-the-alkaline-body.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c8m4','1');window.location.href='course8-module-5-what-junk-food-does-to-you.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

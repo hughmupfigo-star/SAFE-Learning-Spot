@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 8 · Module 7 · Children &amp; Family Nutrition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:500}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:720px;margin:0 auto;padding:72px 48px 120px}
+.slide-num{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:40px;letter-spacing:.06em}
+.slide h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:32px}
+.slide h1 em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.15rem;line-height:1.75;color:var(--ink);margin-bottom:32px;font-weight:300}
+.body-text{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:24px}
+.divider{width:40px;height:1px;background:var(--accent);margin:40px 0}
+.scenario-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;font-family:var(--sans)}
+.scenario-text{font-family:var(--serif);font-size:1.3rem;font-weight:300;line-height:1.6;margin-bottom:36px;padding-left:20px;border-left:2px solid var(--line)}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.choice{background:transparent;border:1px solid var(--line);padding:18px 22px;text-align:left;cursor:pointer;
+font-family:var(--sans);font-size:.95rem;line-height:1.5;color:var(--ink);transition:all .2s ease;border-radius:2px}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--soft)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback{display:none;border-top:1px solid var(--line);padding-top:28px;margin-top:8px}
+.feedback.visible{display:block;animation:fadeUp .4s ease}
+.feedback-headline{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:10px}
+.feedback-detail{font-size:.95rem;line-height:1.75;color:var(--muted)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{background:none;border:none;font-family:var(--sans);font-size:.9rem;color:var(--muted);cursor:pointer;
+letter-spacing:.04em;padding:8px 0;transition:color .2s}
+.nav-btn:hover:not(:disabled){color:var(--ink)}.nav-btn:disabled{opacity:.2;cursor:default}
+.nav-btn.primary{color:var(--ink);font-weight:500}
+.completion{text-align:center;padding:80px 48px}
+.completion-icon{font-size:3rem;margin-bottom:32px}
+.completion h2{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:20px}
+.completion p{font-size:1rem;line-height:1.8;color:var(--muted);max-width:480px;margin:0 auto 40px}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 08 &middot; Food Is Medicine &middot; Module <strong>07</strong> &middot; Children &amp; Family Nutrition</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 8 &middot; Food Is Medicine</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c8m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course8-module-6-healing-foods-and-herbs.html">Healing Foods & Herbs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course8-module-7-children-and-family-nutrition.html">Children & Family Nutrition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course8-module-8-detoxing-and-transition.html">Detoxing & Transition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m9" data-mn="9">
+      <span class="sidebar-mod-n">09</span>
+      <a class="sidebar-mod-a" href="course8-module-9-building-your-alkaline-life.html">Your Alkaline Life</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide-1" data-slide="1">
+  <div class="slide-inner">
+    <div class="slide-num">01 / 09</div>
+    <h1>Nourishing the Child <em>Before Birth</em></h1>
+    <p class="lead">The foundation of a child's health is laid before they take their first breath. What a mother eats during pregnancy becomes the building material for a new human being — from the first cells to the brain, the organs, the immune system, and the gut microbiome.</p>
+    <div class="divider"></div>
+    <p class="body-text">The gut microbiome of a newborn is seeded directly from the mother — during birth and through breastfeeding. A mother who has eaten alkaline, mineral-rich food throughout pregnancy transmits a more diverse and beneficial microbiome to her child. The nutrients available in the womb determine which systems develop to their full potential and which are compromised from the outset.</p>
+    <p class="body-text">Key nutrients for pregnancy from whole food sources: folate from dark leafy greens and avocado — essential for neural tube development; iron from sea moss, dark greens, and hemp seeds — essential for blood building and oxygen delivery to the developing child; calcium from figs, kale, and sesame seeds; omega-3 from walnuts and hemp seeds for brain development. Nature provides everything required in the foods the tradition celebrates.</p>
+    <div class="scenario-label">Scenario 01</div>
+    <p class="scenario-text">A pregnant woman is told by her midwife to take a folic acid supplement and eat "a balanced diet including plenty of dairy and meat." A nutritional practitioner suggests a plant-based alkaline approach can provide everything she needs. Which is more accurate?</p>
+    <div class="choices" data-scenario="1">
+      <button class="choice" data-answer="a">The midwife is correct — pregnancy requires animal products for adequate nutrition</button>
+      <button class="choice" data-answer="b">A well-planned alkaline plant-based diet provides all nutrients essential in pregnancy — folate from greens, iron from sea moss and dark greens, calcium from figs and kale, omega-3 from hemp and walnuts — and avoids the acid-forming burden of a heavy meat and dairy diet</button>
+      <button class="choice" data-answer="c">Pregnant women should not change their diet — stability matters more than quality during pregnancy</button>
+      <button class="choice" data-answer="d">Plant-based diets are unsafe during pregnancy due to protein and B12 deficiency risk</button>
+    </div>
+    <div class="feedback" id="feedback-1">
+      <p class="feedback-headline" id="feedback-text-1"></p>
+      <p class="feedback-detail" id="feedback-detail-1"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()" disabled>← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="slide-2" data-slide="2">
+  <div class="slide-inner">
+    <div class="slide-num">02 / 09</div>
+    <h1>Breast Milk: <em>The First Medicine</em></h1>
+    <p class="lead">Breast milk is not simply nutrition — it is a living biological fluid containing immune antibodies, beneficial bacteria, growth factors, and hundreds of bioactive compounds that no formula has ever replicated. It is the first gift of the alkaline tradition.</p>
+    <div class="divider"></div>
+    <p class="body-text">Colostrum — the first milk produced in the days after birth — is one of the most immunologically concentrated substances in nature. It contains IgA antibodies that coat the infant gut lining, protecting it from pathogens before the immune system is fully active. It seeds the infant microbiome. It provides prebiotics — human milk oligosaccharides — that feed the beneficial bacteria arriving through the birth canal.</p>
+    <p class="body-text">The nutritional quality of breast milk is directly influenced by the mother's diet. A mother eating sea moss, dark leafy greens, hemp seeds, fresh fruits, and herbs provides milk rich in the minerals, fatty acids, and bioactive compounds her infant needs. A mother eating predominantly processed food produces milk that still nourishes — the body prioritises the infant — but from a depleted reserve that costs the mother significantly. What she eats does not only feed the baby. It determines what she has left for herself.</p>
+    <div class="scenario-label">Scenario 02</div>
+    <p class="scenario-text">A new mother is exhausted after six weeks of breastfeeding and is considering switching to formula. She is eating mostly toast, cereal, and ready meals because she has no time to cook. A practitioner suggests the exhaustion and the diet are connected. How?</p>
+    <div class="choices" data-scenario="2">
+      <button class="choice" data-answer="a">Breastfeeding exhaustion is hormonal and unrelated to diet</button>
+      <button class="choice" data-answer="b">The body prioritises breast milk production — drawing heavily on the mother's mineral and nutrient reserves. A diet of toast, cereal, and ready meals is severely depleting those reserves, contributing directly to her exhaustion; nourishing herself is nourishing both of them</button>
+      <button class="choice" data-answer="c">She should switch to formula immediately — her diet makes her milk nutritionally inadequate</button>
+      <button class="choice" data-answer="d">The exhaustion is from sleep deprivation only — diet cannot affect energy levels significantly at this stage</button>
+    </div>
+    <div class="feedback" id="feedback-2">
+      <p class="feedback-headline" id="feedback-text-2"></p>
+      <p class="feedback-detail" id="feedback-detail-2"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="slide-3" data-slide="3">
+  <div class="slide-inner">
+    <div class="slide-num">03 / 09</div>
+    <h1>First Foods: <em>What You Offer First Matters</em></h1>
+    <p class="lead">The foods a child encounters first — around six months of age — begin to shape the palate, the gut microbiome, and the appetite patterns they will carry for life. This is one of the most powerful nutritional windows available to a parent.</p>
+    <div class="divider"></div>
+    <p class="body-text">The alkaline tradition's approach to first foods: begin with soft, naturally sweet, mineral-rich whole foods. Ripe avocado, mashed banana, papaya, ripe mango, mashed sweet potato, and well-cooked spelt or teff porridge are ideal first foods. They are easy to digest, rich in minerals and healthy fats, and introduce flavours the body was designed to receive. Sea moss gel blended into a puree adds a mineral density that no manufactured baby food can match.</p>
+    <p class="body-text">The dominant commercial alternative — rice cereal — is one of the poorest first food choices available. It is a refined, nutritionally empty carbohydrate with a very high glycaemic index. It has been found to contain elevated levels of inorganic arsenic from paddy field cultivation. And it introduces the child's first food experience as one of bland, refined starch — beginning the conditioning toward processed, flavourless food from the very first meal. The first bite matters.</p>
+    <div class="scenario-label">Scenario 03</div>
+    <p class="scenario-text">A health visitor recommends a new mother begin her six-month-old on baby rice cereal as the first solid food, describing it as "gentle on the digestive system." A nutritional practitioner disagrees. What is the case against rice cereal as a first food?</p>
+    <div class="choices" data-scenario="3">
+      <button class="choice" data-answer="a">Rice cereal is the ideal first food — it is universally recommended for a reason</button>
+      <button class="choice" data-answer="b">Rice cereal is a refined, mineral-stripped carbohydrate with a high glycaemic index and documented arsenic contamination risk — whole food alternatives like avocado, papaya, and sweet potato are gentler, more nutritious, and begin the child's relationship with real food from the first meal</button>
+      <button class="choice" data-answer="c">The specific first food doesn't matter at six months — the baby will accept anything</button>
+      <button class="choice" data-answer="d">Rice cereal is fine as a first food as long as it is organic</button>
+    </div>
+    <div class="feedback" id="feedback-3">
+      <p class="feedback-headline" id="feedback-text-3"></p>
+      <p class="feedback-detail" id="feedback-detail-3"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide-4" data-slide="4">
+  <div class="slide-inner">
+    <div class="slide-num">04 / 09</div>
+    <h1>The Taste <em>Preference Window</em></h1>
+    <p class="lead">Children develop their primary taste preferences in the first two years of life. What they eat regularly during this window becomes what they think food is supposed to taste like. This window, once closed, is much harder to reopen.</p>
+    <div class="divider"></div>
+    <p class="body-text">Research in developmental nutrition consistently shows that repeated early exposure to a flavour dramatically increases acceptance of it. Children who are regularly offered bitter greens, varied fruits, and naturally flavoured whole food develop a palate that welcomes these foods. Children whose early food experience is dominated by sweet, processed baby food — often containing artificial flavours designed to be highly palatable — develop expectations of food that natural food cannot meet.</p>
+    <p class="body-text">This is not about forcing children to eat things they dislike. It is about consistent, gentle, repeated exposure before preferences are fully fixed. Offering a small piece of kale alongside the mango. Blending sea moss into the smoothie they already love. Introducing bitter herbs as tea from infancy. The window is a gift — it is much easier to build a healthy palate in a child than to rebuild one in an adult who has spent decades eating industrial food.</p>
+    <div class="scenario-label">Scenario 04</div>
+    <p class="scenario-text">A parent of an 18-month-old offers only foods the child immediately accepts — mostly sweet fruits, yogurt, and plain pasta — to avoid conflict at mealtimes. A nutritional practitioner suggests this approach may create long-term challenges. Why?</p>
+    <div class="choices" data-scenario="4">
+      <button class="choice" data-answer="a">The parent is doing the right thing — children should always eat what they enjoy and will eventually expand their palate naturally</button>
+      <button class="choice" data-answer="b">Consistently offering only immediately accepted foods during the taste preference window closes it — the child's palate becomes fixed around sweetness and blandness at precisely the age when repeated gentle exposure would most effectively build acceptance of diverse, nourishing flavours</button>
+      <button class="choice" data-answer="c">Dietary variety only matters after age five — the first two years are nutritionally straightforward</button>
+      <button class="choice" data-answer="d">The child will self-regulate and choose a balanced diet when given free access to all foods</button>
+    </div>
+    <div class="feedback" id="feedback-4">
+      <p class="feedback-headline" id="feedback-text-4"></p>
+      <p class="feedback-detail" id="feedback-detail-4"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide-5" data-slide="5">
+  <div class="slide-inner">
+    <div class="slide-num">05 / 09</div>
+    <h1>Navigating <em>the Outside World</em></h1>
+    <p class="lead">A child raised on natural food will encounter a world full of junk food — at school, at birthday parties, at friends' houses, in every shop. How you prepare them for this determines whether your work at home holds or unravels.</p>
+    <div class="divider"></div>
+    <p class="body-text">The goal is not to raise a child who is frightened of food or socially isolated at birthday parties. It is to raise a child who understands — at an age-appropriate level — why their family eats the way it does, and who has enough nutritional grounding to make good choices when they are not supervised. Fear-based food education produces rebellion. Knowledge-based food education produces discernment.</p>
+    <p class="body-text">Practical approaches: send nourishing, delicious food to school — food that a child is proud to open, not embarrassed by. Make the alkaline food more appealing than the alternative through variety, colour, and flavour. Teach children what food does to their body in language they understand — "this makes your brain sharp," "this cleans your blood," "this makes you strong." Allow flexibility on social occasions without making exceptions the rule. A child who eats well 80% of the time and understands why is in an excellent position.</p>
+    <div class="scenario-label">Scenario 05</div>
+    <p class="scenario-text">Eight-year-old Jacob has been raised on natural food at home but comes back from a birthday party having eaten cake, crisps, and fizzy drink. His parent is disappointed. How should this be handled?</p>
+    <div class="choices" data-scenario="5">
+      <button class="choice" data-answer="a">The parent should express their disappointment clearly so Jacob understands the seriousness of eating those foods</button>
+      <button class="choice" data-answer="b">This is a normal social experience — the response should be curious and warm rather than disciplinary, asking how he felt afterward and using it as a gentle teaching moment about what the food does, not as a failure</button>
+      <button class="choice" data-answer="c">He should be forbidden from attending birthday parties in future to prevent this happening again</button>
+      <button class="choice" data-answer="d">It doesn't matter — one birthday party has no nutritional significance</button>
+    </div>
+    <div class="feedback" id="feedback-5">
+      <p class="feedback-headline" id="feedback-text-5"></p>
+      <p class="feedback-detail" id="feedback-detail-5"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="slide-6" data-slide="6">
+  <div class="slide-inner">
+    <div class="slide-num">06 / 09</div>
+    <h1>The Whole Family <em>Transition</em></h1>
+    <p class="lead">Changing the way a family eats is one of the most impactful health decisions a household can make. It is also one of the most contested. Success depends less on information than on how the change is introduced.</p>
+    <div class="divider"></div>
+    <p class="body-text">Gradual substitution outperforms sudden elimination. Replacing white rice with quinoa or spelt in the same meal, swapping cow's milk for hemp or coconut milk in a smoothie that already tastes good, introducing sea moss gel into an existing recipe — these are changes that move the family in the right direction without triggering the resistance that comes from announcing everything must change overnight.</p>
+    <p class="body-text">Children who participate in food preparation develop a relationship with real food that children who are simply fed do not. Growing herbs on a windowsill, washing vegetables, blending smoothies, helping to make spelt flatbread — these activities build familiarity, ownership, and curiosity. A child who helped make the food is far more likely to eat it. The kitchen is a classroom. The meal is a lesson. Make both as inviting as possible.</p>
+    <div class="scenario-label">Scenario 06</div>
+    <p class="scenario-text">A mother wants to transition her family to alkaline eating, but her partner is resistant and her children say they will refuse to eat "rabbit food." What approach is most likely to succeed?</p>
+    <div class="choices" data-scenario="6">
+      <button class="choice" data-answer="a">She should immediately clear all processed food from the house and replace it with alkaline alternatives</button>
+      <button class="choice" data-answer="b">Begin with small, unannounced substitutions in existing favourite meals — quinoa instead of white rice, hemp milk in the morning smoothie, sea moss in the soup — building from wins rather than confrontations; involve the children in making the new food delicious</button>
+      <button class="choice" data-answer="c">She should wait until her partner agrees before making any changes</button>
+      <button class="choice" data-answer="d">Change her own diet only and accept that the rest of the family will not join her</button>
+    </div>
+    <div class="feedback" id="feedback-6">
+      <p class="feedback-headline" id="feedback-text-6"></p>
+      <p class="feedback-detail" id="feedback-detail-6"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="slide-7" data-slide="7">
+  <div class="slide-inner">
+    <div class="slide-num">07 / 09</div>
+    <h1>Teenage Bodies, <em>Teenage Needs</em></h1>
+    <p class="lead">Adolescence is one of the most nutritionally demanding periods of life. The body is growing rapidly, hormones are developing, and bone density is being built for the last time. What teenagers eat during these years shapes their bodies for decades.</p>
+    <div class="divider"></div>
+    <p class="body-text">Peak bone density is established during adolescence and early adulthood — primarily between the ages of 10 and 25. The minerals deposited during this window largely determine bone strength for the rest of life. This is the period when a diet rich in calcium, magnesium, and vitamin K from alkaline whole food matters most — and when the bone-depleting acid load of a junk food diet causes its greatest long-term damage.</p>
+    <p class="body-text">Teenage girls face particular risk: iron demands increase significantly with the onset of menstruation, while a diet of processed food provides almost no bioavailable iron. Iron deficiency anaemia — producing fatigue, poor concentration, pale skin, and emotional instability — is extremely common in teenage girls and routinely dismissed as normal. Sea moss, dark leafy greens, hemp seeds, and blackstrap molasses are among the most iron-rich alkaline foods available, and they are what the body needs most during these years.</p>
+    <div class="scenario-label">Scenario 07</div>
+    <p class="scenario-text">A 15-year-old girl has been feeling constantly tired, struggling to concentrate at school, and experiencing heavy periods. Her GP says her iron is "borderline low" but prescribes nothing. Her mother assumes this is just teenage life. What might both be missing?</p>
+    <div class="choices" data-scenario="7">
+      <button class="choice" data-answer="a">Tiredness and poor concentration in teenagers is always due to lack of sleep — iron is unlikely to be relevant</button>
+      <button class="choice" data-answer="b">Borderline iron deficiency in a teenage girl with heavy periods and fatigue is a nutritionally significant finding — iron-rich alkaline foods and removal of the iron-depleting processed diet could make a profound difference to her daily function, and dismissing it as normal teenage tiredness may allow a correctable condition to compound</button>
+      <button class="choice" data-answer="c">She needs iron tablets — food sources of iron are insufficient for the level of deficiency described</button>
+      <button class="choice" data-answer="d">Heavy periods at 15 are a separate gynaecological issue unrelated to nutrition</button>
+    </div>
+    <div class="feedback" id="feedback-7">
+      <p class="feedback-headline" id="feedback-text-7"></p>
+      <p class="feedback-detail" id="feedback-detail-7"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="slide-8" data-slide="8">
+  <div class="slide-inner">
+    <div class="slide-num">08 / 09</div>
+    <h1>Teaching Children to <em>Read Food</em></h1>
+    <p class="lead">The greatest nutritional gift you can give a child is not a perfectly managed diet — it is the knowledge to manage their own. A child who understands food makes better choices for a lifetime. A child who was simply told what to eat is unprotected the moment they leave the house.</p>
+    <div class="divider"></div>
+    <p class="body-text">Food literacy for children does not require teaching biochemistry. It requires age-appropriate language: "this food makes your blood strong," "this food makes it hard for your body to think," "this grows from the earth and your body knows how to use it," "this was made in a factory and has things in it your body has to work hard to manage." Children understand more than adults typically credit them with — and they respond to being trusted with knowledge.</p>
+    <p class="body-text">A child who has been taught to read an ingredient list — and who understands that glucose syrup, modified starch, and E-numbers are not food — is armed. A child who has learned to ask "does this grow from the earth?" before eating has a framework that will serve them in every context, at every age, for the rest of their lives. The food tradition has always been passed down this way: not through institutions, but through families, through kitchens, through the patient work of teaching by example and explanation.</p>
+    <div class="scenario-label">Scenario 08</div>
+    <p class="scenario-text">Ten-year-old Amara asks why she can't have the same crisps her friends have at school. Her parent could simply say no, or could explain. Which response builds the stronger foundation for her health as she grows older?</p>
+    <div class="choices" data-scenario="8">
+      <button class="choice" data-answer="a">Simply saying no and redirecting to an approved snack — too much explanation at ten can create food anxiety</button>
+      <button class="choice" data-answer="b">Explaining in accessible language what the crisps are made of, what they do in the body, why the family eats differently, and what she can have instead — a child who understands the why makes better choices when no one is watching</button>
+      <button class="choice" data-answer="c">Allowing the crisps so she doesn't feel different from her friends — social belonging is more important than nutrition at this age</button>
+      <button class="choice" data-answer="d">Telling her she can have crisps when she is older — delayed access is the best approach for managing food choices in children</button>
+    </div>
+    <div class="feedback" id="feedback-8">
+      <p class="feedback-headline" id="feedback-text-8"></p>
+      <p class="feedback-detail" id="feedback-detail-8"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: COMPLETION -->
+<div class="slide" id="slide-9" data-slide="9">
+  <div class="slide-inner">
+    <div class="completion">
+      <div class="completion-icon">◈</div>
+      <h2>Module 7 Complete</h2>
+      <p>From the nutrition a mother passes in the womb to the knowledge a parent gives a child at the kitchen table — this module covers the full arc of how real food is passed down. Not just as ingredients, but as understanding. That is how traditions survive.</p>
+      <p style="margin-top:16px;font-size:.9rem;color:var(--muted)">Course 08 &middot; Food Is Medicine &middot; Module 07 of 09</p>
+
+<div class="section-heading" style="margin-top:40px">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">The nutritional environment of the womb shapes the child&rsquo;s gut microbiome, immune system, and metabolic tendencies before birth. What a mother eats during pregnancy is the first nutrition the child receives.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Breast milk is not simply food &mdash; it is a living medicine that adapts to the infant&rsquo;s needs, delivers immune factors, and seeds the gut microbiome in ways that no formula can replicate.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">The taste preference window in early childhood is a critical period. The flavours introduced in the first years of life shape food preferences for decades. What you offer first matters enormously.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">The family table is a teaching environment. Children learn what food is, what it means, and what relationship to have with it by watching the adults they live with &mdash; before any explicit instruction begins.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Navigating the outside world &mdash; school meals, parties, peer pressure &mdash; requires giving children understanding, not just rules. A child who knows why real food matters can make better choices when you are not there.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">Teaching children to read food &mdash; to look at an ingredient list and understand what it says &mdash; is a gift that compounds across a lifetime. It is not a restriction; it is literacy.</span></li>
+</ol>
+<div class="section-heading">Practice this week</div>
+<p class="body-text">If you have children in your life: involve one of them in preparing a meal this week. Not a lesson &mdash; a shared activity. Let them handle, smell, and taste the ingredients before they become a dish. The embodied experience of real food is the most durable form of food education, and it begins at the kitchen table.</p>
+<p class="body-text">Monthly: introduce one new whole food this month that the children in your life have not tried before &mdash; or that you have not tried before. Present it without pressure and without commentary about whether it is liked. The goal is exposure and familiarity, not approval. Palates expand through repeated gentle encounter, not instruction.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const feedback = {
+  1:{
+    a:{headline:"The requirement for animal products in pregnancy is not supported by the evidence when the plant-based diet is well-planned.",detail:"Large-scale studies of plant-based pregnancies — including in populations with long traditions of plant-based eating — do not show worse outcomes than omnivorous pregnancies when the diet is nutritionally complete. The British Dietetic Association and American Academy of Nutrition and Dietetics both state that well-planned plant-based diets are appropriate at all stages of life including pregnancy. The requirement for dairy specifically is not supported by evidence."},
+    b:{headline:"Correct. The alkaline plant-based diet provides every essential pregnancy nutrient from whole food sources.",detail:"Dark leafy greens provide folate, calcium, and iron. Sea moss provides iodine, iron, and a spectrum of minerals. Hemp seeds provide complete protein and omega-3. Avocado provides folate and healthy fat. Figs and dates provide calcium, magnesium, and iron. The tradition's food list is, almost exactly, what the developing child needs. The one nutrient requiring attention in a plant-based pregnancy is B12, which is not reliably available in sufficient amounts from plant food and benefits from supplementation — a straightforward and important addition."},
+    c:{headline:"Diet quality during pregnancy has profound and documented effects on foetal development.",detail:"The concept that stability matters more than quality during pregnancy contradicts the evidence on foetal programming — the field documenting how in-utero nutrition shapes lifelong health outcomes. The nutrients available during pregnancy influence brain development, immune function, metabolic set points, and microbiome composition in ways that continue to affect the child decades after birth. Quality of nutrition during pregnancy is among the highest-leverage health decisions a mother can make."},
+    d:{headline:"A well-planned plant-based pregnancy is nutritionally adequate with appropriate attention to B12.",detail:"The primary nutritional consideration in plant-based pregnancy is B12, which is not reliably available from plant food in sufficient amounts and requires supplementation. This is a known, simple, and easily addressed gap. Protein deficiency is not a risk in a varied plant-based diet that includes hemp seeds, quinoa, lentils, and dark greens. The framing of plant-based pregnancy as generically unsafe misrepresents the evidence and the straightforward management of known nutritional considerations."}
+  },
+  2:{
+    a:{headline:"Breastfeeding draws heavily on the mother's nutritional reserves — diet is directly connected to energy.",detail:"The body produces approximately 500 additional calories' worth of milk daily while breastfeeding. These calories and the nutrients they carry come from the mother's diet or, when the diet is insufficient, from her body's stores. A diet of toast, cereal, and ready meals provides energy but almost no minerals, living nutrients, or the healthy fats required to support both milk production and the mother's own recovery from birth. The exhaustion has a clear nutritional explanation."},
+    b:{headline:"Correct. The body protects the milk supply — at the cost of the mother's reserves.",detail:"The biological priority is the infant. When a breastfeeding mother's diet is insufficient, her body draws on its mineral and nutrient stores to maintain milk quality — depleting iron, calcium, magnesium, and essential fatty acids from her own tissues. This is why postpartum depletion is so common in women eating poor diets: the baby receives adequate nutrition; the mother pays the price. Helping her eat well — practically, not just theoretically — nourishes both simultaneously."},
+    c:{headline:"Switching to formula removes the mother's exhaustion trigger but withdraws the infant from the most nutritionally complete food available.",detail:"Breast milk even from a nutritionally depleted mother still contains significant immune benefits — antibodies, beneficial bacteria, human milk oligosaccharides — that formula cannot replicate. The goal is not to stop breastfeeding but to nourish the mother adequately so the cost to her reserves is reduced. Simple, quick-to-prepare alkaline foods — sea moss gel in water, dates, avocado, hemp seed smoothies — can be introduced without requiring cooking time she doesn't have."},
+    d:{headline:"Sleep deprivation and dietary depletion compound each other — both are contributing.",detail:"Sleep deprivation is a real and significant factor in postpartum exhaustion. But it does not explain why the exhaustion is as severe as it is or why it does not improve on days when the baby sleeps longer. Nutritional depletion has its own independent effect on energy production, immune function, and hormonal recovery that sleep alone cannot resolve. Addressing both simultaneously produces outcomes that addressing only one does not."}
+  },
+  3:{
+    a:{headline:"Rice cereal's universal recommendation reflects historical convention rather than nutritional evidence.",detail:"The recommendation of rice cereal as a first food became standard in Western paediatric guidance in the mid-twentieth century — based primarily on its texture and low allergenicity, not its nutritional value. Subsequent research has found it to be nutritionally poor, highly glycaemic, and — in the case of inorganic arsenic content — carrying a specific risk for infants who consume it regularly. The fact that it is widely recommended does not make it the best choice."},
+    b:{headline:"Correct. Rice cereal is one of the least nutritious first foods available — whole food alternatives are superior in every relevant dimension.",detail:"Avocado provides healthy fat essential for brain development, vitamin K, folate, and potassium. Papaya provides digestive enzymes, vitamin C, and beta-carotene. Sweet potato provides beta-carotene, vitamin C, and complex carbohydrates with fibre. All three are gentler on the digestive system than rice cereal and significantly more nutritious. The FDA has specifically warned about inorganic arsenic in rice products for infants. The case against rice cereal as a first food is substantial."},
+    c:{headline:"The specific first food matters profoundly — it begins shaping taste preferences and microbiome composition from the very first meal.",detail:"The first solid food is not nutritionally trivial. It introduces flavours, textures, and microbial substrates that begin to establish what food tastes like and what the gut microbiome is fed. A first meal of ripe papaya introduces the child to natural sweetness, digestive enzymes, and antioxidants. A first meal of bland rice cereal introduces refined starch with almost nothing else. These are different starting points with different trajectories."},
+    d:{headline:"Organic rice cereal still has elevated arsenic risk and remains nutritionally empty.",detail:"Arsenic in rice is absorbed from water and soil during cultivation — a process that affects organic and conventional rice equally. Organic certification reduces pesticide exposure but does not address the arsenic issue. And regardless of arsenic, organic rice cereal is still a refined, nutritionally hollow carbohydrate that provides none of the minerals, healthy fats, or living compounds that whole food first alternatives offer."}
+  },
+  4:{
+    a:{headline:"Children do not naturally expand their palates without repeated deliberate exposure to diverse foods.",detail:"The belief that children will self-expand their dietary range is not supported by developmental nutrition research. Without repeated exposure to a variety of flavours — including bitter, sour, and savoury — during the taste preference window, the palate tends to remain fixed around whatever it was trained on. Children raised primarily on sweet, bland food do not spontaneously develop a taste for kale. The parent who avoids offering challenging foods is not reducing conflict — they are closing a window."},
+    b:{headline:"Correct. The taste preference window is a developmental opportunity — avoiding difficult foods during it narrows it permanently.",detail:"Developmental nutrition research consistently finds that the period between six months and two years is the most receptive window for building dietary variety. Neural pathways for flavour acceptance are more plastic during this time than at any later stage. Consistent avoidance of any food the child doesn't immediately accept during this window does not produce a child who will accept that food later — it produces an adult who finds it genuinely aversive. The investment in repeated, patient, gentle exposure during this window pays lifelong dividends."},
+    c:{headline:"Dietary variety in the first two years has lifelong consequences — it is not a minor consideration.",detail:"The first two years are when the gut microbiome is being established, taste preferences are being wired, and the immune system is being educated by the foods it encounters. These are not processes that can be deferred until age five. The window is open now, and what it is used for shapes the biological baseline the child carries for the rest of their life."},
+    d:{headline:"Free access to all foods without guidance produces preference for the most palatable options — which in the modern food environment means junk food.",detail:"Self-regulation works well in a food environment of whole, natural foods where all options are nourishing. In the modern environment — where ultra-processed foods are specifically engineered to be more immediately rewarding than natural food — children given free access consistently prefer the engineered option. Self-regulation is not a substitute for guidance during the taste preference window."}
+  },
+  5:{
+    a:{headline:"Expressed disappointment makes food a site of shame and failure — the opposite of what builds lasting healthy relationships with eating.",detail:"A child who is made to feel ashamed of normal social participation develops either rebellion against the family food culture or anxiety around eating in social contexts. Neither outcome serves their long-term relationship with food. The birthday party was not a failure to manage — it was a normal childhood experience that provides an opportunity for gentle, curious conversation."},
+    b:{headline:"Correct. Warmth and curiosity after a birthday party builds better food intelligence than disappointment.",detail:"'How did you feel this afternoon?' 'Did the fizzy drink make you feel funny?' 'You might feel a bit rubbish tomorrow — that's what all that sugar does.' These are conversations that build a child's own bodily awareness and connect their food choices to their felt experience. Jacob learns more from being asked how he felt than from being told he did wrong. And a child who is trusted with this kind of conversation trusts the family food culture more, not less."},
+    c:{headline:"Social isolation around food creates the conditions for rebellion and disordered eating.",detail:"Forbidding social occasions to prevent food exposure communicates that normal social participation is dangerous, that the family's food culture is incompatible with the wider world, and that the child's social needs are less important than dietary purity. These are not the foundations of a healthy lifelong relationship with food. The goal is a child who can navigate the world — including birthday parties — with knowledge and discernment, not one who is protected from it."},
+    d:{headline:"One birthday party does not matter nutritionally — but how it is handled does matter for the long-term relationship with food.",detail:"The nutritional impact of one birthday party is genuinely negligible. What matters is the conversation that follows — whether it builds the child's awareness of what food does to their body, or whether it makes food a source of conflict and shame. The practical nutritional answer is: it doesn't matter. The relational and educational answer is: handle it well."}
+  },
+  6:{
+    a:{headline:"Sudden elimination typically produces resistance and conflict that reverses the change.",detail:"Clearing the house of all processed food overnight communicates to a partner and children that their preferences are irrelevant and that change is being imposed rather than shared. The predictable response is resistance — which creates a family dynamic where alkaline eating is associated with conflict rather than wellbeing. The change is less likely to stick, and the family dynamics may suffer in ways that are harder to repair than the diet was to change."},
+    b:{headline:"Correct. Small wins and unannounced substitutions build momentum without triggering resistance.",detail:"When the quinoa tastes good in the dish they already love, when the hemp milk smoothie is something the children ask for again, when the sea moss soup becomes a family favourite — the case for alkaline eating makes itself through experience, not argument. The partner who was resistant is eating differently before they have been asked to. The children who said they would refuse are asking for the smoothie again. Change introduced through pleasure and gradual familiarity is far more durable than change demanded through information and ultimatum."},
+    c:{headline:"Waiting for unanimous agreement means never starting — change often requires a leading edge.",detail:"In family food transitions, one person typically takes the initiative. Waiting for full agreement before making any change gives the most resistant family member a veto over everyone's health. The more effective approach is to begin making changes that are genuinely delicious and unobtrusive — building evidence through experience that the new way is good, not asking for permission before demonstrating it."},
+    d:{headline:"Eating differently from the rest of the family while they continue unchanged is a valid personal choice — but it misses the opportunity for the greater impact of a whole-family shift.",detail:"Personal dietary change is always worth doing. But the family food environment shapes children's eating patterns regardless of what one parent eats. If the household staples remain ultra-processed, children's daily eating is still shaped by that environment. The gradual, strategic introduction of alkaline food into shared family meals reaches everyone without requiring anyone to be convinced first."}
+  },
+  7:{
+    a:{headline:"Sleep matters — but borderline iron deficiency with heavy periods has a clear nutritional explanation that deserves attention.",detail:"The combination of heavy menstrual blood loss, a likely processed-food diet low in bioavailable iron, and a body in a growth phase with increased iron demands is a well-recognised pathway to iron deficiency anaemia in teenage girls. Attributing these symptoms entirely to sleep deprivation without addressing the documented borderline iron finding is clinically incomplete. Sleep and iron are not mutually exclusive factors — both can be true."},
+    b:{headline:"Correct. Borderline iron deficiency in a teenage girl with heavy periods is nutritionally significant — and eminently addressable.",detail:"Iron deficiency is the most common nutritional deficiency globally and the most prevalent nutritional cause of fatigue, cognitive impairment, and mood disruption in teenage girls. 'Borderline low' in the context of heavy periods, rapid growth, and a likely processed-food diet is a meaningful finding that warrants intervention. Sea moss provides iron in a bioavailable mineral matrix. Dark leafy greens provide iron with vitamin C, which enhances absorption. Hemp seeds, blackstrap molasses, and figs are all iron-rich. These are foods — not pharmaceutical interventions — that could make a profound difference to this teenager's daily experience."},
+    c:{headline:"Whole food iron sources are bioavailable and effective — pharmaceutical iron tablets are not the first resort.",detail:"Iron from food arrives in a mineral context that facilitates absorption and avoids the side effects of pharmaceutical iron supplements — constipation, nausea, and gut discomfort — that often cause people to stop taking them. The bioavailability of iron from sea moss and dark leafy greens combined with vitamin C from fresh fruit is excellent. Pharmaceutical iron is appropriate for diagnosed anaemia requiring rapid correction — not the first response to borderline deficiency in an otherwise healthy teenager who has not yet changed her diet."},
+    d:{headline:"Heavy periods and iron deficiency in teenage girls are frequently connected — they are not separate issues.",detail:"Heavy menstrual blood loss increases iron requirements significantly. When the diet provides insufficient iron to replenish what is lost, deficiency follows. The periods and the iron level are not separate — they are cause and effect. Addressing the iron through food while investigating whether the heavy periods have a hormonal dietary component (excess oestrogen from a processed food diet is one documented factor in heavy periods) addresses both sides of the equation."}
+  },
+  8:{
+    a:{headline:"Simple refusal without explanation is a missed educational opportunity and may produce curiosity rather than acceptance.",detail:"A child who is simply told no — without understanding why — is likely to develop a stronger interest in the forbidden food, not less. The mystery of what they are missing is more compelling than the reality of what the crisps actually are. Explanation removes the mystery and replaces it with understanding. Food anxiety does not come from honest, age-appropriate information about what food is — it comes from shame, prohibition, and secrecy."},
+    b:{headline:"Correct. A child who understands the why carries that knowledge into every context where you are not present.",detail:"Every moment Amara is at school, at a friend's house, at a shop, she is making food decisions without her parent. A child equipped only with 'no' is unprotected in all those moments. A child equipped with 'I know what that is made of and I know what it does to my body' has something that travels with her everywhere. The goal of food education is not compliance in the parent's presence — it is competence in the parent's absence. Explanation builds that competence; simple refusal does not."},
+    c:{headline:"Social belonging and nutritional knowledge are not mutually exclusive — and a child can feel confident being different.",detail:"The premise that social belonging requires eating the same food as peers is worth questioning. Children who understand why their family eats differently, and who are confident in that knowledge, are not typically socially isolated — they are often curious to others. A child who can explain what glucose syrup is to a friend is not excluded; they are informed. The social risk of food difference is real but smaller than the risk of sending a child into the world with no food knowledge and no reason to make good choices."},
+    d:{headline:"Deferred access without explanation produces desire, not discipline.",detail:"Telling a child they can have crisps when they are older communicates that the crisps are desirable — so desirable that they must be withheld until adulthood. It builds the food's appeal rather than reducing it. When the deferred access finally arrives, the child — now teenager — has years of built-up desire and no knowledge to replace it with. The result is the opposite of what was intended."}
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById('feedback-text-' + scenarioNum).textContent = fb.headline;
+      document.getElementById('feedback-detail-' + scenarioNum).textContent = fb.detail;
+      document.getElementById('feedback-' + scenarioNum).classList.add('visible');
+      const nextBtn = document.getElementById('next-' + scenarioNum);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function updateProgress() {
+  for (let i = 1; i <= totalSlides; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active','complete');
+    if (i === currentSlide) dot.classList.add('active');
+    else if (i < currentSlide) dot.classList.add('complete');
+  }
+}
+function showSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+updateProgress();
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c8m6';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course8-module-6-healing-foods-and-herbs.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c8m7','1');window.location.href='course8-module-8-detoxing-and-transition.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

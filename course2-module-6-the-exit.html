@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 2 · Module 6 · The Exit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --paper: #fafaf7;
+  --muted: #6b6b66;
+  --line: #d9d9d3;
+  --soft: #f0f0ea;
+  --accent: #c4452d;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; }
+
+.module-header { border-bottom: 1px solid var(--line); padding: 32px 48px 32px 24px; display: grid; grid-template-columns: 1fr auto 1fr; justify-items: start; align-items: baseline; position: sticky; top: 0; background: var(--paper); z-index: 100; backdrop-filter: blur(8px); }
+.module-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.module-tag strong { color: var(--ink); font-weight: 500; }
+.progress-bar { grid-column: 3; justify-self: end; display: flex; gap: 6px; align-items: center; }
+.progress-dot { width: 24px; height: 2px; background: var(--line); transition: background 0.4s ease; }
+.progress-dot.active { background: var(--ink); }
+.progress-dot.complete { background: var(--accent); }
+
+.module-container { max-width: 780px; margin: 0 auto; padding: 80px 48px 120px; }
+.slide { display: none; animation: fadeUp 0.6s ease; }
+.slide.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-number { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 24px; text-transform: uppercase; }
+.slide-title { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.5vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 40px; font-variation-settings: "opsz" 144; }
+.slide-title em { font-style: italic; font-weight: 300; }
+.lead { font-family: var(--serif); font-size: 22px; line-height: 1.5; font-weight: 300; color: var(--ink); margin-bottom: 40px; letter-spacing: -0.01em; }
+.body-text { font-size: 17px; line-height: 1.7; color: #2a2a28; margin-bottom: 24px; max-width: 62ch; }
+.body-text strong { font-weight: 500; color: var(--ink); }
+.section-heading { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 56px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.section-heading::before { content: ''; width: 24px; height: 1px; background: var(--ink); }
+.pullquote { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; font-weight: 300; border-left: 2px solid var(--ink); padding: 8px 0 8px 32px; margin: 48px 0; color: var(--ink); }
+
+.safety-reminder { margin: 40px 0; padding: 22px 26px; background: #1a1a18; color: #e8e8e0; border-left: 2px solid var(--accent); font-size: 14.5px; line-height: 1.65; }
+.safety-reminder strong { color: #fafaf7; font-weight: 500; }
+.safety-reminder .resource { font-family: var(--mono); font-size: 12px; color: #c0c0b8; letter-spacing: 0.02em; }
+
+/* DIAGNOSTIC BLOCKS — page 1 */
+.diagnostic { margin: 28px 0; padding: 28px; background: var(--soft); border-left: 2px solid var(--line); }
+.diagnostic-name { font-family: var(--serif); font-size: 21px; font-style: italic; font-weight: 400; margin-bottom: 10px; line-height: 1.3; }
+.diagnostic-text { font-size: 16px; line-height: 1.65; color: #2a2a28; }
+
+/* ANCHOR BLOCKS — page 2 */
+.anchor { margin: 36px 0; padding: 32px 0; border-top: 1px solid var(--line); }
+.anchor:last-of-type { border-bottom: 1px solid var(--line); }
+.anchor-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 8px; }
+.anchor-name { font-family: var(--serif); font-size: 28px; line-height: 1.15; font-weight: 400; letter-spacing: -0.015em; margin-bottom: 16px; font-style: italic; }
+
+/* TIMELINE — page 4 */
+.timeline { margin: 48px 0; padding: 36px; background: var(--soft); border: 1px solid var(--line); }
+.timeline-header { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.timeline-row { display: grid; grid-template-columns: 100px 1fr; gap: 24px; padding: 16px 0; align-items: baseline; border-bottom: 1px dotted var(--line); }
+.timeline-row:last-child { border-bottom: none; }
+.timeline-week { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.1em; font-weight: 500; }
+.timeline-text { font-family: var(--serif); font-size: 16px; line-height: 1.55; font-style: italic; color: var(--ink); }
+
+/* PRACTICE — page 5, 6 */
+.practice { margin: 28px 0; padding-left: 28px; border-left: 2px solid var(--line); }
+.practice-name { font-family: var(--serif); font-size: 22px; font-style: italic; font-weight: 400; margin-bottom: 10px; line-height: 1.25; }
+.practice-text { font-size: 16px; line-height: 1.65; color: #2a2a28; }
+
+/* SCENARIO + FEEDBACK */
+.scenario { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--line); }
+.scenario-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+.scenario-prompt { font-family: var(--serif); font-size: 24px; line-height: 1.45; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+.scenario-context { font-size: 16px; color: var(--muted); margin-bottom: 32px; font-style: italic; }
+.choices { display: flex; flex-direction: column; gap: 12px; }
+.choice { display: block; width: 100%; text-align: left; background: transparent; border: 1px solid var(--line); padding: 20px 24px; font-family: var(--sans); font-size: 16px; line-height: 1.5; color: var(--ink); cursor: pointer; transition: all 0.25s ease; font-weight: 400; }
+.choice:hover { border-color: var(--ink); background: var(--soft); transform: translateX(2px); }
+.choice-letter { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 14px; letter-spacing: 0.1em; }
+.choice.selected { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.choice.selected .choice-letter { color: var(--paper); opacity: 0.6; }
+.choice:disabled { cursor: default; }
+.choice:disabled:hover { transform: none; }
+.choice.dimmed { opacity: 0.4; }
+
+.feedback { display: none; margin-top: 32px; padding: 32px; background: var(--soft); border-left: 2px solid var(--ink); animation: fadeUp 0.5s ease; }
+.feedback.visible { display: block; }
+.feedback-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.feedback-headline { font-family: var(--serif); font-size: 19px; line-height: 1.5; font-weight: 400; font-style: italic; color: var(--ink); margin-bottom: 16px; }
+.feedback-text { font-family: var(--sans); font-size: 15.5px; line-height: 1.65; color: #2a2a28; }
+
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); }
+.nav-btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; border: none; color: var(--ink); cursor: pointer; padding: 12px 0; transition: opacity 0.2s ease; font-weight: 500; }
+.nav-btn:hover { opacity: 0.6; }
+.nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+.nav-btn.primary { background: var(--ink); color: var(--paper); padding: 16px 32px; }
+.nav-btn.primary:hover { background: #2a2a28; opacity: 1; }
+.nav-btn.primary:disabled { background: var(--line); color: var(--muted); }
+.nav-counter { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+
+.complete-mark { font-family: var(--serif); font-size: 120px; line-height: 1; font-weight: 300; margin-bottom: 32px; color: var(--accent); font-style: italic; }
+.summary-list { list-style: none; margin: 40px 0; }
+.summary-list li { padding: 20px 0; border-bottom: 1px solid var(--line); display: flex; gap: 24px; align-items: baseline; }
+.summary-list li:last-child { border-bottom: none; }
+.summary-num { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; min-width: 32px; }
+.summary-text { font-family: var(--serif); font-size: 18px; line-height: 1.5; font-weight: 400; }
+
+@media (max-width: 640px) {
+  .module-header { padding: 20px 24px; }
+  .module-container { padding: 48px 24px 80px; }
+  .slide-title { font-size: 38px; }
+  .lead { font-size: 19px; }
+  .body-text { font-size: 16px; }
+  .scenario-prompt { font-size: 20px; }
+  .pullquote { font-size: 22px; padding-left: 24px; margin: 32px 0; }
+  .progress-dot { width: 12px; }
+  .complete-mark { font-size: 80px; }
+  .anchor-name { font-size: 24px; }
+  .timeline { padding: 24px; }
+  .timeline-row { grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 02 · Module <strong>06</strong> · The Exit</div>
+  <div class="progress-bar">
+    <div class="progress-dot active"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 2 &middot; Toxic Relationship Patterns</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c2m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course2-module-1-the-patterns-that-predict.html">The Patterns That Predict</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course2-module-2-love-bombing-and-the-initial-mask.html">Love Bombing & The Initial Mask</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course2-module-3-the-micro-aggressions-that-scale.html">Micro-Aggressions That Scale</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course2-module-4-dysfunction-archetypes.html">Dysfunction Archetypes</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course2-module-5-your-role-in-dysfunction.html">Your Role in Dysfunction</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course2-module-6-the-exit.html">The Exit</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course2-module-7-choosing-differently.html">Choosing Differently</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- PAGE 1 -->
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 07 · The Signals</div>
+    <h1 class="slide-title">How to know when it's <em>over.</em></h1>
+
+    <p class="lead">The relationship does not end with the dramatic incident. It ends in a quieter moment, usually weeks or months before the actual leaving — a moment in which you know, with a particular kind of clarity, that the thing you have been working to save has already finished. The dramatic incident, when it comes, is not the ending. It is the body's final insistence that you acknowledge what you already knew.</p>
+
+    <p class="body-text">This module is about that moment, and everything that follows it. Not about whether to leave — that decision, by the time you are reading this module, is almost certainly already forming. <strong>This module is about how to leave without destroying yourself in the leaving, and how to rebuild without immediately recreating the pattern you just escaped.</strong></p>
+
+    <div class="safety-reminder">
+      <strong>If your situation involves physical danger, coercive control, or fear of what your partner will do when you leave</strong> — the exit described in this module is not the right framework for you. Leaving a dangerous relationship requires safety planning with trained professionals. Please reach out before acting:<br><br>
+      <span class="resource">UK · Refuge · 0808 2000 247 (24-hour)</span><br>
+      <span class="resource">UK · Men's Advice Line · 0808 801 0327</span><br>
+      <span class="resource">UK · Galop (LGBT+) · 0800 999 5428</span><br><br>
+      This module addresses the exit from relationships that are dysfunctional but not dangerous. The distinction matters.
+    </div>
+
+    <div class="section-heading">The five quiet signals that it's over</div>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">The relief when they leave the room.</p>
+      <p class="diagnostic-text">Not occasionally — consistently. A felt softening in your body when they leave for work, when they go upstairs, when they cancel plans. The relief has become the default response to their absence, and you have stopped registering it as unusual. It is not unusual. It is the signal.</p>
+    </div>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">The pattern conversation produced nothing durable.</p>
+      <p class="diagnostic-text">You had the conversation from Module Three — about patterns, not instances. The response was denial, or performative recognition that softened briefly and returned to baseline. You have now had the conversation more than once. The conversation itself has become part of the pattern. You are no longer waiting for a result. You are going through the motions of a ritual whose outcome you already know.</p>
+    </div>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">You have stopped imagining a future that includes them.</p>
+      <p class="diagnostic-text">The future used to feature them, however difficultly. Now, when your mind wanders to what is ahead — next year, five years, a different life — they are not in it. You have not decided this consciously. Your imagination has simply stopped including them. The imagination, as Module Five of Course One explored, is the most honest of your internal territories. When it stops featuring someone, it has already made a decision your conscious mind has not yet caught up to.</p>
+    </div>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">You are protecting them from your honesty rather than sharing it.</p>
+      <p class="diagnostic-text">There was a time when you told them what you were thinking. That time is over. Now you filter, edit, withhold — not out of strategy but out of a felt certainty that the honesty would not land, would not be received, would produce friction without producing change. When you stop sharing your honest inner life with a partner, you have stopped investing in the relationship's capacity to grow. This is not a failure of honesty. It is the honest recognition that the relationship has stopped being a place where your honesty is useful.</p>
+    </div>
+
+    <div class="diagnostic">
+      <p class="diagnostic-name">You have begun grieving while still inside the relationship.</p>
+      <p class="diagnostic-text">The grief that usually follows an ending has begun arriving before the ending. You feel, at unexpected moments, a heaviness that is not anger and is not sadness exactly — it is mourning. You are mourning the version of the relationship that might have existed, the version of them that you initially met, the version of yourself that was available at the beginning. <strong>When the grief arrives before the ending, the ending has already begun.</strong></p>
+    </div>
+
+    <div class="pullquote">The ending does not arrive suddenly. It has been arriving for months. What you are feeling now is not the beginning of the end. It is the recognition that the end has already been in motion for longer than you let yourself see.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You read the five signals and recognise three or more of them in your current relationship.</p>
+      <p class="scenario-context">The recognition does not feel like a decision. It feels like an acknowledgement of something that was already true. There is no anger in it. There is mostly a tired clarity.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Act today. The clarity is here. Leave before the clarity fades.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Let the recognition settle. Begin planning quietly. The clarity will not fade — and the exit deserves the same thoughtfulness the relationship was given.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Decide you need to try one more time. Have one more pattern conversation. Give it one more chance.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the signals. Everyone feels relief when their partner leaves sometimes. You're catastrophising.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 07 · The Anchors</div>
+    <h1 class="slide-title">The three things that keep you <em>staying.</em></h1>
+
+    <p class="lead">You know it's over. You have known for months. And you are still here. This is not weakness. It is the predictable effect of three structural forces that operate on almost everyone who stays past the point of knowing. Naming them does not make them disappear. Naming them makes them less mysterious, which makes the leaving less impossible.</p>
+
+    <div class="anchor">
+      <div class="anchor-num">Anchor 01</div>
+      <h2 class="anchor-name">The sunk cost.</h2>
+      <p class="body-text">You have invested years, energy, identity, sometimes money, sometimes children, sometimes a house. The cost of leaving is not only forward — it includes the backward recognition that the investment was not going to pay out. <strong>Most people stay in relationships past their expiry not because of hope for the future, but because of their unwillingness to accept what the past now means.</strong> If you leave, those years become the years you spent in a relationship that didn't work. If you stay, they can still, just possibly, become the years that led to something.</p>
+
+      <p class="body-text">This is the sunk cost at its most precise. The investment is already spent. It is not recoverable whether you stay or leave. The only question is whether you will spend additional years on the same investment, knowing what you now know about its returns. <em>Most people, when they describe the sunk cost clearly, can see the structure. The structure, once seen, begins to lose its grip.</em></p>
+    </div>
+
+    <div class="anchor">
+      <div class="anchor-num">Anchor 02</div>
+      <h2 class="anchor-name">The fear of the aftermath.</h2>
+      <p class="body-text">What will my life look like? Where will I live? Who will I be? Will I cope alone? What will they do without me? What will people think? <strong>The fear of the aftermath is almost always more paralysing than the aftermath itself.</strong> The imagination, confronted with an unknown future, defaults to worst-case projections — and the projections, because they are imagined, are heavier than the reality will be.</p>
+
+      <p class="body-text">The people who have left dysfunctional relationships almost always report the same thing: the weeks immediately after leaving were difficult, and they were not as difficult as they had feared. The anticipation of the aftermath, while still inside the relationship, was worse than the actual aftermath — because the anticipation was being generated by a nervous system that had been trained, by the relationship itself, to catastrophise.</p>
+
+      <p class="body-text">This is not reassurance. Some aftermaths are genuinely hard. Some involve financial strain, housing changes, custody arrangements, social reshuffling. <em>The point is that the fear is not a prediction. It is a feeling being generated by a system that benefits from your staying. The fear is what the relationship produces to prevent you from testing it against reality.</em></p>
+    </div>
+
+    <div class="anchor">
+      <div class="anchor-num">Anchor 03</div>
+      <h2 class="anchor-name">The intermittent reward cycle.</h2>
+      <p class="body-text">The most powerful anchor, and the one least understood. Just when you are closest to leaving — when the evidence is undeniable, when the body has given up — something small and good happens. A genuinely warm night. An unexpected tenderness. A moment that feels, briefly, like the relationship you originally fell for. <strong>The timing is not accidental.</strong> Dysfunctional systems tend to produce reward at precisely the moment the participant is about to exit.</p>
+
+      <p class="body-text">This is the same neurochemical structure as intermittent reinforcement in behavioural psychology — the mechanism that makes gambling addictive. Unpredictable rewards, delivered at variable intervals, produce the strongest bonds. The bond is not proportional to the quantity of reward. It is proportional to the unpredictability. <em>A relationship that gives you warmth on a schedule does not produce this bond. A relationship that gives you warmth unpredictably, sandwiched between months of drought, produces a bond so strong it can override years of evidence.</em></p>
+
+      <p class="body-text">Knowing this is most of the defence against it. The warm night before the exit is not a sign the relationship is changing. It is, structurally, the system's last move to keep you in. The warmth is real. The timing is the data.</p>
+    </div>
+
+    <div class="pullquote">You are not weak for staying past the point of knowing. You are held by three forces that are designed to hold you. Naming them is how you begin to feel the grip loosen.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You are within days of leaving when they do something unexpectedly warm and tender.</p>
+      <p class="scenario-context">The evening is genuinely lovely. You feel, for the first time in months, the version of them you originally loved. The timing is striking. You know about the intermittent reward cycle. And the warmth is still landing.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Take the warm evening as evidence the relationship has turned a corner. Postpone leaving. See if the new tone continues.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Let the evening be lovely without letting it be the verdict. Hold both truths: the warmth was real, and the timing is the data. Check the record. Read six months of entries. Then decide.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Dismiss the warm evening as manipulation. Don't enjoy it. Harden against it.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Leave immediately, right now, before the warmth can work on you further.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 07 · The Architecture</div>
+    <h1 class="slide-title">Leaving without <em>detonation.</em></h1>
+
+    <p class="lead">A clean exit is not a cold exit. It is not the absence of emotion — it is the presence of deliberate thought in the architecture of how you leave. The goal is not to avoid all pain. The goal is to avoid the specific kinds of damage that are avoidable, and to make the unavoidable damage as manageable as possible — for you and, where possible, for them.</p>
+
+    <p class="body-text">This page is practical. It does not assume every exit is the same. But the structural principles hold across most exits from dysfunctional relationships that are not physically dangerous. If your exit involves physical danger, please return to the safety resources at the beginning of this module — your exit requires professional planning that this course cannot provide.</p>
+
+    <div class="section-heading">Before the conversation</div>
+
+    <p class="body-text"><strong>Secure the practical foundation first.</strong> Before you tell the partner anything, handle the logistics. Where will you live? Can you stay with a friend or family member for the first weeks? Are your finances entangled in ways that need to be quietly addressed? Do you have access to your own documents, your own bank account, your own car? These questions feel unromantic. They are the difference between an exit that can sustain itself and one that collapses under practical pressure within the first week.</p>
+
+    <p class="body-text"><strong>Tell one trusted person your timeline.</strong> The same person you have been telling the unedited version to since Module One. Give them a date, or a week, when you plan to have the conversation. The purpose is accountability — not to them, but to yourself. The exit conversation is the easiest thing in the world to postpone. Having given someone else a date makes the postponement harder to rationalise.</p>
+
+    <p class="body-text"><strong>Write down what you want to say and what you do not want to say.</strong> The exit conversation is one of the highest-emotion conversations of your life, and the person on the other side of it knows your vulnerabilities better than almost anyone. Without preparation, you will likely be pulled into one of the following: a final pattern conversation, a negotiation for one more chance, a historical accounting of grievances, or a guilt-based argument about what leaving will do to them. Deciding in advance what the conversation is about — and what it is not about — is most of the preparation.</p>
+
+    <div class="section-heading">The conversation itself</div>
+
+    <p class="body-text"><strong>State the decision. Do not open a negotiation.</strong> "I have decided that this relationship is not going to continue. This is not a request for a conversation about whether it should continue. This is me telling you what I have decided." The language is clear because clarity is a kindness at this moment, even when it doesn't feel like one. A door that is left open invites the partner to stand in it — which is what the intermittent reward cycle was designed to enable. The decision has been made. The conversation is a notification, not a forum.</p>
+
+    <p class="body-text"><strong>Be honest and brief about the reason, without litigating the history.</strong> You do not owe them a comprehensive account of every failure. You do owe them a truthful, if condensed, explanation. Something like: "The relationship has not been good for either of us for a long time. I have tried, in the ways I knew how, to address it, and the patterns have not changed. I have to leave." This is enough. The urge to say more — to present the evidence, to walk through the modules, to reference specific incidents — is the old shape trying to run one last time.</p>
+
+    <p class="body-text"><strong>Do not be cruel, even when cruelty would be justified.</strong> Whatever they have done, whatever the years have cost you, the exit conversation is not the place for the final accounting. You can be angry on your own time. In this moment, clarity without cruelty is the most sovereign position available. <em>The exit defines the version of yourself you will carry into everything that comes after. Make the version something you can live with.</em></p>
+
+    <p class="body-text"><strong>Leave the space after the conversation.</strong> Physically leave. Do not stay in the same room to process. Do not stay for the tears, the promises, the anger, the sudden warmth. The hours immediately after the exit conversation are when the three anchors pull hardest. Having a place to go — a friend's home, a family member's spare room, a hotel — is not a luxury. It is a structural necessity.</p>
+
+    <div class="pullquote">A clean exit is a kindness to both of you. Not because it doesn't hurt. Because it hurts the amount it has to, and no more. The extra damage is usually self-inflicted, in the moments when you try to be understood one last time.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You are in the exit conversation and they say: "But you never told me it was this bad."</p>
+      <p class="scenario-context">The statement lands because it is partly true. You edited yourself. You withheld. You managed their perception of the relationship. You did all of this because the previous conversations produced nothing — but they don't know that version of the story. They know their version.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Apologise. Accept that you should have been more honest. Agree to stay and try again with better communication.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Acknowledge the partial truth without accepting the framing. "I did try, in the ways I knew how. What I should have done differently is leave sooner." Then hold the decision.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Present the full evidence. Walk through every instance, every conversation, every pattern you tracked.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Get angry. Tell them they should have known without being told, that the signs were everywhere, that their failure to notice was the problem.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 4 -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 07 · The Aftermath</div>
+    <h1 class="slide-title">What happens in the first <em>twelve weeks.</em></h1>
+
+    <p class="lead">Nobody tells you what the weeks after leaving actually feel like. They tell you it gets better — and it does, eventually. But the path from the exit to the better is not a clean ascending line. It has a shape, and the shape is predictable, and knowing the shape in advance is most of how you survive it without going back.</p>
+
+    <div class="timeline">
+      <div class="timeline-header">The emotional sequence after leaving</div>
+
+      <div class="timeline-row">
+        <div class="timeline-week">Week 1–2</div>
+        <div class="timeline-text">Adrenaline and relief. The body, freed from chronic low-grade vigilance, produces a brief euphoric period. You feel clear, decisive, liberated. You wonder why you didn't leave sooner. This is real, and it is temporary. Do not make major life decisions during this window.</div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-week">Week 3–4</div>
+        <div class="timeline-text">The crash. The adrenaline recedes and the absence arrives. Not the absence of them specifically — the absence of the structure. Your daily life had been organised around managing them, and the management has stopped, and nothing has replaced it yet. The silence is not peaceful. It is disorienting.</div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-week">Week 5–6</div>
+        <div class="timeline-text">The selective memory arrives. Your mind begins producing highlight reels of the good parts — the early months, the warm moments, the version of them you originally fell for. The highlight reel is not lying. It is editing, with the precision of a system that wants you to return. This is the peak danger window for going back.</div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-week">Week 7–8</div>
+        <div class="timeline-text">The anger window. The grief, which has been sitting underneath the relief and the crash and the selective memory, finally arrives as anger. You are angry at them, at yourself, at the years, at the friends who said nothing, at the system that held you. The anger is useful — it is energy that, pointed correctly, fuels the rebuilding. Pointed incorrectly, it produces contact you will regret.</div>
+      </div>
+
+      <div class="timeline-row">
+        <div class="timeline-week">Week 9–12</div>
+        <div class="timeline-text">The slow settling. The emotional oscillation begins to reduce. You have days that are simply neutral — neither grieving nor relieved, neither angry nor nostalgic. The neutrality, which would have felt empty a month ago, begins to feel like ground. You can stand on it. You are beginning, very slowly, to remember who you were before the relationship reshaped you.</div>
+      </div>
+    </div>
+
+    <p class="body-text">The sequence is not identical for everyone. Some people experience weeks five and six before weeks three and four. Some people have the anger arrive earlier. <strong>The important thing is that the sequence exists, that it is predictable, and that each phase ends.</strong> The crash ends. The selective memory ends. The anger ends. What remains, after the sequence has run, is a version of yourself that is closer to who you actually are than the version who was living inside the relationship.</p>
+
+    <div class="pullquote">The aftermath is not the cost of leaving. The aftermath is the cost that was already being paid, now arriving in a lump sum instead of monthly instalments. It is the same pain, experienced honestly, for a finite period — instead of distributed across years.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">Week five. The selective memory is running. You catch yourself, late at night, scrolling through old photos and remembering only the good.</p>
+      <p class="scenario-context">The highlight reel is vivid, warm, and specific. The difficult months have, somehow, become vague and blurry. You know what is happening. The knowledge does not entirely stop it from working.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Reach out. Send the late-night message. The good memories must mean something.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Put the phone down. Read your record. The record contains the months the highlight reel is editing out. Let both versions sit side by side.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Force yourself to think only about the bad parts. Drown the good memories with bad ones.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Delete all photos immediately. Remove every trace. Scorched earth.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 5 -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 07 · The Return Impulse</div>
+    <h1 class="slide-title">Why you will want to go <em>back.</em></h1>
+
+    <p class="lead">Almost everyone who leaves a dysfunctional relationship will, at some point in the first three months, feel a strong pull to return. This is not weakness, failure of resolve, or evidence that the exit was wrong. It is the neurochemical and structural cost of breaking a bond that was built on intermittent reinforcement. The pull is the withdrawal. It has a peak, a duration, and an end.</p>
+
+    <p class="body-text">The pull usually peaks in weeks five and six — the selective memory window. It is strongest late at night, on weekends, and in moments of acute loneliness. It is exacerbated by alcohol, fatigue, social media contact with the partner, and well-meaning friends who suggest you "just talk to them." <strong>The pull is not a signal. It is a withdrawal symptom. Treating it as a signal is how most people return to the relationship they just left.</strong></p>
+
+    <div class="section-heading">The three forms of the return impulse</div>
+
+    <p class="body-text"><strong>The nostalgic form.</strong> "We had something real. Maybe I gave up too soon. Maybe the good parts were enough." This form is powered by the selective memory, which is editing the difficulty out of the record. The nostalgic impulse feels like love. It is usually the attachment bond performing its final maintenance check.</p>
+
+    <p class="body-text"><strong>The rescue form.</strong> "They need me. They're not coping. If I leave them alone, something bad will happen." This form is the hero shape running one last time. If your shape was the hero, this form will be the strongest — because leaving felt, structurally, like allowing someone to be harmed. <em>Their coping is their responsibility. It was also their responsibility while you were there, and you were doing it for them.</em></p>
+
+    <p class="body-text"><strong>The fear form.</strong> "I can't do this alone. The loneliness is worse than the relationship. Maybe a difficult partnership is better than no partnership." This form runs on the third anchor — the fear of the aftermath. The fear is real. The conclusion (that the relationship was better than the alternative) is almost always wrong, but it will feel convincing for several weeks. It loses its power once the aftermath moves past the crash phase.</p>
+
+    <div class="section-heading">What to do when the impulse arrives</div>
+
+    <div class="practice">
+      <p class="practice-name">Wait twenty-four hours before acting on anything.</p>
+      <p class="practice-text">The return impulse peaks and fades. Give it a full day-night cycle before responding to it. Almost every impulse that feels urgent at 11pm has lost its urgency by 11am. The waiting is not the resolution — it is the space in which the impulse can be felt without being obeyed.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Read the record.</p>
+      <p class="practice-text">The private record from Module One exists specifically for this moment. When the selective memory is running and the nostalgia is strong, open the record and read six months of entries. Let the two versions of the relationship sit side by side — the one your memory is producing and the one you documented in real time. The record was built for this night. Let it do its work.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Call the trusted person.</p>
+      <p class="practice-text">The same person who has heard the unedited version since Module One. Call them not for advice but for witness. Tell them what you are feeling. The act of speaking the impulse aloud, to someone who knows the full story, often dissolves most of the impulse's power — because the impulse was designed to operate in isolation, not in witness.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Do not contact the partner.</p>
+      <p class="practice-text">Not to check on them. Not to clarify. Not to return something. Not to have one last conversation. Any contact at all, during the return impulse, will be interpreted by your nervous system as the beginning of reconciliation — and the relief that contact produces will restart the attachment cycle. The contact, even brief, often costs weeks of progress. The cost is not worth the temporary comfort.</p>
+    </div>
+
+    <div class="pullquote">The return impulse is not your heart speaking. It is the bond breaking. The breaking feels, to the nervous system, indistinguishable from harm — which is why the system tries to repair it. The repair, if you let it happen, is the return. The repair is the trap.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">Week six. You have just received a message from them — brief, warm, non-demanding.</p>
+      <p class="scenario-context">The message says almost nothing. But the tone is the one from the early months, the one that used to make everything feel okay. Your body responds before your mind does — the chest opens, the shoulders drop, the relief washes through. You know what is happening. The knowing is not enough to stop the feeling.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Reply immediately. The warmth is what you have been missing. Maybe this time is different.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Do not reply tonight. Put the phone down. Wait twenty-four hours. Read the record. Call the trusted person. Let the feeling move through without acting on it.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Reply with anger. Tell them to stop contacting you. Punish the message.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Block them immediately. Remove all access. Scorched earth.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- PAGE 6 -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Page 06 / 07 · The Rebuilding</div>
+    <h1 class="slide-title">Rebuilding without <em>rushing.</em></h1>
+
+    <p class="lead">The most dangerous period is not the first six weeks after leaving. It is months three through nine — the period when the acute pain has subsided, the return impulse has faded, and you are beginning to feel functional again. This is when the old shape tries to reinstall itself, usually through a new relationship that arrives with the familiar chemistry that Module Five taught you to recognise.</p>
+
+    <p class="body-text">This page is about how to occupy the space between relationships without filling it prematurely. The premature filling is the most common way the work of the entire course gets undone — because the new person, selected by the old shape before the shape has loosened, produces the same dynamic with different actors, and the cycle begins again.</p>
+
+    <div class="section-heading">The three disciplines of the in-between</div>
+
+    <div class="practice">
+      <p class="practice-name">Do not date for the first three months.</p>
+      <p class="practice-text">Not as punishment. Not as a rule imposed from outside. As a practical recognition that your selection mechanism has not yet been updated. The shape that chose the last partner is still the shape you are carrying, and it will select the next partner from the same wound. Three months is the minimum time most nervous systems need to begin recognising the difference between chemistry-as-connection and chemistry-as-wound-recognition. Some people need longer. Almost nobody needs less.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Rebuild the friendships that atrophied during the relationship.</p>
+      <p class="practice-text">The relationships that thinned during the dysfunctional partnership are almost always recoverable, and their recovery is more important, in the first six months, than any new romantic connection. These are the people who knew you before the shape reshaped you. They carry a version of you that the relationship suppressed. Being around them, slowly, is how you remember what you sounded like before you started editing yourself.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">When you do begin dating, watch for the familiar chemistry.</p>
+      <p class="practice-text">The old signal will still feel like connection. Someone who activates your wound will still produce the unmistakable sense of having met someone significant. The work, now, is to treat that feeling as data rather than as instruction. The question is not "do I feel something?" The question is: <em>"is this something because this person is genuinely interesting to me, or is this something because my wound has just met its match?"</em> The question does not always produce a clear answer. Asking it at all is the practice.</p>
+    </div>
+
+    <div class="section-heading">What the space between relationships is for</div>
+
+    <p class="body-text">The in-between is not a waiting room. It is the actual laboratory in which the shape loosens. The shape was installed in relationships and it loosens in the absence of relationships — in the daily experience of being alone with yourself, making choices nobody else is evaluating, learning what your preferences are when nobody's approval is at stake. <strong>This is the time when you discover who you are without the shape.</strong> The discovery is slow, awkward, and occasionally boring. It is also the precondition for every relationship that comes after not being a repetition of the one you just left.</p>
+
+    <p class="body-text">If you can endure six to twelve months of the in-between — not perfectly, not without difficulty, but with the general discipline of not filling the space before you have inhabited it — you will arrive at the next relationship from a different position than you arrived at the last one. The different position is the entire point. <em>The person you become in the in-between is the person who will choose differently the next time, because they are no longer choosing from the wound.</em></p>
+
+    <div class="pullquote">The space between relationships is not the absence of love. It is the preparation for a different kind of love — the kind that does not require your wound to recognise its match across a room. That kind of love arrives more quietly. It also lasts.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">Four months after leaving, you meet someone new and feel, immediately, the intense chemistry of recognition.</p>
+      <p class="scenario-context">They are different from your ex in every surface detail. But the felt sense — the intensity, the speed, the uncanny sense of being understood — is exactly the same. You know what this feeling means. And the feeling is still landing.</p>
+
+      <div class="choices" data-scenario="6">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Proceed. You've done the work. This time you'll see the patterns early enough. The chemistry must mean something different now.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice the chemistry without obeying it. Slow down. Introduce the ninety-day protocol from Module One. Let the next three months tell you whether the recognition is connection or wound.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Refuse the connection entirely. Any intense chemistry is automatically a red flag. Walk away.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Dive in immediately to prove to yourself that you are over the last relationship.</button>
+      </div>
+
+      <div class="feedback" id="feedback-6">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-6"></p>
+        <p class="feedback-text" id="feedback-detail-6"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 07</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Complete Module →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <!-- COMPLETION -->
+  <section class="slide" data-slide="7">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>Module Six.</em></h1>
+
+    <p class="lead">You now have the architecture for the hardest practical thing this course asks of you. The recognition that it's over. The naming of what has been holding you. The structure of a clean exit. The map of the aftermath. The defence against the return impulse. The discipline of the in-between. These are tools. Use them when you need them. Return to them when the pull gets strong.</p>
+
+    <div class="section-heading">What you carry forward</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">The ending arrives before the exit. Five quiet signals tell you what your body already knows: the relief, the exhausted pattern conversation, the future that no longer includes them, the withheld honesty, the grief that arrives before the ending.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Three anchors keep you staying: sunk cost, fear of the aftermath, and the intermittent reward cycle. Each is structural, each is nameable, and each loosens when named.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">A clean exit is not a cold exit. Secure the practical foundation, prepare what to say, state the decision without opening a negotiation, leave the space after the conversation.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">The aftermath has a predictable sequence: relief, crash, selective memory, anger, slow settling. Knowing the shape in advance is most of how you survive it.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">The return impulse peaks in weeks five and six. Wait twenty-four hours, read the record, call the trusted person, do not contact the partner.</span></li>
+      <li><span class="summary-num">06</span><span class="summary-text">The space between relationships is where the shape loosens. Do not fill it prematurely. The person you become in the in-between is the person who will choose differently next time.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice this week</div>
+
+    <p class="body-text">If you are preparing to leave, secure one practical element this week — a place to stay, a financial arrangement, the conversation with the trusted person. If you have already left, identify which phase of the aftermath you are in and let the knowing carry you through the phase without trying to skip it. If you are in the in-between, notice whether you are rushing to fill it — and if so, give yourself one more month before making decisions about new people.</p>
+
+    <p class="body-text">The final module — <strong>Choosing Differently</strong> — addresses the other side of the exit. Not what to leave, but what to move toward. What actually predicts functional partnership. What healthy love feels like to a nervous system trained on dysfunction. What the next relationship can be, once the shape has loosened and the wound has been named. The course closes there.</p>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">07 / 07</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 07 →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: "Acting today, before planning has occurred, tends to produce exits that collapse under practical weight within the first week.", detail: "The clarity is real. It will also be available tomorrow. The exit conversation, the logistics, the place to stay, the financial arrangements — none of these are ready. Acting from the clarity without the infrastructure means you are likely to find yourself, within days, in a position so practically difficult that returning becomes the only pragmatic option. The return, then, is not a change of heart. It is a failure of planning. The clarity deserves better infrastructure than same-day action provides." },
+    b: { headline: "Letting recognition settle while beginning quiet preparation is the move that produces an exit that can sustain itself.", detail: "The recognition is not going to fade. Once you have seen the five signals, you cannot unsee them. The clarity is durable. What it needs is infrastructure — a place to go, a financial position you can sustain, a conversation with the trusted person, a date. The planning is not delay. It is the difference between an exit that holds and one that reverses within two weeks because the practical ground was not prepared." },
+    c: { headline: "One more chance, after the pattern conversation has already been held and produced nothing durable, is the intermittent reward cycle requesting one more cycle.", detail: "If you have already had the pattern conversation — if the response was denial or performative recognition that returned to baseline — having it again is not a new attempt. It is a repetition of the same attempt with the same expected outcome. Most people who give it 'one more chance' at this stage are not extending a genuine opportunity. They are postponing the exit they have already decided on. The postponement has a cost, and the cost is measured in the weeks and months added to a timeline that was already past its point of return." },
+    d: { headline: "Dismissing the signals because everyone sometimes feels relief at their partner's absence is the relationship protecting itself from being seen clearly.", detail: "Yes, everyone sometimes feels relief when their partner leaves. The diagnostic is not 'sometimes.' The diagnostic is 'consistently, as the default emotional response, to the point where their absence has become the most relaxed your body is.' The dismissal arrives precisely because the signals are so clearly present that refusing them requires an active argument against your own recognition. Notice how much work the dismissal is doing. The recognition required no work at all." }
+  },
+  2: {
+    a: { headline: "Taking the warm evening as evidence of a turning point is the exact function the intermittent reward cycle was designed to perform.", detail: "The warm evening is real. The timing — arriving at the moment you were closest to leaving — is also real. The two data points are not in conflict. A warm evening can be genuine and also arrive as the system's last maintenance check. If you postpone leaving based on this evening, you are waiting for the warmth to continue. It will not continue at this level. The pattern, which has been operating for months or years, will resume within two weeks. The warm evening was not the forecast of a new climate. It was the weather of a single night, arriving at the structurally predicted moment." },
+    b: { headline: "Letting the evening be lovely while holding it against six months of entries is the integrated position the course was built to enable.", detail: "The warmth was real. The enjoyment was real. The record, which contains the other months, is also real. Putting the evening next to the entries does not diminish the evening. It places it in context. Most people, after reading the record, find that the warm evening produces a particular kind of sadness rather than a renewed hope — the sadness of recognising what the relationship could have been if the warm evenings had been the pattern rather than the exception. That sadness is an ending being felt honestly. Let it move through." },
+    c: { headline: "Refusing to enjoy the warmth and hardening against it converts the exit into a punishment, which is not what the exit is for.", detail: "You are not required to hate them in order to leave them. The warmth, experienced honestly, is part of the grief — the grief of leaving someone who is capable of this evening and has not been able to sustain it. Refusing to feel the warmth does not protect you. It produces a brittle, angry version of the exit that tends to generate more collateral damage. The warmth is not the trap. The conclusion you draw from the warmth is the trap. You can feel the warmth and still leave." },
+    d: { headline: "Leaving in the middle of the warm evening, before the warmth can work, is sometimes the correct survival move and is usually the reactive version of the exit.", detail: "If you genuinely fear that the warmth will change your mind, immediate departure is understandable. But the exit that happens as a flight from a moment, rather than as a planned departure with infrastructure, tends to be the exit you second-guess for months. The warm evening will end. Tomorrow, the clarity will return. The exit, planned and supported, can happen from a settled position rather than from a desperate one. Panic-based exits often produce return attempts within weeks." }
+  },
+  3: {
+    a: { headline: "Apologising and agreeing to stay because they say you never told them is the pattern completing its final cycle.", detail: "The statement is partly true — you did withhold. You withheld because previous honesty produced no change. Accepting the framing that your withholding was the problem, rather than their non-responsiveness, inverts the accountability. You now re-enter the relationship having accepted blame for the very dynamic that produced the leaving. The next months will be a repeat of the same cycle, with the additional burden of having agreed that the difficulty was a communication failure rather than a pattern failure. It was not a communication failure. You communicated. They did not change." },
+    b: { headline: "Acknowledging the partial truth without accepting the framing is the most sovereign response available in the exit conversation.", detail: "You did try. The attempts were imperfect. The withholding was real. And the pattern that produced the withholding was also real. Naming all of this, briefly, without accepting the conclusion that you should therefore stay, is how you hold the complexity without losing the decision. 'What I should have done differently is leave sooner' is a sentence that honours the truth of their observation while refusing the trap it was intended to set. The sentence holds your accountability without surrendering your clarity." },
+    c: { headline: "Presenting the full evidence turns the exit conversation into a trial, which is a different kind of conversation entirely.", detail: "The impulse to present every instance, every pattern, every note from the record is the impulse to be understood one last time — and being understood one last time is, structurally, another attempt at the pattern conversation. It will produce the same responses: denial of specific instances, counter-evidence, accusations that you have been paranoid or tracking. You will leave the conversation exhausted, having fought the case instead of holding the decision. The decision does not require their agreement. The evidence is for you. They do not need to see it in order for it to be real." },
+    d: { headline: "Anger at their failure to notice converts the exit into a punishment, which damages the version of yourself you will carry out of this room.", detail: "The anger is valid. They should have noticed. In many cases, they did notice and chose not to act. But delivering the anger in this moment, in this conversation, produces one of two outcomes: a fight that destabilises the exit, or a guilt that follows them into their own aftermath in ways that produce future contact you don't want. The anger can be felt on your own time, processed with the trusted person, expressed in the privacy of your own rebuilding. Here, in this room, clarity without cruelty is the move. The version of you who left with clarity is someone you can live with for years. The version of you who left with a final cruelty will cost you something in the months ahead." }
+  },
+  4: {
+    a: { headline: "The late-night message, sent during the selective memory window, is the return impulse using the good memories as its vehicle.", detail: "The highlight reel is not lying about the good parts. It is editing out the difficult parts with precision. The message you send at 11pm, powered by the reel, will arrive at its destination as an opening. The opening will produce a response. The response will produce contact. The contact will restart the attachment cycle. By week eight, you may be back in the relationship — having lost the weeks of progress you had built and having demonstrated to both yourself and the partner that the exit was temporary. The record exists for tonight. It contains what the highlight reel is removing." },
+    b: { headline: "Putting the phone down and reading the record is the defence the record was built for.", detail: "The record is not the opposite of the highlight reel. It is the complement. The good memories are real. The record contains the months the good memories are currently editing out. Placing them side by side does not require you to dismiss the good. It requires you to see the whole. Most people, after reading six months of entries alongside the highlight reel, find that the pull to return diminishes significantly — not because the good memories become fake, but because the full picture replaces the partial one. The record was built for this night." },
+    c: { headline: "Forcing yourself to think only about the bad parts produces an artificial version of the relationship that doesn't hold up over time.", detail: "If you drown the good memories with bad ones, you create a one-sided story that you will, eventually, recognise as incomplete. The recognition will undermine the exit — because you will know that you left based on a distortion, which reopens the question of whether the exit was fair. The honest position is that the relationship had genuinely good parts and genuinely harmful patterns, and that the patterns were not addressed despite multiple attempts. This position is harder to hold than the all-bad version. It is also the one that sustains the exit over years." },
+    d: { headline: "Scorched earth — deleting everything immediately — removes the evidence alongside the pain.", detail: "The impulse to erase all traces is understandable during the selective memory window. The problem is that the photos and messages also contain evidence of the pattern you left. Three months from now, if the return impulse arrives again, you may need the record — and the record includes some of the context the photos contain. A more calibrated approach is to archive rather than delete — put the photos somewhere inaccessible but not destroyed. The urgency to delete is the urgency to stop feeling. The feeling will stop on its own. The archive will be useful later." }
+  },
+  5: {
+    a: { headline: "Replying immediately to the warm message is the return impulse using the relief of contact as its fuel.", detail: "The body's response to the message — the chest opening, the shoulders dropping, the relief washing through — is the attachment bond's response to contact. It is not new information about the relationship. It is old chemistry, reactivated by a familiar stimulus. Replying tonight will produce a conversation that feels warm and human and connective, and will restart the attachment cycle that has been breaking over the past six weeks. The six weeks of progress will be lost. The cycle will resume. The next exit, when it comes, will be harder." },
+    b: { headline: "Not replying tonight, and letting the feeling move through without acting on it, is the practice the entire module was built to support.", detail: "The phone goes down. The record comes out. The trusted person is called. The feeling — strong, warm, disorienting — is allowed to move through the body without being converted into action. By morning, most of the urgency will have faded. What remains, if anything, can be assessed from a settled position rather than from the peak of the impulse. This is not a dramatic refusal. It is a twenty-four-hour hold. The hold is the practice. The practice is what protects the exit from the system that produced the message." },
+    c: { headline: "Replying with anger turns the contact into a conflict, which is still contact, and contact is what the attachment bond feeds on.", detail: "Angry replies are still engagement. The partner — consciously or not — will register the reply as evidence that you are still emotionally connected, which is accurate. The anger will produce a response, the response will produce a counter-response, and the exchange will consume days of emotional energy that could have gone into the rebuilding. The silent non-response is, structurally, the hardest move available — and it is the only one that does not produce further contact. Silence is not punishment. It is the exit continuing to hold." },
+    d: { headline: "Blocking immediately is sometimes the right move and is often the reactive version of the move.", detail: "Some people, knowing their own vulnerability to the return impulse, block all contact methods as a structural protection — and that can be the right decision, made from a settled place. Blocking in the heat of the impulse, however, often feels dramatic rather than sovereign, and is sometimes reversed within days. The more durable version is to block after the twenty-four-hour hold, from a morning rather than an evening, as a deliberate decision rather than a reactive one. The timing changes the quality of the action, even when the action is the same." }
+  },
+  6: {
+    a: { headline: "Proceeding on the grounds that you've done the work is the work's most common failure mode.", detail: "The chemistry feels different because the surface details are different. But the signal — the intensity, the speed, the uncanny recognition — is the same signal that chose the last partner. The work you have done gives you the language to recognise this. The work does not, by itself, update the selection mechanism. The selection mechanism updates through the practice of Module Five — small variations, over months, that gradually loosen the shape. Four months is rarely enough for that loosening to be complete. The chemistry, right now, is probably the wound finding its match again. The 'probably' is the honest assessment." },
+    b: { headline: "Noticing the chemistry without obeying it and applying the ninety-day protocol is the integration of everything this course has taught.", detail: "The chemistry is data, not instruction. The ninety-day protocol from Module One — the record, the four patterns, the body check, the trusted friend, the day-ninety reading — is exactly the tool designed for this moment. Run the protocol. Slow the pace. Let the next three months tell you whether the recognition is genuine connection or the familiar wound. If the person is genuinely interesting, the protocol will confirm it. If they are the old match in a new costume, the protocol will reveal it. Either way, you will have acted from the work rather than from the impulse." },
+    c: { headline: "Refusing all intense chemistry as automatically a red flag converts discernment into avoidance.", detail: "Some chemistry is healthy. Some connections that begin with intensity go on to be genuine and lasting. Refusing all intensity on principle means you will filter out some genuinely compatible people alongside the wound-matches. The work is not to never feel chemistry. It is to feel chemistry and ask the question: is this connection or is this the wound? Walking away without asking the question is avoidance, and avoidance is a different kind of strategy that prevents the work from being tested. The test, uncomfortable as it is, is what builds the new capacity." },
+    d: { headline: "Diving in immediately to prove you are over the last relationship uses the new person as evidence rather than encountering them as a person.", detail: "The new relationship, entered at speed to demonstrate recovery, is not about the new person. It is about the old one. You are not choosing this person — you are using them to demonstrate something to yourself and possibly to the ex. The relationship, built on demonstration rather than genuine selection, tends to accelerate quickly, produce the familiar chemistry, and collapse in ways that replicate the previous pattern. The new person deserves better. Your recovery deserves better. The in-between, tolerated rather than filled, is where the actual choosing-differently becomes possible." }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 7;
+const answered = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c2m5';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course2-module-5-your-role-in-dysfunction.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c2m6','1');window.location.href='course2-module-7-choosing-differently.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

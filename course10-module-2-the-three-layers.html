@@ -1,0 +1,977 @@
+<title>Module 02 · The Three Layers — Course 10</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display:flex;align-items:center;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);flex:1;order:1;min-width:0}
+.module-tag strong{color:var(--ink);font-weight:500}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:28px;height:2px;background:var(--line);transition:background .4s}
+.progress-dot.active{background:var(--ink)}
+.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}
+.slide{display:none;animation:fadeUp .6s ease}
+.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-title em{font-style:italic;font-weight:300}
+.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}
+.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}
+.body-text strong{font-weight:500;color:var(--ink)}
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}
+.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}
+.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s;position:relative;font-weight:400}
+.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}
+.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.selected .choice-letter{color:var(--paper);opacity:.6}
+.choice:disabled{cursor:default}
+.choice:disabled:hover{transform:none}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s}
+.feedback.visible{display:block}
+.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px;letter-spacing:-.005em}
+.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28;font-weight:400}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s;font-weight:500}
+.nav-btn:hover{opacity:.6}
+.nav-btn:disabled{opacity:.2;cursor:not-allowed}
+.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#2a2a28;opacity:1}
+.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}
+.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+.return-home-wrap{text-align:center;margin-top:20px}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s}
+.return-home-link:hover{color:var(--ink)}
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:18px}.complete-mark{font-size:80px}}
+html[data-theme="dark"]{--ink:#d8d8d4;--paper:#111110;--muted:#77776f;--line:#2c2c2a;--soft:#1c1c1a;--accent:#4aaa6f}
+html[data-theme="dark"] .body-text,html[data-theme="dark"] .lead,html[data-theme="dark"] .summary-text,html[data-theme="dark"] .pullquote,html[data-theme="dark"] .slide-title,html[data-theme="dark"] .feedback-text,html[data-theme="dark"] .scenario-context,html[data-theme="dark"] .feedback-headline{color:var(--ink)}
+html[data-theme="dark"] .choice{background:var(--soft);border-color:var(--line)}
+html[data-theme="dark"] .choice:hover:not(:disabled){background:#222220;border-color:#4a4a48}
+html[data-theme="dark"] .choice.selected{background:#141e17;border-color:var(--accent)}
+html[data-theme="dark"] .feedback{background:var(--soft)}
+html[data-theme="dark"] .nav-btn{background:var(--soft);color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .nav-btn.primary{background:var(--ink);color:var(--paper)}
+html[data-theme="dark"] .nav-btn.primary:hover{background:#b4b4b0;opacity:1}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s;z-index:10}
+.theme-toggle:hover{opacity:1}
+.header-center{display:flex;align-items:center;gap:14px;order:2;margin:0 auto}
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;z-index:49;display:none;scrollbar-width:none;flex-direction:column}
+.course-sidebar::-webkit-scrollbar{display:none}
+@media(min-width:1140px){.course-sidebar{display:flex}.module-container{margin-left:220px}}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s}
+.sidebar-back:hover{color:var(--ink)}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px}
+.sidebar-mod-list{list-style:none}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;gap:8px}
+.sidebar-mod-item:last-child{border-bottom:none}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);flex-shrink:0;margin-top:2px;min-width:20px}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none}
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent)}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto}
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line)}
+.sidebar-mod-item.ss-now .sidebar-mod-n,.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none}
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line)}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem("safespot_theme")==="dark")document.documentElement.setAttribute("data-theme","dark");}catch(e){}})()</script>
+<script>(function(){try{var s=localStorage.getItem("slsc_session");if(!s){var p=encodeURIComponent(location.pathname.split("/").pop()||"index.html");location.replace("login.html?from="+p);}}catch(e){}})()</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Module <strong>02</strong> &middot; The Three Layers</div>
+  <div class="progress-bar" id="progressBar"><div class="progress-dot active" data-page="1"></div><div class="progress-dot" data-page="2"></div><div class="progress-dot" data-page="3"></div><div class="progress-dot" data-page="4"></div><div class="progress-dot" data-page="5"></div><div class="progress-dot" data-page="6"></div></div>
+  <div class="header-center">
+    <button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">&#9680;</button>
+    <span class="zoom-ctrl">
+      <button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A&minus;</button>
+      <button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button>
+    </span>
+  </div>
+</header>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">&larr; Homepage</a>
+  <div class="sidebar-course-label">Course 10 &middot; The Uncharted Mind</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c10m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course10-module-1-the-10-percent-myth.html">The 10% Myth</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course10-module-2-the-three-layers.html">The Three Layers</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course10-module-3-belief-architecture.html">Belief Architecture</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course10-module-4-fear-as-information.html">Fear as Information</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course10-module-5-the-death-question.html">The Death Question</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course10-module-6-neuroplasticity.html">Neuroplasticity</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course10-module-7-stillness-and-superconscious.html">Stillness & Superconscious Access</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c10m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course10-module-8-path-discovery.html">Path Discovery</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <!-- ===== SLIDE 1 ===== -->
+  <section class="slide  active" data-slide="1">
+    <div class="slide-number">Page 01 / 06 &middot; The Map</div>
+    <h1 class="slide-title">Your mind has <em>three distinct operating layers</em> — and you only have reliable access to one of them.</h1>
+    <p class="lead">Conscious, subconscious, and what is sometimes called the superconscious or deeper mind. Understanding these layers is not academic. It is the prerequisite for working with more of what you actually are.</p>
+    <p class="body-text">The three-layer model of mind has appeared, in varying forms, across virtually every major wisdom tradition and psychological framework in human history. Freud identified the conscious, preconscious, and unconscious. Jung expanded this to include the personal unconscious and the collective unconscious. Vedic psychology describes the waking, dreaming, and deep sleep states as levels of consciousness. William James wrote of the "further shore" of the self beyond ordinary awareness. The names differ. The structure is consistently recognised.</p>
+    <p class="body-text">For our purposes, we will use three terms: <em>the conscious mind</em> — the narrow band of deliberate, verbal, sequential thinking you experience as "thinking"; <em>the subconscious</em> — the vast repository of pattern, memory, emotion, and automatic processing that operates just below awareness; and <em>the deeper mind</em> — the layer below both, sometimes described as intuitive intelligence, higher consciousness, or the superconscious, which is the source of insight, creative breakthrough, and the quality of knowing that arrives without a reasoning process. <strong>Each layer has different qualities, different communication styles, and different functions.</strong></p>
+    <div class="section-heading">Why the Model Matters</div>
+    <p class="body-text">The model matters because the strategies that work for the conscious mind do not work for the subconscious, and the strategies that work for the subconscious do not work for the deeper mind. <strong>Trying to reach the deeper layers using only the tools of conscious thought is like trying to see stars in daylight — the instrument is wrong for the task.</strong></p>
+    <div class="pullquote">You are not one mind trying to think better. You are three layers of mind, mostly in conversation with only one of them.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You try to solve a deeply creative problem — not a calculation, but a genuine creative challenge — through sustained, deliberate, conscious effort.</p>
+      <p class="scenario-context">You analyse, you plan, you force the thinking. Hours pass. The solution does not arrive. The next morning, it arrives immediately upon waking.</p>
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude you needed more rest and the morning mind is simply fresher.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Recognise that the subconscious and deeper layers were processing while you slept, and the morning is when they could surface.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Feel frustrated that the deliberate effort was insufficient.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Treat it as coincidence. Problems sometimes just seem clearer in the morning.</button>
+      </div>
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" disabled>&larr; Previous</button>
+      <span class="nav-counter">01 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 2 ===== -->
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 06 &middot; The Conscious</div>
+    <h1 class="slide-title">The conscious mind is the <em>editor</em>, not the author.</h1>
+    <p class="lead">What you experience as thinking — the inner monologue, the deliberate reasoning, the articulated plans — is the final visible layer of a process that began much deeper.</p>
+    <p class="body-text">The conscious mind is remarkable. It can hold a logical argument in sequence, suppress impulses in service of longer-term goals, communicate with other minds through language, plan for futures that do not yet exist, and evaluate its own thinking for errors. These are sophisticated capacities. They are also genuinely limited in ways that most people underestimate.</p>
+    <p class="body-text">The conscious mind cannot multitask — it can only rapidly alternate between tasks. It cannot see its own blind spots. It cannot process the emotional and social information that the subconscious processes automatically and accurately. It cannot produce genuine creative insight on demand. It can <em>recognise</em> insight when it arrives, <em>evaluate</em> it, and <em>refine</em> it — but it cannot produce it from nothing. <strong>The conscious mind is an excellent editor of material generated by deeper processes, but a poor author in its own right.</strong></p>
+    <div class="section-heading">The Role of the Editor</div>
+    <p class="body-text">This is not a demotion. The editorial function is important. Without the conscious mind's capacity to evaluate, sequence, and articulate, the outputs of the deeper layers would remain as raw material — insight without application, feeling without direction, creativity without form. <strong>The conscious mind is the layer that translates the deeper mind's outputs into the world.</strong> The problem is not having a conscious mind. The problem is treating it as the only instrument in the orchestra.</p>
+    <div class="pullquote">You are not your conscious mind. You are the author who uses the conscious mind as the instrument through which some of what you know reaches the page.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You are trying to force an insight — pushing harder in your thinking, analysing from multiple angles, generating more options, refusing to stop until something clicks.</p>
+      <p class="scenario-context">The harder you push, the more elusive the insight becomes. The field narrows rather than expanding. The thinking becomes circular.</p>
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Continue. Persistence is required. The insight will come if you maintain the effort.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Stop. Do something else. Allow the subconscious to process what the conscious mind has been overworking.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Conclude the insight is not available and move on to a different approach entirely.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Ask someone else. Your thinking is clearly blocked and external input is needed.</button>
+      </div>
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">02 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 3 ===== -->
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 06 &middot; The Subconscious</div>
+    <h1 class="slide-title">The subconscious is not the basement. It is the <em>engine room.</em></h1>
+    <p class="lead">The subconscious mind is not a repository of repressed desires and dark urges, as popular culture suggests. It is the most powerful computational and pattern-recognition system available to you.</p>
+    <p class="body-text">The subconscious processes information in parallel rather than sequentially, can hold and integrate enormous quantities of data simultaneously, recognises patterns across vast amounts of experience, regulates all the body's automatic functions, generates the emotional colouring that shapes perception, and runs the automatic behaviours and responses that constitute most of daily life. This is not a dark basement. It is the building's infrastructure — <strong>the system upon which every visible function depends.</strong></p>
+    <p class="body-text">The subconscious is also the repository of every belief, assumption, and emotional pattern you have ever formed. These operate as filters on reality — shaping what you notice, what you ignore, what feels possible, and what feels prohibited. Most people are not aware of the filters they are running. <strong>They experience the filtered version of reality as reality itself.</strong></p>
+    <div class="section-heading">Working With the Subconscious</div>
+    <p class="body-text">The subconscious responds to different inputs than the conscious mind. It is shaped by repetition, emotion, imagery, and felt experience more than by argument and analysis. A logical understanding that a fear is irrational does not automatically reprogram the subconscious pattern that runs the fear. <strong>The subconscious requires a different kind of engagement — one that speaks its language rather than the conscious mind's.</strong></p>
+    <div class="pullquote">What you believe at the subconscious level runs your life. What you believe consciously narrates it. These are often not the same story.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You consciously believe you deserve success, good relationships, and fulfilment. But your behaviour consistently produces outcomes that contradict this conscious belief.</p>
+      <p class="scenario-context">You work hard, you intend well, you make reasonable choices — and something keeps generating the same limiting results despite all of it.</p>
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude the world is unfair and the outcomes are not your responsibility.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Examine what the subconscious layer believes — which the outcomes may be revealing more accurately than the conscious beliefs.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Redouble the conscious effort. More work, more intention, more positive thinking.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Accept the current reality as the correct ceiling for your development.</button>
+      </div>
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">03 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 4 ===== -->
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 06 &middot; The Deeper Mind</div>
+    <h1 class="slide-title">Beyond the subconscious, there is a layer that <em>already knows.</em></h1>
+    <p class="lead">The deepest layer of mind — variously called the superconscious, higher self, intuitive intelligence, or witness consciousness — is not a mystical concept. It is the source of your most accurate knowing, your deepest creativity, and your clearest orientation.</p>
+    <p class="body-text">The deeper mind communicates differently from the subconscious. Where the subconscious communicates through emotion, body sensation, and automatic pattern, the deeper mind communicates through insight, intuition, and a quality of knowing that arrives with a distinctive quality of certainty and peace — not the excitement of a good idea, but the quiet recognition of something true. Many people have experienced this at least once. Fewer have learned to access it reliably.</p>
+    <p class="body-text">The deeper mind is not separate from you. It is the deepest layer of what you are — the dimension of consciousness that exists before and beneath the personality, the history, and the conditioned self. It is what the contemplative traditions have variously called the atman, the Higher Self, Buddha-nature, the soul. <strong>Its defining characteristics, across traditions, are consistency, accuracy, and the absence of agenda — it tells you what is true, not what you want to hear.</strong></p>
+    <div class="section-heading">The Quality of Deeper Knowing</div>
+    <p class="body-text">The deeper mind's communications can be distinguished from the subconscious's by their quality. Subconscious material is often charged — it comes with emotional urgency, body activation, reactivity. Deeper mind communications tend to be quieter, more spacious, more settled. They do not insist or alarm. They simply present. <strong>Learning to distinguish between these qualities is one of the most important discriminations this course will develop.</strong></p>
+    <div class="pullquote">The deeper mind is not a higher power you must access through special rituals. It is the most direct expression of what you actually are, speaking in its own accent.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You receive a quiet, clear, spacious knowing about something in your life — not dramatic, not exciting, not emotionally charged. Simply clear.</p>
+      <p class="scenario-context">It is accompanied by a quality of stillness. It is not what you expected to know. It is not what you wanted to know. It is simply what is true.</p>
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Dismiss it. It lacks the emotional weight you associate with important insights.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Receive it. The quiet, spacious quality is precisely the indicator of the deeper mind speaking.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Question it extensively until you have logical justification for accepting it.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Act on it immediately, without any reflection on whether it is coming from the deeper mind or from fear or wishful thinking.</button>
+      </div>
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">04 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== SLIDE 5 ===== -->
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 06 &middot; The Communication</div>
+    <h1 class="slide-title">All three layers are speaking at once. <em>Learning to tune</em> is the practice.</h1>
+    <p class="lead">The work of this course is not to silence two of the three layers and operate from one. It is to develop the capacity to tune to all three — to know which layer is speaking, and to receive what each has to offer.</p>
+    <p class="body-text">In any given moment, all three layers of mind are active and communicating. The conscious mind is running its linear commentary. The subconscious is generating emotional tone, pattern-matching with past experience, and running its automatic processes. The deeper mind is present, available, quiet, and consistent. The challenge is not that any layer is absent — it is that the conscious mind's volume tends to drown out the quieter frequencies of the other two.</p>
+    <p class="body-text">The practices that develop access to the deeper layers all have one thing in common: they involve reducing the volume of the conscious mind. Meditation, contemplation, creative absorption, physical flow states, dream work — these are not different methods for different goals. They are different ways of achieving the same shift: <strong>moving the conscious mind from foreground to background so that the communications of the deeper layers can be heard.</strong></p>
+    <div class="section-heading">Integration, Not Hierarchy</div>
+    <p class="body-text">The goal is not to permanently inhabit the deepest layer and transcend the others. The goal is integration — all three layers in productive communication, each contributing its particular intelligence to the whole. The conscious mind bringing precision and articulation. The subconscious bringing pattern recognition and emotional intelligence. The deeper mind bringing orientation and truth. <strong>This integration is what is sometimes called wisdom: not intelligence alone, but the full-spectrum engagement of everything you are.</strong></p>
+    <div class="pullquote">Wisdom is not the victory of the deep mind over the conscious mind. It is the conversation between all three, with each layer contributing what it does best.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario &middot; Where does this path lead?</div>
+      <p class="scenario-prompt">You face a decision that has intellectual arguments pointing in multiple directions, emotional pulls pulling toward one option, and a quiet deeper knowing pointing toward something else entirely.</p>
+      <p class="scenario-context">All three layers are presenting their views simultaneously. The tension is real. The question is which to follow.</p>
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Follow the intellectual arguments. They are the most defensible.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Follow the emotional pull. It is the most felt.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Follow the deeper knowing. It is the quietest and the most reliable indicator of truth.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Hold the tension until all three layers are in sufficient agreement.</button>
+      </div>
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">The path this tends to open</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+  <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">05 / 06</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Module &rarr;</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+  <!-- ===== COMPLETION SLIDE ===== -->
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Module Complete</div>
+    <div class="complete-mark">&#10003;</div>
+    <h1 class="slide-title">You've completed <em>Module 02.</em></h1>
+    <p class="lead">This knowledge does not stay on the page. It follows you out.</p>
+    <div class="section-heading">What You Carry Forward</div>
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">The mind operates in three layers: conscious (deliberate, verbal, sequential), subconscious (automatic, pattern-based, emotional), and the deeper mind (intuitive, spacious, accurate).</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">The conscious mind is an excellent editor of material generated by deeper processes — but a poor author in its own right. Insight is generated below the surface.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">The subconscious is the engine room, not the basement. It runs most of daily life and holds the beliefs that determine most outcomes — often different from the conscious beliefs.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">The deeper mind communicates quietly, without emotional charge, without agenda. Its quality of knowing is distinguishable from subconscious pattern by its spaciousness and steadiness.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">Wisdom is the full-spectrum integration of all three layers — each contributing its intelligence, none overriding the others.</span></li>
+    </ol>
+    <div class="section-heading">Practice This Week</div>
+    <p class="body-text">Three times this week, before making a significant decision, do a three-layer check: What does the conscious mind say? (the logical argument) What does the body-emotion say? (the felt response) What does the quiet deeper knowing say? (sit in stillness for two minutes and listen). Write what each layer presents. You do not have to act on the deeper knowing yet — just develop the practice of consulting it.</p>
+    <p class="body-text">The next module &mdash; <strong>Belief Architecture</strong> &mdash; continues this thread deeper.</p>
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="nav-counter">06 / 06</span>
+      <button class="nav-btn primary" id="btn-complete">Begin Module 03 →</button>
+    </div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">&larr; Return to Homepage</a></div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: 'Rest helps, but the solution did not arrive because you were rested.', detail: 'The solution arrived because while you slept, conscious interference with the subconscious and deeper layers stopped. The subconscious continued processing the problem — integrating what the conscious hours of effort had assembled, making connections across a broader dataset, working with the full parallel processing capacity that conscious attention had been crowding out. Rest is the condition that allows this. The processing is what happens during it.' },
+    b: { headline: 'Recognising the source changes how you approach creative problems.', detail: 'When you understand that subconscious and deeper processing are real and operate continuously, you can begin to use them deliberately. This means: do the conscious work that provides the raw material, then release the problem intentionally — create conditions where the deeper processing can complete. Sleep, walks, shower, anything that reduces the foreground volume of conscious attention. The morning insight is not luck. It is the conclusion of a process you can learn to support.' },
+    c: { headline: 'The frustration misassigns the failure.', detail: 'The deliberate effort was not insufficient — it was doing what deliberate conscious effort can do: assembling the information, defining the problem clearly, exploring the consciously-accessible solution space. What it cannot do is access the full depth of the processing that produces genuine creative insight. The frustration belongs not with the effort but with the expectation that conscious effort alone can produce what requires multiple layers of processing.' },
+    d: { headline: 'Problems seem clearer in the morning because of what happened during the night, not despite it.', detail: 'The coincidence interpretation treats the morning insight as an independent event rather than the culmination of a process. Understanding it as a process — conscious assembly, followed by subconscious and deeper integration during sleep, followed by surface emergence — gives you something to work with. It is not coincidence. It is a learnable sequence.' }
+  },
+  2: {
+    a: { headline: 'Persistence in the wrong tool produces more of the same result.', detail: 'The insight that is not arriving under conscious pressure is not absent because the effort has been insufficient. It is absent because the tool being applied — sustained, focused conscious analysis — is exactly the tool that prevents the insight from surfacing. More persistence does not change the tool. It applies the wrong tool with greater force. This is one of the most consistent patterns in creative problem-solving: the harder you push toward insight, the further it retreats.' },
+    b: { headline: 'Releasing the conscious grip is the specific mechanism of access.', detail: 'When the conscious mind is not actively working on a problem, the subconscious continues processing it — with its parallel, pattern-matching, non-linear intelligence. The insight arrives when the conscious mind is otherwise occupied and the subconscious communication can surface. Deliberately releasing the problem — not abandoning it, but moving conscious attention elsewhere — is not giving up. It is using the right tool for the next phase of the process.' },
+    c: { headline: 'The insight may well be available through a different approach — but not the one you have been using.', detail: 'Moving to a different approach is sometimes right. But the specific approach of reducing conscious effort and allowing the subconscious to complete the processing is worth attempting before concluding the insight is unavailable. The distinction between "this approach does not work" and "this approach does not work continuously without pause" is significant.' },
+    d: { headline: 'External input is valuable, but the block is not in the content — it is in the process.', detail: 'Another person may well provide a perspective that unlocks the creative problem. But the block you are experiencing — the narrowing of the field under sustained conscious pressure — is a process issue, not a content issue. Understanding that and addressing it (by releasing the conscious grip) is a more direct route to the insight than importing external content into the same overworked process.' }
+  },
+  3: {
+    a: { headline: 'External attribution leaves the pattern unchanged.', detail: 'If the outcomes are produced by external unfairness, there is nothing to examine internally and nothing to change. This position has the advantage of preserving the conscious self-concept intact. It has the disadvantage of leaving the subconscious beliefs that are generating the outcomes completely unaddressed — which means the outcomes continue, and the world continues to seem unfair in specifically the same ways.' },
+    b: { headline: 'Reading the outcomes as diagnostic information about subconscious belief is the most advanced move.', detail: 'The outcomes are not random. They are the result of choices, and choices are made from belief. The conscious beliefs may say one thing. The subconscious beliefs — revealed by patterns in behaviour and outcome over time — may say something different. The consistent limiting outcome, especially when it persists despite conscious intention, is usually more accurate information about subconscious belief than the conscious self-report is.' },
+    c: { headline: 'More of the same conscious approach addresses only the surface layer of a problem that lives deeper.', detail: 'If redoubled conscious effort could resolve a persistent limiting pattern, it would have done so already. The pattern persists because it is driven by something at a deeper level than conscious intention can reach. More work, more intention, and more positive thinking are all conscious tools applied to a subconscious problem. The appropriate next step is different: learning what the subconscious layer actually believes and why.' },
+    d: { headline: 'Accepting the ceiling before examining its construction is premature.', detail: 'The ceiling is not a natural limit. It is a construction — built from beliefs, patterns, and emotional associations formed at a particular time in a particular context. What has been constructed can be examined and changed. Accepting it as the correct ceiling for your development, without the investigation, closes the door on the most significant work available.' }
+  },
+  4: {
+    a: { headline: 'The quiet is the indicator, not the obstacle.', detail: 'The deeper mind does not arrive with emotional volume. Its communications are characteristically quiet, spacious, and settled — and this is precisely what makes them easy to dismiss in a culture oriented toward the emotionally compelling. What is quiet tends to seem less important. In the hierarchy of the three layers, this is exactly inverted: the loudest layer is the most reactive and least reliable; the quietest is the most accurate and most consistent.' },
+    b: { headline: 'Recognising the quality is the skill.', detail: "Receiving a quiet, spacious, clear knowing — even when it is not what you expected or wanted — is the foundational practice of accessing the deeper mind. The qualities to learn to recognise: stillness rather than excitement, clarity rather than urgency, the absence of agenda rather than the presence of a strong pull, a quality of recognition rather than novelty. These mark the deeper mind's communications across virtually all traditions that have investigated them." },
+    c: { headline: 'Requiring logical justification retrofits a conscious tool onto a deeper-mind output.', detail: 'Logical justification is the appropriate tool for evaluating conscious-mind claims. Applied to a deeper-mind communication, it tests the wrong thing. The deeper mind does not reason to its conclusions. It perceives them directly. Asking for logical justification is asking for a translation into conscious-mind language — which sometimes arrives later and sometimes does not. Withholding reception until the justification appears consistently delays the reception until after the moment of decision has passed.' },
+    d: { headline: 'Immediate action without reflection collapses the three-layer integration into one.', detail: "Acting immediately on the deeper knowing, without the conscious mind's evaluation and the subconscious's pattern-check, is as incomplete as ignoring the deeper knowing entirely. The integration of all three layers produces the most reliable action. The deeper knowing provides the direction. The subconscious checks it against pattern and consequence. The conscious mind plans the implementation. All three are needed." }
+  },
+  5: {
+    a: { headline: 'The defensible answer is not always the right one.', detail: 'The intellectual arguments are the most visible and the most shareable. They can be articulated, defended, adjusted. They are also the output of the narrowest band of your mental processing — the one most likely to be shaped by what you want to believe, what you have been taught to value, and what is easiest to justify in social contexts. Defensible and accurate are different properties.' },
+    b: { headline: 'The emotional pull is the most familiar and the most mixed.', detail: 'The emotional pull contains real information — desire, fear, longing, aversion — and historical noise. What you feel pulled toward is partly what genuinely matters and partly what an old pattern recognises as familiar. The emotional layer is worth listening to, not as the final word, but as one voice in a three-way conversation. Following it exclusively misses both the precision of the conscious mind and the accuracy of the deeper knowing.' },
+    c: { headline: 'The quieter knowing is the more reliable indicator — provided it is genuinely the deeper mind.', detail: 'When you are confident that the quiet knowing is coming from the deeper layer rather than from suppressed fear or wishful thinking, following it is often correct. The challenge is that confident attribution does not guarantee accurate attribution. A fear-based impulse can present as quiet clarity. This is why the other layers are still relevant — not to override the deeper knowing, but to confirm that what seems like deeper knowing is not something else wearing the same costume.' },
+    d: { headline: 'Holding the tension until sufficient agreement is the most sophisticated response — and the most demanding.', detail: 'Integration is not easy. Holding all three perspectives simultaneously, without prematurely resolving the tension by elevating one above the others, requires patience and developed discriminative capacity. But the decisions that emerge from genuine three-layer integration tend to be the most enduring — the ones that hold up not only logically but emotionally and in the deepest sense of alignment. The tension is the work.' }
+  }
+};
+
+var currentSlide=1;
+var totalSlides=document.querySelectorAll(".slide").length;
+function showSlide(n){
+  document.querySelectorAll(".slide").forEach(function(s){s.classList.remove("active");});
+  var t=document.querySelector("[data-slide=\""+n+"\"]");
+  if(t)t.classList.add("active");
+  document.querySelectorAll(".progress-dot").forEach(function(dot,i){
+    dot.classList.remove("active","complete");
+    if(i+1<n)dot.classList.add("complete");
+    else if(i+1===n)dot.classList.add("active");
+  });
+  currentSlide=n;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1);}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1);}
+document.addEventListener("DOMContentLoaded",function(){
+  document.querySelectorAll(".choices").forEach(function(group){
+    var sn=parseInt(group.getAttribute("data-scenario"));
+    group.querySelectorAll(".choice").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        group.querySelectorAll(".choice").forEach(function(b){b.classList.remove("selected");});
+        btn.classList.add("selected");
+        var answer=btn.getAttribute("data-answer");
+        var f=feedback[sn]&&feedback[sn][answer];
+        if(f){
+          var hl=document.getElementById("feedback-text-"+sn);
+          var dt=document.getElementById("feedback-detail-"+sn);
+          var box=document.getElementById("feedback-"+sn);
+          if(hl)hl.textContent=f.headline;
+          if(dt)dt.textContent=f.detail;
+          if(box){box.style.display="block";setTimeout(function(){box.classList.add("visible");},20);}
+        }
+        var nb=document.getElementById("next-"+sn);
+        if(nb)nb.removeAttribute("disabled");
+      });
+    });
+  });
+});
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute("data-theme")==="dark";
+  try{if(dark){h.removeAttribute("data-theme");localStorage.removeItem("safespot_theme");}
+      else{h.setAttribute("data-theme","dark");localStorage.setItem("safespot_theme","dark");}}
+  catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var prevKey='safespot_c10m1';
+    if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+      document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+      return;
+    }
+    var btn=document.getElementById("btn-complete");
+    if(btn){
+      btn.onclick=function(){
+        localStorage.setItem('safespot_c10m2',"1");
+        window.location.href='course10-module-3-belief-architecture.html';
+      };
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll(".sidebar-mod-item").forEach(function(li){
+        if(parseInt(li.getAttribute("data-mn"))===mn)li.classList.add("ss-now");
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem("slsc_session")||"null");
+    if(s&&s.fullName){
+      var nm=s.fullName&&s.fullName.indexOf("@")<0?s.fullName.split(" ")[0]:(s.email||s.fullName||"").split("@")[0];
+      var el=document.getElementById("ss-user-greeting");
+      if(el)el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem("slsc_session");localStorage.removeItem("slsc_token");localStorage.removeItem("slsc_sync_since");}catch(e){}
+  location.replace("login.html");
+}
+</script>
+<script>
+(function(){
+  var levels=["","lg","xl"];
+  function getLevel(){return document.documentElement.getAttribute("data-zoom")||"";}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next)document.documentElement.setAttribute("data-zoom",next);
+    else document.documentElement.removeAttribute("data-zoom");
+    try{localStorage.setItem("slsc_zoom",next||"");}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev)document.documentElement.setAttribute("data-zoom",prev);
+    else document.documentElement.removeAttribute("data-zoom");
+    try{localStorage.setItem("slsc_zoom",prev||"");}catch(e){}
+  };
+})();
+</script>
+<script>
+if("serviceWorker" in navigator){
+  window.addEventListener("load",function(){
+    navigator.serviceWorker.register("./sw.js").catch(function(){});
+  });
+}
+</script>
+
+<!-- TTS READER -->
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+
+<script>
+(function(){
+  try{
+    var items = Array.from(document.querySelectorAll('.sidebar-mod-item[data-mk]'));
+    items.forEach(function(li, idx){
+      var mk = li.getAttribute('data-mk');
+      var mn = parseInt(li.getAttribute('data-mn') || '0');
+      var done = !!localStorage.getItem(mk);
+      if(done){
+        li.classList.add('ss-done');
+      } else if(mn > 1){
+        // Locked if the immediately preceding module is not complete
+        var prev = items[idx - 1];
+        if(prev && !localStorage.getItem(prev.getAttribute('data-mk'))){
+          li.classList.add('ss-next');
+        }
+      }
+    });
+  }catch(e){}
+})();
+</script>
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

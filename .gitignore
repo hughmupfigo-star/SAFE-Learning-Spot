@@ -1,0 +1,46 @@
+# ── Secrets & environment (NEVER commit these) ────────────────────────────────
+.env
+.env.*
+.env.txt
+.env.local
+.env.*.local
+*.env
+secrets.json
+secrets.js
+credentials.json
+
+# ── Node ──────────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# ── Build outputs ─────────────────────────────────────────────────────────────
+dist/
+build/
+.cache/
+
+# ── OS / editor junk ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Dev-only utility scripts (not needed in production repo) ──────────────────
+debug-users.js
+verify-setup.js
+check-env.js
+
+# ── Large binary / generated files ───────────────────────────────────────────
+*.docx
+*.zip
+*.tar.gz

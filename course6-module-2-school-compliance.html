@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 6 · Module 2 · School: Manufacturing Compliance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.mechanism:last-of-type{border-bottom:1px solid var(--line)}.mechanism-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.mechanism-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+.cost-block{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.cost-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.cost-text{font-size:16px;line-height:1.65;color:#2a2a28}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}.voice-block::before{content:'"';position:absolute;top:-8px;left:24px;font-family:var(--serif);font-size:72px;color:var(--accent);line-height:1;font-style:italic}.voice-name{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.voice-text{font-family:var(--serif);font-size:19px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);padding-top:8px}
+.safety-note{margin:40px 0;padding:28px;border:1px solid var(--accent);background:var(--paper)}.safety-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500}.safety-text{font-size:15px;line-height:1.65;color:#2a2a28}
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.mechanism-name{font-size:24px}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 06 &middot; Institutional Brainwashing &middot; Module <strong>02</strong> &middot; School: Manufacturing Compliance</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 6 &middot; Institutional Conditioning</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c6m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course6-module-1-institution-training.html">Institution Training</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course6-module-2-school-compliance.html">School Compliance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course6-module-3-work-adult-school.html">Work: Adult School</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course6-module-4-religion-meaning.html">Religion and Meaning</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course6-module-5-government-governance.html">Government & Governance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course6-module-6-independence-deprogramming.html">Independence & De-Programming</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course6-module-7-thinking-for-yourself.html">Thinking for Yourself</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+<!-- SLIDE 1 -->
+<section class="slide active" data-slide="1">
+<div class="slide-number">Page 01 / 09 &middot; The Total Institution</div>
+<h1 class="slide-title">What makes school <em>different.</em></h1>
+
+<p class="lead">Every institution conditions its members. What makes school unusual &mdash; what makes it the most powerful conditioning environment most people will ever encounter &mdash; is not the content it delivers. It is the combination of four structural features that no other institution in a person&rsquo;s life possesses simultaneously: it is compulsory, universal, developmental, and total. No adult institution replicates this combination. By the time you were old enough to resist, the shaping was largely complete.</p>
+
+<p class="body-text"><strong>Compulsory.</strong> You did not choose to attend school. The state chose for you, and the choice was not subject to appeal. This is not a criticism of compulsory education &mdash; it is a structural observation about what compulsion means for the conditioning it enables. The institution that you cannot leave has unlimited access to you. The institution that you cannot leave can train you in any direction without risking your voluntary departure. Compulsion is the condition under which the deepest conditioning is possible.</p>
+
+<p class="body-text"><strong>Universal.</strong> School is the only institution that nearly every person in a society experiences simultaneously, for roughly the same duration, in roughly the same structural format. <em>This universality is what makes its conditioning invisible.</em> When everyone has been shaped by the same system, the shaping feels like nature rather than design. The person who has never attended school looks strange. The person who has never been in a family looks strange. The person who has never had an employer looks strange. The strangeness is the signal of a departure from the universal conditioning &mdash; and the strangeness tells you something about how deeply the universal experience has been normalised.</p>
+
+<p class="body-text"><strong>Developmental.</strong> School operates during the years of maximum developmental plasticity &mdash; from age five to sixteen or eighteen, when the brain is most actively forming its fundamental patterns, when identity is most fluid, when the self is most available to be shaped by external inputs. <strong>An institution that operates on a person during this window has access that no adult institution can replicate.</strong> The workplace, the military, the religious community &mdash; all of them shape their adult members, but none of them has the developmental access that the school has to the child.</p>
+
+<p class="body-text"><strong>Total.</strong> For six to eight hours a day, five days a week, forty weeks a year, for a decade or more, school is the primary environment in which the child exists. <em>It structures time, space, social relations, the body&rsquo;s movements, the direction of attention, and the basis of self-assessment.</em> No adult institution has this reach. The employer has forty hours a week. The church has a few hours a month. The school has the child&rsquo;s entire formative existence, for the entirety of the years in which the self is being formed. The conditioning it produces is not incidental. It is total &mdash; which is precisely where the word comes from.</p>
+
+<div class="pullquote">School is not where you learned mathematics. School is where you learned what you are. The mathematics was the visible curriculum. The formation of your self-concept, your relationship to authority, your understanding of your own worth, and your capacity for independent thought &mdash; these were the hidden curriculum. They ran continuously, below the threshold of examination, for more than a decade.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You think of your school years and feel a complex mix: nostalgia for the friendships, relief that it is over, and a vague sense that something important was happening there that you never quite examined.</p>
+<p class="scenario-context">The nostalgia is real. The relief is real. The vague sense is the most important of the three &mdash; the dimly felt awareness that the experience was shaping you in ways that went beyond what appeared on the surface. This module is the examination that did not happen at the time.</p>
+
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>School was fine. You learned things, made friends, and got through it. This level of structural analysis is excessive for what was a fairly ordinary experience.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Consider that &ldquo;ordinary&rdquo; is exactly the point. The conditioning was not dramatic. It operated through the ordinary fabric of the school day &mdash; the bells, the rows, the grades, the teacher&rsquo;s approval. The ordinariness is what made it invisible and total.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Feel the force of the structural analysis and conclude that school was an entirely negative experience with no redeeming features.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Locate a specific teacher, a particularly good or bad school, or a specific period and use it to define the entire experience &mdash; avoiding the structural reading in favour of the personal narrative.</button>
+</div>
+
+<div class="feedback" id="feedback-1">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-1"></p>
+<p class="feedback-text" id="feedback-detail-1"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" disabled>&larr; Previous</button>
+<span class="nav-counter">01 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 2 -->
+<section class="slide" data-slide="2">
+<div class="slide-number">Page 02 / 09 &middot; The Architecture</div>
+<h1 class="slide-title">The room itself as <em>argument.</em></h1>
+
+<p class="lead">Before the first lesson begins, the school makes an argument. The argument is written into the physical structure of the building and the arrangement of the classroom. Rows of desks facing a single elevated point. A timetable that divides the day into identical units. A bell that governs movement regardless of the internal state of the human beings it controls. These are not neutral administrative choices. They are teaching technologies &mdash; tools that teach a specific lesson about the relationship between the individual and authority.</p>
+
+<div class="mechanism">
+<div class="mechanism-num">Architectural lesson 01</div>
+<h2 class="mechanism-name">The row teaches hierarchy.</h2>
+<p class="body-text">The traditional classroom arrangement &mdash; rows of students facing a single teacher at the front &mdash; is not primarily a pedagogical choice. It is a spatial argument about where knowledge lives and who controls it. <strong>Knowledge lives at the front. The teacher controls it. The students face it, receive it, and are assessed on how much of it they have absorbed.</strong> The row does not invite dialogue. The row does not create space for the student&rsquo;s perspective to challenge the teacher&rsquo;s. The row produces audience members, not thinkers. The student who sits in rows for twelve years learns, in their body, that knowledge is delivered from above and received in silence. This lesson, installed spatially, travels with the adult into every meeting room, every lecture hall, every conference they attend &mdash; where they continue to sit in the audience, waiting for knowledge to be delivered from the front, long after the rows have gone.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Architectural lesson 02</div>
+<h2 class="mechanism-name">The bell teaches that your time is not yours.</h2>
+<p class="body-text">The school bell is one of the most radical conditioning technologies ever deployed at scale. <em>It tells the student when to begin, when to stop, when to move, when to eat, when to rest &mdash; independently of the student&rsquo;s internal experience of any of these states.</em> The student who is deeply engaged in a problem is interrupted by the bell and required to switch to a different subject. The student who is exhausted is held in the classroom until the bell permits release. <strong>Over years, the bell trains the adult to override their own internal signals in favour of external schedules.</strong> The adult who cannot listen to their own body &mdash; who eats when scheduled rather than hungry, rests when permitted rather than tired, works when required rather than energised &mdash; was trained by a bell that rang for a decade regardless of what was happening inside them.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Architectural lesson 03</div>
+<h2 class="mechanism-name">The timetable teaches that your interests require permission.</h2>
+<p class="body-text">The timetable divides knowledge into subjects and allocates each subject a fixed block of time. <strong>The student&rsquo;s own curiosity is irrelevant to this division.</strong> The mathematics lesson happens at 9 a.m. on Monday, Wednesday, and Friday, regardless of whether the student is currently fascinated by mathematics. The English lesson happens at 2 p.m. on Tuesday and Thursday, regardless of whether the student is currently in the middle of a thought that English could illuminate. <em>The message: your curiosity does not direct your attention. The timetable directs your attention. Your curiosity is a private matter that exists, if at all, in the gaps between scheduled activities.</em> The adult who cannot self-direct a project &mdash; who waits for a structure to be provided before they can begin &mdash; was trained to wait for the timetable to tell them what to think about next.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Architectural lesson 04</div>
+<h2 class="mechanism-name">The uniform teaches that individuality is a problem to be solved.</h2>
+<p class="body-text">The school uniform &mdash; where it exists, and its functional equivalent in dress codes where it does not &mdash; is not primarily a practical measure. It is an argument: that individual expression in dress, which is one of the earliest and most accessible forms of self-definition, is inappropriate in the institutional context. <strong>The uniform says: here, you are a student, not a person. The category supersedes the individual. The individual&rsquo;s choices about self-expression are subordinate to the institution&rsquo;s requirement for visual uniformity.</strong> The adult who experiences the expression of individual identity as mildly transgressive &mdash; who performs conformity in dress, speech, and manner in institutional settings regardless of their private preferences &mdash; learned, from a young age, that individual expression is tolerated at home and suppressed in public. The uniform drew the line early and clearly.</p>
+</div>
+
+<div class="pullquote">The school did not need to tell you that authority controls time, that your interests are secondary to the schedule, that individual expression is a private matter. The building said all of this, daily, for a decade. You absorbed it in your body before your mind could form the words to examine it.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You are in a work meeting. A topic arises that you have been thinking about independently, in depth, for weeks. The meeting&rsquo;s agenda moves on before you have had a chance to contribute your thinking. You say nothing and the moment passes.</p>
+<p class="scenario-context">The silence felt appropriate. The agenda was moving. You did not want to disrupt the flow. And under all of this: the trained sense that the space at the front &mdash; the agenda, the chair, the authority &mdash; determines what is said and when. Your thinking, however developed, required permission to enter the room. The permission was not granted. You waited.</p>
+
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the silence as professional behaviour. You read the room correctly. Derailing the agenda would have been disruptive.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice that &ldquo;reading the room&rdquo; may be the trained response presenting itself as professional skill. Sometimes the reading is accurate. Sometimes it is the row, operating in a meeting room twenty years later &mdash; the trained sense that knowledge flows from the front, and that your contribution requires the front&rsquo;s permission before it can exist.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Resolve to speak in every future meeting regardless of the agenda. The silence was wrong. You will not repeat it.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Feel frustration at the meeting&rsquo;s structure rather than examining your own response to it. The chair ran it badly. The agenda was too tight. The problem was external.</button>
+</div>
+
+<div class="feedback" id="feedback-2">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-2"></p>
+<p class="feedback-text" id="feedback-detail-2"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">02 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 3 -->
+<section class="slide" data-slide="3">
+<div class="slide-number">Page 03 / 09 &middot; The Assessment Machine</div>
+<h1 class="slide-title">How grading <em>reshapes</em> the self.</h1>
+
+<p class="lead">Of all the school&rsquo;s technologies of compliance, none is more powerful or more durable than assessment. The grade is not merely a measurement of academic performance. Over years of accumulation, it becomes the primary technology through which the individual understands their own worth &mdash; which capacities count, which do not, which aspects of themselves are valuable, and which are irrelevant. The grade outlasts the school. The adult carries the assessment framework for the rest of their life, applying it to every arena of their existence, long after the examiner has gone.</p>
+
+<p class="body-text"><strong>The grade measures a narrow slice of human capacity.</strong> It measures the ability to acquire, retain, and reproduce specific information in a specific format under specific conditions. It does not measure curiosity, emotional intelligence, creative thought, practical wisdom, the ability to build relationships, the capacity for original contribution, resilience, leadership, or the dozen other qualities that determine the quality of an adult life. <em>The student who does not excel at the measured slice learns that they are not intelligent.</em> The student who excels at it learns that they are. Both assessments are applied globally, to the whole person &mdash; not to a specific, narrow set of skills that happen to be measurable under exam conditions.</p>
+
+<div class="section-heading">What the grading system installs in the adult</div>
+
+<div class="cost-block">
+<p class="cost-name">The performance-equals-worth equation.</p>
+<p class="cost-text">The student who receives high grades in exchange for effort and compliance learns that <strong>love, approval, and belonging are contingent on performance.</strong> The equation is never stated explicitly. It is enacted through thousands of interactions in which high performance is rewarded with warmth and approval, and low performance is met with disappointment or concern. The adult who cannot rest &mdash; who requires constant productivity, who experiences leisure as guilt, who cannot feel good about themselves unless they are performing at a high level &mdash; is carrying the performance-equals-worth equation installed by a grading system that produced them when they were eight years old.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">The ranking wound.</p>
+<p class="cost-text">Schools rank. Explicitly in some systems, implicitly in all. The ranking teaches the student their position in the social and intellectual hierarchy. <em>The student near the bottom of the ranking learns that they are near the bottom of the human hierarchy.</em> This is not the intended lesson. It is the received one. <strong>The adult who avoids intellectual challenges, who self-selects out of opportunities before applying, who assumes they are not qualified before examining the evidence &mdash; this adult may be protecting themselves from the ranking wound that the school opened and that was never examined or closed.</strong></p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">The externalisation of self-knowledge.</p>
+<p class="cost-text">Grading trains the student to understand themselves through external measurement rather than internal experience. <strong>You are not intelligent because you experience thinking as pleasurable and productive. You are intelligent because an examiner gave you a high grade.</strong> You are not creative because you experience the generation of original ideas as natural and satisfying. You are creative if a teacher writes &ldquo;creative&rdquo; on your report. <em>The adult who cannot assess their own work without external validation &mdash; who requires another person&rsquo;s opinion before they can know whether what they have done is good &mdash; was trained by a system that held the only valid assessment and delivered it in the form of a letter or a number from outside the self.</em></p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">The assessment in full</div>
+<p class="sov-text">The school told you what you were worth, measured a narrow slice of what you could do, ranked you against your peers, and trained you to understand your own value through its external measurements. You internalised the measurements as self-knowledge. They are not self-knowledge. They are institutional measurements of institutional requirements. The distance between those two things is where you actually live &mdash; and where most of your genuine capacities, which the measurements could not reach, have been waiting.</p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You complete a piece of work that you found genuinely engaging, that took sustained effort, and that you believe is good. Before anyone else has seen it, you feel uncertain about it. You need someone to tell you it is good before you can feel it is good.</p>
+<p class="scenario-context">The work itself, and your experience of creating it, contains all the information you need to assess it. The need for external validation is not humility. It is the assessment machine having been so thoroughly internalised that your own experience of the work carries less authority than a grade from outside it.</p>
+
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept that external validation is appropriate and useful. Other people have perspective you lack. Seeking feedback is a professional skill.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Distinguish between seeking useful perspective and requiring external permission to know your own work&rsquo;s value. Feedback is useful. But the need for feedback before you can assess the work yourself suggests the internal assessment mechanism was never developed &mdash; because the external one was provided so consistently that the internal one was never needed. Both can exist. The aim is to develop the internal one alongside the external one.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Reject external validation entirely. From now on, only your own assessment matters. Other perspectives are irrelevant.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Continue waiting for external validation, noting that the internal uncertainty is a character trait &mdash; personal modesty or lack of confidence &mdash; rather than a trained response to a system that provided all assessment from outside.</button>
+</div>
+
+<div class="feedback" id="feedback-3">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-3"></p>
+<p class="feedback-text" id="feedback-detail-3"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">03 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 4 -->
+<section class="slide" data-slide="4">
+<div class="slide-number">Page 04 / 09 &middot; The Peer Group</div>
+<h1 class="slide-title">Social belonging as <em>enforcement.</em></h1>
+
+<p class="lead">The school&rsquo;s most powerful enforcement mechanism is not the teacher. It is the peer group. The school aggregates several hundred age-equivalent children, places them in enforced daily proximity for a decade, and provides minimal adult mediation of the social dynamics that result. What emerges is a social environment of extraordinary intensity &mdash; one in which belonging and exclusion are experienced as existential stakes, and in which the enforcement of conformity is carried out not by institutional authority but by the group itself.</p>
+
+<p class="body-text"><strong>The peer group is more effective than any institutional authority</strong> because its enforcement is continuous, granular, and carried by the people whose approval matters most to the developing child. A teacher can impose formal punishment. The peer group can impose social invisibility &mdash; and for most children, social invisibility is a more powerful deterrent than any formal sanction the institution can apply. <em>The child who deviates from the group&rsquo;s norms does not merely risk detention. They risk losing the social reality that makes the school day survivable.</em></p>
+
+<div class="section-heading">What the peer group enforces</div>
+
+<p class="body-text"><strong>Opinion conformity.</strong> The child who expresses an opinion that diverges significantly from the group&rsquo;s consensus is immediately at risk. The risk is social &mdash; mockery, exclusion, the withdrawal of belonging &mdash; and the risk is managed by the developing child through the adoption of the group&rsquo;s opinions, or through the suppression of their own. <strong>The adult who cannot hold a minority opinion in a room without intense anxiety; who scans for the group&rsquo;s view before forming their own; who changes their expressed position to match the person they are speaking to &mdash; this adult is carrying the peer group&rsquo;s enforcement mechanism into every conversation.</strong></p>
+
+<p class="body-text"><strong>Aesthetic and interest conformity.</strong> The child whose interests, enthusiasms, and aesthetic preferences diverge from the group&rsquo;s is at social risk. <em>The child who loves something the group does not love learns that their love is a social liability.</em> They hide it, manage it, perform indifference to it in social contexts, reserve it for private moments when the group is not watching. The adult who has &ldquo;interests they don&rsquo;t talk about at work,&rdquo; who downplays enthusiasms in social settings, who performs a more conventional version of themselves in group contexts while living a different life in private &mdash; this adult is still managing the social risk that the school peer group taught them their authentic interests carried.</p>
+
+<p class="body-text"><strong>The management of visibility.</strong> The school peer group enforces a specific bandwidth of acceptable visibility: not too prominent, not too invisible. The child who is too prominent &mdash; too loud, too confident, too successful, too different &mdash; is at risk from above. The child who is too invisible is at risk from below. <strong>The child learns to manage their visibility within the acceptable bandwidth, which requires constant self-monitoring and the suppression of any quality that would push them outside it.</strong> The adult who &ldquo;keeps their head down,&rdquo; who does not take credit for their work, who makes themselves smaller in group settings than their actual capacities would warrant, is managing the visibility bandwidth that the school peer group established.</p>
+
+<div class="voice-block">
+<div class="voice-name">The enforcement in action</div>
+<p class="voice-text">You did not stop being interested in the thing you were interested in. You stopped talking about it. You managed the interest until it became private, then until it became shameful, then until you almost forgot you had it. The peer group did not take the interest away. The peer group taught you that the interest was a liability in their presence. You carried the lesson far beyond their presence. The interest is still there. You have been very careful with it for a long time.</p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You are in a group social setting and realise, midway through a sentence, that what you are about to say is genuinely what you think &mdash; and that it diverges from what most of the group appears to think. You complete the sentence, but soften it. You make it less specific, less committed, more hedged.</p>
+<p class="scenario-context">The hedging happened in real time, faster than conscious thought. Something registered the divergence and modified the output before it left your mouth. The modifier is decades old. It learned its job in a school hallway and has been doing it ever since.</p>
+
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the hedging as social intelligence. Reading the room and adjusting your communication is a sophisticated skill, not a conditioned suppression.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice the hedging before accepting it as intelligence. Sometimes adjusting communication is skilled. Sometimes it is the modifier operating at speed &mdash; not reading the room, but flinching from it. The distinction is available if you look at what happened in the body before the hedging. Skilled adjustment feels considered. Conditioned hedging feels like flinching.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Stop hedging entirely. From now on, say exactly what you think, regardless of the social context.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Continue hedging, noting that the group probably would have disagreed and the disagreement would have been unpleasant. The hedging was pragmatic.</button>
+</div>
+
+<div class="feedback" id="feedback-4">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-4"></p>
+<p class="feedback-text" id="feedback-detail-4"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">04 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 5 -->
+<section class="slide" data-slide="5">
+<div class="slide-number">Page 05 / 09 &middot; The Teacher</div>
+<h1 class="slide-title">What teachers teach without <em>knowing.</em></h1>
+
+<p class="lead">The teacher is the institution&rsquo;s primary human agent &mdash; the person through whom the school&rsquo;s conditioning is most directly delivered. This is not a criticism of teachers. The vast majority of teachers entered the profession from genuine care and commitment to the young people in their classrooms. The conditioning they transmitted was, in most cases, not the product of conscious intent. It was the product of their own institutional formation &mdash; the fact that they themselves were shaped by the school, trained in its expectations, and then returned to it as adults to operate within its structures. <em>The institution reproduces itself through the bodies of the people who loved it enough to stay.</em></p>
+
+<div class="mechanism">
+<div class="mechanism-num">Transmitted lesson 01</div>
+<h2 class="mechanism-name">That questions have right answers.</h2>
+<p class="body-text">The teacher asks a question. The question has a right answer &mdash; the answer the curriculum specifies, the answer the examination will require. <strong>The student who provides the right answer is validated. The student who provides a different answer &mdash; even a more interesting, more original, more genuinely thoughtful answer &mdash; is corrected toward the right one.</strong> Over years, this teaches the student that the purpose of thinking is to arrive at the answer that the authority expects. <em>The student who graduates from school having learned that questions have predetermined right answers &mdash; and that the task is to identify the right answer rather than to genuinely think &mdash; is intellectually damaged in a way that their examination results will never reveal.</em> The adult who cannot tolerate open-ended questions, who requires a correct answer before they can engage with a problem, who experiences genuine ambiguity as threat rather than invitation, learned their relationship to questions in a classroom where all questions had right answers and the right answers belonged to the teacher.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Transmitted lesson 02</div>
+<h2 class="mechanism-name">That the adult&rsquo;s emotional state determines the room&rsquo;s safety.</h2>
+<p class="body-text">The child in the classroom learns, with great speed and precision, to read the teacher&rsquo;s emotional state &mdash; because the teacher&rsquo;s emotional state determines the safety of the environment. <strong>A teacher who is in a good mood means the classroom is safe. A teacher who is frustrated, impatient, or distracted means the classroom is unsafe.</strong> The child learns to monitor the adult&rsquo;s emotional state continuously and to adjust their own behaviour in response to it. <em>The adult who spends every meeting monitoring their manager&rsquo;s emotional state for signs of safety or danger; who shapes every interaction around the reading of the authority figure&rsquo;s mood; who cannot be in a room with a powerful person without a portion of their attention devoted to emotional surveillance &mdash; this adult learned this skill in a classroom where the teacher&rsquo;s mood was the primary environmental variable.</em></p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Transmitted lesson 03</div>
+<h2 class="mechanism-name">That getting it right matters more than understanding.</h2>
+<p class="body-text">The pressure of the curriculum, the pace of the timetable, and the requirements of assessment mean that the school&rsquo;s de facto goal is correct performance rather than genuine understanding. <strong>The teacher who must cover the curriculum, produce adequate examination results, and manage thirty children in a single hour has limited time for the student who is genuinely confused but needs more time to understand.</strong> The correct answer, produced quickly and efficiently, is what the structure rewards. The student who needs to sit with confusion, who learns slowly but deeply, who requires the understanding to precede the performance &mdash; this student is a structural problem in a system designed for efficient performance. <em>The adult who performs understanding before they have it; who says &ldquo;yes&rdquo; to comprehension questions before comprehension has arrived; who experiences the admission of genuine confusion as shameful &mdash; learned that getting it right is more important than actually knowing it.</em></p>
+</div>
+
+<div class="pullquote">The teachers transmitted what they were trained to transmit, in the structures they were given, under the pressures the institution imposed on them. Most of them were doing their best inside a system that constrained them. The transmission happened anyway. The question is not whether to blame the teachers. The question is what was transmitted, and what it costs you now.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">In a meeting, someone asks if everyone is clear on the new process. You are not clear. You say you are.</p>
+<p class="scenario-context">The admission of confusion would have required a moment of vulnerability in a group setting. It might have slowed the meeting. It might have suggested you were not keeping up. The cost of clarity felt higher than the cost of continued confusion, so you performed understanding that was not present. You learned this in a classroom. You have been doing it in meeting rooms ever since.</p>
+
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the performance as practical. Slowing the meeting to ask a clarifying question is genuinely disruptive, and you can find the answer later. This is professional judgement.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice the cost of the performance. The confusion persists. The work produced from the confused understanding may be incorrect. The performance of understanding, multiplied across every meeting, every relationship, every situation where genuine confusion is present, is an enormous ongoing cost &mdash; paid in errors, in misdirected effort, in the slow erosion of trust in your own capacity to understand. The one clarifying question, asked honestly, costs far less.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Commit to never performing understanding again. Radical honesty about confusion in every context.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Note that the meeting moved on too quickly and the facilitator should have checked for genuine understanding more carefully. The problem was external.</button>
+</div>
+
+<div class="feedback" id="feedback-5">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-5"></p>
+<p class="feedback-text" id="feedback-detail-5"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">05 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 6 -->
+<section class="slide" data-slide="6">
+<div class="slide-number">Page 06 / 09 &middot; The Problem Learner</div>
+<h1 class="slide-title">What school calls a <em>problem.</em></h1>
+
+<p class="lead">Every system that requires uniform outputs from non-uniform inputs will produce a category of inputs it cannot process. The school requires every child to learn the same material, in the same format, at the same pace, and produce the same kind of performance as evidence of learning. The children who can do this become, in the school&rsquo;s assessment, successful learners. The children who cannot &mdash; for whatever reason, cognitive, emotional, developmental, temperamental, or circumstantial &mdash; become, in the school&rsquo;s assessment, problem learners. The category of &ldquo;problem learner&rdquo; tells you very little about the child. It tells you a great deal about the school&rsquo;s inability to accommodate human variation.</p>
+
+<p class="body-text"><strong>The school&rsquo;s response to the problem learner is to fix the learner rather than the system.</strong> The child who cannot sit still is given strategies for sitting still. The child who cannot sustain attention in a forty-five-minute lecture format is assessed for an attention deficit. The child who cannot learn through reading and writing alone &mdash; who needs to move, to build, to discuss, to discover through experience &mdash; is remediated toward the formats the school can accommodate. <em>In almost every case, the intervention is directed at the child, not at the structural mismatch between the child&rsquo;s learning style and the school&rsquo;s delivery method.</em></p>
+
+<div class="section-heading">The specific condemnations and their structural origins</div>
+
+<div class="cost-block">
+<p class="cost-name">&ldquo;Cannot concentrate.&rdquo;</p>
+<p class="cost-text">The child cannot concentrate on forty-five minutes of lecture-format delivery of subjects they did not choose, in a sequence determined by a timetable they did not design, at a pace determined by curriculum coverage requirements rather than their own comprehension. <strong>The same child, given material that interests them and time that is theirs, may be capable of concentration that the school could never have produced.</strong> The assessment &ldquo;cannot concentrate&rdquo; does not describe the child&rsquo;s cognitive capacity. It describes the mismatch between the child&rsquo;s concentration requirements and the school&rsquo;s delivery format. The child who carries this assessment into adulthood and believes they cannot concentrate &mdash; even when evidence suggests otherwise &mdash; is carrying the school&rsquo;s mismatch as a character verdict.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">&ldquo;Does not apply themselves.&rdquo;</p>
+<p class="cost-text">The child does not apply themselves to material they find meaningless, in a format they did not choose, toward a goal (examination performance) they did not set and do not endorse. <em>The child who applies themselves readily to the things they find genuinely meaningful &mdash; who spends hours in absorbed, self-directed effort on the things that matter to them &mdash; receives the assessment &ldquo;does not apply themselves&rdquo; from an institution that did not offer them anything that warranted application.</em> <strong>The adult who believes they are lazy or unmotivated, who cannot sustain effort on projects not set by an external authority, who has never experienced the application of their own genuine energy to their own chosen work &mdash; this adult may be carrying a verdict written by an institution that never gave them anything worth applying themselves to.</strong></p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">&ldquo;A disruptive influence.&rdquo;</p>
+<p class="cost-text">The child disrupts the institutional requirement for uniform behaviour. <strong>The disruption may take many forms: questioning the lesson&rsquo;s premise, refusing a role, expressing emotions that the classroom cannot accommodate, making other children laugh, pursuing a tangent that the timetable does not permit.</strong> In every case, the assessment &ldquo;disruptive&rdquo; is the institution&rsquo;s description of behaviour that makes its management more difficult. The behaviour itself may be, in any other context, perfectly ordinary or even admirable. <em>The adult who experiences their natural manner &mdash; their energy, their humour, their tendency to ask questions &mdash; as &ldquo;too much&rdquo; in professional settings, is applying the institution&rsquo;s assessment of their childhood self to their adult self, in contexts where the assessment was never relevant.</em></p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You are given an open-ended creative project at work &mdash; no fixed format, no specified output, just a problem to solve in whatever way you think best. You feel paralysed. You wait for more instructions. None come.</p>
+<p class="scenario-context">The paralysis is not a lack of creative capacity. It is the consequence of twelve or more years of structured tasks with specified formats, right answers, and external assessment. The open-ended project requires you to supply the structure, the format, and the assessment criteria from within yourself. Those capacities were never developed, because they were never needed. The school provided them from outside, every day, for over a decade.</p>
+
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Conclude that you are not a creative person. The paralysis is evidence of a limitation. Some people are creative; you are not.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Read the paralysis as structural rather than personal. The capacity to self-direct a creative project was never developed because the school never required it. The paralysis is not evidence of creative limitation &mdash; it is the absence of a skill that was never taught, in a system that had no interest in developing it. The skill can be developed. It begins with the recognition that the absence is trained, not innate.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Push through the paralysis with force. Produce something immediately, regardless of quality, to prove that the paralysis is not real.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Seek additional structure from outside. Ask for more parameters, more guidance, more specification. Reduce the open-endedness until the task resembles something the school would have set.</button>
+</div>
+
+<div class="feedback" id="feedback-6">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-6"></p>
+<p class="feedback-text" id="feedback-detail-6"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">06 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 7 -->
+<section class="slide" data-slide="7">
+<div class="slide-number">Page 07 / 09 &middot; The Adult Output</div>
+<h1 class="slide-title">What school actually <em>produces.</em></h1>
+
+<p class="lead">A system can be evaluated by its outputs. School&rsquo;s declared outputs are an educated, critically thinking, capable citizenry. Its actual outputs &mdash; measured not by examination results but by the qualities it produces in the adults who leave it &mdash; are more specific, more consistent, and less flattering. Understanding what school actually produces is not an attack on education. It is an honest assessment of a system that, like all systems, produces what it is structurally designed to produce rather than what it says it is designed to produce.</p>
+
+<div class="mechanism">
+<div class="mechanism-num">Actual output 01</div>
+<h2 class="mechanism-name">Credentialled but not educated.</h2>
+<p class="body-text">School produces people who have passed examinations and have very little relationship with genuine learning. The examination-passing and the learning are not the same process and were never required to be. <strong>The student who learns to reproduce the right answers under exam conditions &mdash; who acquires, retains, and performs the curriculum&rsquo;s specified content &mdash; receives the credential that the system awards and may have very little understanding of, or genuine curiosity about, any of the subjects examined.</strong> <em>The adult who has no reading practice, who avoids intellectual challenge, who has not learned anything new in years except what their job requires &mdash; this adult may have left school with excellent results. The results measured compliance with the curriculum, not love of learning.</em> School, in many cases, destroys love of learning by converting it into an examination performance requirement. The student who loved reading before school assigned books to be examined; who loved numbers before mathematics became a high-stakes assessment; who loved making things before art was graded &mdash; this student is common. They are a structural output of a system that converts intrinsic motivation into extrinsic compliance.</p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Actual output 02</div>
+<h2 class="mechanism-name">Compliant but not capable of self-direction.</h2>
+<p class="body-text">School produces people who can follow instructions with great efficiency and who struggle profoundly with the absence of instructions. <strong>Thirteen years of being told what to do, when, in what format, toward what standard, produces a person who has never been required to generate direction from within themselves &mdash; and who experiences the demand to do so as either paralysing or threatening.</strong> This is the workforce that most employers encounter: highly qualified, technically skilled, and deeply uncomfortable with genuine autonomy. The employer who gives this person a project and says &ldquo;figure it out&rdquo; will encounter confusion, requests for further specification, and, often, work that replicates the expected template rather than genuinely engaging with the problem. <em>The person is not stupid. They are school&rsquo;s ideal product: maximally compliant and minimally self-directed.</em></p>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-num">Actual output 03</div>
+<h2 class="mechanism-name">Risk-averse to the point of immobility.</h2>
+<p class="body-text">School&rsquo;s assessment system rewards correct answers and penalises wrong ones. <strong>The student who is wrong loses marks, loses rank, loses the teacher&rsquo;s approval.</strong> The student who is consistently right is rewarded. Over a decade and more, this produces a profound aversion to being wrong &mdash; which means a profound aversion to the condition of not yet knowing, which is the condition that all genuine learning and all genuine creative effort require. <em>The adult who will not attempt something they might do badly; who will not offer an idea that might be rejected; who will not take a position that might be wrong &mdash; this adult was trained by a system that punished wrongness for so long that wrongness became intolerable.</em> The genuine learner, the genuine creator, the genuine thinker, must be comfortable with being wrong. School spent a decade and more making this comfort impossible.</p>
+</div>
+
+<div class="pullquote">School produced exactly what it was designed to produce: people who can follow instructions, perform on command, accept external assessment of their worth, and resist the discomfort of not knowing. These are the qualities of an excellent employee in an economy that requires reliable, predictable human outputs. They are not, in any meaningful sense, the qualities of a free person.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You have an idea &mdash; a genuine one, original, potentially valuable. You do not share it. You hold it privately, examining it for flaws, waiting until you are certain it is good enough before offering it. The moment for offering passes and the idea is never shared.</p>
+<p class="scenario-context">The idea may have been good. It may have been flawed. You will never know, because the fear of being wrong &mdash; the fear trained by a decade of assessment &mdash; held the idea inside until the moment for it closed. This is not caution. This is the assessment machine operating in a context where no one is giving you marks.</p>
+
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Accept the withholding as appropriate quality control. Sharing unvetted ideas wastes people&rsquo;s time and exposes you to unnecessary criticism. The caution was correct.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice what the withholding actually costs. The idea that is never shared cannot be developed, challenged, improved, or used. The fear of wrongness, applied consistently, produces silence &mdash; and silence produces nothing. The examined idea held until perfect is the unshared idea held forever. The imperfect idea offered is the beginning of something.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Share every idea immediately, regardless of development, as a deconditioning practice.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Conclude that you are not an ideas person and redirect your energy toward execution rather than generation.</button>
+</div>
+
+<div class="feedback" id="feedback-7">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-7"></p>
+<p class="feedback-text" id="feedback-detail-7"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">07 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Continue &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 8 -->
+<section class="slide" data-slide="8">
+<div class="slide-number">Page 08 / 09 &middot; The Long Shadow</div>
+<h1 class="slide-title">School&rsquo;s life after <em>school.</em></h1>
+
+<p class="lead">You left school. School did not leave you. The conditioning installed across a decade of total institutional exposure continues to operate in every adult context &mdash; in your relationship to authority, to assessment, to self-direction, to risk, to the expression of opinion, to the experience of confusion, to the question of what you are worth. The school that shaped you is gone. The shape it produced is present in every room you enter.</p>
+
+<p class="body-text"><strong>The long shadow manifests most clearly in the workplace</strong> &mdash; not because the workplace is the most important arena of adult life, but because it most closely replicates the school&rsquo;s structural features: hierarchy, assessment, peer social dynamics, the requirement to be present on schedule, the allocation of tasks by authority, and the evaluation of performance against external standards. For many adults, the workplace is experienced as a continuation of school rather than a departure from it &mdash; because the structural features that produced the conditioning are still present, and the conditioned responses they produce are still firing.</p>
+
+<div class="section-heading">Where school continues to operate</div>
+
+<div class="cost-block">
+<p class="cost-name">In the relationship to authority.</p>
+<p class="cost-text"><strong>The manager who cannot be disagreed with. The rule that cannot be questioned. The process that must be followed even when it is clearly wrong.</strong> In every case, the adult&rsquo;s relationship to the authority figure replicates the classroom dynamic: the teacher is at the front, the teacher knows the right answer, the correct response is compliance. The adult who is capable of genuine engagement with authority &mdash; who can disagree respectfully, question productively, challenge constructively &mdash; is the adult who has begun to exit the school&rsquo;s conditioning. They are less common than the institution would prefer and more valuable than the institution knows how to use.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">In the relationship to learning.</p>
+<p class="cost-text">The adult who cannot read for pleasure because reading was an assessed performance requirement. The adult who avoids learning new things because learning carries the memory of being assessed and found wanting. <em>The adult who experiences intellectual challenge as threat rather than invitation &mdash; who closes the book when it becomes difficult, who stops the course when the material exceeds comfortable comprehension, who experiences not-yet-knowing as evidence of inadequacy rather than the normal state of anyone in the process of learning something.</em> <strong>All of these adults are carrying school&rsquo;s relationship to learning: the equation between learning and assessment, between not-knowing and failure, between confusion and shame.</strong> The recovery of genuine learning &mdash; the kind that is intrinsically motivated, self-directed, and tolerant of confusion &mdash; is one of the most significant liberations available to the adult who understands what school did to their relationship with it.</p>
+</div>
+
+<div class="cost-block">
+<p class="cost-name">In the relationship to creative work.</p>
+<p class="cost-text">The adult who believes they are not creative because their school&rsquo;s assessment of their creative work was poor. The adult who produces work and immediately subjects it to external assessment criteria before they have had the experience of making it themselves. The adult who cannot complete a creative project because completion would require submitting it &mdash; and submission carries the memory of the grade. <strong>Creative work requires the capacity to begin without knowing the outcome, to proceed through confusion, to produce imperfect first attempts, and to assess the work against your own internal standards rather than an external examiner&rsquo;s.</strong> Every one of these requirements is precisely the opposite of what school trained. The recovery of creative capacity, for many adults, is primarily the recovery of freedom from the school&rsquo;s assessment framework.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">The exit from school&rsquo;s shadow</div>
+<p class="sov-text">You cannot undo the conditioning. You can see it. You can ask, in each situation where the conditioned response fires: is this mine, or is this school&rsquo;s? The silence in the meeting &mdash; is that professional judgement or the row? The need for external validation &mdash; is that collaborative spirit or the grade? The aversion to being wrong &mdash; is that appropriate quality control or the examination? The questions do not always have clear answers. The asking of them is the practice. The asking is what gradually, over time, creates the distance between you and the conditioning &mdash; the distance in which genuine choice becomes possible.</p>
+</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario &middot; Sit with this</div>
+<p class="scenario-prompt">You finish this module and notice something: you have been reading it the way you read in school &mdash; looking for the key points, the things you are supposed to take away, the position that would be &ldquo;correct&rdquo; to hold on the material.</p>
+<p class="scenario-context">The noticing is the module&rsquo;s most useful product. You have been conditioned to engage with educational content as performance rather than genuine inquiry &mdash; to look for the right answer rather than to think. The content of this module was about that conditioning. The way you engaged with the module was that conditioning, operating in real time.</p>
+
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Dismiss the observation. You were reading normally. There is nothing to examine here.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Stay with the observation. If you were reading for the right answer, what would happen if you read the module again &mdash; or any piece of educational content &mdash; asking what you genuinely think rather than what the correct response is? The difference between those two modes is the entire difference this course is attempting to describe. And the noticing, here, in this moment, is its most concrete demonstration.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Feel shame at having been conditioned even while studying conditioning. The irony is evidence of how deep it goes.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Make a note of the correct response for each page and proceed to the completion slide.</button>
+</div>
+
+<div class="feedback" id="feedback-8">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-8"></p>
+<p class="feedback-text" id="feedback-detail-8"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">08 / 09</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Complete Module &rarr;</button>
+</div>
+</section>
+
+<!-- SLIDE 9: COMPLETION -->
+<section class="slide" data-slide="9">
+<div class="slide-number">Module Complete</div>
+<div class="complete-mark">&#10003;</div>
+<h1 class="slide-title">You&rsquo;ve completed <em>Module Two.</em></h1>
+
+<p class="lead">You now have a structural account of what school actually teaches &mdash; beneath the curriculum, inside the architecture, through the assessment machine, the peer group, the teacher&rsquo;s unconscious transmissions, and the long shadow it casts into adult life. The school was not trying to damage you. The school was doing what systems do: producing the outputs it was designed to produce. The outputs were, in most cases, compliance. The compliance is still running.</p>
+
+<div class="section-heading">What you carry forward</div>
+
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">School is a total institution: compulsory, universal, developmental, and total. No adult institution replicates this combination. The conditioning it produces is unlike anything that follows it.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">The architecture itself teaches: rows teach hierarchy, bells teach that your time is not yours, timetables teach that curiosity requires permission, uniforms teach that individual expression is inappropriate in institutional settings.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">The assessment machine installs the performance-equals-worth equation, the ranking wound, and the externalisation of self-knowledge. The adult who cannot assess their own work without external validation was trained by a system that held the only valid assessment.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">The peer group enforces opinion conformity, aesthetic conformity, and the management of visibility. The conditioning applies wherever groups gather, long after the school has been left.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Teachers transmit that questions have right answers, that the adult&rsquo;s emotional state determines the room&rsquo;s safety, and that getting it right matters more than understanding. The transmission was not malicious. It was structural.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">The category of &ldquo;problem learner&rdquo; describes the school&rsquo;s limitations, not the learner&rsquo;s. The adult who carries a school-issued verdict on their intelligence, application, or behaviour is carrying the school&rsquo;s structural mismatch as a character verdict.</span></li>
+<li><span class="summary-num">07</span><span class="summary-text">School&rsquo;s actual outputs: credentialled but not educated, compliant but not self-directing, risk-averse to the point of immobility. These are features, not bugs. The system produced what it was designed to produce.</span></li>
+<li><span class="summary-num">08</span><span class="summary-text">School continues to operate in the adult&rsquo;s relationship to authority, learning, and creative work. The exit from the shadow begins with the question: in this moment, is this mine, or is this school&rsquo;s?</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+
+<p class="body-text">This week, notice the assessment reflex: the moment, in any context, when you reach for an external standard to measure your own work, thought, or opinion against, before you have formed your own assessment. Notice it, name it as school&rsquo;s reflex, and then ask: what do <em>I</em> actually think about this? Not what is the right answer. Not what would be approved of. What do you actually think? The answer might be uncertain. The answer might be wrong. The answer is yours. That is what makes it the practice.</p>
+
+<p class="body-text">The next module &mdash; <strong>Work: The Adult School</strong> &mdash; examines how the workplace replicates the school&rsquo;s structure in an adult form: the manager as teacher, the appraisal as grade, the organisation&rsquo;s culture as peer group, and the way employment extracts the same compliance that education installed &mdash; now exchanged, explicitly, for money.</p>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">&larr; Previous</button>
+<span class="nav-counter">09 / 09</span>
+<button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Begin Module 03 &rarr;</button>
+</div>
+</section>
+
+</main>
+
+<script>
+const feedback={
+1:{
+a:{headline:"Accepting the ordinary as self-evidently fine is the conditioning&rsquo;s most reliable defence: making the invisible architecture of the school day feel like the natural texture of childhood.",detail:"The conditioning was not dramatic. It did not announce itself. It operated through the ordinary bells, rows, grades, and peer group dynamics of a standard school day, which is precisely why it was so effective and so difficult to see. The call to examine the ordinary is not a claim that the experience was uniquely traumatic or that the school was unusually bad. It is a structural observation: the ordinary experience installed specific patterns in you, and those patterns are still operating. The ordinariness is not a rebuttal. The ordinariness is the mechanism."},
+b:{headline:"Holding the ordinariness as the mechanism rather than the rebuttal is the precise structural reading this module begins from.",detail:"The conditioning&rsquo;s power came from its total ordinariness &mdash; its presence in every school day, every classroom, every bell and row and grade and peer interaction. The dramatic experience conditions the dramatic response. The ordinary experience conditions the ordinary adult &mdash; someone who accepts the arrangement of the meeting room, the authority of the manager, the validity of the appraisal, the suppression of the inconvenient opinion, without ever questioning whether these arrangements were chosen or installed. They were installed. The installation was ordinary. The examination of the ordinary is the beginning of the governed departure from it."},
+c:{headline:"Converting the structural analysis into a total condemnation removes the nuance that makes the analysis useful.",detail:"School delivered genuine things: friendship, some knowledge, some skills, exposure to ideas and people and ways of thinking that had real value. The structural analysis does not erase these. It adds a layer: alongside the genuine education, the school was also running the compliance programme, the assessment machine, and the peer group enforcement. Both were happening simultaneously. The condemnation that erases the genuine things is as limiting as the nostalgia that erases the conditioning. The full picture holds both."},
+d:{headline:"Personalising the structural reading &mdash; locating the experience in a specific teacher or period &mdash; converts a structural analysis into a personal narrative and prevents the examination of the structure.",detail:"The specific teacher, the good school, the bad school, the particular year &mdash; these are real and they matter. They do not determine the structural experience. A good teacher in a bad structural environment still delivers the row, the bell, the timetable, and the grade. A bad teacher in the same structural environment delivers the same structural conditioning with additional personal damage. The structural reading examines what all schools share, regardless of individual quality. The personal narrative is easier to hold and less illuminating about the patterns the adult is still carrying."}
+},
+2:{
+a:{headline:"Accepting professional silence as consistently appropriate social intelligence is the row&rsquo;s most durable defence: presenting itself as sophisticated reading of the room.",detail:"The row is very good at disguising itself as contextual judgement. The silence, when examined, often reveals not a considered assessment of the specific situation but a pre-cognitive flinch from speaking in the presence of the agenda &mdash; the authority structure that the agenda represents. The distinction is available in the body: considered silence feels chosen; conditioned silence feels compelled. The question is not whether silence was the right choice in this specific situation &mdash; it may well have been. The question is whether the silence was chosen or whether it happened before choosing was possible. If it happened before choosing was possible, it is the row."},
+b:{headline:"Distinguishing the felt quality of considered silence from conditioned flinching is the precise practice this scenario is designed to introduce.",detail:"The row teaches that knowledge belongs at the front and that speaking in the presence of authority requires permission. This is not a memory. It is a trained response pattern that continues to fire in every room that replicates the row&rsquo;s structural logic. The meeting room, with its agenda at the front and its participants arrayed around the table, replicates the row&rsquo;s logic sufficiently to activate the response. Noticing the response &mdash; feeling the compulsion quality of the silence, the pre-cognitive nature of the flinch &mdash; is the first movement toward genuine choice. The choice may still be silence. The difference is that it is chosen."},
+c:{headline:"Wholesale commitment to speaking in every meeting is the reactive inversion of conditioned silence &mdash; still the row, now from the other side.",detail:"The commitment to always speak, as a practice of deconditioning, replaces one automatic response with another. The genuinely de-conditioned response is neither always silent nor always speaking: it is the capacity to assess each specific situation from a conscious position and choose accordingly. That capacity is not built by adopting a new rule. It is built by developing the pause between stimulus and response &mdash; the moment in which the conditioned reflex can be observed before it is acted on. The rule produces compliance in a different direction. The pause produces genuine choice."},
+d:{headline:"Attributing the silence entirely to the meeting&rsquo;s external structure keeps the conditioning invisible by locating the cause outside the self.",detail:"The meeting may have been poorly run. The agenda may have been too tight. The chair may have moved on too quickly. All of this may be true. And inside all of it, the conditioned response was operating: the trained sense that the agenda determines what is said, that authority controls the room, that speaking requires permission from the structure. The external attribution is more comfortable and less illuminating. The internal examination &mdash; what happened in me when the moment passed? &mdash; is the examination that produces useful information."}
+},
+3:{
+a:{headline:"Accepting the need for external validation as appropriate professional practice is the assessment machine presenting itself as collaborative professional skill.",detail:"Feedback from others is genuinely useful. The question is whether you can assess your own work independently before seeking external perspective &mdash; or whether the external assessment must arrive before you can know what you think of the work. The person who seeks feedback from a position of their own prior assessment is collaborating. The person who cannot assess the work until someone else assesses it first is still inside the assessment machine &mdash; operating as the student who cannot know the quality of their answer until the teacher marks it. Collaboration and dependency are not the same process. The distinction tells you whether you are seeking perspective or seeking permission."},
+b:{headline:"Distinguishing between seeking perspective from a position of your own assessment and requiring external permission to know your own work&rsquo;s value is the precise and useful response to this recognition.",detail:"The internal assessment mechanism was never developed because it was never needed &mdash; the external one was provided so consistently, so authoritatively, and so continuously that the internal one had no space to form. Developing it now means, first, noticing when it is absent: the moment of reaching outward for assessment before looking inward. Then practising the internal assessment first, however uncertain it feels, before seeking external perspective. The uncertainty is the undeveloped capacity, not a verdict on the work. The practice, over time, grows the capacity. The external perspective retains its value. It becomes additional, not foundational."},
+c:{headline:"Rejecting all external validation as unnecessary is the reactive inversion that produces isolation rather than sovereignty.",detail:"External perspective has genuine value. Other people see things you do not see. Other people&rsquo;s responses to your work are real and meaningful. The goal is not to become impervious to external assessment &mdash; it is to develop an internal assessment capacity that can exist alongside external assessment rather than being replaced by it. The person who can assess their own work and then seek useful external perspective is in a different position from the person who can only assess through external eyes. The difference is not the presence or absence of external feedback. It is the existence of the internal assessment alongside it."},
+d:{headline:"Attributing the need for external validation to a personality trait &mdash; modesty, lack of confidence &mdash; keeps the trained origin invisible and makes it seem fixed.",detail:"Modesty is a value. Lack of confidence is a feeling. Neither of them is the same as the trained absence of an internal assessment mechanism. Calling the trained state a personality trait places it outside the reach of examination &mdash; it is just how you are, rather than what was installed. The installation can be examined. The personality trait cannot. The recognition that this is trained rather than innate is not a small distinction. It is the difference between a condition that is permanent and a condition that is the starting point for a recoverable capacity. The capacity can be developed. It begins with the recognition that it is absent because it was never built, not because it cannot exist."}
+},
+4:{
+a:{headline:"Accepting the hedging as sophisticated social intelligence is the modifier presenting itself as skill to prevent examination.",detail:"Social reading is a genuine and valuable capacity. The modifier, however, does not read the room. It scans for the divergence and modifies the output before conscious assessment of the specific room&rsquo;s actual response is possible. A skilled communicator adjusts their communication based on a considered reading of the specific context. The modifier activates on the detection of divergence, regardless of the specific context, and produces hedging as an automatic response. The test is speed and sensation: did the modification happen before you consciously assessed the room? If it did, it was not social intelligence. It was the modifier. Social intelligence happens after the assessment. The modifier happens before it."},
+b:{headline:"Noticing the felt quality of the hedging &mdash; flinching versus assessing &mdash; is the precise practice that begins to distinguish conditioned response from genuine social skill.",detail:"The distinction is available in the body in real time if you develop the capacity to notice it. Flinching has a specific felt quality: the tightening before the divergence is expressed, the modification that happens in the throat or in the formulation of the sentence before it leaves your mouth, the relief when the opinion has been safely hedged. Assessing has a different quality: a more deliberate pause, a consideration of the room, a conscious choice about what level of directness the context warrants. The first is conditioning. The second is skill. They produce similar behavioural outputs and completely different internal processes. The noticing of the internal process is the practice."},
+c:{headline:"Committing to total directness as deconditioning replicates the pattern of replacing one automatic response with another without developing the genuine capacity for contextual choice.",detail:"The goal is not to say everything you think in every context. The goal is to choose what you say based on your own governed reading of the situation, rather than from a conditioned flinch from divergence. Total directness as a rule is as automatic as total hedging &mdash; and, in most social contexts, considerably more damaging. The capacity the practice is developing is the pause: the moment between the recognition of divergence and the modification, in which a genuine choice can form. The choice, from that pause, may be to hedge, to speak directly, or to say nothing. The important thing is that it is a choice."},
+d:{headline:"Accepting the pragmatic framing &mdash; the hedging saved a difficult social moment &mdash; is the conditioned response explaining itself after the fact rather than being examined.",detail:"The pragmatic account may be accurate. The disagreement may genuinely have been unpleasant. And the hedging may have happened faster than the pragmatic calculation, which means the calculation arrived to explain a behaviour that had already been completed rather than to produce it. This is the characteristic signature of post-hoc rationalisation of a conditioned response: the behaviour comes first, the justification follows, and the justification feels like the reason for the behaviour. Examining whether the calculation preceded or followed the hedging is the examination the scenario points toward."}
+},
+5:{
+a:{headline:"Accepting the performance of understanding as practical professional behaviour is the school&rsquo;s lesson presenting itself as contextual wisdom.",detail:"The pragmatic case for the silence is real: raising a clarifying question in a meeting does carry costs. But the costs of the performance are also real and consistently underestimated: the work produced from the confused understanding, the time spent in incorrect effort, the follow-up correction required, the cumulative erosion of your own sense of competence as the confusions accumulate. The pragmatic calculation that says the silence is cheaper than the question is usually inaccurate when the full costs of the silence are included. The school trained you to make this inaccurate calculation because the school needed your silence more than it needed your understanding."},
+b:{headline:"Naming the full cost of performed understanding &mdash; and recognising it as a trained behaviour rather than a professional choice &mdash; is the response that actually changes the pattern.",detail:"The honest clarifying question, asked at the right moment, is one of the most professionally effective behaviours available. It produces accurate work, demonstrates genuine engagement, and models the intellectual honesty that most groups benefit from but rarely practise. The conditioning &mdash; which installed the equation between confusion and shame &mdash; systematically prevents this behaviour by making the question feel like an admission of inadequacy rather than an exercise of intellectual rigour. Naming the equation as trained, and recognising that genuine intellectual rigour often requires the admission of confusion, is the beginning of the reversal."},
+c:{headline:"Committing to total honesty about confusion in every context is the reactive overcorrection that produces its own social costs.",detail:"Context matters. There are situations where the admission of confusion is genuinely disruptive and the better choice is to note the confusion privately and address it afterwards. The governed response is not radical honesty in all situations. It is the development of the capacity to assess, in each specific situation, what is actually required &mdash; which sometimes means speaking and sometimes means noting and following up. What the practice is moving toward is the capacity to make this assessment consciously, rather than defaulting automatically to performed understanding as the safe option."},
+d:{headline:"Attributing the performed understanding to the meeting&rsquo;s structure &mdash; the facilitator should have checked more carefully &mdash; keeps the conditioned internal response invisible.",detail:"The facilitator may well have moved too quickly. Better facilitation practice would have included explicit comprehension checks. And inside the external structural failure, the conditioned response was operating: the trained equation between confusion and shame, the trained behaviour of performing understanding to avoid the social cost of admitting it. Both are true. The external attribution is more comfortable. The internal examination is more useful. The meeting&rsquo;s structure cannot be changed by examining your conditioned response to it. The conditioned response can be changed by examining it. The examination is the practice."}
+},
+6:{
+a:{headline:"Accepting a school-issued assessment of creative limitation as a fixed personal characteristic is the institutional verdict operating as self-knowledge decades after the institution has gone.",detail:"The school assessed creative capacity in specific formats, under specific conditions, at a specific age, against a specific standard. The assessment was not a measurement of the full range of what you are capable of generating. It was a measurement of how well a child performed a school-defined creative task. A child who received low marks on school-assessed creative work and a child who received high marks are not significantly different in their actual creative capacity. They are different in how well they matched what the school could assess. The verdict is about the match, not about the capacity. The capacity exists independently of the verdict."},
+b:{headline:"Reading the paralysis as structural rather than personal &mdash; as the absence of an undeveloped skill rather than evidence of a fixed limitation &mdash; is the response that opens the possibility of development.",detail:"Self-direction in creative work is a skill. Like all skills, it was either developed or not, depending on whether the conditions for its development were present. School did not provide those conditions. The conditions for developing self-direction are: open-ended problems, time to explore without specified format, the safety to produce imperfect first attempts without assessment, and the experience of pursuing your own direction toward your own self-assessed outcome. School provided none of these. The skill is absent because it was never developed, not because it cannot be. Development begins with the recognition that the paralysis is a starting point, not a verdict."},
+c:{headline:"Forcing output through the paralysis produces something, which is useful, but does not address the structural origin of the paralysis or develop the underlying capacity.",detail:"Producing something through force is better than producing nothing. It is not the same as developing the capacity for self-directed creative work. The force approach treats the symptom &mdash; the absence of output &mdash; without examining the cause &mdash; the absence of the skill. The skill is developed through repeated exposure to the conditions of self-direction: starting with a small open-ended task, producing something imperfect, assessing it against your own internal standard, and iterating. The force produces output. The practice produces the capacity to generate output without force."},
+d:{headline:"Seeking additional external structure to reduce the open-endedness is the compliance reflex finding the nearest available timetable &mdash; replacing the school&rsquo;s structure with the employer&rsquo;s so that self-direction is never required.",detail:"The additional parameters make the task manageable by converting it from a self-directed problem into a specified task. The specified task can be completed. The capacity for self-direction remains undeveloped. Every time the compliance reflex successfully reduces open-endedness to specifiability, it reinforces the pattern and delays the development of the underlying capacity. The practice that builds the capacity requires tolerating some open-endedness rather than consistently eliminating it. The tolerance is uncomfortable. The discomfort is the development."}
+},
+7:{
+a:{headline:"Accepting the withholding as quality control is the assessment machine presenting itself as professional judgement.",detail:"Quality control is a genuine and valuable practice. The question is whether the vetting process ever ends &mdash; whether the idea is eventually shared, or whether it is held indefinitely inside the examination process, refined and checked and never quite good enough. The assessment machine&rsquo;s version of quality control does not end in a share. It ends in the conclusion that the idea is not yet ready, which produces the same result as having no idea: silence. The ideas that change things are not the perfectly vetted ones. They are the ones offered imperfectly, into the space where they can be challenged, improved, and developed. The vetting that prevents the offering is not quality control. It is the fear of the grade."},
+b:{headline:"Naming the actual cost of the withheld idea &mdash; the nothing it produced &mdash; is the concrete, specific application of the module&rsquo;s structural reading to an actual moment.",detail:"The idea held until perfect is the idea held until it dies quietly in the examination room. The cost is not abstract. It is the specific idea that was not offered, not developed, not used. The assessment machine produces this cost in every domain where it operates: in professional conversations, in creative work, in relationships where the true feeling is held back until it is perfectly expressed and the moment for it has closed. The recovery begins with the recognition that imperfect offering is the productive condition. The perfect idea that is never offered contributes exactly as much as having no idea. The imperfect idea offered is the beginning."},
+c:{headline:"Sharing every idea immediately as a deconditioning practice replaces the assessment machine with a different automatic response rather than developing the governed capacity to choose.",detail:"Sharing ideas before they have any development is not a practice of intellectual courage. It is the compliance reflex in reverse: instead of defaulting to silence, defaulting to constant output. The governed capacity is neither. It is the ability to assess, in each specific context, what level of development the idea needs before it can usefully enter a conversation &mdash; and then to offer it at that level rather than either holding it indefinitely or offering it prematurely. The practice of getting to &lsquo;good enough to share&rsquo; rather than &lsquo;perfect or nothing&rsquo; is the specific development the scenario is pointing toward."},
+d:{headline:"Redefining the self as a non-ideas person is the assessment machine&rsquo;s final product: converting a trained absence into a permanent identity category.",detail:"The ideas exist. The module you just read is evidence that ideas exist &mdash; the reading produced thoughts, reactions, recognitions, and responses that are ideas. The question is not whether you have ideas. The question is whether you share them, and if not, why not. The assessment machine produces people who have ideas and do not share them, and who over time conclude they are not ideas people because sharing the ideas was so consistently risky. The identity category protects the person from the risk of sharing by eliminating the sharing entirely. The protection has the same cost as the risk: the ideas remain unshared. The identity is not a description of your nature. It is a description of the assessment machine&rsquo;s effect on it."}
+},
+8:{
+a:{headline:"Dismissing the observation is the assessment machine performing its most elegant trick: using the compliance reflex to prevent the examination of the compliance reflex.",detail:"The observation is not an accusation. It is a description of a very common reading pattern that people trained by school&rsquo;s assessment system develop: the orientation toward educational content as performance, the search for the right answer, the reading for what will be required rather than for what is genuinely thought. The dismissal of the observation as nothing to examine is the pattern protecting itself from examination by asserting there is nothing to examine. The observation, taken seriously for thirty seconds, produces the only moment in this module where the conditioning is visible in real time. The dismissal produces nothing except the continuation of the pattern."},
+b:{headline:"Staying with the observation &mdash; using it as the module&rsquo;s most concrete demonstration &mdash; is the moment of genuine self-referential recognition that the entire module was building toward.",detail:"The content of the module described the conditioning. The observation reveals the conditioning operating while the content was being read. Both matter. The observation matters more, because it is not a description of something that happened to you in the past. It is the conditioning happening now, visible, examinable, present. The practice of re-engaging with the content from a position of genuine inquiry rather than answer-seeking &mdash; even for one paragraph, even once &mdash; produces the felt difference between conditioned engagement and genuine thought. That felt difference is the most useful thing this module can give you."},
+c:{headline:"Shame at the irony of being conditioned while studying conditioning adds a cost to the recognition and prevents the recognition from being productive.",detail:"The conditioning&rsquo;s presence during the reading of the module is not a failure of your attention or your intelligence. It is evidence of how thoroughly the pattern is embedded and how automatically it operates. Everyone who reads this module will have read some of it in assessment mode. The conditioning does not suspend itself during the examination of the conditioning. It is not defeated by being noticed once. It is gradually loosened by being noticed repeatedly, over time, in many contexts. The shame at the irony is the conditioning doing one more thing: converting a useful observation into a self-judgement that ends the examination. The examination is more useful than the shame."},
+d:{headline:"Making a note of the correct responses and proceeding is the assessment machine operating in real time, providing its own most perfect demonstration, in the completion slide of a module about exactly this.",detail:"There is no correct response. There has been no correct response on any page of this module. There have been responses that are more governed, more structurally accurate, more useful for the work the course is doing &mdash; and those responses have been explained in the feedback, not because they are right but because the explanation of them is the course&rsquo;s content. The search for the correct response to take away &mdash; the thing to note, the position to adopt, the right answer &mdash; is the school continuing its work inside a course designed to make the school&rsquo;s work visible. The making visible is the work. It has been done. What you do with it now is yours."}
+}
+};
+
+let currentSlide=1;const totalSlides=9;const answered={1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c6m1';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course6-module-1-institution-training.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c6m2','1');window.location.href='course6-module-3-work-adult-school.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

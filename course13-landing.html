@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Inner Child & Self-Reparenting — Safe Spot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})()</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#7b5ea7;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html[data-theme="dark"]{--ink:#e8e8e4;--paper:#0f0f0d;--muted:#888884;--line:#2a2a27;--soft:#1a1a17}
+html,body{min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.site-header{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--line);
+  padding:14px 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.site-logo{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.site-logo strong{color:var(--ink);font-weight:500}
+.header-nav-right{display:flex;align-items:center;gap:16px;justify-self:end}
+.header-back{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.header-back:hover{color:var(--ink)}
+.theme-toggle{grid-column:2;justify-self:center;background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.theme-toggle:hover{opacity:1}
+.landing-wrap{max-width:760px;margin:0 auto;padding:56px 32px 100px}
+.landing-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.free-badge{display:inline-block;background:var(--accent);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;margin-left:10px;vertical-align:middle}
+.landing-title{font-family:var(--serif);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:300;line-height:1.25;margin-bottom:20px}
+.landing-tagline{font-size:.95rem;color:#3a3a36;line-height:1.75;margin-bottom:10px;font-style:italic}
+.landing-intro{font-size:.95rem;color:#3a3a36;line-height:1.75;margin-bottom:32px;max-width:640px}
+.landing-intro p{margin-bottom:14px}
+html[data-theme="dark"] .landing-intro,.landing-tagline{color:#b8b8b4}
+.what-youll-cover{border:1px solid var(--line);border-left:3px solid var(--ink);padding:20px 24px;background:var(--soft);border-radius:0 4px 4px 0;margin-bottom:28px}
+.what-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.module-preview{list-style:none;display:flex;flex-direction:column;gap:0}
+.module-preview li{font-size:.88rem;line-height:1.55;border-bottom:1px solid var(--line);padding:10px 0;display:flex;gap:14px;align-items:flex-start}
+.module-preview li:last-child{border-bottom:none}
+.mod-n{font-family:var(--mono);font-size:.72rem;color:var(--muted);flex-shrink:0;margin-top:3px;min-width:24px}
+.mod-title{font-weight:500;color:var(--ink);margin-bottom:2px}
+.mod-desc{color:var(--muted);font-size:.82rem;line-height:1.45}
+.time-notice{background:var(--paper);border:1px solid var(--line);padding:16px 20px;border-radius:4px;margin-bottom:40px;font-size:.88rem;color:var(--muted);line-height:1.65}
+.time-notice strong{color:var(--ink);font-weight:500}
+.begin-btn{padding:14px 36px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;font-size:.9rem;font-family:var(--sans);letter-spacing:.04em;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .2s}
+.begin-btn:hover{opacity:.85}
+.disclaimer-pre{border:1px solid var(--line);padding:20px 24px;background:var(--soft);border-radius:4px;margin-bottom:32px}
+.disclaimer-pre-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.disclaimer-pre-text p{font-size:.88rem;line-height:1.7;color:#3a3a36;margin-bottom:10px}
+.disclaimer-pre-text p:last-child{margin-bottom:0}
+.landing-footer{border-top:1px solid var(--line);margin-top:80px;padding:16px 32px}
+.landing-footer-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;max-width:1100px;margin:0 auto}
+.landing-footer-copy{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:#888;text-transform:uppercase}
+.landing-footer-links{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.landing-footer-links a{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;transition:color .2s}
+.landing-footer-links a:hover{color:#888}
+<style>
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+</style></style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-logo"><strong>Safe Spot</strong> &middot; Learning Centre</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+  <div class="header-nav-right">
+    <span style="font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted)" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:5px 10px;color:var(--muted);cursor:pointer;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+    <a href="index.html" class="header-back">← All Courses</a>
+  </div>
+</header>
+
+<div class="landing-wrap">
+  <div class="landing-eyebrow">Free Course<span class="free-badge">Free</span></div>
+  <h1 class="landing-title">The Inner Child & Self-Reparenting</h1>
+  <p class="landing-tagline">The most honest map of why you do what you do — and the first practical steps toward changing it.</p>
+
+  <div class="landing-intro">
+    <p>Almost everything taught in the paid curriculum traces back to one place: what happened to you before you had the language, the power, or the awareness to understand what was happening. This course names that territory directly.</p>
+<p>The inner child is not a metaphor. It is a developmental reality — the part of the nervous system that formed its strategies, its fears, its relationship templates, and its sense of what is safe before the conscious mind had any say in the matter. Those strategies are still running.</p>
+<p>Self-reparenting is the practice of giving yourself — consistently, not perfectly — what the child needed and did not receive. This course is where that practice begins.</p>
+
+  </div>
+
+  <div class="what-youll-cover">
+    <div class="what-label">What you will cover</div>
+    <ul class="module-preview">
+    <li><span class="mod-n">01</span><div><div class="mod-title">What Is the Inner Child</div></div></li>
+    <li><span class="mod-n">02</span><div><div class="mod-title">Developmental Windows & Strategies</div></div></li>
+    <li><span class="mod-n">03</span><div><div class="mod-title">Adaptations & Unmet Needs</div></div></li>
+    <li><span class="mod-n">04</span><div><div class="mod-title">The Wound in the Body</div></div></li>
+    <li><span class="mod-n">05</span><div><div class="mod-title">Wounding & Identity</div></div></li>
+    <li><span class="mod-n">06</span><div><div class="mod-title">The Reparenting Framework</div></div></li>
+    <li><span class="mod-n">07</span><div><div class="mod-title">Reparenting in Practice</div></div></li>
+    <li><span class="mod-n">08</span><div><div class="mod-title">Building & Sustaining the Work</div></div></li>
+    </ul>
+  </div>
+
+  <div class="time-notice"><strong>Time commitment:</strong> Approximately 4–5 hours across 8 modules.</div>
+
+  <div class="disclaimer-pre">
+    <div class="disclaimer-pre-label">Before you begin</div>
+    <div class="disclaimer-pre-text">
+      <p><strong>This course is free.</strong> No payment required. It is our way of putting the foundational work into as many hands as possible before anything else.</p>
+      <p>Think of SAFE as windscreen wipers on your drive. This is <em>your</em> healing — your direction, your destination. We are here to keep the view clear so you can read the signs without judgement.</p>
+      <p>The fees from the paid courses go directly toward funding SAFE youth hubs. Once we reach the right level of funding, every course will be free.</p>
+    </div>
+  </div>
+
+  <a href="course13-module-1-what-is-the-inner-child.html" class="begin-btn" id="beginBtn">Begin Course &rarr;</a>
+</div>
+
+<footer class="landing-footer">
+  <div class="landing-footer-bar">
+    <div class="landing-footer-copy">SAFE Learning Spot Centre &middot; All Rights Reserved</div>
+    <nav class="landing-footer-links">
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="help.html">Help</a>
+      <div class="footer-legal-wrap" style="position:relative;display:inline-block">
+        <button onclick="(function(b){var d=b.nextElementSibling;d.style.display=d.style.display==='flex'?'none':'flex';})(this)" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-transform:uppercase;background:none;border:none;cursor:pointer;padding:0;transition:color .2s" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Legal &#9662;</button>
+        <div class="footer-legal-menu" style="display:none;position:absolute;bottom:calc(100% + 8px);right:0;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:8px 0;flex-direction:column;min-width:140px;z-index:100;box-shadow:0 4px 16px rgba(0,0,0,.08)">
+          <a href="privacy.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Privacy</a>
+          <a href="terms.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Terms</a>
+          <a href="privacy-choices.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Choices</a>
+          <a href="accessibility.html" style="font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:#3a3a38;text-decoration:none;text-transform:uppercase;padding:6px 16px;transition:color .2s;display:block" onmouseover="this.style.color='#888'" onmouseout="this.style.color='#3a3a38'">Access</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+      else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}}
+  catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];
+      var el=document.getElementById('ss-user-greeting');
+      if(el)el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+<script>
+(function(){
+  var keys  = ['safespot_c13m1', 'safespot_c13m2', 'safespot_c13m3', 'safespot_c13m4', 'safespot_c13m5', 'safespot_c13m6', 'safespot_c13m7', 'safespot_c13m8'];
+  var urls  = ['course13-module-1-what-is-the-inner-child.html', 'course13-module-2-developmental-windows.html', 'course13-module-3-four-adaptations-and-needs.html', 'course13-module-4-beginning-the-practice.html', 'course13-module-5-wounding-and-identity.html', 'course13-module-6-the-reparenting-framework.html', 'course13-module-7-reparenting-in-practice.html', 'course13-module-8-building-and-sustaining.html'];
+  var lbls  = ['Module 01', 'Module 02', 'Module 03', 'Module 04', 'Module 05', 'Module 06', 'Module 07', 'Module 08'];
+  var done  = keys.filter(function(k){ return !!localStorage.getItem(k); }).length;
+  var total = keys.length;
+  var btn   = document.getElementById('beginBtn');
+  if(!btn) return;
+  if(done === 0){
+    // Default: button text already set to "Begin Course" in HTML
+  } else if(done < total){
+    btn.textContent = 'Continue: ' + lbls[done] + ' →';
+    btn.href = urls[done];
+  } else {
+    btn.textContent = 'Course Complete ✓';
+    btn.style.background = '#22863a';
+    btn.style.borderColor = '#22863a';
+    btn.style.color = '#fff';
+  }
+})();
+</script>
+</body>
+</html>

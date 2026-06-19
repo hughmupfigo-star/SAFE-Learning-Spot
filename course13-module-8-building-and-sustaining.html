@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Module 08 · Building & Sustaining the Work — Safe Spot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})()</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})()</script>
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#7b5ea7;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html[data-theme="dark"]{--ink:#e8e8e4;--paper:#0f0f0d;--muted:#888884;--line:#2a2a27;--soft:#1a1a17}
+html,body{min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6}
+.module-header{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.module-tag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.progress-bar{display:flex;gap:4px;align-items:center}
+.progress-dot{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .3s}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:4px;transition:color .2s}
+.theme-toggle:hover{color:var(--ink)}
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;border-right:1px solid var(--line);background:var(--paper);padding:80px 20px 40px;z-index:49;display:flex;flex-direction:column;scrollbar-width:none}
+@media(min-width:900px){.course-sidebar{display:flex;}}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:16px;transition:color .2s}
+.sidebar-back:hover{color:var(--ink)}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.sidebar-mod-list{list-style:none}.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line)}.sidebar-mod-item:last-child{border-bottom:none}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);margin-right:10px}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;color:var(--muted);text-decoration:none;transition:color .2s}
+.sidebar-mod-a:hover{color:var(--ink)}
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line)}
+.sidebar-mod-item.ss-now .sidebar-mod-n,.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a1a17}
+.module-container{padding:48px 40px 100px;max-width:720px;margin:0 auto}
+@media(min-width:900px){.module-container{margin-left:220px}}
+.slide{display:none}.slide.active{display:block}
+.slide-number{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:32px}
+.slide-title{font-family:var(--serif);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;line-height:1.25;margin-bottom:32px}
+.slide-title em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.08rem;line-height:1.78;color:var(--ink);margin-bottom:24px;font-family:var(--serif);font-weight:300}
+.body-text{font-size:.95rem;line-height:1.82;color:#3a3a36;margin-bottom:20px}
+html[data-theme="dark"] .body-text{color:#b8b8b4}
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:40px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.callout{border-left:2px solid var(--accent);padding:18px 22px;background:var(--soft);margin:28px 0;font-size:.93rem;line-height:1.75;color:#3a3a36;border-radius:0 4px 4px 0}
+html[data-theme="dark"] .callout{color:#b8b8b4}
+.term-block{border:1px solid var(--line);border-radius:4px;padding:20px 24px;margin:24px 0}
+.term-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.term-def{font-size:.93rem;line-height:1.75;color:#3a3a36}
+html[data-theme="dark"] .term-def{color:#b8b8b4}
+.three-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin:24px 0}
+.col-item{border-top:2px solid var(--line);padding-top:12px}.col-item.accent{border-top-color:var(--accent)}
+.col-title{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.col-text{font-size:.85rem;line-height:1.6;color:var(--muted)}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-top:56px;padding-top:28px;border-top:1px solid var(--line)}
+.nav-btn{padding:12px 28px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;font-size:.88rem;font-family:var(--sans);cursor:pointer;transition:opacity .2s;letter-spacing:.04em}
+.nav-btn:hover{opacity:.82}.nav-btn[disabled]{opacity:.25;cursor:default}
+.nav-counter{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em}
+.return-home-wrap{margin-top:20px;text-align:center}
+.return-home-link{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.return-home-link:hover{color:var(--ink)}
+.completion-slide{padding:48px 0 32px}
+.completion-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.completion-title{font-family:var(--serif);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:300;line-height:1.3;margin-bottom:16px}
+.completion-sub{font-size:.93rem;color:var(--muted);margin-bottom:40px}
+.summary-list{list-style:none;margin:24px 0}
+.summary-list li{padding:16px 0;border-bottom:1px solid var(--line);display:flex;gap:20px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.12em;min-width:28px}
+.summary-text{font-family:var(--serif);font-size:17px;line-height:1.5;font-weight:300}
+.practice-block{background:var(--soft);border-left:2px solid var(--accent);padding:20px 24px;margin:20px 0;border-radius:0 4px 4px 0}
+.practice-block p{font-size:.93rem;line-height:1.75;color:#3a3a36;margin-bottom:10px}
+.practice-block p:last-child{margin-bottom:0}
+html[data-theme="dark"] .practice-block p{color:#b8b8b4}
+.divider{height:1px;background:var(--line);margin:40px 0}
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent)}.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.55;pointer-events:auto}.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;cursor:default}<style>
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+<header class="module-header">
+  <div class="module-tag">Module <strong>08</strong> · Building & Sustaining the Work</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+  <div class="progress-bar" id="progressBar"><div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+        <div class="progress-dot"></div>
+    </div>
+</header>
+
+</div>
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Free &middot; The Inner Child & Self-Reparenting</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c13m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course13-module-1-what-is-the-inner-child.html">What Is the Inner Child</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c13m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course13-module-2-developmental-windows.html">Developmental Windows & Strategies</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c13m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course13-module-3-four-adaptations-and-needs.html">Adaptations & Unmet Needs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c13m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course13-module-4-the-wound-in-the-body.html">The Wound in the Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c13m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course13-module-5-wounding-and-identity.html">Wounding & Identity</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c13m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course13-module-6-the-reparenting-framework.html">The Reparenting Framework</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c13m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course13-module-7-reparenting-in-practice.html">Reparenting in Practice</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c13m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course13-module-8-building-and-sustaining.html">Building & Sustaining the Work</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+<main class="module-container">
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 04</div>
+    <h1 class="slide-title">Why consistency is more powerful than <em>intensity.</em></h1>
+    <p class="lead">The reparenting practice does not build through intensity. It builds through consistency — and this is connected directly to the wounding itself. Most people who come to inner child work come from environments where care was intense and episodic: it arrived dramatically or not at all. They approach the practice the same way: enormous initial commitment, followed by gaps, followed by guilt, followed by a fresh start that replicates the original pattern of unreliable care.</p>
+<p class="body-text">The nervous system updates its templates through new data — through the experience of something being different, over time. A caregiver who shows up consistently, even imperfectly, even briefly, even when it is inconvenient — that is the experience the nervous system uses to build a new template. Not the grand gesture. The ordinary, sustained showing up.</p>
+<div class="callout">The wound was not created by a single dramatic event. It was created by repetition — the steady accumulation of a particular kind of experience across months and years. The healing operates through the same mechanism. Repetition. Over time. Until the nervous system has enough new data to begin revising what it assumed was permanent.</div>
+    <div class="nav"><button class="nav-btn" disabled onclick="prevSlide()">← Previous</button><span class="nav-counter">01 / 04</span><button class="nav-btn primary" onclick="nextSlide()">Continue →</button></div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 04</div>
+    <h1 class="slide-title">Working with <em>shame.</em></h1>
+    <p class="lead">Shame is the most significant obstacle in the reparenting work and the least discussed, because shame is self-concealing. It is the emotion that most actively prevents the very process required to heal it.</p>
+<p class="body-text">Guilt says: "I did something wrong." Shame says: "I am something wrong." Shame is produced whenever a child concludes from the available evidence that their authentic self — their genuine feelings, needs, reactions, desires — is too much, not enough, inconvenient, or dangerous. The conclusion does not require an explicit message. It is often inferred from subtler signals: the parent who changed the subject when the child was distressed, the family that did not talk about certain things, the environment in which the child learned that being real carried cost.</p>
+<p class="body-text">Shame hides. It disguises itself as self-criticism, perfectionism, invisibility, or grandiosity. Recognising shame underneath these presentations is one of the most practically useful skills in the entire inner child work.</p>
+<div class="callout">The antidote to shame is not affirmation. It is empathy — specifically, the experience of being seen in the shameful thing without being rejected. In the reparenting context: the internal parent being able to see the shame, acknowledge it, sit with it — without recoiling or adding to it. That is, again, the daily practice. Small moments of staying present with what you would normally hide from yourself.</div>
+    <div class="nav"><button class="nav-btn" onclick="prevSlide()">← Previous</button><span class="nav-counter">02 / 04</span><button class="nav-btn primary" onclick="nextSlide()">Continue →</button></div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 04</div>
+    <h1 class="slide-title">Signs the reparenting is <em>landing.</em></h1>
+    <p class="lead">The signs that the reparenting practice is working are rarely dramatic. They are quiet. The presence of things that used to be absent and the absence of things that used to be relentless.</p>
+<p class="body-text"><strong>The gap is widening.</strong> The trigger still fires, but the time between trigger and response is longer. There is a moment in which you recognise the template before it has fully run its programme. Sometimes that moment is enough to make a different choice.</p>
+<p class="body-text"><strong>The self-criticism has changed quality.</strong> It has not disappeared — but it is no longer purely automatic. There is occasionally a small moment of recognition before the attack: "that is the wound speaking." And sometimes that recognition is enough to choose something different.</p>
+<p class="body-text"><strong>You can receive care.</strong> A compliment lands rather than bouncing off. A kind act means something. You can let yourself be glad that someone is glad you exist. <strong>Discomfort can be felt.</strong> More than before, and without immediately escaping into numbing, fixing, or producing. The urge still activates — but there are moments when it is possible to simply be with the discomfort rather than making it go away.</p>
+<div class="callout">These shifts are not permanent, not continuous, not linear. What you are tracking is not perfection. You are tracking the direction of travel over time. That direction, maintained through consistent practice, is the healing. You were not broken by what happened to you. You were shaped by it. What was shaped by circumstance and repetition can be reshaped — by intention, consistency, and the kind of reliable presence you are now becoming capable of providing for yourself.</div>
+    <div class="nav"><button class="nav-btn" onclick="prevSlide()">← Previous</button><span class="nav-counter">03 / 04</span><button class="nav-btn primary" onclick="nextSlide()">Continue →</button></div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 04 · Complete</div>
+    <div class="slide-inner completion-slide">
+      <p class="completion-label">Module complete</p>
+      <h1 class="completion-title">Building & Sustaining the Work</h1>
+      <p class="completion-sub">You have finished this module. Here is what you now carry forward.</p>
+      <div class="section-heading">What you carry forward</div>
+      <ul class="summary-list">
+        <li><span class="summary-num">01</span><span class="summary-text">Consistency builds the new template. The practice that you will do every day is more valuable than the perfect practice you will do once.</span></li>
+        <li><span class="summary-num">02</span><span class="summary-text">Shame is self-concealing and prevents the very process needed to heal it. The antidote is empathy — being seen in the shameful thing without being rejected.</span></li>
+        <li><span class="summary-num">03</span><span class="summary-text">Shame hides as self-criticism, perfectionism, invisibility, and grandiosity. Learning to recognise it is foundational.</span></li>
+        <li><span class="summary-num">04</span><span class="summary-text">The internal parent's capacity to sit with shame — without recoiling or adding to it — is among the most healing acts available.</span></li>
+        <li><span class="summary-num">05</span><span class="summary-text">Signs of progress: widening gap, changed quality of self-criticism, capacity to receive care, increasing capacity to feel discomfort without escaping.</span></li>
+        <li><span class="summary-num">06</span><span class="summary-text">The direction of travel over time is the healing. You were shaped by what happened. What was shaped by repetition can be reshaped by it.</span></li>
+      </ul>
+      <div class="section-heading">Practice this week</div>
+      <div class="practice-block"><p><strong>Going forward — thirty days:</strong> The daily check-in, every morning, for thirty days. Ninety seconds. One question. Genuine attention. No fixing. At day thirty, review what has shifted — not in the size of the feelings, but in your relationship to them. That relationship is the reparenting.</p></div>
+      <div class="divider"></div>
+    </div>
+    <div class="nav"><button class="nav-btn" onclick="prevSlide()">← Previous</button><span class="nav-counter">04 / 04</span><button class="nav-btn primary" onclick="nextSlide()">Continue →</button></div>
+    <div class="return-home-wrap"><a href="index.html" class="return-home-link">← Return to Homepage</a></div>
+  </section>
+
+</main>
+<script>
+var currentSlide=1,totalSlides=document.querySelectorAll('.slide').length;
+function showSlide(n){document.querySelectorAll('.slide').forEach(function(s){s.classList.remove('active');});document.querySelector('[data-slide="'+n+'"]').classList.add('active');document.querySelectorAll('.progress-dot').forEach(function(d,i){d.classList.remove('active','complete');if(i+1<n)d.classList.add('complete');else if(i+1===n)d.classList.add('active');});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'});}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1);}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1);}
+</script>
+<script>
+(function(){try{var prevKey='safespot_c13m7';if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">&#128274; Module Locked</div><p style="font-size:.9rem;color:#6b6b66;max-width:380px;line-height:1.75;margin-bottom:32px">Complete the previous module first to unlock this one.</p><a href="course13-landing.html" style="padding:12px 28px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">&#8592; Back to Course</a></div>';return;}
+var slides=document.querySelectorAll('.slide');
+if(slides.length>0){var last=slides[slides.length-1];last.querySelectorAll('.nav-btn.primary').forEach(function(b){b.textContent='Take the Self-Reflection Check-In →';b.setAttribute('onclick','');b.style.background='var(--accent)';b.onclick=function(){localStorage.setItem('safespot_c13m8','1');document.querySelector('.assess-trigger').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(function(){SA_start();},400);};}); }
+}catch(e){}})()</script>
+<script>
+function SS_toggleTheme(){var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';try{if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}}catch(e){}}
+</script>
+<script>(function(){try{var m=location.pathname.match(/module-(\d+)-/);if(m){var mn=parseInt(m[1]);document.querySelectorAll('.sidebar-mod-item').forEach(function(li){if(parseInt(li.getAttribute('data-mn'))===mn)li.classList.add('ss-now');});}}catch(e){}})()</script>
+<script>
+(function(){try{var s=JSON.parse(localStorage.getItem('slsc_session')||'null');if(s&&s.fullName){var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];var el=document.getElementById('ss-user-greeting');if(el)el.textContent=nm;}}catch(e){}})();
+function SS_logout(){try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}location.replace('login.html');}
+</script>
+
+
+<style>
+.mini-assess-wrap{max-width:720px;margin:0 auto;padding:0 40px 120px}
+@media(min-width:900px){.mini-assess-wrap{margin-left:220px}}
+.assess-trigger{display:flex;flex-direction:column;gap:12px;padding:40px 0;border-top:2px solid var(--line);margin-top:60px}
+.assess-trigger-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#7b5ea7}
+.assess-trigger-title{font-family:var(--serif);font-size:1.5rem;font-weight:300;line-height:1.3}
+.assess-trigger-sub{font-size:.9rem;color:var(--muted);line-height:1.6;max-width:560px}
+.assess-start-btn{align-self:flex-start;margin-top:8px;padding:12px 28px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;font-size:.88rem;font-family:var(--sans);cursor:pointer;letter-spacing:.04em;transition:opacity .2s}
+.assess-start-btn:hover{opacity:.82}
+.mini-assess{display:none;padding-top:48px}
+.mini-assess.open{display:block}
+.assess-section{margin-bottom:48px}
+.assess-section-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.assess-q{margin-bottom:28px}
+.assess-q-num{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:6px}
+.assess-q-text{font-family:var(--serif);font-size:1rem;font-weight:300;line-height:1.55;margin-bottom:12px;color:var(--ink)}
+.assess-options{display:flex;flex-direction:column;gap:8px}
+.assess-opt{padding:12px 16px;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:.88rem;line-height:1.5;background:var(--paper);color:var(--ink);text-align:left;transition:border-color .15s,background .15s;display:flex;align-items:flex-start;gap:12px}
+.assess-opt:hover{border-color:var(--ink);background:var(--soft)}
+.assess-opt.chosen{border-color:#7b5ea7;background:var(--soft)}
+html[data-theme="dark"] .assess-opt.chosen{background:#1a1a17}
+.assess-opt-letter{font-family:var(--mono);font-size:.75rem;color:var(--muted);min-width:14px;margin-top:2px;flex-shrink:0}
+.assess-opt.chosen .assess-opt-letter{color:#7b5ea7}
+.assess-submit{margin-top:16px;padding:14px 36px;background:var(--ink);color:var(--paper);border:none;border-radius:3px;font-size:.9rem;font-family:var(--sans);cursor:pointer;letter-spacing:.04em;transition:opacity .2s}
+.assess-submit:hover{opacity:.82}
+.assess-submit:disabled{opacity:.3;cursor:default}
+.assess-progress-note{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.08em;margin-top:12px}
+.assess-results{display:none;padding-top:16px}
+.assess-results.open{display:block}
+.results-header{margin-bottom:40px}
+.results-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#7b5ea7;margin-bottom:12px}
+.results-title{font-family:var(--serif);font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:300;line-height:1.3;margin-bottom:12px}
+.results-intro{font-size:.92rem;color:var(--muted);line-height:1.7;max-width:600px}
+.results-areas{margin:32px 0;display:flex;flex-direction:column;gap:16px}
+.result-area{border:1px solid var(--line);border-radius:4px;padding:20px 24px}
+.result-area.high{border-color:#7b5ea7;background:var(--soft)}
+html[data-theme="dark"] .result-area.high{background:#1a1a17}
+.area-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.area-name{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.area-tag{font-family:var(--mono);font-size:9px;letter-spacing:.06em;padding:2px 8px;border-radius:2px;text-transform:uppercase}
+.tag-high{background:#7b5ea7;color:#fff}
+.tag-active{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+html[data-theme="dark"] .tag-active{background:var(--soft);color:var(--ink)}
+.tag-settled{background:var(--soft);color:var(--muted);border:1px solid var(--line)}
+.area-bar-bg{height:2px;background:var(--line);border-radius:1px;overflow:hidden;margin-bottom:8px}
+.area-bar-fill{height:2px;border-radius:1px;transition:width 1s ease}
+.area-insight{font-size:.85rem;color:var(--muted);line-height:1.6;font-style:italic}
+.prompt-section{margin:36px 0;padding:24px;border:1px solid var(--line);border-radius:4px;background:var(--soft)}
+html[data-theme="dark"] .prompt-section{background:var(--soft)}
+.prompt-section-label{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.prompt-section-title{font-family:var(--serif);font-size:1.05rem;font-weight:300;margin-bottom:16px}
+.prompt-list{display:flex;flex-direction:column;gap:12px}
+.prompt-item{display:flex;gap:14px;align-items:baseline}
+.prompt-num{font-family:var(--mono);font-size:9px;color:#7b5ea7;min-width:20px;flex-shrink:0}
+.prompt-text{font-size:.9rem;line-height:1.65;color:#3a3a36}
+html[data-theme="dark"] .prompt-text{color:#b8b8b4}
+.assess-disclaimer{font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+.results-restart{margin-top:24px;padding:10px 24px;background:none;border:1px solid var(--line);border-radius:3px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color .2s,border-color .2s}
+.results-restart:hover{color:var(--ink);border-color:var(--ink)}
+</style>
+
+<div class="mini-assess-wrap">
+  <div class="assess-trigger">
+    <div class="assess-trigger-label">Self-Reflection Check-In</div>
+    <h2 class="assess-trigger-title">22 questions. No right answers. A map of where you actually are.</h2>
+    <p class="assess-trigger-sub">This short check-in surfaces the areas where the inner child & self-reparenting is most active in your life right now. At the end, you will receive specific prompts to bring to a therapist or to use in independent reflection.</p>
+    <button class="assess-start-btn" onclick="SA_start()">Begin the Check-In →</button>
+  </div>
+
+  <div class="mini-assess" id="SA_form">
+    <div class="assess-section" data-sec="attachment">
+  <div class="assess-section-label">Attachment & Safety</div>
+  <div class="assess-q" data-qn="1" data-sec="attachment">
+    <div class="assess-q-num">01 / 22</div>
+    <div class="assess-q-text">When someone important to you becomes unavailable — unresponsive, busy, or distant — your first internal response is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="1" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>A quiet, grounded sense that they are occupied and will return — I can hold the space</button>
+      <button class="assess-opt" data-q="1" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>A mild unease that I notice but can usually regulate without it dominating</button>
+      <button class="assess-opt" data-q="1" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Anxiety, over-thinking, or an impulse to reach out and re-establish contact</button>
+      <button class="assess-opt" data-q="1" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>A sharp, immediate fear — something close to abandonment — even when I know logically it is fine</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="2" data-sec="attachment">
+    <div class="assess-q-num">02 / 22</div>
+    <div class="assess-q-text">In close relationships, the thing that most consistently threatens your sense of safety is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="2" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Very little — I can hold the ordinary ebb and flow of close relationship without significant threat</button>
+      <button class="assess-opt" data-q="2" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Sustained conflict or periods of emotional distance that last longer than feels manageable</button>
+      <button class="assess-opt" data-q="2" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>The sense that I am too much, or not enough, or that the relationship is precarious</button>
+      <button class="assess-opt" data-q="2" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>The expectation of closeness itself — being known too well, or needing someone too much</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="3" data-sec="attachment">
+    <div class="assess-q-num">03 / 22</div>
+    <div class="assess-q-text">When you imagine being in a relationship characterised by consistent, reliable care — someone who shows up predictably and is genuinely glad you exist — you feel:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="3" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Grounded and hopeful — this is recognisably what I want and can receive</button>
+      <button class="assess-opt" data-q="3" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Moved but slightly uncertain — it sounds real and I can partly access it</button>
+      <button class="assess-opt" data-q="3" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Uncomfortable or sceptical — part of me does not quite believe it is possible or sustainable</button>
+      <button class="assess-opt" data-q="3" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Frightened — either because I do not trust it, or because wanting it this much feels dangerous</button>
+    </div>
+  </div>
+</div>
+<div class="assess-section" data-sec="identity">
+  <div class="assess-section-label">Core Beliefs & Identity</div>
+  <div class="assess-q" data-qn="4" data-sec="identity">
+    <div class="assess-q-num">04 / 22</div>
+    <div class="assess-q-text">When you receive genuine, specific praise or acknowledgment from someone who knows you well, you:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="4" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Can take it in and let it mean something — I believe it and feel glad</button>
+      <button class="assess-opt" data-q="4" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Feel genuinely touched but notice a small impulse to qualify or deflect</button>
+      <button class="assess-opt" data-q="4" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Deflect it, minimise it, or immediately counter it with what is wrong or incomplete</button>
+      <button class="assess-opt" data-q="4" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Feel a combination of longing and suspicion — part of me wants to believe it and part of me cannot</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="5" data-sec="identity">
+    <div class="assess-q-num">05 / 22</div>
+    <div class="assess-q-text">After a significant failure or mistake — something that matters — the internal response that arrives fastest is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="5" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Disappointment and the impulse to learn, without a lasting attack on my worth</button>
+      <button class="assess-opt" data-q="5" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>A sharp self-critical response that softens once I have processed what happened</button>
+      <button class="assess-opt" data-q="5" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>A sustained internal attack that is significantly disproportionate to the actual mistake</button>
+      <button class="assess-opt" data-q="5" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Something close to collapse — the failure feels like evidence of something fundamentally wrong with me</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="6" data-sec="identity">
+    <div class="assess-q-num">06 / 22</div>
+    <div class="assess-q-text">When you are genuinely resting — not being productive, not useful to anyone — you feel:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="6" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Comfortable and restored — rest is something I can inhabit without guilt</button>
+      <button class="assess-opt" data-q="6" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Mostly fine, with a background sense that I should probably be doing something</button>
+      <button class="assess-opt" data-q="6" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Uncomfortable — rest requires justification, and the guilt usually wins before long</button>
+      <button class="assess-opt" data-q="6" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Unable to rest at all — the discomfort of not being useful or productive is too strong to tolerate</button>
+    </div>
+  </div>
+</div>
+<div class="assess-section" data-sec="strategies">
+  <div class="assess-section-label">Adaptive Strategies</div>
+  <div class="assess-q" data-qn="7" data-sec="strategies">
+    <div class="assess-q-num">07 / 22</div>
+    <div class="assess-q-text">In close relationships, the role you most naturally and consistently settle into is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="7" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>A genuinely mutual one — I can both give and receive, be known and know</button>
+      <button class="assess-opt" data-q="7" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Leaning somewhat toward giving, caretaking, or managing — though I can also receive</button>
+      <button class="assess-opt" data-q="7" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Primarily a giving, caretaking, or managing role — it is difficult to be on the receiving end</button>
+      <button class="assess-opt" data-q="7" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Either significantly merged (losing myself in others' needs) or significantly defended (keeping others at a safe distance)</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="8" data-sec="strategies">
+    <div class="assess-q-num">08 / 22</div>
+    <div class="assess-q-text">When you sense that someone important is displeased with you, your most automatic response is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="8" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Curiosity about what is happening, without significant threat to my sense of self</button>
+      <button class="assess-opt" data-q="8" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>A desire to understand and repair, with some underlying discomfort</button>
+      <button class="assess-opt" data-q="8" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>An automatic impulse to apologise, placate, or fix — regardless of whether I am responsible</button>
+      <button class="assess-opt" data-q="8" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Either immediate capitulation (doing whatever is needed to restore the person's approval) or defensive withdrawal (removing myself before the rejection can fully land)</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="9" data-sec="strategies">
+    <div class="assess-q-num">09 / 22</div>
+    <div class="assess-q-text">The statement that most accurately describes how you experience your own needs in relationships is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="9" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>My needs are knowable, expressible, and generally welcome in the relationships that matter</button>
+      <button class="assess-opt" data-q="9" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>I can express needs in some relationships and contexts, though it often takes conscious effort</button>
+      <button class="assess-opt" data-q="9" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>My needs tend to go underground — I either don't know what they are or don't feel entitled to express them</button>
+      <button class="assess-opt" data-q="9" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Needs feel fundamentally dangerous — either they will burden others, or their expression will cost me something important in the relationship</button>
+    </div>
+  </div>
+</div>
+<div class="assess-section" data-sec="emotional">
+  <div class="assess-section-label">Emotional Access</div>
+  <div class="assess-q" data-qn="10" data-sec="emotional">
+    <div class="assess-q-num">10 / 22</div>
+    <div class="assess-q-text">When you experience anger — genuine anger, not managed irritation — the most accurate description is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="10" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>I can feel it clearly, hold it without either exploding or suppressing it, and express it constructively when appropriate</button>
+      <button class="assess-opt" data-q="10" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>I can feel it but often manage it into something more acceptable — irritation, humour, or reasoned frustration</button>
+      <button class="assess-opt" data-q="10" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>I rarely feel it directly. Something closer to sadness, anxiety, or emptiness arrives where anger should be</button>
+      <button class="assess-opt" data-q="10" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Anger is almost entirely inaccessible to me consciously, though I can sometimes see its effects on my behaviour after the fact</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="11" data-sec="emotional">
+    <div class="assess-q-num">11 / 22</div>
+    <div class="assess-q-text">When you are genuinely sad — not superficially moved but actually sad — your most consistent internal response is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="11" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>I can feel it, be with it, let it move through, and allow tears if they come — without needing to manage or escape it</button>
+      <button class="assess-opt" data-q="11" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>I can feel it, though I often find a reason to contain or limit it before it fully completes</button>
+      <button class="assess-opt" data-q="11" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>I move quickly to problem-solving, fixing, distracting, or intellectualising — the sadness rarely fully lands</button>
+      <button class="assess-opt" data-q="11" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Sadness rarely arrives consciously. There is instead a flatness, a numbness, or an absence that I suspect is the suppressed version</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="12" data-sec="emotional">
+    <div class="assess-q-num">12 / 22</div>
+    <div class="assess-q-text">In the middle of a difficult emotional experience, the most honest description of your inner state is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="12" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Present to what is happening, with some capacity to observe it without being overwhelmed by it</button>
+      <button class="assess-opt" data-q="12" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Partially present — I can feel it but there is also a background movement toward escape or management</button>
+      <button class="assess-opt" data-q="12" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Primarily in the managing position — working to contain, reduce, or explain the experience rather than feel it</button>
+      <button class="assess-opt" data-q="12" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Largely absent — I am going through the external motions but not actually inside the experience; the feelings are happening somewhere behind glass</button>
+    </div>
+  </div>
+</div>
+<div class="assess-section" data-sec="shame">
+  <div class="assess-section-label">Shame & Self-Worth</div>
+  <div class="assess-q" data-qn="13" data-sec="shame">
+    <div class="assess-q-num">13 / 22</div>
+    <div class="assess-q-text">When you imagine being fully seen by someone — including your vulnerabilities, your uncertainties, the parts of you that are still unfinished — you feel:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="13" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Mostly open to it — being known is something I can tolerate and even value in the right relationships</button>
+      <button class="assess-opt" data-q="13" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Somewhat willing, with a background discomfort about specific aspects of myself I would prefer to manage carefully</button>
+      <button class="assess-opt" data-q="13" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Primarily cautious — there are significant parts of myself I keep hidden and would not freely offer even in close relationships</button>
+      <button class="assess-opt" data-q="13" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Genuinely afraid — the full picture of who I am feels like something that would change or end most relationships if fully exposed</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="14" data-sec="shame">
+    <div class="assess-q-num">14 / 22</div>
+    <div class="assess-q-text">The statement that most closely describes your moment-to-moment relationship to your own worth is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="14" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>I have a generally stable sense of my own value that does not depend entirely on performance or others' approval</button>
+      <button class="assess-opt" data-q="14" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>My sense of worth is reasonably stable but noticeably more fragile when I am failing, being criticised, or feel unseen</button>
+      <button class="assess-opt" data-q="14" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>My sense of worth is primarily conditional — it rises with achievement and approval and falls with failure and criticism</button>
+      <button class="assess-opt" data-q="14" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>I carry a background sense that I am fundamentally less worthy or less acceptable than others, regardless of what I achieve or who approves of me</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="15" data-sec="shame">
+    <div class="assess-q-num">15 / 22</div>
+    <div class="assess-q-text">When you make a significant error in front of others — something public, something that matters — your internal response tends to be:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="15" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Embarrassment and the impulse to make it right, without a sustained attack on my fundamental adequacy</button>
+      <button class="assess-opt" data-q="15" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>A sharp self-critical response that I can usually work through within a reasonable period</button>
+      <button class="assess-opt" data-q="15" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>A sustained, disproportionate internal response that remains active significantly longer than the error warrants</button>
+      <button class="assess-opt" data-q="15" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Something close to collapse or desperate repair — the error feels less like a mistake and more like an exposure of something I already knew was wrong with me</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="16" data-sec="shame">
+    <div class="assess-q-num">16 / 22</div>
+    <div class="assess-q-text">The most honest description of your inner critic is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="16" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Present but not dominant — I can observe it without being fully identified with it</button>
+      <button class="assess-opt" data-q="16" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Active and often unpleasant, but not operating continuously or at a level that governs daily life</button>
+      <button class="assess-opt" data-q="16" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Persistent and often harsh — a running commentary that I am usually not able to fully step back from</button>
+      <button class="assess-opt" data-q="16" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Relentless and intimate — less like a voice and more like the furniture; it is simply how I experience myself from the inside</button>
+    </div>
+  </div>
+</div>
+<div class="assess-section" data-sec="readiness">
+  <div class="assess-section-label">Reparenting Readiness</div>
+  <div class="assess-q" data-qn="17" data-sec="readiness">
+    <div class="assess-q-num">17 / 22</div>
+    <div class="assess-q-text">When you consider giving yourself genuine, unjustified care — rest, comfort, pleasure — without needing to earn or justify it first, you:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="17" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Can do it — I can rest and receive care without needing it to be earned</button>
+      <button class="assess-opt" data-q="17" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Can approximate it, though a background discomfort or guilt usually accompanies it</button>
+      <button class="assess-opt" data-q="17" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Struggle significantly — the rest is usually undermined by guilt, restlessness, or the compulsion to return to productivity</button>
+      <button class="assess-opt" data-q="17" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Cannot currently access it — unjustified care feels either impossible or like a kind of dangerous indulgence that I am not entitled to</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="18" data-sec="readiness">
+    <div class="assess-q-num">18 / 22</div>
+    <div class="assess-q-text">The most honest description of your daily relationship to your own inner experience is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="18" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Genuinely attentive — I check in with myself regularly and treat what I find as relevant information</button>
+      <button class="assess-opt" data-q="18" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Intermittently attentive — I can access my inner experience but do not prioritise it consistently</button>
+      <button class="assess-opt" data-q="18" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Largely distant — I am usually oriented outward, managing the world, with little consistent contact with my inner state</button>
+      <button class="assess-opt" data-q="18" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Almost entirely absent from my inner life — the inner world feels inaccessible, irrelevant, or too threatening to regularly inhabit</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="19" data-sec="readiness">
+    <div class="assess-q-num">19 / 22</div>
+    <div class="assess-q-text">When the reparenting work brings up stronger, more difficult feelings — when it seems to be making things harder before they get easier — your most honest response is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="19" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>I can hold it and stay with the practice — I understand that this is what surfacing material feels like</button>
+      <button class="assess-opt" data-q="19" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>I find it difficult but can usually return to the practice, particularly if I have support</button>
+      <button class="assess-opt" data-q="19" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>I tend to withdraw from the practice when it gets harder — the difficulty reads as evidence that I am doing it wrong</button>
+      <button class="assess-opt" data-q="19" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>The difficulty usually ends the practice entirely — the material it surfaces feels too much to hold without significant external support</button>
+    </div>
+  </div>
+</div>
+<div class="assess-section" data-sec="territory">
+  <div class="assess-section-label">Most Active Territory</div>
+  <div class="assess-q" data-qn="20" data-sec="territory">
+    <div class="assess-q-num">20 / 22</div>
+    <div class="assess-q-text">The unmet need that feels most active and present in your daily life right now is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="20" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Safety — the need for predictability, stability, and the absence of threat in the environments and relationships that matter</button>
+      <button class="assess-opt" data-q="20" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Attunement — the need to be genuinely seen, accurately reflected, and known for who I actually am</button>
+      <button class="assess-opt" data-q="20" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Validation — the need for permission to have my inner experience be real and relevant, without having to justify or manage it</button>
+      <button class="assess-opt" data-q="20" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Delight — the need to be valued simply for existing, not for what I produce, provide, or perform</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="21" data-sec="territory">
+    <div class="assess-q-num">21 / 22</div>
+    <div class="assess-q-text">The adaptive strategy that is currently costing you the most — the one that keeps you from what you actually need — is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="21" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Over-connection: I lose myself in others' needs and cannot adequately advocate for my own</button>
+      <button class="assess-opt" data-q="21" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Under-connection: I keep people at a distance that prevents the depth of relationship I actually want</button>
+      <button class="assess-opt" data-q="21" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>Performing: I present a version of myself that earns approval but prevents genuine knowing</button>
+      <button class="assess-opt" data-q="21" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Controlling: I manage outcomes and people in ways that prevent genuine rest and genuine trust</button>
+    </div>
+  </div>
+  <div class="assess-q" data-qn="22" data-sec="territory">
+    <div class="assess-q-num">22 / 22</div>
+    <div class="assess-q-text">The domain where the inner child shows up most consistently — where the old templates are most reliably activated — is:</div>
+    <div class="assess-options">
+      <button class="assess-opt" data-q="22" data-score="0" onclick="SA_pick(this)"><span class="assess-opt-letter">A</span>Intimate relationships — romantic partnership, deep friendship, family dynamics</button>
+      <button class="assess-opt" data-q="22" data-score="1" onclick="SA_pick(this)"><span class="assess-opt-letter">B</span>Professional contexts — work, performance, authority figures, evaluation and recognition</button>
+      <button class="assess-opt" data-q="22" data-score="2" onclick="SA_pick(this)"><span class="assess-opt-letter">C</span>My relationship with myself — the inner critic, rest, self-worth, and the capacity to be kind to myself</button>
+      <button class="assess-opt" data-q="22" data-score="3" onclick="SA_pick(this)"><span class="assess-opt-letter">D</span>Loss, endings, and transitions — any situation where something or someone important might not continue</button>
+    </div>
+  </div>
+</div>
+
+    <button class="assess-submit" id="SA_submit" disabled onclick="SA_show_results()">See My Results →</button>
+    <p class="assess-progress-note" id="SA_progress">0 of 22 answered</p>
+  </div>
+
+  <div class="assess-results" id="SA_results">
+    <div class="results-header">
+      <div class="results-eyebrow">Your Map</div>
+      <h2 class="results-title">Here is where the work is most active for you.</h2>
+      <p class="results-intro">These results reflect what your answers suggest about your current landscape — not a diagnosis, not a verdict. Use them as a starting point for your own inquiry and for the conversations worth having.</p>
+    </div>
+    <div class="results-areas" id="SA_areas"></div>
+    <div id="SA_prompts"></div>
+    <p class="assess-disclaimer">This check-in is a self-reflection tool, not a clinical instrument. It does not replace professional assessment or therapeutic support. If any of the results resonate strongly, they are worth exploring further — with a professional, with this course, or in your own reflection practice.</p>
+    <button class="results-restart" onclick="SA_restart()">Retake the check-in</button>
+    <a href="index.html" style="display:inline-block;margin-top:12px;margin-left:12px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">← Return to All Courses</a>
+  </div>
+</div>
+
+<script>
+var SA_answers = {};
+var SA_total = 22;
+var SA_insights = {"attachment":{high:`Your attachment and safety patterns are significantly active. The way you relate to closeness, distance, and reliability in relationships is being shaped by early templates that are still operating. This is the first territory for the reparenting work.`,active:`There is meaningful activation here. Your nervous system has some wiring around what closeness and safety mean in relationships that is worth examining.`,settled:`Your attachment patterns appear relatively settled. This does not mean the work here is complete, but it is not the most active front.`},"identity":{high:`Core beliefs about your own worth and identity are significantly active. The stories you carry about who you are, what you deserve, and what is possible — formed in childhood and operating below conscious thought — are shaping your daily experience in ways that are worth direct examination.`,active:`There are live threads here around how you understand your own worth and identity. Some of the core conclusions drawn in childhood are still influencing how you move through the world.`,settled:`Your core beliefs about identity and worth appear relatively stable. The inner critic may still be present, but it does not appear to be governing your experience as its primary organiser.`},"strategies":{high:`Your adaptive strategies — the childhood-formed patterns that once kept you safe — are significantly active and are costing you. The over-connection, under-connection, performing, or controlling patterns are shaping important decisions and relationships. This is central territory for the reparenting work.`,active:`Your adaptive strategies are present and have a meaningful effect on your choices and relationships. They are not fully governing — but they are consistently in the frame.`,settled:`Your adaptive strategies appear relatively integrated — less automatic, less costly. The underlying patterns may still emerge, but with less governing force than before.`},"emotional":{high:`Your emotional access is significantly restricted. A great deal of your inner experience is either inaccessible, suppressed below the level of conscious awareness, or managed before it can be fully felt. The work here involves gradually rebuilding the capacity to feel without the feeling being a threat.`,active:`Your emotional access is partial — some emotions are available, others remain distant or suppressed. There is real work available here in expanding the range of what can be felt without immediately escaping it.`,settled:`Your emotional access appears relatively open. You can access and stay with your inner experience with reasonable availability, though there may still be specific emotions or intensities that are less accessible.`},"shame":{high:`Shame is significantly active in your system. The belief that something about you is fundamentally unacceptable — formed in childhood and operating without examination — is costing you in ways that are both visible and invisible. Shame work is delicate and important, and professional support is particularly valuable here.`,active:`Shame is present and doing meaningful work in your system — shaping how you see yourself, how much of yourself you show, and how you respond to failure or visibility.`,settled:`Shame does not appear to be a primary organiser of your experience. It may still be present in specific areas or relationships, but it is not governing the overall sense of self.`},"readiness":{high:`There is significant resistance to the reparenting work — whether from protector parts, from the cost of the work surfacing difficult material, or from the wound-derived strategy being applied to the healing itself. This is not an obstacle to the work. It is the work. Professional support would be particularly valuable at this stage.`,active:`There are real blocks and resistances to the reparenting practice — areas where the protectors are active or where the work is surfacing difficult material. This is a live and important zone of the work.`,settled:`You appear to have meaningful access to the reparenting practice — able to give yourself genuine attention without it being immediately deflected or colonised by the wound-derived strategy.`},"territory":{high:`The areas you have identified here are the live territories — the places where the wound is currently doing the most work. These are the starting points for the reparenting practice, for the conversations worth having, and for the professional support that would produce the most movement.`,active:`You have a clear sense of where the work is most active. The identification itself is valuable — it is the prerequisite for directing the practice intelligently.`,settled:`You appear to have a grounded picture of your own landscape. The areas of most activity are identifiable and approachable.`}};
+var SA_labels = {"attachment":"Attachment & Safety","identity":"Core Beliefs & Identity","strategies":"Adaptive Strategies","emotional":"Emotional Access","shame":"Shame & Self-Worth","readiness":"Reparenting Readiness","territory":"Most Active Territory"};
+var SA_max = {"attachment":9,"identity":9,"strategies":9,"emotional":9,"shame":12,"readiness":9,"territory":9};
+var SA_therapist = {"attachment":[`"I have noticed that when people I depend on become unavailable, I tend to respond as though it means something significant about the relationship — or about me. I'd like to understand where that pattern came from."`,`"The idea of being consistently cared for produces something uncomfortable in me — suspicion, fear, or a sense that it won't last. I'd like to work on understanding what that is and where it originated."`,`"My attachment patterns seem to have a quality of either holding on too tightly or keeping too much distance. I'd like to explore the history of how I learned to relate to closeness."`],"identity":[`"I carry a background sense that I am only as acceptable as my last achievement, or my most recent usefulness. I'd like to understand where the conditionality of my own sense of worth came from."`,`"When I am resting or not being productive, there is a persistent discomfort — almost a guilt — that I'd like to understand more clearly. I suspect it has roots I haven't fully examined."`,`"My inner critic is very active and often disproportionate to what actually happened. I'd like to work on understanding what it is protecting and where it was formed."`],"strategies":[`"I've noticed a pattern where I consistently end up in the giving or caretaking role in relationships, and find it genuinely difficult to receive care. I'd like to understand the history of that."`,`"My needs tend to go underground in relationships — I either don't know what they are or don't feel entitled to have them met. I'd like to explore that in more depth."`,`"When someone is displeased with me, something automatic and disproportionate happens internally. I'd like to understand what that response is about and where it originates."`],"emotional":[`"I have noticed that certain emotions — particularly anger, or sometimes sadness — are not very accessible to me. I suspect I learned early that those emotions were not safe. I'd like to work on that."`,`"I often find myself in a 'managing' position with my emotions — containing them, explaining them, reducing them — rather than actually feeling them. I'd like to understand what that costs me and how to change it."`,`"There is a quality of distance between me and my own emotional experience — as though I am watching it rather than living it. I'd like to work on closing that gap."`],"shame":[`"I carry a background sense that being fully seen — the real picture of who I am — would change how people relate to me. I'd like to work on understanding where that belief came from and whether it is still accurate."`,`"My relationship to my own worth is primarily conditional — it rises and falls with performance and approval in ways that are exhausting. I'd like to understand the history of that conditionality."`,`"My inner critic is a significant presence in my daily life — relentless and often quite harsh. I'd like to explore what it was originally protecting and whether there is a way to work with it rather than simply trying to suppress it."`],"readiness":[`"I notice that when I try to give myself genuine care — rest, kindness, pleasure without earning it — something in me resists or undermines it. I'd like to understand what that resistance is about."`,`"When the inner work gets harder, I tend to withdraw from it rather than stay with it. I'd like to develop more capacity to be present to difficult material without it feeling like it's too much."`,`"I am quite distant from my own inner experience in daily life — oriented outward and managing the world, with little consistent contact with what is actually happening inside me. I'd like to change that."`],"territory":[`"I'd like to explore the unmet need that feels most active for me right now, and understand how it has shaped my choices and relationships."`,`"The adaptive strategy that costs me the most is something I'd like to work on specifically — understanding its history and finding ways to update it."`,`"I can see the domain where my triggers are most consistently activated. I'd like to work on that territory specifically, understanding what is underneath the pattern."`]};
+var SA_reflect = {"attachment":[`Write about what "reliable care" felt like in your childhood — not the ideal, but the actual experience. What did people reliably do, and what did they reliably fail to do? How is that history showing up in your current relationships?`,`Identify one relationship in your current life where your attachment pattern is most active. What do you notice in your body when that person is unavailable? What do you actually need in those moments?`,`Write a letter from the child who formed your attachment template — describing what they needed, what they concluded from what they received, and what they would want the adult version of you to know.`],"identity":[`Name three things that are genuinely true about you — not achievements, not qualities others approve of, but things that are actually, specifically you. Notice how it feels to claim them without qualification.`,`Write about the history of your inner critic: when did it first appear, what was it protecting, and what does it believe would happen if it stopped? Is that belief still accurate?`,`Identify the specific conditions under which your sense of worth feels most fragile. What are the triggers? What need underneath them is still active?`],"strategies":[`Map your dominant adaptive strategy in one specific relationship. What does it do there? What is it protecting? What would you do differently if the strategy were not running?`,`Write about what you genuinely need from the relationships that matter most to you — not what you typically ask for, but what you actually need. How much of that are you currently receiving?`,`Identify one moment this week where your adaptive strategy ran automatically. What triggered it? What did the child underneath it need in that moment?`],"emotional":[`Write about one emotion that is not very accessible to you. When did you last feel it clearly? What happened to it — was it suppressed, converted into something else, or simply unavailable? What do you imagine it would tell you if it could?`,`Track one emotional experience this week from beginning to end. Where did it live in your body? What happened when you moved toward it? What happened when you tried to stay with it?`,`Write about the relationship between emotional expression and safety in your childhood household. What was allowed to be felt and expressed? What was not? How does that history show up in how you handle your emotions today?`],"shame":[`Write about the specific parts of yourself that you most carefully manage, hide, or keep at a distance from others. What do you believe would happen if those parts were seen?`,`Identify the most active version of your inner critic — the harshest, most familiar internal attack. Write it down exactly as it sounds. Then ask: whose voice is this? When was it first spoken?`,`Write about a time when you were genuinely seen — when someone accurately knew something real about you and their response was not rejection. What did that feel like? What made it possible?`],"readiness":[`Write about what happens when you try to give yourself genuine care — rest, pleasure, kindness without earning it. What is the internal commentary? What does the resistance say? What is it afraid of?`,`Identify your protector part that most actively resists the inner child work. What does it do? What is it afraid would happen if the work were allowed in? Write it a brief letter acknowledging what it has been protecting.`,`Write about your daily relationship to your own inner experience. How often do you genuinely check in? What do you find when you do? What gets in the way of doing it more consistently?`],"territory":[`Write about the unmet need you identified as most active. How has it shaped your choices in relationships? In work? In how you relate to yourself? What would a life where that need was consistently met look like?`,`Map one day's worth of interactions through the lens of your dominant adaptive strategy. Where did it show up? What did it cost? What would the day have looked like if the strategy were less active?`,`Write about the domain where your triggers are most consistently activated. What is the oldest version of this trigger — how far back can you trace it? What did the child in that situation actually need?`]};
+var SA_sec_keys = ["attachment", "identity", "strategies", "emotional", "shame", "readiness", "territory"];
+
+function SA_start(){
+  document.querySelector('.assess-trigger').style.display='none';
+  document.getElementById('SA_form').classList.add('open');
+  document.getElementById('SA_form').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function SA_pick(btn){
+  var qn=btn.getAttribute('data-q');
+  var score=parseInt(btn.getAttribute('data-score'));
+  var sec=btn.closest('.assess-q').getAttribute('data-sec');
+  document.querySelectorAll('.assess-opt[data-q="'+qn+'"]').forEach(function(b){b.classList.remove('chosen');});
+  btn.classList.add('chosen');
+  SA_answers[qn]={score:score,sec:sec};
+  var answered=Object.keys(SA_answers).length;
+  document.getElementById('SA_progress').textContent=answered+' of 22 answered';
+  if(answered>=22){document.getElementById('SA_submit').removeAttribute('disabled');}
+}
+
+function SA_show_results(){
+  // Calculate section scores
+  var scores={};
+  SA_sec_keys.forEach(function(k){scores[k]=0;});
+  Object.values(SA_answers).forEach(function(a){scores[a.sec]=(scores[a.sec]||0)+a.score;});
+
+  // Sort by score descending
+  var sorted=SA_sec_keys.slice().sort(function(a,b){return scores[b]-scores[a];});
+
+  // Build areas HTML
+  var areasHtml='';
+  sorted.forEach(function(key){
+    var sc=scores[key];
+    var mx=SA_max[key];
+    var pct=Math.round((sc/mx)*100);
+    var tier=pct>=67?'high':pct>=34?'active':'settled';
+    var tagClass='tag-'+tier;
+    var tagLabel=tier==='high'?'Most Active':tier==='active'?'Active':'Settled';
+    var fillColor=tier==='high'?'var(--accent)':tier==='active'?'var(--ink)':'var(--muted)';
+    var insight=SA_insights[key][tier];
+    areasHtml+='<div class="result-area '+(tier==='high'?'high':'')+'">'+
+      '<div class="area-header"><span class="area-name">'+SA_labels[key]+'</span>'+
+      '<span class="area-tag '+tagClass+'">'+tagLabel+'</span></div>'+
+      '<div class="area-bar-bg"><div class="area-bar-fill" style="width:0%;background:'+fillColor+'" data-target="'+pct+'%"></div></div>'+
+      '<p class="area-insight">'+insight+'</p></div>';
+  });
+  document.getElementById('SA_areas').innerHTML=areasHtml;
+
+  // Get top 2 sections for prompts
+  var top2=sorted.slice(0,2);
+
+  // Build therapist prompts
+  var therapistHtml='<div class="prompt-section"><div class="prompt-section-label">For your therapist</div>'+
+    '<p class="prompt-section-title">Bring these conversation starters to your next session. They are based on the areas where your responses showed the most activation.</p>'+
+    '<div class="prompt-list">';
+  var tp_items=[];
+  top2.forEach(function(k){
+    if(SA_therapist[k]){
+      SA_therapist[k].slice(0,2).forEach(function(p){tp_items.push(p);});
+    }
+  });
+  tp_items.slice(0,4).forEach(function(p,i){
+    therapistHtml+='<div class="prompt-item"><span class="prompt-num">0'+(i+1)+'</span><span class="prompt-text">'+p+'</span></div>';
+  });
+  therapistHtml+='</div></div>';
+
+  // Build self-reflection prompts
+  var reflectHtml='<div class="prompt-section"><div class="prompt-section-label">For independent reflection</div>'+
+    '<p class="prompt-section-title">These prompts are designed for journaling, quiet thinking, or any reflective practice that works for you.</p>'+
+    '<div class="prompt-list">';
+  var rp_items=[];
+  top2.forEach(function(k){
+    if(SA_reflect[k]){
+      SA_reflect[k].slice(0,2).forEach(function(p){rp_items.push(p);});
+    }
+  });
+  rp_items.slice(0,4).forEach(function(p,i){
+    reflectHtml+='<div class="prompt-item"><span class="prompt-num">0'+(i+1)+'</span><span class="prompt-text">'+p+'</span></div>';
+  });
+  reflectHtml+='</div></div>';
+
+  document.getElementById('SA_prompts').innerHTML=therapistHtml+reflectHtml;
+
+  // Hide form, show results
+  document.getElementById('SA_form').classList.remove('open');
+  document.getElementById('SA_results').classList.add('open');
+  document.getElementById('SA_results').scrollIntoView({behavior:'smooth',block:'start'});
+
+  // Animate bars
+  setTimeout(function(){
+    document.querySelectorAll('.area-bar-fill').forEach(function(b){
+      b.style.width=b.getAttribute('data-target');
+    });
+  },200);
+}
+
+function SA_restart(){
+  SA_answers={};
+  document.querySelectorAll('.assess-opt').forEach(function(b){b.classList.remove('chosen');});
+  document.getElementById('SA_submit').setAttribute('disabled','');
+  document.getElementById('SA_progress').textContent='0 of 22 answered';
+  document.getElementById('SA_results').classList.remove('open');
+  document.getElementById('SA_form').classList.add('open');
+  document.getElementById('SA_form').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+
+
+<script>
+(function(){
+  try{
+    var items = Array.from(document.querySelectorAll('.sidebar-mod-item[data-mk]'));
+    items.forEach(function(li, idx){
+      var mk = li.getAttribute('data-mk');
+      var mn = parseInt(li.getAttribute('data-mn') || '0');
+      var done = !!localStorage.getItem(mk);
+      if(done){
+        li.classList.add('ss-done');
+      } else if(mn > 1){
+        // Locked if the immediately preceding module is not complete
+        var prev = items[idx - 1];
+        if(prev && !localStorage.getItem(prev.getAttribute('data-mk'))){
+          li.classList.add('ss-next');
+        }
+      }
+    });
+  }catch(e){}
+})();
+</script>
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body></html>

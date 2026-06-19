@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 6 · Module 6 · Independence &amp; De-Programming</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:860px;margin:0 auto;padding:80px 48px 120px}
+.slide-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:24px}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);
+line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-body{font-size:17px;line-height:1.75;color:var(--ink);margin-bottom:32px}
+.slide-body p{margin-bottom:20px}.slide-body p:last-child{margin-bottom:0}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}
+.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}
+.mechanism:last-of-type{border-bottom:1px solid var(--line)}
+.mechanism-name{font-family:var(--serif);font-size:28px;font-style:italic;font-weight:400;letter-spacing:-.015em;margin-bottom:16px}
+.mechanism-body{font-size:16px;line-height:1.7;color:var(--muted)}
+.cost-block{margin:28px 0;padding:24px 28px;border-left:2px solid var(--accent);background:var(--soft)}
+.cost-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.cost-body{font-size:15px;line-height:1.65;color:var(--ink)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}
+.voice-block::before{content:'"'  ;position:absolute;top:-8px;left:24px;font-family:var(--serif);
+font-size:72px;color:var(--accent);line-height:1;font-style:italic}
+.voice-text{font-family:var(--serif);font-size:18px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);margin-bottom:12px}
+.voice-attr{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.scenario-block{margin:48px 0;padding:40px;border:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.scenario-q{font-family:var(--serif);font-size:22px;line-height:1.45;font-weight:400;font-style:italic;margin-bottom:32px}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{padding:18px 24px;border:1px solid var(--line);background:var(--paper);font-family:var(--sans);
+font-size:15px;line-height:1.5;text-align:left;cursor:pointer;transition:all .2s ease;color:var(--ink)}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback-block{margin-top:28px;padding:28px 32px;background:var(--soft);border-left:3px solid var(--accent);display:none}
+.feedback-block.visible{display:block}
+.feedback-headline{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:12px;font-style:italic}
+.feedback-detail{font-size:15px;line-height:1.7;color:var(--muted)}
+.nav-row{display:flex;gap:16px;margin-top:40px;align-items:center}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--ink);
+background:none;color:var(--ink);padding:14px 28px;cursor:pointer;transition:all .2s ease;text-transform:uppercase}
+.nav-btn:hover{background:var(--soft)}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#222}.nav-btn:disabled{opacity:.3;cursor:default}
+.completion-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;
+min-height:80vh;text-align:center;padding:80px 48px}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;color:var(--accent);font-style:italic}
+.complete-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:400;margin:32px 0 20px;letter-spacing:-.02em}
+.complete-body{font-size:17px;line-height:1.7;color:var(--muted);max-width:560px}
+.divider{width:48px;height:1px;background:var(--line);margin:40px auto}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 06 &middot; Institutional Brainwashing &middot; Module <strong>06</strong> &middot; Independence &amp; De-Programming</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 6 &middot; Institutional Conditioning</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c6m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course6-module-1-institution-training.html">Institution Training</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course6-module-2-school-compliance.html">School Compliance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course6-module-3-work-adult-school.html">Work: Adult School</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course6-module-4-religion-meaning.html">Religion and Meaning</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course6-module-5-government-governance.html">Government & Governance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course6-module-6-independence-deprogramming.html">Independence & De-Programming</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course6-module-7-thinking-for-yourself.html">Thinking for Yourself</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1: What De-Programming Actually Is -->
+<section class="slide active" data-slide="1">
+<div class="slide-inner">
+<div class="slide-label">Module 06 · Slide 01</div>
+<h1 class="slide-title">What De-Programming Actually Is</h1>
+<div class="slide-body">
+<p>The word de-programming carries the image of a dramatic break — the moment someone leaves a cult, sees through the propaganda, wakes up to the truth. This image is almost entirely wrong.</p>
+<p>Real de-programming is slow. It is not a single revelation but a long series of small noticings. It is less like switching on a light and more like adjusting to a room that was always brighter than you were able to see. And it is not a destination. It is an ongoing practice — because conditioning is ongoing, and because the institutions that produced the original conditioning continue to operate.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">De-programming is not the acquisition of correct beliefs to replace incorrect ones. It is the slow development of a capacity — the ability to notice, in real time, when you are operating from conditioning rather than genuine choice.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">It is not about being right</div>
+<div class="mechanism-body">The most common error in de-programming is to replace one set of certainties with another. The person who escapes religious fundamentalism and becomes an aggressive atheist. The person who leaves a cult and joins a counter-cult. The political convert who traded one orthodoxy for another. The content changed; the structure — unexamined certainty, tribal belonging, suppression of doubt — remained identical. Genuine de-programming produces more uncertainty, not less.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">It is not about others</div>
+<div class="mechanism-body">The impulse to help others see what you have seen — to wake them up, to show them the truth — is almost always premature and often counterproductive. People who have begun to notice their conditioning frequently become fixated on the conditioning of those around them. This is partly avoidance: examining others is easier than examining yourself. The work is inward before it is outward.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">It is not linear</div>
+<div class="mechanism-body">De-programming does not proceed from more conditioned to less conditioned in a clean line. People see clearly in one domain and remain entirely captured in another. They experience genuine moments of freedom followed by months of regression. Old patterns return under stress, illness, grief, or significant life change. The capacity grows unevenly, non-linearly, and with long periods that look like nothing is happening.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 01</div>
+<div class="scenario-q">Someone tells you they have "completely de-programmed" from their upbringing — they now see through all of it and think for themselves entirely. What is most worth noticing in this claim?</div>
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a">This sounds like genuine progress — full awareness is the goal</button>
+<button class="choice" data-answer="b">The certainty of the claim is itself a signal — de-programming that is complete is almost certainly a new form of conditioning</button>
+<button class="choice" data-answer="c">They are probably right about others but are likely still affected by deeper patterns they cannot see</button>
+<button class="choice" data-answer="d">This kind of self-assessment is healthy — confidence in your own clarity is part of recovery</button>
+</div>
+<div class="feedback-block" id="feedback-1">
+<div class="feedback-headline" id="feedback-text-1"></div>
+<div class="feedback-detail" id="feedback-detail-1"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn primary" id="next-1" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 2: Recognising Conditioning in Real Time -->
+<section class="slide" data-slide="2">
+<div class="slide-inner">
+<div class="slide-label">Module 06 · Slide 02</div>
+<h1 class="slide-title">Recognising Conditioning in Real Time</h1>
+<div class="slide-body">
+<p>Conditioning does not announce itself. It presents as personality, as values, as instinct. The person who cannot tolerate silence does not experience this as a learned aversion to something that was never permitted — they experience it as who they are. The person who works compulsively does not experience this as a response to childhood threat — they experience it as drive, ambition, identity.</p>
+<p>The first task of de-programming is developing what you might call a second sight — a capacity to observe your own responses as they occur, to notice the automatic quality of certain reactions, to feel the difference between a genuinely chosen response and one that arrived pre-formed.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Conditioned responses have a specific texture: they arrive faster than thought, they resist examination, and they feel like self rather than like behaviour. Learning to recognise that texture is the beginning of everything.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The speed of the conditioned response</div>
+<div class="mechanism-body">Genuine responses to situations take time — they require perception, processing, evaluation. Conditioned responses arrive before any of this. You feel the shame before you have assessed whether shame is appropriate. You feel the anxiety before you have evaluated the actual level of threat. You produce the pleasing response before you have checked whether you agree. Speed is the first signal.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The resistance to examination</div>
+<div class="mechanism-body">Ask someone why they feel strongly about something that was conditioned into them and they will often be unable to give a reason — or will produce reasons that, on examination, do not actually hold. The conditioned belief does not feel like a belief. It feels like reality. When you ask "why do you think that?" and the response is defensiveness rather than reflection, you are near the edge of conditioning.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The felt sense of selfhood</div>
+<div class="mechanism-body">The most deeply conditioned responses feel like the truest self. "This is just who I am" is almost always about something that was installed, not discovered. The things that feel most essential — the guilt that arrives when you rest, the anxiety that arrives when you set limits, the need to be small or large or useful or invisible — feel like core identity. They are, in almost all cases, core conditioning.</div>
+</div>
+
+<div class="voice-block">
+<div class="voice-text">The first time I noticed it — really noticed it — I was in the middle of apologising for something I hadn't done wrong. And I caught myself, mid-sentence, and thought: I am doing this automatically. I have no idea if I am sorry. I just started apologising.</div>
+<div class="voice-attr">— workshop participant, 34</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 02</div>
+<div class="scenario-q">In a group conversation, someone challenges a belief you hold. Before you have processed what they said, you feel a flush of irritation and a strong impulse to defend your position. What is most useful to notice in that moment?</div>
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a">The irritation means the challenge was unfair — a justified response to being attacked</button>
+<button class="choice" data-answer="b">The speed and automaticity of the response is the signal — something arrived before thought, which means it is worth examining what that something is protecting</button>
+<button class="choice" data-answer="c">Strong emotion in response to challenge is natural — the right move is to express it clearly</button>
+<button class="choice" data-answer="d">The impulse to defend may mean the belief is important to you — defend it carefully</button>
+</div>
+<div class="feedback-block" id="feedback-2">
+<div class="feedback-headline" id="feedback-text-2"></div>
+<div class="feedback-detail" id="feedback-detail-2"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-2" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 3: The Body Knows First -->
+<section class="slide" data-slide="3">
+<div class="slide-inner">
+<div class="slide-label">Module 06 · Slide 03</div>
+<h1 class="slide-title">The Body Knows First</h1>
+<div class="slide-body">
+<p>Institutional conditioning is not stored only in the mind — in beliefs, narratives, and rules. It is stored in the body. The shoulders that rise when authority speaks. The stomach that tightens before a performance review. The throat that constricts when you are about to say something honest. The exhaustion that arrives as soon as the obligation ends.</p>
+<p>Bodies learned these responses during the original conditioning. The child who was punished for showing anger learned to suppress it somewhere between the feeling and the expression — and over time, the suppression moved earlier and earlier in the sequence, until the anger itself began to be suppressed at the level of sensation. The body carries what the mind was not permitted to process.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Embodied awareness often precedes cognitive understanding in de-programming. You feel that something is wrong — constricted, off, not-yours — before you can name what is happening or why.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Somatic signals as early warning</div>
+<div class="mechanism-body">Before the mind has processed a situation, the body has already responded to it. A sense of shrinking, a held breath, a sudden tiredness, a diffuse anxiety — these are often the first indicators that you are in a conditioned pattern. Learning to read these signals — not to diagnose them immediately, but simply to register them — gives you a few seconds of awareness before the automatic behaviour unfolds.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Compliance stored as posture</div>
+<div class="mechanism-body">The body learns to take up specific amounts of space, to hold itself in specific ways, to move at specific tempos — all calibrated to the relational dynamics of the original conditioning environment. The person who learned that smallness was safer moves small. The person who learned that stillness prevented conflict becomes still. These are not personality traits. They are survival strategies that outlived the threat.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">What the body knows that the mind defends</div>
+<div class="mechanism-body">Sometimes the mind has constructed elaborate justifications for a pattern while the body simply knows it is wrong. The person who tells a coherent story about why their relationship is fine while their body is exhausted, contracted, braced. The person who explains why their job is meaningful while their body moves toward Monday morning like it is moving toward something painful. The body is not always right — but it is often ahead.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 03</div>
+<div class="scenario-q">Every time you prepare to disagree with someone in authority — a boss, a parent, an expert — you notice your voice becomes quieter and your body feels slightly smaller. You have not consciously decided to do this. What is most useful here?</div>
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a">This is appropriate deference — showing respect for authority is socially adaptive</button>
+<button class="choice" data-answer="b">Notice the response as somatic conditioning — the body learned this pattern in an earlier environment and is running it automatically in a different one</button>
+<button class="choice" data-answer="c">Force yourself to speak louder and take up more space, even if it feels wrong</button>
+<button class="choice" data-answer="d">This is just introversion or shyness — a personality trait, not something to examine</button>
+</div>
+<div class="feedback-block" id="feedback-3">
+<div class="feedback-headline" id="feedback-text-3"></div>
+<div class="feedback-detail" id="feedback-detail-3"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-3" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 4: The Loyalty Bind -->
+<section class="slide" data-slide="4">
+<div class="slide-inner">
+<div class="slide-label">Module 06 · Slide 04</div>
+<h1 class="slide-title">The Loyalty Bind</h1>
+<div class="slide-body">
+<p>One of the most powerful barriers to de-programming is the feeling that seeing your conditioning clearly is an act of betrayal. Seeing your family's dynamics clearly feels like disowning your family. Seeing your religion's control mechanisms feels like abandoning your faith. Seeing your country's governance for what it is feels like being unpatriotic. Seeing your workplace's culture feels like ingratitude.</p>
+<p>This feeling — that clarity is betrayal — is not a coincidence. It was installed deliberately. Every institution trains its members to experience critical examination as disloyalty. This is how institutions protect themselves from scrutiny: not by forbidding examination but by making examination feel like a moral failing.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The guilt you feel when examining an institution that shaped you is itself a product of that institution's conditioning. You are being asked to feel guilty for thinking — by the very system that benefited from your not thinking.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Love conflated with acceptance</div>
+<div class="mechanism-body">Most people were taught — explicitly or implicitly — that loving their family, faith, or country meant accepting it without criticism. Love and critical examination were placed in opposition. This is a false opposition, but it is deeply felt. Genuine love — for a person, a tradition, a place — does not require blindness. But the conditioning runs deep: seeing clearly feels like loving less.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The loss of belonging as threat</div>
+<div class="mechanism-body">Institutions use community and belonging as leverage. The implicit message is: if you question, you risk exclusion. For people whose sense of safety and identity is bound up in group membership, this threat is existential. The fear of being cast out — from family, faith community, ideological group — is not irrational. The exclusion is real. The question is what it costs to avoid it.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Internalised enforcement</div>
+<div class="mechanism-body">By the time de-programming begins, most people do not need an external authority to enforce loyalty. They enforce it themselves — through guilt, shame, and self-attack whenever the examination goes too deep. The internal voice that says "you are being ungrateful," "you are betraying your roots," "who do you think you are?" is not your voice. It is the institution speaking through the person you learned to be in its presence.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">The reframe</div>
+<div class="cost-body">Seeing an institution clearly is not the opposite of loving what was genuine within it. You can hold grief for what was real and good alongside clear sight of what was harmful. These are not contradictory positions. The loyalty bind asks you to choose. You do not have to.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 04</div>
+<div class="scenario-q">You have been examining your upbringing and seeing clearly, for the first time, how certain family dynamics were harmful. A wave of guilt arrives: you feel like you are betraying the people who raised you. What is most useful to recognise here?</div>
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a">The guilt is a signal that you are going too far — some things should stay unexamined out of respect</button>
+<button class="choice" data-answer="b">The guilt is itself a conditioned response — installed to protect the system from examination — and its arrival does not mean you are doing something wrong</button>
+<button class="choice" data-answer="c">Push through the guilt as quickly as possible — it is only an obstacle</button>
+<button class="choice" data-answer="d">The guilt means you still love your family — hold onto that feeling as a guide</button>
+</div>
+<div class="feedback-block" id="feedback-4">
+<div class="feedback-headline" id="feedback-text-4"></div>
+<div class="feedback-detail" id="feedback-detail-4"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-4" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 5: Grief as Part of the Process -->
+<section class="slide" data-slide="5">
+<div class="slide-inner">
+<div class="slide-label">Module 06 · Slide 05</div>
+<h1 class="slide-title">Grief as Part of the Process</h1>
+<div class="slide-body">
+<p>De-programming involves loss. This is not a side effect — it is intrinsic to the process. When you see clearly what an institution was doing, you lose something: the comfort of unexamined belonging, the simplicity of received answers, the warmth of shared certainty, the identity that the institution provided.</p>
+<p>Many people who begin to examine their conditioning are surprised by how sad it makes them. They expected relief and instead find grief. This grief is legitimate. Something real was lost — not only to harmful conditioning but to the years spent not knowing, the choices made from those years, the relationships built on the foundation of a self that was not entirely free.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The grief of de-programming is not weakness or regression. It is the accurate emotional response to what actually happened. Skipping it produces brittle clarity — certainty without depth, sight without integration.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The loss of the simple story</div>
+<div class="mechanism-body">Conditioning provides a simple story: who you are, where you belong, what is good and bad, what life is for. De-programming dismantles the simplicity before it builds anything to replace it. There is a period — sometimes a long one — of living without the story. This period feels like groundlessness, like having nothing to hold onto. It is uncomfortable in a way that makes the old story seem, in retrospect, like something worth returning to.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The loss of retrospective innocence</div>
+<div class="mechanism-body">Seeing clearly means seeing the past clearly too. The choices made from conditioning that cost you or others something real. The relationships maintained by compliance. The opportunities not taken because the conditioned self could not take them. The grief here has a particular quality: you cannot go back and remake those choices with the clarity you now have. What was lost is gone. That is worth grieving.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The loss of belonging</div>
+<div class="mechanism-body">When you see the dynamics of a group that shaped you, your relationship to that group often changes — even if you choose to remain within it. You can no longer participate in the same way. You notice things others do not notice. You find certain conversations impossible to have in the way they are being had. The belonging you had — unreflective, full, warm — is no longer available in the same form. A different, more conscious belonging may become possible. But the first kind is gone.</div>
+</div>
+
+<div class="voice-block">
+<div class="voice-text">I thought I would feel free. Instead I felt like I had been reading a book my whole life and had just discovered it was translated wrong. And I had based decisions on the translation. You can not un-know that.</div>
+<div class="voice-attr">— workshop participant, 41</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 05</div>
+<div class="scenario-q">After months of examining your conditioning, you find yourself feeling unexpectedly sad — not angry or liberated, just sad. You miss the certainty you had before. You miss the belonging. What is most useful to do with this?</div>
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a">Push through it — sadness is a sign you are still attached to the old system</button>
+<button class="choice" data-answer="b">Allow and acknowledge it — the grief is an accurate response to real loss, and moving through it rather than around it is part of the process</button>
+<button class="choice" data-answer="c">Return to the familiar — the sadness is telling you that the old way was better</button>
+<button class="choice" data-answer="d">Analyse why you feel sad — understanding it intellectually will help you move past it</button>
+</div>
+<div class="feedback-block" id="feedback-5">
+<div class="feedback-headline" id="feedback-text-5"></div>
+<div class="feedback-detail" id="feedback-detail-5"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-5" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 6: The Danger of the New System -->
+<section class="slide" data-slide="6">
+<div class="slide-inner">
+<div class="slide-label">Module 06 · Slide 06</div>
+<h1 class="slide-title">The Danger of the New System</h1>
+<div class="slide-body">
+<p>One of the most common patterns in de-programming is the immediate adoption of a new system to replace the old one. The person who leaves a controlling religion joins a wellness community with identical dynamics. The person who escapes corporate culture joins an activist movement that demands the same self-sacrifice and punishes dissent in the same ways. The person who breaks from their family's politics migrates to the opposite political tribe and adopts its certainties wholesale.</p>
+<p>The content changed. The structure — unquestioned authority, tribal loyalty, suppression of doubt, punishment of deviation — remained intact. The new system feels like freedom because it is new, and because it validates the critique of the old system. But it is a replacement, not a recovery.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Genuine de-programming produces increased tolerance for uncertainty and complexity — not a new set of certain answers. If the new system feels as certain as the old one, examine the structure, not the content.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Why the new system is appealing</div>
+<div class="mechanism-body">The discomfort of living without a system — the groundlessness, the absence of clear belonging and ready answers — is genuine and significant. The new system relieves it. It provides community, purpose, identity, and explanation. It validates the discomfort you just came from by naming what was wrong with the old system. This is seductive precisely when you are most depleted and most in need of belonging. The moment of greatest vulnerability to new capture is immediately after escaping the old one.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Signals that the new system is the old structure</div>
+<div class="mechanism-body">The new system is repeating the old pattern if: questions about foundational premises are met with defensive hostility rather than genuine engagement; belonging is conditional on adherence to the group's positions; members are expected to perform certainty they do not feel; deviation or doubt is treated as a moral failing or as evidence of corruption; and the group's own dynamics are exempt from the critical examination it applies elsewhere.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The leader as new authority</div>
+<div class="mechanism-body">Many people who leave a conditioning environment move quickly toward a teacher, therapist, guru, or leader who seems to offer a cleaner version of the truth. This relationship can be genuinely valuable or can reproduce the original authority dynamic in a new guise — trading one person whose approval you needed for another. The signal: if disagreeing with the new authority feels dangerous in the same way as disagreeing with the old one did, the structure has not changed.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 06</div>
+<div class="scenario-q">After leaving a rigid religious community, you have joined a mindfulness and wellness group. You feel more free. But you notice you feel anxious when you disagree with the group's teacher, and you have begun moderating your opinions to maintain belonging. What is most important to recognise?</div>
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a">This is different from before — the new community is genuinely healthier and more open</button>
+<button class="choice" data-answer="b">The dynamics you are describing — anxiety about disagreement, self-censorship for belonging — are structurally identical to what you left, regardless of the different content</button>
+<button class="choice" data-answer="c">Some deference to a teacher is appropriate — this is not the same as the old control</button>
+<button class="choice" data-answer="d">The anxiety means you are still healing — give it more time and it will resolve</button>
+</div>
+<div class="feedback-block" id="feedback-6">
+<div class="feedback-headline" id="feedback-text-6"></div>
+<div class="feedback-detail" id="feedback-detail-6"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-6" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 7: Building Internal Authority -->
+<section class="slide" data-slide="7">
+<div class="slide-inner">
+<div class="slide-label">Module 06 · Slide 07</div>
+<h1 class="slide-title">Building Internal Authority</h1>
+<div class="slide-body">
+<p>Institutional conditioning systematically undermines your trust in your own perception. School taught you that the teacher knows better than you. Religion taught you that the text knows better than your experience. The workplace taught you that the performance review knows better than your own assessment. Government taught you that official sources know better than your questions.</p>
+<p>After decades of this, recovering trust in your own perception is not simple or quick. Internal authority — the capacity to know what you know, to trust what you see, to act from your own judgement — has to be built slowly, through repeated practice of noticing, naming, and then sitting with your own perceptions rather than immediately checking them against an external authority.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Building internal authority does not mean becoming certain about everything. It means developing a working relationship with your own perception — one that includes appropriate scepticism about your own conditioning alongside trust in your direct experience.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The practice of naming before checking</div>
+<div class="mechanism-body">One concrete practice: before seeking external validation for a perception, name it internally first. "I notice I feel uncomfortable in this meeting." "I notice this explanation does not satisfy me." "I notice something feels off about this." Hold the perception for a moment before immediately reaching for someone else's authority to confirm or correct it. This is not about ignoring expertise — it is about developing the habit of knowing what you think before you find out what you should think.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Small decisions as practice</div>
+<div class="mechanism-body">Internal authority grows through use. Begin with small, low-stakes decisions: where you want to eat, how you want to spend an afternoon, what you actually think about a minor issue. The habit of consulting your own preference — genuinely, rather than performing a preference while watching for the reaction — builds the muscle. The major decisions require the same capacity, developed first in minor ones.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Distinguishing perception from projection</div>
+<div class="mechanism-body">Internal authority is not the same as treating every thought and feeling as accurate information. Conditioning produces distorted perceptions — seeing threat where there is none, seeing approval where it is absent, interpreting neutral events through the lens of old experience. Building genuine internal authority requires learning to distinguish: is this perception arising from what is actually here, or from what I was taught to see? Both require your own attention to sort out. Neither requires deferring to an external authority.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">The patience this requires</div>
+<div class="cost-body">This cannot be rushed. Internal authority was eroded over years and is rebuilt over years. The people who try to accelerate it often land in a different trap: replacing deference to external authority with a rigid, defensive insistence on their own perception that cannot absorb new information. Genuine internal authority remains curious, remains open to being wrong, and can hold its own perceptions lightly enough to examine them.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 07</div>
+<div class="scenario-q">You have a clear sense that something in your life is not working — a relationship, a job, a living situation. But every time you try to trust this perception, you find yourself dismissing it: maybe you are wrong, maybe you are being dramatic, maybe someone who knows better would see it differently. What is most useful here?</div>
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a">Seek expert opinion — the uncertainty means you need external guidance to clarify what you are actually experiencing</button>
+<button class="choice" data-answer="b">Sit with the perception before seeking confirmation — the automatic dismissal of your own knowing is itself a conditioned response worth recognising</button>
+<button class="choice" data-answer="c">The doubt means the perception is probably inaccurate — trust the doubt over the feeling</button>
+<button class="choice" data-answer="d">Act immediately on the perception — delay only serves the conditioning</button>
+</div>
+<div class="feedback-block" id="feedback-7">
+<div class="feedback-headline" id="feedback-text-7"></div>
+<div class="feedback-detail" id="feedback-detail-7"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-7" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 8: What Independence Actually Looks Like -->
+<section class="slide" data-slide="8">
+<div class="slide-inner">
+<div class="slide-label">Module 06 · Slide 08</div>
+<h1 class="slide-title">What Independence Actually Looks Like</h1>
+<div class="slide-body">
+<p>Independence does not mean isolation. It does not mean certainty. It does not mean freedom from influence — no human being is free from influence, and pursuing that fantasy produces its own kind of rigidity. Independence is not a state you arrive at. It is a capacity you exercise, imperfectly and continuously.</p>
+<p>What genuine independence looks like in practice is more modest and more durable than the dramatic awakening image. It is the ability to notice when you are being influenced and to choose your relationship to that influence. It is the recovery of a working relationship with your own perception. It is the capacity to remain in genuine uncertainty without reaching immediately for a certainty that someone else provides.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Independence is not the absence of influence. It is the presence of awareness — you know what is shaping you, and you have some say in what you do with that.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">You will still be conditioned</div>
+<div class="mechanism-body">Even after significant de-programming work, you will still carry conditioning. Patterns laid down in early childhood operate in the body and nervous system in ways that conscious awareness does not fully access. Under sufficient stress, old patterns return. This is not failure. It is the nature of the work. The goal is not to be without conditioning but to have an increasingly honest relationship with it — to know, more often, when it is running, and to have slightly more choice about what you do next.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The relationships that become possible</div>
+<div class="mechanism-body">As internal authority grows, a different kind of relationship becomes possible — with people, institutions, ideas, and traditions. Instead of the all-or-nothing logic of conditioning (either belonging fully or departing completely), a more nuanced engagement opens: you can appreciate what is genuine in an institution while clearly seeing what is harmful. You can love people while seeing them clearly. You can participate in structures while remaining aware of their dynamics. This is not compromise — it is complexity.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The ongoing practice</div>
+<div class="mechanism-body">De-programming is not completed. It is maintained. It requires ongoing attention to the signals — somatic, emotional, relational — that indicate conditioning is running. It requires regular encounters with perspectives that challenge your settled positions. It requires honesty about the new systems you have joined and the new certainties you have adopted. It is a practice in the same sense that any practice is: something you return to, imperfectly, repeatedly, over time.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">What makes it worth it</div>
+<div class="cost-body">The alternative is not stability. Conditioning does not preserve you from suffering — it shapes what you suffer about and in whose interests you suffer it. The work of de-programming does not guarantee happiness or certainty or freedom. It offers something more modest and more lasting: the gradually increasing experience of living from something that is actually yours.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 08</div>
+<div class="scenario-q">You have been doing de-programming work for a year. You still catch yourself in old patterns. You still feel the pull of belonging to systems that you know are not entirely healthy. You wonder if you are making any progress at all. What is most useful to hold onto here?</div>
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a">If old patterns are still present, the work has not been effective — you need a different approach</button>
+<button class="choice" data-answer="b">The fact that you can notice the patterns and ask the question is itself the progress — de-programming is measured in awareness, not in the absence of conditioning</button>
+<button class="choice" data-answer="c">Progress requires more intensity — push harder and faster to break through the remaining patterns</button>
+<button class="choice" data-answer="d">Accept that some conditioning is permanent and focus on what has already changed</button>
+</div>
+<div class="feedback-block" id="feedback-8">
+<div class="feedback-headline" id="feedback-text-8"></div>
+<div class="feedback-detail" id="feedback-detail-8"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-8" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 9: Completion -->
+<section class="slide" data-slide="9">
+<div class="slide-inner completion-slide">
+<div class="complete-mark">&check;</div>
+<h2 class="complete-title">Module 06 complete.</h2>
+<p class="complete-body">You have moved through what de-programming actually is — and is not — and examined the signals of conditioning in real time, the wisdom held in the body, the loyalty bind that makes examination feel like betrayal, the grief that clarity brings, the danger of the new system, the slow building of internal authority, and what genuine independence actually looks like: not arrival, but ongoing practice.</p>
+<div class="section-heading">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">De-programming is not an event. It is a sustained re-examination of beliefs, responses, and identity structures that were installed before you had the capacity to examine them. It is slow, non-linear, and produces grief before it produces freedom.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Conditioning announces itself in the body before it reaches the mind. The tightening, the shrinking, the automatic deference, the sudden inability to hold your own position — these are somatic records of institutional training, readable in real time.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">The loyalty bind makes examination feel like betrayal. You are not betraying the people you love by examining what they transmitted. You are separating the people from the mechanism. The people can be loved. The mechanism can be questioned.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">The danger of the new system is real: exchange one unexamined framework for another. The work of de-programming is not the discovery of the correct alternative belief system. It is the development of the capacity to examine all of them.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Internal authority is built slowly, through accumulating decisions made from your own perception rather than from institutional approval. Each small act of trusting your own reading of a situation is a deposit in the authority that the conditioning depleted.</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+<p class="body-text">Identify one area of your life — a relationship, a career decision, a political view, a lifestyle choice — where you sense that your position is shaped more by loyalty to an institution or community than by your own examination. You do not need to change the position this week. The practice is to hold the position and the question simultaneously: <em>"Is this mine, or did I inherit it?"</em> The two things can coexist. The question does not require an answer immediately. It requires the willingness to keep it open.</p>
+<p class="body-text"><strong>The grief practice:</strong> De-programming involves grieving the version of reality you were given before you had any alternative. Set aside twenty minutes this week to acknowledge what that version gave you — community, certainty, a framework for meaning — and what its revision is costing you. The grief does not mean the revision was wrong. It means you understood what was real in the original alongside what was false. Both can be true. The grief honours what was real.</p>
+<div class="divider"></div>
+<p class="complete-body" style="font-style:italic;font-family:var(--serif);font-size:19px;">Next: Module 07 — Thinking For Yourself.</p>
+<div class="nav-row" style="justify-content:center;margin-top:48px">
+<button class="nav-btn" onclick="prevSlide()">&larr; Review</button>
+</div>
+</div>
+</section>
+
+<script>
+const feedback = {
+  1: {
+    a: {
+      headline: "Complete de-programming is not actually possible — and claiming it is a warning sign.",
+      detail: "De-programming does not reach a state of completion. Conditioning is stored in the body, the nervous system, and relational patterns that conscious awareness does not fully access. Someone who claims to have completely de-programmed and now thinks entirely for themselves has most likely adopted a new framework with particular certainty — which is structurally similar to the original conditioning, regardless of how different the content is."
+    },
+    b: {
+      headline: "Yes — the certainty of the claim is itself the signal.",
+      detail: "Genuine de-programming produces more uncertainty, more complexity, more tolerance for not knowing — not the confident declaration that one has fully arrived. The claim to complete de-programming has the structure of institutional certainty: a fixed endpoint, a clear identity (the awakened one), and an implied comparison to those who have not yet arrived. These are the features of a new system, not the absence of one."
+    },
+    c: {
+      headline: "This may be true — but it is not the most important thing to notice.",
+      detail: "It is likely that someone who claims complete de-programming has blind spots they cannot see — this is true of everyone. But the more useful observation is about the structure of the claim itself: what does it mean to say you have completely de-programmed? What would that even look like? The claim assumes a finished state that does not exist in this kind of work, which suggests the person has replaced one certainty with another."
+    },
+    d: {
+      headline: "Confidence in clarity is different from claiming clarity is complete.",
+      detail: "There is a real and useful form of confidence that grows through de-programming work: trust in your own perception, a more settled sense of what you know and how you know it. But this is different from claiming you have finished the work, that conditioning no longer operates in you, that you now think entirely for yourself. The first is internal authority growing. The second is a new kind of certainty that forecloses the ongoing noticing the work requires."
+    }
+  },
+  2: {
+    a: {
+      headline: "The irritation may be justified — and it arrived before you could assess that.",
+      detail: "The challenge may genuinely have been unfair. But the useful thing is not the content of the irritation but its timing: it arrived before you processed what was said. That speed is the signal of a conditioned response. A genuinely chosen reaction to unfairness has a different quality — it is assessed, grounded, proportional. The automatic flush of irritation before evaluation tells you something is protecting something — and is worth a moment's examination."
+    },
+    b: {
+      headline: "Yes — speed and automaticity are the first signals to learn.",
+      detail: "The response arrived before thought. This is the diagnostic feature of a conditioned pattern: it bypasses evaluation. A genuine response to a genuine challenge might produce irritation — but it would be irritation that emerged after processing, proportional to what was actually said. The pre-processed quality of this reaction points toward something being protected: a belief, an identity, a sense of self that the challenge threatened. Worth noticing, not necessarily acting on."
+    },
+    c: {
+      headline: "Expressing it directly may be appropriate — examining it first is more useful.",
+      detail: "There is nothing wrong with expressing irritation in response to an unfair challenge. But the most useful move here is the one that happens before expression: noticing that the response was automatic, asking what it is protecting, checking whether the irritation is proportional to what was actually said. You can express it after that examination — and it will be a more honest expression, coming from understanding rather than reflex."
+    },
+    d: {
+      headline: "The impulse to defend may or may not be appropriate — examining it first clarifies which.",
+      detail: "Important beliefs are worth defending. But the automatic impulse to defend before processing whether defence is warranted is a conditioned reflex, not a considered response. Examining the automatic quality of the reaction does not mean abandoning the belief — it means understanding which part of you is responding and why. After that examination, you can defend the belief with much more clarity about what you are actually defending and why it matters to you."
+    }
+  },
+  3: {
+    a: {
+      headline: "Respect for authority and the body's conditioned shrinking are different things.",
+      detail: "Appropriate deference — choosing to defer to someone because you genuinely judge their expertise or authority to be relevant — is a conscious act. The body becoming quieter and smaller before you have consciously made any decision is not. It is an automatic somatic response learned in an earlier environment where smallness in the presence of authority was safer. Calling this 'appropriate deference' collapses a conditioned pattern into a virtue — which is how conditioning maintains itself."
+    },
+    b: {
+      headline: "Yes — the body is running a pattern from an earlier environment.",
+      detail: "The response you are describing is somatic conditioning: the body learned in childhood or early life that authority required a particular physical posture — smaller, quieter, less visible — and it is now applying that learning automatically in situations that trigger the authority cue. This does not mean the response was wrong in its original context. It means it is now operating in a different context, and you are not choosing it. Noticing this is the first and most important step."
+    },
+    c: {
+      headline: "Forcing the opposite behaviour is not the same as moving through the conditioning.",
+      detail: "Overriding a conditioned somatic response with a willed opposite — forcing yourself to be loud and large when you automatically go small — can be useful as occasional practice. But it does not address the underlying pattern, and it can produce its own rigidity. The more useful first step is what you are being invited to do: notice the response as a response, recognise its conditioned quality, and sit with that recognition before deciding what to do next."
+    },
+    d: {
+      headline: "Introversion and somatic conditioning have different origins and different remedies.",
+      detail: "Some people genuinely prefer quieter, less prominent roles in social settings — and that preference may be entirely authentic. But the specific pattern described here — body becoming smaller and voice becoming quieter specifically in the presence of authority, automatically, before any conscious choice — has the features of somatic conditioning rather than personality. Personality traits are relatively consistent across contexts. This response is triggered by a specific cue: authority. That specificity is worth examining."
+    }
+  },
+  4: {
+    a: {
+      headline: "The guilt is not a reliable guide to where the examination should stop.",
+      detail: "The feeling that you are going too far is exactly what institutions install to protect themselves from scrutiny. If the guilt were a reliable signal, it would arrive proportionally to actual harm — and examining your upbringing harms no one. The guilt arrives not because you are doing something wrong but because you are doing something the conditioning was designed to prevent. That is information about the conditioning, not a reason to stop."
+    },
+    b: {
+      headline: "Yes — the guilt is part of the conditioning, not a correction of it.",
+      detail: "Every institution that conditions its members installs a mechanism to make examination feel like betrayal. The guilt you feel is that mechanism operating. It does not mean you are being disloyal — it means the conditioning is working as designed. Recognising this does not make the guilt disappear, and it does not mean you should not also hold love and complexity about the people who raised you. But it means the guilt alone cannot tell you what to do next."
+    },
+    c: {
+      headline: "The guilt is worth understanding, not only moving through.",
+      detail: "Treating guilt as purely an obstacle to be overcome as quickly as possible misses what it contains. The guilt is a conditioned response — but it also points toward something real: the genuine complexity of love, harm, and loyalty that is involved in seeing your origins clearly. Moving through it too quickly can produce a brittle clarity that does not hold the genuine grief and love alongside the new understanding. The goal is to understand the guilt, not only to overcome it."
+    },
+    d: {
+      headline: "The love is real — and the guilt is a separate thing that needs examining.",
+      detail: "Love for the people who raised you and critical examination of what happened in your upbringing are not in opposition. But the guilt is not the same as the love — it is a conditioned response that conflates the two. Using the guilt as a guide (holding onto it because it signals love) means using a conditioned mechanism to regulate the examination. The love can be held clearly. The guilt is worth understanding on its own terms, which are primarily about what the conditioning installed rather than what you actually feel."
+    }
+  },
+  5: {
+    a: {
+      headline: "Sadness is not attachment to the old system — it is grief for a real loss.",
+      detail: "Framing the sadness as evidence of unresolved attachment treats it as a problem to overcome rather than an experience to move through. But something real was lost: the simplicity of unexamined belonging, the comfort of received answers, the warmth of shared certainty. Those things had genuine value even within a harmful system. Grief for them is accurate, not weak. Treating it as an obstacle to push through tends to produce the brittle clarity that bypasses integration."
+    },
+    b: {
+      headline: "Yes — this grief is not regression. It is the work.",
+      detail: "Many people expect de-programming to feel primarily like liberation. When it feels like loss instead, they worry they are going backwards. But grief is an intrinsic part of the process — not a side effect. You genuinely lost something: the comfort of not knowing, the belonging that came from shared certainty, the simplicity of an assigned identity. Allowing the grief means letting it move through rather than storing it. The clarity that follows grief tends to be more integrated and durable than the clarity that bypasses it."
+    },
+    c: {
+      headline: "The sadness is not a guide to the old way being better — it is a guide to what was real within it.",
+      detail: "The grief does not mean the old system was preferable overall — it means something within it was genuinely valuable and is now gone. Those things can coexist: a harmful system can contain real warmth, real belonging, real meaning alongside the harm. The sadness is pointing at the real, not recommending the harmful. Returning to avoid the grief means returning to the harm to recover the warmth — and those cannot be separated."
+    },
+    d: {
+      headline: "Analysis can accompany grief but rarely replaces it.",
+      detail: "Understanding why you feel sad is useful. But grief is a somatic and emotional process that intellectual analysis does not complete. The attempt to understand the sadness well enough to move past it tends to produce a loop: more analysis, more understanding, the same grief still present. What moves grief is allowing it — feeling it in the body, not solving it in the mind. Analysis can provide context. It cannot do the work that grief requires you to actually feel."
+    }
+  },
+  6: {
+    a: {
+      headline: "The content being different does not mean the structure has changed.",
+      detail: "Wellness and mindfulness communities can be genuinely different from controlling religious institutions — and can also reproduce the same dynamics with different language. What tells you which is which is not the content (the teachings, the practices, the stated values) but the structure: how dissent is handled, whether belonging is conditional, whether the leader's authority is open to question. The content feeling different is not sufficient evidence that the dynamics are different."
+    },
+    b: {
+      headline: "Yes — the structure is what to examine, not only the content.",
+      detail: "Anxiety about disagreeing with a teacher and self-censorship to maintain belonging are the structural signatures of institutional conditioning, regardless of what the institution teaches. These dynamics operating in a wellness community do not mean the community has no value — it may offer real things. But they mean you are in a setting where the same mechanisms of compliance are active. Recognising this is not a reason to leave immediately — it is a reason to stay with clear eyes rather than the eyes of a person who has found the true alternative."
+    },
+    c: {
+      headline: "The distinction between appropriate deference and conditioned compliance is worth examining carefully.",
+      detail: "Some deference to a teacher or guide is reasonable — they may have knowledge and experience that is genuinely worth learning from. But the specific experience described — anxiety about disagreement, moderating opinions to maintain belonging — is not deference chosen from genuine respect. It is anxiety-driven compliance driven by the fear of exclusion. These feel different from the inside, and you know which one this is."
+    },
+    d: {
+      headline: "The anxiety may be part of healing — but the pattern it is producing is worth examining now, not later.",
+      detail: "It is true that healing takes time and that patterns from old environments can take time to resolve. But 'give it time' as a response to noticing specific structural dynamics in a new group can become a way to avoid seeing what is actually happening. The question is not whether the anxiety will resolve — it is whether the environment is one in which it safely can. The signals you are describing suggest the environment may be reproducing the conditions that created the anxiety, not resolving them."
+    }
+  },
+  7: {
+    a: {
+      headline: "External guidance has value — and can also become another form of the same deference.",
+      detail: "A good therapist, mentor, or guide can help you clarify what you are perceiving. But immediately reaching for external authority every time your own perception is uncertain reproduces the conditioned habit of checking yourself against an approved source before trusting your own experience. The practice worth developing here is sitting with the perception long enough to know what you actually think — before, not instead of, seeking external perspective."
+    },
+    b: {
+      headline: "Yes — the dismissal of your own perception is itself the conditioning at work.",
+      detail: "The automatic self-dismissal — maybe you are wrong, maybe you are being dramatic, maybe someone who knows better would see it differently — is precisely the pattern installed by institutions that had an interest in your not trusting your own perception. The fact that it arrives automatically, reliably, whenever you try to trust your own clear sense of something, is the signal. Sitting with the perception before checking it against external authority is a small and significant act of recovering internal authority."
+    },
+    c: {
+      headline: "The doubt is also a conditioned response — it is not more reliable than the perception.",
+      detail: "Trusting doubt over feeling assumes that doubt is a cleaner or more reliable signal. But the automatic doubt — arriving on cue whenever you try to trust your own perception — is itself conditioned. It was installed by systems that had an interest in your doubting yourself. This does not mean the perception is necessarily correct. It means neither the perception nor the automatic doubt is automatically more trustworthy than the other. Both require your own attention to sort out."
+    },
+    d: {
+      headline: "Immediate action bypasses the very capacity you are trying to build.",
+      detail: "Acting immediately on a perception, before sitting with it and understanding it, is a different kind of bypassing — not the familiar self-dismissal, but a kind of self-certainty that does not actually pause to know. The practice of internal authority involves holding a perception, examining it, and then deciding what to do — not acting reflexively in either direction. Both 'immediately dismiss' and 'immediately act' skip the middle step, which is the one that builds the capacity."
+    }
+  },
+  8: {
+    a: {
+      headline: "The presence of old patterns is not evidence of failure — it is the nature of the work.",
+      detail: "Conditioning laid down over years does not dissolve through a year of attention. The expectation that old patterns should be gone by now is itself a kind of institutional thinking — the idea that if you do the work correctly and completely, you reach a finished state. De-programming does not work this way. The patterns may never disappear entirely. What changes, with genuine work, is your relationship to them: you see them sooner, understand them better, and have slightly more choice about what you do next."
+    },
+    b: {
+      headline: "Yes — the noticing is the progress.",
+      detail: "A year ago, you may not have been able to notice the patterns as patterns — they would have simply felt like who you are, like reality, like the obvious response. Now you can see them, name them, and ask the question. That capacity is the thing that was absent before and is growing now. De-programming is not measured by the absence of conditioning. It is measured by the gradually increasing accuracy of your awareness of it. The question itself — 'am I making progress?' — asked with genuine curiosity rather than self-punishment, is evidence of that awareness."
+    },
+    c: {
+      headline: "Intensity tends to produce rigidity, not freedom.",
+      detail: "The impulse to push harder and faster when the work feels slow is itself often a conditioned response — the same driven quality that institutions rewarded as ambition and productivity. De-programming does not accelerate through force. Trying to break through remaining patterns by increasing pressure tends to produce either brittle surface-level change that does not hold, or rigid self-certainty that mistakes control for freedom. The work asks for patience, not intensity."
+    },
+    d: {
+      headline: "Accepting permanent conditioning and noticing it ongoing are different positions.",
+      detail: "There is something useful in the acceptance — the patterns may never fully disappear, and accepting this prevents the exhausting pursuit of a finished state. But 'focus on what has already changed' can become a form of premature closure — stopping the noticing before it needs to stop. The most useful position is neither despair about the remaining patterns nor acceptance that closes examination: it is ongoing curiosity about what is still running, alongside genuine acknowledgement of what has already shifted."
+    }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c6m5';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course6-module-5-government-governance.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c6m6','1');window.location.href='course6-module-7-thinking-for-yourself.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

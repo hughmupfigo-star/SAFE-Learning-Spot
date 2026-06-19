@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 4 · Module 7 · The Next Economy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}.module-tag strong{color:var(--ink);font-weight:500}.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.module-container{max-width:780px;margin:0 auto;padding:80px 48px 120px}.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-number{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--muted);margin-bottom:24px;text-transform:uppercase}.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}.slide-title em{font-style:italic;font-weight:300}.lead{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;color:var(--ink);margin-bottom:40px;letter-spacing:-.01em}.body-text{font-size:17px;line-height:1.7;color:#2a2a28;margin-bottom:24px;max-width:62ch}.body-text strong{font-weight:500;color:var(--ink)}.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}.pullquote{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.4;font-weight:300;border-left:2px solid var(--ink);padding:8px 0 8px 32px;margin:48px 0;color:var(--ink)}
+
+.shift{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}.shift:last-of-type{border-bottom:1px solid var(--line)}.shift-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:8px}.shift-name{font-family:var(--serif);font-size:28px;line-height:1.15;font-weight:400;letter-spacing:-.015em;margin-bottom:16px;font-style:italic}
+.shift-what{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:20px 0 8px;font-weight:500}
+
+.capacity{margin:28px 0;padding:28px;background:var(--soft);border-left:2px solid var(--line)}.capacity-name{font-family:var(--serif);font-size:21px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.3}.capacity-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.practice{margin:28px 0;padding-left:28px;border-left:2px solid var(--line)}.practice-name{font-family:var(--serif);font-size:22px;font-style:italic;font-weight:400;margin-bottom:10px;line-height:1.25}.practice-text{font-size:16px;line-height:1.65;color:#2a2a28}
+
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#999;margin-bottom:16px}.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+
+.scenario{margin-top:72px;padding-top:48px;border-top:1px solid var(--line)}.scenario-label{font-family:var(--mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:500}.scenario-prompt{font-family:var(--serif);font-size:24px;line-height:1.45;font-weight:400;margin-bottom:8px;letter-spacing:-.01em}.scenario-context{font-size:16px;color:var(--muted);margin-bottom:32px;font-style:italic}.choices{display:flex;flex-direction:column;gap:12px}.choice{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line);padding:20px 24px;font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--ink);cursor:pointer;transition:all .25s ease;font-weight:400}.choice:hover{border-color:var(--ink);background:var(--soft);transform:translateX(2px)}.choice-letter{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:14px;letter-spacing:.1em}.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}.choice.selected .choice-letter{color:var(--paper);opacity:.6}.choice:disabled{cursor:default}.choice:disabled:hover{transform:none}.choice.dimmed{opacity:.4}
+.feedback{display:none;margin-top:32px;padding:32px;background:var(--soft);border-left:2px solid var(--ink);animation:fadeUp .5s ease}.feedback.visible{display:block}.feedback-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.feedback-headline{font-family:var(--serif);font-size:19px;line-height:1.5;font-weight:400;font-style:italic;color:var(--ink);margin-bottom:16px}.feedback-text{font-family:var(--sans);font-size:15.5px;line-height:1.65;color:#2a2a28}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;border:none;color:var(--ink);cursor:pointer;padding:12px 0;transition:opacity .2s ease;font-weight:500}.nav-btn:hover{opacity:.6}.nav-btn:disabled{opacity:.2;cursor:not-allowed}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}.nav-btn.primary:hover{background:#2a2a28;opacity:1}.nav-btn.primary:disabled{background:var(--line);color:var(--muted)}.nav-counter{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;margin-bottom:32px;color:var(--accent);font-style:italic}.summary-list{list-style:none;margin:40px 0}.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}.summary-list li:last-child{border-bottom:none}.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}
+
+@media(max-width:640px){.module-header{padding:20px 24px}.module-container{padding:48px 24px 80px}.slide-title{font-size:38px}.lead{font-size:19px}.body-text{font-size:16px}.scenario-prompt{font-size:20px}.pullquote{font-size:22px;padding-left:24px;margin:32px 0}.progress-dot{width:12px}.complete-mark{font-size:80px}.shift-name{font-size:24px}.sov-frame{padding:28px}.sov-text{font-size:19px}}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 04 · Financial Truth & Reversal · Module <strong>07</strong> · The Next Economy</div>
+<div class="progress-bar"><div class="progress-dot active"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div><div class="progress-dot"></div></div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 4 &middot; Financial Sovereignty</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c4m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course4-module-1-the-language-of-money.html">The Language of Money</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course4-module-2-how-the-system-keeps-you-poor.html">How the System Keeps You Poor</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course4-module-3-the-debt-trap-architecture.html">The Debt Trap</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course4-module-4-building-true-wealth.html">Building True Wealth</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course4-module-5-the-frequency-of-abundance.html">The Frequency of Abundance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course4-module-6-money-as-sovereignty.html">Money as Sovereignty</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c4m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course4-module-7-the-next-economy.html">The Next Economy</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+<section class="slide active" data-slide="1">
+<div class="slide-number">Page 01 / 06 · The Shifting Ground</div>
+<h1 class="slide-title">Why the current economy is <em>changing.</em></h1>
+
+<p class="lead">The financial system described in the previous six modules — the extraction architecture, the debt trap, the income loop, the asset gate — is not permanent. It is the current iteration of an economic system that has shifted fundamentally multiple times in human history, and is shifting again now. The shift is not a prediction. It is an observation — a set of structural changes already in motion that will, across the next decade and beyond, alter how money moves, who captures value, and what sovereignty requires.</p>
+
+<p class="body-text">This module does not predict the future. <strong>Prediction is a form of performance — the appearance of knowing what cannot be known.</strong> What this module does is name the structural forces that are currently in motion and describe the capacities that serve you regardless of which specific future those forces produce. The capacities are the investment. The specific future is what the capacities will navigate.</p>
+
+<div class="section-heading">The four forces producing the shift</div>
+
+<p class="body-text"><strong>The digitalisation of value.</strong> Value — the thing money is supposed to measure — is moving from physical to digital at an accelerating rate. Digital products, digital services, digital content, digital assets — all of these produce value without requiring physical infrastructure, physical inventory, or physical distribution. <em>The shift means that the asset gate from Module Two is being rebuilt in a new location.</em> The old gate required capital for physical assets. The new gate requires knowledge, creativity, and digital literacy — which are more accessible than capital, and which connect directly to the intellectual property form from Module Four.</p>
+
+<p class="body-text"><strong>The decentralisation of trust.</strong> The institutions that previously held the economy's trust — banks, governments, large corporations — are experiencing a structural decline in that trust. Not a collapse, but a redistribution. <em>Trust is moving toward peer networks, community structures, transparent systems, and individual reputation.</em> The shift means that the person who builds trust through their own presence, competence, and integrity has a structural advantage that the previous economy did not provide.</p>
+
+<p class="body-text"><strong>The creator economy.</strong> The tools to create, distribute, and monetise intellectual property — which previously required institutional access — are now available to any individual with a device and an internet connection. A course can be built and sold without a university. A product can be designed and distributed without a factory. A brand can be built without an advertising budget. <strong>The creator economy is the asset gate reopening at a lower threshold</strong> — accessible to people who would never have passed through the old gate.</p>
+
+<p class="body-text"><strong>The breakdown of the employment model.</strong> The assumption that most adults will trade their time for wages inside an institution for the duration of their working life is eroding — through automation, through gig structures, through remote work, through the increasing mismatch between the value workers produce and the wages they receive. <em>The breakdown is not liberation. It is the removal of the structures that, however extractive, provided stability.</em> The person positioned for the breakdown is the person who has already begun the transition from active to passive income, from employment to ownership, from institutional dependency to sovereign capacity.</p>
+
+<div class="pullquote">The economy is shifting. The shift is not a catastrophe or a utopia. It is a structural rearrangement of how value is created, captured, and distributed. The person who reads the shift from governance — neither in panic nor in denial — is the person who positions themselves to benefit from it rather than to be displaced by it.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">You read about the four forces and feel the familiar combination of excitement and anxiety that structural change produces.</p>
+<p class="scenario-context">The excitement: the shifts are creating opportunities that the old economy did not provide. The anxiety: the shifts are also removing structures that the old economy guaranteed — job security, institutional reliability, predictable career paths. The combination is the honest response to a system in transition.</p>
+
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Lean into the excitement. The new economy is all opportunity. Embrace the change fully and abandon the old structures.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold both the excitement and the anxiety as accurate responses to a genuine transition. The opportunities are real. The instabilities are also real. The governed response is to build the capacities that serve you in both the old and the new economy, rather than betting entirely on either one.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Lean into the anxiety. The shifts are threatening. Hold onto the old structures as long as possible. The new economy is risky.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Dismiss the shifts as overstated. The economy has always been changing. These forces are not significantly different from previous ones.</button>
+</div>
+
+<div class="feedback" id="feedback-1">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-1"></p>
+<p class="feedback-text" id="feedback-detail-1"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" disabled>← Previous</button>
+<span class="nav-counter">01 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+</div>
+</section>
+
+<section class="slide" data-slide="2">
+<div class="slide-number">Page 02 / 06 · The Three Shifts</div>
+<h1 class="slide-title">What is structurally <em>changing.</em></h1>
+
+<p class="lead">The four forces from Page One produce three structural shifts in how value is created, captured, and distributed. Each shift changes the rules of the financial system — and each one creates new pathways to sovereignty that were not available in the previous iteration. The shifts are not complete. They are in motion. Positioning yourself in relation to a shift in motion is different from positioning yourself in relation to a completed change.</p>
+
+<div class="shift">
+<div class="shift-num">Shift 01</div>
+<h2 class="shift-name">From employment to ownership.</h2>
+<p class="body-text">The previous economy's primary financial relationship was employment — you traded time for wages inside an institution that captured most of the value. The shift is toward ownership — of your own skills as products, of your own content as assets, of your own enterprise however small. <strong>The shift does not mean employment is disappearing. It means employment is becoming one option among several, and the option of ownership is becoming structurally available to people for whom it was previously gated.</strong></p>
+
+<p class="body-text">The sovereign response: begin building ownership alongside employment. The intellectual property from Module Four. The first passive income stream. The skill converted from a time-traded service into a productised asset. <em>The person who holds both employment and ownership is structurally resilient — the employment provides current income while the ownership builds toward the independence that makes the employment optional.</em></p>
+<div class="shift-what">What this means for your sovereignty</div>
+<p class="body-text">The wage-productivity gap from Module Two is most severe inside employment. Ownership captures the full value of what you produce. Each step from employment toward ownership narrows the gap and returns a larger portion of your value to your own financial position.</p>
+</div>
+
+<div class="shift">
+<div class="shift-num">Shift 02</div>
+<h2 class="shift-name">From institutional trust to distributed trust.</h2>
+<p class="body-text">The previous economy centralised trust in institutions — banks held your money, corporations held your career, governments held the system's stability. The shift is toward distributed trust — peer networks, community structures, reputation systems, transparent ledgers. <strong>The shift means that your personal reputation — your track record of delivering value, your integrity in transactions, your consistency in relationships — becomes a financial asset in ways the previous economy did not reward.</strong></p>
+
+<p class="body-text">The sovereign response: invest in your reputation as deliberately as you invest in financial assets. The trust you build with the people you serve — clients, customers, community — is a form of equity that the new economy values and the old economy did not. <em>Reputation is the asset that cannot be seized, cannot be inflated away, and compounds with every consistent interaction. It is also the asset most connected to the sovereignty work of the previous courses — because a governed person, operating from integrity across all four domains, builds reputation as a natural consequence of the governance.</em></p>
+</div>
+
+<div class="shift">
+<div class="shift-num">Shift 03</div>
+<h2 class="shift-name">From consumption to creation.</h2>
+<p class="body-text">The previous economy positioned most people as consumers — the value created by a small number of producers was consumed by a large number of purchasers, and the financial flow moved from consumers to producers. The shift is toward creation — the tools to create value are now so widely distributed that the line between producer and consumer is dissolving. <strong>Anyone with knowledge, skill, and creative energy can produce value and capture it directly, without institutional intermediation.</strong></p>
+
+<p class="body-text">The sovereign response: position yourself as a creator rather than solely as a consumer. The creative energy reclaimed in Course Three is not only an internal resource — it is the raw material for the fourth form of asset: intellectual property. Every piece of knowledge you hold, every skill you have developed, every perspective you have built through the work of this curriculum — these are potential assets in an economy that increasingly values individual creation. <em>The shift from consumer to creator is the financial version of the shift from resource to territory. In both cases, the governed version of you is the one that produces rather than merely receives.</em></p>
+</div>
+
+<div class="pullquote">Three shifts. Each one creating new pathways to sovereignty. The person positioned for the next economy is not the person who predicted it correctly. It is the person who built the structural capacities — ownership, reputation, creation — that serve them regardless of which specific version of the next economy arrives.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">You recognise that you have been positioned entirely as an employee and a consumer — with no ownership, no creator output, and no deliberate reputation beyond your current role.</p>
+<p class="scenario-context">The recognition is not panic-inducing — it is clarifying. The previous economy rewarded this position. The next economy may not. The positioning can change, starting now, through the governed practices this module and the previous ones have described.</p>
+
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Panic. You are entirely unprepared for the shift. Dramatic action is needed immediately.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the recognition as the starting coordinate. The shift is in motion, not complete. You have time to build the capacities — ownership, reputation, creation — alongside the structures that currently sustain you. The building is governed, not urgent.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Dismiss the shifts. Employment has survived every economic change. It will survive this one too.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Quit your job and become a full-time creator immediately. The shift demands commitment.</button>
+</div>
+
+<div class="feedback" id="feedback-2">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-2"></p>
+<p class="feedback-text" id="feedback-detail-2"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">02 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+</div>
+</section>
+
+<section class="slide" data-slide="3">
+<div class="slide-number">Page 03 / 06 · The Capacities</div>
+<h1 class="slide-title">What to build regardless of which future <em>arrives.</em></h1>
+
+<p class="lead">The honest position on the future is uncertainty. The shifts are real. Where they lead specifically is unknowable. The governed response to uncertainty is not prediction — it is the building of structural capacities that serve you across multiple possible futures. This page names the four capacities that produce resilience regardless of which specific economy emerges.</p>
+
+<div class="capacity">
+<p class="capacity-name">Multiple income streams.</p>
+<p class="capacity-text">The person with a single income source is structurally fragile — one disruption eliminates the entire income. The person with three, four, five sources is structurally resilient — any single disruption is absorbed by the others. <strong>The governed approach is not to build five streams simultaneously. It is to build one additional stream alongside the primary income, and then, once the first is stable, to build the second.</strong> Each stream can be small. The resilience is in the plurality, not in the size of any individual stream. A primary income from employment, a secondary stream from intellectual property, a tertiary stream from a small investment — three streams, each modest, collectively producing a structural resilience that a single large salary cannot match.</p>
+</div>
+
+<div class="capacity">
+<p class="capacity-name">Ownership of intellectual property.</p>
+<p class="capacity-text">Intellectual property is the form of asset most available to most people and most aligned with the shifts in motion. A course, a guide, a template, a method, a body of content, a trained skill converted into a teachable system — each of these is an asset that produces value after the initial creation. <strong>The curriculum you are completing is itself an example of intellectual property</strong> — knowledge structured into a format that produces ongoing value. Your own knowledge, structured similarly, is the most accessible pathway to the asset gate available to you right now.</p>
+</div>
+
+<div class="capacity">
+<p class="capacity-name">Adaptability as a structural practice.</p>
+<p class="capacity-text">The capacity to learn, unlearn, and relearn — to release a skill that is becoming obsolete and acquire one that is becoming valuable — is the meta-capacity that makes all other capacities useful. <strong>Adaptability is not a personality trait. It is a practice</strong> — the ongoing, governed attention to what the system is rewarding, what it is depreciating, and what the gap between the two tells you about where to direct your next development. The practice is not reactive (scrambling when the ground shifts) but anticipatory (building the next capacity while the current one is still producing value).</p>
+</div>
+
+<div class="capacity">
+<p class="capacity-name">Digital literacy as financial literacy.</p>
+<p class="capacity-text">The next economy operates digitally. The platforms on which value is created, distributed, and captured are digital platforms. The tools with which intellectual property is built are digital tools. The reputation systems that replace institutional trust are digital systems. <strong>Digital literacy — the capacity to use digital tools to create, distribute, and capture value — is no longer a technical skill. It is a financial skill.</strong> The person who can build a digital product, reach a digital audience, and capture digital value has access to the asset gate that the previous economy reserved for people with physical capital.</p>
+</div>
+
+<p class="body-text">The four capacities are not predictions about what the future will reward. They are structural positions that produce resilience across multiple possible futures. <strong>The person with multiple income streams, owned intellectual property, practised adaptability, and digital literacy is positioned for the shifts regardless of their specific form</strong> — because each capacity serves the sovereignty framework independently of which economy it operates inside.</p>
+
+<div class="pullquote">The future is uncertain. The capacities are not. Multiple streams, owned assets, practised adaptability, and digital literacy serve you in any economy — current, transitional, or next. The building of capacities is the governed response to uncertainty. The uncertainty is the only honest prediction available.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">You assess yourself against the four capacities and find that you have one — maybe one and a half — in any developed form.</p>
+<p class="scenario-context">The assessment is not a verdict. It is an inventory of what is in place and what needs building. The building does not require dramatic action. It requires the same governed, incremental approach the curriculum has prescribed for every other domain.</p>
+
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Try to build all four simultaneously. The shifts are already in motion. Every capacity must be developed now.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Choose the capacity closest to completion and focus the next three months on strengthening it. One capacity, built to function, produces more resilience than four capacities begun and abandoned. The next capacity follows from the foundation the first one provides.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Focus entirely on digital literacy. The future is digital. The other capacities can wait.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Decide the capacities are for other people — younger, more technical, more entrepreneurial. Your path is stable employment for as long as it lasts.</button>
+</div>
+
+<div class="feedback" id="feedback-3">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-3"></p>
+<p class="feedback-text" id="feedback-detail-3"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">03 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+</div>
+</section>
+
+<section class="slide" data-slide="4">
+<div class="slide-number">Page 04 / 06 · The Governed Relationship with Uncertainty</div>
+<h1 class="slide-title">Approaching the unknown from <em>governance.</em></h1>
+
+<p class="lead">The future is uncertain. The governed response to uncertainty is not prediction, not anxiety, not denial. It is the stance this curriculum has been teaching across every domain: the shift from "this is happening to me" to "I see what is happening and I am choosing my response." The shift, applied to economic uncertainty, produces a different relationship with the future than either fear or fantasy can provide.</p>
+
+<p class="body-text">Most people approach economic uncertainty from one of two programmes. <strong>The fear programme:</strong> the future is threatening. The shifts will displace you. The economy is becoming less stable, less predictable, less survivable. The response is to cling to whatever structures currently exist — the job, the institution, the familiar — and to resist the shifts as threats. <strong>The fantasy programme:</strong> the future is liberating. The shifts will produce abundance, opportunity, and freedom. The new economy will reward the individual, dissolve the old extraction, and produce a fairer system. The response is to embrace the shifts uncritically and to abandon the current structures prematurely.</p>
+
+<p class="body-text"><strong>Both programmes produce ungoverned responses.</strong> Fear produces paralysis — the person stays inside structures that may be eroding, unable to build the capacities that the transition requires. Fantasy produces recklessness — the person abandons structures that still provide stability, chasing opportunities that may not materialise. The governed response holds the uncertainty honestly: the future is unknown, some of the shifts will produce opportunity, some will produce disruption, and the capacities that serve you are the same regardless of which outcomes arrive.</p>
+
+<div class="section-heading">The governed stance toward the future</div>
+
+<p class="body-text"><strong>Build from the current structure, not against it.</strong> The job you have, the income you earn, the position you hold — these are not the enemy. They are the platform from which the capacities are built. The governed approach uses the current structure's stability to fund the building of the next structure, without abandoning the current structure before the next one can support the weight.</p>
+
+<p class="body-text"><strong>Invest in capacities, not in predictions.</strong> Every prediction about the future economy is, at best, partially accurate. The capacities — multiple streams, owned assets, adaptability, digital literacy — serve you regardless of which prediction turns out to be correct. The governed approach directs investment (of time, of energy, of money) toward capacities rather than toward bets on specific outcomes.</p>
+
+<p class="body-text"><strong>Read the shifts, do not react to them.</strong> The shifts produce noise — financial media, social media, urgent predictions, dramatic narratives about what is coming. The noise produces reactive decisions — the panic buy, the panic sell, the dramatic career change, the impulsive investment. <em>The governed response reads the noise as data, distinguishes the structural signal from the temporary fluctuation, and makes decisions from the settled state rather than from the activated one.</em> The settled state is the financial equivalent of the sovereignty move from Course Three: present, governed, choosing from inside rather than reacting from outside.</p>
+
+<div class="sov-frame">
+<div class="sov-label">The sovereign relationship with the future</div>
+<p class="sov-text">I cannot predict the future. I can build the capacities that serve me across multiple futures. I can read the shifts without reacting to the noise. I can make decisions from governance — from the settled state, from fullness, from the position of a person who has done the internal and external work that this curriculum describes. The future is uncertain. The governance is mine.</p>
+</div>
+
+<div class="pullquote">The future does not require your prediction. It requires your preparation. The preparation is the capacities. The capacities are built from governance. The governance is the practice you have been learning across twenty-six modules, four courses, and every domain in which sovereignty is possible.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">A major economic shift is announced — a new technology, a market disruption, a structural change in your industry. The news produces the familiar activation: the chest tightens, the thoughts scatter, the urgency to act arrives before the thinking can organise itself.</p>
+<p class="scenario-context">You recognise the activation as the same nervous system response from Course Three — the body reporting a threat before the mind has evaluated the threat's actual severity. The activation is not a decision. The activation is the pre-decision state that, ungoverned, produces reactive decisions. Governed, it produces the half-second pause that precedes a considered response.</p>
+
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Act immediately. The shift is real. Dramatic repositioning is needed now.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Pause. Read the shift as data. Ask: does this change my capacities? Does this change my trajectory? Does this require a structural response or only an informational update? The pause is the governance. The governance produces the response that the activation, by itself, cannot.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Ignore the shift entirely. You have heard these announcements before. The economy always stabilises.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Consume every piece of analysis about the shift. Read everything. Listen to every podcast. Form a comprehensive view before doing anything.</button>
+</div>
+
+<div class="feedback" id="feedback-4">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-4"></p>
+<p class="feedback-text" id="feedback-detail-4"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">04 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+</div>
+</section>
+
+<section class="slide" data-slide="5">
+<div class="slide-number">Page 05 / 06 · The Sovereign Life</div>
+<h1 class="slide-title">What becomes <em>available.</em></h1>
+
+<p class="lead">This is the final page of the final module of the final course. Twenty-six modules across four courses. From energy as currency to the next economy. From the patterns that predict to the frequency of abundance. From the body as resource to money as sovereignty. The arc is complete. The practice is beginning.</p>
+
+<p class="body-text">The sovereign life is not a destination. It is a daily practice — the ongoing, imperfect, governed attention to your own territory across every domain in which territory exists. <strong>The territory is your energy, your relationships, your body, and your money.</strong> The governance is the daily decision to inhabit the territory from the inside, to read the systems you are operating within, and to make your next move from governance rather than from the programmes that have been running your life without your conscious participation.</p>
+
+<div class="section-heading">What all four courses produced, together</div>
+
+<p class="body-text"><strong>Course One gave you the framework.</strong> Energy as finite resource. The four channels. The five territories. The recognition that protecting your energy is an act of sovereignty, not selfishness.</p>
+
+<p class="body-text"><strong>Course Two gave you the diagnostics.</strong> The patterns. The archetypes. Your own role. The half-second between impulse and action. The capacity to choose differently, from governance, in the domain where most adults repeat the same patterns for decades.</p>
+
+<p class="body-text"><strong>Course Three gave you the reclamation.</strong> The body as territory. The truth reversals. Sacred as sovereign. The five borders. The daily stance of inhabiting a body that is governed by you alone.</p>
+
+<p class="body-text"><strong>Course Four gave you the foundation.</strong> Money as language. The extraction architecture. The debt trap. The wealth mechanics. The internal programmes. The financial sovereignty that makes all other sovereignty structurally durable.</p>
+
+<div class="sov-frame">
+<div class="sov-label">The sovereign life</div>
+<p class="sov-text">You are not fixed. You were never broken. You are governed — by yourself, from inside, across four domains, with the awareness that was always available and has now been claimed through twenty-six modules of structured, patient, unglamorous work. The work continues. The governance deepens. The territory remains yours. The life — governed across energy, relationships, body, and money — is the life you are now equipped to build.</p>
+</div>
+
+<p class="body-text">The sovereign life does not look different from outside. <strong>From outside, it looks like an ordinary life being lived by an ordinary person.</strong> From inside, the difference is total. Every interaction is read through the four channels. Every relationship is navigated with the half-second of governance. Every physical experience is felt from inside the body rather than managed from outside it. Every financial decision is made from literacy rather than from programme. The differences are invisible. The differences are everything.</p>
+
+<p class="body-text"><em>Your energy is the most valuable thing you have. Your relationships are the most intimate territory you navigate. Your body is the most personal domain you govern. Your money is the structural foundation on which all three stand. The governance of all four — daily, imperfectly, with the gentle return when the old patterns reassert themselves — is the sovereign life. The sovereign life is what was always available to you, underneath the programmes, the extractions, the reversals, and the architectures that this curriculum has spent twenty-six modules naming.</em></p>
+
+<p class="body-text">Go well. Build from governance. The practice is the life. The life, governed, is yours.</p>
+
+<div class="pullquote">Twenty-six modules. Four courses. One practice: the daily, ongoing, imperfect governance of your own territory — energy, relationships, body, money — by the only legitimate authority, which has always been you. The curriculum ends here. The sovereignty begins every morning.</div>
+
+<div class="scenario">
+<div class="scenario-label">Scenario · Sit with this</div>
+<p class="scenario-prompt">You have completed the entire curriculum. The work continues.</p>
+<p class="scenario-context">You know things you did not know twenty-six modules ago. You have language for experiences you carried without words. You have practices for every domain, diagnostics for every system, and the half-second of governance that changes what is possible in every interaction, every relationship, every financial decision, every morning. None of this is finished. All of it is available.</p>
+
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a"><span class="choice-letter">A</span>Close the curriculum and proceed as if the knowledge is enough. The understanding is sufficient. The practice is optional.</button>
+<button class="choice" data-answer="b"><span class="choice-letter">B</span>Carry the practice forward. Every morning: arrive in the body. Every interaction: read the energy. Every relationship: hold the half-second. Every financial decision: govern from literacy. Every evening: account for the day. The curriculum ends. The practice is the life.</button>
+<button class="choice" data-answer="c"><span class="choice-letter">C</span>Return to Course One, Module One, Page One and begin again. More study is needed before the practice can begin.</button>
+<button class="choice" data-answer="d"><span class="choice-letter">D</span>Decide the curriculum was interesting but ultimately theoretical. Return to normal life unchanged.</button>
+</div>
+
+<div class="feedback" id="feedback-5">
+<div class="feedback-label">What this tends to produce</div>
+<p class="feedback-headline" id="feedback-text-5"></p>
+<p class="feedback-text" id="feedback-detail-5"></p>
+</div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">05 / 06</span>
+<button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Complete Curriculum →</button>
+</div>
+</section>
+
+<section class="slide" data-slide="6">
+<div class="slide-number">Curriculum Complete</div>
+<div class="complete-mark">✓</div>
+<h1 class="slide-title">You've completed the <em>full curriculum.</em></h1>
+
+<p class="lead">Four courses. Twenty-six modules. From energy as currency to the next economy. From the cost of nice to money as sovereignty. From the body as resource to the governed financial life. The arc is complete. The practice begins every morning. The sovereignty is yours.</p>
+
+<div class="section-heading">What you carry forward from Module Seven</div>
+
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">The economy is shifting through four forces: digitalisation, decentralisation, the creator economy, and the breakdown of employment. The shifts are observable, not predictable.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Three structural shifts: from employment to ownership, from institutional trust to distributed trust, from consumption to creation. Each one creates new pathways to sovereignty.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Four capacities serve you regardless of which future arrives: multiple income streams, owned intellectual property, practised adaptability, and digital literacy.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">The governed relationship with the future: build from the current structure, invest in capacities not predictions, read the shifts without reacting to the noise.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The sovereign life is not a destination. It is a daily practice across four domains — energy, relationships, body, money — governed by the only legitimate authority, which is you.</span></li>
+</ol>
+
+<div class="section-heading">The closing practice</div>
+
+<p class="body-text">Return to Course One, Module One, Page One. Read the opening paragraph — the one about energy as a finite resource. Then return here. Notice the distance. The distance is not intellectual. It is felt — in the body, in the quality of your attention, in the relationship you now have with every word the curriculum has used. The distance is twenty-six modules of work. The distance is yours.</p>
+
+<p class="body-text"><em>Money is the language of freedom. Energy is the currency of sovereignty. Relationships are the territory of intimacy. The body is the home. The governance of all four — daily, imperfectly, with the gentle return — is the life the curriculum was always building toward. Go well. Build from governance. The practice is the life.</em></p>
+
+<div class="nav">
+<button class="nav-btn" onclick="prevSlide()">← Previous</button>
+<span class="nav-counter">06 / 06</span>
+<button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Return to Beginning</button>
+</div>
+</section>
+
+</main>
+
+<script>
+const feedback={
+1:{
+a:{headline:"Embracing the change fully and abandoning old structures is the fantasy programme producing an ungoverned response to a genuine transition.",detail:"The opportunities in the new economy are real. The instabilities are also real. Abandoning employment, institutional relationships, and existing financial structures before the new capacities are built produces a vulnerability that the shifts themselves will exploit. The governed approach uses the current structure's stability as the platform from which the new capacities are built. The building happens alongside the existing structures, not in place of them. The replacement occurs when the new structures can bear the weight. The fantasy programme skips this step, and the skipping is where most failures occur."},
+b:{headline:"Holding both excitement and anxiety while building capacities that serve across multiple futures is the governed relationship with uncertainty the page was designed to produce.",detail:"The excitement tells you something real: opportunities are emerging that the previous economy did not provide. The anxiety tells you something real: structures you depend on are becoming less reliable. Both signals are accurate. The governed response does not suppress either one. It uses the excitement as fuel for capacity building and the anxiety as fuel for maintaining the current structures while the building occurs. The result is a person who is positioned for the shifts without having bet their stability on any single prediction about which shifts will prove most consequential."},
+c:{headline:"Clinging to old structures because the shifts are threatening is the fear programme preventing the capacity building that the transition requires.",detail:"The old structures may persist for years. They may also erode faster than expected. Clinging to them as the sole strategy ensures that when the erosion arrives — as it has for every previous economic structure in history — the capacities for the next structure have not been built. The governed approach does not abandon the old structures. It builds the new capacities alongside them. The building is the insurance. The insurance is what makes the holding of both old and new a governed position rather than a paralysed one."},
+d:{headline:"Dismissing the shifts as no different from previous ones prevents the reading of what is specifically different about the current transition.",detail:"The economy has always been changing. Previous changes, however, operated at different speeds and with different mechanisms. The digitalisation of value creation, the distribution of production tools to individuals, and the decentralisation of trust are operating simultaneously and at a pace that previous transitions did not achieve. The dismissal — 'this has happened before' — is accurate in the general sense and inaccurate in the specific sense. The governed response examines the specifics rather than dismissing the general. The specifics are where the positioning opportunities and the positioning risks are both located."}
+},
+2:{
+a:{headline:"Panic at being entirely positioned as employee and consumer is the recognition arriving faster than the governance can organise itself around it.",detail:"The recognition is accurate. The panic is the ungoverned response. The shifts are in motion, not complete. The window for building the capacities — ownership, reputation, creation — is measured in years, not in days. The governed response uses the recognition as the starting coordinate and begins the capacity building at the pace the current structure can support. The first ownership asset. The first piece of created content. The first deliberate investment in reputation. Each one is buildable alongside the employment. The panic says: too late. The governance says: the building begins now."},
+b:{headline:"Holding the recognition as the starting coordinate and building governed capacities alongside existing structures is the response that produces structural resilience over time.",detail:"The shifts are in motion. You have time. The time is not unlimited, but it is sufficient for governed capacity building. The first stream alongside the employment income. The first piece of intellectual property alongside the job. The first investment in reputation alongside the career. Each capacity, built incrementally, produces a structural resilience that the previous position — entirely dependent on a single employer — did not have. The building is not urgent. The building is governed. The governance is what produces the durability."},
+c:{headline:"Dismissing the shifts on the grounds that employment has survived previous changes ignores what is specifically different about the current structural forces.",detail:"Employment will likely survive as a structure. What is changing is the proportion of value that employment captures for the employee, the stability of employment as a long-term arrangement, and the availability of alternatives to employment that were previously gated by capital requirements. The person who assumes employment will always be available in its current form may be correct. The person who has built ownership, reputation, and creation alongside the employment is correct either way. The governance is in the 'either way' — the structural position that serves regardless of which prediction turns out to be accurate."},
+d:{headline:"Quitting to become a full-time creator before the creation has been built is the same dramatic intervention the curriculum has warned against across twenty-six modules.",detail:"The creator economy is real. The opportunities are real. The income from creation, built from zero, takes months or years to reach a level that can replace employment income. Quitting before the creation income exists produces a financial crisis that consumes the creative energy the creation requires. The governed approach builds the creation alongside the employment, using the employment's stability to fund the creation's development. When the creation income reaches a level that can support the life, the employment can be reduced or released. The sequence is the governance. The dramatic exit is the fantasy programme."}
+},
+3:{
+a:{headline:"Building all four capacities simultaneously produces the scattered attention that guarantees none of them reaches functional strength.",detail:"Each capacity requires focused development — time, attention, practice. Four capacities developed simultaneously receive a quarter of the available attention each, which is typically insufficient to bring any one of them to functional strength. The result is four half-built capacities, none of which provides actual resilience. The governed approach identifies the capacity closest to completion and focuses on it for a defined period. One capacity at functional strength provides more resilience than four at quarter-strength. The next capacity is built on the foundation the first one provides."},
+b:{headline:"Choosing the capacity closest to completion and focusing the next three months on strengthening it is the governed approach to capacity building the curriculum has prescribed across every domain.",detail:"One capacity, built to function, changes the structural position. The position, changed, provides the platform for the next capacity. The sequencing is the governance — not building everything at once but building one thing at a time, from the one nearest completion to the one furthest from it. Three months of focused development typically brings a capacity from partial to functional. Functional means: the capacity is producing value, however small. The value, once flowing, can be maintained with less attention while the next capacity is developed. The sequence is how the four capacities are built without the scattered attention that building simultaneously would produce."},
+c:{headline:"Focusing entirely on digital literacy at the expense of the other capacities produces a single-skill dependency that is structurally similar to the single-employer dependency it was supposed to replace.",detail:"Digital literacy is important. It is one of four capacities. A person with excellent digital literacy and no owned assets, no reputation infrastructure, and no adaptability practice is a technically skilled person with a fragile structural position. The capacities reinforce each other: digital literacy enables the creation of intellectual property, which builds reputation, which creates multiple income streams, which requires adaptability to maintain. The reinforcement is lost when one capacity is developed in isolation. All four are needed. The governed approach builds them sequentially, not in isolation."},
+d:{headline:"Deciding the capacities are for other people is the unworthiness programme from Module Five operating in the domain of economic positioning.",detail:"The capacities are not age-gated. They are not technically gated. They are not entrepreneurially gated. A person at any age, with any technical background, in any current position can build one additional income stream, create one piece of intellectual property, practise one cycle of adaptation, and develop one area of digital competence. The belief that these capacities are for other people — younger, more technical, more entrepreneurial — is the unworthiness programme preventing the capacity building that would change the structural position. The programme says: not for you. The governance says: beginning from wherever you are."}
+},
+4:{
+a:{headline:"Acting immediately on economic news is the reactive decision-making the entire curriculum was designed to interrupt.",detail:"The shift is real. The news reports the shift. The activation in your body is the nervous system responding to the news. The activation, ungoverned, produces a decision — a dramatic repositioning, a panic investment, an impulsive career change — that is made from the activated state rather than from the governed state. The activated state produces decisions optimised for relieving the activation, not for serving the sovereignty. The governed state produces decisions optimised for the structural trajectory, which is what the activation was trying to protect. The pause is the governance. The governance is what separates the structural response from the reactive one."},
+b:{headline:"Pausing to read the shift as data before responding is the sovereignty move applied to economic uncertainty.",detail:"The shift is real. The data is what the shift changes — in your industry, in your income sources, in your capacities. The pause produces the half-second in which the data can be evaluated from governance rather than from activation. The evaluation asks specific questions: does this change my trajectory? Does this require a structural response (reallocating assets, building a new capacity) or only an informational update (noting the change, monitoring its development)? Most economic shifts require informational updates. A minority require structural responses. The governance is in knowing which is which — and the knowing is what the pause produces."},
+c:{headline:"Ignoring the shift entirely because previous announcements have not materialised is the denial programme preventing the reading that governance requires.",detail:"Some shifts do not materialise. Some do. The governed response is not to ignore all shifts because some do not materialise. It is to read each shift as data and to assess, from governance, whether it requires a response. The assessment may conclude that no response is needed — that the shift is noise rather than signal. The assessment may conclude that a response is needed — that the shift represents a genuine structural change. Either conclusion, reached through governed assessment, is more useful than the blanket dismissal that prevents the assessment from occurring."},
+d:{headline:"Consuming every piece of analysis before acting is the information-gathering version of avoidance — the appearance of preparation that prevents the preparation from being acted on.",detail:"Comprehensive analysis of an economic shift produces comprehensive understanding and zero structural change. The understanding is useful. The understanding, without action, is information. The governed response reads enough to assess whether a structural response is needed, and then — if it is — makes the governed response. The governed response is not dramatic. It is incremental: adjust the allocation, build the next capacity, maintain the trajectory. The adjustment requires an hour, not a month of analysis. The analysis, extended past the point of sufficiency, is the avoidance of the adjustment disguised as preparation for it."}
+},
+5:{
+a:{headline:"Treating the understanding as sufficient and the practice as optional is the intellectual engagement without the embodied engagement — the curriculum as entertainment rather than as governance.",detail:"Twenty-six modules of understanding, without the daily practice, is twenty-six interesting readings that changed nothing about how you inhabit your body, navigate your relationships, direct your energy, or govern your money. The practice is the outcome. Without it, the curriculum is information. With it, the curriculum is transformation. The transformation is not dramatic. It is daily, ordinary, and almost boring. The ordinariness is the mechanism. The mechanism does not operate through understanding alone. It operates through the daily, embodied, governed attention to the four domains — applied this morning, applied this evening, applied tomorrow."},
+b:{headline:"Carrying the practice forward as a daily governance across four domains is the outcome the entire curriculum was designed to produce.",detail:"Every morning: arrive in the body. Every interaction: read the energy. Every relationship: hold the half-second. Every financial decision: govern from literacy. Every evening: account for the day. These practices, sustained daily, are the curriculum's entire practical output. The twenty-six modules were preparation for their installation. The courses end here. The practice continues for as long as you are alive, across every domain, in every interaction, every morning, every evening. The practice is not an obligation. It is the daily experience of living inside a life that is governed by you. The living is the sovereignty. The sovereignty is the life. Go well."},
+c:{headline:"Returning to Course One immediately is sometimes the right pace and is often the intellectual engagement protecting you from the harder work of application.",detail:"Re-reading produces new recognitions. The curriculum, encountered a second time, lands differently because you now carry the full arc. This has value. It is also, sometimes, the avoidance of the practice — the preference for the safe container of study over the exposed terrain of daily application. The application is the harder work. The application is the work that changes things. At some point, the re-reading must give way to the practising. The practising is the sovereignty. The reading is the preparation for it."},
+d:{headline:"Deciding the curriculum was theoretical and returning to normal life unchanged is the programme's final, most sophisticated defence.",detail:"Twenty-six modules. Hundreds of recognitions. Specific, named patterns across energy, relationships, body, and money. The decision to treat this as theoretical — interesting but not applicable, correct but not relevant to your actual life — is the programme's last move. It allows the engagement at a safe distance while preventing the engagement from reaching the body, the relationships, the bank account, the daily life. The curriculum was not theoretical. The recognitions were not abstract. The practices are not optional. The programme that calls them theoretical is the programme the curriculum was designed to name. Notice the programme. Name it. Then begin the practice anyway. The practice is the sovereignty. The sovereignty begins today."}
+}
+};
+
+let currentSlide=1;const totalSlides=6;const answered={1:false,2:false,3:false,4:false,5:false};
+document.querySelectorAll('.choices').forEach(group=>{const scenarioNum=parseInt(group.dataset.scenario);const choices=group.querySelectorAll('.choice');choices.forEach(choice=>{choice.addEventListener('click',()=>{if(answered[scenarioNum])return;const answer=choice.dataset.answer;const fb=feedback[scenarioNum][answer];choices.forEach(c=>{if(c===choice)c.classList.add('selected');else c.classList.add('dimmed');c.disabled=true});document.getElementById(`feedback-text-${scenarioNum}`).textContent=fb.headline;document.getElementById(`feedback-detail-${scenarioNum}`).textContent=fb.detail;document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');const nextBtn=document.getElementById(`next-${scenarioNum}`);if(nextBtn)nextBtn.disabled=false;answered[scenarioNum]=true})})});
+function showSlide(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.querySelector(`[data-slide="${n}"]`).classList.add('active');document.querySelectorAll('.progress-dot').forEach((dot,i)=>{dot.classList.remove('active','complete');if(i+1<n)dot.classList.add('complete');else if(i+1===n)dot.classList.add('active')});currentSlide=n;window.scrollTo({top:0,behavior:'smooth'})}
+function nextSlide(){if(currentSlide<totalSlides)showSlide(currentSlide+1)}
+function prevSlide(){if(currentSlide>1)showSlide(currentSlide-1)}
+</script>
+
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c4m6';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course4-module-6-money-as-sovereignty.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Course Complete ✓';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c4m7','1');window.location.href='index.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+function SS_restartCourse(){
+  try{['safespot_c4m1','safespot_c4m2','safespot_c4m3','safespot_c4m4','safespot_c4m5','safespot_c4m6','safespot_c4m7'].forEach(function(k){localStorage.removeItem(k);});}catch(e){}
+  window.location.href="course4-landing.html";
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 8 · Module 1 · You Are What You Eat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:500}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:720px;margin:0 auto;padding:72px 48px 120px}
+.slide-num{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:40px;letter-spacing:.06em}
+.slide h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:32px}
+.slide h1 em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.15rem;line-height:1.75;color:var(--ink);margin-bottom:32px;font-weight:300}
+.body-text{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:24px}
+.divider{width:40px;height:1px;background:var(--accent);margin:40px 0}
+.scenario-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;font-family:var(--sans)}
+.scenario-text{font-family:var(--serif);font-size:1.3rem;font-weight:300;line-height:1.6;margin-bottom:36px;padding-left:20px;border-left:2px solid var(--line)}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.choice{background:transparent;border:1px solid var(--line);padding:18px 22px;text-align:left;cursor:pointer;
+font-family:var(--sans);font-size:.95rem;line-height:1.5;color:var(--ink);transition:all .2s ease;border-radius:2px}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--soft)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback{display:none;border-top:1px solid var(--line);padding-top:28px;margin-top:8px}
+.feedback.visible{display:block;animation:fadeUp .4s ease}
+.feedback-headline{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:10px}
+.feedback-detail{font-size:.95rem;line-height:1.75;color:var(--muted)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{background:none;border:none;font-family:var(--sans);font-size:.9rem;color:var(--muted);cursor:pointer;
+letter-spacing:.04em;padding:8px 0;transition:color .2s}
+.nav-btn:hover:not(:disabled){color:var(--ink)}.nav-btn:disabled{opacity:.2;cursor:default}
+.nav-btn.primary{color:var(--ink);font-weight:500}
+.completion{text-align:center;padding:80px 48px}
+.completion-icon{font-size:3rem;margin-bottom:32px}
+.completion h2{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:20px}
+.completion p{font-size:1rem;line-height:1.8;color:var(--muted);max-width:480px;margin:0 auto 40px}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+
+<header class="module-header">
+  <div class="module-tag">Course 08 &middot; Food Is Medicine &middot; Module <strong>01</strong> &middot; You Are What You Eat</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 8 &middot; Food Is Medicine</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c8m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course8-module-6-healing-foods-and-herbs.html">Healing Foods & Herbs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course8-module-7-children-and-family-nutrition.html">Children & Family Nutrition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course8-module-8-detoxing-and-transition.html">Detoxing & Transition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m9" data-mn="9">
+      <span class="sidebar-mod-n">09</span>
+      <a class="sidebar-mod-a" href="course8-module-9-building-your-alkaline-life.html">Your Alkaline Life</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide-1" data-slide="1">
+  <div class="slide-inner">
+    <div class="slide-num">01 / 09</div>
+    <h1>Food Is <em>Information</em></h1>
+    <p class="lead">This course is built in the tradition of healers who understood what modern science is only beginning to confirm: that food is not merely fuel. It is information. It is instruction. It is medicine — or it is poison.</p>
+    <div class="divider"></div>
+    <p class="body-text">Every time you eat, you are sending a message to every cell in your body. That message either says: grow, repair, thrive — or it says: inflame, struggle, survive. The body listens to everything you put into it and responds accordingly.</p>
+    <p class="body-text">The old wisdom said it simply: you are what you eat. Modern biology confirms it in precise detail. The food you eat becomes your blood, your skin, your organs, your hormones, your thoughts. There is no separation between what you consume and what you become.</p>
+    <div class="scenario-label">Scenario 01</div>
+    <p class="scenario-text">A doctor tells their patient: "Your diet has nothing to do with your chronic fatigue and joint pain — those are just signs of ageing." The patient has been eating predominantly processed food for twenty years. What is the doctor missing?</p>
+    <div class="choices" data-scenario="1">
+      <button class="choice" data-answer="a">The doctor is correct — fatigue and joint pain are inevitable with age regardless of diet</button>
+      <button class="choice" data-answer="b">Food directly supplies the raw materials the body uses to repair tissue, regulate inflammation, and produce energy — a poor diet is a primary cause of chronic symptoms, not a coincidence</button>
+      <button class="choice" data-answer="c">The patient should take supplements to compensate for the poor diet</button>
+      <button class="choice" data-answer="d">Only hereditary conditions are related to how the body functions — lifestyle is secondary</button>
+    </div>
+    <div class="feedback" id="feedback-1">
+      <p class="feedback-headline" id="feedback-text-1"></p>
+      <p class="feedback-detail" id="feedback-detail-1"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()" disabled>← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="slide-2" data-slide="2">
+  <div class="slide-inner">
+    <div class="slide-num">02 / 09</div>
+    <h1>You Literally <em>Become</em> What You Eat</h1>
+    <p class="lead">This isn't a metaphor. The body you inhabit right now is built from everything you have ever eaten. Your bones, your blood, your brain — assembled from food.</p>
+    <div class="divider"></div>
+    <p class="body-text">The cells of the human body are constantly replacing themselves. Skin cells renew every few weeks. Red blood cells every four months. The lining of your gut every few days. Each time a cell is rebuilt, the body uses whatever materials are available — and those materials come from food.</p>
+    <p class="body-text">Feed the body high-quality, nutrient-dense, natural food and it builds strong, functional cells. Feed it processed, mineral-depleted, chemically altered food and it builds with inferior materials. The body does its best either way — but what it builds with matters enormously to how you feel, how you function, and how long you thrive.</p>
+    <div class="scenario-label">Scenario 02</div>
+    <p class="scenario-text">A child has been raised eating mostly fast food, sugary drinks, and packaged snacks. At 12, she is frequently tired, has poor concentration at school, and gets sick several times a year. Her parents assume she's just "not a healthy kid." What is the most likely contributing factor being overlooked?</p>
+    <div class="choices" data-scenario="2">
+      <button class="choice" data-answer="a">She probably needs more sleep — diet is unlikely to be the main factor at her age</button>
+      <button class="choice" data-answer="b">Her body has been building itself from low-quality materials for twelve years — the fatigue, poor focus, and weakened immunity are predictable outputs of a nutrient-depleted diet</button>
+      <button class="choice" data-answer="c">Some children are simply more prone to illness — it's genetic</button>
+      <button class="choice" data-answer="d">She needs more exercise, not dietary changes</button>
+    </div>
+    <div class="feedback" id="feedback-2">
+      <p class="feedback-headline" id="feedback-text-2"></p>
+      <p class="feedback-detail" id="feedback-detail-2"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="slide-3" data-slide="3">
+  <div class="slide-inner">
+    <div class="slide-num">03 / 09</div>
+    <h1>Full Is Not the Same as <em>Nourished</em></h1>
+    <p class="lead">You can eat three times a day, every day, and still be starving at the cellular level. The body needs nutrients — not just calories. Quantity and quality are not the same thing.</p>
+    <div class="divider"></div>
+    <p class="body-text">Modern processed food is engineered to be filling without being nourishing. It delivers calories — enough to silence hunger — without delivering the minerals, vitamins, and living compounds the body actually needs to function. The result is a state that has been called "overfed and undernourished": consuming plenty, but still depleted.</p>
+    <p class="body-text">Minerals are the foundation of every bodily function — calcium, iron, zinc, magnesium, potassium. When the diet consistently lacks them, the body begins to compensate, borrowing from its own reserves. Over time, this depletion shows up as fatigue, brittle bones, poor immunity, hormonal imbalance, and a body that is ageing faster than it should.</p>
+    <div class="scenario-label">Scenario 03</div>
+    <p class="scenario-text">Marcus eats three full meals a day and never feels hungry, but he is frequently exhausted, his skin is dull, his nails break easily, and he struggles to concentrate. His diet consists mainly of white bread, processed meats, ready meals, and fizzy drinks. What does his condition most likely reflect?</p>
+    <div class="choices" data-scenario="3">
+      <button class="choice" data-answer="a">He is eating enough so his nutrition must be adequate — his symptoms are probably stress-related</button>
+      <button class="choice" data-answer="b">He is overfed and undernourished — consuming sufficient calories while being chronically deficient in the minerals and living nutrients the body needs to thrive</button>
+      <button class="choice" data-answer="c">He needs to eat more frequently to boost his energy levels</button>
+      <button class="choice" data-answer="d">These symptoms are unrelated to diet and should be investigated as separate conditions</button>
+    </div>
+    <div class="feedback" id="feedback-3">
+      <p class="feedback-headline" id="feedback-text-3"></p>
+      <p class="feedback-detail" id="feedback-detail-3"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide-4" data-slide="4">
+  <div class="slide-inner">
+    <div class="slide-num">04 / 09</div>
+    <h1>The Gut–Brain <em>Connection</em></h1>
+    <p class="lead">Your gut and your brain are in constant conversation. What you eat doesn't just affect your body — it directly shapes your mood, your focus, your anxiety levels, and your mental clarity.</p>
+    <div class="divider"></div>
+    <p class="body-text">The gut contains hundreds of millions of nerve cells — more than the spinal cord — and produces roughly 90% of the body's serotonin, the neurotransmitter most associated with mood and emotional balance. A healthy gut, fed living, natural food, supports a calm and focused mind. A compromised gut, fed processed food, sugar, and artificial ingredients, produces inflammation that travels directly to the brain.</p>
+    <p class="body-text">What healers understood through observation, science now maps through research: feed yourself well and your mind is clearer, your emotions more stable, your energy more sustained. The mind is not separate from the body. It is a product of it.</p>
+    <div class="scenario-label">Scenario 04</div>
+    <p class="scenario-text">Amara has been experiencing anxiety, low mood, and brain fog for several months. She has been prescribed antidepressants. Her diet consists largely of sugar, processed foods, and alcohol. A functional health practitioner suggests starting with dietary change before medication. What is the reasoning?</p>
+    <div class="choices" data-scenario="4">
+      <button class="choice" data-answer="a">Diet has no proven connection to mood disorders — the practitioner is giving unscientific advice</button>
+      <button class="choice" data-answer="b">The gut produces the majority of the body's serotonin and is directly linked to brain function — a diet high in processed food and sugar disrupts this system, and addressing the root cause before symptom management is a sound approach</button>
+      <button class="choice" data-answer="c">Dietary change might help with physical symptoms but cannot affect mental health</button>
+      <button class="choice" data-answer="d">Medication is always the first and most reliable treatment for mood disorders</button>
+    </div>
+    <div class="feedback" id="feedback-4">
+      <p class="feedback-headline" id="feedback-text-4"></p>
+      <p class="feedback-detail" id="feedback-detail-4"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide-5" data-slide="5">
+  <div class="slide-inner">
+    <div class="slide-num">05 / 09</div>
+    <h1>What We Were <em>Designed</em> to Eat</h1>
+    <p class="lead">For the vast majority of human history, people ate what the earth provided directly — fruits, vegetables, seeds, roots, herbs, and water from living springs. The body was built for this. Modern food is something else entirely.</p>
+    <div class="divider"></div>
+    <p class="body-text">The industrialisation of food — which began less than two centuries ago — has transformed what humans eat more dramatically than any change in all of prior history. Refined grains, refined sugar, seed oils, synthetic preservatives, artificial flavours, and hybrid crops now form the foundation of the modern diet. The human body has not had time to adapt.</p>
+    <p class="body-text">The wisdom traditions — African, indigenous, ancient — understood this intuitively. They ate close to the earth, in season, in whole form. They used plants not just for food but for healing. They knew that the closer you eat to nature, the closer you live to health. That knowledge did not become less true when factories were built.</p>
+    <div class="scenario-label">Scenario 05</div>
+    <p class="scenario-text">A nutritionist argues that because modern humans have survived on processed food for generations, the body has adapted and these foods are now safe for long-term health. How does the evidence respond to this claim?</p>
+    <div class="choices" data-scenario="5">
+      <button class="choice" data-answer="a">The nutritionist is correct — if the body couldn't handle modern food, humans would have stopped eating it</button>
+      <button class="choice" data-answer="b">Survival is not the same as thriving — rates of chronic disease, obesity, diabetes, and inflammatory conditions have risen sharply in direct correlation with the spread of industrialised food, suggesting the body has not adapted and is under chronic stress</button>
+      <button class="choice" data-answer="c">The body adapts quickly to new foods — a few generations is sufficient time</button>
+      <button class="choice" data-answer="d">Modern medicine compensates for any negative effects of the modern diet, so adaptation is irrelevant</button>
+    </div>
+    <div class="feedback" id="feedback-5">
+      <p class="feedback-headline" id="feedback-text-5"></p>
+      <p class="feedback-detail" id="feedback-detail-5"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="slide-6" data-slide="6">
+  <div class="slide-inner">
+    <div class="slide-num">06 / 09</div>
+    <h1>The Body's <em>Intelligence</em></h1>
+    <p class="lead">The body is not passive. It is constantly communicating — through energy levels, through cravings, through symptoms, through how you feel after eating. Learning to listen to it is one of the most important skills you can develop.</p>
+    <div class="divider"></div>
+    <p class="body-text">A craving for something sweet may be a genuine signal that the body needs quick energy — or it may be an addiction response to sugar that has hijacked the body's natural signalling. A craving for something bitter may be the liver asking for support. Fatigue after eating is often the body diverting energy to manage something it was not designed to process.</p>
+    <p class="body-text">The problem is that processed food is specifically designed to override the body's intelligence — to make you crave more of what depletes you. The path back to genuine body literacy begins with eating food that the body recognises, so that its signals become readable again. Natural food restores the conversation. Processed food drowns it out.</p>
+    <div class="scenario-label">Scenario 06</div>
+    <p class="scenario-text">Every afternoon at 3pm, Sofia gets an intense craving for something sweet and feels a crash in energy. She has been eating this way for years and assumes she just "has low energy." What is her body most likely communicating?</p>
+    <div class="choices" data-scenario="6">
+      <button class="choice" data-answer="a">She should eat a sugary snack at 3pm every day to maintain her energy levels</button>
+      <button class="choice" data-answer="b">The crash and craving pattern suggests blood sugar instability — likely driven by a diet high in refined carbohydrates and sugar that causes spikes and drops, and the 3pm craving is withdrawal from that cycle, not a true nutritional need</button>
+      <button class="choice" data-answer="c">Afternoon energy crashes are normal and unavoidable for most people</button>
+      <button class="choice" data-answer="d">She should drink more coffee to manage the afternoon energy dip</button>
+    </div>
+    <div class="feedback" id="feedback-6">
+      <p class="feedback-headline" id="feedback-text-6"></p>
+      <p class="feedback-detail" id="feedback-detail-6"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="slide-7" data-slide="7">
+  <div class="slide-inner">
+    <div class="slide-num">07 / 09</div>
+    <h1>Food as Medicine or <em>Poison</em></h1>
+    <p class="lead">Every meal is a choice between two directions: toward health or away from it. Food does not stay neutral in the body. It heals or it harms — often slowly, always certainly.</p>
+    <div class="divider"></div>
+    <p class="body-text">The ancient healers of every tradition understood this. Hippocrates said let food be thy medicine. Traditional African healing systems worked primarily through plants, foods, and herbs. The body was understood as something that could be maintained in health — not merely treated in disease. Prevention was the foundation, not the afterthought.</p>
+    <p class="body-text">Modern medicine largely reversed this: it waits for disease to appear, then addresses symptoms. The nutritional tradition does the opposite — it maintains the conditions in which disease cannot easily take hold. Both have their place, but only one puts the power primarily in your hands. Understanding food as medicine is the beginning of that power.</p>
+    <div class="scenario-label">Scenario 07</div>
+    <p class="scenario-text">James has been told by his doctor that his Type 2 diabetes is a lifelong condition he will manage with medication. A nutritional healer tells him that significant dietary change — removing processed food, sugar, and refined carbohydrates and eating whole, mineral-rich foods — has reversed Type 2 diabetes in many cases. Which perspective better reflects the evidence?</p>
+    <div class="choices" data-scenario="7">
+      <button class="choice" data-answer="a">The doctor is correct — Type 2 diabetes is a permanent condition that can only be managed, not reversed</button>
+      <button class="choice" data-answer="b">The nutritional healer's position is supported by substantial evidence — Type 2 diabetes is in many cases a dietary disease and has been reversed through significant, sustained nutritional change, though medical supervision during transition is important</button>
+      <button class="choice" data-answer="c">Diet can help manage symptoms but cannot address the underlying condition</button>
+      <button class="choice" data-answer="d">Only medication can address the insulin resistance involved in Type 2 diabetes</button>
+    </div>
+    <div class="feedback" id="feedback-7">
+      <p class="feedback-headline" id="feedback-text-7"></p>
+      <p class="feedback-detail" id="feedback-detail-7"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="slide-8" data-slide="8">
+  <div class="slide-inner">
+    <div class="slide-num">08 / 09</div>
+    <h1>Taking Back <em>Responsibility</em></h1>
+    <p class="lead">The most empowering truth in this course is also the most demanding: what you eat is largely within your control. And that means your health is more within your control than most people are ever told.</p>
+    <div class="divider"></div>
+    <p class="body-text">Systems profit from your not knowing this. The food industry profits from selling you what depletes you. The pharmaceutical industry profits from treating what the food industry causes. Neither system has an incentive to tell you that the foundation of your health is on your plate — and that it is yours to reclaim.</p>
+    <p class="body-text">This is not about blame. It is about possibility. The knowledge that food built the conditions for your struggles is also the knowledge that food can help rebuild you. That is not a small thing. That is everything. The first act of healing is understanding that you are not powerless — and that it begins, as it always has, with what you eat.</p>
+    <div class="scenario-label">Scenario 08</div>
+    <p class="scenario-text">Diane has struggled with her weight, energy, and mood for years. She has tried various medications and diets without lasting results. A healer tells her: "Stop looking for something outside yourself to fix you. Start with what you put inside yourself every single day." What is the healer pointing toward?</p>
+    <div class="choices" data-scenario="8">
+      <button class="choice" data-answer="a">She should stop seeking medical help and rely entirely on diet</button>
+      <button class="choice" data-answer="b">The foundation of lasting health is daily nutritional practice — not a temporary fix but a permanent shift in the relationship between what she eats and what her body can become</button>
+      <button class="choice" data-answer="c">Her struggles are psychological, not physical, and diet won't help</button>
+      <button class="choice" data-answer="d">The healer is suggesting she has only herself to blame for her condition</button>
+    </div>
+    <div class="feedback" id="feedback-8">
+      <p class="feedback-headline" id="feedback-text-8"></p>
+      <p class="feedback-detail" id="feedback-detail-8"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: COMPLETION -->
+<div class="slide" id="slide-9" data-slide="9">
+  <div class="slide-inner">
+    <div class="completion">
+      <div class="completion-icon">◈</div>
+      <h2>Module 1 Complete</h2>
+      <p>You now understand the foundational principle that underpins everything in this course: food is not neutral. It is information, instruction, and medicine. What you eat is what you become — and that means you have more power over your health than you have ever been told.</p>
+      <p style="margin-top:16px;font-size:.9rem;color:var(--muted)">Course 08 &middot; Food Is Medicine &middot; Module 01 of 09</p>
+
+<div class="section-heading" style="margin-top:40px">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">Food is not neutral &mdash; it is information, instruction, and medicine. Every meal is a signal to your cells about what to produce, what to suppress, and how to function.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">You literally become what you eat. The cells replacing themselves today are built from the raw materials you supplied yesterday. This is not a metaphor; it is physiology.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Full is not the same as nourished. The body can be calorically satisfied and simultaneously deficient in the minerals, vitamins, and phytonutrients it needs to repair and regulate itself.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">The gut and the brain are in constant communication. The quality of your digestion shapes your mood, cognition, and emotional regulation &mdash; not as a secondary effect but as a primary pathway.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The body is designed with extraordinary intelligence. It is not working against you &mdash; it is working with the materials you give it. Better materials produce a different result.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">Taking back responsibility for what you eat is not a burden &mdash; it is the recovery of power over one of the most fundamental variables in your health.</span></li>
+</ol>
+<div class="section-heading">Practice this week</div>
+<p class="body-text">Before each meal this week, pause for ten seconds and ask one question: what is this food going to build? Not whether it is healthy or unhealthy in the abstract &mdash; specifically what it will become inside you. This is not a reason to eat or refuse anything. It is the beginning of a different relationship with eating: informed rather than automatic.</p>
+<p class="body-text">Monthly: write down everything you ate in a single representative day. Against each item, note: was this closer to what the body was designed to process, or closer to what industry designed to sell? Note the ratio, not to generate guilt, but to see clearly what your body has actually been working with.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const feedback = {
+  1:{
+    a:{headline:"Ageing explains decline — but diet determines the rate and severity.",detail:"While the body does change with age, the chronic fatigue and joint pain associated with a twenty-year diet of processed food are not simply inevitable ageing. Inflammation — the root of joint pain and many fatigue conditions — is directly driven by what we eat. The doctor is separating two things that are deeply connected."},
+    b:{headline:"Correct. Food provides the raw materials for every bodily process.",detail:"The body uses nutrients from food to produce energy, repair tissue, regulate inflammation, and maintain every system from immunity to hormonal balance. Twenty years of processed, mineral-depleted food means twenty years of the body working with inadequate materials. The symptoms are not coincidence — they are the predictable result of a depleted system trying to function."},
+    c:{headline:"Supplements address deficiency after the fact — food addresses it at the source.",detail:"While targeted supplementation can help correct specific deficiencies, it doesn't replace the complex, interacting matrix of nutrients that whole food provides, nor does it address the inflammatory compounds that processed food introduces. The better starting point is always the food itself."},
+    d:{headline:"Genetics set a range — lifestyle determines where within that range you land.",detail:"Hereditary factors influence susceptibility to various conditions but they are rarely deterministic on their own. Epigenetics — the study of how lifestyle and environment affect gene expression — shows that what you eat can actually influence which genetic tendencies are activated. Diet is one of the most powerful modifiers of genetic predisposition."}
+  },
+  2:{
+    a:{headline:"Sleep matters — but it cannot compensate for nutritional depletion.",detail:"Sleep is essential, and inadequate sleep does produce fatigue and poor concentration. But a child eating predominantly processed food is building every cell of her growing body from inferior materials — and no amount of sleep produces the minerals, vitamins, and living compounds she isn't getting from her diet. Both matter, and diet is being overlooked here."},
+    b:{headline:"Correct. The body builds from what it is given — for twelve years, it has been given very little to work with.",detail:"A growing child has higher nutritional needs than an adult, not lower. The rapid cell division, brain development, and immune system maturation of childhood all require a dense supply of minerals and living nutrients. A diet of fast food and packaged snacks provides calories without that density. The fatigue, poor focus, and repeated illness are the body's output given the materials it has been building with."},
+    c:{headline:"Genetics influence health but don't determine it — especially when diet is the variable.",detail:"Attributing a child's chronic poor health to genetics without addressing the obvious dietary factor is premature. Genetics may create susceptibilities, but a nutrient-dense diet supports even genetically vulnerable systems. The dietary factor here is significant enough to address before assuming a genetic cause."},
+    d:{headline:"Exercise and diet work together — but you cannot out-exercise a depleted diet.",detail:"Physical activity is important for children's health and does support immunity and energy. But exercise cannot supply the minerals, vitamins, and phytonutrients that the body needs and is not receiving through food. The dietary foundation has to be addressed — exercise built on top of it amplifies health; exercise attempted on an empty nutritional base often just increases depletion."}
+  },
+  3:{
+    a:{headline:"Caloric adequacy and nutritional adequacy are not the same.",detail:"The modern diet is specifically engineered to silence hunger without delivering nutrients. Processed food provides enough calories to suppress the hunger signal — but hunger is a blunt instrument. The body also needs iron, magnesium, zinc, B vitamins, and dozens of other compounds that refined food does not contain. Stress may be a factor too, but dismissing diet because he eats regularly misses the core issue."},
+    b:{headline:"Correct. This is the hallmark of the modern nutritional crisis: overfed and undernourished.",detail:"Marcus's symptoms — fatigue, dull skin, brittle nails, poor concentration — are classic signs of mineral and vitamin deficiency. White bread, processed meats, ready meals, and fizzy drinks provide energy without the living nutrients the body needs to repair, maintain, and thrive. He is eating. He is not nourishing. The body will show that difference eventually, and it is showing it now."},
+    c:{headline:"Eating more frequently without changing what is eaten compounds the problem.",detail:"If the food being eaten more frequently is still nutritionally empty, the only result is more calories without more nourishment — and often more blood sugar disruption. Frequency is not the issue here. Quality is."},
+    d:{headline:"These symptoms cluster consistently with nutritional deficiency — treating them as separate conditions misses the common root.",detail:"Fatigue, skin and nail changes, and cognitive fog are not random — they are frequently co-occurring symptoms of specific nutritional deficiencies, particularly in iron, B12, zinc, and magnesium. Investigating them separately without addressing the dietary pattern risks treating symptoms while the root cause continues unchecked."}
+  },
+  4:{
+    a:{headline:"The gut-brain connection is one of the most well-evidenced areas of nutritional science.",detail:"The enteric nervous system — the gut's own nervous system — and the gut microbiome are directly linked to mood, anxiety, and cognition. Research into the gut-brain axis is mainstream and extensive. A practitioner who suggests dietary change as a first step for mood disorders is working with strong evidence, not against it."},
+    b:{headline:"Correct. The gut produces most of the body's serotonin — and diet shapes the gut.",detail:"This is the heart of the gut-brain connection. A diet high in processed food, refined sugar, and alcohol damages the gut lining, disrupts the microbiome, and reduces the gut's capacity to produce the neurotransmitters that regulate mood and anxiety. Addressing this at the source — through food — before adding medication that itself works on serotonin pathways is a genuinely rational approach."},
+    c:{headline:"Mental and physical health are not separate systems.",detail:"The brain is a physical organ. It is built from, maintained by, and regulated through the same nutrients that maintain every other organ. Inflammation that begins in the gut reaches the brain. Nutritional deficiencies that deplete the body also deplete the mind. The idea that physical diet affects physical health but not mental health is a false separation."},
+    d:{headline:"Medication addresses symptoms — food can address the conditions that produce them.",detail:"This isn't an argument against medication — it is an argument for addressing the root before managing symptoms. Antidepressants alter neurotransmitter availability in the brain, but they do not repair a damaged gut lining or restore a depleted microbiome. If the root cause is nutritional, medication manages the output while the cause continues. Starting with diet is not unscientific — it is the more thorough approach."}
+  },
+  5:{
+    a:{headline:"Continuing to eat something is not the same as thriving on it.",detail:"Humans have continued eating industrialised food — but the health outcomes over the same period tell a clear story. Rates of obesity, Type 2 diabetes, heart disease, autoimmune conditions, and inflammatory disorders have all risen sharply alongside the spread of the modern diet. Survival does not mean the body has adapted; it means the body is coping, at significant cost."},
+    b:{headline:"Correct. The chronic disease epidemic mirrors the industrialisation of food.",detail:"Significant genetic adaptation takes thousands of generations, not a few hundred years. The human genome is not meaningfully different from what it was before industrialised food — but the food is radically different. The correlation between the rise of processed food and the rise of chronic disease is not coincidence; it is the body responding to conditions it was not designed for."},
+    c:{headline:"Genetic adaptation operates over thousands of generations, not decades.",detail:"A few generations is an evolutionary blink. Human DNA today is not meaningfully different from that of ancestors who ate close to the earth. What has changed, dramatically and rapidly, is the food itself. The body is not adapting to processed food — it is managing it, with increasing difficulty as the burden compounds over a lifetime."},
+    d:{headline:"Modern medicine treats the conditions that modern food helps create — it does not neutralise them.",detail:"The premise that medicine compensates for dietary damage implies that the chronic disease epidemic is being successfully contained. The evidence suggests otherwise: rates of diet-related disease continue to rise even as medical spending increases. Medicine manages these conditions; it does not prevent them at the root. Prevention requires addressing the cause."}
+  },
+  6:{
+    a:{headline:"Responding to the craving with sugar reinforces the cycle rather than resolving it.",detail:"Eating a sugary snack at 3pm will temporarily raise blood sugar and relieve the craving — and then trigger another drop, extending the cycle into the evening. This is the addiction mechanic of refined sugar: each dose briefly relieves the withdrawal it also causes. Feeding the craving is the opposite of resolving it."},
+    b:{headline:"Correct. The 3pm crash is a symptom of blood sugar dysregulation, not a genuine nutritional need.",detail:"When the diet is high in refined carbohydrates and sugar, blood glucose spikes sharply after eating and then drops. The drop triggers fatigue and the craving for something sweet to raise it again. The afternoon crash is not a sign that Sofia lacks energy in general — it is a sign that her diet is producing an unstable blood sugar pattern. Replacing refined carbohydrates with complex, mineral-rich foods stabilises the curve and eliminates the crash."},
+    c:{headline:"Afternoon energy dips are common — but common is not the same as inevitable.",detail:"The 3pm crash is so widespread in modern populations that it is often assumed to be normal. But in populations eating predominantly whole, natural food without refined sugar and carbohydrates, it is far less prevalent. Common patterns in populations eating the same food reflect that food, not an unchangeable human limitation."},
+    d:{headline:"Coffee addresses the sensation of fatigue without addressing its cause.",detail:"Caffeine blocks adenosine receptors — the receptors that signal tiredness — temporarily masking the crash without resolving the underlying blood sugar instability. Using coffee to manage the 3pm dip means the root cause continues while the symptom is suppressed. It also typically disrupts evening sleep quality, which compounds the fatigue the next day."}
+  },
+  7:{
+    a:{headline:"Type 2 diabetes has been reversed through dietary change in documented cases.",detail:"The characterisation of Type 2 diabetes as a permanent condition requiring lifelong medication is increasingly challenged by the evidence. Major clinical studies — including NHS trials — have demonstrated full remission in significant proportions of patients who underwent radical dietary change. 'Managed with medication' can become 'no longer present' when the dietary root is addressed. This is empowering, not dangerous information."},
+    b:{headline:"Correct. Type 2 diabetes is in many cases a dietary disease — and dietary change can reverse it.",detail:"Type 2 diabetes is driven primarily by insulin resistance caused by chronically elevated blood sugar — itself a product of a diet high in refined carbohydrates and sugar. Remove the cause and the body's insulin sensitivity can recover. This has been demonstrated in rigorous clinical settings. Medical supervision during transition matters, but the principle is sound and supported: food caused it, and food can often heal it."},
+    c:{headline:"Diet doesn't just manage symptoms — it can address the underlying mechanism.",detail:"Insulin resistance is not a fixed condition separate from lifestyle. It is the body's response to chronic dietary stress. When that stress is removed and replaced with mineral-rich, whole food that doesn't spike blood glucose, insulin sensitivity often improves substantially. Diet addresses the mechanism, not just the symptoms."},
+    d:{headline:"Medication addresses the effect of insulin resistance — food can address the cause.",detail:"Metformin and other diabetes medications work by managing blood glucose levels or improving insulin sensitivity pharmacologically. Dietary change — particularly the removal of refined carbohydrates and sugar — reduces the glucose load the body has to manage and allows insulin sensitivity to recover naturally. Both approaches affect insulin resistance; one manages it, one can resolve it at the root."}
+  },
+  8:{
+    a:{headline:"Nutritional healing works best alongside, not instead of, appropriate medical care.",detail:"The healer is pointing toward the power of daily food practice — not toward rejecting all medical support. The two approaches are not mutually exclusive. What the healer is resisting is the idea that something outside the person is the primary agent of their healing. That is a different point from refusing medicine altogether."},
+    b:{headline:"Correct. Daily nutritional practice is the foundation — not a temporary intervention, but a permanent return.",detail:"This is the deepest teaching in this tradition: there is no supplement, medication, or treatment that replaces the daily act of feeding yourself well. Not as a diet with a start and end date — as a permanent shift in relationship with food. What Diane puts in her body every day either builds toward health or away from it. That is always true. And it is always in her hands."},
+    c:{headline:"The body and mind are not separate — nutritional depletion affects both.",detail:"Weight, energy, and mood are deeply interconnected, and all three are influenced by what is eaten. The gut-brain connection, hormonal balance, blood sugar regulation, and cellular energy production are all nutritional processes. Framing her struggles as purely psychological while the diet remains unchanged misses the most available lever for change."},
+    d:{headline:"Responsibility is not the same as blame.",detail:"Pointing toward the power of food is an act of empowerment, not accusation. Diane did not create the food system that sells her what depletes her, nor the medical system that didn't connect her symptoms to her diet. What she can do now — with the knowledge she is building — is make different choices. That is not blame. That is possibility."}
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById('feedback-text-' + scenarioNum).textContent = fb.headline;
+      document.getElementById('feedback-detail-' + scenarioNum).textContent = fb.detail;
+      document.getElementById('feedback-' + scenarioNum).classList.add('visible');
+      const nextBtn = document.getElementById('next-' + scenarioNum);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function updateProgress() {
+  for (let i = 1; i <= totalSlides; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active','complete');
+    if (i === currentSlide) dot.classList.add('active');
+    else if (i < currentSlide) dot.classList.add('complete');
+  }
+}
+
+function showSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+
+updateProgress();
+</script>
+<script>
+(function(){
+  try{
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c8m1','1');window.location.href='course8-module-2-god-made-vs-man-made.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

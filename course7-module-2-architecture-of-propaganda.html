@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 7 · Module 2 · The Architecture of Propaganda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:860px;margin:0 auto;padding:80px 48px 120px}
+.slide-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:24px}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);
+line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-body{font-size:17px;line-height:1.75;color:var(--ink);margin-bottom:32px}
+.slide-body p{margin-bottom:20px}.slide-body p:last-child{margin-bottom:0}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}
+.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}
+.mechanism:last-of-type{border-bottom:1px solid var(--line)}
+.mechanism-name{font-family:var(--serif);font-size:28px;font-style:italic;font-weight:400;letter-spacing:-.015em;margin-bottom:16px}
+.mechanism-body{font-size:16px;line-height:1.7;color:var(--muted)}
+.cost-block{margin:28px 0;padding:24px 28px;border-left:2px solid var(--accent);background:var(--soft)}
+.cost-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.cost-body{font-size:15px;line-height:1.65;color:var(--ink)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}
+.voice-block::before{content:'"'  ;position:absolute;top:-8px;left:24px;font-family:var(--serif);
+font-size:72px;color:var(--accent);line-height:1;font-style:italic}
+.voice-text{font-family:var(--serif);font-size:18px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);margin-bottom:12px}
+.voice-attr{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.scenario-block{margin:48px 0;padding:40px;border:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.scenario-q{font-family:var(--serif);font-size:22px;line-height:1.45;font-weight:400;font-style:italic;margin-bottom:32px}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{padding:18px 24px;border:1px solid var(--line);background:var(--paper);font-family:var(--sans);
+font-size:15px;line-height:1.5;text-align:left;cursor:pointer;transition:all .2s ease;color:var(--ink)}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback-block{margin-top:28px;padding:28px 32px;background:var(--soft);border-left:3px solid var(--accent);display:none}
+.feedback-block.visible{display:block}
+.feedback-headline{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:12px;font-style:italic}
+.feedback-detail{font-size:15px;line-height:1.7;color:var(--muted)}
+.nav-row{display:flex;gap:16px;margin-top:40px;align-items:center}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--ink);
+background:none;color:var(--ink);padding:14px 28px;cursor:pointer;transition:all .2s ease;text-transform:uppercase}
+.nav-btn:hover{background:var(--soft)}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#222}.nav-btn:disabled{opacity:.3;cursor:default}
+.completion-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;
+min-height:80vh;text-align:center;padding:80px 48px}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;color:var(--accent);font-style:italic}
+.complete-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:400;margin:32px 0 20px;letter-spacing:-.02em}
+.complete-body{font-size:17px;line-height:1.7;color:var(--muted);max-width:560px}
+.divider{width:48px;height:1px;background:var(--line);margin:40px auto}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 07 &middot; Media &amp; Narrative Control &middot; Module <strong>02</strong> &middot; The Architecture of Propaganda</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 7 &middot; Media &amp; Narrative Control</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c7m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course7-module-1-narratives-as-weapons.html">Narratives as Weapons</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course7-module-2-architecture-of-propaganda.html">Architecture of Propaganda</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course7-module-3-media-literacy.html">Media Literacy</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course7-module-4-hero-villain.html">Hero and Villain</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course7-module-5-algorithmic-narratives.html">Algorithmic Narratives</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course7-module-6-building-narrative-immunity.html">Narrative Immunity</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1: What Propaganda Actually Is -->
+<section class="slide active" data-slide="1">
+<div class="slide-inner">
+<div class="slide-label">Module 02 · Slide 01</div>
+<h1 class="slide-title">What Propaganda Actually Is</h1>
+<div class="slide-body">
+<p>The word propaganda conjures specific images: wartime posters, Soviet state media, totalitarian rallies. This is the first and most effective piece of propaganda about propaganda — the idea that it is something other people do, in other places, under obviously illegitimate regimes. Once you believe that, you stop looking for it where it actually operates most effectively: in ordinary life, in democratic societies, in the media you trust, in the assumptions you inherited.</p>
+<p>Propaganda is not defined by its source or its political affiliation. It is defined by its method: the systematic effort to shape belief and behaviour through means that bypass rational evaluation — through repetition, emotion, tribal loyalty, and the management of what feels thinkable. By this definition, propaganda is not the exception in modern information environments. It is close to the rule.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The most effective propaganda is the kind you are certain you are immune to — because that certainty is exactly what the propaganda produced.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Propaganda is not primarily about lying</div>
+<div class="mechanism-body">A common misconception is that propaganda works by inserting false information. In practice, the most durable propaganda is built substantially from true facts — selectively chosen, strategically arranged, and emotionally framed to produce a predetermined conclusion. The facts are accurate. The picture they create is engineered. This makes propaganda far more robust than simple lying: the facts can be checked and confirmed, which makes the overall framing feel verified even though the framing is doing most of the work.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Propaganda requires no conspiracy</div>
+<div class="mechanism-body">Propaganda does not require a room full of people consciously deceiving the public. It emerges from the accumulated effect of many individual decisions made by people operating within shared frameworks — editors who know what their readers want, journalists who have internalised what counts as a credible source, advertisers who fund coverage they find sympathetic. No individual decision is a lie. The system produces distortion without anyone in it having to intend deception. Understanding this prevents the error of thinking that if there is no conspiracy, there is no propaganda.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The propaganda of normalcy</div>
+<div class="mechanism-body">Some of the most powerful propaganda is not produced by any actor trying to shape opinion — it is produced by the accumulated effect of what is treated as normal, unremarkable, and not requiring explanation. The presence of military recruitment advertisements in entertainment, the routine coverage of share prices as public interest information, the framing of GDP growth as a measure of national wellbeing — these are not obviously propaganda. They are so thoroughly normalised that calling them so seems eccentric. That normalcy is itself a propagandistic achievement.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 01</div>
+<div class="scenario-q">A colleague says: "Propaganda is something authoritarian governments use — it doesn't really apply to democratic societies with free press." How would you respond to this?</div>
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a">They have a point — free press and democratic accountability make systematic propaganda difficult to sustain</button>
+<button class="choice" data-answer="b">The belief that propaganda belongs to other systems is itself one of the most effective pieces of propaganda in democratic societies — it prevents people from looking where it actually operates</button>
+<button class="choice" data-answer="c">They are completely wrong — democratic governments are just as deliberately deceptive as authoritarian ones</button>
+<button class="choice" data-answer="d">It depends on the country — some democracies are more prone to propaganda than others</button>
+</div>
+<div class="feedback-block" id="feedback-1">
+<div class="feedback-headline" id="feedback-text-1"></div>
+<div class="feedback-detail" id="feedback-detail-1"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn primary" id="next-1" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 2: Repetition -->
+<section class="slide" data-slide="2">
+<div class="slide-inner">
+<div class="slide-label">Module 02 · Slide 02</div>
+<h1 class="slide-title">Repetition: Truth by Volume</h1>
+<div class="slide-body">
+<p>The relationship between repetition and perceived truth is one of the most thoroughly documented findings in cognitive psychology. Statements that are repeated become more familiar. Familiarity is processed as a signal of truth. The result — called the illusory truth effect — means that a claim heard many times is rated as more likely to be true than a claim heard for the first time, even when people are explicitly told that the familiar claim might be false, and even when they already know the claim is incorrect.</p>
+<p>This is not a vulnerability of poorly educated or credulous people. It operates across educational levels, across political affiliations, and across degrees of media literacy. Repetition affects belief at a level below conscious evaluation. It is the most reliable, most scalable, and most thoroughly exploited mechanic in the propaganda toolkit.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">You do not need to convince someone a claim is true. You need to ensure they encounter it often enough that it begins to feel true — and then the mind does the rest, generating explanations and evidence that feel like independent confirmation.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The political slogan as repetition technology</div>
+<div class="mechanism-body">Political slogans are not primarily arguments. They are repetition technologies: short, memorable phrases designed to be heard and repeated until they achieve the familiarity that registers as truth. "Take back control." "Make America great again." "Strong and stable." These phrases do not make claims that can be evaluated — they produce associations and feelings through repetition. The content is less important than the volume. The volume is what builds the felt sense that this is obviously, self-evidently true.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The media echo as amplification</div>
+<div class="mechanism-body">When a claim is repeated across multiple sources — different newspapers, different broadcasters, different online platforms — the repetition across sources produces an additional effect: it feels like independent confirmation. Ten outlets reporting the same thing feels like ten independent verifications. If those outlets share the same source, the same wire service, or the same fundamental framing assumptions, the ten accounts are not independent. But they are experienced as ten separate data points converging on the same conclusion. The apparent consensus is manufactured by repetition, not produced by independent investigation.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Repetition and the direction of attention</div>
+<div class="mechanism-body">Repetition does not only make specific claims feel true — it determines what counts as a problem worth thinking about. The topics that are covered repeatedly become the issues that matter; the topics that receive little coverage cease to feel urgent regardless of their actual significance. This agenda-setting function of repetition is arguably more powerful than any specific claim: it shapes the landscape of what is real, what is concerning, and what deserves public attention — without ever making a single falsifiable assertion.</div>
+</div>
+
+<div class="voice-block">
+<div class="voice-text">I noticed I believed something about a political figure I had never actually looked into. When I tried to find where the belief came from, I couldn't find a source — just a vague sense that everyone knew this about them. That sense was the product of thousands of repetitions I couldn't locate individually.</div>
+<div class="voice-attr">— workshop participant, journalist</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 02</div>
+<div class="scenario-q">A political claim has been repeated across news broadcasts, social media, and casual conversation for several months. You now feel confident it is true, though you have never directly verified it. When asked for your source, you say "everyone knows this." What is happening here?</div>
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a">Widespread agreement across multiple sources is reasonable evidence — consensus is meaningful</button>
+<button class="choice" data-answer="b">The feeling of certainty was produced by repetition — familiarity has been processed as truth, and "everyone knows" is a description of the repetition's success, not of the claim's accuracy</button>
+<button class="choice" data-answer="c">You should look for the original source before repeating the claim further</button>
+<button class="choice" data-answer="d">Your confidence is appropriate if the claim aligns with other things you already know to be true</button>
+</div>
+<div class="feedback-block" id="feedback-2">
+<div class="feedback-headline" id="feedback-text-2"></div>
+<div class="feedback-detail" id="feedback-detail-2"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-2" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 3: Tribal Identity -->
+<section class="slide" data-slide="3">
+<div class="slide-inner">
+<div class="slide-label">Module 02 · Slide 03</div>
+<h1 class="slide-title">Tribal Identity: The Loyalty Mechanic</h1>
+<div class="slide-body">
+<p>Human beings are profoundly social animals. The need to belong — to be part of a group, to be recognised as a member in good standing, to share identity with others — is not a weakness or an irrationality. It is one of the deepest drivers of human behaviour. Propaganda does not exploit this need by accident. It is specifically engineered to activate it.</p>
+<p>Once a narrative is successfully tied to group identity, it becomes almost impervious to factual challenge. Pointing out that the narrative is inaccurate does not produce a revision of the narrative — it produces a defence of the group. The person is not defending a claim. They are defending who they are and where they belong.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">When belonging to a group becomes contingent on holding that group's narrative, changing your mind stops being an intellectual act and becomes a social one — an act of leaving rather than updating.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Identity capture</div>
+<div class="mechanism-body">The process by which a narrative becomes identity — rather than just a held belief — is gradual and usually invisible. It begins with shared language and symbols, moves through shared enemies and shared victories, and completes when the narrative is so fused with self-concept that questioning it feels like self-erasure. At this stage, the narrative requires no external enforcement. The person enforces it themselves — through internal guilt when doubt arises, through social policing of those in the group who waver, and through increasing hostility to outside perspectives.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Belief as loyalty signal</div>
+<div class="mechanism-body">Within any identity group, expressing the group's narrative functions as a loyalty signal — proof of membership, of commitment, of trustworthiness. This creates pressure to express the narrative regardless of private doubts, which in turn creates the appearance of consensus, which makes the narrative feel even more obviously true. The group produces what looks like collective conviction, but is substantially collective performance of conviction. The performance eventually shapes the belief, because humans are not reliably able to distinguish between what they say they believe and what they actually believe.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The cost of group departure</div>
+<div class="mechanism-body">Leaving a group narrative — changing your mind about something the group holds as definitional — typically means losing belonging, relationships, and identity. This cost is not abstract. For many people it means family conflict, friendship loss, professional consequences, and the disorienting experience of having no community. The propaganda of group identity is so effective precisely because the cost of leaving it is real and significant, not imaginary. The narrative is enforced not by force but by the genuine pain of exclusion.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 03</div>
+<div class="scenario-q">You have been part of a political community for years. You encounter evidence that significantly challenges a core claim your community holds. Your first response is not to evaluate the evidence carefully — it is to feel anxious about what accepting it would mean for your place in the group. What is this response telling you?</div>
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a">The anxiety means the evidence is probably wrong — genuine truth doesn't feel threatening</button>
+<button class="choice" data-answer="b">The anxiety is the tribal identity mechanic at work — the belief has been fused with belonging, so evaluating it feels like a social act rather than an intellectual one</button>
+<button class="choice" data-answer="c">The anxiety is natural — changing long-held views is always uncomfortable regardless of group membership</button>
+<button class="choice" data-answer="d">You should consult trusted members of your community before evaluating the evidence alone</button>
+</div>
+<div class="feedback-block" id="feedback-3">
+<div class="feedback-headline" id="feedback-text-3"></div>
+<div class="feedback-detail" id="feedback-detail-3"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-3" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 4: Enemy Creation -->
+<section class="slide" data-slide="4">
+<div class="slide-inner">
+<div class="slide-label">Module 02 · Slide 04</div>
+<h1 class="slide-title">Enemy Creation</h1>
+<div class="slide-body">
+<p>Every propaganda system requires an enemy. The enemy performs several essential functions simultaneously: it unifies the in-group around a shared threat; it explains all failures and frustrations (the enemy's fault); it directs anger outward rather than inward; and it makes critique of the in-group feel like collaboration with the enemy. Without an enemy, the propaganda architecture loses most of its emotional force.</p>
+<p>The enemy does not need to be fabricated whole cloth. In most effective propaganda, the enemy is real — a real group, a real government, a real set of interests. What is fabricated is not their existence but their total explanatory power: the claim that they are the primary or sufficient cause of the problems attributed to them, and that defeating or excluding them would resolve those problems.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The enemy is not a description. It is a function. Understanding the function tells you more about the propaganda system than understanding the enemy's actual characteristics.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The enemy as explanation</div>
+<div class="mechanism-body">One of the enemy's primary narrative functions is to explain problems that might otherwise require structural analysis. Economic insecurity, cultural change, political dysfunction — these are complex phenomena with multiple interacting causes. The propaganda enemy collapses this complexity: one group becomes the explanation for everything, and removing or suppressing that group becomes the solution to everything. This is enormously appealing because it is simple, emotionally satisfying, and requires no uncomfortable examination of systems in which the audience is also implicated.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The enemy as in-group glue</div>
+<div class="mechanism-body">A group with a clear, vivid enemy is more cohesive, more motivated, and easier to mobilise than a group without one. This is why propaganda systems produce enemies even when no external threat exists — and why they maintain enemy narratives even when those enemies have been defeated or diminished. The enemy is not primarily about the enemy. It is about the in-group — about maintaining the emotional intensity and collective identity that the enemy narrative generates. When the old enemy disappears, a new one is located.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Internal dissent as enemy collaboration</div>
+<div class="mechanism-body">The most important function of the enemy narrative for propaganda purposes is what it does to internal dissent. Once an enemy has been established as an existential threat, anyone who questions the in-group's narrative about that enemy can be framed as a naive dupe, a fellow traveller, or an active collaborator. This closes the feedback loop that allows groups to update their beliefs. Critique from outside is dismissed because it comes from the enemy. Critique from inside becomes evidence of infiltration or betrayal. The enemy narrative makes the propaganda system self-sealing.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">The question that cuts through</div>
+<div class="cost-body">When a group presents a single enemy as the explanation for a complex set of problems, ask: what would need to be true for removing this enemy to actually solve the problems attributed to them? What structural factors would remain? Whose interests are served by this explanation? The answers to these questions usually reveal what the enemy narrative is designed to make invisible.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 04</div>
+<div class="scenario-q">A political movement blames a specific minority group for rising unemployment, housing costs, and cultural instability. When an economist points out that these trends predate the group's presence and have structural economic causes, they are accused of defending the enemy. What is this dynamic revealing?</div>
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a">The economist may be biased — expert opinion is not immune to political influence</button>
+<button class="choice" data-answer="b">The self-sealing structure of the enemy narrative is operating: structural analysis is being converted into enemy defence, which makes the enemy explanation permanently unfalsifiable</button>
+<button class="choice" data-answer="c">Both explanations may be partially correct — immigration and structural factors can both affect employment</button>
+<button class="choice" data-answer="d">The movement's members genuinely believe their analysis — sincerity should be acknowledged even if the analysis is flawed</button>
+</div>
+<div class="feedback-block" id="feedback-4">
+<div class="feedback-headline" id="feedback-text-4"></div>
+<div class="feedback-detail" id="feedback-detail-4"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-4" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 5: The Big Lie -->
+<section class="slide" data-slide="5">
+<div class="slide-inner">
+<div class="slide-label">Module 02 · Slide 05</div>
+<h1 class="slide-title">The Big Lie</h1>
+<div class="slide-body">
+<p>In <em>Mein Kampf</em>, Adolf Hitler described a technique he called the "big lie" — the observation that people are more likely to believe a massive falsehood than a small one, because they cannot imagine anyone having the audacity to so completely distort the truth. The small lie is checked against experience and found wanting. The big lie is so far outside the normal range of human dishonesty that it short-circuits the evaluation process.</p>
+<p>The big lie has evolved since Hitler described it. Contemporary versions rely less on a single massive falsehood and more on a strategy of confident, total assertion — claims delivered with such certainty, at such scale, and with such frequency that the demand for evidence begins to feel like the unusual position. In a high-volume information environment, the firehose of confident falsehood can overwhelm the fact-checker simply through volume.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The big lie does not succeed by being believed. It succeeds by making truth feel uncertain — by producing enough noise that distinguishing signal from interference becomes exhausting, and exhausted people default to the simplest available story.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Confidence as credibility substitute</div>
+<div class="mechanism-body">In normal epistemic environments, confidence and evidence travel together: people are most confident about things they have good reason to believe. Propaganda disrupts this by producing confidence without evidence — and relying on the fact that most people, most of the time, use confidence as a proxy for credibility. The politician or commentator who speaks with absolute certainty about complex matters is not displaying knowledge. They are displaying propaganda technique. The certainty is the product, not the result of the evidence.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The firehose of falsehood</div>
+<div class="mechanism-body">The modern evolution of the big lie is the strategy of producing so many claims — some false, some misleading, some true — at such volume and speed that comprehensive fact-checking becomes impossible. The goal is not to be believed on each individual claim. It is to produce a general state of epistemic confusion in which nothing feels definitively verifiable, and the audience retreats to trusting whoever feels most familiar or most aligned with their existing views. Confusion benefits those who produce it, not those who consume it.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The partial truth as delivery vehicle</div>
+<div class="mechanism-body">The most effective big lies are carried by partial truths. A claim that is ten percent accurate can survive fact-checking of that ten percent while the ninety percent of misleading framing goes unchallenged. When a fact-checker confirms the accurate element, the confirmation bleeds across to the surrounding falsehood. The accurate detail is not incidental — it is structural. It is what allows the lie to travel through environments that would otherwise filter it out.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 05</div>
+<div class="scenario-q">A political figure makes fifteen specific claims in a speech. Three are accurate, seven are misleading, and five are false. Fact-checkers confirm the three accurate claims. The political figure's supporters point to the fact-checks as vindication. What is happening?</div>
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a">The fact-checks vindicate the speech — verified claims are evidence of accuracy</button>
+<button class="choice" data-answer="b">The three verified claims are being used to launder the twelve unverified or false ones — confirmation of accurate details bleeds credibility onto surrounding falsehood</button>
+<button class="choice" data-answer="c">Fact-checkers are biased — their confirmation of only three claims shows selective coverage</button>
+<button class="choice" data-answer="d">The supporters are engaging in motivated reasoning — they would defend the figure regardless of fact-check results</button>
+</div>
+<div class="feedback-block" id="feedback-5">
+<div class="feedback-headline" id="feedback-text-5"></div>
+<div class="feedback-detail" id="feedback-detail-5"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-5" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 6: Propaganda in Democracy -->
+<section class="slide" data-slide="6">
+<div class="slide-inner">
+<div class="slide-label">Module 02 · Slide 06</div>
+<h1 class="slide-title">Propaganda in Democracy</h1>
+<div class="slide-body">
+<p>After the First World War, the success of propaganda in mobilising mass populations produced a crisis for democratic theorists. If ordinary people could be moved so reliably by propaganda, could democracy — which required an informed citizenry capable of genuine deliberation — actually function? The response, developed most explicitly by figures like Edward Bernays, was not to limit propaganda but to professionalise it: to develop the techniques of what Bernays called "the engineering of consent" and place them in the service of democratic institutions and commercial interests.</p>
+<p>Bernays was Sigmund Freud's nephew. He took his uncle's insight about the irrational foundations of human behaviour and applied it to the problem of managing public opinion at scale. The result was modern public relations — an industry that now shapes almost every significant communication between institutions and the public, and which operates using every mechanic examined in this module.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The difference between propaganda and public relations is primarily one of legitimacy, not of method. Both use repetition, emotion, identity, and the management of what feels thinkable. One is done by governments we disapprove of. The other is done by organisations we are accustomed to trusting.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Advertising as continuous propaganda</div>
+<div class="mechanism-body">Modern advertising is propaganda in the precise technical sense: it uses repetition, emotional association, tribal identity, and aspirational narrative to shape belief and behaviour through means that bypass rational evaluation. The claim that a particular car conveys success, or that a particular drink is associated with authentic freedom, or that a particular cosmetic product addresses a need the advertisement itself creates — these are not informational claims subject to fact-checking. They are narrative injections that produce associations without making propositions.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Think tanks and manufactured expertise</div>
+<div class="mechanism-body">The think tank model — organisations that produce research and commentary aligned with their funders' interests while presenting themselves as independent experts — is a sophisticated propaganda infrastructure operating within democratic legitimacy norms. The research they produce can be technically accurate. The questions they choose to study, the frameworks they apply, the conclusions they emphasise, and the media relationships that amplify their work are all shaped by the interests of whoever funds them. The appearance of independent expertise is the product being sold.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Political messaging as emotional engineering</div>
+<div class="mechanism-body">Modern political campaigns are built on psychological profiling, emotional trigger mapping, and message testing at scale. The message delivered to each voter is increasingly calibrated to their specific psychological profile — their particular fears, aspirations, tribal identities, and emotional vulnerabilities. This is not persuasion in the sense of argument and evidence. It is emotional manipulation conducted with the sophistication of large budgets, extensive data, and teams of psychologists. It operates within democratic norms while being structurally incompatible with the deliberative ideal those norms are supposed to serve.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 06</div>
+<div class="scenario-q">A public relations firm is hired to improve public perception of a mining company's environmental record. They commission independent-seeming research showing the company's practices compare favourably to industry averages, place sympathetic stories in local media, and fund community events. No individual claim is false. Is this propaganda?</div>
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a">No — PR is a legitimate communication function and the claims are accurate</button>
+<button class="choice" data-answer="b">Yes — it meets the precise definition: systematic shaping of belief through emotional and associative means that bypass rational evaluation, regardless of technical accuracy</button>
+<button class="choice" data-answer="c">It depends on the environmental record — if the company is genuinely improving, the campaign is informational</button>
+<button class="choice" data-answer="d">It is ethically questionable but not propaganda — propaganda requires intent to deceive</button>
+</div>
+<div class="feedback-block" id="feedback-6">
+<div class="feedback-headline" id="feedback-text-6"></div>
+<div class="feedback-detail" id="feedback-detail-6"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-6" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 7: These Mechanics Work on Everyone -->
+<section class="slide" data-slide="7">
+<div class="slide-inner">
+<div class="slide-label">Module 02 · Slide 07</div>
+<h1 class="slide-title">These Mechanics Work on Everyone</h1>
+<div class="slide-body">
+<p>One of the most consistent findings in the psychology of propaganda and persuasion is that believing yourself to be immune significantly increases your susceptibility. The person who is certain they can spot manipulation is less vigilant, not more — because their confidence has replaced the ongoing attention that actual immunity requires. This applies regardless of education, intelligence, political affiliation, or media literacy training.</p>
+<p>This module exists not to produce certainty that you can now identify propaganda, but to make the mechanics visible enough that you can notice when they are running — including when they are running on you, in narratives you find entirely convincing, from sources you trust completely.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The mechanics of propaganda do not distinguish between people who know about them and people who do not. Knowing the name of a technique is not protection against it. Ongoing noticing is.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The third-person effect</div>
+<div class="mechanism-body">Research consistently shows that people believe media influence affects others more than it affects themselves — a phenomenon called the third-person effect. People who score highest on this belief — most certain that they are unaffected — tend to show the strongest signs of influence in their subsequent behaviour. The belief in personal immunity is itself a propaganda product: it has been cultivated, because people who believe they are not being influenced stop scrutinising the influence they are receiving.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The propaganda you agree with</div>
+<div class="mechanism-body">The propaganda mechanics examined in this module are most visible in narratives you distrust and least visible in narratives you find convincing. This is not because the mechanics are absent from the convincing narratives. It is because alignment between your existing views and the narrative's conclusions makes the mechanics invisible — the repetition feels like confirmation, the emotional resonance feels like recognition of truth, the tribal identity feels like genuine community. The most important application of these mechanics is to the content you find most obviously, naturally true.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Immunity as practice, not achievement</div>
+<div class="mechanism-body">The goal of this course is not to produce people who have successfully identified all propaganda and can now consume media without being shaped by it. That is not a reachable state, and believing you have reached it is the most dangerous position available. The goal is to develop a practice: a set of questions applied consistently, a habit of noticing the mechanics as they operate, and enough humility about your own susceptibility to keep the practice active rather than replacing it with confidence that you no longer need it.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 07</div>
+<div class="scenario-q">After completing this module, you find yourself confidently identifying propaganda in news sources you already distrusted, while finding the sources you already trusted to be largely free of these mechanics. What is most worth examining in this pattern?</div>
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a">Your analysis is probably accurate — you were already sceptical of those sources for good reasons</button>
+<button class="choice" data-answer="b">The pattern of seeing the mechanics clearly in distrusted sources and not in trusted ones is itself a sign that the mechanics are operating most effectively in the trusted sources — they are invisible there precisely because they are working</button>
+<button class="choice" data-answer="c">This is confirmation bias — you should consciously look for propaganda in your trusted sources to balance your analysis</button>
+<button class="choice" data-answer="d">Trust is earned through track record — sources you trust have demonstrated reliability, making the mechanics less applicable</button>
+</div>
+<div class="feedback-block" id="feedback-7">
+<div class="feedback-headline" id="feedback-text-7"></div>
+<div class="feedback-detail" id="feedback-detail-7"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-7" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 8: Recognising the Mechanics in Real Time -->
+<section class="slide" data-slide="8">
+<div class="slide-inner">
+<div class="slide-label">Module 02 · Slide 08</div>
+<h1 class="slide-title">Recognising the Mechanics in Real Time</h1>
+<div class="slide-body">
+<p>Knowing the names of propaganda mechanics and being able to spot them as they operate are different capacities. This slide is about the second: the specific signals that indicate each mechanic is running, in the moment, in ordinary media consumption and conversation.</p>
+<p>These signals are not proof of propaganda — they are reasons to slow down and look more carefully. The mechanics can operate in both accurate and inaccurate content. Their presence does not determine truth or falsehood. It indicates that something other than evidence is doing some of the work of conviction.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The signal that a propaganda mechanic is running is almost never the content of what is being said. It is the quality of the experience of receiving it — the speed, the certainty, the emotional intensity, the social weight that arrives attached to the claim.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Repetition signal: familiarity without source</div>
+<div class="mechanism-body">When something feels obviously true and you cannot locate where you first encountered it, repetition has likely been the mechanism. The test: can you trace this belief to a specific source, a specific argument, a specific piece of evidence? If not — if it simply feels like something everyone knows — ask when you first formed this view and what it was based on. The inability to locate a source for a strongly held belief is one of the clearest signals that repetition, not evidence, produced the conviction.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Tribal identity signal: critique feels like betrayal</div>
+<div class="mechanism-body">When engaging with a challenge to a belief makes you feel disloyal rather than curious — when the emotion that arrives is anxiety about the group rather than interest in the question — tribal identity capture is running. The test: can you engage with the strongest version of the opposing argument without it feeling like a threat to your sense of belonging? If not, the belief is doing social work as well as intellectual work, and the social work is likely doing most of the heavy lifting.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Enemy narrative signal: one explanation for everything</div>
+<div class="mechanism-body">When a single group or force is consistently offered as the explanation for a wide range of otherwise unrelated problems — economic, cultural, security, social — the enemy narrative mechanic is likely running. The test: what would need to be true about this group for them to be the primary cause of all the problems attributed to them? What structural factors would remain if they were removed? If the enemy's removal would clearly not solve the problems attributed to them, the enemy is functioning as a narrative device rather than an accurate analysis.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 08</div>
+<div class="scenario-q">You are watching a news segment about a social issue. You notice: the same three phrases have been used in every segment on this topic for weeks; you feel a rising sense of threat; and the segment ends by implicitly pointing toward a specific group as responsible. You find the segment completely convincing. What is the most rigorous response to this experience?</div>
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a">The conviction means the reporting is accurate — genuine journalism produces genuine conviction</button>
+<button class="choice" data-answer="b">Notice that all three mechanics — repetition, emotional threat, enemy narrative — are running simultaneously, and that their presence is a reason to look harder at the evidence, not a verdict on whether the content is accurate</button>
+<button class="choice" data-answer="c">Dismiss the segment — when propaganda mechanics are present, the content is probably false</button>
+<button class="choice" data-answer="d">Research the topic independently to verify the claims before forming a strong view</button>
+</div>
+<div class="feedback-block" id="feedback-8">
+<div class="feedback-headline" id="feedback-text-8"></div>
+<div class="feedback-detail" id="feedback-detail-8"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-8" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 9: Completion -->
+<section class="slide" data-slide="9">
+<div class="slide-inner completion-slide">
+<div class="complete-mark">&check;</div>
+<h2 class="complete-title">Module 02 complete.</h2>
+<p class="complete-body">You have examined the five core mechanics of propaganda — what it actually is (not just government lying), how repetition produces false familiarity, how tribal identity makes narratives impervious to challenge, how enemy creation serves the in-group rather than describing reality, how the big lie overwhelms rather than convinces, and how these mechanics operate inside democratic societies and inside the content you trust most. And you have encountered the hardest truth: knowing all of this does not make you immune. Ongoing noticing is the only thing that does.</p>
+
+<div class="section-heading">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">Propaganda is not state lying &mdash; it is any systematic use of communication to produce specific beliefs and behaviours by bypassing rational evaluation. It operates in democracies, in trusted media, and in content that feels like analysis.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Repetition produces familiarity, and familiarity produces the sensation of truth. A claim encountered enough times begins to feel known rather than asserted &mdash; the mechanism requires no deception and no conspiracy to operate.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Tribal identity makes narratives impervious to evidence. A claim that serves in-group identity will be believed not because it is true but because believing it is a membership requirement.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Enemy creation does not describe a real threat &mdash; it manufactures internal cohesion by designating an out-group whose hostility justifies whatever the in-group needs to do.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The big lie works by overwhelming. A claim of sufficient scale produces the sensation of significance and the reluctance to disbelieve something so consequential.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">Knowing the mechanics does not make you immune. You must notice them operating, in each specific case, while they are operating. The knowledge is the beginning; the noticing is the practice.</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+
+<p class="body-text">Identify one claim you believe with high confidence that also serves your in-group identity &mdash; a claim whose falseness would cost you standing in your community. Then ask: what would the evidence need to look like to genuinely change my mind about this? If you cannot answer the question concretely, that difficulty is the propaganda architecture operating from inside.</p>
+
+<p class="body-text">Monthly: track one ongoing narrative &mdash; political, cultural, or social &mdash; across thirty days. Note each repetition. Observe when familiarity begins to produce the sensation of confirmation rather than assessment. The tracking is the counter-mechanism: it makes the repetition visible rather than cumulative.</p>
+<div class="divider"></div>
+<p class="complete-body" style="font-style:italic;font-family:var(--serif);font-size:19px;">Next: Module 03 — Media Literacy in the Attention Economy.</p>
+<div class="nav-row" style="justify-content:center;margin-top:48px">
+<button class="nav-btn" onclick="prevSlide()">&larr; Review</button>
+</div>
+</div>
+</section>
+
+<script>
+const feedback = {
+  1: {
+    a: {
+      headline: "Free press and accountability reduce some forms of propaganda — they do not eliminate the mechanics.",
+      detail: "Democratic societies with free press do have genuine advantages: independent journalism can expose government lies, legal protections allow dissent, competitive media creates some accountability. These are real and matter. And: the mechanics of propaganda — repetition, emotional framing, tribal identity, enemy creation — operate through these structures as well as despite them. A free press owned by concentrated commercial interests, dependent on advertising revenue, and competing for attention in a high-emotion environment will produce propaganda effects without any individual actor intending to deceive."
+    },
+    b: {
+      headline: "Yes — the exemption claim is itself a propaganda product.",
+      detail: "The belief that propaganda is something authoritarian governments do — and that democratic societies with free press are structurally different — is one of the most effective pieces of propaganda in those same democratic societies. It directs critical attention elsewhere and produces complacency about the mechanics operating at home. This is not to say democratic and authoritarian propaganda are identical — they differ in important ways. But the mechanics are the same, and believing otherwise is exactly what makes those mechanics most effective."
+    },
+    c: {
+      headline: "The claim is more precise than this — and the precision matters.",
+      detail: "Saying democratic governments are 'just as deliberately deceptive' as authoritarian ones loses the nuance that makes the analysis useful. Democratic propaganda often does not require deliberate intent to deceive — it emerges from structural incentives, shared assumptions, and the accumulated effect of individual decisions made in good faith within systems that produce distortion. Equivalence with authoritarian systems is not the point. The point is that the mechanics operate here, not only there — and that democratic forms provide both genuine protections and new vectors for the same processes."
+    },
+    d: {
+      headline: "The variation is real — the universal applicability of the mechanics is more important.",
+      detail: "Some democratic societies do have stronger propaganda systems than others — more concentrated media ownership, weaker public interest journalism, stronger political messaging operations. These differences are real and worth examining. And: the core mechanics — repetition, emotion, tribal identity, enemy construction — operate in all of them to varying degrees. The variation in degree does not change the nature of the phenomenon. The starting point is recognising that the mechanics apply everywhere before examining where they are strongest."
+    }
+  },
+  2: {
+    a: {
+      headline: "Multiple sources agreeing can mean independent confirmation — or repeated exposure to the same claim.",
+      detail: "Consensus across sources is meaningful when those sources gathered their evidence independently, through different methods, from different starting points. When multiple outlets repeat a claim that originated from the same source, wire service, or shared cultural assumption, the apparent consensus is actually just the same claim distributed widely. The question is not how many sources report something but how independently each source arrived at it. 'Everyone knows' is almost never produced by independent verification — it is produced by successful repetition."
+    },
+    b: {
+      headline: "Yes — this is exactly what the illusory truth effect looks like from the inside.",
+      detail: "The feeling of certainty, the inability to locate a source, the 'everyone knows' framing — these are the signatures of repetition-produced belief rather than evidence-produced belief. The belief may still be accurate — repetition does not make things false. But the certainty it has produced is not a function of the evidence for it. It is a function of how many times the claim has been encountered. That distinction matters: evidence-based confidence can be revised when evidence changes; repetition-based confidence tends to persist regardless of what the evidence shows."
+    },
+    c: {
+      headline: "Looking for the source is a good practice — and the more important insight is about what produced the certainty.",
+      detail: "Tracing a claim to its source is a useful habit and often revealing — the 'original source' is frequently much weaker than the certainty built on top of it. And the deeper insight is about the process: why does this feel certain before you checked? What produced that feeling? The answer — repeated exposure without remembered source — is important to recognise as a distinct thing from evidence-based confidence. The source search is a good next step; noticing what produced the certainty is the more fundamental one."
+    },
+    d: {
+      headline: "Coherence with existing beliefs is not independent confirmation.",
+      detail: "A claim that aligns with other things you believe feels more credible — but the alignment is not independent evidence. If your existing beliefs were also formed substantially through repetition, then a new claim that coheres with them is not being tested against independent evidence — it is being tested against other repetition-produced beliefs. Each seems to confirm the others. This is how a network of mutually reinforcing beliefs can feel thoroughly verified while none of them have been independently evaluated."
+    }
+  },
+  3: {
+    a: {
+      headline: "Threatening evidence is not evidence of inaccuracy — it may be evidence that something important is at stake.",
+      detail: "If truth only felt safe and non-threatening, we could use the discomfort of evidence as a filter. But challenging evidence often is threatening — not because it is wrong but because it is right, and its being right has consequences for beliefs, relationships, and identity. The anxiety the evidence produces is not information about whether the evidence is accurate. It is information about how much is invested in the belief being challenged. Those are completely different things, and treating them as the same forecloses the evaluation."
+    },
+    b: {
+      headline: "Yes — the anxiety is the tribal identity mechanic making the evaluation social rather than intellectual.",
+      detail: "The specific quality of the anxiety — not 'this evidence might be wrong' but 'what does this mean for my place in the group?' — is the diagnostic signal. The question being unconsciously asked is not 'is this true?' but 'can I afford for this to be true?' That is a social question, not an epistemological one, and it has replaced the epistemological question before the evaluation has begun. Recognising this does not tell you whether the evidence is accurate — it tells you that the evaluation is being conducted under conditions that make honest evaluation structurally difficult."
+    },
+    c: {
+      headline: "Changing views is uncomfortable generally — but this specific anxiety has a specific source.",
+      detail: "Revision of long-held views is genuinely uncomfortable for reasons unrelated to group membership — cognitive dissonance, sunk cost, the disorientation of losing a frame you have organised experience around. These are real. And: the specific anxiety described — not 'this is uncomfortable' but 'what does this mean for my place in the group?' — has a more specific source. It is group-membership anxiety, not view-revision discomfort. Distinguishing between them matters because they require different responses."
+    },
+    d: {
+      headline: "Consulting the group before evaluating the evidence embeds the problem more deeply.",
+      detail: "Consulting trusted community members before evaluating challenging evidence means running the evidence through the community's existing framework before giving yourself a chance to engage with it directly. The community members will apply the same tribal identity filter — the evidence will be evaluated for its implications for the group's narrative before it is evaluated for its accuracy. This is the mechanism by which group narratives become self-reinforcing: every challenge is filtered through the group before the individual can form an independent view."
+    }
+  },
+  4: {
+    a: {
+      headline: "Expert bias is possible — and the specific dynamic here is not about bias.",
+      detail: "Experts can be biased, politically motivated, or operating within limited frameworks. Raising this possibility is legitimate in the right context. But in the scenario described, the economist's structural analysis is not being evaluated — it is being dismissed as enemy defence without engagement. That move — converting analysis into allegiance — is the specific mechanic worth examining. Whether the economist is biased is a separate question from whether the accusation of enemy defence is a way to make their analysis unexaminable."
+    },
+    b: {
+      headline: "Yes — the self-sealing structure is the most important thing to see here.",
+      detail: "Once a narrative has an enemy, structural analysis of the problems attributed to that enemy becomes unfalsifiable as evidence against the narrative. The economist's structural argument is not engaged — it is reclassified as enemy defence and thereby excluded from consideration. This is how the enemy narrative becomes permanently unfalsifiable: any challenge to it is either from the enemy (and therefore suspect) or from a dupe/collaborator (and therefore disloyal). No evidence can penetrate a narrative with this structure, because the structure converts all counterevidence into more evidence for itself."
+    },
+    c: {
+      headline: "Both factors may be relevant — the specific dynamic being observed is still worth naming.",
+      detail: "It is entirely possible that both structural economic factors and immigration-related factors play roles in the outcomes described. That is a legitimate empirical question. And: the specific dynamic happening here — the economist's structural analysis being dismissed as enemy defence rather than engaged as analysis — is not about the empirical question. It is about what happens to analysis within a narrative that has an enemy. That move is worth identifying regardless of where the empirical evidence ultimately points."
+    },
+    d: {
+      headline: "Sincerity does not exempt a belief from structural analysis.",
+      detail: "Movement members may genuinely believe their analysis — this is almost certainly true, and genuine belief deserves acknowledgement rather than dismissal as cynical manipulation. And: sincere belief can be produced by propaganda mechanics. People who have absorbed enemy narratives through repetition, tribal identity reinforcement, and emotional loading believe those narratives sincerely. Sincerity is not evidence of accuracy. Acknowledging it does not require treating the analysis as sound or the dismissal of the economist as legitimate engagement."
+    }
+  },
+  5: {
+    a: {
+      headline: "Verified claims are evidence only of the accuracy of those specific claims.",
+      detail: "Fact-checks that confirm three specific claims verify three specific claims. They do not verify the overall picture the speech produced, the framing of the accurate claims, the selection of which facts to present, or the twelve unverified and false claims that surrounded the three accurate ones. The error of treating partial verification as general vindication is how the partial-truth technique works: the verifiable details provide a credibility foundation for everything adjacent to them."
+    },
+    b: {
+      headline: "Yes — the accurate claims are structural elements, not incidental ones.",
+      detail: "The three accurate claims are not incidental to the fifteen-claim speech — they are load-bearing. They exist to allow the seven misleading and five false claims to travel through fact-checking environments that would otherwise filter them out. When the three are verified, the confirmation bleeds across to the surrounding content that was not verified. This is the partial truth technique: accurate details are selected specifically because they will survive scrutiny and lend credibility to the claims that cannot. The supporters are using the fact-checks correctly — from the perspective of propaganda reception."
+    },
+    c: {
+      headline: "Fact-checker bias is possible — and not what is being described here.",
+      detail: "Fact-checkers can be selective, politically motivated, or operating within particular frameworks. Scrutinising fact-checkers is legitimate. But in the scenario described, the fact-checkers confirmed three claims — which means they did not refuse to confirm the accurate ones for political reasons. The issue is not that the fact-checkers are biased. It is that confirming three out of fifteen claims is being presented as vindication of the entire speech. That is a separate and specific dynamic."
+    },
+    d: {
+      headline: "Motivated reasoning is occurring — and the partial truth technique is what makes it work.",
+      detail: "The supporters are engaged in motivated reasoning — they would likely defend the figure in almost any circumstance. And: the partial truth technique is specifically designed to give motivated reasoning something to work with. If all fifteen claims were false, motivated reasoning would have nothing to point to. The three accurate claims provide the raw material that motivated reasoning amplifies into general vindication. Both observations are true. The technical mechanism is worth naming alongside the psychological one."
+    }
+  },
+  6: {
+    a: {
+      headline: "Legitimate communication function and propaganda mechanics are not mutually exclusive.",
+      detail: "PR is a legitimate profession that serves real communication functions — organisations do need to communicate with publics, accurate information does need to reach people. And: the specific mechanics being used in this scenario — commissioning research designed to produce favourable conclusions, placing stories through relationships rather than news value, using community events to create positive association — are propaganda mechanics applied with professional sophistication. The legitimacy of PR as an industry does not exempt specific campaigns from analysis using these criteria."
+    },
+    b: {
+      headline: "Yes — meeting the precise definition does not require intent to deceive.",
+      detail: "The campaign fits the definition of propaganda precisely: it systematically shapes belief and behaviour through emotional and associative means — community goodwill, apparent expert endorsement, media placement — that bypass rational evaluation of the company's actual environmental record. No individual claim needs to be false. The overall impression produced is engineered rather than earned. The intent is not to deceive but to manufacture favourable perception — which is the same thing by a different name. Propaganda defined by method rather than intent applies here clearly."
+    },
+    c: {
+      headline: "The accuracy of the underlying record changes what the campaign is communicating but not whether it is propaganda.",
+      detail: "If the company genuinely is improving its environmental record, communicating that accurately is legitimate and valuable. The question is whether the specific methods used — research commissioned for favourable conclusions, media placement through relationships, community events as association-building — constitute information or engineering. Even if the underlying facts are positive, the campaign is using propaganda mechanics to ensure a specific impression is produced rather than allowing accurate information to speak for itself. The method is what makes it propaganda."
+    },
+    d: {
+      headline: "Propaganda does not require intent to deceive — it requires methods that bypass rational evaluation.",
+      detail: "The intent-to-deceive definition of propaganda is restrictive in a way that allows most real-world propaganda to escape the category. Most sophisticated propaganda is produced by people who believe, to varying degrees, in what they are promoting — and who experience their work as legitimate communication, not deception. Defining propaganda by method rather than intent captures what actually matters: are beliefs being shaped through mechanisms that prevent rather than enable genuine evaluation? In this case, yes — regardless of whether anyone in the campaign intended deception."
+    }
+  },
+  7: {
+    a: {
+      headline: "Prior scepticism may be well-founded — and it does not guarantee unbiased analysis.",
+      detail: "You may have had good reasons to distrust certain sources before engaging with this material, and those reasons may still be valid. And: analysis that consistently confirms prior distrust of already-distrusted sources while finding trusted sources clean is too neat to be reliable. Propaganda mechanics do not operate selectively — they operate wherever there is content designed to shape belief at scale. If your analysis never finds them in sources you trust, the most likely explanation is not that those sources are propaganda-free. It is that the mechanics are most invisible where you are most aligned."
+    },
+    b: {
+      headline: "Yes — visibility in distrusted sources and invisibility in trusted ones is the diagnostic pattern.",
+      detail: "This is the most important and most difficult application of propaganda analysis. The mechanics are visible in content you distrust because you are already looking critically. They are invisible in content you trust because the alignment between your existing views and the content's conclusions removes the critical distance that makes the mechanics visible. The trusted sources are where the mechanics are working most effectively on you — because there, they feel like recognition of truth rather than technique. That is exactly when they are most operative."
+    },
+    c: {
+      headline: "Consciously balancing your analysis is a useful practice — the dynamic described is worth understanding more precisely.",
+      detail: "Deliberately looking for propaganda mechanics in trusted sources is a good practice and will likely be revealing. And: calling this 'confirmation bias' and prescribing balance as the solution is slightly off. It is not that you are seeing propaganda where it does not exist in the distrusted sources. It is that you are not seeing it where it does exist in the trusted ones. The asymmetry is not about adding false positives — it is about removing false negatives. The practice is not about balance; it is about applying the same level of scrutiny to all sources."
+    },
+    d: {
+      headline: "Demonstrated reliability on facts does not make a source immune to propaganda mechanics.",
+      detail: "A source can have a strong track record for factual accuracy and still use emotional framing, repetition, tribal identity activation, and enemy narrative. These mechanics operate independently of whether specific claims are accurate. A trusted source that frames accurate information through fear, points consistently toward the same enemies as explanations, and produces tribal loyalty in its audience is using propaganda mechanics regardless of its factual track record. Trust earned through accuracy does not extend automatically to immunity from analysis of methods."
+    }
+  },
+  8: {
+    a: {
+      headline: "Conviction and accuracy are different things — the quality of the conviction is worth examining.",
+      detail: "Genuine journalism does produce genuine conviction — when the evidence is strong and the reporting is honest, conviction is the appropriate response. The question is what produced this conviction. Repetition produces conviction. Fear produces conviction. Enemy narrative produces conviction. These mechanics produce conviction independently of whether the underlying content is accurate. The strength of the conviction is not evidence of the accuracy of the content. It is evidence that the content's delivery was effective — which is a different and more ambiguous thing."
+    },
+    b: {
+      headline: "Yes — the presence of mechanics is a reason to look harder, not a verdict on accuracy.",
+      detail: "All three mechanics are running: repeated phrases (repetition), rising threat sense (emotional fear engineering), and implied responsible group (enemy narrative). Their simultaneous operation is significant — it means the conviction being produced is being driven by technique as well as, or possibly instead of, evidence. This does not mean the content is false. It means the conviction it produced was partly manufactured. The rigorous response is to separate the emotional experience from the evidential question: what is the actual evidence for the claims being made, independent of the affective experience of receiving them?"
+    },
+    c: {
+      headline: "Propaganda mechanics are present in accurate content as well as inaccurate content.",
+      detail: "Dismissing content when propaganda mechanics are present would require dismissing most media, since these mechanics operate across the spectrum from outright false to thoroughly accurate. The mechanics are a signal about how the content is being delivered — through emotional engineering, repetition, and enemy framing — not a verdict on whether the underlying claims are true. The response is increased scrutiny of the evidence, not dismissal of the content."
+    },
+    d: {
+      headline: "Independent research is a good next step — and the insight about the mechanics is the more fundamental one.",
+      detail: "Researching the topic independently is an excellent practice and will often be revealing. And: the more fundamental insight is about what happened in the moment of reception — three mechanics running simultaneously produced strong conviction before any evaluation occurred. That process is worth understanding, not just responding to with further research. The research addresses whether the claims are accurate. The insight about the mechanics addresses how the conviction was produced before the claims were evaluated. Both are worth attending to."
+    }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c7m1';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course7-module-1-narratives-as-weapons.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c7m2','1');window.location.href='course7-module-3-media-literacy.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

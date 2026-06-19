@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 7 · Module 5 · Algorithmic Narratives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:500}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:720px;margin:0 auto;padding:72px 48px 120px}
+.slide-num{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:40px;letter-spacing:.06em}
+.slide h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:32px}
+.slide h1 em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.15rem;line-height:1.75;color:var(--ink);margin-bottom:32px;font-weight:300}
+.body-text{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:24px}
+.divider{width:40px;height:1px;background:var(--accent);margin:40px 0}
+.scenario-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;font-family:var(--sans)}
+.scenario-text{font-family:var(--serif);font-size:1.3rem;font-weight:300;line-height:1.6;margin-bottom:36px;padding-left:20px;border-left:2px solid var(--line)}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.choice{background:transparent;border:1px solid var(--line);padding:18px 22px;text-align:left;cursor:pointer;
+font-family:var(--sans);font-size:.95rem;line-height:1.5;color:var(--ink);transition:all .2s ease;border-radius:2px}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--soft)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback{display:none;border-top:1px solid var(--line);padding-top:28px;margin-top:8px}
+.feedback.visible{display:block;animation:fadeUp .4s ease}
+.feedback-headline{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:10px}
+.feedback-detail{font-size:.95rem;line-height:1.75;color:var(--muted)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{background:none;border:none;font-family:var(--sans);font-size:.9rem;color:var(--muted);cursor:pointer;
+letter-spacing:.04em;padding:8px 0;transition:color .2s}
+.nav-btn:hover:not(:disabled){color:var(--ink)}.nav-btn:disabled{opacity:.2;cursor:default}
+.nav-btn.primary{color:var(--ink);font-weight:500}
+.completion{text-align:center;padding:80px 48px}
+.completion-icon{font-size:3rem;margin-bottom:32px}
+.completion h2{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:20px}
+.completion p{font-size:1rem;line-height:1.8;color:var(--muted);max-width:480px;margin:0 auto 40px}
+.completion-next{display:inline-block;padding:14px 32px;border:1px solid var(--ink);font-family:var(--sans);
+font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;background:none;
+transition:all .2s;font-weight:500}
+.completion-next:hover{background:var(--ink);color:var(--paper)}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 07 &middot; Media &amp; Narrative Control &middot; Module <strong>05</strong> &middot; Algorithmic Narratives</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 7 &middot; Media &amp; Narrative Control</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c7m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course7-module-1-narratives-as-weapons.html">Narratives as Weapons</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course7-module-2-architecture-of-propaganda.html">Architecture of Propaganda</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course7-module-3-media-literacy.html">Media Literacy</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course7-module-4-hero-villain.html">Hero and Villain</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course7-module-5-algorithmic-narratives.html">Algorithmic Narratives</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course7-module-6-building-narrative-immunity.html">Narrative Immunity</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide-1" data-slide="1">
+  <div class="slide-inner">
+    <div class="slide-num">01 / 09</div>
+    <h1>The Feed Is Not <em>Neutral</em></h1>
+    <p class="lead">You open the app and see the world. Except you don't. You see a world assembled for you by a system optimising for one thing above all else: keeping you on the platform.</p>
+    <div class="divider"></div>
+    <p class="body-text">The feed feels like a window. It isn't. It's a curated environment designed to maximise your time and attention — because your attention is the product being sold to advertisers.</p>
+    <p class="body-text">Every algorithm makes choices about what to show you and what to bury. Those choices aren't random and they aren't neutral. They're engineered. Understanding the engineering is the first step to seeing through it.</p>
+    <div class="scenario-label">Scenario 01</div>
+    <p class="scenario-text">You scroll through your social media feed for twenty minutes. Everything you've seen — every post, video, and article — was selected by an algorithm. What is the algorithm optimising for?</p>
+    <div class="choices" data-scenario="1">
+      <button class="choice" data-answer="a">Showing you the most accurate and important information available</button>
+      <button class="choice" data-answer="b">Maximising your engagement — time spent, clicks, reactions — because that's what generates ad revenue</button>
+      <button class="choice" data-answer="c">Showing you a balanced range of perspectives to keep you informed</button>
+      <button class="choice" data-answer="d">Showing you what your friends and community care about most</button>
+    </div>
+    <div class="feedback" id="feedback-1">
+      <p class="feedback-headline" id="feedback-text-1"></p>
+      <p class="feedback-detail" id="feedback-detail-1"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()" id="prev-top-1" disabled>← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="slide-2" data-slide="2">
+  <div class="slide-inner">
+    <div class="slide-num">02 / 09</div>
+    <h1>What the Algorithm <em>Rewards</em></h1>
+    <p class="lead">If engagement is the metric, then content that generates outrage, fear, and tribal identity wins. Not because anyone planned it that way — but because the system selects for what works.</p>
+    <div class="divider"></div>
+    <p class="body-text">Research consistently shows that emotionally charged content — especially content that provokes anger or moral outrage — spreads faster and generates more engagement than measured, nuanced content. The algorithm didn't choose this. It discovered it, and then it optimised for it.</p>
+    <p class="body-text">This means the emotional temperature of your feed is not an accident. It's an output of a system that has learned, through billions of data points, that your emotions are what keep you scrolling.</p>
+    <div class="scenario-label">Scenario 02</div>
+    <p class="scenario-text">A platform's algorithm has been trained on billions of interactions. It has learned that posts expressing moral outrage get three times more engagement than posts with balanced analysis. What does the algorithm do with this information?</p>
+    <div class="choices" data-scenario="2">
+      <button class="choice" data-answer="a">Shows it equally alongside balanced content to give users a fair picture</button>
+      <button class="choice" data-answer="b">Suppresses outrage content to protect users from manipulation</button>
+      <button class="choice" data-answer="c">Amplifies outrage content because higher engagement means more time on platform and more ad revenue</button>
+      <button class="choice" data-answer="d">Reports the pattern to regulators as a potential public health risk</button>
+    </div>
+    <div class="feedback" id="feedback-2">
+      <p class="feedback-headline" id="feedback-text-2"></p>
+      <p class="feedback-detail" id="feedback-detail-2"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="slide-3" data-slide="3">
+  <div class="slide-inner">
+    <div class="slide-num">03 / 09</div>
+    <h1>The Filter <em>Bubble</em></h1>
+    <p class="lead">Personalisation feels like service. The platform learns what you like and shows you more of it. What it's actually doing is slowly narrowing your world.</p>
+    <div class="divider"></div>
+    <p class="body-text">When an algorithm shows you content that matches your existing beliefs, your existing tribe, and your existing emotional responses, it creates a feedback loop. You see your views reflected back constantly. The world starts to look like everyone agrees with you — until you encounter someone outside your bubble, and the disagreement feels incomprehensible.</p>
+    <p class="body-text">The filter bubble doesn't just confirm what you believe. It makes dissenting views invisible, which makes them feel fringe — even when they're widely held outside your feed.</p>
+    <div class="scenario-label">Scenario 03</div>
+    <p class="scenario-text">Maya notices that her social media feed is almost entirely populated with people who share her political views. When she occasionally encounters someone with different views, their position seems bizarre and extreme. What is most likely happening?</p>
+    <div class="choices" data-scenario="3">
+      <button class="choice" data-answer="a">People with different views are objectively more extreme than they used to be</button>
+      <button class="choice" data-answer="b">Maya has done a good job of curating a high-quality, thoughtful feed</button>
+      <button class="choice" data-answer="c">The algorithm's personalisation has created a filter bubble that makes moderate versions of opposing views invisible to her</button>
+      <button class="choice" data-answer="d">The people she follows simply happen to represent the mainstream of public opinion</button>
+    </div>
+    <div class="feedback" id="feedback-3">
+      <p class="feedback-headline" id="feedback-text-3"></p>
+      <p class="feedback-detail" id="feedback-detail-3"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide-4" data-slide="4">
+  <div class="slide-inner">
+    <div class="slide-num">04 / 09</div>
+    <h1>The Recommendation <em>Rabbit Hole</em></h1>
+    <p class="lead">You watch one video. The algorithm queues the next. Each recommendation is designed to keep you watching — and to do that, it often escalates.</p>
+    <div class="divider"></div>
+    <p class="body-text">Recommendation systems have been shown to push progressively more extreme content because extreme content tends to retain attention more effectively. A viewer of moderate political commentary gets recommended more emphatic political commentary, then increasingly radical versions — not because the platform endorses those views, but because the viewer kept watching.</p>
+    <p class="body-text">The rabbit hole isn't a bug. It's an emergent property of an optimisation system with no ceiling on how far it's willing to go to keep you engaged.</p>
+    <div class="scenario-label">Scenario 04</div>
+    <p class="scenario-text">James starts watching videos about healthy eating. Over several weeks, his recommendations have shifted from nutritional science to strict elimination diets, then to content claiming most doctors are hiding the truth about food. He didn't seek out the more extreme content — it kept appearing in his queue. What process explains this?</p>
+    <div class="choices" data-scenario="4">
+      <button class="choice" data-answer="a">James has been deliberately targeted by a coordinated disinformation campaign</button>
+      <button class="choice" data-answer="b">The recommendation algorithm escalated toward more engaging — and progressively more extreme — content because that's what retained his attention longest</button>
+      <button class="choice" data-answer="c">The algorithm correctly identified that James wanted deeper, more committed content</button>
+      <button class="choice" data-answer="d">Extreme content about nutrition is simply more popular, so it appears in everyone's recommendations</button>
+    </div>
+    <div class="feedback" id="feedback-4">
+      <p class="feedback-headline" id="feedback-text-4"></p>
+      <p class="feedback-detail" id="feedback-detail-4"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide-5" data-slide="5">
+  <div class="slide-inner">
+    <div class="slide-num">05 / 09</div>
+    <h1>The <em>Virality</em> Mechanic</h1>
+    <p class="lead">What spreads is not what's true. What spreads is what provokes a strong enough emotional response to make someone share it before they've thought about it.</p>
+    <div class="divider"></div>
+    <p class="body-text">Studies have found that false news spreads faster, further, and more deeply than true news on social platforms — consistently. The researchers attributed this to novelty and emotional arousal: false stories tend to be more novel and emotionally provocative, which triggers sharing.</p>
+    <p class="body-text">The platform doesn't care if a story is true. Virality is an engagement metric. And the architecture of sharing — the frictionless repost, the one-tap share — is designed to act before reflection can intervene.</p>
+    <div class="scenario-label">Scenario 05</div>
+    <p class="scenario-text">A post claiming a major public figure said something outrageous goes viral overnight, shared millions of times. The next day, it's confirmed the quote was fabricated. The correction gets a fraction of the shares. Which feature of the platform best explains this asymmetry?</p>
+    <div class="choices" data-scenario="5">
+      <button class="choice" data-answer="a">People are simply too lazy to check corrections</button>
+      <button class="choice" data-answer="b">The correction wasn't written as compellingly as the original claim</button>
+      <button class="choice" data-answer="c">The original post provoked strong emotional arousal that triggered rapid sharing before verification; corrections lack the same emotional charge and arrive after most sharing is complete</button>
+      <button class="choice" data-answer="d">Platforms deliberately suppress corrections to protect engagement metrics</button>
+    </div>
+    <div class="feedback" id="feedback-5">
+      <p class="feedback-headline" id="feedback-text-5"></p>
+      <p class="feedback-detail" id="feedback-detail-5"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="slide-6" data-slide="6">
+  <div class="slide-inner">
+    <div class="slide-num">06 / 09</div>
+    <h1>Division Is the <em>Business Model</em></h1>
+    <p class="lead">Platforms don't profit from calm, informed citizens. They profit from engaged, emotionally activated users. Conflict is more engaging than consensus. Division drives revenue.</p>
+    <div class="divider"></div>
+    <p class="body-text">This is not a conspiracy. It's a structural feature of the attention economy. When the business model is advertising revenue tied to time-on-platform, the system will naturally select for content that keeps people emotionally activated. And the most reliable way to keep people emotionally activated is tribal conflict.</p>
+    <p class="body-text">It's worth noting that this analysis applies across the political spectrum and to all ideological communities — including those critical of mainstream platforms. The algorithmic amplification of division doesn't spare any tribe.</p>
+    <div class="scenario-label">Scenario 06</div>
+    <p class="scenario-text">Research finds that political content generating the most platform engagement consists almost entirely of posts expressing contempt for the opposing side. A platform executive sees this data. What is the most structurally predictable response?</p>
+    <div class="choices" data-scenario="6">
+      <button class="choice" data-answer="a">Immediately suppress contempt-generating content out of civic responsibility</button>
+      <button class="choice" data-answer="b">Commission a study to explore whether the finding can be replicated</button>
+      <button class="choice" data-answer="c">Continue amplifying high-engagement content because changing the algorithm would reduce the metric the company is optimised to maximise</button>
+      <button class="choice" data-answer="d">Issue a public statement acknowledging the problem and committing to reform</button>
+    </div>
+    <div class="feedback" id="feedback-6">
+      <p class="feedback-headline" id="feedback-text-6"></p>
+      <p class="feedback-detail" id="feedback-detail-6"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="slide-7" data-slide="7">
+  <div class="slide-inner">
+    <div class="slide-num">07 / 09</div>
+    <h1>Manufactured <em>Consensus</em></h1>
+    <p class="lead">Trending lists. Viral posts. The sense that everyone is talking about this. These mechanics can create the illusion that a view is more widely held than it is — or that dissent has vanished.</p>
+    <div class="divider"></div>
+    <p class="body-text">Trending topics are not a neutral reflection of what people care about. They can be triggered by coordinated activity, amplified by bots, or simply reflect which communities are most active at a given moment. The appearance of consensus shapes behaviour — people often conform to what they believe is the majority view, whether or not it actually is.</p>
+    <p class="body-text">This mechanism can be used deliberately — by political actors, PR campaigns, astroturfing operations — or it can emerge organically from the platform's amplification dynamics. Either way, the perception of consensus is a narrative tool.</p>
+    <div class="scenario-label">Scenario 07</div>
+    <p class="scenario-text">A hashtag suddenly appears in the top ten trending topics, associated with a political cause. Within hours, major news outlets are reporting on "the growing movement." Two days later, researchers find that 70% of the accounts that launched the hashtag were automated bots. What does this reveal?</p>
+    <div class="choices" data-scenario="7">
+      <button class="choice" data-answer="a">Social media trends are generally reliable indicators of genuine public sentiment</button>
+      <button class="choice" data-answer="b">The news outlets who reported on it were complicit in the deception</button>
+      <button class="choice" data-answer="c">Trending mechanics can be gamed to manufacture the appearance of consensus, and that manufactured consensus then influences real behaviour and media coverage</button>
+      <button class="choice" data-answer="d">This only happens with fringe political actors — mainstream campaigns don't use these tactics</button>
+    </div>
+    <div class="feedback" id="feedback-7">
+      <p class="feedback-headline" id="feedback-text-7"></p>
+      <p class="feedback-detail" id="feedback-detail-7"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="slide-8" data-slide="8">
+  <div class="slide-inner">
+    <div class="slide-num">08 / 09</div>
+    <h1>Using Platforms Without <em>Being Used</em></h1>
+    <p class="lead">Understanding the machinery doesn't require leaving it. It requires knowing when the machine is running on you — and having practices that slow that process down.</p>
+    <div class="divider"></div>
+    <p class="body-text">Algorithmic awareness is a practical skill. It means noticing when you're outraged and asking: is this my response to the world, or is it a response that a system optimised for my engagement? It means seeking out primary sources rather than algorithmically curated summaries. It means pausing before sharing. It means occasionally navigating directly to sources rather than waiting to be served them.</p>
+    <p class="body-text">None of this makes you immune. But noticing the architecture — even mid-scroll — creates a gap between stimulus and response. That gap is where your judgment lives.</p>
+    <div class="scenario-label">Scenario 08</div>
+    <p class="scenario-text">Sofia wants to stay informed without being constantly emotionally activated by her feed. She's aware of how algorithms work but doesn't want to disengage entirely. Which approach is most likely to help?</p>
+    <div class="choices" data-scenario="8">
+      <button class="choice" data-answer="a">Switching to a different social media platform, which will have a more honest algorithm</button>
+      <button class="choice" data-answer="b">Only following accounts that confirm her existing worldview, to avoid manipulation by opposing views</button>
+      <button class="choice" data-answer="c">Developing practices — direct navigation to sources, pausing before sharing, noticing emotional activation — that create friction between the algorithm's outputs and her automatic responses</button>
+      <button class="choice" data-answer="d">Consuming as much content as possible from as many sources as possible so the algorithms cancel each other out</button>
+    </div>
+    <div class="feedback" id="feedback-8">
+      <p class="feedback-headline" id="feedback-text-8"></p>
+      <p class="feedback-detail" id="feedback-detail-8"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: COMPLETION -->
+<div class="slide" id="slide-9" data-slide="9">
+  <div class="slide-inner">
+    <div class="completion">
+      <div class="completion-icon">◈</div>
+      <h2>Module 5 Complete</h2>
+      <p>You can now see the architecture beneath the feed — what it optimises for, how it amplifies emotion and division, how consensus is manufactured, and how to create the gap between the algorithm's pull and your own judgment.</p>
+      <p style="margin-top:16px;font-size:.9rem;color:var(--muted)">Course 07 &middot; Media &amp; Narrative Control &middot; Module 05 of 06</p>
+
+<div class="section-heading" style="margin-top:40px">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">Algorithms do not optimise for truth, balance, or your wellbeing &mdash; they optimise for engagement. The metric is time on platform and emotional activation; accuracy is irrelevant to the optimisation target.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Filter bubbles are not built by deliberate selection &mdash; they are built by the algorithm learning what you engage with and showing you more of it. The result is a personalised reality tunnel that feels like the world.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Outrage, fear, and tribal confirmation are the highest-engagement content categories. The algorithm systematically amplifies them because they produce more interaction than balanced, measured, or uncertain content.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Consensus inside a filter bubble is manufactured, not discovered. The appearance of everyone agreeing reflects algorithmic curation, not actual majority opinion.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The algorithm&rsquo;s pull is not neutral &mdash; it is a force that shapes what feels real, urgent, and worth acting on. Seeing it as a force rather than as reality is the beginning of using it rather than being used by it.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">The gap between the algorithm&rsquo;s stimulus and your response is a learnable practice. That gap is where judgment lives.</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+
+<p class="body-text">For one week: before sharing or reacting to any content, ask &mdash; what am I feeling right now, and is this feeling part of why this content was made? If the answer is outrage, fear, or tribal satisfaction, pause before acting. Not to suppress the feeling &mdash; to notice that you are inside a mechanism designed to produce it, and to choose what you do inside that mechanism.</p>
+
+<p class="body-text">Monthly: audit your feed. What topics, frames, and emotional registers dominate it? Is this a picture of the world, or a picture of what the algorithm learned you engage with? Name three things that are probably significant and happening that your feed has shown you nothing about this month.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const feedback = {
+  1:{
+    a:{headline:"Accuracy isn't the metric.",detail:"Algorithms aren't designed to surface truth — they're designed to surface engagement. Accurate content that's dull will be buried. Emotionally activating content that's misleading will be amplified. These are two different optimisation targets, and the platforms have chosen the one that generates revenue."},
+    b:{headline:"Correct. Engagement is the product.",detail:"Every interaction — a click, a pause, a share, a reaction — feeds the algorithm data about what keeps you on the platform. The goal is time spent and ad impressions, not your being well-informed. Understanding this reframes everything you see in a feed."},
+    c:{headline:"Balance isn't the goal.",detail:"Balanced content is often less emotionally engaging than partisan or outrage-generating content. A system optimised for engagement will naturally deprioritise balance. The illusion of balance is sometimes maintained, but it isn't what the algorithm is selecting for."},
+    d:{headline:"Community interest is a proxy, not the goal.",detail:"What your friends engage with does influence your feed — but the algorithm is selecting for what generates the most engagement, not for what represents your community's most thoughtful interests. The two often differ, and when they do, engagement wins."}
+  },
+  2:{
+    a:{headline:"Equal treatment is not the system's logic.",detail:"Algorithmic systems don't apply equal treatment — they amplify what works. If outrage content generates three times the engagement, showing it equally alongside balanced content is leaving revenue on the table. The system is designed to follow the data."},
+    b:{headline:"Suppression would reduce the metric the system is built to maximise.",detail:"Suppressing high-engagement content would require the platform to prioritise user wellbeing over engagement metrics. That's a policy choice that conflicts with the underlying business model — and historically, it's a choice platforms have been slow to make."},
+    c:{headline:"Correct. Engagement beats wellbeing in the algorithm's calculus.",detail:"This is the documented reality of how recommendation and ranking systems operate. The algorithm learned that outrage works and optimised for it. This isn't malice — it's what happens when you build a system that maximises engagement with no constraints on how it achieves that goal."},
+    d:{headline:"Platforms are not structured to self-report risks.",detail:"Regulatory transparency would require platforms to surface findings that could invite scrutiny of their core business model. The incentive structure runs in the opposite direction — toward minimising external visibility of how the algorithm operates."}
+  },
+  3:{
+    a:{headline:"Political extremism is real — but that doesn't explain Maya's bubble.",detail:"Even if polarisation has increased, that wouldn't explain why Maya only sees one side of it. The filter bubble specifically explains why one perspective is amplified in her feed while alternatives are made invisible — regardless of what's happening in the wider world."},
+    b:{headline:"Active curation and passive algorithmic shaping are different things.",detail:"There's a difference between deliberately following a diverse set of thoughtful voices and having an algorithm learn what you engage with and show you more of it. The second process is happening whether or not the first is. Most people haven't actively curated a bubble — the algorithm built it for them."},
+    c:{headline:"Correct. The bubble makes moderation invisible.",detail:"A critical effect of filter bubbles is that they don't just amplify your own side — they make moderate versions of opposing views disappear. What's left is either nothing or the most extreme representatives of the other side, which makes disagreement feel incomprehensible. The algorithm created that effect."},
+    d:{headline:"'Mainstream' is constructed by the algorithm.",detail:"What appears mainstream in a feed is a function of algorithmic selection, not an accurate sample of public opinion. The people Maya follows represent the mainstream of her filter bubble, which may be a narrow slice of what people actually think."}
+  },
+  4:{
+    a:{headline:"Coordination isn't required for this effect.",detail:"The rabbit hole pattern doesn't need a conspiracy. It's an emergent property of a recommendation system optimising for watch time. The algorithm doesn't need to target James deliberately — it just keeps recommending the next most engaging thing, and escalation is what works."},
+    b:{headline:"Correct. Escalation is an output of engagement optimisation.",detail:"This pattern has been documented across multiple platforms and multiple topics. The algorithm isn't choosing extremism ideologically — it's following engagement signals. Extreme content often retains attention more effectively than moderate content, so the recommendation engine escalates toward it. James didn't lead the system there; the system led him."},
+    c:{headline:"The algorithm isn't inferring preferences — it's maximising retention.",detail:"The system isn't interpreting James's interests. It's observing that he kept watching, and recommending content with even higher predicted engagement. His 'preference' for deeper content is a story about him; the algorithm's logic is purely about retention time."},
+    d:{headline:"Extreme content's popularity is itself shaped by algorithmic amplification.",detail:"It's circular to say extreme content appears in recommendations because it's popular — algorithmic amplification is part of what makes it popular. The recommendation system creates the conditions that make certain content appear mainstream within a particular feed."}
+  },
+  5:{
+    a:{headline:"Framing this as individual laziness misses the structural cause.",detail:"The asymmetry between spread of misinformation and spread of corrections is consistent enough across contexts that individual laziness can't explain it. Something structural is happening. The architecture of sharing — frictionless, emotionally triggered — is designed to act before reflection intervenes."},
+    b:{headline:"Craft matters less than emotional charge.",detail:"Corrections are structurally disadvantaged regardless of how well-written they are. They arrive after the emotional arousal of the original has already triggered mass sharing. They're also less novel — they're telling a story that fewer people haven't already heard a version of."},
+    c:{headline:"Correct. Emotion precedes verification, and corrections can't compete.",detail:"This finding has been replicated across multiple studies and platforms. False news is more novel and more emotionally arousing — it was designed to provoke. By the time correction is available, the sharing has largely already happened. The architecture of the platform rewards the first emotional hit, not subsequent accuracy."},
+    d:{headline:"Deliberate suppression isn't required to explain this.",detail:"You don't need to assume platforms deliberately hide corrections to explain the asymmetry. The mechanics of emotional arousal, novelty, and frictionless sharing are sufficient. Assuming deliberate suppression before exhausting structural explanations is itself a thinking pattern worth noticing."}
+  },
+  6:{
+    a:{headline:"Suppression would require prioritising civic responsibility over the core metric.",detail:"This would be admirable — and some platforms have made partial moves in this direction under public and regulatory pressure. But the baseline prediction, given the incentive structure, is that engagement will be protected. Civic responsibility and engagement maximisation frequently conflict."},
+    b:{headline:"Further study is a common delay tactic when findings threaten the business model.",detail:"Commissioning additional research is a structurally predictable response when a finding creates tension with the company's interests. It delays having to act while appearing to take the issue seriously. This is a well-documented pattern in corporate responses to inconvenient evidence."},
+    c:{headline:"Correct. The incentive structure predicts continued amplification.",detail:"This isn't cynicism — it's structural analysis. When a system is optimised to maximise a specific metric, it will resist changes that reduce that metric, even if those changes would improve social outcomes. The platform isn't evil; it's an optimisation machine running the programme it was built to run."},
+    d:{headline:"Public statements and structural change are different things.",detail:"Platforms have issued many statements acknowledging problems with their amplification effects. Statements don't change the underlying optimisation target. Without changing what the algorithm is designed to maximise, statements are narrative management, not structural reform."}
+  },
+  7:{
+    a:{headline:"Trending mechanics are vulnerable to gaming.",detail:"Treating trends as genuine signals of public sentiment is a documented vulnerability. Bot networks, coordinated campaigns, and astroturfing operations have successfully gamed trending mechanics across multiple platforms, multiple times. The mechanics were not designed with adversarial use in mind."},
+    b:{headline:"News outlets responding to apparent trends aren't necessarily complicit.",detail:"Journalists reporting on a trending hashtag are doing their job as they understand it. The failure here is in the assumption that trends reliably indicate genuine sentiment — not malice. The solution is better trend verification, not attribution of complicity."},
+    c:{headline:"Correct. Manufactured consensus influences real behaviour.",detail:"This is the core mechanism. Once a trending topic creates the appearance of consensus, real people respond to that appearance as if it were real. Media coverage follows. Politicians respond. The manufactured consensus becomes a lever for shaping actual discourse, independent of the organic sentiment that originally triggered it — or didn't."},
+    d:{headline:"Astroturfing and bot campaigns span the political spectrum.",detail:"Attributing these tactics to fringe actors misses the documented reality: coordinated inauthentic behaviour has been found across political ideologies, nation-state actors, and commercial campaigns. The tools are available to any sufficiently motivated actor with resources."}
+  },
+  8:{
+    a:{headline:"All large platforms face the same structural incentives.",detail:"Switching platforms doesn't escape the underlying economics. Any platform built on advertising revenue tied to engagement faces the same structural pressure to amplify emotionally activating content. The problem is the business model, not the specific platform — and the business model follows Sofia wherever she goes."},
+    b:{headline:"Narrowing to confirmation is itself a form of being used.",detail:"Only following accounts that confirm existing beliefs is what the algorithm already nudges toward — it's compliance with the bubble, not escape from it. This approach trades one form of manipulation for another: instead of being manipulated by outrage, you're being manipulated by comfort."},
+    c:{headline:"Correct. Friction is the practical tool.",detail:"You can't opt out of algorithms entirely while staying informed. What you can do is introduce deliberate friction between the algorithm's output and your automatic response. Direct navigation to sources, pausing before sharing, noticing emotional activation — these practices create the gap where judgment operates. Small, consistent, and genuinely effective."},
+    d:{headline:"Volume doesn't produce balance — it produces exhaustion.",detail:"Consuming more content from more sources doesn't create an averaging effect. Algorithms on different platforms are optimised for the same thing. More volume means more exposure to the same engagement-optimising mechanics, not cancellation of them. Overwhelm is a vulnerability, not a defence."}
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById('feedback-text-' + scenarioNum).textContent = fb.headline;
+      document.getElementById('feedback-detail-' + scenarioNum).textContent = fb.detail;
+      document.getElementById('feedback-' + scenarioNum).classList.add('visible');
+      const nextBtn = document.getElementById('next-' + scenarioNum);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function updateProgress() {
+  for (let i = 1; i <= totalSlides; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active', 'complete');
+    if (i === currentSlide) dot.classList.add('active');
+    else if (i < currentSlide) dot.classList.add('complete');
+  }
+}
+
+function showSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateProgress();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+  if (currentSlide > 1) showSlide(currentSlide - 1);
+}
+
+updateProgress();
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c7m4';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course7-module-4-hero-villain.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c7m5','1');window.location.href='course7-module-6-building-narrative-immunity.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

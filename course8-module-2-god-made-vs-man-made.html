@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 8 · Module 2 · God-Made vs. Man-Made</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:500}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:720px;margin:0 auto;padding:72px 48px 120px}
+.slide-num{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:40px;letter-spacing:.06em}
+.slide h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:32px}
+.slide h1 em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.15rem;line-height:1.75;color:var(--ink);margin-bottom:32px;font-weight:300}
+.body-text{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:24px}
+.divider{width:40px;height:1px;background:var(--accent);margin:40px 0}
+.scenario-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;font-family:var(--sans)}
+.scenario-text{font-family:var(--serif);font-size:1.3rem;font-weight:300;line-height:1.6;margin-bottom:36px;padding-left:20px;border-left:2px solid var(--line)}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.choice{background:transparent;border:1px solid var(--line);padding:18px 22px;text-align:left;cursor:pointer;
+font-family:var(--sans);font-size:.95rem;line-height:1.5;color:var(--ink);transition:all .2s ease;border-radius:2px}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--soft)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback{display:none;border-top:1px solid var(--line);padding-top:28px;margin-top:8px}
+.feedback.visible{display:block;animation:fadeUp .4s ease}
+.feedback-headline{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:10px}
+.feedback-detail{font-size:.95rem;line-height:1.75;color:var(--muted)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{background:none;border:none;font-family:var(--sans);font-size:.9rem;color:var(--muted);cursor:pointer;
+letter-spacing:.04em;padding:8px 0;transition:color .2s}
+.nav-btn:hover:not(:disabled){color:var(--ink)}.nav-btn:disabled{opacity:.2;cursor:default}
+.nav-btn.primary{color:var(--ink);font-weight:500}
+.completion{text-align:center;padding:80px 48px}
+.completion-icon{font-size:3rem;margin-bottom:32px}
+.completion h2{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:20px}
+.completion p{font-size:1rem;line-height:1.8;color:var(--muted);max-width:480px;margin:0 auto 40px}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 08 &middot; Food Is Medicine &middot; Module <strong>02</strong> &middot; God-Made vs. Man-Made</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 8 &middot; Food Is Medicine</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c8m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course8-module-6-healing-foods-and-herbs.html">Healing Foods & Herbs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course8-module-7-children-and-family-nutrition.html">Children & Family Nutrition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course8-module-8-detoxing-and-transition.html">Detoxing & Transition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m9" data-mn="9">
+      <span class="sidebar-mod-n">09</span>
+      <a class="sidebar-mod-a" href="course8-module-9-building-your-alkaline-life.html">Your Alkaline Life</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide-1" data-slide="1">
+  <div class="slide-inner">
+    <div class="slide-num">01 / 09</div>
+    <h1>Electric <em>Food</em></h1>
+    <p class="lead">The healing tradition this course is built upon made a distinction that modern science is slowly arriving at: there is food that the body recognises as alive, and food that the body does not. The first feeds you. The second burdens you.</p>
+    <div class="divider"></div>
+    <p class="body-text">Natural, original foods — fruits, vegetables, seeds, roots, and herbs that grow as nature designed them — carry minerals, enzymes, and living compounds in a form the body was built to receive. These are sometimes called electric foods: foods that carry genuine life force and transfer it to those who eat them.</p>
+    <p class="body-text">Hybrid, processed, and chemically altered foods are something different. They may look like food. They may taste like food. But the body's capacity to receive full nourishment from them is compromised — because they were not made by the intelligence that made the body. The further a food drifts from its natural form, the further it drifts from being able to truly feed you.</p>
+    <div class="scenario-label">Scenario 01</div>
+    <p class="scenario-text">A nutritionist dismisses the concept of "electric" or "living" foods as unscientific, arguing that a calorie is a calorie and the body processes all food the same way. What does the evidence actually show?</p>
+    <div class="choices" data-scenario="1">
+      <button class="choice" data-answer="a">The nutritionist is correct — all food provides the same quality of nourishment as long as macronutrients are equivalent</button>
+      <button class="choice" data-answer="b">Whole, natural foods contain enzymes, phytonutrients, and mineral complexes that work synergistically in the body — processed foods lack or destroy these, producing measurably different biological responses</button>
+      <button class="choice" data-answer="c">The concept of living food is purely spiritual and has no physical basis</button>
+      <button class="choice" data-answer="d">The difference between natural and processed food only matters for people with existing health conditions</button>
+    </div>
+    <div class="feedback" id="feedback-1">
+      <p class="feedback-headline" id="feedback-text-1"></p>
+      <p class="feedback-detail" id="feedback-detail-1"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()" disabled>← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="slide-2" data-slide="2">
+  <div class="slide-inner">
+    <div class="slide-num">02 / 09</div>
+    <h1>The Question of <em>Hybrid Foods</em></h1>
+    <p class="lead">Not all food that appears natural is original. Hybridisation — the crossing of plant varieties to produce new traits — has created many of the staple foods we now consider normal. But normal is not the same as natural.</p>
+    <div class="divider"></div>
+    <p class="body-text">Seedless grapes, seedless watermelons, most varieties of commercial corn, most wheat, and many popular fruits are hybrids that do not exist in nature without human intervention. They cannot reproduce on their own — the absence of seeds is itself a sign of manipulation. Hybrid foods are often higher in sugar and starch than their natural ancestors, and lower in the mineral content that makes a food genuinely nourishing.</p>
+    <p class="body-text">The healing tradition taught that hybrid foods — because they exist outside nature's original design — tend to be acid-forming in the body, contributing to the acidic internal environment that is associated with disease. Returning to original, non-hybrid foods is part of returning to alignment with what the body was designed to receive.</p>
+    <div class="scenario-label">Scenario 02</div>
+    <p class="scenario-text">Kezia has been eating seedless grapes daily, thinking she is making a healthy choice because they are fruit. What might the healing tradition say about this choice compared to eating a small bunch of naturally seeded fruit?</p>
+    <div class="choices" data-scenario="2">
+      <button class="choice" data-answer="a">All fruit is equally healthy — the presence or absence of seeds makes no nutritional difference</button>
+      <button class="choice" data-answer="b">Seedless grapes are a hybrid that does not exist in nature — they tend to be higher in sugar and lower in minerals than seeded varieties, and the seeds themselves contain beneficial compounds the hybrid has lost</button>
+      <button class="choice" data-answer="c">Seedless fruit is better because it is more convenient and contains fewer compounds the body has to process</button>
+      <button class="choice" data-answer="d">The only thing that matters is the fibre content, which is the same in both</button>
+    </div>
+    <div class="feedback" id="feedback-2">
+      <p class="feedback-headline" id="feedback-text-2"></p>
+      <p class="feedback-detail" id="feedback-detail-2"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="slide-3" data-slide="3">
+  <div class="slide-inner">
+    <div class="slide-num">03 / 09</div>
+    <h1>Reading the <em>Ingredient List</em></h1>
+    <p class="lead">The ingredient list on a food package is a map of how far that food has travelled from nature. Learning to read it is one of the most practical skills in nutritional literacy.</p>
+    <div class="divider"></div>
+    <p class="body-text">A real food has no ingredient list, or a very short one. An apple is an apple. A handful of walnuts is walnuts. When a food requires a list of thirty ingredients to describe what it is, it is no longer a food in the original sense — it is a product designed in a laboratory to replicate the experience of eating while delivering very little of the nourishment.</p>
+    <p class="body-text">The simple rule from the healing tradition: if you cannot imagine it growing from the earth, or if your great-grandmother would not have recognised it as food, approach it with caution. Ingredients you cannot pronounce, numbers in place of names, and substances that exist only in chemistry laboratories are signs that what you are holding is man-made — assembled, not grown.</p>
+    <div class="scenario-label">Scenario 03</div>
+    <p class="scenario-text">Two products sit side by side in a supermarket. Product A: oats, water, sea salt. Product B: oats (42%), glucose syrup, palm oil, sugar, skimmed milk powder, emulsifier (E471), flavouring, colour (E150d). Both are marketed as "healthy oat products." What does the ingredient list tell you?</p>
+    <div class="choices" data-scenario="3">
+      <button class="choice" data-answer="a">Both are essentially the same — the extra ingredients in Product B are just for taste and texture</button>
+      <button class="choice" data-answer="b">Product B has had recognisable food significantly diluted by processed sugars, industrial oils, synthetic emulsifiers, and artificial additives — it is a manufactured product that uses oats as a minority ingredient, not a food</button>
+      <button class="choice" data-answer="c">Product B is probably more nutritious because it contains more ingredients</button>
+      <button class="choice" data-answer="d">The "E numbers" in Product B are simply the scientific names for natural compounds — they are nothing to be concerned about</button>
+    </div>
+    <div class="feedback" id="feedback-3">
+      <p class="feedback-headline" id="feedback-text-3"></p>
+      <p class="feedback-detail" id="feedback-detail-3"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide-4" data-slide="4">
+  <div class="slide-inner">
+    <div class="slide-num">04 / 09</div>
+    <h1>What Refining <em>Removes</em></h1>
+    <p class="lead">Refining takes something whole and strips it down. What is left may look clean, may taste mild, may last longer on a shelf — but the most important parts have been removed.</p>
+    <div class="divider"></div>
+    <p class="body-text">White flour begins as a whole grain containing the bran — rich in fibre and B vitamins — and the germ — rich in minerals, healthy fats, and vitamin E. Refining removes both, leaving only the starchy endosperm. The result is a product that raises blood sugar rapidly, provides almost no nutrients, and has had its living intelligence extracted. Manufacturers sometimes add synthetic vitamins back, but a supplement pressed into depleted flour is not the same as the whole food.</p>
+    <p class="body-text">The same process applies to white rice, refined sugar cane, and white salt. Nature packages nutrients together for a reason — they work synergistically, each supporting the absorption and function of the others. Refining breaks that package apart and discards the parts industry finds inconvenient.</p>
+    <div class="scenario-label">Scenario 04</div>
+    <p class="scenario-text">A bread manufacturer removes the bran and germ from wheat to produce white flour, then adds back synthetic B vitamins and iron during processing. The packaging says "fortified with vitamins and minerals." Is this equivalent to eating wholegrain bread?</p>
+    <div class="choices" data-scenario="4">
+      <button class="choice" data-answer="a">Yes — fortification restores the nutrients that were removed, so the end product is equivalent</button>
+      <button class="choice" data-answer="b">No — synthetic isolates added back after refining do not replicate the complex, synergistic nutrient matrix of the whole grain, and the fibre, enzymes, and co-factors that govern absorption are still absent</button>
+      <button class="choice" data-answer="c">Fortified white bread is actually superior because the added nutrients are in more concentrated form</button>
+      <button class="choice" data-answer="d">The difference is negligible for most people — only those with specific deficiencies need to consider it</button>
+    </div>
+    <div class="feedback" id="feedback-4">
+      <p class="feedback-headline" id="feedback-text-4"></p>
+      <p class="feedback-detail" id="feedback-detail-4"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide-5" data-slide="5">
+  <div class="slide-inner">
+    <div class="slide-num">05 / 09</div>
+    <h1>Whole Food vs. <em>Isolated Nutrients</em></h1>
+    <p class="lead">Nature does not make isolated nutrients. It makes whole foods — complex, interconnected systems of compounds that work together in ways that no laboratory has yet fully mapped.</p>
+    <div class="divider"></div>
+    <p class="body-text">The vitamin C in an orange does not arrive alone. It comes embedded in a matrix of bioflavonoids, enzymes, and co-factors that govern how it is absorbed and used. An ascorbic acid tablet contains one isolated compound, synthesised in a factory. The body recognises and uses the two differently.</p>
+    <p class="body-text">This principle — called food synergy — is why the healing tradition has always pointed toward whole food rather than supplements. A mango does not just contain beta-carotene; it contains hundreds of compounds that interact with each other and with the body in ways that a capsule cannot replicate. Eat the mango. Eat the herb. Eat the food. The intelligence is in the whole, not in the isolated part.</p>
+    <div class="scenario-label">Scenario 05</div>
+    <p class="scenario-text">Raj takes a daily multivitamin and eats a predominantly processed diet, reasoning that the supplement will cover any nutritional gaps. What is the flaw in this approach?</p>
+    <div class="choices" data-scenario="5">
+      <button class="choice" data-answer="a">This is a sound approach — supplements are designed to compensate for dietary gaps and do so effectively</button>
+      <button class="choice" data-answer="b">Supplements provide isolated synthetic compounds without the co-factors, enzymes, and synergistic compounds in whole food that govern absorption and biological activity — and they do nothing to address the inflammatory and disruptive compounds in the processed diet they are meant to compensate for</button>
+      <button class="choice" data-answer="c">The main problem is that he is not taking enough different supplements to cover all his needs</button>
+      <button class="choice" data-answer="d">Supplements are only needed by people who are already deficient — a varied diet makes them unnecessary regardless of food quality</button>
+    </div>
+    <div class="feedback" id="feedback-5">
+      <p class="feedback-headline" id="feedback-text-5"></p>
+      <p class="feedback-detail" id="feedback-detail-5"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="slide-6" data-slide="6">
+  <div class="slide-inner">
+    <div class="slide-num">06 / 09</div>
+    <h1>What Artificial Additives <em>Do</em></h1>
+    <p class="lead">Preservatives, artificial colours, synthetic flavour enhancers, emulsifiers — these chemicals exist in food products because they serve the manufacturer, not the person eating them. The body was not designed to process them.</p>
+    <div class="divider"></div>
+    <p class="body-text">Artificial additives extend shelf life, intensify flavour, improve appearance, and reduce production costs. They are extraordinarily profitable. What they are not is food. When the body encounters substances it does not recognise as food, it mounts a response — often inflammatory — to manage their presence. Over time, chronic exposure to multiple artificial compounds creates a cumulative burden that manifests as gut disruption, skin conditions, hormonal imbalance, and systemic inflammation.</p>
+    <p class="body-text">Children are particularly vulnerable. Their gut microbiomes are still developing, their livers are less equipped to process chemical loads, and their bodies are building at a rapid pace — from whatever materials, natural or synthetic, are available. Removing artificial additives from a child's diet often produces visible improvements in behaviour, focus, and immunity within weeks.</p>
+    <div class="scenario-label">Scenario 06</div>
+    <p class="scenario-text">A parent notices that after eating brightly coloured sweets and packaged snacks, their seven-year-old becomes hyperactive, then crashes in mood and energy. A paediatrician suggests this is just "normal child behaviour." What might be contributing?</p>
+    <div class="choices" data-scenario="6">
+      <button class="choice" data-answer="a">The paediatrician is correct — food additives have no proven effect on children's behaviour</button>
+      <button class="choice" data-answer="b">Studies have found significant links between artificial food colours and preservatives — particularly sodium benzoate — and increased hyperactivity in children; combined with a blood sugar spike from refined sugar, the behavioural pattern the parent is describing is well-documented</button>
+      <button class="choice" data-answer="c">The behaviour is likely genetic — some children simply have more energy than others</button>
+      <button class="choice" data-answer="d">Only children with ADHD are affected by food additives — this effect is not relevant for other children</button>
+    </div>
+    <div class="feedback" id="feedback-6">
+      <p class="feedback-headline" id="feedback-text-6"></p>
+      <p class="feedback-detail" id="feedback-detail-6"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="slide-7" data-slide="7">
+  <div class="slide-inner">
+    <div class="slide-num">07 / 09</div>
+    <h1>The Seed and <em>the Soil</em></h1>
+    <p class="lead">A natural food is only as good as the earth it grew in. Decades of industrial farming — heavy pesticide use, monoculture, synthetic fertilisers — have depleted the mineral content of agricultural soil. Even vegetables can now be nutritionally hollow compared to what they once were.</p>
+    <div class="divider"></div>
+    <p class="body-text">Studies comparing the mineral content of vegetables grown fifty years ago to those grown today show significant declines in iron, magnesium, calcium, and zinc. The plants grow — industrial fertilisers ensure that — but they grow large and fast, without the depth of mineral absorption that comes from rich, living soil. A tomato that grew in a week in nutrient-depleted soil is not the same food as a tomato that grew in a month in mineral-rich earth.</p>
+    <p class="body-text">Organic growing, natural composting, and traditional farming methods maintain living soil. Food grown this way retains more of what the body needs. Where possible, choosing organically grown, naturally cultivated food — and supporting those who grow it — is an extension of the same principle: stay as close to what nature made as possible.</p>
+    <div class="scenario-label">Scenario 07</div>
+    <p class="scenario-text">Ibrahim eats vegetables every day and believes his diet is excellent. However, all his vegetables are conventionally farmed, non-organic, and shipped from thousands of miles away. What might he be missing that he cannot see from looking at the food?</p>
+    <div class="choices" data-scenario="7">
+      <button class="choice" data-answer="a">Nothing — vegetables are vegetables, and the mineral content is the same regardless of how they were grown</button>
+      <button class="choice" data-answer="b">Conventionally farmed vegetables grown in depleted soil may carry significantly less mineral content than organically grown equivalents — the food looks the same but may nourish substantially less</button>
+      <button class="choice" data-answer="c">The only concern with conventional farming is pesticide residue — mineral content is unaffected</button>
+      <button class="choice" data-answer="d">Food loses nutrients during transport but not due to farming methods</button>
+    </div>
+    <div class="feedback" id="feedback-7">
+      <p class="feedback-headline" id="feedback-text-7"></p>
+      <p class="feedback-detail" id="feedback-detail-7"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="slide-8" data-slide="8">
+  <div class="slide-inner">
+    <div class="slide-num">08 / 09</div>
+    <h1>Recognising <em>Real Food</em></h1>
+    <p class="lead">The simplest test does not require a nutrition degree. It requires asking one question: did this exist before humans had factories?</p>
+    <div class="divider"></div>
+    <p class="body-text">A mango, a fig, a bunch of kale, a coconut, a handful of hemp seeds — these are real food. They grow. They contain seeds. They decay. Their ingredient list is themselves. The body has been receiving these foods for as long as humans have existed, and it knows precisely what to do with them.</p>
+    <p class="body-text">A product in a box with a shelf life of two years, thirty ingredients, and a flavour that could not exist in nature is man-made. It has been engineered to taste irresistible and to bypass the body's satiety signals. It serves the company that makes it. It does not serve the body that eats it. The more you move your plate toward the first category and away from the second, the more your body begins to function as it was designed to. That shift does not require perfection. It requires direction.</p>
+    <div class="scenario-label">Scenario 08</div>
+    <p class="scenario-text">Fatima wants to start eating more naturally but feels overwhelmed by conflicting nutritional advice. A simple framework is offered: if it grows from the earth in its original form and your ancestors would have recognised it as food, prioritise it. If it was made in a factory, minimise it. How useful is this framework as a starting point?</p>
+    <div class="choices" data-scenario="8">
+      <button class="choice" data-answer="a">It is too simplistic — modern nutrition is complex and requires detailed macronutrient tracking to be effective</button>
+      <button class="choice" data-answer="b">It is a powerful and practical starting point — it cuts through nutritional complexity with a principle that aligns the diet toward what the body was designed to receive, without requiring expert knowledge</button>
+      <button class="choice" data-answer="c">It only works for people who can afford organic food — it is not applicable for everyone</button>
+      <button class="choice" data-answer="d">The framework is outdated — modern food science has improved processed food to the point where the distinction no longer matters</button>
+    </div>
+    <div class="feedback" id="feedback-8">
+      <p class="feedback-headline" id="feedback-text-8"></p>
+      <p class="feedback-detail" id="feedback-detail-8"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: COMPLETION -->
+<div class="slide" id="slide-9" data-slide="9">
+  <div class="slide-inner">
+    <div class="completion">
+      <div class="completion-icon">◈</div>
+      <h2>Module 2 Complete</h2>
+      <p>You can now see the difference between what nature made and what industry assembled. Electric food, hybrid crops, the ingredient list, refining, food synergy, artificial additives, depleted soil — and the simple framework that cuts through all of it: closer to nature, closer to health.</p>
+      <p style="margin-top:16px;font-size:.9rem;color:var(--muted)">Course 08 &middot; Food Is Medicine &middot; Module 02 of 09</p>
+
+<div class="section-heading" style="margin-top:40px">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">Electric food &mdash; food that still carries the full energetic and nutritional signature of the living plant &mdash; is categorically different from food that has been processed, refined, or assembled by industry.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Refining removes the most nutritionally valuable parts of a food to extend shelf life and improve palatability. What is left is the caloric structure without the biological intelligence.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Whole foods contain synergistic nutrients that work together. Isolating one compound and adding it back to a processed food does not replicate what the whole food provides.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">The ingredient list is a map of industrial intervention. The longer it is, and the less recognisable the ingredients are as food, the further the product is from what the body knows how to process.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Soil health determines food quality. A vegetable grown in depleted soil is nutritionally different from the same vegetable grown in living, mineralised earth &mdash; regardless of how it looks.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">The simplest framework: closer to nature, closer to health. The question is not whether a food is organic or expensive &mdash; it is how many steps it has been through between the earth and your plate.</span></li>
+</ol>
+<div class="section-heading">Practice this week</div>
+<p class="body-text">Read the ingredient list on five packaged foods you currently eat regularly. For each one, ask: would I recognise every item on this list as food? If an ingredient requires a chemistry background to identify, note it. You are not committing to change anything yet &mdash; you are learning to see what is actually there.</p>
+<p class="body-text">Monthly: identify one processed food you eat regularly and find its whole-food equivalent. Spend one month swapping them. Note any differences in how you feel &mdash; in energy, digestion, or satiety &mdash; in the two weeks after the swap. Not to prove a point, but to gather your own data.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const feedback = {
+  1:{
+    a:{headline:"A calorie is not a calorie — the source and context matter enormously.",detail:"Two foods with identical calorie counts can produce completely different biological responses. White sugar and a sweet potato may contain similar amounts of carbohydrate, but one arrives with fibre, minerals, and phytonutrients that govern how the carbohydrate is absorbed and used. The body's response — insulin, inflammation, satiety, cellular repair — differs dramatically between them. Equating them by calorie count alone is a significant oversimplification."},
+    b:{headline:"Correct. Whole food contains a biological complexity that processed food lacks.",detail:"Phytonutrients, enzymes, mineral complexes, and living co-factors in whole food actively support cellular function in ways that processed food cannot replicate. Studies comparing populations eating predominantly whole food diets with those eating predominantly processed food diets show consistent differences in inflammation markers, disease rates, and longevity — not because of calories, but because of what the food is made of and how the body responds to it."},
+    c:{headline:"The physical basis for the difference between living and processed food is well-documented.",detail:"The concept of living or electric food points toward something measurable: enzyme activity, bioavailable mineral content, antioxidant complexity, and the presence of intact phytonutrients. These are not spiritual abstractions — they are compounds that affect biological processes. Processed food, through heat, chemical treatment, and refining, destroys or removes many of these compounds. The difference is physical."},
+    d:{headline:"The difference between natural and processed food affects everyone, not just those already unwell.",detail:"It is true that people with existing conditions are often more visibly affected by dietary quality. But the processes that lead to those conditions — chronic inflammation, mineral depletion, gut disruption — accumulate in everyone eating a poor diet. The absence of visible symptoms does not mean the absence of damage; it means the body is still compensating."}
+  },
+  2:{
+    a:{headline:"The presence or absence of seeds reflects whether a food exists in its natural form.",detail:"Seeds are not incidental. They are how a plant reproduces — and the act of removing them requires human intervention that fundamentally alters the plant's structure, sugar content, and mineral profile. The convenience of seedless fruit comes at a nutritional cost that is worth understanding."},
+    b:{headline:"Correct. Seeds are a sign of original design — and the compounds in them matter.",detail:"Grape seeds contain oligomeric proanthocyanidins — powerful antioxidants — as well as oils and minerals that the seedless variety has lost. Seedless grapes are also typically bred for sweetness, meaning higher sugar content than naturally seeded varieties. This is not to say they are harmful in moderation, but choosing naturally seeded fruit where possible is a meaningful nutritional choice, not a trivial one."},
+    c:{headline:"Convenience is not a nutritional value.",detail:"The idea that the body benefits from having fewer compounds to process assumes that all compounds in natural food are burdens. They are not. The seeds, the bitter compounds, the tannins, the complex sugars in natural food serve biological functions — many of them protective. Removing them for convenience removes part of what makes the food genuinely nourishing."},
+    d:{headline:"Fibre is one component of food value — not the whole picture.",detail:"Reducing the comparison between seeded and seedless fruit to fibre content ignores the antioxidant compounds in seeds, the mineral differences, and the sugar content variation. Nutritional quality is multidimensional, and a single measure rarely tells the full story."}
+  },
+  3:{
+    a:{headline:"Additional ingredients in processed food are not additions to a whole food — they are replacements for it.",detail:"Product B uses oats as a minority component and fills the rest with glucose syrup, palm oil, and synthetic additives. These are not neutral flavour or texture agents — glucose syrup is a highly processed sugar that spikes blood glucose; palm oil is a saturated fat associated with inflammation; synthetic emulsifiers have been linked to gut microbiome disruption. These are not additions. They are substitutions."},
+    b:{headline:"Correct. The ingredient list reveals what a product actually is.",detail:"Product B is a confectionery product built around a healthy-sounding name. The word 'oat' appears on the front, but oats are less than half the product by weight. Everything else — the glucose syrup, the palm oil, the emulsifiers, the artificial colours — is there to make a cheap product taste appealing and last longer. Reading ingredient lists this way is a fundamental food literacy skill."},
+    c:{headline:"More ingredients in processed food means more additives, not more nourishment.",detail:"The relationship between number of ingredients and nutritional quality runs in the opposite direction for processed food. A long ingredient list in a packaged product almost always means more processing, more artificial compounds, and less resemblance to natural food. Nutritional quality comes from the quality of each ingredient, not the quantity."},
+    d:{headline:"E numbers are a mixed category — some are natural, many are synthetic, and some have documented concerns.",detail:"While some E numbers do refer to natural compounds — E300 is vitamin C, for example — others refer to synthetic chemicals, petroleum derivatives, and compounds with documented effects on gut bacteria and behaviour. Blanket reassurance that E numbers are 'just scientific names' is not accurate. The specific compound matters, and several of the most common ones in processed food have legitimate concerns attached to them."}
+  },
+  4:{
+    a:{headline:"Fortification is not restoration — it is partial replacement with inferior substitutes.",detail:"The bran and germ of a whole grain contain dozens of interdependent compounds. Fortification typically replaces three to five of these with synthetic versions. The fibre structure that slows carbohydrate absorption is gone. The natural vitamin E in the germ is gone. The enzymes are gone. What is added back is a small selection of isolated synthetics that do not replicate the function of the whole."},
+    b:{headline:"Correct. Synergy is what refining destroys — and fortification cannot restore it.",detail:"The bran and germ are not just the location of certain nutrients — they are the context in which those nutrients function. Fibre slows absorption of the starch. Minerals govern enzyme activity. Co-factors in the germ support how B vitamins are used. When these are stripped away and a handful of synthetic isolates are added back, the result is a fundamentally different food that behaves differently in the body — producing faster blood sugar spikes, less satiation, and fewer downstream benefits."},
+    c:{headline:"Concentration is not the same as bioavailability or biological usefulness.",detail:"A higher concentration of an isolated synthetic vitamin does not mean the body absorbs or uses more of it. Without the co-factors that govern absorption — which are present in whole food and absent in fortified refined products — much of the added nutrient may pass through unused. And the rapid blood sugar response of white flour is not improved by adding vitamins to it."},
+    d:{headline:"The difference between white and wholegrain food matters for everyone, not just those with deficiencies.",detail:"A diet built on refined grains creates a pattern of blood sugar spikes and drops, insufficient fibre for gut health, and chronic low-level mineral depletion. These effects accumulate. The absence of an immediate visible deficiency does not mean the body is thriving on refined food — it means it is compensating, at a cost that compounds over time."}
+  },
+  5:{
+    a:{headline:"Supplements compensate for some deficiencies — they do not replicate whole food nourishment.",detail:"Targeted supplementation can be genuinely useful for specific documented deficiencies. But a multivitamin taken alongside a processed diet is not equivalent to eating well. It does not address the inflammatory compounds the processed diet introduces, does not provide the synergistic compounds that govern nutrient absorption, and does not supply the hundreds of phytonutrients that whole food contains and no supplement catalogue lists."},
+    b:{headline:"Correct. Supplements address gaps — they cannot replicate the intelligence of whole food.",detail:"The problem with Raj's approach is twofold: the supplement provides isolated synthetics that the body uses less efficiently than food-matrix nutrients, and the processed diet continues to create the very conditions — inflammation, gut disruption, mineral depletion — that the supplement is attempting to patch. It is like trying to fix a leaking pipe by adding more water. The source of the problem remains unaddressed."},
+    c:{headline:"The answer is not more supplements — it is better food.",detail:"The solution to the limitations of isolated supplements is not a more comprehensive supplement protocol. It is food. Whole, natural food delivers hundreds of compounds in the ratios and contexts the body is equipped to use. No supplement regimen has successfully replicated the outcomes of a whole food diet in the long-term evidence."},
+    d:{headline:"The concept of a 'varied diet' only holds if the variation is in whole, natural foods.",detail:"A varied diet of processed food is still a processed food diet. Variety across artificially flavoured, refined, and chemically preserved products does not deliver the nutritional breadth that variety across whole, natural foods does. The principle applies to the quality of the food, not just the range of products."}
+  },
+  6:{
+    a:{headline:"The evidence on artificial food colours and hyperactivity is substantial enough to have prompted regulatory action.",detail:"The UK Food Standards Agency commissioned a landmark study — the Southampton study — that found significant links between certain artificial food colours and sodium benzoate (a common preservative) and increased hyperactivity in children. The European Union subsequently required warning labels on foods containing the colours studied. Claiming no proven effect misrepresents the available evidence."},
+    b:{headline:"Correct. The behavioural pattern described has documented nutritional causes.",detail:"The combination of artificial food colours, preservatives such as sodium benzoate, and refined sugar creates a well-recognised cluster of effects in children: rapid blood sugar spike producing hyperactivity, followed by a sharp drop producing irritability and fatigue, overlaid with the neurological effects of synthetic additives on developing brains. This is not anecdotal — it has been studied, replicated, and acted upon by regulatory bodies in multiple countries."},
+    c:{headline:"Genetics may influence a child's sensitivity — but the trigger in this case is dietary.",detail:"Some children are more sensitive to food additives and blood sugar fluctuation than others, and that variation may have a genetic component. But the pattern the parent is observing — consistently following consumption of specific foods — points toward diet as the active variable. Genetic predisposition does not preclude a dietary cause."},
+    d:{headline:"The effects of artificial additives on behaviour and focus are not limited to children with ADHD diagnoses.",detail:"The Southampton study and subsequent research found effects across children in the general population, not only those with existing ADHD diagnoses. A child does not need a diagnosis for their brain and gut to respond to synthetic chemicals. The developing nervous system is affected by what it encounters, regardless of diagnostic category."}
+  },
+  7:{
+    a:{headline:"Mineral content in vegetables is directly linked to the mineral content of the soil they grew in.",detail:"Plants absorb minerals from the soil through their root systems. If the soil is depleted — through repeated monoculture, synthetic fertiliser use, and failure to replenish organic matter — the plants grow but do not absorb the minerals that are not there. This is not theoretical: comparative analysis of vegetable mineral content between the mid-twentieth century and today shows consistent decline."},
+    b:{headline:"Correct. The same vegetable from different soil can be a fundamentally different food.",detail:"Research published in the British Food Journal compared nutrient data for 20 vegetables and fruits from 1930 to 1980, finding significant declines in calcium, magnesium, copper, and sodium. More recent studies have confirmed the trend continues. Ibrahim is eating vegetables — but the mineral density of those vegetables depends heavily on how and where they were grown. Organic cultivation in living soil typically produces measurably higher mineral content."},
+    c:{headline:"Farming methods affect mineral content, not only pesticide residue.",detail:"Pesticide residue is a legitimate concern with conventional farming. But it is separate from — and additional to — the question of mineral depletion. Synthetic fertilisers provide nitrogen, phosphorus, and potassium for plant growth but do not replenish the full spectrum of minerals that plants absorb from living soil. The two issues are related but distinct."},
+    d:{headline:"Both transport and farming methods affect nutritional content — and farming methods are the more significant factor.",detail:"Nutrient loss during transport is real, particularly for water-soluble vitamins. But the mineral content of a vegetable is determined primarily by the soil it grew in, not the distance it travelled afterward. A mineral-rich vegetable transported a long distance still contains more minerals than a mineral-poor vegetable grown locally in depleted soil."}
+  },
+  8:{
+    a:{headline:"Complexity in nutritional advice often serves the industry that generates it more than the people receiving it.",detail:"The nutritional supplement and processed food industries both benefit from people believing that eating well requires expert guidance, detailed tracking, and specialist products. The ancestral principle — eat what grows from the earth as it was created — predates every nutrition label and contradicts every product formulated to replace it. Simplicity here is not naivety. It is clarity."},
+    b:{headline:"Correct. A clear principle is more powerful than a complex system.",detail:"The framework Fatima has been offered aligns her choices with what the body recognises and can use — without requiring her to understand every compound in every food. It is not perfect or exhaustive, but as a direction of travel it is sound, practical, and backed by the consistent finding across every nutritional tradition: populations that eat primarily natural, minimally processed whole food have dramatically lower rates of the chronic diseases that dominate modern medicine."},
+    c:{headline:"The principle applies regardless of budget — it is a direction, not a prescription.",detail:"Organic food is not always accessible or affordable, and that is a real limitation worth acknowledging. But the principle does not require organic food to be useful. Choosing dried lentils over a ready meal, choosing a banana over a cereal bar, choosing tap water over a fizzy drink — these are all applications of the same direction that cost the same or less. The framework is about orientation, not perfection."},
+    d:{headline:"Modern food science has made processed food more profitable — not more nourishing.",detail:"The advances in food technology over recent decades have primarily served to make processed food more shelf-stable, more flavour-consistent, more visually appealing, and more addictive. They have not made it more aligned with what the body needs. The fundamental distinction — food that grew from the earth versus food assembled in a factory — has not been closed by food science. It has been widened."}
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById('feedback-text-' + scenarioNum).textContent = fb.headline;
+      document.getElementById('feedback-detail-' + scenarioNum).textContent = fb.detail;
+      document.getElementById('feedback-' + scenarioNum).classList.add('visible');
+      const nextBtn = document.getElementById('next-' + scenarioNum);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function updateProgress() {
+  for (let i = 1; i <= totalSlides; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active','complete');
+    if (i === currentSlide) dot.classList.add('active');
+    else if (i < currentSlide) dot.classList.add('complete');
+  }
+}
+
+function showSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+
+updateProgress();
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c8m1';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course8-module-1-you-are-what-you-eat.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c8m2','1');window.location.href='course8-module-3-the-alkaline-body.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

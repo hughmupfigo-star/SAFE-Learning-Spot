@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 7 · Module 1 · Narratives as Weapons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:860px;margin:0 auto;padding:80px 48px 120px}
+.slide-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:24px}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);
+line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-body{font-size:17px;line-height:1.75;color:var(--ink);margin-bottom:32px}
+.slide-body p{margin-bottom:20px}.slide-body p:last-child{margin-bottom:0}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}
+.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}
+.mechanism:last-of-type{border-bottom:1px solid var(--line)}
+.mechanism-name{font-family:var(--serif);font-size:28px;font-style:italic;font-weight:400;letter-spacing:-.015em;margin-bottom:16px}
+.mechanism-body{font-size:16px;line-height:1.7;color:var(--muted)}
+.cost-block{margin:28px 0;padding:24px 28px;border-left:2px solid var(--accent);background:var(--soft)}
+.cost-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.cost-body{font-size:15px;line-height:1.65;color:var(--ink)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}
+.voice-block::before{content:'"'  ;position:absolute;top:-8px;left:24px;font-family:var(--serif);
+font-size:72px;color:var(--accent);line-height:1;font-style:italic}
+.voice-text{font-family:var(--serif);font-size:18px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);margin-bottom:12px}
+.voice-attr{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.scenario-block{margin:48px 0;padding:40px;border:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.scenario-q{font-family:var(--serif);font-size:22px;line-height:1.45;font-weight:400;font-style:italic;margin-bottom:32px}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{padding:18px 24px;border:1px solid var(--line);background:var(--paper);font-family:var(--sans);
+font-size:15px;line-height:1.5;text-align:left;cursor:pointer;transition:all .2s ease;color:var(--ink)}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback-block{margin-top:28px;padding:28px 32px;background:var(--soft);border-left:3px solid var(--accent);display:none}
+.feedback-block.visible{display:block}
+.feedback-headline{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:12px;font-style:italic}
+.feedback-detail{font-size:15px;line-height:1.7;color:var(--muted)}
+.nav-row{display:flex;gap:16px;margin-top:40px;align-items:center}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--ink);
+background:none;color:var(--ink);padding:14px 28px;cursor:pointer;transition:all .2s ease;text-transform:uppercase}
+.nav-btn:hover{background:var(--soft)}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#222}.nav-btn:disabled{opacity:.3;cursor:default}
+.completion-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;
+min-height:80vh;text-align:center;padding:80px 48px}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;color:var(--accent);font-style:italic}
+.complete-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:400;margin:32px 0 20px;letter-spacing:-.02em}
+.complete-body{font-size:17px;line-height:1.7;color:var(--muted);max-width:560px}
+.divider{width:48px;height:1px;background:var(--line);margin:40px auto}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+
+<header class="module-header">
+<div class="module-tag">Course 07 &middot; Media &amp; Narrative Control &middot; Module <strong>01</strong> &middot; Narratives as Weapons</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 7 &middot; Media &amp; Narrative Control</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c7m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course7-module-1-narratives-as-weapons.html">Narratives as Weapons</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course7-module-2-architecture-of-propaganda.html">Architecture of Propaganda</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course7-module-3-media-literacy.html">Media Literacy</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course7-module-4-hero-villain.html">Hero and Villain</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course7-module-5-algorithmic-narratives.html">Algorithmic Narratives</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c7m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course7-module-6-building-narrative-immunity.html">Narrative Immunity</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1: What a Narrative Actually Is -->
+<section class="slide active" data-slide="1">
+<div class="slide-inner">
+<div class="slide-label">Module 01 · Slide 01</div>
+<h1 class="slide-title">What a Narrative Actually Is</h1>
+<div class="slide-body">
+<p>The word narrative is used loosely — as a synonym for story, account, or perspective. But narrative is something more specific and more powerful than any of these. A story is a sequence of events. A narrative is the meaning-making structure imposed on those events: which ones count, in what order, who caused what, and what it all adds up to.</p>
+<p>The same events can be structured into entirely different narratives. A strike is either workers standing up for their dignity or agitators holding the economy hostage. A border crossing is either families fleeing danger or an invasion. A protest is either citizens demanding accountability or a mob threatening order. The events are not in dispute. The narrative determines what the events mean — and therefore what response is appropriate, who is responsible, and who deserves sympathy.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Whoever controls the narrative does not need to control the facts. They only need to control the frame — the structure that determines what the facts mean before anyone has examined them.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The frame precedes the content</div>
+<div class="mechanism-body">When you encounter a news story, a speech, or a social media post, the frame arrives before the content. The headline, the source, the tone, the image — these pre-load interpretation. By the time you reach the facts, you are already reading them through a structure that was placed around them before you arrived. The frame is not neutral. It is the most important editorial decision made, and it is usually the least examined one.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Narrative determines what questions are askable</div>
+<div class="mechanism-body">Within any narrative, certain questions feel natural and others feel irrelevant or offensive. The terrorism narrative makes "how do we stop them?" feel like the obvious question and "what conditions produced this?" feel like excuse-making. The economic growth narrative makes "how do we increase it?" feel urgent and "growth for whom?" feel ideological. The questions a narrative forecloses are often more revealing than the questions it encourages.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Narrative as the water you swim in</div>
+<div class="mechanism-body">The most powerful narratives are the ones that feel like common sense — like the way things simply are, rather than like a story someone is telling. The narrative of individual merit (success reflects effort and talent), the narrative of natural scarcity (there is never enough), the narrative of inevitable progress (things are getting better over time) — these are not obviously stories. They feel like descriptions of reality. That invisibility is what makes them so effective.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 01</div>
+<div class="scenario-q">A newspaper reports that a new government policy has "created 50,000 jobs." A second newspaper reports the same policy has "left 200,000 workers in precarious conditions." Both are reporting the same data. What is happening here?</div>
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a">One newspaper is reporting accurately and the other is misleading its readers</button>
+<button class="choice" data-answer="b">Both are selecting which facts to foreground to support a pre-existing narrative frame — the data is the same; what differs is the structure of meaning placed around it</button>
+<button class="choice" data-answer="c">This is normal journalistic balance — readers should read both and average out the truth</button>
+<button class="choice" data-answer="d">The second newspaper is being negative — focusing on problems rather than progress</button>
+</div>
+<div class="feedback-block" id="feedback-1">
+<div class="feedback-headline" id="feedback-text-1"></div>
+<div class="feedback-detail" id="feedback-detail-1"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn primary" id="next-1" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 2: The Architecture Before the Story -->
+<section class="slide" data-slide="2">
+<div class="slide-inner">
+<div class="slide-label">Module 01 · Slide 02</div>
+<h1 class="slide-title">The Architecture Before the Story</h1>
+<div class="slide-body">
+<p>Every narrative is built on a structure that exists before any specific story is told. This structure includes: who counts as a protagonist (whose perspective is centred, whose suffering matters), who counts as an antagonist (who is responsible, who is threatening), what counts as evidence (which sources are legitimate, which are fringe), and what counts as a solution (what range of responses is permissible to discuss).</p>
+<p>This architecture is almost never made explicit. It operates as background — as the shape of the container into which specific stories are poured. You can change every story in a newspaper while leaving the architecture intact, and the worldview it produces will be essentially unchanged. The architecture is the real editorial position.</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">You can fact-check every individual claim in a narrative and find nothing false, while the overall picture it produces is profoundly misleading — because the architecture, not the facts, is doing the shaping.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The protagonist slot</div>
+<div class="mechanism-body">Every narrative has a default protagonist — the person or group whose perspective structures the account, whose interests define what "the problem" is, and whose wellbeing determines what counts as a good outcome. In most mainstream economic reporting, the default protagonist is the investor or the market. In most crime reporting, the default protagonist is the law-abiding citizen threatened by disorder. The protagonist is never announced — they are simply present in the structure, determining what everything else means.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The solution space</div>
+<div class="mechanism-body">Narratives do not only shape how a problem is understood — they also delimit what solutions are conceivable. If a social problem is framed as a failure of individual behaviour, the solution space contains individual interventions: education, incentives, enforcement. If the same problem is framed as a structural failure, the solution space contains systemic changes. The narrative that dominates public discussion about a problem determines which solutions can be seriously proposed and which will feel absurd, dangerous, or irrelevant.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">What the architecture hides</div>
+<div class="mechanism-body">The most significant function of narrative architecture is not what it highlights but what it makes invisible. The architecture of most business journalism makes the interests of shareholders the natural centre of gravity — so the question of worker ownership, for instance, is simply not present as a live option to be considered. It is not argued against; it is absent. The architecture decides what enters the frame. What is outside the frame does not need to be refuted. It simply does not exist in the discussion.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 02</div>
+<div class="scenario-q">You are reading coverage of a housing crisis. Every article is factually accurate — prices, statistics, policy details are all correct. But every article frames the issue as a problem of supply: not enough homes being built. No article questions who owns the existing housing stock, or examines the role of investment purchasing. What is happening at the architectural level?</div>
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a">The journalists are being objective — they are reporting what the data shows</button>
+<button class="choice" data-answer="b">The architecture of the coverage has a built-in protagonist (the developer, the market) and a built-in solution space (build more) — which makes whole categories of question invisible without any single article being dishonest</button>
+<button class="choice" data-answer="c">The missing angles simply are not newsworthy — supply is the real issue</button>
+<button class="choice" data-answer="d">Readers should research investment purchasing separately — journalism cannot cover everything</button>
+</div>
+<div class="feedback-block" id="feedback-2">
+<div class="feedback-headline" id="feedback-text-2"></div>
+<div class="feedback-detail" id="feedback-detail-2"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-2" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 3: Narrative Controls Reality -->
+<section class="slide" data-slide="3">
+<div class="slide-inner">
+<div class="slide-label">Module 01 · Slide 03</div>
+<h1 class="slide-title">Narrative Controls Reality</h1>
+<div class="slide-body">
+<p>There is a tendency to think of narrative as downstream of reality — first things happen, then stories are told about them. This is partially true and substantially incomplete. Narratives do not only describe reality. Over time, they produce it.</p>
+<p>When a narrative tells you that certain people are dangerous, fear shapes the interactions between people that confirm the danger. When a narrative tells you that markets are self-correcting, policymakers make decisions that treat them as such — producing outcomes that then require further narrative work to explain. When a narrative tells you that your community is under threat, the threat becomes lived experience through the decisions made in response to it. Narrative and reality are not separate systems. They shape each other continuously.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The most powerful narratives are the ones that generate the conditions that make them appear true. They do not merely describe a world — they participate in building one.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The self-fulfilling narrative</div>
+<div class="mechanism-body">A narrative that certain young men from a particular neighbourhood are inherently criminal changes how police patrol that neighbourhood, how employers respond to applications, how teachers respond to those students. The outcomes that follow — higher arrest rates, lower employment, lower educational attainment — then appear as confirmation of the original narrative. The narrative did not predict the reality. It produced it through the cascade of decisions made by people who believed it.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The narrative that creates the enemy</div>
+<div class="mechanism-body">Political and military narratives often create the enemies they describe. A narrative of existential threat produces military build-up; military build-up is perceived as threat by the named enemy; the enemy responds with build-up of their own; which confirms the original threat narrative. Each side's response to the narrative about the other produces the behaviour that validates that narrative. The enemy is real by the time the cycle has run — but they were, at least partly, produced by the story told about them.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Narrative as policy pre-authorisation</div>
+<div class="mechanism-body">Before a policy can be implemented, it typically needs to be narratively prepared. The austerity measures of the 2010s required years of "the country has maxed out its credit card" and "we are all in this together" narrative work before the policies were politically viable. The narrative did not describe a pre-existing economic reality — it constructed the popular understanding of economic reality that made the policies feel necessary and fair. Policy follows narrative more reliably than it follows evidence.</div>
+</div>
+
+<div class="voice-block">
+<div class="voice-text">I spent years arguing about facts with people who disagreed with me. It took a long time to understand that we weren't disagreeing about facts at all. We were operating inside completely different narrative structures. The facts weren't the problem. The container was.</div>
+<div class="voice-attr">— workshop participant, former political researcher</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 03</div>
+<div class="scenario-q">A decade of media coverage describes welfare recipients as primarily people who "choose not to work." Employment policy tightens, support becomes harder to access, and stigma around poverty increases. Ten years later, the data shows lower workforce participation and worse outcomes for people in poverty. A politician cites this as proof that welfare "doesn't work." What is the most complete analysis of what happened?</div>
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a">The data confirms the original narrative — welfare dependency is a real phenomenon</button>
+<button class="choice" data-answer="b">The narrative shaped the policy that produced the outcomes that are now cited as evidence for the narrative — the data is a product of the story, not a test of it</button>
+<button class="choice" data-answer="c">This is a complex policy debate where both sides have valid points</button>
+<button class="choice" data-answer="d">The media coverage was accurate — it reflected a genuine social reality</button>
+</div>
+<div class="feedback-block" id="feedback-3">
+<div class="feedback-headline" id="feedback-text-3"></div>
+<div class="feedback-detail" id="feedback-detail-3"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-3" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 4: The Emotion Is the Mechanism -->
+<section class="slide" data-slide="4">
+<div class="slide-inner">
+<div class="slide-label">Module 01 · Slide 04</div>
+<h1 class="slide-title">The Emotion Is the Mechanism</h1>
+<div class="slide-body">
+<p>Narratives do not work primarily through argument. They work through emotion. Fear, outrage, pride, shame, hope, disgust — these are not the side effects of a narrative. They are the delivery system. A story that makes you feel has already bypassed much of your capacity for critical evaluation before you have consciously engaged with it.</p>
+<p>This is not a flaw in human psychology that education can fix. Emotion is how meaning is made. We are not broken because stories move us. The question is not how to stop being moved — it is how to recognise when an emotional response is being deliberately engineered, and what that engineering is in service of.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The most effective narrative weapon is not the lie. It is the true story told in a way that produces a specific emotional state — because that emotional state then does the interpretive work that the narrator needed done.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Fear as the primary tool</div>
+<div class="mechanism-body">Fear is the most reliably effective emotional mechanism in narrative because it activates the parts of the nervous system least suited to critical evaluation. A frightened person seeks safety, not accuracy. They look for clear threats and clear protectors. They tolerate simplifications that a calm person would question. Narratives designed to produce fear — of crime, invasion, economic collapse, cultural change, physical danger — do not need to make compelling arguments. They need to make the fear feel immediate and the protection feel attainable.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Outrage as engagement and bonding</div>
+<div class="mechanism-body">Outrage serves a dual function in narrative: it drives engagement (outraged people share, comment, return) and it bonds a group (shared enemies produce shared identity). The political and media economy has discovered that outrage is among the most reliable generators of attention and loyalty. A narrative that produces outrage does not need to be true or well-evidenced — it needs to point at a sufficiently credible target and provide enough detail to feel specific. The rest of the cognitive work is done by the outrage itself.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Pride and shame as identity tools</div>
+<div class="mechanism-body">Narratives that invoke collective pride ("we are the greatest nation," "we stand for freedom") or collective shame ("we have betrayed our values," "we are losing who we are") reach into identity. They make the narrative personal — not just a story about events out there but a story about who you are and whether you measure up. Once a narrative is tied to identity, evaluating it critically feels like self-criticism, and rejecting it feels like self-betrayal. The emotional stakes have been raised beyond what ordinary fact-checking can reach.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 04</div>
+<div class="scenario-q">You read a news article about a violent crime. The article is factually accurate but includes extensive personal detail about the victim's family, a photograph of their home, and a quote from a grieving parent. By the end you feel genuine distress and a strong sense that something must be done. What is worth examining in this response?</div>
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a">Nothing — emotional responses to genuine suffering are appropriate and should inform action</button>
+<button class="choice" data-answer="b">The emotional response is real and legitimate, but the framing choices that produced it — the personal details, the photograph, the quote — are also editorial decisions that shape what "something must be done" ends up meaning</button>
+<button class="choice" data-answer="c">The distress means the article was manipulative — factual reporting should be unemotional</button>
+<button class="choice" data-answer="d">The response is appropriate — the article was accurate and the emotion it produced reflects the reality of the situation</button>
+</div>
+<div class="feedback-block" id="feedback-4">
+<div class="feedback-headline" id="feedback-text-4"></div>
+<div class="feedback-detail" id="feedback-detail-4"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-4" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 5: The Narrative You Don't Notice -->
+<section class="slide" data-slide="5">
+<div class="slide-inner">
+<div class="slide-label">Module 01 · Slide 05</div>
+<h1 class="slide-title">The Narrative You Don't Notice</h1>
+<div class="slide-body">
+<p>There are narratives you can see — the obvious propaganda, the transparent spin, the story that is clearly serving someone's interest. These are not the most dangerous kind. You can defend against what you can see.</p>
+<p>The most powerful narratives are the ones that feel like descriptions of reality rather than stories about it. They are the background assumptions so widely shared that questioning them seems eccentric or confused. They have the texture of common sense. They are the water — and you are the fish.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Every era has narratives so dominant that most people cannot see them as narratives at all. The people inside them experience them as simply the way things are. The people who challenge them are seen not as thinking differently but as being wrong about reality.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The naturalisation of the existing order</div>
+<div class="mechanism-body">Perhaps the most pervasive invisible narrative in modern societies is that the current distribution of wealth, power, and opportunity reflects something natural or earned rather than something historically produced through specific decisions, conflicts, and concentrations of power. This narrative does not need to be stated — it is embedded in which questions are taken seriously, which proposals are treated as realistic, and which alternatives are dismissed as utopian or dangerous. It feels like realism. It is a story.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The individual responsibility frame</div>
+<div class="mechanism-body">The narrative that locates the causes of social problems primarily in individual choices and behaviours is so thoroughly embedded in much of Western culture that proposing structural explanations feels like excusing bad behaviour. "Why do people make poor choices?" feels like a reasonable question. "Why does this system produce these outcomes?" feels ideological. The individual responsibility frame is not neutral — it systematically redirects attention from structural causes to individual failings, which benefits those whose interests are served by the existing structure.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Progress as direction of travel</div>
+<div class="mechanism-body">The narrative of inevitable linear progress — that things are generally getting better, that the direction of history is improvement, that setbacks are temporary — is both sometimes true and systematically deployed to manage dissatisfaction. When things are bad, the progress narrative says: this too shall pass. When someone challenges the system, the progress narrative says: change is already happening, incrementally, through proper channels. It makes urgency feel impatient and structural critique feel ungrateful. It has the texture of optimism. It functions as sedation.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">The test for invisible narrative</div>
+<div class="cost-body">Ask: what in my current understanding of the world would feel bizarre or offensive to someone from a different century, culture, or class position? The answers to that question are candidates for invisible narratives — things you experience as facts that others would experience as ideology. This is not relativism. Some things that feel like common sense are actually true. But they cannot be distinguished from conditioned narrative without being examined.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 05</div>
+<div class="scenario-q">A friend says: "People are poor because they make bad choices — if they worked harder and spent less, they would be fine." This feels to them like obvious common sense, not a political opinion. What is most accurate about this statement?</div>
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a">It is common sense — individual behaviour is the primary driver of financial outcomes</button>
+<button class="choice" data-answer="b">It is an invisible narrative — a structural explanation for poverty has been replaced by an individual one, and the replacement is so thoroughly internalised that it no longer feels like an interpretation</button>
+<button class="choice" data-answer="c">It is simply wrong — individual choices have no effect on financial outcomes</button>
+<button class="choice" data-answer="d">It is a political opinion your friend is entitled to hold — both individual and structural factors matter</button>
+</div>
+<div class="feedback-block" id="feedback-5">
+<div class="feedback-headline" id="feedback-text-5"></div>
+<div class="feedback-detail" id="feedback-detail-5"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-5" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 6: Counter-Narratives Are Still Narratives -->
+<section class="slide" data-slide="6">
+<div class="slide-inner">
+<div class="slide-label">Module 01 · Slide 06</div>
+<h1 class="slide-title">Counter-Narratives Are Still Narratives</h1>
+<div class="slide-body">
+<p>Here is the most important and least comfortable part of this module: everything we have examined so far applies equally to the narratives that position themselves as alternatives to mainstream narratives. The "red pill." The awakening. The hidden truth that the system doesn't want you to know. These are narratives. They have architecture. They have protagonists and antagonists. They work through emotion. They produce reality as surely as any official story does.</p>
+<p>And this course — the one you are reading now — is also a narrative. It has a frame (institutions manipulate, narratives are weapons, critical awareness is the goal), a protagonist (the person developing immunity), and an implied antagonist (the forces of narrative control). These choices are worth examining, not exempting.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">A narrative that teaches you to distrust all other narratives while exempting itself from that distrust is not immunity. It is the most complete form of capture — because it has convinced you that you are already free.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The structure of the awakening narrative</div>
+<div class="mechanism-body">The awakening narrative has a reliable structure: there was a time when you were deceived, there is a moment of revelation, and now you see what others cannot. This structure is emotionally powerful — it confers specialness, explains past confusion, and creates a community of the enlightened. It also has a specific vulnerability: it is designed to make itself unfalsifiable. Evidence against the new view is interpreted as evidence of how deep the deception goes. The awakening narrative's greatest trick is making scepticism toward itself feel like the deepest form of sleep.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Alternative media as alternative authority</div>
+<div class="mechanism-body">Much counter-narrative media has simply relocated authority rather than dismantled it. Instead of trusting the BBC or the New York Times, you trust a different set of sources — ones that validate a different worldview. The epistemological structure is identical: find the source aligned with your existing framework, defer to its conclusions. The content changed; the deference did not. Genuine narrative immunity requires applying the same critical scrutiny to sources you agree with as to those you distrust.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Who benefits from the counter-narrative</div>
+<div class="mechanism-body">The question "who benefits from this narrative?" applies to counter-narratives with the same force it applies to official ones. Counter-narrative media has business models. Distrust of institutions generates engagement and loyalty as reliably as institutional propaganda does. Movements built on shared enemy narratives need those enemies to remain threatening in order to maintain cohesion and fundraising. The critical question is not "is this narrative mainstream or alternative?" It is: what does this narrative produce, in whose interests, and at what cost to clarity?</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 06</div>
+<div class="scenario-q">You have become deeply sceptical of mainstream media and now rely primarily on independent and alternative sources. You feel more informed and less manipulated than before. A friend questions one of your alternative sources and you feel a flash of defensiveness. What is most worth examining here?</div>
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a">The defensiveness is justified — you have done the research and your sources are more reliable</button>
+<button class="choice" data-answer="b">The defensiveness has the same structure as the mainstream media loyalty it replaced — if a source cannot be questioned, that is a signal about your relationship to it, not about its accuracy</button>
+<button class="choice" data-answer="c">Your friend is probably still captured by mainstream narratives — their scepticism of your sources is itself conditioned</button>
+<button class="choice" data-answer="d">Evaluate the specific criticism rather than the general defensiveness — the source may or may not be reliable</button>
+</div>
+<div class="feedback-block" id="feedback-6">
+<div class="feedback-headline" id="feedback-text-6"></div>
+<div class="feedback-detail" id="feedback-detail-6"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-6" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 7: Why Narrative Control Is Power -->
+<section class="slide" data-slide="7">
+<div class="slide-inner">
+<div class="slide-label">Module 01 · Slide 07</div>
+<h1 class="slide-title">Why Narrative Control Is Power</h1>
+<div class="slide-body">
+<p>Physical force is an expensive and unreliable form of control. It requires constant maintenance, produces resistance, and is visible enough to generate opposition. Narrative control is cheaper, more durable, and largely invisible. If you can determine what people believe is real, what they fear, who they blame, and what solutions they can imagine, you do not need to compel their behaviour. They will produce it themselves, from inside their own apparently free minds.</p>
+<p>This is why those with the most to lose from shifts in power invest so heavily in narrative infrastructure: media ownership, think tank funding, educational framing, public relations, political messaging. The return on investment in narrative far exceeds the return on investment in force — because narrative-shaped compliance does not look like compliance. It looks like agreement.</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The goal of narrative control is not to make people believe false things. It is to make people unable to imagine true things — specifically, to make alternative arrangements of power feel impossible, absurd, or dangerous to consider.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Consent manufacture versus force</div>
+<div class="mechanism-body">Antonio Gramsci described cultural hegemony: the process by which the dominant class maintains power not through force but through the widespread acceptance of its worldview as common sense. The governed come to understand reality through the categories provided by those who govern — and in doing so, produce the behaviour that maintains the existing order without any visible coercion. This is not a conspiracy. It is a structural property of how meaning is produced in societies with concentrated media ownership and coordinated institutional messaging.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The Overton window as power</div>
+<div class="mechanism-body">The Overton window — the range of ideas considered acceptable in mainstream discourse — is not fixed by logic or evidence. It is shaped by who funds media, who funds research, who funds political parties, and whose interests are served by particular framings. Moving the Overton window is a long-term project, and it is the primary project of well-resourced narrative actors. What feels impossible to propose today was ordinary in previous decades; what feels ordinary today was radical recently. The window moves when enough resources are invested in moving it.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The cost of narrative disruption</div>
+<div class="mechanism-body">When a narrative that supports existing power arrangements is disrupted — by events, by journalism, by social movements — the response is almost always immediate and significant: discrediting of sources, legal action, social pressure on those who amplified the disruption, and rapid production of counter-narratives. The speed and scale of the response is itself information about how much is at stake in the narrative. Narratives that threaten nothing produce no counter-response. The ferocity of the pushback is proportional to the power being protected.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 07</div>
+<div class="scenario-q">A well-funded research institute produces a series of reports arguing that the primary cause of climate change is individual consumer behaviour rather than industrial emissions. The reports are widely covered in sympathetic media. Later, it emerges the institute receives significant funding from fossil fuel companies. What is most important to understand about this situation?</div>
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a">The reports should be disregarded — funded research is always corrupt</button>
+<button class="choice" data-answer="b">The funding is relevant information about whose interests the narrative serves — it does not automatically make the reports wrong, but it tells you what questions to ask about what the narrative forecloses</button>
+<button class="choice" data-answer="c">The reports may be accurate — follow-up research should determine their validity independently of funding</button>
+<button class="choice" data-answer="d">This is a conspiracy theory framing — researchers should be evaluated on their methodology, not their funding</button>
+</div>
+<div class="feedback-block" id="feedback-7">
+<div class="feedback-headline" id="feedback-text-7"></div>
+<div class="feedback-detail" id="feedback-detail-7"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-7" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 8: The First Act of Immunity -->
+<section class="slide" data-slide="8">
+<div class="slide-inner">
+<div class="slide-label">Module 01 · Slide 08</div>
+<h1 class="slide-title">The First Act of Immunity</h1>
+<div class="slide-body">
+<p>Narrative immunity does not begin with identifying the bad actors or locating the true sources. It begins with something more fundamental: developing the capacity to see narrative structure before you are inside it — to recognise, as you encounter a story, that you are encountering a story, with all the architecture that implies.</p>
+<p>This is harder than it sounds. By the time you are aware of a narrative, it has usually already done most of its work. The frame arrived before the content. The emotion was produced before the analysis began. The questions the narrative wants you to ask already feel like the obvious questions. The first act of immunity is not a conclusion. It is a pause — a moment of noticing before the automatic processing resumes.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">You cannot opt out of living inside narratives. You can develop the habit of noticing when you are in one — and that noticing, practised over time, is what immunity actually means.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The three questions</div>
+<div class="mechanism-body">Three questions, applied to any narrative you encounter, begin to make the architecture visible. First: whose perspective is centred here, and whose is absent? Second: what emotion is this producing in me, and what does that emotion make me want to do? Third: what solutions does this narrative make feel natural, and what does it make feel impossible? These questions do not resolve the narrative — they interrupt the automatic processing long enough for something like genuine evaluation to become possible.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Slowing down before sharing</div>
+<div class="mechanism-body">The specific moment when narratives spread most virally is the moment of sharing — when a story produces enough emotion that the impulse to pass it on arrives before evaluation does. The single most effective practice for reducing your role as a narrative amplifier is inserting a pause between the emotional response and the sharing decision. Not necessarily to refuse to share — but to ask, before you do: do I understand the architecture of this story well enough to share it responsibly?</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Applying the tools symmetrically</div>
+<div class="mechanism-body">The tools of narrative analysis are only as useful as the consistency with which they are applied. A person who examines the architecture of narratives they distrust while accepting the narratives they agree with has not developed immunity — they have developed a more sophisticated form of the original bias. The practice worth developing is the habit of applying the same three questions to stories that confirm your existing views as to those that challenge them. The confirming stories are where the real work is.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 08</div>
+<div class="scenario-q">You come across a story that perfectly confirms something you have long believed about a group you distrust. It is emotionally satisfying — it feels like vindication. Your first impulse is to share it immediately. What is the most important thing to do before sharing?</div>
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a">Share it — if it confirms something you already knew to be true, it is probably accurate</button>
+<button class="choice" data-answer="b">Apply the same scrutiny you would apply to a story that challenged your beliefs — stories that confirm existing views are more dangerous, not less, because they bypass the scepticism that protects you</button>
+<button class="choice" data-answer="c">Fact-check the specific claims before sharing — accuracy is the primary concern</button>
+<button class="choice" data-answer="d">Consider whether the story is kind before sharing — the emotional impact on the people it describes matters</button>
+</div>
+<div class="feedback-block" id="feedback-8">
+<div class="feedback-headline" id="feedback-text-8"></div>
+<div class="feedback-detail" id="feedback-detail-8"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-8" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 9: Completion -->
+<section class="slide" data-slide="9">
+<div class="slide-inner completion-slide">
+<div class="complete-mark">&check;</div>
+<h2 class="complete-title">Module 01 complete.</h2>
+<p class="complete-body">You have examined what narratives actually are — not stories but meaning-making structures that precede content, produce reality, work through emotion, and operate most powerfully when they are invisible. You have looked at how counter-narratives reproduce the same architecture. And you have encountered the first act of immunity: the pause before the automatic processing, the habit of seeing the structure before you are inside it.</p>
+
+<div class="section-heading">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">A narrative is not a story &mdash; it is a meaning-making structure that determines what counts as a fact, what connections are obvious, and what response is appropriate. The content is installed second; the frame is installed first.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Narratives produce reality rather than describing it. They determine what is visible, what is logical, what is imaginable as a solution, and whose suffering counts.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Emotion is not a response to a narrative &mdash; it is the mechanism by which the narrative is delivered. Fear, outrage, and hope bypass examination and produce direct action.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Counter-narratives reproduce the same architecture. The correction uses the same frame&ndash;emotion&ndash;action mechanism as the original. Immunity requires seeing the architecture, not choosing the better side.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">The most powerful narratives are invisible. You do not notice them because you are living inside them and calling them reality.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">The first act of immunity is the pause &mdash; inserting a gap between the narrative arriving and your reality updating. In that gap, you can begin to see the structure.</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+
+<p class="body-text">Choose one ongoing news story you have strong feelings about. Write down what the narrative frame is &mdash; not just what the facts are. Who are the actors? What is the implied moral? What response is being produced in you? Then ask one further question: what would have to be true for this frame to be wrong?</p>
+
+<p class="body-text">Monthly: read one piece of content from a source you would normally dismiss entirely &mdash; not to agree with it, but to examine its narrative architecture. What frame is it inside? What emotions does it use? What solution does it pre-authorise? You are not looking for which side is right. You are learning to see the structure in both.</p>
+<div class="divider"></div>
+<p class="complete-body" style="font-style:italic;font-family:var(--serif);font-size:19px;">Next: Module 02 — The Architecture of Propaganda.</p>
+<div class="nav-row" style="justify-content:center;margin-top:48px">
+<button class="nav-btn" onclick="prevSlide()">&larr; Review</button>
+</div>
+</div>
+</section>
+
+<script>
+const feedback = {
+  1: {
+    a: {
+      headline: "Both papers may be accurate — the issue is not accuracy but selection and framing.",
+      detail: "Identifying one as accurate and one as misleading assumes that reporting is a neutral transmission of facts, and that the job is to find the right facts. But both papers are reporting real data. The question is which data they chose to foreground, in what context, with what emphasis. Both are making editorial decisions that reflect prior narrative frameworks — about what progress looks like, whose situation matters, and what the policy is fundamentally for. Neither is straightforwardly lying. Both are framing."
+    },
+    b: {
+      headline: "Yes — this is the core of how narrative works with accurate facts.",
+      detail: "The data is the same. The story it is placed inside is completely different. One narrative centres economic growth and job creation as the measure of success; the other centres worker security and conditions. These are not different readings of the same data — they are different narrative architectures that determine what counts as a good outcome. Neither involves fabrication. Both involve selection. Recognising this is the beginning of understanding how narrative shapes reality without lying."
+    },
+    c: {
+      headline: "Averaging two framed accounts does not produce an unframed one.",
+      detail: "Reading multiple outlets and 'averaging' their coverage is a reasonable instinct — but it assumes that the biases cancel out, leaving truth in the middle. This is not how narrative architecture works. If both papers share the same assumptions about what matters (economic growth, job numbers) while differing on their evaluation, averaging them produces a view within the shared frame. The assumptions that both papers never question remain invisible. Reading more of the same kind of framing does not add up to seeing beyond it."
+    },
+    d: {
+      headline: "Framing problems as 'negative' is itself a narrative move.",
+      detail: "Describing the second paper as 'focusing on problems rather than progress' already imports a narrative: that job creation is progress, that questioning the quality of those jobs is negative thinking. This framing treats one set of editorial choices (what to count as progress) as neutral, and the other (whose conditions matter) as bias. That itself is a narrative position — one that decides in advance which measurements of a policy's impact are legitimate and which are complaint."
+    }
+  },
+  2: {
+    a: {
+      headline: "Objectivity and architecture are separate questions.",
+      detail: "Each journalist may be reporting accurately within their beat. Individual-level objectivity — checking facts, citing sources, not fabricating — is real and matters. But it does not address the architectural level: which questions are being asked, whose perspective structures the inquiry, what solution space is being assumed. A corpus of individually accurate articles can produce a systematically misleading picture of a problem if they all operate within the same narrative architecture. Objectivity at the level of facts does not guarantee neutrality at the level of frame."
+    },
+    b: {
+      headline: "Yes — this is what architectural narrative control looks like in practice.",
+      detail: "No individual article needs to be dishonest for the overall picture to be shaped by a particular narrative. When every article on housing frames the problem as supply, and no article asks about ownership patterns, institutional investment, or who benefits from high prices, the architecture has determined the coverage — not through editorial interference on specific stories, but through the shared assumptions about what housing journalism is about. The missing questions are invisible because the architecture made them unaskable, not because anyone suppressed them."
+    },
+    c: {
+      headline: "Whether supply is 'the real issue' is itself the contested claim.",
+      detail: "Saying the missing angles 'simply are not newsworthy' and 'supply is the real issue' is making the narrative assumption explicit: that supply is the correct frame for understanding housing. But this is precisely the contested question. Economists, housing researchers, and affected communities disagree significantly about the relative importance of supply, demand, investment, and ownership in producing housing crises. Treating one framing as the obvious correct one — not newsworthy to question — is how the architecture operates."
+    },
+    d: {
+      headline: "Asking readers to research separately is how architectural gaps perpetuate themselves.",
+      detail: "If the missing angle required for an accurate picture of a problem is routinely placed outside mainstream coverage, most readers will never encounter it. The suggestion that readers should research it separately assumes equal access to information, equal time, and equal awareness of what is missing. But you cannot search for a question you do not know to ask. The architecture of coverage determines what questions feel necessary and what questions feel optional — and most readers are guided by that determination."
+    }
+  },
+  3: {
+    a: {
+      headline: "The data is a product of the narrative's effects — it cannot confirm the narrative.",
+      detail: "Using outcomes produced by policies shaped by a narrative as evidence for that narrative is circular. The 'welfare dependency' data emerged from a decade of policy tightening, increased stigma, reduced support, and changed social norms — all of which were products of the original narrative. The data cannot be used as independent confirmation of that narrative's accuracy because it was produced by the world the narrative helped shape. This is what narrative-produced reality looks like: the story generates the conditions that appear to prove the story."
+    },
+    b: {
+      headline: "Yes — this is the complete analysis of how narrative produces its own confirmation.",
+      detail: "The cycle is worth mapping precisely: a narrative about welfare shaped public attitudes, which shaped political will, which shaped policy, which shaped material conditions, which produced data, which was cited as evidence for the original narrative. At no point in this cycle does the data function as an independent test of the story. It is a product of the story. Recognising this does not tell you what welfare policy should look like — it tells you that citing these outcomes as proof is not the same as demonstrating causation from evidence."
+    },
+    c: {
+      headline: "Both sides having valid points does not address the specific mechanism described.",
+      detail: "Acknowledging complexity is appropriate for most policy questions. But the specific mechanism described here — narrative shaping policy that produces outcomes that appear to confirm the narrative — is not resolved by noting that the debate is complex. The question is whether the data cited as evidence was produced independently of the narrative or as a consequence of it. That is a specific analytical question, and 'both sides have valid points' avoids rather than answers it."
+    },
+    d: {
+      headline: "The coverage reflecting a genuine social reality is not incompatible with that reality being narrative-produced.",
+      detail: "Media coverage can accurately reflect real conditions while those conditions were themselves shaped by the narrative. If a decade of 'welfare dependency' coverage produced tighter policies, increased stigma, and worse outcomes — and then accurately reported those outcomes — the coverage is both accurate and complicit in producing what it accurately reported. Accuracy at the level of describing current conditions does not mean neutrality at the level of how those conditions came to be."
+    }
+  },
+  4: {
+    a: {
+      headline: "Emotional responses to suffering are appropriate — and the framing choices that produced them are worth examining.",
+      detail: "There is nothing wrong with feeling distress in response to a genuine tragedy. Empathy is not a vulnerability to exploit — it is a human response worth honouring. And: the specific emotional state produced by a piece of journalism is shaped by editorial decisions that can serve very different ends. Distress about a crime can be channelled into calls for longer sentences, more policing, community investment, mental health services, or many other responses — depending on what the narrative architecture around the story points toward. The emotion and the architecture are both real."
+    },
+    b: {
+      headline: "Yes — the emotional response and the editorial decisions that produced it are both worth examining.",
+      detail: "The distress is real. The suffering it responds to is real. And the specific personal details, photograph, and quote that produced the intensity of that distress are editorial choices that shape what 'something must be done' ends up meaning. A story about the same crime with different framing choices — focused on systemic conditions rather than individual suffering — would produce a different emotional state and point toward different responses. The facts did not determine the framing. The framing determined which facts felt important enough to include."
+    },
+    c: {
+      headline: "Emotional resonance is not the same as manipulation.",
+      detail: "Journalism that produces emotional responses is not automatically manipulative — emotional resonance is often what makes reporting matter rather than disappear. The question is not whether an article produces emotion but what the emotion is in service of: whose suffering is made visible, what response is pointed toward, and whose interests are served by the specific emotional state produced. Factual reporting that deliberately produces specific emotions through framing choices deserves examination — not because emotion is illegitimate but because the choices that shape it are editorial, not neutral."
+    },
+    d: {
+      headline: "Accuracy and framing neutrality are separate properties.",
+      detail: "An article can be entirely accurate and still be making significant framing choices about which accurate details to include, emphasise, and arrange. The photograph of the victim's home, the grieving parent's quote, the personal details — these are all accurate. They are also selections from among the many accurate things that could have been included. Those selections shape the emotional experience of the article and the sense of what response is appropriate. Accuracy is necessary. It is not sufficient to establish that the framing is neutral."
+    }
+  },
+  5: {
+    a: {
+      headline: "The invisibility of this as an interpretation is the point.",
+      detail: "The statement feels like common sense rather than a political opinion to your friend — which is precisely what makes it worth examining as a narrative. When a structural explanation for poverty (wage stagnation, housing costs, inherited wealth, labour market conditions) is replaced in common understanding by an individual explanation, and that replacement is so complete that the individual explanation no longer feels like an interpretation, the invisible narrative has done its work. Individual behaviour does affect financial outcomes. It does not operate in a vacuum that individual effort alone can overcome."
+    },
+    b: {
+      headline: "Yes — this is a clear example of an invisible narrative.",
+      detail: "The statement attributes poverty primarily to individual choice while treating the structural conditions within which those choices are made as background or irrelevant. This is not an obvious or neutral interpretation of the causes of poverty — it is a specific narrative position that has become so widely internalised in certain cultural contexts that it feels like observation rather than theory. Its invisibility as a narrative is its power. Once you can see it as a frame — one possible structure for understanding poverty, with identifiable origins and identifiable interests it serves — it can be examined rather than just absorbed."
+    },
+    c: {
+      headline: "Overcorrecting to the opposite claim is the same error in reverse.",
+      detail: "The claim that individual choices have no effect on financial outcomes is as much an invisible narrative as its opposite — just a different one. Individual agency is real. The conditions within which that agency operates are also real, and are not equally distributed. The point of identifying the individual responsibility frame as a narrative is not to replace it with a pure structural determinism, but to make visible the selection that is occurring: a full picture of poverty involves both individual and structural factors, and emphasising one to the near-exclusion of the other is a narrative choice, not a description of reality."
+    },
+    d: {
+      headline: "Calling it an opinion your friend is entitled to hold sidesteps what is worth examining.",
+      detail: "Framing this as a political opinion in a debate where both sides have merit is itself a narrative move — one that places a structural question on the same epistemic footing as an individual one, as though they are simply two equally valid perspectives. The more precise observation is that your friend does not experience this as an opinion. They experience it as common sense. That is what invisible narrative looks like — and the difference between 'an opinion I hold' and 'the way things obviously are' is exactly the distinction worth making."
+    }
+  },
+  6: {
+    a: {
+      headline: "The research done and the defensiveness felt are separate things.",
+      detail: "You may have done genuine research and arrived at well-grounded views about your sources. That is entirely possible. But the defensiveness when a source is questioned is not evidence of that — it is a relational signal about your attachment to the source. A person who has done rigorous research and holds well-examined views about their sources should be able to engage with a specific criticism of those sources with curiosity rather than defensiveness. The defensiveness is worth examining regardless of whether the source is ultimately reliable."
+    },
+    b: {
+      headline: "Yes — the structure of the defensiveness is the signal.",
+      detail: "The pattern described — mainstream media distrust replaced by alternative source loyalty, with defensiveness when those sources are questioned — is the same epistemological structure relocated. The content changed; the deference dynamic did not. Genuine narrative immunity means applying the same critical scrutiny to sources you trust as to those you distrust. If a source cannot be questioned without producing defensiveness, that relationship has the features of authority capture regardless of the source's actual reliability. The feeling is the data."
+    },
+    c: {
+      headline: "This response uses the tools of narrative analysis to exempt itself from them.",
+      detail: "Attributing your friend's scepticism to their conditioning is exactly the move the awakening narrative makes: evidence against the new view becomes evidence of how deep the conditioning runs. This makes the new narrative unfalsifiable — any challenge to it is explained away as the challenger's failure to see. If the tools of narrative analysis only ever point outward — at mainstream media, at people who disagree — and never turn inward on your own sources and certainties, they are serving motivated reasoning, not genuine immunity."
+    },
+    d: {
+      headline: "Evaluating the specific criticism is appropriate — and the defensiveness that preceded it is still worth examining.",
+      detail: "Engaging with specific criticisms of a source on their merits is exactly the right thing to do. And the defensiveness that arrived before the evaluation is still worth noting — not as proof that the source is unreliable, but as information about your relationship to it. These are not contradictory: you can both evaluate the specific criticism carefully and notice that your initial response was defensive rather than curious. Both observations are useful."
+    }
+  },
+  7: {
+    a: {
+      headline: "Funded research is not automatically corrupt — and funding is still relevant information.",
+      detail: "Disregarding all funded research would eliminate most of the research that exists. Funding source does not automatically invalidate findings. But the suggestion that it is irrelevant or a conspiracy-theory framing is equally wrong. Funding creates incentive structures that shape what questions get asked, which results get published, and how findings are framed. The most accurate position is that funding is relevant information that raises specific questions — not a verdict, but a reason to scrutinise methodology, examine what was not studied, and ask whose interests the framing serves."
+    },
+    b: {
+      headline: "Yes — funding is context that shapes what questions to ask, not a verdict on the findings.",
+      detail: "Knowing who funds research does not tell you whether the research is accurate. It tells you whose interests are aligned with particular conclusions, and therefore what structural incentives may have shaped the questions asked, the data gathered, and the findings published. In this case, the specific narrative produced — individual consumer behaviour rather than industrial emissions — has direct financial implications for the funders. That is not proof of fabrication. It is a reason to ask: what did this research not study, what questions did it not ask, and what does the individual-responsibility frame foreclose?"
+    },
+    c: {
+      headline: "Independent follow-up research is valuable — the funding context remains relevant.",
+      detail: "Evaluating the reports' methodology on its own terms and through independent replication is the right scientific approach. And: the funding context remains relevant even after methodology is examined, because it tells you something about the narrative the research was produced to support. Individual findings might be replicable while the overall frame — attributing climate change primarily to consumer behaviour — still serves particular interests by directing attention away from industrial emissions. Methodology and narrative architecture are separate questions."
+    },
+    d: {
+      headline: "Examining funding is not a conspiracy theory — it is standard critical analysis.",
+      detail: "The suggestion that noting funding sources is 'conspiracy theory framing' is itself a narrative move — one that attempts to place the funding question outside the range of legitimate inquiry. Examining who funds research, what conclusions that funding incentivises, and how those conclusions serve the funder's interests is standard practice in academic peer review, investigative journalism, and policy analysis. It becomes problematic only when it replaces evaluation of evidence entirely, rather than informing it."
+    }
+  },
+  8: {
+    a: {
+      headline: "Stories that confirm existing beliefs are more dangerous to share uncritically, not less.",
+      detail: "The feeling of vindication — this confirms what I already knew — is one of the strongest signals that rigorous scrutiny is most needed. Stories that confirm existing beliefs bypass the scepticism that usually operates as a filter because they feel true before they are evaluated. This is precisely when motivated reasoning is most active and most invisible. Prior belief is not evidence of accuracy. The strength of the confirmation feeling is a reason for more scrutiny, not less."
+    },
+    b: {
+      headline: "Yes — confirmation stories require the most scrutiny, not the least.",
+      detail: "The most important and most difficult practice in narrative immunity is applying critical tools to stories that feel true. The architecture of a story that confirms your existing beliefs is invisible to you in a way it would not be if the story challenged them. Your emotional response — the satisfaction of vindication — is doing the work that scepticism would otherwise do. Pausing to ask: whose perspective is centred, what emotion is this producing, what solutions does this make feel natural, and what does it make feel impossible — is most needed precisely when the answer already seems obvious."
+    },
+    c: {
+      headline: "Fact-checking is necessary and not sufficient.",
+      detail: "Checking the specific factual claims in a story before sharing is better than not checking. It is not sufficient for the reasons this module has examined: a story can be factually accurate while its narrative architecture is significantly misleading — in who it centres, what it makes visible, what emotions it produces, and what responses it points toward. A story that is factually accurate but architecturally engineered to produce outrage toward a specific group, for the benefit of specific interests, is not made safe by fact-checking. The architecture also deserves examination."
+    },
+    d: {
+      headline: "Considering emotional impact on subjects is worth doing — it is not the primary concern here.",
+      detail: "Thinking about the human impact of sharing a story is a genuine ethical consideration, and worth practising. But in the specific situation described — a story that feels like vindication, that confirms existing beliefs, that produces an immediate impulse to share — the primary concern is epistemological rather than ethical: is this story's narrative architecture clear to me, or am I about to amplify something I have not examined because it feels satisfying? Kindness and critical evaluation are both relevant. The critical evaluation is most urgently needed here."
+    }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+<script>
+(function(){
+  try{
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c7m1','1');window.location.href='course7-module-2-architecture-of-propaganda.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

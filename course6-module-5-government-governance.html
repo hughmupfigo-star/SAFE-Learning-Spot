@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 6 · Module 5 · Government & Governance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#c4452d;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:860px;margin:0 auto;padding:80px 48px 120px}
+.slide-label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:24px}
+.slide-title{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.5vw,64px);
+line-height:1.05;letter-spacing:-.02em;margin-bottom:40px;font-variation-settings:"opsz" 144}
+.slide-body{font-size:17px;line-height:1.75;color:var(--ink);margin-bottom:32px}
+.slide-body p{margin-bottom:20px}.slide-body p:last-child{margin-bottom:0}
+.sov-frame{margin:48px 0;padding:40px;background:var(--ink);color:var(--paper)}
+.sov-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.sov-text{font-family:var(--serif);font-size:22px;line-height:1.5;font-weight:300;font-style:italic;color:var(--paper)}
+.mechanism{margin:36px 0;padding:32px 0;border-top:1px solid var(--line)}
+.mechanism:last-of-type{border-bottom:1px solid var(--line)}
+.mechanism-name{font-family:var(--serif);font-size:28px;font-style:italic;font-weight:400;letter-spacing:-.015em;margin-bottom:16px}
+.mechanism-body{font-size:16px;line-height:1.7;color:var(--muted)}
+.cost-block{margin:28px 0;padding:24px 28px;border-left:2px solid var(--accent);background:var(--soft)}
+.cost-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.cost-body{font-size:15px;line-height:1.65;color:var(--ink)}
+.voice-block{margin:28px 0;padding:28px 32px;background:var(--ink);color:var(--paper);position:relative}
+.voice-block::before{content:'"'  ;position:absolute;top:-8px;left:24px;font-family:var(--serif);
+font-size:72px;color:var(--accent);line-height:1;font-style:italic}
+.voice-text{font-family:var(--serif);font-size:18px;line-height:1.6;font-weight:300;font-style:italic;color:var(--paper);margin-bottom:12px}
+.voice-attr{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.scenario-block{margin:48px 0;padding:40px;border:1px solid var(--line)}
+.scenario-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+.scenario-q{font-family:var(--serif);font-size:22px;line-height:1.45;font-weight:400;font-style:italic;margin-bottom:32px}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{padding:18px 24px;border:1px solid var(--line);background:var(--paper);font-family:var(--sans);
+font-size:15px;line-height:1.5;text-align:left;cursor:pointer;transition:all .2s ease;color:var(--ink)}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback-block{margin-top:28px;padding:28px 32px;background:var(--soft);border-left:3px solid var(--accent);display:none}
+.feedback-block.visible{display:block}
+.feedback-headline{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:12px;font-style:italic}
+.feedback-detail{font-size:15px;line-height:1.7;color:var(--muted)}
+.nav-row{display:flex;gap:16px;margin-top:40px;align-items:center}
+.nav-btn{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--ink);
+background:none;color:var(--ink);padding:14px 28px;cursor:pointer;transition:all .2s ease;text-transform:uppercase}
+.nav-btn:hover{background:var(--soft)}.nav-btn.primary{background:var(--ink);color:var(--paper);padding:16px 32px}
+.nav-btn.primary:hover{background:#222}.nav-btn:disabled{opacity:.3;cursor:default}
+.completion-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;
+min-height:80vh;text-align:center;padding:80px 48px}
+.complete-mark{font-family:var(--serif);font-size:120px;line-height:1;font-weight:300;color:var(--accent);font-style:italic}
+.complete-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);font-weight:400;margin:32px 0 20px;letter-spacing:-.02em}
+.complete-body{font-size:17px;line-height:1.7;color:var(--muted);max-width:560px}
+.divider{width:48px;height:1px;background:var(--line);margin:40px auto}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+<div class="module-tag">Course 06 &middot; Institutional Brainwashing &middot; Module <strong>05</strong> &middot; Government &amp; Governance</div>
+<div class="progress-bar">
+<div class="progress-dot active"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+<div class="progress-dot"></div>
+</div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 6 &middot; Institutional Conditioning</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c6m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course6-module-1-institution-training.html">Institution Training</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course6-module-2-school-compliance.html">School Compliance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course6-module-3-work-adult-school.html">Work: Adult School</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course6-module-4-religion-meaning.html">Religion and Meaning</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course6-module-5-government-governance.html">Government & Governance</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course6-module-6-independence-deprogramming.html">Independence & De-Programming</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c6m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course6-module-7-thinking-for-yourself.html">Thinking for Yourself</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1: The Institution of Institutions -->
+<section class="slide active" data-slide="1">
+<div class="slide-inner">
+<div class="slide-label">Module 05 · Slide 01</div>
+<h1 class="slide-title">The Institution of Institutions</h1>
+<div class="slide-body">
+<p>Every institution we have examined — family, school, workplace, religion — operates within a larger container. That container is the state. Government is not one institution among many. It is the institution that authorises, legitimises, and ultimately enforces all the others.</p>
+<p>It writes the laws that define the family. It charters the schools. It regulates work. It permits or prohibits religious practice. It holds, in the words of sociologist Max Weber, the <em>monopoly on legitimate violence</em> — the sole authority to compel compliance through force.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Government does not sit above institutions as a neutral referee. It is itself an institution — one with exceptional power to define what is normal, what is legal, and what is dangerous.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">It naturalises its own authority</div>
+<div class="mechanism-body">You were born into a state. You did not choose it. Yet its claim on your compliance is presented not as a historical arrangement but as a fact of nature — as inevitable as gravity. Nations have borders drawn by wars fought before your birth. Laws were written by people long dead. Yet their authority over your daily life is absolute and assumed.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">It frames itself as protection</div>
+<div class="mechanism-body">The state's primary justification is that without it, there is chaos. This is partly true and substantially exaggerated. Every governing body frames its own continuation as a public safety measure. The question rarely asked is: protection of whom, from what, and at whose expense?</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">It defines the limits of legitimate dissent</div>
+<div class="mechanism-body">All governments permit some form of internal criticism. What they do not permit — what they actively suppress — is questioning the legitimacy of the arrangement itself. You may vote for a different party. You may not question whether the electoral system concentrates power in ways that serve particular interests. That question is placed outside the permissible.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 01</div>
+<div class="scenario-q">Someone says: "The government exists to protect us." What is the more complete picture?</div>
+<div class="choices" data-scenario="1">
+<button class="choice" data-answer="a">That is exactly right — governments exist purely to protect their citizens</button>
+<button class="choice" data-answer="b">Governments emerged from power arrangements and protect certain interests more reliably than others — including their own continuation</button>
+<button class="choice" data-answer="c">Governments are corrupt and should be abolished — they protect no one</button>
+<button class="choice" data-answer="d">Government is a necessary evil we simply have to accept</button>
+</div>
+<div class="feedback-block" id="feedback-1">
+<div class="feedback-headline" id="feedback-text-1"></div>
+<div class="feedback-detail" id="feedback-detail-1"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn primary" id="next-1" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 2: The Social Contract You Never Signed -->
+<section class="slide" data-slide="2">
+<div class="slide-inner">
+<div class="slide-label">Module 05 · Slide 02</div>
+<h1 class="slide-title">The Social Contract You Never Signed</h1>
+<div class="slide-body">
+<p>Political philosophy invented the social contract to justify government authority: citizens agree to surrender some freedoms in exchange for protection and order. It is a compelling idea. It is also largely fictional.</p>
+<p>You did not sign a contract. You were born into a territory, assigned a nationality, issued documents, enrolled in systems, and taxed — all before you were capable of consent. The contract is not an agreement. It is a retroactive framing of conditions you were born into.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The social contract works not through actual consent but through the manufacture of the appearance of consent — and through making the cost of non-consent so high that compliance looks like choice.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Tacit consent as manufactured agreement</div>
+<div class="mechanism-body">You are told that by remaining in the country, using its roads, benefiting from its institutions, you have consented. This is circular reasoning. You use the roads because you were born near them. You benefit from systems you had no hand in designing. Using what surrounds you is not consent to every arrangement that built it.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Exit as near-impossibility</div>
+<div class="mechanism-body">The standard response to dissatisfaction is "leave if you don't like it." But leaving requires money, documents issued by the very state you are leaving, acceptance by another state, severing family and community ties, and surrendering the life you built. For most people, exit is not a realistic option. A choice with no viable alternative is not a choice.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Voting as consent theatre</div>
+<div class="mechanism-body">Voting is offered as the mechanism of consent. But voting within a system is not the same as consenting to the system. Choosing between two pre-selected options within pre-established rules is a constrained act, not a free one. The theatre of choice substitutes for the substance of it.</div>
+</div>
+
+<div class="voice-block">
+<div class="voice-text">I vote because I understand what it is — a small, constrained act within a large system I did not design. I stopped calling it democracy and started calling it what it is: managed consent.</div>
+<div class="voice-attr">— workshop participant, political science background</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 02</div>
+<div class="scenario-q">A friend says: "If you don't like how things are run, just leave the country." What is actually being revealed in that response?</div>
+<div class="choices" data-scenario="2">
+<button class="choice" data-answer="a">A fair point — staying means accepting the rules in place</button>
+<button class="choice" data-answer="b">The social contract myth in action: consent manufactured by making exit nearly impossible, then calling compliance a choice</button>
+<button class="choice" data-answer="c">An invitation to seriously consider emigrating to a better-governed country</button>
+<button class="choice" data-answer="d">A reasonable frustration with people who complain without acting</button>
+</div>
+<div class="feedback-block" id="feedback-2">
+<div class="feedback-headline" id="feedback-text-2"></div>
+<div class="feedback-detail" id="feedback-detail-2"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-2" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 3: Law as Compliance Architecture -->
+<section class="slide" data-slide="3">
+<div class="slide-inner">
+<div class="slide-label">Module 05 · Slide 03</div>
+<h1 class="slide-title">Law as Compliance Architecture</h1>
+<div class="slide-body">
+<p>Law presents itself as neutral. It does not favour the powerful or the powerless, the property-owner or the homeless. It applies equally to all. This is the doctrine. The practice is different.</p>
+<p>Laws are written by people with power, enforced by systems that reflect existing hierarchies, and interpreted by judges who were trained within those same hierarchies. The law does not descend from nature. It is a constructed system that encodes a particular set of values — about property, family, labour, dissent — and presents those values as universal and inevitable.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The power of law is not only in punishment. It is in making existing arrangements feel like the only natural arrangements — so that challenging them feels like disorder rather than justice.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Criminalisation of dissent</div>
+<div class="mechanism-body">Across history and geography, governments have criminalised strikes, protests, whistleblowing, journalism, assembly, and speech that threatened their authority. What gets criminalised is not only harm to people — it is also threats to the arrangement. This tells you what the law is primarily protecting.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The naturalisation of property</div>
+<div class="mechanism-body">Most legal systems treat the existing distribution of property as the baseline of order. To take from someone who owns is crime. To maintain vast ownership while others have nothing is legal. The law did not create this arrangement — it inherited it from conquest and enclosure — but it enforces it daily as though it were natural fact.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Compliance through internalisd legality</div>
+<div class="mechanism-body">The deepest compliance is not the person who follows the law because they fear punishment. It is the person who cannot imagine acting outside the law — who has so thoroughly internalised legal boundaries as moral boundaries that illegality feels wrong even when the law is itself unjust. This is the fully conditioned citizen.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 03</div>
+<div class="scenario-q">You receive a fine for a minor infraction that harmed no one. What is worth noticing in this moment?</div>
+<div class="choices" data-scenario="3">
+<button class="choice" data-answer="a">Rules are rules — pay it and move on without overthinking it</button>
+<button class="choice" data-answer="b">Notice the experience: the state's power to extract compliance is felt even in the smallest encounters — this is law as architecture</button>
+<button class="choice" data-answer="c">Contest it — the system has built-in mechanisms for fairness</button>
+<button class="choice" data-answer="d">Feel guilty — you broke the law regardless of who was harmed</button>
+</div>
+<div class="feedback-block" id="feedback-3">
+<div class="feedback-headline" id="feedback-text-3"></div>
+<div class="feedback-detail" id="feedback-detail-3"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-3" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 4: Nationalism: Identity as Capture -->
+<section class="slide" data-slide="4">
+<div class="slide-inner">
+<div class="slide-label">Module 05 · Slide 04</div>
+<h1 class="slide-title">Nationalism: Identity as Capture</h1>
+<div class="slide-body">
+<p>One of the most effective tools of governmental control is not force but feeling. Nationalism manufactures an identity — citizen of this nation, member of this people — and then leverages that identity to secure compliance, sacrifice, and loyalty to the state.</p>
+<p>The feeling is genuine. The sense of belonging to a place, a people, a shared history is a real human need. What governments have learned is how to capture that need and redirect it toward their own purposes — so that defence of the state feels like defence of the self.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Nationalism works because it converts political loyalty into personal identity — so that criticism of the government feels like an attack on who you are.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The invented nation</div>
+<div class="mechanism-body">Nations are recent inventions. Most of what feels ancient and deep — national flags, anthems, traditions, borders — was constructed in the last two to three centuries, often deliberately. Historian Eric Hobsbawm called these "invented traditions." They feel timeless because they were designed to. The sense of deep belonging to a nation is a feeling produced by careful cultural engineering.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Class suppression through national unity</div>
+<div class="mechanism-body">A worker who identifies primarily as a citizen of their nation will feel solidarity with a wealthy co-national before a poor foreigner. Nationalism dissolves class consciousness by replacing it with national consciousness. "We are all in this together" — across enormous differences of wealth, power, and life experience — is a nationalist claim that serves those at the top of the hierarchy.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">War as identity consolidation</div>
+<div class="mechanism-body">Nothing consolidates national identity like an external threat. Governments have known this for millennia. When internal contradictions grow — inequality, corruption, unrest — external conflict redirects attention. Citizens who were questioning their leaders become defenders of the nation. Dissent becomes betrayal. The critic becomes the enemy within.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">What this costs you</div>
+<div class="cost-body">When your identity is captured by national belonging, you lose the ability to evaluate your own government's actions clearly. Criticism of the state feels like self-criticism. Defence of harmful policies becomes automatic. Your capacity for independent political judgement is replaced by tribal loyalty.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 04</div>
+<div class="scenario-q">Your country is about to go to war. You notice a strong pull of national pride and a feeling that you should support the effort. What is worth examining here?</div>
+<div class="choices" data-scenario="4">
+<button class="choice" data-answer="a">Follow the feeling — national pride in difficult times is natural and healthy</button>
+<button class="choice" data-answer="b">Pause and ask whose interests this war serves and why the feeling of pride arrived so reliably at this moment</button>
+<button class="choice" data-answer="c">Resist all nationalism — it is always and only manipulation</button>
+<button class="choice" data-answer="d">Support the effort regardless of cause — loyalty to country comes first</button>
+</div>
+<div class="feedback-block" id="feedback-4">
+<div class="feedback-headline" id="feedback-text-4"></div>
+<div class="feedback-detail" id="feedback-detail-4"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-4" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 5: The Surveillance State & Self-Policing -->
+<section class="slide" data-slide="5">
+<div class="slide-inner">
+<div class="slide-label">Module 05 · Slide 05</div>
+<h1 class="slide-title">The Surveillance State &amp; Self-Policing</h1>
+<div class="slide-body">
+<p>The philosopher Michel Foucault described the panopticon — a prison designed so that any inmate might be watched at any moment, without knowing when observation is actually occurring. The result: inmates police themselves. Behaviour modifies not because of actual surveillance but because of the possibility of it.</p>
+<p>Modern governance has built a panopticon at civilisational scale. CCTV, data collection, digital communication monitoring, financial tracking, social media analysis — these create a condition not of universal observation but of universal observability. And that is enough.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The most efficient form of control is the kind you perform on yourself. When citizens internalise the watcher, the state no longer needs to watch.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">The chilling effect on thought</div>
+<div class="mechanism-body">Research consistently shows that people who know they are being observed change their behaviour — not just their actions but their expressed opinions, their willingness to seek information, their preparedness to dissent. The chilling effect does not require punishment. The awareness of potential scrutiny is sufficient to alter how people think, what they say, and what they are willing to explore.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Peer surveillance as state amplification</div>
+<div class="mechanism-body">States do not need to watch everything when citizens watch each other. Social media platforms have created environments where every person is potentially surveilled by every other person simultaneously. The result is a distributed surveillance network far more comprehensive than any government could construct — operated voluntarily, at no cost to the state.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Self-censorship as normalised compliance</div>
+<div class="mechanism-body">The most internalised stage of surveillance compliance is when people no longer experience self-censorship as censorship. They simply do not say certain things, do not ask certain questions, do not pursue certain lines of thinking — and experience this not as suppression but as being reasonable, responsible, appropriate. The constraint has become invisible because it has become identity.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 05</div>
+<div class="scenario-q">You hold an opinion you believe is true, but you know it is unpopular. Before posting it online, you run through a rapid calculation: who will see this, what will they think, what could happen. What is worth noticing in that calculation?</div>
+<div class="choices" data-scenario="5">
+<button class="choice" data-answer="a">Post it — free speech exists precisely so unpopular views can be expressed</button>
+<button class="choice" data-answer="b">Notice the calculation itself: the mental act of pre-censorship is the surveillance effect working inside you, regardless of what you decide to post</button>
+<button class="choice" data-answer="c">Do not post — some opinions cause harm even when sincerely held</button>
+<button class="choice" data-answer="d">Soften the opinion until it is safe enough to post, then publish that</button>
+</div>
+<div class="feedback-block" id="feedback-5">
+<div class="feedback-headline" id="feedback-text-5"></div>
+<div class="feedback-detail" id="feedback-detail-5"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-5" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 6: Media & the Authorised Narrative -->
+<section class="slide" data-slide="6">
+<div class="slide-inner">
+<div class="slide-label">Module 05 · Slide 06</div>
+<h1 class="slide-title">Media &amp; the Authorised Narrative</h1>
+<div class="slide-body">
+<p>Modern states rarely maintain overt censorship of the kind that was practised in the twentieth century. They do not need to. The manufacture of consent — Noam Chomsky and Edward Herman's term — operates through a more sophisticated mechanism: not the suppression of all views, but the narrowing of what counts as serious, credible, and worth discussing.</p>
+<p>The Overton window — the range of opinions deemed acceptable in mainstream discourse — is not drawn by governments alone. It is shaped by ownership of media, advertising dependency, the sourcing habits of journalists, and the social dynamics of professional newsrooms. The result is a narrow band of permissible thought that feels, from inside it, like the full range of reasonable opinion.</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">The most effective censorship is the kind that does not feel like censorship — where the excluded perspectives are not banned but simply never appear, so their absence is never noticed.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Ownership and editorial alignment</div>
+<div class="mechanism-body">Most major media outlets are owned by large corporations or wealthy individuals whose interests are not identical to those of the general public. Ownership shapes what is covered, how it is framed, and what is treated as natural. This does not require direct editorial interference — cultural alignment and shared class position produce the same effect more efficiently and invisibly.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The illusion of debate within consensus</div>
+<div class="mechanism-body">Mainstream media presents vigorous debate — Party A versus Party B, left commentator versus right commentator. This creates the impression of a full range of views. But the debate almost always occurs within a shared set of assumptions: that the current economic system is essentially sound, that state authority is essentially legitimate, that certain foreign policy frameworks are essentially correct. The debate is real. The range is narrow.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Sourcing as self-reinforcing authority</div>
+<div class="mechanism-body">Journalists are trained to seek authoritative sources: government officials, established institutions, credentialled experts within accepted frameworks. This means the people who define the problem are also the primary sources explaining it. Counter-narratives and dissenting analyses are either absent or framed as fringe — regardless of their evidential merit.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 06</div>
+<div class="scenario-q">Every major news outlet is reporting on the same political event with identical framing. What is most worth attending to in this convergence?</div>
+<div class="choices" data-scenario="6">
+<button class="choice" data-answer="a">If all credible outlets agree on the framing, it is almost certainly accurate</button>
+<button class="choice" data-answer="b">Convergence among authorised sources narrows rather than confirms truth — the more important question is what is not being covered and whose interests are served by this framing</button>
+<button class="choice" data-answer="c">All mainstream media is propaganda — trust only alternative sources</button>
+<button class="choice" data-answer="d">Follow the story closely across multiple outlets to form your own view from the mainstream coverage</button>
+</div>
+<div class="feedback-block" id="feedback-6">
+<div class="feedback-headline" id="feedback-text-6"></div>
+<div class="feedback-detail" id="feedback-detail-6"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-6" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 7: Questioning Authority as Pathology -->
+<section class="slide" data-slide="7">
+<div class="slide-inner">
+<div class="slide-label">Module 05 · Slide 07</div>
+<h1 class="slide-title">Questioning Authority as Pathology</h1>
+<div class="slide-body">
+<p>Every institutional system has a mechanism for dealing with people who ask the wrong questions. In religious institutions, they become heretics. In workplaces, troublemakers. In schools, problem learners. In governments, they are radicals, extremists, conspiracy theorists, or threats to national security.</p>
+<p>The label varies. The function is identical: to move the questioner from the category of legitimate participant to the category of person whose concerns do not need to be addressed. The question is not answered. The questioner is discredited.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">When a system cannot answer a question, it attacks the person asking it. The vehemence of the attack is often proportional to the threat the question poses.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Conspiracy theorist as category</div>
+<div class="mechanism-body">The term "conspiracy theorist" was popularised in part through CIA documents following the Kennedy assassination, as a way to discredit those questioning the official account. It has since become a general-purpose label applied to anyone who questions official narratives — regardless of the quality of their evidence or reasoning. The label does not engage with the argument. It removes the person from the argument.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Radical as contamination</div>
+<div class="mechanism-body">To be labelled radical is to be placed outside the range of people worth listening to. This label is applied based on content — what is being argued — not on the quality of the argument. A demand for universal healthcare was once radical. A demand for women to vote was once radical. The label tracks power, not reason.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">The social cost of dissent</div>
+<div class="mechanism-body">Beyond formal suppression, there is informal social cost. People who question government authority face social pressure from peers, family, and colleagues. Relationships become strained. Professional opportunities close. The person learns — as they learned in school and workplace — that compliance is socially rewarded and questioning is socially costly. No force is required. The social environment does the work.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">What happens inside</div>
+<div class="cost-body">When you genuinely do not know whether a question you are asking is legitimate inquiry or "conspiracy thinking," you have successfully internalised the suppression. The goal of pathologising dissent is precisely to make dissenters unable to distinguish between a good question and a dangerous one — so they stop asking either.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 07</div>
+<div class="scenario-q">You raise a serious, evidence-based question about a government policy in a group setting. A colleague responds: "That sounds like conspiracy thinking." What is most worth recognising in that moment?</div>
+<div class="choices" data-scenario="7">
+<button class="choice" data-answer="a">Back down — being seen as a conspiracy theorist carries real social cost</button>
+<button class="choice" data-answer="b">Notice that "conspiracy theorist" closes inquiry rather than addresses it — the label replaced engagement with the actual question</button>
+<button class="choice" data-answer="c">Double down — the fact they used that label probably means you are onto something important</button>
+<button class="choice" data-answer="d">Apologise and clarify that you do actually trust the government on this issue</button>
+</div>
+<div class="feedback-block" id="feedback-7">
+<div class="feedback-headline" id="feedback-text-7"></div>
+<div class="feedback-detail" id="feedback-detail-7"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-7" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 8: What Genuine Civic Agency Looks Like -->
+<section class="slide" data-slide="8">
+<div class="slide-inner">
+<div class="slide-label">Module 05 · Slide 08</div>
+<h1 class="slide-title">What Genuine Civic Agency Looks Like</h1>
+<div class="slide-body">
+<p>The preceding slides describe a system with significant power to manufacture compliance. This does not mean the system is omnipotent, or that individual and collective action is meaningless. It means that genuine agency requires first seeing the conditions you are operating in.</p>
+<p>Performing citizenship — voting, flying the flag, attending civic events — is not the same as exercising political agency. Agency begins with the capacity to see the system clearly enough to act within it consciously, rather than to reproduce it unconsciously.</p>
+</div>
+
+<div class="sov-frame">
+<div class="sov-label">Central observation</div>
+<div class="sov-text">Political agency is not primarily about which party you vote for. It is about whether you have recovered enough of your own mind to make that choice — and every other choice — from genuine discernment rather than conditioned reflex.</div>
+</div>
+
+<div class="mechanism">
+<div class="mechanism-name">Distinguish compliance from engagement</div>
+<div class="mechanism-body">Paying taxes is compliance. Deciding actively how you relate to a political system, what you are willing to do and refuse to do, what you are willing to say and at what cost — this is engagement. Most people never move from the first to the second because the system is designed to make compliance feel like participation. Noticing the difference is a first act of real civic presence.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Locate your actual sphere of influence</div>
+<div class="mechanism-body">Institutional conditioning produces two pathological responses to politics: passive compliance ("my vote doesn't matter") and heroic grandiosity ("I will change the system"). Neither is accurate. Real influence is almost always local, relational, specific, and slow. Your actual sphere of political impact is smaller than your aspirations and larger than your despair suggests.</div>
+</div>
+<div class="mechanism">
+<div class="mechanism-name">Recover the right to not know</div>
+<div class="mechanism-body">Conditioned citizens hold strong opinions about systems they have not examined, in alignment with positions they were assigned by birth, class, and social environment. Genuine civic agency often begins with allowing yourself not to know — to hold the complexity, to sit with genuine uncertainty, to resist the pull toward the tribal certainty of your assigned team. Not knowing can be a position of strength, not weakness.</div>
+</div>
+
+<div class="cost-block">
+<div class="cost-label">The three practices</div>
+<div class="cost-body">Notice when political emotion (pride, outrage, fear) arrives reliably in response to a government prompt — and ask whose interests are served by that emotion. Ask what question is being foreclosed every time you hear a label: radical, conspiracy theorist, anti-democratic. Identify one specific, concrete thing within your actual reach — and do that, rather than the grand gesture that protects you from having to do it.</div>
+</div>
+
+<div class="scenario-block">
+<div class="scenario-label">Scenario · Slide 08</div>
+<div class="scenario-q">You want to engage politically in a way that feels genuine — not performative, not driven by tribal allegiance, not compliance dressed as participation. Where does real civic agency begin?</div>
+<div class="choices" data-scenario="8">
+<button class="choice" data-answer="a">Vote carefully in every election — this is the foundation of democratic participation</button>
+<button class="choice" data-answer="b">With honest examination of which of your political beliefs are genuinely yours and which arrived pre-assembled from your conditioning — agency begins where that distinction becomes clear</button>
+<button class="choice" data-answer="c">Disengage from the system entirely — authentic refusal is the only honest response to a corrupt system</button>
+<button class="choice" data-answer="d">Join an organised political movement — collective action is where individual agency becomes meaningful</button>
+</div>
+<div class="feedback-block" id="feedback-8">
+<div class="feedback-headline" id="feedback-text-8"></div>
+<div class="feedback-detail" id="feedback-detail-8"></div>
+</div>
+</div>
+
+<div class="nav-row">
+<button class="nav-btn" onclick="prevSlide()">&larr; Back</button>
+<button class="nav-btn primary" id="next-8" onclick="nextSlide()" disabled>Continue &rarr;</button>
+</div>
+</div>
+</section>
+
+<!-- SLIDE 9: Completion -->
+<section class="slide" data-slide="9">
+<div class="slide-inner completion-slide">
+<div class="complete-mark">&check;</div>
+<h2 class="complete-title">Module 05 complete.</h2>
+<p class="complete-body">You have examined how government operates as the institution of institutions — naturalising its authority, manufacturing consent, encoding power in law, capturing identity through nationalism, building compliance through surveillance, narrowing legitimate thought through media, and pathologising questions that threaten its legitimacy. And you have begun to locate what genuine civic agency might look like inside all of this.</p>
+<div class="section-heading">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">Government is the institution of institutions — the one that charters, legitimises, or constrains all others. Its authority is presented as natural and neutral; its history is the history of power arrangements, conquest, and class interest encoded into law.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Law presents as neutral and universal. Its application is structurally uneven. The neutrality claim is the legitimating mechanism. Examining what law protects and what it permits reveals whose interests it was designed to serve.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Nationalism captures identity — it makes the interests of the state feel like the interests of the self. When the state's interests and your personal interests diverge, nationalism makes the divergence difficult to perceive.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">The surveillance effect — the modification of behaviour when you believe you are being observed — operates whether or not observation is actually occurring. The most effective compliance system is the one you have internalised as normal behaviour.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Genuine civic agency begins with seeing the system accurately — not cynically, not with the assumption that action is pointless, but with the precision that allows you to act within the system consciously rather than reproducing it unconsciously.</span></li>
+</ol>
+
+<div class="section-heading">Practice this week</div>
+<p class="body-text">Identify one political or civic belief you hold confidently. Then spend thirty minutes tracing where it came from — not what supports it, but where you first encountered it and under what conditions it was presented to you. What was the source? What interests did that source have in your holding that belief? This is not an exercise in abandoning your views. It is an exercise in holding them with awareness of their provenance rather than as self-evident facts. Beliefs examined in this way either deepen or change. Both outcomes are useful.</p>
+<p class="body-text"><strong>The surveillance check:</strong> Notice this week any behaviour you modify in the presence of authority — not because of direct instruction but because of the generalised sense that you are being watched or assessed. The modified behaviour is the internalised compliance. Its presence tells you where the surveillance effect is operating in your daily life. Mapping it does not require reversing it. It requires seeing it clearly enough to know when you are choosing and when you are performing.</p>
+<div class="divider"></div>
+<p class="complete-body" style="font-style:italic;font-family:var(--serif);font-size:19px;">Next: Module 06 — Independence &amp; De-Programming.</p>
+<div class="nav-row" style="justify-content:center;margin-top:48px">
+<button class="nav-btn" onclick="prevSlide()">&larr; Review</button>
+</div>
+</div>
+</section>
+
+<script>
+const feedback = {
+  1: {
+    a: {
+      headline: "This is the self-presentation, not the whole picture.",
+      detail: "Every government presents itself as existing to protect citizens — this is the legitimating narrative. A fuller picture includes how governments emerged from conquest, class struggle, and power arrangements, and how they reliably protect some interests more than others, including their own continuation. Both things can be true: governments do provide real protections and they are also self-serving institutions."
+    },
+    b: {
+      headline: "Yes — the whole picture requires holding both truths.",
+      detail: "Governments do provide genuine functions — legal order, public goods, coordination at scale. But they emerged from particular power arrangements and their protective function has always been selective. Understanding this does not mean abandoning all engagement with government. It means engaging with clear eyes rather than through the self-serving narrative every state constructs about itself."
+    },
+    c: {
+      headline: "This is the equal and opposite error.",
+      detail: "The opposite of uncritical loyalty is not useful. Recognising that governments are self-interested institutions with selective protection functions does not lead to a simple conclusion about abolition. Complex, large-scale societies require coordination mechanisms. The question is not whether governance exists but what it serves, who controls it, and what accountability looks like."
+    },
+    d: {
+      headline: "Accepting something and understanding it are different acts.",
+      detail: "Framing government as a necessary evil to be accepted keeps the critical insight but forecloses the deeper question: what would governance that genuinely served collective wellbeing look like? 'Necessary evil' is a position of passive resignation. Seeing government clearly — including its self-interested operation — opens space for more precise political engagement."
+    }
+  },
+  2: {
+    a: {
+      headline: "Staying and consenting are not the same act.",
+      detail: "This is precisely the reasoning the social contract myth requires. But presence is not agreement. You are present in the territory you were born into, using infrastructure you did not choose, within a system whose rules were set before you could evaluate them. Presence is not consent any more than being born into a family is consent to everything that family does."
+    },
+    b: {
+      headline: "Yes — the framing reveals the mechanism precisely.",
+      detail: "'Leave if you don't like it' exposes how manufactured consent actually works: it creates conditions where exit is nearly impossible, then calls remaining 'agreement.' The argument also deflects from the substance of any actual grievance. It is a thought-stopper, not a response. Recognising this does not tell you what to do about it — but it clarifies what you are actually dealing with."
+    },
+    c: {
+      headline: "Possibly — but that is not the most useful thing to notice here.",
+      detail: "Emigration may or may not be worth considering. But the more important thing to notice is how the 'leave if you don't like it' response functions rhetorically: it converts a structural critique into an individual problem, deflects from the substance of the grievance, and calls presence within an effectively inescapable system 'choice.' That move is worth seeing clearly regardless of what you ultimately decide to do."
+    },
+    d: {
+      headline: "There may be genuine frustration in it — the mechanism is still worth examining.",
+      detail: "The person saying 'leave if you don't like it' may genuinely be frustrated by complaint without action. That frustration is understandable. But the statement still performs a specific function: it ends structural conversation and converts it into individual action or silence. Both things can be true — the speaker's frustration can be real and the rhetorical move can be worth examining."
+    }
+  },
+  3: {
+    a: {
+      headline: "The rule may be worth following — the experience is worth noticing.",
+      detail: "Paying the fine is likely the practical decision. But 'rules are rules' forecloses something worth seeing: that this encounter — however minor — is a direct experience of the state's power to extract compliance. You did something that harmed no one, and an institution's claim on your behaviour and your money is real regardless. That experience contains information about the nature of law."
+    },
+    b: {
+      headline: "Yes — small encounters contain the full architecture.",
+      detail: "The fine for a harmless infraction is a concentrated moment of the state's compliance function. You experience its demand, its assumption of authority over your behaviour, its power to cost you something — all for an act that affected no one. This is worth noticing not to avoid paying the fine but because the discomfort points to something real about how law operates as architecture, not just rule-set."
+    },
+    c: {
+      headline: "The system does have appeal mechanisms — they are not the same as fairness.",
+      detail: "Contesting the fine may be entirely appropriate. Legal systems do contain dispute processes. But 'the system has built-in fairness' is a separate and larger claim. Legal processes produce outcomes within existing rules — which were written by particular people to protect particular interests. Built-in process is not the same as structural fairness."
+    },
+    d: {
+      headline: "Guilt here is a conditioned response, not a moral signal.",
+      detail: "Feeling guilty for breaking a law that harmed no one tells you more about your conditioning than about the action itself. Law and harm are not identical categories. Many laws prohibit harmless acts; some historical laws required harmful ones. The guilt response is precisely the fully internalised compliance state that institutions aim to produce — where legality and morality feel like the same thing."
+    }
+  },
+  4: {
+    a: {
+      headline: "The feeling is real — its source is worth examining.",
+      detail: "National pride is a genuine emotion. The question is not whether to feel it but to know where it came from and whose interests it serves in this particular moment. Pride in one's country arriving reliably when that country prepares for war is not an accident. It is a system working. Following the feeling without examining it means being moved by something you cannot see."
+    },
+    b: {
+      headline: "Yes — this is precisely what conscious citizenship requires.",
+      detail: "Pausing before a powerful political emotion — especially one that arrives on cue — is not unpatriotic. It is the beginning of actual political agency. Ask: who benefits from this war? Who will fight it and who will profit from it? Why does the feeling of pride arrive now rather than, say, when healthcare statistics are released? The emotion contains information — about the system as much as about yourself."
+    },
+    c: {
+      headline: "Categorical rejection replaces one reflex with another.",
+      detail: "Nationalism is often manipulative. It is not always and only manipulation. A sense of connection to place, people, and shared history is a genuine human need. The institutional capture of that need is the problem — not the need itself. Blanket rejection of all national feeling is itself a conditioned response, just in the opposite direction from uncritical loyalty."
+    },
+    d: {
+      headline: "Supporting individuals does not require suspending judgement about causes.",
+      detail: "'Support the troops regardless of cause' is itself a product of institutional conditioning — it is designed to insulate military action from political scrutiny by converting it into a question of personal loyalty to individuals. You can care about the people sent to fight and still ask whether the cause is just, the evidence real, and the interests served legitimate. These are not contradictory positions."
+    }
+  },
+  5: {
+    a: {
+      headline: "Free speech exists — the internal calculation already changed the exercise of it.",
+      detail: "Posting is fine. But the more important thing to notice happened before the posting decision: the rapid internal audit of who will see this, what they will think, what might happen. That calculation is the surveillance effect operating inside you. The panopticon does not need to actually watch you — it needs you to internalise the watcher. You already have, whether or not you post."
+    },
+    b: {
+      headline: "Yes — the calculation is the phenomenon, not just the outcome.",
+      detail: "The content of what you decide to post matters less than the mental act that preceded the decision. You performed a pre-censorship pass — consulting an imagined audience, assessing risk, modifying or withholding based on that assessment. This is the surveillance architecture working at the level of thought. Seeing it clearly does not tell you what to post. It tells you what has already been built inside you."
+    },
+    c: {
+      headline: "This may be correct — the calculation is still worth examining.",
+      detail: "Some opinions do cause harm, and choosing not to express them can be a genuinely ethical decision. But 'harm' is a complex standard and its application is rarely neutral. The more important thing here is to notice the difference between choosing silence as a conscious ethical act and choosing silence because the internal surveillance calculation makes expression feel too costly. Both can produce the same behaviour. Only one is freely chosen."
+    },
+    d: {
+      headline: "This is self-censorship experiencing itself as compromise.",
+      detail: "Softening an opinion until it is safe is a classic self-censorship pattern — and it typically does not feel like censorship. It feels like being reasonable, thoughtful, considerate of others. The surveillance effect is most complete when it has been incorporated into your self-image as a virtue. Notice: is the softening making the thought more precise, or safer? These are different operations."
+    }
+  },
+  6: {
+    a: {
+      headline: "Consensus among authorised sources is not the same as accuracy.",
+      detail: "Multiple outlets reporting the same framing can mean the event is clearly understood — or it can mean they share the same sources, the same ownership interests, the same professional culture, and the same set of assumptions about what counts as a credible perspective. Convergence within a narrow band of authorised voices narrows rather than confirms. The question is whether the range of voices is adequate, not whether those voices agree."
+    },
+    b: {
+      headline: "Yes — convergence is the phenomenon to examine, not the confirmation.",
+      detail: "When all major outlets tell the same story the same way, the most useful question is not 'is this true?' but 'what is not being covered here?' and 'whose interests are served by this particular framing?' Convergence among media outlets that share ownership, sourcing practices, and professional norms is not evidence of truth — it is evidence of shared filters. The gaps are often more informative than the content."
+    },
+    c: {
+      headline: "The opposite error does not produce better information.",
+      detail: "Wholesale rejection of mainstream media and migration to alternative sources does not solve the epistemological problem — it relocates it. Alternative sources have their own interests, biases, and failure modes, often with less accountability and fact-checking infrastructure. The useful skill is not finding the 'true' source but developing genuine media literacy: examining sources, motivations, evidence, and what any account leaves out."
+    },
+    d: {
+      headline: "Following multiple mainstream sources produces breadth within the same narrow band.",
+      detail: "Reading multiple mainstream outlets does provide more information. But if those outlets share the same sourcing practices, ownership structures, and implicit assumptions, reading more of them does not expand the range of perspectives — it provides more of the same frame. Genuine understanding requires seeking out perspectives that operate outside the mainstream's shared assumptions, not just more volume within it."
+    }
+  },
+  7: {
+    a: {
+      headline: "The social cost is real — and backing down validates the mechanism.",
+      detail: "Being labelled a conspiracy theorist does carry social cost. Recognising that does not mean the label was applied fairly. Backing down in response to the label — rather than in response to actual engagement with the question — means the mechanism worked exactly as intended. The label closed inquiry without addressing it, and you complied. The social cost is real; the label was still a thought-stopper, not an argument."
+    },
+    b: {
+      headline: "Yes — the label replaced engagement with the question.",
+      detail: "Whatever the merits of your question, 'that sounds like conspiracy thinking' is not an answer to it. It is a category assignment designed to remove the questioner from legitimate discourse. Notice what happened: your question was not addressed, your evidence was not examined, your reasoning was not engaged. The label did the work instead. Seeing this clearly does not tell you whether your question is correct — it tells you the response you received was a suppression, not a refutation."
+    },
+    c: {
+      headline: "The label does not confirm your argument any more than it refutes it.",
+      detail: "'They attacked me rather than my argument, therefore I am right' is a logical error — sometimes called argumentum ad persecutionem. Suppression of a view does not validate it. Establishment figures have suppressed both important truths and dangerous nonsense. The correct response to the label is not certainty that you are right but insistence that the actual question be engaged — and ongoing rigor about the quality of your own evidence and reasoning."
+    },
+    d: {
+      headline: "Apologising for asking a sincere question teaches you not to ask sincere questions.",
+      detail: "Capitulating to a social pressure move by recanting a genuine question is a form of self-abandonment. You had a question worth asking. The question was not answered — it was shut down. Apologising and claiming you trust the government on this conflates social comfort with intellectual honesty. You can choose not to re-engage in that setting. You do not need to pretend the question was illegitimate."
+    }
+  },
+  8: {
+    a: {
+      headline: "Voting is a tool — it is not the beginning of agency.",
+      detail: "Voting is a constrained act within a pre-established system. It matters and it is not sufficient. More importantly, voting is often the point at which conditioned citizens feel most like they are participating, which can substitute for more demanding forms of engagement. Careful voting is useful. But agency that begins and ends at the ballot box is agency within the narrowest possible range of what the system permits."
+    },
+    b: {
+      headline: "Yes — this is where genuine agency actually begins.",
+      detail: "Before you can act politically from genuine discernment, you need to know what is actually yours — which beliefs came from conditioning (family, class, media, national identity) and which came from genuine reflection. Most people never make this distinction. The ones who do find that some of their conditioned positions survive examination and some do not. Either way, what remains is theirs. That is a different relationship to political life entirely."
+    },
+    c: {
+      headline: "Disengagement is a position — it is not the same as freedom.",
+      detail: "Refusing to participate in a corrupt system has a long philosophical history and real integrity in some forms. But wholesale disengagement often means the system continues operating without you, shaped by people who are engaged — many of whom are comfortable with its current operation. More importantly, disengagement often becomes its own performance: the authenticity of refusal. Genuine agency is present whether you engage or refuse — and it knows the difference between the two."
+    },
+    d: {
+      headline: "Collective action amplifies agency — it does not replace the need to find it first.",
+      detail: "Organised movements have produced real political change. Joining one can be a meaningful act. But organised movements also reproduce institutional dynamics — hierarchy, conformity pressure, identity capture, suppression of internal dissent. Joining a movement before you have done the work of recovering your own mind often means trading one form of conditioned allegiance for another. Find what is genuinely yours first. Then bring it to collective action."
+    }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c6m4';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course6-module-4-religion-meaning.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c6m5','1');window.location.href='course6-module-6-independence-deprogramming.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

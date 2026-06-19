@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 8 · Module 6 · Healing Foods &amp; Herbs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+--serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.module-header{border-bottom:1px solid var(--line);padding:32px 48px 32px 24px;display: grid; grid-template-columns: 1fr auto 1fr;justify-items: start;
+align-items:baseline;position:sticky;top:0;background:var(--paper);z-index:100;backdrop-filter:blur(8px)}
+.module-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:500}
+.module-tag strong{color:var(--ink)}
+.progress-bar{grid-column:3;justify-self:end;display:flex;gap:6px;align-items:center}
+.progress-dot{width:24px;height:2px;background:var(--line);transition:background .4s ease}
+.progress-dot.active{background:var(--ink)}.progress-dot.complete{background:var(--accent)}
+.slide{display:none;animation:fadeUp .6s ease}.slide.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.slide-inner{max-width:720px;margin:0 auto;padding:72px 48px 120px}
+.slide-num{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:40px;letter-spacing:.06em}
+.slide h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:32px}
+.slide h1 em{font-style:italic;color:var(--accent)}
+.lead{font-size:1.15rem;line-height:1.75;color:var(--ink);margin-bottom:32px;font-weight:300}
+.body-text{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:24px}
+.divider{width:40px;height:1px;background:var(--accent);margin:40px 0}
+.scenario-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;font-family:var(--sans)}
+.scenario-text{font-family:var(--serif);font-size:1.3rem;font-weight:300;line-height:1.6;margin-bottom:36px;padding-left:20px;border-left:2px solid var(--line)}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
+.choice{background:transparent;border:1px solid var(--line);padding:18px 22px;text-align:left;cursor:pointer;
+font-family:var(--sans);font-size:.95rem;line-height:1.5;color:var(--ink);transition:all .2s ease;border-radius:2px}
+.choice:hover:not(:disabled){border-color:var(--ink);background:var(--soft)}
+.choice.selected{border-color:var(--ink);background:var(--soft)}
+.choice.dimmed{opacity:.35}.choice:disabled{cursor:default}
+.feedback{display:none;border-top:1px solid var(--line);padding-top:28px;margin-top:8px}
+.feedback.visible{display:block;animation:fadeUp .4s ease}
+.feedback-headline{font-family:var(--serif);font-size:1.1rem;font-weight:400;margin-bottom:10px}
+.feedback-detail{font-size:.95rem;line-height:1.75;color:var(--muted)}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.nav-btn{background:none;border:none;font-family:var(--sans);font-size:.9rem;color:var(--muted);cursor:pointer;
+letter-spacing:.04em;padding:8px 0;transition:color .2s}
+.nav-btn:hover:not(:disabled){color:var(--ink)}.nav-btn:disabled{opacity:.2;cursor:default}
+.nav-btn.primary{color:var(--ink);font-weight:500}
+.completion{text-align:center;padding:80px 48px}
+.completion-icon{font-size:3rem;margin-bottom:32px}
+.completion h2{font-family:var(--serif);font-size:2.2rem;font-weight:300;margin-bottom:20px}
+.completion p{font-size:1rem;line-height:1.8;color:var(--muted);max-width:480px;margin:0 auto 40px}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}
+
+.section-heading{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:56px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-heading::before{content:'';width:24px;height:1px;background:var(--ink)}
+.summary-list{list-style:none;margin:40px 0}
+.summary-list li{padding:20px 0;border-bottom:1px solid var(--line);display:flex;gap:24px;align-items:baseline}
+.summary-list li:last-child{border-bottom:none}
+.summary-num{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.15em;min-width:32px}
+.summary-text{font-family:var(--serif);font-size:18px;line-height:1.5;font-weight:400}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 08 &middot; Food Is Medicine &middot; Module <strong>06</strong> &middot; Healing Foods &amp; Herbs</div>
+  <div class="progress-bar">
+    <div class="progress-dot" id="dot-1"></div>
+    <div class="progress-dot" id="dot-2"></div>
+    <div class="progress-dot" id="dot-3"></div>
+    <div class="progress-dot" id="dot-4"></div>
+    <div class="progress-dot" id="dot-5"></div>
+    <div class="progress-dot" id="dot-6"></div>
+    <div class="progress-dot" id="dot-7"></div>
+    <div class="progress-dot" id="dot-8"></div>
+    <div class="progress-dot" id="dot-9"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 8 &middot; Food Is Medicine</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c8m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course8-module-1-you-are-what-you-eat.html">You Are What You Eat</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course8-module-2-god-made-vs-man-made.html">God-Made vs Man-Made</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course8-module-3-the-alkaline-body.html">The Alkaline Body</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course8-module-4-the-power-of-fasting.html">The Power of Fasting</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course8-module-5-what-junk-food-does-to-you.html">What Junk Food Does</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course8-module-6-healing-foods-and-herbs.html">Healing Foods & Herbs</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course8-module-7-children-and-family-nutrition.html">Children & Family Nutrition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m8" data-mn="8">
+      <span class="sidebar-mod-n">08</span>
+      <a class="sidebar-mod-a" href="course8-module-8-detoxing-and-transition.html">Detoxing & Transition</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c8m9" data-mn="9">
+      <span class="sidebar-mod-n">09</span>
+      <a class="sidebar-mod-a" href="course8-module-9-building-your-alkaline-life.html">Your Alkaline Life</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<!-- SLIDE 1 -->
+<div class="slide active" id="slide-1" data-slide="1">
+  <div class="slide-inner">
+    <div class="slide-num">01 / 09</div>
+    <h1>Sea Moss: <em>The Ocean's Gift</em></h1>
+    <p class="lead">Of all the foods celebrated in the alkaline healing tradition, sea moss — the red algae Chondrus crispus — holds a special place. It contains an extraordinary density of the minerals the human body needs, sourced directly from the sea.</p>
+    <div class="divider"></div>
+    <p class="body-text">Sea moss is said to contain 92 of the 102 minerals found in the human body — including iodine, potassium, calcium, iron, magnesium, phosphorus, zinc, and selenium. It is a natural source of iodine that supports thyroid function and metabolism. Its natural mucilaginous quality — the gel it produces when soaked — soothes and coats the gut lining, acting as a prebiotic that feeds beneficial gut bacteria. It supports the respiratory system, the immune system, skin health, and joint flexibility.</p>
+    <p class="body-text">Sea moss gel — made by blending soaked sea moss with spring water — can be added to smoothies, teas, porridge, and soups. It has no strong flavour, making it one of the most versatile healing foods available. As a fast-breaker after extended fasting, it is ideal: gentle on the gut, immediately mineralising, and deeply supportive of the renewed gut lining.</p>
+    <div class="scenario-label">Scenario 01</div>
+    <p class="scenario-text">Fatigue, hair thinning, cold sensitivity, and sluggish metabolism have led Imani's doctor to investigate her thyroid. Her iodine levels are low. She has been prescribed synthetic thyroid medication. A nutritional practitioner suggests beginning with sea moss daily as a natural iodine source. What is the case for this approach?</p>
+    <div class="choices" data-scenario="1">
+      <button class="choice" data-answer="a">Sea moss has no proven effect on thyroid function and should not be suggested alongside medical investigation</button>
+      <button class="choice" data-answer="b">Sea moss is one of the most bioavailable natural sources of iodine — a mineral essential for thyroid hormone production — and addressing a documented iodine deficiency through whole food is a sound first or complementary step before or alongside pharmaceutical intervention</button>
+      <button class="choice" data-answer="c">Synthetic medication is always preferable to food-based approaches for thyroid conditions</button>
+      <button class="choice" data-answer="d">Iodine supplementation is dangerous and should only come from pharmaceutical sources</button>
+    </div>
+    <div class="feedback" id="feedback-1">
+      <p class="feedback-headline" id="feedback-text-1"></p>
+      <p class="feedback-detail" id="feedback-detail-1"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()" disabled>← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide" id="slide-2" data-slide="2">
+  <div class="slide-inner">
+    <div class="slide-num">02 / 09</div>
+    <h1>Burdock Root: <em>The Blood Purifier</em></h1>
+    <p class="lead">Burdock root has been used as medicine across African, Asian, and European healing traditions for centuries. In the alkaline tradition it is among the most important herbs: a deep cleanser of the blood, the liver, and the lymphatic system.</p>
+    <div class="divider"></div>
+    <p class="body-text">Burdock root contains inulin — a prebiotic fibre that feeds beneficial gut bacteria — as well as arctigenin, a compound with documented anti-inflammatory and anti-tumour properties. It is rich in antioxidants including quercetin, luteolin, and phenolic acids. It stimulates bile production, supporting fat digestion and liver detoxification. It has a mild diuretic effect, supporting kidney function and the elimination of waste through the urinary system.</p>
+    <p class="body-text">The lymphatic system — the body's drainage and immune network — is a primary focus of the alkaline healing tradition. Unlike the blood, the lymphatic system has no pump; it moves through muscular contraction and breathing. Burdock root is one of the herbs most consistently recommended for lymphatic stimulation and clearing — making it particularly valuable for skin conditions like eczema, psoriasis, and acne, which the tradition views as the body eliminating through the skin what the lymph has failed to clear.</p>
+    <div class="scenario-label">Scenario 02</div>
+    <p class="scenario-text">Marcus has struggled with chronic acne and eczema for years and has been prescribed topical steroid creams that suppress the symptoms temporarily. A herbalist recommends burdock root tea daily alongside dietary change. What is the logic behind this recommendation?</p>
+    <div class="choices" data-scenario="2">
+      <button class="choice" data-answer="a">Herbal tea cannot treat skin conditions — only pharmaceutical creams have proven efficacy</button>
+      <button class="choice" data-answer="b">The tradition understands skin eruptions as the body eliminating through the skin what the lymph and liver have not cleared — burdock root supports both systems at the root, addressing the cause rather than suppressing the symptom</button>
+      <button class="choice" data-answer="c">Burdock root only works for internal conditions — it has no effect on skin</button>
+      <button class="choice" data-answer="d">The acne and eczema are separate conditions and should be treated separately with different medications</button>
+    </div>
+    <div class="feedback" id="feedback-2">
+      <p class="feedback-headline" id="feedback-text-2"></p>
+      <p class="feedback-detail" id="feedback-detail-2"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide" id="slide-3" data-slide="3">
+  <div class="slide-inner">
+    <div class="slide-num">03 / 09</div>
+    <h1>Bladderwrack: <em>Sea Vegetable Medicine</em></h1>
+    <p class="lead">Bladderwrack is a brown seaweed that grows along Atlantic coastlines — and in the alkaline tradition it is paired with sea moss as one of nature's most complete mineral and thyroid-supportive combinations.</p>
+    <div class="divider"></div>
+    <p class="body-text">Bladderwrack is rich in iodine, fucoidan, and fucoxanthin. Fucoidan — a sulphated polysaccharide unique to sea vegetables — is one of the most researched natural compounds in current nutritional science, with documented anti-inflammatory, antiviral, anticoagulant, and anti-tumour properties. Fucoxanthin is a carotenoid with potent antioxidant effects and emerging research supporting its role in metabolism and weight management.</p>
+    <p class="body-text">Together, sea moss and bladderwrack provide a spectrum of minerals and bioactive compounds from the sea — the same mineral-rich environment that life on earth originated from. The tradition holds that sea vegetables bring the ocean's mineral intelligence directly into the body. Science is increasingly mapping what that intelligence contains: compounds that support immunity, reduce inflammation, protect against viral replication, and nourish the thyroid and adrenal systems that govern energy and stress response.</p>
+    <div class="scenario-label">Scenario 03</div>
+    <p class="scenario-text">A researcher dismisses sea vegetables as "folk medicine" with no clinical evidence. A nutritional healer responds by pointing to fucoidan research. Who has the stronger position?</p>
+    <div class="choices" data-scenario="3">
+      <button class="choice" data-answer="a">The researcher — traditional remedies have no place in evidence-based health</button>
+      <button class="choice" data-answer="b">The healer — fucoidan from brown seaweeds including bladderwrack has an extensive and growing research literature documenting anti-inflammatory, antiviral, and anti-tumour properties that validate what healing traditions have known for generations</button>
+      <button class="choice" data-answer="c">Neither — the two approaches are completely incompatible and cannot be compared</button>
+      <button class="choice" data-answer="d">The researcher, because anecdotal traditional use cannot substitute for randomised controlled trials</button>
+    </div>
+    <div class="feedback" id="feedback-3">
+      <p class="feedback-headline" id="feedback-text-3"></p>
+      <p class="feedback-detail" id="feedback-detail-3"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide" id="slide-4" data-slide="4">
+  <div class="slide-inner">
+    <div class="slide-num">04 / 09</div>
+    <h1>Sarsaparilla: <em>The Hormone Harmoniser</em></h1>
+    <p class="lead">Sarsaparilla root — used across Central American, Caribbean, and African healing traditions — is one of the alkaline tradition's most valued herbs for blood purification, hormonal balance, and inflammatory conditions.</p>
+    <div class="divider"></div>
+    <p class="body-text">Sarsaparilla contains plant sterols — steroidal saponins including sarsasapogenin and smilagenin — that interact with the endocrine system. These plant compounds are structurally similar to human steroid hormones and are believed to support the body's own hormone production, helping to restore balance in states of hormonal disruption. It has historically been used for conditions associated with hormonal imbalance including skin disorders, low libido, fatigue, and menopausal symptoms.</p>
+    <p class="body-text">Sarsaparilla also binds to endotoxins in the gut — bacterial lipopolysaccharides that, when absorbed into the bloodstream, drive systemic inflammation — and helps carry them out of the body before absorption. This endotoxin-binding property makes it particularly relevant in conditions of gut permeability where internal toxins are contributing to inflammation, skin conditions, and hormonal disruption. It is both a blood purifier and a hormonal support in one root.</p>
+    <div class="scenario-label">Scenario 04</div>
+    <p class="scenario-text">Yvonne has been experiencing hormonal imbalance symptoms — irregular cycles, mood instability, low energy — and has been prescribed the contraceptive pill to regulate her hormones. A herbalist suggests sarsaparilla root alongside dietary change. What is the distinction between the two approaches?</p>
+    <div class="choices" data-scenario="4">
+      <button class="choice" data-answer="a">The pill and sarsaparilla work identically — both regulate hormones</button>
+      <button class="choice" data-answer="b">The pill overrides the body's hormonal system with synthetic hormones; sarsaparilla supports the body's own hormone-producing systems — one replaces function, the other attempts to restore it</button>
+      <button class="choice" data-answer="c">Herbal hormone support is dangerous and should never be used alongside or instead of prescribed medication without medical supervision</button>
+      <button class="choice" data-answer="d">Sarsaparilla only affects male hormones and is irrelevant for women's hormonal conditions</button>
+    </div>
+    <div class="feedback" id="feedback-4">
+      <p class="feedback-headline" id="feedback-text-4"></p>
+      <p class="feedback-detail" id="feedback-detail-4"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide" id="slide-5" data-slide="5">
+  <div class="slide-inner">
+    <div class="slide-num">05 / 09</div>
+    <h1>Elderberry and Elderflower: <em>Nature's Antiviral</em></h1>
+    <p class="lead">Elder — both the berry and the flower — is one of the most thoroughly researched medicinal plants available. What healing traditions across Europe and Africa have known for thousands of years, clinical trials have now confirmed.</p>
+    <div class="divider"></div>
+    <p class="body-text">Elderberries are exceptionally rich in anthocyanins — the dark purple pigments that give them their colour and are among the most potent antioxidant and anti-inflammatory compounds in the plant kingdom. Multiple randomised controlled trials have found that elderberry extract significantly reduces the duration and severity of influenza and upper respiratory tract infections. The mechanism includes direct antiviral activity — compounds in elderberry have been shown to prevent viral particles from binding to and entering host cells — as well as immune modulation.</p>
+    <p class="body-text">Elderflower supports the respiratory system through a different route: it is diaphoretic — it promotes sweating, helping the body release fever — and has expectorant properties, supporting the clearing of mucus from the airways. As a tea during illness, it supports the body's own fever response rather than suppressing it. Both berry and flower demonstrate the elder plant's complete orientation toward respiratory and immune health.</p>
+    <div class="scenario-label">Scenario 05</div>
+    <p class="scenario-text">During flu season, a pharmacist recommends an over-the-counter antiviral medication. A nutritional healer recommends elderberry syrup, elderflower tea, and high-dose whole food vitamin C. A parent wants to know which approach has better evidence for children. What does the research show?</p>
+    <div class="choices" data-scenario="5">
+      <button class="choice" data-answer="a">Only pharmaceutical antivirals have clinical evidence — herbal approaches are unproven for children</button>
+      <button class="choice" data-answer="b">Multiple clinical trials support elderberry's effectiveness in reducing flu duration and severity, with an excellent safety profile in children; the pharmaceutical antiviral has evidence but also documented side effects including nausea and vomiting that herbal approaches typically do not produce</button>
+      <button class="choice" data-answer="c">Both approaches are equally unproven and neither should be recommended</button>
+      <button class="choice" data-answer="d">Elderberry is only effective as a preventive measure, not during active illness</button>
+    </div>
+    <div class="feedback" id="feedback-5">
+      <p class="feedback-headline" id="feedback-text-5"></p>
+      <p class="feedback-detail" id="feedback-detail-5"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide" id="slide-6" data-slide="6">
+  <div class="slide-inner">
+    <div class="slide-num">06 / 09</div>
+    <h1>Turmeric: <em>The Golden Root</em></h1>
+    <p class="lead">Turmeric has been central to Ayurvedic and African healing traditions for thousands of years. Its active compound — curcumin — is now among the most extensively researched natural anti-inflammatory compounds in science.</p>
+    <div class="divider"></div>
+    <p class="body-text">Curcumin works by inhibiting NF-kB — a molecule that travels into cell nuclei and switches on inflammation genes. This is the same pathway targeted by many pharmaceutical anti-inflammatory drugs. But curcumin modulates this pathway rather than blocking it entirely, producing anti-inflammatory effects without the side effects — gut damage, immune suppression, cardiovascular risk — associated with long-term NSAID use.</p>
+    <p class="body-text">Curcumin's bioavailability is significantly enhanced by two things: black pepper (piperine increases absorption by up to 2,000%) and a fat source, since curcumin is fat-soluble. The traditional preparation — turmeric cooked with pepper in oil — was arrived at through generations of practical wisdom, not laboratory analysis. Research has also identified curcumin's neuroprotective properties: it crosses the blood-brain barrier, reduces neuroinflammation, and is being actively researched for applications in Alzheimer's and depression.</p>
+    <div class="scenario-label">Scenario 06</div>
+    <p class="scenario-text">A rheumatologist prescribes long-term ibuprofen for a patient's joint inflammation. The patient asks about turmeric as an alternative. The doctor says turmeric is not a medication and has no proven anti-inflammatory effect. How accurate is this?</p>
+    <div class="choices" data-scenario="6">
+      <button class="choice" data-answer="a">The doctor is correct — turmeric has no documented anti-inflammatory mechanism</button>
+      <button class="choice" data-answer="b">The doctor is incorrect — curcumin in turmeric has a well-documented anti-inflammatory mechanism (NF-kB inhibition) supported by thousands of studies, and is particularly relevant for chronic joint inflammation where long-term NSAID use carries significant risks</button>
+      <button class="choice" data-answer="c">Turmeric works for mild inflammation only — for serious joint conditions it has no relevant effect</button>
+      <button class="choice" data-answer="d">Turmeric supplements are the only effective form — cooking with turmeric has no therapeutic value</button>
+    </div>
+    <div class="feedback" id="feedback-6">
+      <p class="feedback-headline" id="feedback-text-6"></p>
+      <p class="feedback-detail" id="feedback-detail-6"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide" id="slide-7" data-slide="7">
+  <div class="slide-inner">
+    <div class="slide-num">07 / 09</div>
+    <h1>Dandelion: <em>The Misunderstood Weed</em></h1>
+    <p class="lead">The most dismissed plant in the garden is one of the most medicinally complete. Every part of the dandelion — root, leaf, and flower — is medicine. It grows freely, costs nothing, and most people pull it out of the ground and throw it away.</p>
+    <div class="divider"></div>
+    <p class="body-text">Dandelion leaves contain more calcium per gram than milk, more iron per gram than spinach, and significant amounts of potassium, vitamin K, vitamin A, and vitamin C. They are bitter — and that bitterness is medicine: bitter compounds stimulate the digestive system, trigger bile production in the liver, and prime the gut for optimal nutrient absorption. The leaf has a gentle diuretic effect that supports kidney function and helps the body clear excess fluid without depleting potassium the way pharmaceutical diuretics do.</p>
+    <p class="body-text">The dandelion root is a liver tonic and prebiotic — rich in inulin, it feeds beneficial gut bacteria. It is one of the most reliable herbs for supporting liver detoxification pathways and is used across multiple healing traditions for conditions associated with liver congestion: sluggish digestion, skin conditions, hormonal excess, and chronic fatigue. The flower provides antioxidants and polyphenols. A plant scorned as a weed contains an entire pharmacy.</p>
+    <div class="scenario-label">Scenario 07</div>
+    <p class="scenario-text">Nina takes a prescription diuretic for fluid retention. It is effective but causes her to lose potassium, requiring a separate potassium supplement. A herbalist tells her dandelion leaf tea achieves a similar diuretic effect while naturally replenishing the potassium it helps eliminate. How is this possible?</p>
+    <div class="choices" data-scenario="7">
+      <button class="choice" data-answer="a">It is not possible — all diuretics deplete potassium regardless of their source</button>
+      <button class="choice" data-answer="b">Dandelion leaf contains significant potassium within the plant itself — so its natural diuretic compounds promote fluid elimination while the potassium in the leaf simultaneously replaces what is lost, a balance that pharmaceutical diuretics do not provide</button>
+      <button class="choice" data-answer="c">Herbal diuretics are too weak to be effective for genuine fluid retention</button>
+      <button class="choice" data-answer="d">The potassium in plant food is not the same as potassium in the body and cannot compensate for losses</button>
+    </div>
+    <div class="feedback" id="feedback-7">
+      <p class="feedback-headline" id="feedback-text-7"></p>
+      <p class="feedback-detail" id="feedback-detail-7"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-7" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 -->
+<div class="slide" id="slide-8" data-slide="8">
+  <div class="slide-inner">
+    <div class="slide-num">08 / 09</div>
+    <h1>The Pharmacy Is <em>in the Garden</em></h1>
+    <p class="lead">The herbs in this module are not the whole library — they are a doorway. Behind them is an entire tradition of plant medicine that covers nearly every condition the human body encounters. The pharmacy was always in the earth.</p>
+    <div class="divider"></div>
+    <p class="body-text">Garlic: one of nature's most potent antimicrobial and antiviral compounds. Raw garlic produces allicin — a sulphur compound that kills bacteria, fungi, and viruses with a potency that has been compared to pharmaceutical antibiotics in laboratory conditions. Ginger: a powerful anti-inflammatory and digestive support, effective for nausea, joint pain, and gut motility. Avocado: one of the densest sources of healthy fat and glutathione — the body's master antioxidant, essential for liver detoxification. Dark leafy greens: chlorophyll-rich blood builders that oxygenate the body at a cellular level. Figs and dates: among the most mineral-dense fruits available — figs contain more calcium than milk per 100g.</p>
+    <p class="body-text">The principle that runs through all of it is the same: nature provided what the body needs, in the form the body can receive it, long before laboratories existed. Learning to read the garden — to know which plant supports which system — is the restoration of an ancient literacy that was never supposed to be lost.</p>
+    <div class="scenario-label">Scenario 08</div>
+    <p class="scenario-text">Daniel has a mild bacterial infection and asks his doctor about natural alternatives to the antibiotic being prescribed. His doctor insists no food or herb can match pharmaceutical antibiotics. What is the most accurate and balanced response to this claim?</p>
+    <div class="choices" data-scenario="8">
+      <button class="choice" data-answer="a">The doctor is completely right — natural antimicrobials have no evidence and cannot treat bacterial infections</button>
+      <button class="choice" data-answer="b">For serious or systemic infections, pharmaceutical antibiotics are important and should not be avoided. However, for mild infections, compounds like raw garlic (allicin), oregano oil (carvacrol), and manuka honey have demonstrated genuine antimicrobial properties in laboratory and clinical settings — and do not carry the microbiome-disrupting effects of broad-spectrum antibiotics</button>
+      <button class="choice" data-answer="c">All bacterial infections should always be treated with natural remedies — antibiotics are unnecessary</button>
+      <button class="choice" data-answer="d">Natural antimicrobials only work as preventives — once an infection is present, only pharmaceutical antibiotics are effective</button>
+    </div>
+    <div class="feedback" id="feedback-8">
+      <p class="feedback-headline" id="feedback-text-8"></p>
+      <p class="feedback-detail" id="feedback-detail-8"></p>
+    </div>
+    <div class="nav-row">
+      <button class="nav-btn" onclick="prevSlide()">← Back</button>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-8" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: COMPLETION -->
+<div class="slide" id="slide-9" data-slide="9">
+  <div class="slide-inner">
+    <div class="completion">
+      <div class="completion-icon">◈</div>
+      <h2>Module 6 Complete</h2>
+      <p>Sea moss, burdock root, bladderwrack, sarsaparilla, elderberry, turmeric, dandelion — and behind them, an entire tradition of plant medicine that covers the full spectrum of human health. The pharmacy was always in the earth. Now you know how to read it.</p>
+      <p style="margin-top:16px;font-size:.9rem;color:var(--muted)">Course 08 &middot; Food Is Medicine &middot; Module 06 of 09</p>
+
+<div class="section-heading" style="margin-top:40px">What you carry forward</div>
+<ol class="summary-list">
+<li><span class="summary-num">01</span><span class="summary-text">Sea moss provides 92 of the 102 minerals the human body uses. It supports thyroid function, gut lining integrity, joint health, and immune regulation &mdash; it is among the most complete single foods available.</span></li>
+<li><span class="summary-num">02</span><span class="summary-text">Burdock root is one of the most effective blood purifiers in the plant kingdom. It supports the liver, lymphatic system, and skin &mdash; all three of which are primary detoxification pathways.</span></li>
+<li><span class="summary-num">03</span><span class="summary-text">Bladderwrack delivers iodine, fucoidan, and trace minerals in a form the body recognises. It supports thyroid function and is particularly valuable where iodine deficiency underlies fatigue and hormonal disruption.</span></li>
+<li><span class="summary-num">04</span><span class="summary-text">Elderberry and elderflower are among nature&rsquo;s most documented antivirals. They reduce the severity and duration of respiratory illness and support immune resilience through the cold and flu season.</span></li>
+<li><span class="summary-num">05</span><span class="summary-text">Turmeric&rsquo;s active compound, curcumin, is one of the most studied natural anti-inflammatories. Its bioavailability increases dramatically with black pepper and a fat source &mdash; the combination matters, not just the ingredient.</span></li>
+<li><span class="summary-num">06</span><span class="summary-text">The pharmacy is in the earth. These plants are not supplements to a conventional approach &mdash; they are the original medicine, refined over thousands of years of human health experience.</span></li>
+</ol>
+<div class="section-heading">Practice this week</div>
+<p class="body-text">Choose one herb or plant from this module and bring it into your life this week. Sea moss gel in a smoothie, elderberry syrup before bed, turmeric in cooking with black pepper, burdock root tea in the evening. Not as a cure for anything &mdash; as the beginning of a relationship with plant medicine. A single plant, used consistently, teaches more than reading about ten.</p>
+<p class="body-text">Monthly: build a simple herb and plant rotation across the month &mdash; one or two plants per week, cycling through what you have available. Note what each one seems to affect: energy, digestion, sleep, skin, mucus. You are assembling your own working knowledge of how these plants interact with your specific body. That knowledge is not transferable from anyone else.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const feedback = {
+  1:{
+    a:{headline:"Sea moss has well-documented mineral content including iodine — its relevance to thyroid function is established.",detail:"Iodine deficiency is one of the most common and correctable causes of thyroid dysfunction globally. Sea moss is a bioavailable, whole-food source of iodine in a mineral matrix that the body recognises and absorbs efficiently. Suggesting it as a first or complementary step to address a documented iodine deficiency is nutritionally sound. It does not replace the medical investigation — it addresses a specific, identified nutritional root."},
+    b:{headline:"Correct. Addressing a mineral deficiency through its whole-food source is the most direct approach.",detail:"Imani's thyroid symptoms align precisely with iodine deficiency, and sea moss is one of the most mineral-rich, iodine-containing whole foods available. Before moving to pharmaceutical thyroid hormone replacement — which manages the output of thyroid dysfunction without necessarily addressing its nutritional cause — establishing adequate iodine intake through food is a rational and evidence-aligned step. Medical supervision during this process ensures the response is monitored appropriately."},
+    c:{headline:"Pharmaceutical intervention is appropriate when nutritional approaches have been tried and are insufficient — not as a first resort for a nutritional deficiency.",detail:"Synthetic thyroid hormones replace what the thyroid is not producing. They do not address why the thyroid is underproducing. If the underlying cause is iodine deficiency — a nutritional gap — pharmaceutical hormone replacement manages the downstream effect while the upstream cause continues. Addressing the cause first is the more complete approach."},
+    d:{headline:"Food-based iodine — particularly from sea vegetables — is a safe and bioavailable source used globally.",detail:"Iodine from whole food sources like sea moss and bladderwrack arrives in a natural mineral matrix that moderates absorption. Toxicity from food-based iodine is rare and requires consumption far beyond normal use. The claim that iodine should only come from pharmaceutical sources misrepresents the safety profile of whole-food mineral sources and would exclude the entire traditional use of sea vegetables as thyroid-supportive food."}
+  },
+  2:{
+    a:{headline:"The evidence for herbal medicine in skin conditions is more substantial than the pharmaceutical framing suggests.",detail:"Topical steroid creams suppress the immune response driving the skin inflammation — they are effective at reducing symptoms but do not address what is producing those symptoms. Multiple studies have found benefits from burdock root and other liver and lymph-supportive herbs in chronic skin conditions. Dismissing herbal medicine as unproven while accepting symptom suppression as treatment reflects a selective standard of evidence."},
+    b:{headline:"Correct. The tradition treats skin conditions as internal conditions expressed externally.",detail:"In the alkaline healing framework, chronic skin eruptions — acne, eczema, psoriasis — are understood as the body eliminating internally what the detoxification systems have not cleared. The skin becomes an exit route when the liver and lymphatic system are overburdened. Steroid cream closes this exit without addressing the burden. Burdock root supports the liver and lymph directly, reducing the internal load that is expressing through the skin. Combined with dietary change that reduces the acid and toxic load in the first place, this is a root-cause approach."},
+    c:{headline:"The connection between internal detoxification and external skin health is well-established.",detail:"The relationship between liver function, lymphatic flow, and skin condition is not controversial in nutritional medicine. The liver detoxifies compounds that, if not processed efficiently, recirculate and contribute to inflammatory skin conditions. Burdock root's bile-stimulating and antioxidant properties directly support this process. Characterising it as internal-only ignores one of the most consistent applications of the herb across multiple traditions."},
+    d:{headline:"In the healing tradition, acne and eczema co-occurring in the same person reflect the same underlying condition — not two separate ones.",detail:"The co-occurrence of multiple skin conditions in the same person is itself informative: it suggests a systemic, internal cause rather than separate localised issues requiring separate treatments. Treating them separately with different pharmaceutical products addresses each symptom in isolation while the common root — a burdened detoxification system — continues to express through wherever in the skin it finds an exit."}
+  },
+  3:{
+    a:{headline:"Dismissing traditional remedies as folk medicine ignores centuries of accumulated clinical observation and a growing research base.",detail:"Traditional healing systems represent thousands of years of systematic observation of what works — a form of evidence that, while not randomised controlled trials, carries significant informational weight. The dismissal of traditional medicine as merely anecdotal reflects a cultural bias rather than a scientific position. Many pharmaceutical compounds were derived from or modelled on traditional plant medicines."},
+    b:{headline:"Correct. Fucoidan research is extensive and continues to grow — the healer has the stronger scientific position.",detail:"Fucoidan from brown seaweeds — including bladderwrack — has been the subject of thousands of published studies examining its anti-inflammatory properties (via inhibition of inflammatory cytokines), antiviral activity (against herpes, HIV, and influenza viruses in laboratory settings), anticoagulant properties (similar mechanism to heparin), and anti-tumour effects (including inducing apoptosis in cancer cell lines). This is not folk medicine — it is one of the most actively researched areas in marine natural products chemistry. The healer's claim is well-founded."},
+    c:{headline:"Traditional knowledge and scientific research are not incompatible — they are increasingly convergent.",detail:"The most productive current approach in nutritional and pharmacological research involves identifying the biological mechanisms behind traditional plant remedies. Fucoidan is a perfect example: a compound in a seaweed used in coastal healing traditions for generations, now being rigorously characterised in research laboratories. The two approaches are not incompatible — scientific research is often following where traditional knowledge pointed first."},
+    d:{headline:"Traditional use across multiple cultures is itself a form of evidence — not proof, but signal.",detail:"The requirement for randomised controlled trials as the only valid form of evidence is appropriate for pharmaceutical drug approval — where the question is whether a novel synthetic compound is safe for mass prescription. It is not the only relevant standard for evaluating the use of whole foods and plants used safely across many cultures for many centuries. The standard should be proportionate to the question being asked and the risk profile of the substance."}
+  },
+  4:{
+    a:{headline:"The mechanisms are fundamentally different — one overrides, one supports.",detail:"Synthetic hormones in the contraceptive pill work by introducing exogenous hormones that signal the pituitary to stop triggering the body's own hormone production. The body's cycle is suspended, not regulated. Sarsaparilla's plant sterols interact with the endocrine system in a way that supports the body's own production pathways. These are categorically different interventions with different relationships to the body's own function."},
+    b:{headline:"Correct. Replacing versus restoring are different medical philosophies.",detail:"The contraceptive pill is a powerful and effective intervention for many women in many circumstances. But using it specifically to 'regulate' hormones that are dysregulated for a nutritional, lifestyle, or environmental reason is using a replacement strategy where a restoration strategy might be more appropriate. Sarsaparilla's plant sterols, combined with the dietary and lifestyle changes that address the root causes of hormonal imbalance, attempt to restore the body's own regulatory capacity. Whether that restoration is achievable for a given person requires individual assessment — but the philosophical distinction between the two approaches is important to understand."},
+    c:{headline:"The note about medical supervision is valid — but the framing of herbal hormone support as categorically dangerous is not.",detail:"Sarsaparilla has been used safely across multiple healing traditions for centuries. Its plant sterol content does interact with the endocrine system — which is why awareness and, for people on hormone-affecting medications, professional guidance is appropriate. But the same caution applies to pharmaceutical hormonal interventions, which carry well-documented risks including blood clot, mood disruption, and cardiovascular effects. 'Dangerous without supervision' applies to both, not only the herbal approach."},
+    d:{headline:"Sarsaparilla has been used specifically for women's hormonal conditions across multiple traditions.",detail:"Across South American, Caribbean, and African healing traditions, sarsaparilla has been used for menstrual irregularity, menopausal symptoms, and hormonal imbalance in women. The plant sterols it contains interact with a range of steroid hormone receptors, not only testosterone pathways. Its historical and contemporary use for female hormonal conditions is well-documented."}
+  },
+  5:{
+    a:{headline:"Elderberry has more clinical trial evidence than many over-the-counter cold and flu remedies.",detail:"Multiple randomised controlled trials — including a 2016 study in Nutrients and a 2019 meta-analysis in Complementary Medicine — found significant reductions in flu duration and severity with elderberry extract. This is not traditional use without clinical backing — it is a traditional remedy that has been subjected to rigorous clinical investigation and confirmed. Dismissing it as unproven reflects unfamiliarity with the evidence, not the evidence itself."},
+    b:{headline:"Correct. Elderberry has genuine clinical evidence and a favourable safety profile, particularly for children.",detail:"The antiviral mechanism of elderberry — preventing viral particles from entering host cells — is distinct from pharmaceutical antivirals, which typically work by inhibiting viral replication after infection. Both approaches have clinical support. The key difference for a parent choosing between them is the side effect profile: elderberry syrup at appropriate doses has an excellent safety record in children, while the most common pharmaceutical antiviral (oseltamivir/Tamiflu) has documented side effects including nausea, vomiting, and neuropsychiatric events that led to black box warnings in several countries."},
+    c:{headline:"This is the least accurate position — elderberry has among the strongest evidence bases of any herbal antiviral.",detail:"Dismissing both approaches as equally unproven ignores the clinical trial literature for elderberry and the approved status of pharmaceutical antivirals. A more accurate framing is: both have evidence, both have appropriate use cases, and the comparison between them involves weighing efficacy, safety, accessibility, and cost — not one being proven and the other unproven."},
+    d:{headline:"Clinical trials have studied elderberry both as preventive and as active treatment during illness — both applications have support.",detail:"The 2004 study by Zakay-Rones et al. in the Journal of International Medical Research specifically examined elderberry extract during active influenza infection and found significant reduction in duration. Subsequent studies have confirmed this. Elderberry's evidence base covers both preventive and active therapeutic use."}
+  },
+  6:{
+    a:{headline:"Curcumin's anti-inflammatory mechanism is among the most documented in nutritional science.",detail:"A PubMed search for 'curcumin inflammation' returns thousands of published studies. The NF-kB inhibition mechanism by which curcumin reduces inflammation has been characterised in detail across multiple cell types, animal models, and human trials. The doctor's claim that turmeric has no documented anti-inflammatory effect is simply factually incorrect — it reflects unfamiliarity with the research, not the state of the evidence."},
+    b:{headline:"Correct. Curcumin has thousands of studies behind it — and a safety profile that long-term NSAIDs do not match.",detail:"Ibuprofen and other NSAIDs taken long-term carry well-documented risks: gut bleeding, kidney damage, cardiovascular events. These risks are why long-term prescribing of NSAIDs for chronic conditions like joint inflammation is itself a clinical concern. Curcumin, with its documented NF-kB inhibition, operates on the same inflammatory pathway without these side effects at normal doses. For a patient with chronic joint inflammation, the comparison is clinically relevant — and the doctor's dismissal of it is not well-founded."},
+    c:{headline:"Clinical evidence for curcumin extends to chronic inflammatory and autoimmune conditions.",detail:"Studies examining curcumin's effects have been conducted in rheumatoid arthritis, osteoarthritis, inflammatory bowel disease, and other serious inflammatory conditions. A 2012 randomised controlled trial published in Phytotherapy Research found curcumin outperformed diclofenac (a prescription NSAID) in reducing joint pain and swelling in rheumatoid arthritis patients. The evidence is not limited to mild conditions."},
+    d:{headline:"Cooking with turmeric in the traditional way — with pepper and fat — is therapeutically valid.",detail:"The traditional preparation that combines turmeric with black pepper and oil was arrived at through practical wisdom across generations of use. Modern research has confirmed why it works: piperine in black pepper increases curcumin bioavailability by up to 2,000%, and fat solubility means oil aids absorption. A turmeric golden milk made with coconut oil and black pepper is not just a pleasant drink — it is a well-formulated delivery vehicle for a potent anti-inflammatory compound."}
+  },
+  7:{
+    a:{headline:"Pharmaceutical diuretics deplete potassium because they do not contain it — dandelion leaf does.",detail:"Loop diuretics and thiazide diuretics work by inhibiting sodium reabsorption in the kidney, which also causes potassium to be excreted in the urine. The medication itself contains no potassium. Dandelion leaf promotes diuresis through a different pathway — via its taraxacin and taraxacerin compounds — and simultaneously provides potassium from within the plant itself. This is not a paradox; it is the difference between a synthetic compound with a single targeted mechanism and a whole plant with multiple complementary compounds."},
+    b:{headline:"Correct. The plant provides the mineral it also helps the body excrete — a balance pharmaceutical diuretics lack.",detail:"This is one of the clearest examples of what the healing tradition means by whole-plant medicine. The dandelion leaf contains both the compounds that promote mild diuresis and the potassium that makes that diuresis safe. It is a self-correcting system. Pharmaceutical diuretics, designed as isolated active compounds, produce one targeted effect without the buffering that the whole plant provides. The need for a separate potassium supplement when taking pharmaceutical diuretics is itself evidence of what the synthetic approach is missing."},
+    c:{headline:"Dandelion leaf's diuretic effect is mild but genuine and documented.",detail:"Dandelion leaf's diuretic effect has been confirmed in a small human pilot study published in the Journal of Alternative and Complementary Medicine (2011), which found significant increases in urinary frequency and volume following dandelion leaf extract. For mild to moderate fluid retention in otherwise healthy individuals, it is an appropriate and supportive option. For severe fluid retention or heart failure, pharmaceutical diuretics remain the appropriate intervention."},
+    d:{headline:"Dietary potassium is the same element as pharmaceutical potassium — the body uses both.",detail:"Potassium is potassium. The body does not distinguish between the potassium in a dandelion leaf and the potassium in a supplement tablet — both are absorbed from the gut and used by the same cellular mechanisms. The claim that food-based minerals are functionally different from their pharmaceutical equivalents has no biochemical basis. In many cases food-based minerals are better absorbed because they arrive in a cofactor matrix that supports their uptake."}
+  },
+  8:{
+    a:{headline:"Natural antimicrobials have documented mechanisms and clinical evidence — the claim of no evidence is inaccurate.",detail:"Allicin from raw garlic has been shown in laboratory studies to inhibit a wide range of bacteria, fungi, and viruses. Oregano oil's active compound carvacrol has documented antimicrobial activity against multiple bacterial strains including antibiotic-resistant ones. Manuka honey has been studied in clinical settings for wound infections and H. pylori. 'No evidence' misrepresents a body of research that is substantial, even if it does not match the size of pharmaceutical trial literature."},
+    b:{headline:"Correct. The most accurate position is: both have their place, and the choice depends on severity and context.",detail:"This is the integrative position that evidence supports. Serious, systemic, or rapidly progressing bacterial infections — sepsis, pneumonia, severe urinary tract infections — require pharmaceutical antibiotics, which can save lives. For mild, localised infections in otherwise healthy people, natural antimicrobials with documented efficacy and without the microbiome-depleting effects of broad-spectrum antibiotics are a rational first line. The healing tradition and pharmaceutical medicine are not competitors — they serve different situations, and wisdom lies in knowing which situation you are in."},
+    c:{headline:"Some bacterial infections are life-threatening and require pharmaceutical antibiotics — avoiding them in those situations is dangerous.",detail:"The teaching of the healing tradition is not that antibiotics are never necessary. It is that they are overused for situations that do not require them — contributing to antibiotic resistance, microbiome depletion, and downstream health consequences. For genuine need, pharmaceutical antibiotics are important medicine. The error is in using them reflexively for every mild infection rather than reserving them for where they are truly needed."},
+    d:{headline:"Laboratory and clinical evidence documents natural antimicrobials working during active infections, not only as preventives.",detail:"The evidence for allicin, carvacrol, and manuka honey includes studies of their activity against active bacterial cultures and, in the case of manuka honey, clinical wound infection management. The distinction between preventive and therapeutic use is not supported by the mechanism — antimicrobial compounds kill or inhibit bacteria whether the bacteria are present prophylactically or as part of an established infection."}
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 9;
+const answered = {1:false,2:false,3:false,4:false,5:false,6:false,7:false,8:false};
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById('feedback-text-' + scenarioNum).textContent = fb.headline;
+      document.getElementById('feedback-detail-' + scenarioNum).textContent = fb.detail;
+      document.getElementById('feedback-' + scenarioNum).classList.add('visible');
+      const nextBtn = document.getElementById('next-' + scenarioNum);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function updateProgress() {
+  for (let i = 1; i <= totalSlides; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active','complete');
+    if (i === currentSlide) dot.classList.add('active');
+    else if (i < currentSlide) dot.classList.add('complete');
+  }
+}
+function showSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+updateProgress();
+</script>
+<script>
+(function(){
+  try{
+  var prevKey='safespot_c8m5';
+  if(prevKey&&!localStorage.getItem(prevKey)){document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#fafaf7;flex-direction:column;text-align:center;padding:40px;font-family:sans-serif"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b66;margin-bottom:28px">Safe Spot</div><div style="font-size:2rem;font-family:Georgia,serif;font-weight:300;color:#0a0a0a;margin-bottom:16px">This module is locked.</div><p style="font-size:.9rem;color:#6b6b66;max-width:360px;line-height:1.7;margin-bottom:28px">Complete the previous module first.</p><a href="course8-module-5-what-junk-food-does-to-you.html" style="padding:12px 24px;background:#0a0a0a;color:#fafaf7;text-decoration:none;border-radius:3px;font-size:.85rem">← Previous Module</a><a href="index.html" style="margin-top:12px;font-size:.8rem;color:#6b6b66;text-decoration:none;border-bottom:1px solid #d9d9d3">All Courses</a></div>';
+    return;
+  }
+  var slides=document.querySelectorAll('.slide');
+  if(slides.length>0){
+    var last=slides[slides.length-1];
+    last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+      b.textContent='Begin Next Module →';
+      b.setAttribute('onclick','');
+      b.onclick=function(){localStorage.setItem('safespot_c8m6','1');window.location.href='course8-module-7-children-and-family-nutrition.html';};
+    });
+  }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

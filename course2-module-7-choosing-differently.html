@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 2 · Module 7 · Choosing Differently</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0a;
+  --paper: #fafaf7;
+  --muted: #6b6b66;
+  --line: #d9d9d3;
+  --soft: #f0f0ea;
+  --accent: #c4452d;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter Tight', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; }
+
+.module-header { border-bottom: 1px solid var(--line); padding: 32px 48px 32px 24px; display: grid; grid-template-columns: 1fr auto 1fr; justify-items: start; align-items: baseline; position: sticky; top: 0; background: var(--paper); z-index: 100; backdrop-filter: blur(8px); }
+.module-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.module-tag strong { color: var(--ink); font-weight: 500; }
+.progress-bar { grid-column: 3; justify-self: end; display: flex; gap: 5px; align-items: center; }
+.progress-dot { width: 20px; height: 2px; background: var(--line); transition: background 0.4s ease; }
+.progress-dot.active { background: var(--ink); }
+.progress-dot.complete { background: var(--accent); }
+
+.module-container { max-width: 780px; margin: 0 auto; padding: 80px 48px 120px; }
+.slide { display: none; animation: fadeUp 0.6s ease; }
+.slide.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+.slide-number { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 24px; text-transform: uppercase; }
+.slide-title { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5.5vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 40px; font-variation-settings: "opsz" 144; }
+.slide-title em { font-style: italic; font-weight: 300; }
+.lead { font-family: var(--serif); font-size: 22px; line-height: 1.5; font-weight: 300; color: var(--ink); margin-bottom: 40px; letter-spacing: -0.01em; }
+.body-text { font-size: 17px; line-height: 1.7; color: #2a2a28; margin-bottom: 24px; max-width: 62ch; }
+.body-text strong { font-weight: 500; color: var(--ink); }
+.section-heading { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 56px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.section-heading::before { content: ''; width: 24px; height: 1px; background: var(--ink); }
+.pullquote { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; font-weight: 300; border-left: 2px solid var(--ink); padding: 8px 0 8px 32px; margin: 48px 0; color: var(--ink); }
+
+/* CAPACITY CARDS — page 2 */
+.capacity { margin: 36px 0; padding: 32px 0; border-top: 1px solid var(--line); }
+.capacity:last-of-type { border-bottom: 1px solid var(--line); margin-bottom: 56px; }
+.capacity-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 8px; }
+.capacity-name { font-family: var(--serif); font-size: 28px; line-height: 1.15; font-weight: 400; letter-spacing: -0.015em; margin-bottom: 16px; font-style: italic; }
+.capacity-test { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin: 20px 0 8px; font-weight: 500; }
+
+/* CONTRAST BLOCK — page 3 */
+.contrast-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); margin: 40px 0; border: 1px solid var(--line); }
+.contrast-cell { background: var(--paper); padding: 28px; }
+.contrast-cell.right { background: var(--soft); }
+.contrast-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.contrast-cell.right .contrast-label { color: var(--accent); }
+.contrast-list { list-style: none; }
+.contrast-list li { font-family: var(--serif); font-size: 15.5px; line-height: 1.55; padding: 10px 0; font-style: italic; color: var(--ink); border-bottom: 1px dotted var(--line); }
+.contrast-list li:last-child { border-bottom: none; }
+
+/* PRACTICE — pages 5, 6 */
+.practice { margin: 28px 0; padding-left: 28px; border-left: 2px solid var(--line); }
+.practice-name { font-family: var(--serif); font-size: 22px; font-style: italic; font-weight: 400; margin-bottom: 10px; line-height: 1.25; }
+.practice-text { font-size: 16px; line-height: 1.65; color: #2a2a28; }
+
+/* CLOSING PASSAGE — completion page */
+.closing-passage { margin: 56px 0; padding: 40px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.closing-passage p { font-family: var(--serif); font-size: 19px; line-height: 1.65; font-weight: 400; color: var(--ink); margin-bottom: 20px; letter-spacing: -0.005em; }
+.closing-passage p:last-child { margin-bottom: 0; }
+.closing-passage em { font-style: italic; }
+
+/* SCENARIO + FEEDBACK */
+.scenario { margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--line); }
+.scenario-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+.scenario-prompt { font-family: var(--serif); font-size: 24px; line-height: 1.45; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em; }
+.scenario-context { font-size: 16px; color: var(--muted); margin-bottom: 32px; font-style: italic; }
+.choices { display: flex; flex-direction: column; gap: 12px; }
+.choice { display: block; width: 100%; text-align: left; background: transparent; border: 1px solid var(--line); padding: 20px 24px; font-family: var(--sans); font-size: 16px; line-height: 1.5; color: var(--ink); cursor: pointer; transition: all 0.25s ease; font-weight: 400; }
+.choice:hover { border-color: var(--ink); background: var(--soft); transform: translateX(2px); }
+.choice-letter { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 14px; letter-spacing: 0.1em; }
+.choice.selected { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.choice.selected .choice-letter { color: var(--paper); opacity: 0.6; }
+.choice:disabled { cursor: default; }
+.choice:disabled:hover { transform: none; }
+.choice.dimmed { opacity: 0.4; }
+
+.feedback { display: none; margin-top: 32px; padding: 32px; background: var(--soft); border-left: 2px solid var(--ink); animation: fadeUp 0.5s ease; }
+.feedback.visible { display: block; }
+.feedback-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.feedback-headline { font-family: var(--serif); font-size: 19px; line-height: 1.5; font-weight: 400; font-style: italic; color: var(--ink); margin-bottom: 16px; }
+.feedback-text { font-family: var(--sans); font-size: 15.5px; line-height: 1.65; color: #2a2a28; }
+
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--line); }
+.nav-btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; background: transparent; border: none; color: var(--ink); cursor: pointer; padding: 12px 0; transition: opacity 0.2s ease; font-weight: 500; }
+.nav-btn:hover { opacity: 0.6; }
+.nav-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+.nav-btn.primary { background: var(--ink); color: var(--paper); padding: 16px 32px; }
+.nav-btn.primary:hover { background: #2a2a28; opacity: 1; }
+.nav-btn.primary:disabled { background: var(--line); color: var(--muted); }
+.nav-counter { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+
+.complete-mark { font-family: var(--serif); font-size: 140px; line-height: 1; font-weight: 300; margin-bottom: 32px; color: var(--accent); font-style: italic; }
+.course-complete-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+.summary-list { list-style: none; margin: 40px 0; }
+.summary-list li { padding: 20px 0; border-bottom: 1px solid var(--line); display: flex; gap: 24px; align-items: baseline; }
+.summary-list li:last-child { border-bottom: none; }
+.summary-num { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.15em; min-width: 32px; }
+.summary-text { font-family: var(--serif); font-size: 18px; line-height: 1.5; font-weight: 400; }
+
+@media (max-width: 640px) {
+  .module-header { padding: 20px 24px; }
+  .module-container { padding: 48px 24px 80px; }
+  .slide-title { font-size: 38px; }
+  .lead { font-size: 19px; }
+  .body-text { font-size: 16px; }
+  .scenario-prompt { font-size: 20px; }
+  .pullquote { font-size: 22px; padding-left: 24px; margin: 32px 0; }
+  .progress-dot { width: 10px; }
+  .complete-mark { font-size: 96px; }
+  .capacity-name { font-size: 24px; }
+  .contrast-grid { grid-template-columns: 1fr; }
+  .closing-passage p { font-size: 17px; }
+}
+
+/* ════════ SAFE SPOT DARK MODE ════════════════════════════════════════════ */
+html[data-theme="dark"] {
+  --ink:    #d8d8d4;
+  --paper:  #111110;
+  --muted:  #77776f;
+  --line:   #2c2c2a;
+  --soft:   #1c1c1a;
+  --accent: #4aaa6f;
+}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .assess-strip,
+html[data-theme="dark"] #assessment  { background: #0a0a0a; }
+html[data-theme="dark"] .hero-title,
+html[data-theme="dark"] .assess-title { color: #e0e0dc; }
+html[data-theme="dark"] .btn-secondary { border-color: #2c2c2a; color: #888; }
+html[data-theme="dark"] .price-card.featured { background: #131b16; }
+html[data-theme="dark"] .card-num { color: #282826; }
+html[data-theme="dark"] .body-text,
+html[data-theme="dark"] .lead,
+html[data-theme="dark"] .summary-text,
+html[data-theme="dark"] .pullquote,
+html[data-theme="dark"] .slide-title,
+html[data-theme="dark"] .pattern-list li,
+html[data-theme="dark"] .signal-text,
+html[data-theme="dark"] .protocol-text,
+html[data-theme="dark"] .feedback-text,
+html[data-theme="dark"] .scenario-context,
+html[data-theme="dark"] .choice-text,
+html[data-theme="dark"] .feedback-detail,
+html[data-theme="dark"] .statement-text,
+html[data-theme="dark"] .sequence-text,
+html[data-theme="dark"] .note-text      { color: var(--ink); }
+html[data-theme="dark"] .choice         { background: var(--soft); border-color: var(--line); }
+html[data-theme="dark"] .choice:hover:not(:disabled) { background: #222220; border-color: #4a4a48; }
+html[data-theme="dark"] .choice.selected { background: #141e17; border-color: var(--accent); }
+html[data-theme="dark"] .feedback       { background: var(--soft); }
+html[data-theme="dark"] .feedback-headline { color: var(--ink); }
+html[data-theme="dark"] .nav-btn        { background: var(--soft); color: var(--ink); border-color: var(--line); }
+html[data-theme="dark"] .nav-btn:disabled { opacity: 0.22; }
+html[data-theme="dark"] .nav-btn.primary { background: var(--ink); color: var(--paper); }
+html[data-theme="dark"] .nav-btn.primary:hover { background: #b4b4b0; opacity: 1; }
+html[data-theme="dark"] .slide-number,
+html[data-theme="dark"] .nav-counter   { color: var(--muted); }
+html[data-theme="dark"] .summary-list li { border-color: var(--line); }
+html[data-theme="dark"] .summary-num   { color: var(--muted); }
+html[data-theme="dark"] .complete-mark { color: var(--accent); }
+
+/* Minimal centred toggle button */
+.theme-toggle {
+  grid-column: 2; justify-self: center; background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  color: var(--muted);
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: .55;
+  transition: opacity .2s;
+  z-index: 10;
+}
+.theme-toggle:hover { opacity: 1; }
+
+/* ════════ COURSE PROGRESS SIDEBAR ══════════════════════════════════════ */
+.course-sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);background:var(--paper);padding:100px 20px 40px;
+  z-index:49;display:none;scrollbar-width:none;flex-direction:column;}
+.course-sidebar::-webkit-scrollbar{display:none;}
+@media(min-width:1140px){
+  .course-sidebar{display:flex;}
+  .module-container{margin-left:220px;}
+}
+.sidebar-back{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:1px solid var(--line);transition:color .2s;}
+.sidebar-back:hover{color:var(--ink);}
+.sidebar-course-label{font-family:var(--mono);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+.sidebar-mod-list{list-style:none;}
+.sidebar-mod-item{padding:8px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:8px;}
+.sidebar-mod-item:last-child{border-bottom:none;}
+.sidebar-mod-n{font-family:var(--mono);font-size:9px;color:var(--muted);
+  flex-shrink:0;margin-top:2px;min-width:20px;}
+.sidebar-mod-a{font-family:var(--mono);font-size:9px;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;line-height:1.45;display:block;pointer-events:none;}
+/* completed */
+.sidebar-mod-item.ss-done .sidebar-mod-n::after{content:' ✓';color:var(--accent);}
+.sidebar-mod-item.ss-done .sidebar-mod-a{opacity:.45;pointer-events:auto;}
+/* current */
+.sidebar-mod-item.ss-now{margin:0 -20px;padding:8px 20px;background:var(--soft);border-left:2px solid var(--accent);border-bottom:1px solid var(--line);}
+.sidebar-mod-item.ss-now .sidebar-mod-n,
+.sidebar-mod-item.ss-now .sidebar-mod-a{color:var(--accent);font-weight:600;pointer-events:none;}
+html[data-theme="dark"] .sidebar-mod-item.ss-now{background:#1a2e22;}
+/* upcoming */
+.sidebar-mod-item.ss-next .sidebar-mod-a{opacity:.28;pointer-events:none;}
+/* return home */
+.return-home-wrap{text-align:center;margin-top:20px;}
+.return-home-link{font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s;}
+.return-home-link:hover{color:var(--ink);}
+/* restart */
+.restart-wrap{text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);}
+.restart-btn{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;
+  padding:10px 20px;cursor:pointer;transition:color .2s,border-color .2s;}
+.restart-btn:hover{color:var(--ink);border-color:var(--ink);}
+html[data-theme="dark"] .course-sidebar{background:var(--paper);border-color:var(--line);}
+
+/* ── HEADER LAYOUT (flex) ── */
+.module-header{display:flex!important;align-items:center!important;}
+.module-tag{flex:1;order:1;min-width:0;}
+.header-center{display:flex;align-items:center;gap:14px;grid-column:2;justify-self:center;order:2;margin:0 auto}
+.theme-toggle{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);padding:2px 6px;opacity:.55;transition:opacity .2s}
+.progress-bar{flex:1;order:3;justify-content:flex-end;display:flex;gap:6px;align-items:center;}<style>
+.header-center{display:flex;align-items:center;gap:14px;justify-self:center;grid-column:2}
+.header-center .theme-toggle{grid-column:unset;justify-self:unset}
+html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
+.zoom-ctrl{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.zoom-btn{background:none;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--muted);padding:3px 7px;line-height:1.2;transition:color .2s,border-color .2s}
+.zoom-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+</style></style>
+<script>(function(){try{var z=localStorage.getItem("slsc_zoom");if(z)document.documentElement.setAttribute("data-zoom",z);}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script>(function(){try{var s=localStorage.getItem('slsc_session');if(!s){var p=encodeURIComponent(location.pathname.split('/').pop()||'index.html');location.replace('login.html?from='+p);}}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f0d" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SAFE Learning">
+<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="57x57"  href="apple-touch-icon-57.png">
+  <link rel="apple-touch-icon" sizes="60x60"  href="apple-touch-icon-60.png">
+  <link rel="apple-touch-icon" sizes="72x72"  href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="76x76"  href="apple-touch-icon-76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180.png">
+  <link rel="apple-touch-startup-image" media="(device-width:430px) and (device-height:932px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro-max.png">
+  <link rel="apple-touch-startup-image" media="(device-width:393px) and (device-height:852px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone14pro.png">
+  <link rel="apple-touch-startup-image" media="(device-width:390px) and (device-height:844px) and (-webkit-device-pixel-ratio:3)" href="splash-iphone13.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3)" href="splash-iphonex.png">
+  <link rel="apple-touch-startup-image" media="(device-width:414px) and (device-height:896px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:375px) and (device-height:667px) and (-webkit-device-pixel-ratio:2)" href="splash-iphone8.png">
+  <link rel="apple-touch-startup-image" media="(device-width:1024px) and (device-height:1366px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro12.png">
+  <link rel="apple-touch-startup-image" media="(device-width:834px)  and (device-height:1194px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-pro11.png">
+  <link rel="apple-touch-startup-image" media="(device-width:768px)  and (device-height:1024px) and (-webkit-device-pixel-ratio:2)" href="splash-ipad-9th.png">
+  <link rel="stylesheet" href="app.css">
+<script src="slsc-sync.js"></script>
+<script src="slsc-access.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  try{
+    var _p=location.pathname.replace(/\\/g,'/');
+    var _m=_p.match(/course(\d+)-module-(\d+)-/);
+    if(_m){
+      var _cn=_m[1],_mn=parseInt(_m[2]);
+      if(_mn>1){
+        var _pk='safespot_c'+_cn+'m'+(_mn-1);
+        if(!localStorage.getItem(_pk)){
+          var _dk=localStorage.getItem('safespot_theme')==='dark';
+          var _bg=_dk?'#0f0f0d':'#fafaf7';
+          var _ink=_dk?'#e8e8e4':'#0a0a0a';
+          var _mut=_dk?'#888884':'#6b6b66';
+          var _lnd='course'+_cn+'-landing.html';
+          document.body.innerHTML='<div style="min-height:100vh;display:flex;align-items:center;'
+            +'justify-content:center;background:'+_bg+';flex-direction:column;text-align:center;'
+            +'padding:40px;font-family:sans-serif"><div style="font-family:monospace;font-size:10px;'
+            +'letter-spacing:.12em;text-transform:uppercase;color:'+_mut+';margin-bottom:28px">'
+            +'Safe Spot</div><div style="font-size:2.2rem;font-family:Georgia,serif;font-weight:300;'
+            +'color:'+_ink+';margin-bottom:16px">&#128274; Module Locked</div>'
+            +'<p style="font-size:.9rem;color:'+_mut+';max-width:380px;line-height:1.75;'
+            +'margin-bottom:32px">Complete the previous module first to unlock this one.</p>'
+            +'<a href="'+_lnd+'" style="padding:12px 28px;background:'+_ink+';color:'+_bg+';'
+            +'text-decoration:none;border-radius:3px;font-family:sans-serif;font-size:.88rem">'
+            +'&#8592; Back to Course</a></div>';
+        }
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
+<header class="module-header">
+  <div class="module-tag">Course 02 · Module <strong>07</strong> · Choosing Differently</div>
+  <div class="progress-bar">
+    <div class="progress-dot active"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+  <div class="header-center"><button class="theme-toggle" onclick="SS_toggleTheme()" title="Toggle dark / light mode" aria-label="Toggle dark mode">◐</button><span class="zoom-ctrl"><button class="zoom-btn" onclick="SS_zoomOut()" title="Decrease text size" aria-label="Decrease text size">A−</button><button class="zoom-btn" onclick="SS_zoomIn()" title="Increase text size" aria-label="Increase text size">A+</button></span></div>
+</header>
+
+</div>
+
+<aside class="course-sidebar" id="cSidebar">
+  <a href="index.html" class="sidebar-back">← Homepage</a>
+  <div class="sidebar-course-label">Course 2 &middot; Toxic Relationship Patterns</div>
+  <ul class="sidebar-mod-list" id="cSidebarList">
+    <li class="sidebar-mod-item" data-mk="safespot_c2m1" data-mn="1">
+      <span class="sidebar-mod-n">01</span>
+      <a class="sidebar-mod-a" href="course2-module-1-the-patterns-that-predict.html">The Patterns That Predict</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m2" data-mn="2">
+      <span class="sidebar-mod-n">02</span>
+      <a class="sidebar-mod-a" href="course2-module-2-love-bombing-and-the-initial-mask.html">Love Bombing & The Initial Mask</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m3" data-mn="3">
+      <span class="sidebar-mod-n">03</span>
+      <a class="sidebar-mod-a" href="course2-module-3-the-micro-aggressions-that-scale.html">Micro-Aggressions That Scale</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m4" data-mn="4">
+      <span class="sidebar-mod-n">04</span>
+      <a class="sidebar-mod-a" href="course2-module-4-dysfunction-archetypes.html">Dysfunction Archetypes</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m5" data-mn="5">
+      <span class="sidebar-mod-n">05</span>
+      <a class="sidebar-mod-a" href="course2-module-5-your-role-in-dysfunction.html">Your Role in Dysfunction</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m6" data-mn="6">
+      <span class="sidebar-mod-n">06</span>
+      <a class="sidebar-mod-a" href="course2-module-6-the-exit.html">The Exit</a>
+    </li>
+    <li class="sidebar-mod-item" data-mk="safespot_c2m7" data-mn="7">
+      <span class="sidebar-mod-n">07</span>
+      <a class="sidebar-mod-a" href="course2-module-7-choosing-differently.html">Choosing Differently</a>
+    </li>
+  </ul>
+  <div style="margin-top:auto;padding:20px 0 12px;border-top:1px solid var(--line)">
+    <span style="display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px" id="ss-user-greeting"></span>
+    <button onclick="SS_logout()" style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line);border-radius:3px;padding:6px 12px;color:var(--muted);cursor:pointer;width:100%;text-align:left;transition:color .2s,border-color .2s" onmouseover="this.style.color='var(--ink)';this.style.borderColor='var(--ink)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--line)'">Log out</button>
+  </div>
+</aside>
+
+<main class="module-container">
+
+  <section class="slide active" data-slide="1">
+    <div class="slide-number">Page 01 / 08 · The Shift</div>
+    <h1 class="slide-title">What choosing differently <em>actually</em> means.</h1>
+
+    <p class="lead">You have spent six modules learning to see — patterns, programmes, micro-aggressions, archetypes, your own role, the architecture of the exit. You now have a vocabulary that most people go through their entire adult lives without developing. The final module asks the hardest question: now that you can see, what does it look like to choose from a place that is not the wound?</p>
+
+    <p class="body-text">The popular version of "choosing differently" is a green-flags checklist — a list of positive traits to scan for in the next partner. They communicate well. They respect your boundaries. They are emotionally available. These are real things and they are also, in practice, almost useless — because a person running the programme from Module Two will communicate beautifully in month one, respect every boundary you name in month two, and appear emotionally available in ways that are indistinguishable, at the surface, from the real thing.</p>
+
+    <p class="body-text"><strong>Choosing differently is not a better checklist applied to the partner. It is a different relationship to the choosing itself.</strong> The shift is from evaluating them to noticing yourself — from asking "are they good?" to asking "who am I becoming in their presence?" This is the only reliable diagnostic, because it is the one that cannot be performed. Your shape, your body, your nervous system — these respond to the actual person, not to the person's presentation. And the response they produce in you is the data that tells you more than any trait list ever could.</p>
+
+    <div class="section-heading">The diagnostic shift</div>
+
+    <p class="body-text">In previous relationships, you were probably evaluating the partner — their qualities, their behaviour, their potential. The evaluation was sincere and it was also happening inside a wound, which means the evaluation was being filtered through the wound's preferences before it reached your conscious judgement. The wound liked the intensity. The wound liked the flattery. The wound liked the familiar chemistry. By the time the evaluation reached you, it had already been edited.</p>
+
+    <p class="body-text">The new diagnostic does not trust the evaluation. It trusts the observation of your own state. <em>Are you larger around this person, or smaller? Are you more yourself, or less? Do you share opinions you hold confidently, or do you find yourself editing? Do you leave their company feeling restored or slightly depleted?</em> These questions cannot be faked, by you or by them. They produce data about the actual relationship, not about the performance.</p>
+
+    <div class="pullquote">Stop asking whether they are good for you. Start asking who you are around them. The answer to the second question tells you everything the first question was trying to find out.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You are on a third date with someone new. The conversation is good. The chemistry is present but not overwhelming.</p>
+      <p class="scenario-context">You notice yourself doing something unusual — sharing an opinion you actually hold, without editing it for their response. The opinion lands. They disagree, mildly, with warmth. You do not feel the floor shift. The moment is unremarkable and unfamiliar.</p>
+
+      <div class="choices" data-scenario="1">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Interpret the lack of intensity as a lack of chemistry. Conclude they're not exciting enough. Move on.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Notice the unfamiliarity of the moment — sharing an opinion without managing its reception. Hold this as interesting data. Continue.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Test them further. Share progressively more provocative opinions to see when the warmth breaks.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Decide, on the basis of three dates, that this is the different relationship you've been working toward. Commit fully.</button>
+      </div>
+
+      <div class="feedback" id="feedback-1">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-1"></p>
+        <p class="feedback-text" id="feedback-detail-1"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" disabled>← Previous</button>
+      <span class="nav-counter">01 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-1" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="2">
+    <div class="slide-number">Page 02 / 08 · The Five Capacities</div>
+    <h1 class="slide-title">The five things that actually <em>predict.</em></h1>
+
+    <p class="lead">If not a checklist of traits, then what? What are you actually looking for in the first ninety days that reliably predicts the next three years — this time toward something functional rather than something dysfunctional? The answer is not traits. It is capacities. A trait is a quality someone has. A capacity is a structural ability to do something when it is difficult. Traits can be performed. Capacities, under pressure, reveal themselves.</p>
+
+    <div class="capacity">
+      <div class="capacity-num">Capacity 01</div>
+      <h2 class="capacity-name">The capacity for repair.</h2>
+      <p class="body-text">Not the absence of rupture — the capacity to repair it. Every relationship, including good ones, produces small ruptures — misunderstandings, hurt feelings, moments of friction. <strong>What predicts the next three years is not whether the ruptures happen but what happens in the hours after.</strong> Can this person sit with the discomfort of having caused you hurt? Can they acknowledge their part without minimising or maximising? Can they stay in the room while the repair happens, rather than withdrawing or escalating?</p>
+      <div class="capacity-test">How it reveals itself</div>
+      <p class="body-text">Watch what happens after the first small disagreement. Not a manufactured test — a real one, when it naturally occurs. The repair capacity shows itself in the quality of the return. The person with this capacity comes back — not instantly, not performatively, but genuinely, with something that addresses the actual rupture rather than just the discomfort of having caused it.</p>
+    </div>
+
+    <div class="capacity">
+      <div class="capacity-num">Capacity 02</div>
+      <h2 class="capacity-name">The capacity for boredom.</h2>
+      <p class="body-text">Can this person be with you on a Sunday afternoon when nothing is happening? Can they sit in a car for three hours without the conversation being remarkable? Can the relationship survive a week in which nothing dramatic occurs? <strong>Dysfunctional relationships run on intensity. Functional relationships run on the capacity to be ordinary together without the ordinariness being a problem.</strong></p>
+      <div class="capacity-test">How it reveals itself</div>
+      <p class="body-text">Notice what happens on the unremarkable evenings. Does the person seem restless when the connection is simply pleasant rather than electric? Do they manufacture drama or urgency when things are calm? Or can they sit in the quiet with you, comfortably, without the quiet needing to be filled with something more intense?</p>
+    </div>
+
+    <div class="capacity">
+      <div class="capacity-num">Capacity 03</div>
+      <h2 class="capacity-name">The capacity for genuine disagreement.</h2>
+      <p class="body-text">Not argument. Not fighting. The capacity to hold a different opinion from yours, to express it with warmth, and to let the difference exist without it threatening the connection. <strong>In dysfunctional relationships, disagreement is dangerous — it produces punishment, withdrawal, or the silent recalibration of warmth.</strong> In functional relationships, disagreement is where two separate people discover that they are, in fact, separate — and that the separateness does not diminish the love.</p>
+      <div class="capacity-test">How it reveals itself</div>
+      <p class="body-text">Share an opinion you actually hold that you suspect they might disagree with. Not a provocation — a genuine position. Watch whether they can hold their own view alongside yours without the energy changing. Watch whether you can hold your own view in their presence without the old instinct to edit rising. Both signals matter.</p>
+    </div>
+
+    <div class="capacity">
+      <div class="capacity-num">Capacity 04</div>
+      <h2 class="capacity-name">The capacity to be wrong.</h2>
+      <p class="body-text">The single most predictive capacity, and the one most absent in dysfunctional partners. Can this person, when genuinely wrong about something, acknowledge it without the acknowledgement becoming its own performance? Can they say "I was wrong about that" and have the words land cleanly, without deflection, without counter-accusation, without the apology being converted into a new debt?</p>
+      <div class="capacity-test">How it reveals itself</div>
+      <p class="body-text">You will not need to manufacture this test. Life will produce it. A factual error, a mistaken assumption, a wrong turn while driving. These small moments of being wrong are diagnostic because they are low-stakes enough that the response is not rehearsed. The person who can be wrong about something trivial, with grace, is usually the person who can be wrong about something significant without the relationship buckling.</p>
+    </div>
+
+    <div class="capacity">
+      <div class="capacity-num">Capacity 05</div>
+      <h2 class="capacity-name">The capacity to let you be separate.</h2>
+      <p class="body-text">Can this person tolerate you having a life, interests, friendships, and time that do not include them? Can they let you go to dinner with a friend without needing to know the details? Can they let you be in a mood they did not cause and cannot fix, without making your mood about them? <strong>The capacity for separateness is the structural opposite of the enmeshment that dysfunctional relationships are built on.</strong> A person with this capacity can love you without needing to be part of every room you stand in.</p>
+      <div class="capacity-test">How it reveals itself</div>
+      <p class="body-text">Take an evening for yourself. Go out with a friend. Be unavailable for a few hours without explanation. Notice whether the response is easy or whether it produces a felt pressure — questions, sulking, a cooling that arrives when you return. The person with this capacity will barely register the evening. The person without it will register it as an event.</p>
+    </div>
+
+    <div class="pullquote">Traits can be performed indefinitely. Capacities, under pressure, reveal themselves within months. The five capacities are not a checklist. They are a structural assessment of whether the person can do the things that functional partnership actually requires.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You apply the five capacities to someone you are currently seeing and find they have four of the five.</p>
+      <p class="scenario-context">The missing one — the capacity to be wrong — is the one that makes you pause. They're warm, present, capable of boredom, tolerant of separateness, good at repair. But you have never seen them acknowledge being wrong about anything, even something trivial.</p>
+
+      <div class="choices" data-scenario="2">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Dismiss the gap. Four out of five is excellent. Nobody is perfect.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Take the gap seriously. Continue observing. The capacity to be wrong is the one that predicts how conflicts will be handled in year three. Four out of five is good — but the missing one may be load-bearing.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Test them deliberately. Manufacture a situation in which they are clearly wrong to see how they respond.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>End the relationship over the gap. If they can't be wrong now, they won't be able to be wrong later.</button>
+      </div>
+
+      <div class="feedback" id="feedback-2">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-2"></p>
+        <p class="feedback-text" id="feedback-detail-2"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">02 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-2" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="3">
+    <div class="slide-number">Page 03 / 08 · The Recalibration</div>
+    <h1 class="slide-title">What healthy love feels like to a nervous system trained on <em>dysfunction.</em></h1>
+
+    <p class="lead">This is the page the entire course has been building toward — because it addresses the single most common reason people leave healthy relationships and return to dysfunctional ones. The healthy relationship does not feel the way you expected it to feel. It feels, at first, almost suspiciously calm. And the calm, to a nervous system trained on intensity, feels like absence.</p>
+
+    <div class="contrast-grid">
+      <div class="contrast-cell">
+        <div class="contrast-label">What dysfunction felt like</div>
+        <ul class="contrast-list">
+          <li>Intensity that registered as passion</li>
+          <li>Chemistry that arrived immediately and overwhelmingly</li>
+          <li>A sense of being completely understood, almost too quickly</li>
+          <li>Urgency in the bonding — fast plans, fast futures, fast commitment</li>
+          <li>Highs that felt transcendent and lows that felt devastating</li>
+          <li>A felt sense of being the centre of their entire world</li>
+          <li>Difficulty imagining life without them, even in the first weeks</li>
+        </ul>
+      </div>
+      <div class="contrast-cell right">
+        <div class="contrast-label">What health feels like, at first</div>
+        <ul class="contrast-list">
+          <li>Calm that registers, initially, as boredom</li>
+          <li>Chemistry that develops gradually rather than detonating</li>
+          <li>A sense of being seen partially, with the rest still to be discovered</li>
+          <li>A pace that matches the actual depth of knowing, not the urgency of needing</li>
+          <li>Consistent warmth without the oscillation that used to feel like passion</li>
+          <li>A sense that you are important to them alongside a full existing life</li>
+          <li>The ability to imagine life without them — which, paradoxically, is why you stay</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="body-text">Read both columns and notice where your nervous system pulls. If the left column feels more like love, the right column will feel, for the first several months, like settling. <strong>The feeling is a lie your nervous system is telling you because it was trained on a different frequency.</strong> The nervous system, over years of dysfunctional relationships, has calibrated "love" to mean "intensity" — and when intensity is absent, the system reports absence of love. The system is wrong. It is reporting what it was trained to look for, not what is actually there.</p>
+
+    <div class="section-heading">Why the right column feels wrong at first</div>
+
+    <p class="body-text"><strong>Your nervous system is in withdrawal.</strong> The intermittent reinforcement that powered previous relationships produced a genuine neurochemical bond — dopamine peaks and crashes that the body learned to interpret as emotional significance. Consistent warmth does not produce the same peaks. The body, accustomed to the peaks, registers the consistency as flatness. This is the withdrawal. It lasts, typically, three to six months. After that, the nervous system begins to recalibrate — and the consistent warmth begins to register as something more durable and more trustworthy than the peaks ever were.</p>
+
+    <p class="body-text"><strong>Your wound is not being activated.</strong> In dysfunctional relationships, your wound was being directly courted — the mirror found it, the programme ran on it, the chemistry was the wound's recognition of its match. In a healthy relationship, the wound is not being courted. Nobody is offering you the exact thing your childhood lacked at the exact speed that bypasses your discernment. The absence of wound-activation feels, to the wound, like the absence of love. <em>It is, in fact, the absence of the trap.</em></p>
+
+    <p class="body-text"><strong>You have never experienced what you are experiencing.</strong> If every significant relationship you have had was organised around dysfunction, the quiet kind of love is structurally unfamiliar. You do not have a template for it. You do not know what it is supposed to feel like from the inside. The unfamiliarity produces a particular kind of anxiety — not the anxiety of danger, but the anxiety of uncharted ground. <em>The anxiety is not telling you to leave. It is telling you that you have arrived somewhere new.</em></p>
+
+    <div class="pullquote">The right relationship will not feel right at first. It will feel quiet, slow, almost suspicious. This is not the absence of love. This is what love feels like when it arrives without the wound's signature on it. The recalibration takes months. The months are worth it.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">Two months into a new relationship, you find yourself thinking: this is nice, but something is missing.</p>
+      <p class="scenario-context">They are kind. They are present. They hold their own opinions. They can be wrong with grace. And yet — there is a quietness to the connection that your nervous system keeps interpreting as a lack. You catch yourself wondering whether you are settling.</p>
+
+      <div class="choices" data-scenario="3">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Trust the feeling. Something is missing. End the relationship and find someone who produces the familiar intensity.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Recognise the feeling as the recalibration the page just described. The quietness is not the absence of love — it is the absence of the wound's signature. Stay. Let the nervous system update.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Tell them you need more intensity. Ask them to be more passionate, more demonstrative, more urgent.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Start seeing someone else on the side — someone who provides the intensity this person lacks.</button>
+      </div>
+
+      <div class="feedback" id="feedback-3">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-3"></p>
+        <p class="feedback-text" id="feedback-detail-3"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">03 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-3" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="4">
+    <div class="slide-number">Page 04 / 08 · The Honest Diagnostic</div>
+    <h1 class="slide-title">The difference between settling and <em>choosing.</em></h1>
+
+    <p class="lead">This module would be dishonest if it did not address the real question underneath the recalibration: how do I know whether I am choosing differently or just choosing less? The quietness that the nervous system interprets as boredom could be the absence of the wound's signature — or it could be the absence of genuine connection. Both feel similar from inside. Distinguishing them is the final diagnostic skill of the course.</p>
+
+    <p class="body-text">The distinction is subtle, and it requires the kind of honest self-observation that the entire course has been developing. <strong>Here are three questions that tend to separate settling from choosing differently:</strong></p>
+
+    <p class="body-text"><strong>"Am I curious about this person, or am I simply relieved that they are not difficult?"</strong> Choosing differently produces curiosity — a genuine interest in who this person is, what they think, how they see the world. Settling produces relief but not curiosity. You are glad they don't hurt you. You are not particularly fascinated by them. The difference matters, because curiosity is the fuel of long relationships, and relief, by itself, burns out within a year or two.</p>
+
+    <p class="body-text"><strong>"Do I share myself because I want to, or because nothing feels at stake?"</strong> In a differently-chosen relationship, you share yourself because the sharing produces something — a feeling of being met, a deepening of understanding, a mutual discovery. In a settling relationship, you share yourself because the other person is safe enough that sharing costs nothing. The distinction is between sharing-as-connection and sharing-as-default. <em>If you could share yourself with anyone equally, you are not choosing this specific person. You are choosing the absence of danger, which is a different thing.</em></p>
+
+    <p class="body-text"><strong>"Would I miss this specific person, or would I miss having someone?"</strong> The most diagnostic question. If this person left tomorrow, would the grief be about losing them — their particular humour, their specific way of listening, the small specific things only they do — or would the grief be about returning to the alone? The first is the grief of loss. The second is the grief of circumstance. <em>Choosing differently produces the first. Settling produces the second.</em></p>
+
+    <div class="section-heading">What to do if the answer is settling</div>
+
+    <p class="body-text">If you recognise that what you have been calling "choosing differently" is actually settling — being with someone because they are safe rather than because they are compelling — the honest move is to acknowledge it without panicking. Some people need a period of settling before the deeper choosing becomes possible. The wound's recalibration takes time. It is possible that this person is the one you will, eventually, become genuinely curious about — once the noise of the previous patterns has quieted enough for actual interest to emerge.</p>
+
+    <p class="body-text">It is also possible that this person is not the one, and that the settling was a necessary rest stop rather than a destination. <strong>Either possibility is available. Neither is a failure.</strong> The failure would be to stay in a settling relationship for years without examining it, which is a different kind of dysfunction — less dramatic than the old kind, but still a version of not choosing.</p>
+
+    <div class="pullquote">Settling is the body's rest after years of exhaustion. It is not the same as choosing. The rest is sometimes necessary. Mistaking it for the destination is how the work of the entire course gets quietly undone.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You apply the three questions to your current relationship and find the answers are mixed.</p>
+      <p class="scenario-context">You are curious about them — genuinely. But the "would I miss this specific person" question produced a slower answer than you expected. You are not sure whether the slowness is the honest answer or the wound's interference.</p>
+
+      <div class="choices" data-scenario="4">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>End the relationship based on the slow answer. If you have to think about it, the connection isn't strong enough.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Hold the mixed answers as the honest state of early recalibration. Continue. Let the answers clarify over months rather than demanding clarity now.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Force the answer to be yes. Decide you would miss them. Overwrite the hesitation with effort.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Confess your uncertainty to the partner. Ask them to help you decide whether this is real.</button>
+      </div>
+
+      <div class="feedback" id="feedback-4">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-4"></p>
+        <p class="feedback-text" id="feedback-detail-4"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">04 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-4" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="5">
+    <div class="slide-number">Page 05 / 08 · The Fullness</div>
+    <h1 class="slide-title">Bringing your <em>whole self.</em></h1>
+
+    <p class="lead">In every previous relationship, you brought a partial version of yourself — the version calibrated for the shape, the version that the wound permitted, the version that survived the partner's architecture. There were parts of you that were never available because the shape was using all the room. Choosing differently means choosing from sovereignty — and sovereignty means arriving at a relationship with the full version of yourself, not the edited one.</p>
+
+    <p class="body-text">This page is about what becomes possible when you bring your whole self — including the parts that were suppressed, edited, hidden, or sacrificed by the shapes you have been carrying. The whole self is not a perfect self. It is a self that includes the wound and is not organised around it. It is a self that has a shape and is not defined by it. <strong>It is a self that can be with someone without needing to become a particular version of someone in order to be loved.</strong></p>
+
+    <div class="section-heading">What becomes available when the shape is not in the room</div>
+
+    <div class="practice">
+      <p class="practice-name">Your actual opinions.</p>
+      <p class="practice-text">Not the opinions you pre-adjusted for approval. Not the opinions you softened to avoid friction. Your actual thoughts about the world, expressed in your actual voice, received by a partner who finds them interesting even when they disagree. For many people who have spent years in the pre-empter shape, this is genuinely disorienting — the experience of saying what they think and discovering that the room holds.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Your real needs.</p>
+      <p class="practice-text">Not the needs you calibrated downward to keep the peace. Not the needs you stopped asking for because the cumulative no had trained you not to. Your actual needs, stated clearly, received by a partner who can hear them without interpreting the statement as a demand. This is what the right side of the contrast grid looks like in practice — a relationship in which asking for what you need is simply asking, not an act of courage.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Your capacity for rest.</p>
+      <p class="practice-text">Not the rest that comes from being alone because you have to recover from the relationship. The rest that comes from being with someone who does not require your vigilance. Many people, in their first functional relationship, discover they can fall asleep in someone's presence without monitoring the room — and the discovery is so unfamiliar it produces tears. The tears are not sadness. They are the body's recognition of safety it did not know was possible.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Your full emotional range.</p>
+      <p class="practice-text">Not only the emotions that were safe to express in the previous relationship. All of them. Anger that is not punished. Sadness that is not managed. Joy that is not monitored for whether it is too much. Confusion that is not interpreted as weakness. A functional partner does not require you to be a particular emotional temperature. They can sit with you in the range, without the range being a problem.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Your separateness.</p>
+      <p class="practice-text">The most radical thing you bring to a healthy relationship is not your love. It is your separateness — your friendships, your time alone, your interests that have nothing to do with the partner, your capacity to be a whole person outside the relationship. In dysfunction, separateness is threatening. In health, separateness is what makes the togetherness voluntary rather than compulsory. <em>The relationship you are building is one in which two separate, whole people choose to be together — not one in which two halves need each other in order to feel complete.</em></p>
+    </div>
+
+    <div class="pullquote">You have never brought your whole self to a relationship before. The whole self includes the wound and is not organised around it. The whole self has a shape and is not defined by it. The whole self is, for most adults, the version of themselves they have never been allowed to be in love.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Scenario · Sit with this</div>
+      <p class="scenario-prompt">You are six months into a healthy relationship and you notice, one evening, that you have not edited yourself all day.</p>
+      <p class="scenario-context">You said what you thought. You asked for what you needed. You spent the afternoon alone without explaining why. You fell asleep on their sofa without monitoring the room. None of this was dramatic. None of it required courage. It simply happened, because the room allowed it.</p>
+
+      <div class="choices" data-scenario="5">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Become suspicious. Why is this so easy? When does the difficulty arrive? Scan for what must be wrong.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Let the moment be what it is. This is the quiet centre of everything the course was building toward. The ease is not the absence of depth. It is what depth feels like when neither person is performing.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Announce to the partner that today was significant. Explain the course, the work, the framework.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Worry that the ease means you have stopped caring. Introduce friction to test whether the love is still there.</button>
+      </div>
+
+      <div class="feedback" id="feedback-5">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-5"></p>
+        <p class="feedback-text" id="feedback-detail-5"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">05 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-5" disabled>Continue →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="6">
+    <div class="slide-number">Page 06 / 08 · The Foundation</div>
+    <h1 class="slide-title">The relationship you are building with <em>yourself.</em></h1>
+
+    <p class="lead">The final page before the course closes — and it addresses the relationship that has been underneath every other relationship in the curriculum. Not the one with the partner. Not the one with the archetype. The one with yourself. Without this relationship, every external connection remains vulnerable to the same patterns the course was designed to address. With it, every external connection becomes a choice rather than a need.</p>
+
+    <p class="body-text">This page echoes what Course One, Module Six taught about becoming a friend to yourself. If you have completed both courses, the principle will arrive as a deepening rather than a repetition. If you are encountering it for the first time, the principle is this: <strong>the relationship you have with yourself determines the quality of every relationship you have with anyone else.</strong> Not because self-love is a prerequisite for being loved — that framing is reductive and often shaming. Because the version of yourself you bring to a relationship is the version of yourself you have been practising in private.</p>
+
+    <div class="section-heading">The four daily practices</div>
+
+    <div class="practice">
+      <p class="practice-name">Speak to yourself the way you would speak to someone you love.</p>
+      <p class="practice-text">When you make a mistake, when you fail, when you choose badly — notice the tone of your inner response. If you would not say it to a friend in the same position, the voice saying it is borrowed, and you can put it down. The practice is not affirmation. It is the ongoing refusal to be crueller to yourself than you would be to anyone else. This single practice, maintained over years, changes the internal weather more than any other intervention in either course.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Keep small promises to yourself.</p>
+      <p class="practice-text">If you say you will go to bed by eleven, go to bed by eleven. If you say you will take the walk, take the walk. If you say you will not contact them, do not contact them. The small promises are the daily evidence of whether you treat yourself as someone whose word matters. A self that has been chronically broken-promised-to stops trusting its own intentions. The repair is in the small consistencies.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Let yourself want what you want.</p>
+      <p class="practice-text">Without editing the wants for practicality, for respectability, for the imagined reactions of the people around you. The wanting is not the same as the having. Allowing yourself to want — genuinely, without immediately dismissing the want — is how the imagination reopens after years of being narrowed by other people's expectations. Some of the wants will be quiet and strange. Some will surprise you. Those are usually the real ones.</p>
+    </div>
+
+    <div class="practice">
+      <p class="practice-name">Forgive yourself for the years you spent in the shape.</p>
+      <p class="practice-text">The version of you who stayed too long, who over-functioned, who pursued, who saved, who kept score on their behalf — that version was using the tools they had. They were not weak. They were running a strategy that was installed before they were old enough to question it. The new work does not require the old self to be disowned. It requires only that the new self take over. <em>You can love the person you were while not being them anymore.</em></p>
+    </div>
+
+    <div class="pullquote">The relationship you are building with yourself is the relationship that never leaves. Every other relationship is built on this one. Without this one, every other one will eventually wobble. With this one, the wobbles become survivable — because the ground you are standing on is finally, after all this work, your own.</div>
+
+    <div class="scenario">
+      <div class="scenario-label">Final scenario · Sit with this</div>
+      <p class="scenario-prompt">You have completed the course. Someone asks how you are — and for the first time in years, you consider the question honestly before answering.</p>
+      <p class="scenario-context">Not performing fine. Not performing struggle. Just considering, with a small and unfamiliar patience, what the honest answer is.</p>
+
+      <div class="choices" data-scenario="6">
+        <button class="choice" data-answer="a"><span class="choice-letter">A</span>Default to "fine." Skip the moment. Move on.</button>
+        <button class="choice" data-answer="b"><span class="choice-letter">B</span>Answer truthfully. Briefly, without performance. Notice that the truthful answer is no longer dangerous — and that the noticing, itself, is the arrival.</button>
+        <button class="choice" data-answer="c"><span class="choice-letter">C</span>Launch into the full story — the course, the work, the framework, the transformation.</button>
+        <button class="choice" data-answer="d"><span class="choice-letter">D</span>Become suspicious. Why are they asking? What do they want?</button>
+      </div>
+
+      <div class="feedback" id="feedback-6">
+        <div class="feedback-label">What this tends to produce</div>
+        <p class="feedback-headline" id="feedback-text-6"></p>
+        <p class="feedback-text" id="feedback-detail-6"></p>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">06 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()" id="next-6" disabled>Complete the Course →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="7">
+    <div class="slide-number">Page 07 / 08 · The Arrival</div>
+    <h1 class="slide-title">What is <em>available</em> to you now.</h1>
+
+    <p class="lead">Seven modules. Forty-three pages. One complete architecture for how to see, name, address, exit, and replace the patterns that have been operating in your relationships for longer than you knew they had names.</p>
+
+    <p class="body-text">You have language now for the patterns that predict. For the programme and its four phases. For the small cruelties that scale. For the four archetypes and the four shapes you take in response. For the wound underneath the shape and the hidden pleasure that keeps the shape running. For the exit. For the in-between. For the five capacities that actually predict a functional partnership. For what healthy love feels like to a nervous system that has been trained on dysfunction. <strong>For the relationship with yourself that sits underneath every other relationship in your life.</strong></p>
+
+    <p class="body-text">Most of this language was not available to you seven modules ago. It is now. It does not expire. It does not require renewal. It is yours, permanently, to use whenever the patterns reappear — because they will reappear, in smaller forms, for years to come. The work is not to never encounter the old patterns again. <em>The work is to recognise them faster, respond differently, and carry the recognition as a quiet competence rather than a constant vigilance.</em></p>
+
+    <div class="pullquote">You came to this course because something in your relationships was not working and you could not see what it was. You can see it now. What you do with the seeing is the rest of your life.</div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">07 / 08</span>
+      <button class="nav-btn primary" onclick="nextSlide()">Complete →</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+  </section>
+
+  <section class="slide" data-slide="8">
+    <div class="slide-number">Course Complete</div>
+    <div class="course-complete-label">Seven modules · Forty-three pages · One arrival</div>
+    <div class="complete-mark">✓</div>
+    <h1 class="slide-title">You've completed <em>the course.</em></h1>
+
+    <p class="lead">Not the work — the work continues. But the framework, the vocabulary, the structure that gave you language for what has been happening in your relationships, possibly for your entire adult life. That, you have completed.</p>
+
+    <div class="section-heading">What you carry forward from Module Seven</div>
+
+    <ol class="summary-list">
+      <li><span class="summary-num">01</span><span class="summary-text">Choosing differently is not a better checklist. It is a different relationship to the choosing itself — from evaluating them to noticing who you are around them.</span></li>
+      <li><span class="summary-num">02</span><span class="summary-text">Five capacities predict a functional partnership: repair, boredom, genuine disagreement, being wrong, and letting you be separate. Capacities are tested under pressure. Traits are performed at leisure.</span></li>
+      <li><span class="summary-num">03</span><span class="summary-text">Healthy love will feel, at first, like something is missing. What is missing is the wound's signature. The recalibration takes months. The months are worth it.</span></li>
+      <li><span class="summary-num">04</span><span class="summary-text">Settling is not the same as choosing differently. Three questions tell you which one you are doing: curiosity versus relief, sharing-as-connection versus sharing-as-default, missing this person versus missing having someone.</span></li>
+      <li><span class="summary-num">05</span><span class="summary-text">The whole self includes the wound and is not organised around it. Sovereignty means arriving with your actual opinions, needs, rest, emotional range, and separateness. Two whole people choosing to be together.</span></li>
+      <li><span class="summary-num">06</span><span class="summary-text">The relationship with yourself is the foundation. Speak kindly to yourself, keep small promises, let yourself want, forgive the years in the shape. This relationship never leaves. Every other one is built on it.</span></li>
+    </ol>
+
+    <div class="section-heading">Practice going forward</div>
+
+    <p class="body-text"><strong>In the next seven days:</strong> Think of one person currently in your life — or recently considered — and run them through the five capacities rather than the traits. Not: are they kind, attractive, successful, interesting? But: have you seen them repair after a genuine disagreement? Have you seen how they handle boredom? Have you seen them be wrong about something that mattered to them, and stay? Have you had the experience of being separate from them without it creating distance? You are not judging the person. You are gathering data you may have been trained to ignore.</p>
+
+    <p class="body-text"><strong>A practice to return to monthly:</strong> At the end of each month, ask yourself one question about your closest relationships — romantic, friendship, or otherwise: <em>"Am I showing up as myself in this, or as the shape they seem to need me to be?"</em> The answer is not always actionable immediately. Sometimes awareness precedes change by months or years. But the honest answer, held privately and regularly, keeps you from drifting unnoticed back into the pattern. Write it down. Date it. Return to it the following month. The change, when it happens, is visible in the comparison.</p>
+
+    <p class="body-text"><strong>If the pull toward dysfunction returns:</strong> It will. Under stress, grief, loneliness, or transition, the old shapes feel like home because they are familiar. When you notice the pull, do not treat it as evidence that the course didn't work. Treat it as a signal: something in your current life is not meeting a need, and the old pattern is offering to meet it in the way it always has. The question is not "why am I doing this again?" The question is "what do I actually need right now, and can I find a way to get it that doesn't require returning to something I already know the cost of?"</p>
+
+    <div class="section-heading">A final passage</div>
+
+    <div class="closing-passage">
+      <p>You came here because something in your relationships was repeating and you could not see the machinery. You can see it now. The patterns. The programme. The micro-aggressions. The archetypes and the shapes you took in response. The wound and the hidden pleasure. The exit and the in-between. The five capacities and the recalibration. The relationship at the centre of every other relationship.</p>
+
+      <p>The course cannot continue the work for you. The course was a lens. What you see through it, and what you do about what you see, is the life you will now build.</p>
+
+      <p><em>Most of the work happens after the course ends. That is not a failure of the course. That is the design.</em></p>
+
+      <p>Be patient with yourself. Be honest with yourself. Speak to yourself the way you would speak to someone you love. Choose from sovereignty rather than from wound. Let the right relationship feel quiet, and stay with the quiet long enough for your nervous system to discover that the quiet was the thing you were looking for the entire time.</p>
+
+      <p>The work of choosing differently is not the work of finding the right person. It is the work of becoming someone who can recognise them when they arrive — and who can be recognised in return, not by their wound, but by their wholeness.</p>
+    </div>
+
+    <div class="section-heading">If you return</div>
+
+    <p class="body-text">This course is here. You can return to any module, any page, any scenario, at any point in the years ahead. The modules will hold different things at different times. The page on the five capacities will mean more after you have used them. The page on what healthy love feels like will deepen every time you re-read it from inside a relationship that matches the description. There is no correct order. There is no schedule. There is only what you need when you need it.</p>
+
+    <p class="body-text">If you completed Course One — <em>Energy and Sovereignty</em> — before this one, you now hold both halves of the curriculum. The first course taught you to reclaim yourself. The second taught you to bring that self into relationships that honour it. Together, they are the architecture of a different kind of adult life. The architecture is yours. Build with it.</p>
+
+    <div class="pullquote">You came here looking for something. You found it. What it cost you to find is now what it is worth to you. Treat it carefully. It is not common.</div>
+
+    <div class="nav">
+      <button class="nav-btn" onclick="prevSlide()">← Previous</button>
+      <span class="nav-counter">08 / 08</span>
+      <button class="nav-btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Return to Top</button>
+    </div>
+
+    <div class="return-home-wrap">
+      <a href="index.html" class="return-home-link">← Return to Homepage</a>
+    </div>
+    <div class="restart-wrap">
+      <button class="restart-btn" onclick="SS_restartCourse()">↺ Restart This Course</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const feedback = {
+  1: {
+    a: { headline: "Interpreting the lack of intensity as a lack of chemistry is the wound's most reliable way of rejecting what doesn't match its frequency.", detail: "The old relationships produced intensity because intensity was the wound's signal for connection. The third date you just described had something the old relationships never did — an unmanaged opinion shared without consequence. That moment is worth more, as data, than any amount of chemistry. The boredom you are interpreting as absence may be the quietness of a room that does not require your vigilance. Give it time. The nervous system updates slowly." },
+    b: { headline: "Noticing the unfamiliar quality of the moment — and holding it as interesting rather than as a verdict — is the practice the entire course was building toward.", detail: "You shared an opinion. They disagreed. The floor did not shift. This small, unremarkable moment is what the right column of the contrast grid feels like in real life. It does not feel significant in the moment because significance, in your nervous system, has been coded as intensity. The unfamiliarity is data. Continue observing. The picture will clarify over the next several weeks. The speed of the clarification is not the urgency — the willingness to stay with the question is." },
+    c: { headline: "Testing them with progressively provocative opinions converts a genuine interaction into a manufactured assessment.", detail: "The disagreement on the third date was organic — it arose from a real conversation and was held by both of you with warmth. Deliberately escalating the provocation to find the breaking point is a different kind of activity. It is surveillance, dressed as honesty. The breaking point, when you find it, will tell you something about their limits — but the testing itself will have changed the quality of the interaction. Real information comes from real moments. Manufactured tests produce manufactured data." },
+    d: { headline: "Committing fully on the basis of three dates is the acceleration the programme from Module Two was running.", detail: "The fact that the third date felt different from your usual pattern does not, by itself, mean the relationship is the one. It means the third date had a promising quality. Three dates is not enough data for a verdict in either direction — and the urge to commit immediately, even to something that looks healthy, is structurally the same urgency that the old relationships ran on. The pace matters. Let the pace match the actual depth of knowing. The right relationship will survive being given time." }
+  },
+  2: {
+    a: { headline: "Dismissing the gap because four out of five is strong is reasonable — and the missing capacity may be the one that determines the next three years.", detail: "The capacity to be wrong is not one of five equal capacities. It is the one that predicts how every conflict will be navigated. A partner who cannot be wrong will, when conflict arrives, always redirect the fault. Every repair will require you to accept responsibility, even when the responsibility is shared. Four excellent capacities and one missing load-bearing capacity is, in many cases, worse than three moderate capacities and one that holds — because the four create the appearance of a strong partner while the fifth quietly structures the dynamic toward the same patterns you came here to address." },
+    b: { headline: "Taking the gap seriously and continuing to observe is the discernment the course was designed to produce.", detail: "You do not yet have enough data to know whether the partner cannot be wrong or whether you have not yet seen them be wrong. The distinction matters. Some people, in the first months of a relationship, have simply not encountered a moment that tested this capacity visibly. Continue observing. If the next three months produce several moments where being wrong was available and was not taken — you have a pattern. If they do produce a graceful acknowledgement, the gap was an absence of data rather than an absence of capacity." },
+    c: { headline: "Manufacturing a test converts observation into entrapment and produces data about their response to being trapped, not their capacity to be wrong.", detail: "The capacity to be wrong reveals itself in organic moments — the wrong turn, the mistaken assumption, the factual error. These moments will arrive naturally within weeks. Constructing one artificially changes what is being tested. You are no longer observing their relationship to error. You are observing their response to a partner who set them up. The data you get will be about the setup, not about the capacity." },
+    d: { headline: "Ending the relationship over one missing data point converts a preliminary observation into a pre-emptive verdict.", detail: "You have not yet seen them be wrong. This is different from them being unable to be wrong. The absence of evidence is not, in this case, evidence of absence — not yet. Ending now forecloses the possibility that the next month would have produced exactly the moment you were looking for. The discernment is in continuing to observe while taking the gap seriously. The pre-emptive exit is the reactive version of the discerning exit, and the distinction has been the theme of the entire course." }
+  },
+  3: {
+    a: { headline: "Trusting the feeling of something missing and returning to the familiar intensity is what the wound has been requesting since the first week.", detail: "The something missing is the wound's signature. You described a partner who is kind, present, capable of boredom, tolerant of separateness, good at repair. The missing thing is not a quality the partner lacks. It is a signal your nervous system is no longer receiving. The signal was the wound being activated. The activation felt like love because it had always felt like love. What you are feeling now is what love feels like when the wound is not being courted. It is quieter. It is also more durable. The feeling of absence will, if you stay, recalibrate over the next several months into something your nervous system learns to recognise as safety." },
+    b: { headline: "Recognising the feeling as the recalibration and staying with it is the most important single decision you will make in the entire course.", detail: "This is where the work becomes real. The recalibration cannot be rushed. It takes three to six months for most nervous systems to update their definition of love from intensity to consistency. During those months, you will have moments of doubt, moments of boredom, moments of wondering whether you are settling. The record, the trusted friend, the body-check from Module One — these are the tools that carry you through. The relationship does not need to feel electric to be right. It needs to feel like the room holds. If the room holds, the rest comes." },
+    c: { headline: "Asking them to be more intense is asking them to perform a version of love that is not theirs.", detail: "If they are capable of the five capacities — if they repair well, tolerate boredom, hold disagreement, can be wrong, and let you be separate — then asking them to also produce the kind of intensity you are missing is asking them to add a layer that belongs to a different operating system. The intensity you miss was the wound's frequency. The person in front of you is operating on a different frequency. Asking them to match the old one will either produce a performance (which is what Module Two's programme looked like) or push them away (because the demand for intensity, from someone who has all five capacities, tends to read as a demand to be someone else). Let them be who they are. Let the frequency update in you." },
+    d: { headline: "Seeking the missing intensity from someone else while staying in the relationship installs a new dysfunction on top of the healing one.", detail: "The intensity the other person provides will be, structurally, the wound being re-activated — because intensity is the wound's preferred signal. You will now be in two relationships: one that is functional and one that is dysfunctional, each providing something the other doesn't. The arrangement may feel like balance. It is, in practice, a way of keeping the wound fed while appearing to have moved past it. The work is to let the wound starve of its preferred signal until it learns to recognise a different one. Feeding it from a side channel prevents the recalibration from ever completing." }
+  },
+  4: {
+    a: { headline: "Ending a relationship because the answer came slowly is treating speed of certainty as a diagnostic, which it is not.", detail: "The speed of the answer tells you something about your nervous system's current calibration — not about the quality of the connection. A person whose nervous system has been trained on intensity will produce fast answers about intense connections and slow answers about healthy ones. The slowness is the recalibration working. It is the nervous system learning to assess a connection without the old shortcut of wound-activation. Ending based on the slowness forecloses the possibility that the answer, given months, would have clarified into something genuine and durable." },
+    b: { headline: "Holding the mixed answers as the honest state of early recalibration and continuing is the patient version of discernment the course was building toward.", detail: "Mixed answers in the first months of a post-work relationship are structurally normal. The curiosity is real — you described genuine interest. The slow answer on the missing question may be the nervous system still learning what to look for, now that the old signal is no longer the guide. Give the answers months to clarify. The clarity that arrives after six months of consistent experience is more durable than any clarity produced in the first weeks, because it is based on actual accumulated evidence rather than on the speed of neurochemical recognition." },
+    c: { headline: "Forcing the answer to be yes overwrites the honest signal with performance, which is structurally what previous relationships required.", detail: "If the answer is genuinely yes, you will not need to force it. If you are forcing it, you are doing the thing the pre-empter does — adjusting the internal response to match the desired outcome. The hesitation is information. It does not need to be overwritten. It needs to be held, observed, and allowed to develop at its own pace. Some hesitations resolve into genuine connection over months. Some resolve into the recognition that the relationship is settling rather than choosing. Both outcomes are available. Neither is available if you have already forced the answer." },
+    d: { headline: "Confessing your uncertainty to the partner places the resolution of an internal process in their hands.", detail: "Your uncertainty is not about them — it is about whether your nervous system has recalibrated enough to recognise what it is being offered. Sharing this with the partner converts an internal developmental question into a relationship conversation, which then requires them to respond to a question they cannot answer. Their reassurance, if they offer it, will not resolve the uncertainty. Their hurt, if they feel it, will produce guilt that further complicates the assessment. The uncertainty is yours to hold. It resolves in time, through continued observation, not through external validation." }
+  },
+  5: {
+    a: { headline: "Becoming suspicious of ease is the old nervous system performing its final audit.", detail: "The scanning for what must be wrong is the same scanning the pre-empter has been doing in every previous relationship — checking the room for weather, monitoring the partner for shifts. The fact that the scanning has activated is information that the old shape is still partially running. The response is not to act on the scanning. It is to notice it, name it as the old pattern, and return to the actual experience: you were not edited today. The room held. The ease was real. The suspicious feeling is what the shape does when the shape has nothing to do." },
+    b: { headline: "Letting the moment be what it is — the quiet centre of the entire course's promise — is the arrival the work was built to make available.", detail: "This is what the other side looks like. Not dramatic. Not transformative. Not cinematic. A day in which you were yourself, with another person, and nothing required management. The moment does not need to be announced or analysed. It can simply be lived, and noticed, and quietly held as evidence that the work has produced something real. These moments, accumulated across months and years, become the texture of a life that does not require the wound to organise it. The quiet is not the absence of love. It is what love sounds like when neither person is performing." },
+    c: { headline: "Announcing the significance of the moment to the partner converts a private arrival into a shared project, which changes its quality.", detail: "The moment was significant because it was unremarkable. Explaining the course, the work, the framework converts the moment from something experienced into something presented — and the presentation, however well-intentioned, introduces the partner into a narrative they did not consent to participate in. They were, simply, being with you. Your arrival is your own. Sharing the framework, if it ever happens, can come much later, from a settled place rather than from the intensity of a single good day." },
+    d: { headline: "Introducing friction to test whether the love survives the ease is the wound's most sophisticated attempt to restart the old cycle.", detail: "The worry that ease means you have stopped caring is the nervous system's calibration speaking — it has been trained to interpret friction as evidence of emotional investment, and calm as evidence of emotional withdrawal. Manufacturing friction to test whether the love is still present will produce either a fight (confirming that intensity equals connection) or a successful tolerance of the friction (which will need to be repeated, because the test never quite resolves the underlying worry). The ease is the answer. The test is the old question, and the old question was never the right one." }
+  },
+  6: {
+    a: { headline: "Defaulting to 'fine' skips the moment the course existed to make available.", detail: "The autopilot answer is harmless. It is also the daily small way you keep yourself unknown. Now and then, when the moment offers itself — and this one did — the honest answer is worth giving. Not every interaction needs to be a confession. But the practice of answering honestly in small moments builds the capacity that lets you answer honestly in larger ones. The 'fine' that comes from habit is the old map. You are holding a new one now." },
+    b: { headline: "Answering truthfully, briefly, is the entire course delivered in a single sentence in a single moment.", detail: "Notice what is no longer happening — the rehearsal of what to say, the management of how they'll receive it, the calibration of self-presentation. You answered as yourself, to another person, about your actual life. This is the small daily texture of a life built on sovereignty rather than performance. It is not dramatic. It is not impressive. It is, simply, what it looks like to live without the wound organising every interaction. Most of the course was preparation for moments exactly like this. You will have hundreds of them. Each one is the work." },
+    c: { headline: "The full story, delivered as a monologue, converts a moment of connection into a lecture.", detail: "The temptation to share everything — the course, the work, the framework, the transformation — is real, especially in the early period when the changes feel most vivid. The monologue about transformation tends to create distance rather than closeness. The transformation, when it is real, shows itself in how you respond in small moments, not in what you say about it. The person who asked how you've been is asking for connection, not a curriculum overview. Let the work speak through how you answer, not through what you say about the work." },
+    d: { headline: "Becoming suspicious of a casual question is the hypervigilance the course taught you to recognise.", detail: "The reflex to scan for motive — to check what they want before answering — is the old shape, still partially running. It was useful when the environment required it. Most environments do not. The question is probably just a question. Notice the scanning when it activates. Decide whether the present situation actually warrants it. Most situations don't. The hypervigilance was protective once. The default to it is no longer required. You can let a question be a question." }
+  }
+};
+
+let currentSlide = 1;
+const totalSlides = 8;
+const answered = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+
+document.querySelectorAll('.choices').forEach(group => {
+  const scenarioNum = parseInt(group.dataset.scenario);
+  const choices = group.querySelectorAll('.choice');
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      if (answered[scenarioNum]) return;
+      const answer = choice.dataset.answer;
+      const fb = feedback[scenarioNum][answer];
+      choices.forEach(c => {
+        if (c === choice) c.classList.add('selected');
+        else c.classList.add('dimmed');
+        c.disabled = true;
+      });
+      document.getElementById(`feedback-text-${scenarioNum}`).textContent = fb.headline;
+      document.getElementById(`feedback-detail-${scenarioNum}`).textContent = fb.detail;
+      document.getElementById(`feedback-${scenarioNum}`).classList.add('visible');
+      const nextBtn = document.getElementById(`next-${scenarioNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+      answered[scenarioNum] = true;
+    });
+  });
+});
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-slide="${n}"]`).classList.add('active');
+  document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'complete');
+    if (i + 1 < n) dot.classList.add('complete');
+    else if (i + 1 === n) dot.classList.add('active');
+  });
+  currentSlide = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+</script>
+
+<script>
+(function(){
+  try{
+    var slides=document.querySelectorAll('.slide');
+    if(slides.length>0){
+      var last=slides[slides.length-1];
+      last.querySelectorAll('.nav-btn.primary').forEach(function(b){
+        b.textContent='Begin Course 3 →';
+        b.setAttribute('onclick','');
+        b.onclick=function(){localStorage.setItem('safespot_c2m7','1');window.location.href='course3-landing.html';};
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+function SS_toggleTheme(){
+  var h=document.documentElement,dark=h.getAttribute('data-theme')==='dark';
+  try{
+    if(dark){h.removeAttribute('data-theme');localStorage.removeItem('safespot_theme');}
+    else{h.setAttribute('data-theme','dark');localStorage.setItem('safespot_theme','dark');}
+  }catch(e){}
+}
+</script>
+<script>
+(function(){
+  try{
+    var m=location.pathname.match(/module-(\d+)-/);
+    if(!m) m=location.search.match(/module-(\d+)-/);
+    if(m){
+      var mn=parseInt(m[1]);
+      document.querySelectorAll('.sidebar-mod-item').forEach(function(li){
+        if(parseInt(li.getAttribute('data-mn'))===mn) li.classList.add('ss-now');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('slsc_session')||'null');
+    if(s&&s.fullName){
+      var el=document.getElementById('ss-user-greeting');
+      if(el)var nm=s.fullName&&s.fullName.indexOf('@')<0?s.fullName.split(' ')[0]:(s.email||s.fullName||'').split('@')[0];el.textContent=nm;
+    }
+  }catch(e){}
+})();
+function SS_logout(){
+  try{localStorage.removeItem('slsc_session');localStorage.removeItem('slsc_token');localStorage.removeItem('slsc_sync_since');}catch(e){}
+  location.replace('login.html');
+}
+</script>
+<script>
+(function(){
+  var levels=['','lg','xl'];
+  function getLevel(){return document.documentElement.getAttribute('data-zoom')||'';}
+  window.SS_zoomIn=function(){
+    var i=levels.indexOf(getLevel());
+    var next=levels[Math.min(i+1,levels.length-1)];
+    if(next){document.documentElement.setAttribute('data-zoom',next);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',next||'');}catch(e){}
+  };
+  window.SS_zoomOut=function(){
+    var i=levels.indexOf(getLevel());
+    var prev=levels[Math.max(i-1,0)];
+    if(prev){document.documentElement.setAttribute('data-zoom',prev);}
+    else{document.documentElement.removeAttribute('data-zoom');}
+    try{localStorage.setItem('slsc_zoom',prev||'');}catch(e){}
+  };
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  });
+}
+</script>
+
+
+
+<!-- TTS READER -->
+<style>
+#ttsBar{position:fixed;top:48px;left:0;right:0;z-index:88;background:var(--paper);border-bottom:1px solid var(--line);padding:0 16px}
+@media(min-width:900px){#ttsBar{left:220px}}
+#ttsControls{display:flex;align-items:center;gap:8px;height:38px}
+#ttsLabel{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px;flex-shrink:0}
+.ttsbtn{background:var(--paper);border:1px solid var(--line);border-radius:3px;cursor:pointer;font-size:13px;width:28px;height:26px;line-height:1;color:var(--ink);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0}
+.ttsbtn:hover{background:var(--soft);border-color:var(--ink)}
+.ttsbtn:disabled{opacity:.3;pointer-events:none}
+.ttsbtn.on{background:var(--ink);color:var(--paper)}
+#ttsSpeed{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0}
+#ttsStatus{font-family:var(--mono);font-size:9px;color:var(--muted);flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px}
+#ttsVoice{font-family:var(--mono);font-size:9px;border:1px solid var(--line);border-radius:3px;padding:3px 4px;color:var(--muted);background:var(--paper);height:26px;cursor:pointer;flex-shrink:0;max-width:160px}
+@media(max-width:480px){#ttsVoice{max-width:90px}}
+#ttsTrack{height:2px;background:var(--line);width:100%}
+#ttsFill{height:2px;background:var(--accent);width:0;transition:width .3s}
+</style>
+<div id="ttsBar">
+  <div id="ttsControls">
+    <span id="ttsLabel">&#128266; Read aloud</span>
+    <button class="ttsbtn" id="ttsPlay" onclick="TP()" title="Play">&#9654;</button>
+    <button class="ttsbtn" id="ttsPause" onclick="TPause()" title="Pause" disabled>&#9646;&#9646;</button>
+    <button class="ttsbtn" id="ttsStop" onclick="TStop()" title="Stop" disabled>&#9632;</button>
+    <select id="ttsSpeed" title="Speed">
+      <option value="0.75">0.75x</option>
+      <option value="1" selected>1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+    </select>
+    <select id="ttsVoice" onchange="SS_ttsVoiceChange()" title="Voice"><option value="">Loading voices…</option></select>
+    <span id="ttsStatus">Press play to hear this page</span>
+  </div>
+  <div id="ttsTrack"><div id="ttsFill"></div></div>
+</div>
+
+
+<script src="tts.js"></script>
+<script>
+/* TTS fallback — runs if tts.js failed to load (e.g. offline with stale SW cache) */
+if(typeof window.TP !== 'function'){
+  (function(){
+    var _syn=window.speechSynthesis,_act=false,_pau=false,_ka=null;
+    function _sp(p){var e=document.getElementById('ttsFill')||document.getElementById('ttsProgress');if(e)e.style.width=Math.min(100,p)+'%';}
+    function _ss(m){var e=document.getElementById('ttsStatus');if(e)e.textContent=m;}
+    function _ub(){var pl=document.getElementById('ttsPlay'),pa=document.getElementById('ttsPause'),st=document.getElementById('ttsStop');if(!pl)return;pl.disabled=_act&&!_pau;pl.className='ttsbtn'+(_act&&!_pau?' on':'');pa.disabled=!_act&&!_pau;st.disabled=!_act&&!_pau;}
+    function _gt(){var s=document.querySelector('.slide.active');if(!s)return'';var c=s.cloneNode(true);c.querySelectorAll('.nav,button').forEach(function(x){x.remove();});return(c.innerText||c.textContent||'').replace(/\s+/g,' ').trim();}
+    function _play(){
+      if(!_syn)return;
+      if(_pau&&_syn.paused){_syn.resume();_pau=false;_act=true;_ub();_ss('Reading...');return;}
+      _syn.cancel();
+      var t=_gt();if(!t){_ss('Nothing to read');return;}
+      var u=new SpeechSynthesisUtterance(t);
+      u.rate=parseFloat((document.getElementById('ttsSpeed')||{value:'1'}).value);
+      u.lang='en-GB';
+      u.onstart=function(){_act=true;_pau=false;_ub();_ss('Reading...');_sp(0);_ka=setInterval(function(){if(_syn.speaking&&!_syn.paused){_syn.pause();_syn.resume();}else{clearInterval(_ka);}},10000);};
+      u.onend=function(){_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Done');_sp(100);};
+      u.onerror=function(e){if(e.error==='interrupted'||e.error==='canceled')return;_act=false;_pau=false;_ub();_ss('Error - try again');};
+      u.onboundary=function(ev){_sp((ev.charIndex/t.length)*100);};
+      _syn.speak(u);
+    }
+    window.TP=window.TTS_play=_play;
+    window.TPause=window.TTS_pause=function(){if(_syn&&_syn.speaking&&!_syn.paused){_syn.pause();_pau=true;_act=false;_ub();_ss('Paused');}};
+    window.TStop=window.TTS_stop=function(){if(_syn)_syn.cancel();_act=false;_pau=false;clearInterval(_ka);_ub();_ss('Press play to hear this page');_sp(0);};
+    if(!_syn){var b=document.getElementById('ttsBar');if(b)b.style.display='none';}
+  })();
+}
+</script>
+<!-- SLSC_NOTES — Private Reflection journal (auto-saved on this device only) -->
+<style>
+#slscNotesBtn{position:fixed;right:18px;bottom:18px;z-index:120;font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--ink,#0a0a0a);
+  color:var(--paper,#fafaf7);border:none;border-radius:24px;padding:11px 18px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;opacity:.92}
+#slscNotesBtn:hover{transform:translateY(-2px);opacity:1}
+#slscNotesBtn .dot{width:6px;height:6px;border-radius:50%;background:var(--accent,#c4452d);display:none}
+#slscNotesBtn.has-content .dot{display:inline-block}
+#slscNotesOverlay{position:fixed;inset:0;background:rgba(0,0,0,.32);z-index:121;opacity:0;
+  pointer-events:none;transition:opacity .25s}
+#slscNotesOverlay.open{opacity:1;pointer-events:auto}
+#slscNotesPanel{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;z-index:122;
+  background:var(--paper,#fafaf7);border-left:1px solid var(--line,#d9d9d3);
+  transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+#slscNotesPanel.open{transform:translateX(0)}
+#slscNotesHead{padding:26px 26px 18px;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscNotesHead .k{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:8px}
+#slscNotesHead h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:24px;
+  font-style:italic;color:var(--ink,#0a0a0a);margin:0 0 8px;line-height:1.2}
+#slscNotesHead p{font-size:12.5px;color:var(--muted,#6b6b66);line-height:1.5;margin:0}
+#slscNotesArea{flex:1;border:none;outline:none;resize:none;background:transparent;
+  font-family:var(--sans,sans-serif);font-size:16px;line-height:1.7;color:var(--ink,#2a2a28);
+  padding:22px 26px;width:100%}
+#slscNotesArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+#slscNotesFoot{padding:14px 26px 20px;border-top:1px solid var(--line,#d9d9d3);
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+#slscNotesStatus{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscNotesActions{display:flex;gap:8px}
+.slsc-nbtn{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:none;border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:8px 13px;
+  color:var(--muted,#6b6b66);cursor:pointer;transition:color .2s,border-color .2s}
+.slsc-nbtn:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a)}
+#slscNotesClose{background:none;border:none;font-size:22px;line-height:1;color:var(--muted,#6b6b66);
+  cursor:pointer;position:absolute;top:20px;right:22px;padding:4px}
+#slscNotesClose:hover{color:var(--ink,#0a0a0a)}
+@media(max-width:480px){#slscNotesPanel{width:100vw}#slscNotesBtn{right:14px;bottom:14px}}
+@media print{#slscNotesBtn,#slscNotesOverlay,#slscNotesPanel{display:none!important}}
+</style>
+<button id="slscNotesBtn" onclick="SLSC_notesOpen()" aria-label="Open private reflection notes" title="Private reflection — saved only on this device">&#9998; <span>Notes</span><span class="dot"></span></button>
+<div id="slscNotesOverlay" onclick="SLSC_notesClose()"></div>
+<aside id="slscNotesPanel" role="dialog" aria-modal="true" aria-labelledby="slscNotesTitle">
+  <button id="slscNotesClose" onclick="SLSC_notesClose()" aria-label="Close notes">&times;</button>
+  <div id="slscNotesHead">
+    <div class="k">Private Reflection</div>
+    <h3 id="slscNotesTitle">Your notes for this module</h3>
+    <p>Only you can see this. It's saved on this device and never leaves it — write freely.</p>
+  </div>
+  <textarea id="slscNotesArea" placeholder="What landed for you? What do you want to carry forward&hellip;"></textarea>
+  <div id="slscNotesFoot">
+    <span id="slscNotesStatus">&nbsp;</span>
+    <div id="slscNotesActions">
+      <button class="slsc-nbtn" onclick="SLSC_notesCopy()">Copy</button>
+      <button class="slsc-nbtn" onclick="SLSC_notesClear()">Clear</button>
+    </div>
+  </div>
+</aside>
+<script>
+(function(){
+  var key='slsc_notes_'+(location.pathname.split('/').pop()||'module');
+  var ta,btn,st,saveT;
+  function el(id){return document.getElementById(id);}
+  function refreshDot(){var v=(ta&&ta.value||'').trim();if(btn)btn.classList.toggle('has-content',v.length>0);}
+  function load(){try{var v=localStorage.getItem(key);if(v!=null&&ta)ta.value=v;}catch(e){}refreshDot();}
+  function save(){try{localStorage.setItem(key,ta.value);}catch(e){}
+    if(st){st.textContent='Saved ✓';clearTimeout(saveT);saveT=setTimeout(function(){st.innerHTML='&nbsp;';},1400);}refreshDot();}
+  window.SLSC_notesOpen=function(){el('slscNotesOverlay').classList.add('open');el('slscNotesPanel').classList.add('open');setTimeout(function(){ta&&ta.focus();},120);};
+  window.SLSC_notesClose=function(){el('slscNotesOverlay').classList.remove('open');el('slscNotesPanel').classList.remove('open');};
+  window.SLSC_notesClear=function(){if(ta&&confirm('Clear your notes for this module? This cannot be undone.')){ta.value='';save();ta.focus();}};
+  window.SLSC_notesCopy=function(){if(!ta)return;ta.select();try{document.execCommand('copy');if(st){st.textContent='Copied ✓';setTimeout(function(){st.innerHTML='&nbsp;';},1400);}}catch(e){}window.getSelection&&window.getSelection().removeAllRanges();};
+  document.addEventListener('DOMContentLoaded',function(){
+    ta=el('slscNotesArea');btn=el('slscNotesBtn');st=el('slscNotesStatus');
+    load();
+    if(ta)ta.addEventListener('input',function(){clearTimeout(saveT);st&&(st.textContent='Saving…');saveT=setTimeout(save,400);});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')SLSC_notesClose();});
+})();
+</script>
+<!-- SLSC_CHECK — Recap & retrieval-practice knowledge check (reads the module's own key points) -->
+<style>
+#slscCheck{margin:64px 0 8px;padding:30px 30px 26px;background:var(--soft,#f0f0ea);
+  border-left:2px solid var(--accent,#c4452d);border-radius:2px}
+#slscCheck .sc-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent,#c4452d);font-weight:500;margin-bottom:12px}
+#slscCheck h3{font-family:var(--serif,Georgia,serif);font-weight:400;font-size:26px;
+  line-height:1.25;color:var(--ink,#0a0a0a);margin:0 0 8px;letter-spacing:-.01em}
+#slscCheck .sc-lead{font-size:15.5px;line-height:1.6;color:var(--muted,#6b6b66);margin:0 0 20px;max-width:60ch}
+#slscRecallArea{width:100%;min-height:96px;resize:vertical;background:var(--paper,#fafaf7);
+  border:1px solid var(--line,#d9d9d3);border-radius:4px;padding:14px 16px;
+  font-family:var(--sans,sans-serif);font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);outline:none}
+#slscRecallArea:focus{border-color:var(--ink,#0a0a0a)}
+#slscRecallArea::placeholder{color:var(--muted,#9a9a94);opacity:.7}
+.sc-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:14px}
+.sc-btn{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);border:none;border-radius:4px;
+  padding:11px 18px;cursor:pointer;transition:opacity .2s}
+.sc-btn:hover{opacity:.82}
+.sc-btn.ghost{background:none;color:var(--muted,#6b6b66);border:1px solid var(--line,#d9d9d3)}
+.sc-btn.ghost:hover{color:var(--ink,#0a0a0a);border-color:var(--ink,#0a0a0a);opacity:1}
+.sc-savestate{font-family:var(--mono,monospace);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6b6b66)}
+#slscKeyPoints{display:none;margin-top:22px;padding-top:22px;border-top:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints.open{display:block}
+#slscKeyPoints .kp-k{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:16px}
+#slscKeyPoints ol{list-style:none;margin:0;padding:0;counter-reset:kp}
+#slscKeyPoints li{counter-increment:kp;display:flex;gap:16px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--line,#d9d9d3)}
+#slscKeyPoints li:last-child{border-bottom:none}
+#slscKeyPoints li::before{content:counter(kp,decimal-leading-zero);font-family:var(--mono,monospace);
+  font-size:11px;color:var(--accent,#c4452d);min-width:24px;letter-spacing:.1em}
+#slscKeyPoints li span{font-family:var(--serif,Georgia,serif);font-size:16.5px;line-height:1.5;color:var(--ink,#2a2a28)}
+#slscRate{display:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line,#d9d9d3)}
+#slscRate.open{display:block}
+#slscRate .rt-q{font-size:14px;color:var(--muted,#6b6b66);margin-bottom:12px;font-family:var(--mono,monospace);letter-spacing:.06em;text-transform:uppercase}
+#slscRateMsg{display:none;margin-top:16px;font-size:15.5px;line-height:1.6;color:var(--ink,#2a2a28);font-style:italic;font-family:var(--serif,Georgia,serif)}
+#slscRateMsg.open{display:block}
+</style>
+<script>
+(function(){
+  function build(){
+    if(document.getElementById('slscCheck'))return;
+    var list=document.querySelector('.summary-list');
+    if(!list)return; // modules without a recap list are skipped gracefully
+    var items=[].map.call(list.querySelectorAll('.summary-text'),function(n){return n.innerHTML;});
+    if(!items.length)return;
+    // find the recap heading that precedes the list, to insert before it
+    var anchor=list, p=list.previousElementSibling;
+    while(p){ if(p.classList&&p.classList.contains('section-heading')){anchor=p;break;} p=p.previousElementSibling; }
+    var file=(location.pathname.split('/').pop()||'module');
+    var rkey='slsc_recall_'+file, ratekey='slsc_rate_'+file;
+
+    var box=document.createElement('div');
+    box.id='slscCheck';
+    var lis=items.map(function(t){return '<li><span>'+t+'</span></li>';}).join('');
+    box.innerHTML=''
+      +'<div class="sc-k">Check your understanding</div>'
+      +'<h3>Before you move on, what stayed with you?</h3>'
+      +'<p class="sc-lead">Without scrolling back, jot down the main ideas from this module in your own words. Trying to recall it — before you re-read it — is what makes it stick. Then reveal the key points to compare.</p>'
+      +'<textarea id="slscRecallArea" placeholder="The main things I’m taking from this module are…"></textarea>'
+      +'<div class="sc-row"><button class="sc-btn" id="slscRevealBtn" type="button">Reveal the key points</button><span class="sc-savestate" id="slscRecallSave">&nbsp;</span></div>'
+      +'<div id="slscKeyPoints"><div class="kp-k">The module’s key points</div><ol>'+lis+'</ol></div>'
+      +'<div id="slscRate"><div class="rt-q">How much of that did you recall on your own?</div>'
+      +'<div class="sc-row"><button class="sc-btn ghost" type="button" data-r="all">Most or all of it</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="some">About half</button>'
+      +'<button class="sc-btn ghost" type="button" data-r="few">Just a few</button></div>'
+      +'<div id="slscRateMsg"></div></div>';
+    anchor.parentNode.insertBefore(box,anchor);
+
+    var ta=document.getElementById('slscRecallArea');
+    var save=document.getElementById('slscRecallSave');
+    var t;
+    try{var v=localStorage.getItem(rkey);if(v!=null)ta.value=v;}catch(e){}
+    ta.addEventListener('input',function(){clearTimeout(t);save.textContent='Saving…';
+      t=setTimeout(function(){try{localStorage.setItem(rkey,ta.value);}catch(e){}
+        save.textContent='Saved ✓';setTimeout(function(){save.innerHTML='&nbsp;';},1400);},400);});
+
+    document.getElementById('slscRevealBtn').addEventListener('click',function(){
+      document.getElementById('slscKeyPoints').classList.add('open');
+      document.getElementById('slscRate').classList.add('open');
+      this.style.display='none';
+    });
+    var msgs={all:'That’s real understanding — the ideas are yours now, not just something you read. Carry them into the week ahead.',
+      some:'A solid foundation. Glance back over the points you didn’t recall — a second pass is where the rest settles in.',
+      few:'Completely normal, and not a problem. Recall is a muscle. Scroll back up, re-read the parts that didn’t surface, then try this again — it will come faster next time.'};
+    [].forEach.call(document.querySelectorAll('#slscRate [data-r]'),function(b){
+      b.addEventListener('click',function(){
+        var r=this.getAttribute('data-r');
+        try{localStorage.setItem(ratekey,r);}catch(e){}
+        var m=document.getElementById('slscRateMsg');m.textContent=msgs[r];m.classList.add('open');
+      });
+    });
+    try{var pr=localStorage.getItem(ratekey);}catch(e){}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+</script>
+<!-- SLSC_RTIME — Gentle, self-paced reading-time estimate -->
+<style>
+.slsc-rtime{margin:0 0 36px;padding:16px 0 0;border-top:1px solid var(--line,#d9d9d3)}
+.slsc-rtime .rt-line{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:9px;display:flex;align-items:center;gap:9px}
+.slsc-rtime .rt-line::before{content:'';width:18px;height:1px;background:var(--accent,#c4452d);flex-shrink:0}
+.slsc-rtime .rt-note{font-family:var(--serif,Georgia,serif);font-style:italic;font-size:15.5px;
+  line-height:1.55;color:var(--muted,#6b6b66);max-width:54ch}
+</style>
+<script>
+(function(){
+  function run(){
+    if(document.querySelector('.slsc-rtime'))return;
+    var main=document.querySelector('.module-container')||document.body;
+    var first=document.querySelector('.slide');
+    if(!first)return;
+    var anchor=first.querySelector('.slide-number');
+    // count words across all slides, excluding interactive/added chrome
+    var clone=main.cloneNode(true);
+    clone.querySelectorAll('#slscCheck,.nav,.choices,.return-home-wrap,script,style,button,.feedback').forEach(function(n){n.remove();});
+    var words=(clone.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+    var m=Math.max(2,Math.round(words/200));
+    var box=document.createElement('div');
+    box.className='slsc-rtime';
+    var label,note;
+    if(m>=30){
+      label='About '+m+' minutes · take it in stages if you like';
+      note='This is a longer one — there’s no need to finish in a single sitting. Move through it at the pace your healing asks for; your place is saved when you step away.';
+    }else{
+      label='About '+m+' minutes · at your own pace';
+      note='There’s no clock here. Take all the time you need — this is your own process. You can pause and return whenever you like, and your place is saved.';
+    }
+    box.innerHTML='<div class="rt-line">'+label+'</div><div class="rt-note">'+note+'</div>';
+    if(anchor&&anchor.parentNode){anchor.parentNode.insertBefore(box,anchor.nextSibling);}
+    else{first.insertBefore(box,first.firstChild);}
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+<!-- SLSC_RESUME — saves your page + offers a gentle one-tap resume -->
+<style>
+#slscResumeToast{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;z-index:115;
+  background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.08em;padding:11px 8px 11px 18px;border-radius:24px;display:none;
+  align-items:center;gap:14px;box-shadow:0 4px 20px rgba(0,0,0,.22);max-width:92vw}
+#slscResumeToast.show{display:flex}
+#slscResumeToast .rs-go{background:none;border:none;color:var(--paper,#fafaf7);font-family:var(--mono,monospace);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:underline;padding:0}
+#slscResumeToast .rs-x{background:none;border:none;color:var(--paper,#fafaf7);opacity:.55;font-size:17px;
+  line-height:1;cursor:pointer;padding:0 8px}
+#slscResumeToast .rs-x:hover{opacity:1}
+</style>
+<script>
+(function(){
+  var file=(location.pathname.split('/').pop()||'module');
+  var pkey='slsc_pos_'+file;
+  function slides(){return document.querySelectorAll('.slide');}
+  function total(){return slides().length;}
+  function activeN(){var a=document.querySelector('.slide.active');return a?(parseInt(a.getAttribute('data-slide'),10)||1):1;}
+  function label(){var t=document.querySelector('.module-tag');return ((t?t.textContent:'')||document.title||'').replace(/\s+/g,' ').trim();}
+  function writeLast(n){try{localStorage.setItem('slsc_last',JSON.stringify({file:file,label:label(),slide:n,total:total(),ts:Date.now()}));}catch(e){}}
+  function persist(){var n=activeN();try{localStorage.setItem(pkey,String(n));}catch(e){}writeLast(n);}
+  function go(n){if(typeof window.showSlide==='function'){try{window.showSlide(n);return true;}catch(e){}}return false;}
+  function init(){
+    if(!slides().length)return; // locked or non-slide page
+    var saved=parseInt(localStorage.getItem(pkey)||'1',10);
+    var T=total();
+    var wantResume=/resume/i.test(location.hash)||/[?&]resume/i.test(location.search);
+    // start saving on every navigation
+    var mo=new MutationObserver(function(){persist();});
+    slides().forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:['class']});});
+    if(saved>1&&saved<=T&&wantResume){ go(saved); writeLast(saved); return; }
+    writeLast(activeN());
+    if(saved>1&&saved<T){
+      var bar=document.createElement('div');bar.id='slscResumeToast';
+      var pad=(saved<10?'0':'')+saved;
+      bar.innerHTML='<span>You left off on page '+pad+'</span><button class="rs-go">Resume</button><button class="rs-x" aria-label="Dismiss">&times;</button>';
+      document.body.appendChild(bar);
+      setTimeout(function(){bar.classList.add('show');},700);
+      bar.querySelector('.rs-go').onclick=function(){go(saved);bar.classList.remove('show');};
+      bar.querySelector('.rs-x').onclick=function(){bar.classList.remove('show');};
+      setTimeout(function(){bar.classList.remove('show');},9000);
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- SLSC_GATE — paywall for paid courses + assessment (soft lock; backend enforces once live) -->
+<script>
+(function(){
+  try{
+    var f=(location.pathname.split('/').pop()||'');
+    var id=null;
+    if(/^assessment\.html$/i.test(f)) id='assessment';
+    else { var mm=f.match(/^course(\d+)-/); if(mm){var n=parseInt(mm[1],10); if(n>=1&&n<=10) id=String(n);} }
+    if(!id) return;
+    if(window.SLSC_ACCESS && window.SLSC_ACCESS.has(id)) return;
+    var info=(window.SLSC_PAID&&window.SLSC_PAID[id])||{name:'This course',price:11,link:'index.html#pricing'};
+    document.documentElement.setAttribute('data-locked','1');
+    document.body.innerHTML=''
+      +'<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper,#fafaf7);flex-direction:column;text-align:center;padding:40px;font-family:var(--sans,-apple-system,sans-serif)">'
+      +'<div style="font-family:var(--mono,monospace);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b6b66);margin-bottom:26px">Safe Spot</div>'
+      +'<div style="font-family:var(--serif,Georgia,serif);font-size:2.1rem;font-weight:300;color:var(--ink,#0a0a0a);margin-bottom:10px;line-height:1.25">'+info.name+'</div>'
+      +'<div style="font-family:var(--mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#c4452d;margin-bottom:18px">Locked</div>'
+      +'<p style="font-size:.95rem;color:var(--muted,#6b6b66);max-width:380px;line-height:1.7;margin-bottom:28px">This is a paid course. Unlock it for &pound;'+info.price+' &mdash; lifetime access &mdash; or get all 10 courses plus the assessment in the &pound;88 bundle.</p>'
+      +'<a href="'+info.link+'" style="padding:14px 30px;background:var(--ink,#0a0a0a);color:var(--paper,#fafaf7);text-decoration:none;border-radius:3px;font-size:.9rem;letter-spacing:.03em">Unlock for &pound;'+info.price+' &rarr;</a>'
+      +'<a href="index.html#pricing" style="margin-top:18px;font-size:.82rem;color:var(--muted,#6b6b66);text-decoration:none;border-bottom:1px solid var(--line,#d9d9d3);padding-bottom:2px">See all courses &amp; the &pound;88 bundle</a>'
+      +'<a href="index.html" style="margin-top:16px;font-family:var(--mono,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted,#6b6b66);text-decoration:none">&larr; All Courses</a>'
+      +'</div>';
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
