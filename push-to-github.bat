@@ -1,16 +1,16 @@
 @echo off
-setlocal
+setlocal enabledelayedexpansion
 REM ===========================================================================
-REM  Push Safe Learning Spot Centre to GitHub  (self-repairing)
+REM  Push Safe Learning Spot Centre to GitHub  (one-click, self-repairing)
 REM  ---------------------------------------------------------------------------
 REM  HOW TO USE:
 REM    1. Make sure Git is installed:  https://git-scm.com/downloads
 REM    2. Double-click this file (it lives inside your project folder).
-REM    3. The first time, a browser window opens to sign in to GitHub.
-REM       Sign in as hughmupfigo-star and approve.  That's it.
+REM    3. If a GitHub sign-in window appears the first time, complete it.
 REM
 REM  Your .env file and node_modules are excluded automatically by .gitignore,
-REM  so no secrets are uploaded.
+REM  so no secrets are uploaded.  This script also applies the HTTP/1.1 +
+REM  big-buffer settings that got past the "HTTP 408 / sideband" timeout.
 REM ===========================================================================
 
 cd /d "%~dp0"
@@ -28,6 +28,12 @@ if errorlevel 1 (
   exit /b 1
 )
 
+REM --- Connection fixes for slow / VPN / proxy networks ----------------------
+git config --global http.version HTTP/1.1
+git config --global http.postBuffer 524288000
+git config --global http.lowSpeedLimit 0
+git config --global http.lowSpeedTime 999999
+
 REM --- Repair a broken / half-initialised repo -------------------------------
 git rev-parse --is-inside-work-tree >nul 2>&1
 if errorlevel 1 (
@@ -43,33 +49,44 @@ git config user.name  >nul 2>&1 || git config user.name  "hughmupfigo-star"
 
 echo.
 echo === Staging files (secrets excluded by .gitignore) ===
-git add .
+git add -A
 git commit -m "Update Safe Learning Spot Centre" || echo (nothing new to commit - continuing)
 git branch -M main
 
 echo.
 echo === Connecting to your GitHub repo ===
-git remote remove origin >nul 2>&1
+git remote remove origin 1>nul 2>nul
 git remote add origin https://github.com/hughmupfigo-star/SAFE-Learning-Spot.git
 
 echo.
-echo === Safety check: these files will NOT be uploaded ===
-git status --porcelain --ignored | findstr /R "^!! .env$ ^!!.*node_modules" >nul && echo .env and node_modules are correctly ignored. || echo (continuing)
-
-echo.
-echo === Pushing to GitHub (sign in if a browser window appears) ===
+echo === Pushing (retries up to 3 times on a timeout) ===
+set /a n=0
+:retry
+set /a n+=1
+echo --- Attempt !n! of 3 ---
 git push -u origin main
-if errorlevel 1 (
-  echo.
-  echo === Push was rejected - syncing with the remote, then retrying once ===
-  git pull origin main --rebase --allow-unrelated-histories
-  git push -u origin main
-)
+if not errorlevel 1 goto ok
+if !n! GEQ 3 goto fail
+echo Connection hiccup. Waiting 5s, then retrying...
+timeout /t 5 /nobreak >nul
+goto retry
 
+:ok
 echo.
-echo ===========================================================================
-echo  DONE.  If you saw a sign-in window, finish it and the push completes.
-echo  Refresh https://github.com/hughmupfigo-star/SAFE-Learning-Spot to confirm.
-echo ===========================================================================
+echo ============================================================
+echo   SUCCESS - GitHub now matches this folder.
+echo   Refresh: https://github.com/hughmupfigo-star/SAFE-Learning-Spot
+echo ============================================================
+goto end
+
+:fail
+echo.
+echo ============================================================
+echo   Push kept timing out. This is usually a VPN or antivirus.
+echo   Try: turn OFF Hotspot Shield (VPN) for a minute, then run
+echo   this file again. Your sign-in and settings are remembered.
+echo ============================================================
+
+:end
 echo.
 pause
