@@ -1,6 +1,6 @@
 /*
  * app.css — Safe Learning Spot Centre
- * Mobile & tablet UI polish for PWA / Capacitor app
+ * Mobile & tablet UI polish for PWA
  * Include AFTER your main styles on every page:
  *   <link rel="stylesheet" href="app.css">
  */
@@ -196,7 +196,7 @@ select {
   font-size: max(16px, 1em);
 }
 
-/* ── Capacitor / app-specific overrides ─────────────────────────────────── */
+/* ── PWA / app-specific overrides ───────────────────────────────────────── */
 
 /* Hide browser-only elements when running as installed app */
 @media (display-mode: standalone) {
