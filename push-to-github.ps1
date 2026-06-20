@@ -25,27 +25,10 @@ $Remote = "https://github.com/hughmupfigo-star/SAFE-Learning-Spot.git"
 
 # Files/folders to NEVER copy or commit
 $Exclude = @(
-    # Secrets
     ".env", ".env.*", "*.env", ".env.local", ".env.txt",
-    # Capacitor config — local only (iOS/Android building)
-    "capacitor.config.json",
-    # node_modules stays local — never commit
-    "node_modules",
-    # Build outputs
-    "dist", "build", ".cache",
-    # Dev-only scripts
+    "node_modules", "dist", "build", ".cache",
     "debug-users.js", "verify-setup.js", "check-env.js",
-    # Junk
-    "*.log", ".DS_Store", "Thumbs.db", "*.swp",
-    # Cloudflare SPA redirect rule — wrong for a multi-page site, breaks login.html
-    "_redirects",
-    # Push/deploy scripts — local helpers only, not part of the site
-    "push-to-github.ps1", "push-to-github.bat", "RUN-PUSH.bat",
-    "push-http11.bat", "verify-push.bat", "retry-push.bat", "finish-push.bat",
-    # SQL schema files — backend only, never upload to GitHub
-    "*.sql",
-    # Backend server folders — API routes and libraries, not part of static site
-    "lib", "routes"
+    "*.log", ".DS_Store", "Thumbs.db", "*.swp"
 )
 
 # Patterns that suggest a real secret is exposed in a file
@@ -73,7 +56,6 @@ function Should-Exclude($name) {
     return $false
 }
 
-
 # ── Step 1: Verify source folder ───────────────────────────────────────────────
 Write-Step "Checking source folder"
 if (-not (Test-Path $Source)) {
@@ -97,11 +79,11 @@ $copied = 0
 $skipped = 0
 
 Get-ChildItem -Path $Source -Recurse | ForEach-Object {
-    $rel = $_.FullName.Substring($Source.Length).TrimStart('\', '/')
+    $rel = $_.FullName.Substring($Source.Length).TrimStart('\','/')
 
     # Skip any path segment that matches an exclusion
     $skip = $false
-    foreach ($seg in ($rel -split '[\\\/]')) {
+    foreach ($seg in $rel.Split('\','/')) {
         if (Should-Exclude $seg) { $skip = $true; break }
     }
 
@@ -136,7 +118,7 @@ Write-OK ".gitignore installed"
 # ── Step 5: Pre-push secrets scan ─────────────────────────────────────────────
 Write-Step "Running secrets scan on destination"
 $scanFiles = Get-ChildItem -Path $Dest -Recurse -File | Where-Object {
-    $_.Extension -in @('.js','.html','.json','.ts','.env','.txt','.sh','.yml','.yaml') -and
+    $_.Extension -in @('.js','.html','.json','.ts','.env','.txt','.sh','.ps1','.bat','.yml','.yaml') -and
     $_.FullName -notlike "*\node_modules\*"
 }
 
@@ -177,55 +159,6 @@ if (-not (Test-Path (Join-Path $Dest ".git"))) {
 git remote remove origin 2>$null
 git remote add origin $Remote
 Write-OK "Remote set: $Remote"
-
-# ── Step 6c: Sync with remote main — align history before staging ─────────────
-Write-Step "Syncing history with origin/main"
-git fetch origin 2>&1 | Out-Null
-if ($LASTEXITCODE -eq 0) {
-    # Ensure we are on the main branch
-    git checkout main 2>&1 | Out-Null
-    if ($LASTEXITCODE -ne 0) {
-        git checkout -b main 2>&1 | Out-Null   # create main if it doesn't exist locally
-    }
-    # Reset commit history to match origin/main WITHOUT touching the working tree.
-    # Files were already copied; this just makes sure we build on top of the correct
-    # remote commit so the push is always a clean fast-forward.
-    git reset --mixed origin/main 2>&1 | Out-Null
-    if ($LASTEXITCODE -eq 0) {
-        Write-OK "History aligned with origin/main — push will be a clean fast-forward"
-    } else {
-        Write-Warn "origin/main not available yet (first push?) — proceeding without sync"
-    }
-} else {
-    Write-Warn "Could not reach remote — working with local state only"
-}
-
-# ── Step 6b: Purge Capacitor/npm files — delete from disk AND git index ────────
-Write-Step "Purging Capacitor/npm files from repo (these break Cloudflare Pages)"
-$filesToPurge = @(
-    "capacitor.config.json", "_redirects",
-    "push-to-github.ps1", "push-to-github.bat", "RUN-PUSH.bat",
-    "push-http11.bat", "verify-push.bat", "retry-push.bat", "finish-push.bat"
-)
-foreach ($f in $filesToPurge) {
-    $destPath = Join-Path $Dest $f
-    # 1. Physically delete from destination folder (in case a previous push left them)
-    if (Test-Path $destPath) {
-        Remove-Item $destPath -Force
-        Write-OK "Deleted from disk: $f"
-    }
-    # 2. Remove from git index (so deletion gets committed)
-    git rm --cached $f 2>&1 | Out-Null
-    if ($LASTEXITCODE -eq 0) {
-        Write-OK "Removed from git tracking: $f"
-    }
-}
-# Also purge node_modules if it somehow got in
-if (Test-Path (Join-Path $Dest "node_modules")) {
-    Remove-Item (Join-Path $Dest "node_modules") -Recurse -Force
-    git rm --cached -r node_modules 2>&1 | Out-Null
-    Write-OK "Removed node_modules"
-}
 
 # ── Step 7: Stage, commit, push ───────────────────────────────────────────────
 Write-Step "Committing changes"

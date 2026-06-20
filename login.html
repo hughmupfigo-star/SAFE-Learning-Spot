@@ -132,16 +132,6 @@ html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
         </div>
       </div>
       <button class="btn-submit" id="login-btn" onclick="doLogin()">Sign in</button>
-      <div class="auth-footer" style="margin-top:10px"><a onclick="showForgot()" style="cursor:pointer">Forgot password?</a></div>
-      <!-- FORGOT PASSWORD -->
-      <div id="forgot-box" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)">
-        <div class="field">
-          <label for="forgot-email">Email for your account</label>
-          <input type="email" id="forgot-email" placeholder="you@example.com" autocomplete="email" />
-        </div>
-        <button class="btn-submit" id="forgot-btn" onclick="doForgot()">Send reset link</button>
-        <div id="forgot-msg" style="display:none;margin-top:14px;font-size:.85rem;line-height:1.6;color:var(--muted)"></div>
-      </div>
       <div class="auth-footer">No account? <a onclick="switchTab('signup')">Create one &rarr;</a></div>
     </div>
 
@@ -337,37 +327,6 @@ function doSignup(){
       })
       .catch(function(){ localSignup(); }); // server unreachable -> offline fallback
   }else{ localSignup(); }
-}
-
-function showForgot(){
-  var b=document.getElementById('forgot-box');
-  if(!b)return;
-  b.style.display='block';
-  var fe=document.getElementById('forgot-email'),le=document.getElementById('login-email');
-  if(fe){ if(le&&le.value)fe.value=le.value; fe.focus(); }
-}
-function doForgot(){
-  var email=(document.getElementById('forgot-email').value||'').trim().toLowerCase();
-  var btn=document.getElementById('forgot-btn');
-  var msg=document.getElementById('forgot-msg');
-  function tell(t){ msg.innerHTML=t; msg.style.display='block'; }
-  if(!isValidEmail(email)){ tell('Please enter a valid email address.'); return; }
-  var base=''; try{ base=(window.SLSC_SYNC&&window.SLSC_SYNC.base&&window.SLSC_SYNC.base())||''; }catch(e){}
-  if(!base){
-    tell('Password reset will be available once our online service is live. For now, email <strong>enquiries@safespot.life</strong> from your account address and we&rsquo;ll reset it for you.');
-    return;
-  }
-  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Sending&hellip;';
-  fetch(base+'/api/auth/forgot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})})
-    .then(function(r){ return r.json().catch(function(){return{};}); })
-    .then(function(){
-      btn.style.display='none';
-      tell('If that email is registered, we&rsquo;ve sent a reset link. Check your inbox (and your spam folder).');
-    })
-    .catch(function(){
-      btn.disabled=false; btn.textContent='Send reset link';
-      tell('Couldn&rsquo;t reach the server just now. Please try again in a moment.');
-    });
 }
 
 document.addEventListener('keydown',function(e){
