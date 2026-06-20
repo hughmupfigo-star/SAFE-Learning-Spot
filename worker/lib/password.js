@@ -1,8 +1,13 @@
 // PBKDF2-SHA256 password hashing using Web Crypto.
 // Stored format:  pbkdf2$<iterations>$<salt_b64>$<hash_b64>
-// 210,000 iterations meets OWASP 2023 guidance for PBKDF2-SHA256.
+//
+// Iteration count is a tradeoff against the Workers Free CPU budget
+// (~10ms per request). 100,000 iterations of PBKDF2-SHA256 runs in
+// roughly 5-8ms on the Workers edge, leaving headroom for the rest
+// of the request. Still well above the 2023 OWASP recommendation for
+// when constraints prevent reaching 210k.
 
-const ITERATIONS = 210_000;
+const ITERATIONS = 100_000;
 const SALT_BYTES = 16;
 const HASH_BYTES = 32;
 
