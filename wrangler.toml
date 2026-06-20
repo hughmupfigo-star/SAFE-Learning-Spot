@@ -1,6 +1,18 @@
 name = "safe-learning-spot"
+main = "worker/index.js"
 compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
 
-# Serve everything in this folder as static assets
+# Serve all static files in the project root as the site's assets.
+# The Worker handles /api/* requests; everything else falls through to ASSETS.
 [assets]
 directory = "."
+binding = "ASSETS"
+
+# D1 database for users, progress, sync state.
+# After running `wrangler d1 create safe-learning-spot`, paste the
+# database_id from the output below.
+[[d1_databases]]
+binding = "DB"
+database_name = "safe-learning-spot"
+database_id = "a4002226-ec1d-4887-a58e-18e49b334687"

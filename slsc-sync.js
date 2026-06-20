@@ -29,8 +29,12 @@
   };
 
   function base() {
-    var b = (window.SLSC_API_BASE || API_BASE || '');
-    return b ? String(b).replace(/\/+$/, '') : '';
+    var b = (window.SLSC_API_BASE || API_BASE);
+    if (b) return String(b).replace(/\/+$/, '');
+    // No explicit API base configured: assume the API lives on the same origin
+    // as the page (the Cloudflare Worker serves both static files and /api/*).
+    // Falls back to '' in non-browser contexts so nothing crashes.
+    try { return window.location.origin; } catch (e) { return ''; }
   }
   function token() { try { return localStorage.getItem('slsc_token'); } catch (e) { return null; } }
   function enabled() { return !!(base() && token()); }
