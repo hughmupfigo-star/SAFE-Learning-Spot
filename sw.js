@@ -1,6 +1,6 @@
 // SAFE Learning Spot Centre — Service Worker
-const CACHE_NAME = 'safe-learning-v11';
-const SHELL_CACHE = 'safe-shell-v8';
+const CACHE_NAME = 'safe-learning-v12';
+const SHELL_CACHE = 'safe-shell-v9';
 
 // Core shell files cached on install
 const SHELL_FILES = [
@@ -222,15 +222,49 @@ self.addEventListener('activate', function(e) {
   );
 });
 
+// Reconstruct a redirected response as a plain response so the browser
+// will accept it for navigation requests (whose redirect mode is "manual").
+function cleanRedirect(response) {
+  return response.blob().then(function(body) {
+    return new Response(body, {
+      status: 200,
+      statusText: 'OK',
+      headers: response.headers
+    });
+  });
+}
+
 self.addEventListener('fetch', function(e) {
   // Only handle same-origin GET requests
   if (e.request.method !== 'GET') return;
   var url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
 
+  // For navigation requests, force fetch to follow redirects ourselves
+  // (default redirect mode for navigations is "manual", which breaks SWs).
+  var fetchRequest = e.request;
+  if (e.request.mode === 'navigate') {
+    fetchRequest = new Request(e.request.url, {
+      method: 'GET',
+      headers: e.request.headers,
+      credentials: e.request.credentials,
+      redirect: 'follow'
+    });
+  }
+
   e.respondWith(
     caches.match(e.request).then(function(cached) {
-      var networkFetch = fetch(e.request).then(function(response) {
+      var networkFetch = fetch(fetchRequest).then(function(response) {
+        // If the response followed a redirect, the "redirected" flag is set
+        // and browsers refuse to use it for navigations. Rebuild it cleanly.
+        if (response.redirected) {
+          return cleanRedirect(response).then(function(clean) {
+            caches.open(CACHE_NAME).then(function(cache) {
+              cache.put(e.request, clean.clone());
+            });
+            return clean;
+          });
+        }
         if (response && response.status === 200) {
           var clone = response.clone();
           caches.open(CACHE_NAME).then(function(cache) {
