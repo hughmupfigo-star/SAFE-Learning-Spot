@@ -1,6 +1,6 @@
 // SAFE Learning Spot Centre — Service Worker
-const CACHE_NAME = 'safe-learning-v12';
-const SHELL_CACHE = 'safe-shell-v9';
+const CACHE_NAME = 'safe-learning-v13';
+const SHELL_CACHE = 'safe-shell-v10';
 
 // Core shell files cached on install
 const SHELL_FILES = [
@@ -239,6 +239,11 @@ self.addEventListener('fetch', function(e) {
   if (e.request.method !== 'GET') return;
   var url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
+
+  // Don't intercept API calls. They can do server-side redirects to other
+  // origins (e.g. Google OAuth) which the SW can't safely proxy due to CORS.
+  // The browser handles these as direct navigations / fetches.
+  if (url.pathname.startsWith('/api/')) return;
 
   // For navigation requests, force fetch to follow redirects ourselves
   // (default redirect mode for navigations is "manual", which breaks SWs).
