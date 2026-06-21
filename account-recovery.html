@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account Recovery · Safe Spot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<script>(function(){try{if(localStorage.getItem('safespot_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0a0a;--paper:#fafaf7;--muted:#6b6b66;--line:#d9d9d3;--soft:#f0f0ea;--accent:#2d7a4f;
+  --serif:'Fraunces',Georgia,serif;--sans:'Inter Tight',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+html[data-theme="dark"]{--ink:#e8e8e4;--paper:#0f0f0d;--muted:#888884;--line:#2a2a27;--soft:#1a1a17}
+html,body{min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.card{width:100%;max-width:440px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:34px 30px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+h1{font-family:var(--serif);font-weight:300;font-size:1.9rem;line-height:1.2;margin-bottom:10px;color:var(--ink)}
+.sub{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:24px}
+.tabs{display:flex;gap:0;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.tab{flex:1;padding:10px 0;background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
+.tab.active{color:var(--ink);border-bottom-color:var(--ink)}
+.tab:hover:not(.active){color:var(--ink)}
+.panel{display:none}
+.panel.active{display:block}
+label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;margin-top:6px}
+input[type=email],input[type=text]{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:5px;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;outline:none}
+input[type=email]:focus,input[type=text]:focus{border-color:var(--ink)}
+textarea{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:5px;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;outline:none;resize:vertical;min-height:90px}
+textarea:focus{border-color:var(--ink)}
+html[data-theme="dark"] input,html[data-theme="dark"] textarea{background:var(--soft)}
+.btn{width:100%;margin-top:24px;padding:14px;background:var(--ink);color:var(--paper);border:none;border-radius:5px;font-size:.95rem;font-family:var(--sans);letter-spacing:.02em;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.86}.btn:disabled{opacity:.4;cursor:default}
+.msg{margin-top:18px;font-size:.88rem;line-height:1.6;padding:12px 14px;border-radius:5px;display:none;word-break:break-word}
+.msg.show{display:block}
+.msg.err{background:#fbeaea;color:#8c2f2f;border:1px solid #e7c2c2}
+.msg.ok{background:#e9f4ee;color:#1f6b41;border:1px solid #bfe0cd}
+html[data-theme="dark"] .msg.err{background:#241414;color:#e2a3a3;border-color:#3a2020}
+html[data-theme="dark"] .msg.ok{background:#13211a;color:#9fd8b6;border-color:#214030}
+.msg a{color:inherit;text-decoration:underline}
+.foot{margin-top:22px;text-align:center}
+.foot a{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+.foot a:hover{color:var(--ink)}
+.help-text{font-size:.85rem;color:var(--muted);margin-bottom:18px;line-height:1.55}
+.help-text strong{color:var(--ink)}
+.spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:7px}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+<script src="slsc-sync.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="eyebrow">Safe Spot</div>
+    <h1>Recover your account</h1>
+    <p class="sub">We can help you get back in. Choose what you've forgotten below.</p>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" id="tab-password" onclick="switchTab('password')" role="tab">Forgot password</button>
+      <button class="tab" id="tab-email" onclick="switchTab('email')" role="tab">Forgot email</button>
+    </div>
+
+    <!-- FORGOT PASSWORD -->
+    <div class="panel active" id="panel-password">
+      <p class="help-text">Enter the email address on your account. We&rsquo;ll send you a link to choose a new password.</p>
+      <form id="pwForm" onsubmit="return false">
+        <label for="email">Email address</label>
+        <input type="email" id="email" autocomplete="email" placeholder="you@example.com" />
+        <button class="btn" id="pwBtn" onclick="doRequest()">Send reset link</button>
+      </form>
+      <div class="msg" id="pwMsg"></div>
+    </div>
+
+    <!-- FORGOT EMAIL -->
+    <div class="panel" id="panel-email">
+      <p class="help-text">If you can&rsquo;t remember the email on your account, send us your details and we&rsquo;ll help you recover access. We&rsquo;ll respond to <strong>any</strong> email you list below.</p>
+      <form id="emailForm" onsubmit="return false">
+        <label for="fullname">Full name on the account</label>
+        <input type="text" id="fullname" autocomplete="name" placeholder="Your full name" />
+        <label for="contactEmail">An email you can be reached on</label>
+        <input type="email" id="contactEmail" autocomplete="email" placeholder="you@example.com" />
+        <label for="notes">Anything else that might help us find your account</label>
+        <textarea id="notes" placeholder="Approximate sign-up date, courses you've worked through, etc."></textarea>
+        <button class="btn" id="emailBtn" onclick="doFindMe()">Send recovery request</button>
+      </form>
+      <div class="msg" id="emailMsg"></div>
+    </div>
+
+    <div class="foot"><a href="login.html">&larr; Back to sign in</a></div>
+  </div>
+</div>
+
+<script>
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('tab-'+t).classList.add('active');
+  document.getElementById('panel-'+t).classList.add('active');
+}
+function apiBase(){ try { return (window.SLSC_SYNC && window.SLSC_SYNC.base && window.SLSC_SYNC.base()) || ''; } catch(e){ return ''; } }
+function show(id, kind, html){ var m = document.getElementById(id); m.className = 'msg show ' + kind; m.innerHTML = html; }
+function clearMsg(id){ var m = document.getElementById(id); m.className = 'msg'; m.innerHTML = ''; }
+function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+function doRequest(){
+  clearMsg('pwMsg');
+  var email = (document.getElementById('email').value || '').trim().toLowerCase();
+  var btn = document.getElementById('pwBtn');
+  if (!email || !isValidEmail(email)){
+    show('pwMsg', 'err', 'Please enter a valid email address.');
+    return;
+  }
+  var base = apiBase();
+  if (!base){
+    show('pwMsg', 'err', 'The online service isn&rsquo;t available yet. Please email <strong>enquiries@safespot.life</strong> and we&rsquo;ll help you reset your password.');
+    return;
+  }
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Sending…';
+  fetch(base + '/api/auth/request-reset', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ email: email })
+  }).then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+    .then(function(res){
+      btn.disabled = false; btn.textContent = 'Send reset link';
+      if (res.ok){
+        var msg = 'If an account exists for that email, a reset link has been sent. Check your inbox (and your spam folder, just in case).';
+        if (res.j && res.j.reset_url){
+          msg += '<br><br><strong>Dev mode — your reset link:</strong><br>' +
+                 '<a href="' + res.j.reset_url + '">' + res.j.reset_url + '</a>';
+        }
+        show('pwMsg', 'ok', msg);
+      } else {
+        show('pwMsg', 'err', (res.j && res.j.error) || 'Something went wrong. Please try again.');
+      }
+    })
+    .catch(function(){
+      btn.disabled = false; btn.textContent = 'Send reset link';
+      show('pwMsg', 'err', 'Couldn&rsquo;t reach the server. Please try again in a moment.');
+    });
+}
+
+function doFindMe(){
+  clearMsg('emailMsg');
+  var name = (document.getElementById('fullname').value || '').trim();
+  var contact = (document.getElementById('contactEmail').value || '').trim().toLowerCase();
+  var notes = (document.getElementById('notes').value || '').trim();
+  var btn = document.getElementById('emailBtn');
+
+  if (!name){
+    show('emailMsg', 'err', 'Please enter the full name on your account.');
+    return;
+  }
+  if (!contact || !isValidEmail(contact)){
+    show('emailMsg', 'err', 'Please enter a valid email address we can reach you on.');
+    return;
+  }
+
+  var base = apiBase();
+  if (!base){
+    show('emailMsg', 'err', 'The online service isn&rsquo;t available yet. Please email <strong>enquiries@safespot.life</strong> with these details and we&rsquo;ll help you recover your account.');
+    return;
+  }
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Sending…';
+  fetch(base + '/api/auth/recover-email', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ fullName: name, contactEmail: contact, notes: notes })
+  }).then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+    .then(function(res){
+      btn.disabled = false; btn.textContent = 'Send recovery request';
+      if (res.ok){
+        show('emailMsg', 'ok', 'Thanks — we&rsquo;ve received your request. The Safe Spot team will get back to you at the email you provided, usually within one business day.');
+      } else {
+        show('emailMsg', 'err', (res.j && res.j.error) || 'Something went wrong. Please try again or email enquiries@safespot.life directly.');
+      }
+    })
+    .catch(function(){
+      btn.disabled = false; btn.textContent = 'Send recovery request';
+      show('emailMsg', 'err', 'Couldn&rsquo;t reach the server. Please try again, or email enquiries@safespot.life directly.');
+    });
+}
+</script>
+</body>
+</html>
