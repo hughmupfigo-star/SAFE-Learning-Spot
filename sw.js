@@ -1,6 +1,8 @@
 // SAFE Learning Spot Centre — Service Worker
-const CACHE_NAME = 'safe-learning-v13';
-const SHELL_CACHE = 'safe-shell-v10';
+// v15/v12: bumped to evict caches poisoned with redirected responses from the
+// old /login.html -> /login behaviour. See wrangler.toml html_handling = "none".
+const CACHE_NAME = 'safe-learning-v15';
+const SHELL_CACHE = 'safe-shell-v12';
 
 // Core shell files cached on install
 const SHELL_FILES = [
@@ -222,9 +224,12 @@ self.addEventListener('activate', function(e) {
   );
 });
 
-// Reconstruct a redirected response as a plain response so the browser
-// will accept it for navigation requests (whose redirect mode is "manual").
-function cleanRedirect(response) {
+// If a response followed a server-side redirect, its `redirected` flag is set
+// and the browser REFUSES to use it for a navigation request. Rebuild such a
+// response as a plain 200 so it is always safe to return. Non-redirected
+// responses are passed straight through.
+function normalize(response) {
+  if (!response || !response.redirected) return Promise.resolve(response);
   return response.blob().then(function(body) {
     return new Response(body, {
       status: 200,
@@ -235,52 +240,57 @@ function cleanRedirect(response) {
 }
 
 self.addEventListener('fetch', function(e) {
-  // Only handle same-origin GET requests
+  // Only handle same-origin GET requests.
   if (e.request.method !== 'GET') return;
   var url = new URL(e.request.url);
   if (url.origin !== location.origin) return;
 
-  // Don't intercept API calls. They can do server-side redirects to other
+  // Never intercept API calls. They can do server-side redirects to other
   // origins (e.g. Google OAuth) which the SW can't safely proxy due to CORS.
-  // The browser handles these as direct navigations / fetches.
   if (url.pathname.startsWith('/api/')) return;
 
-  // For navigation requests, force fetch to follow redirects ourselves
-  // (default redirect mode for navigations is "manual", which breaks SWs).
-  var fetchRequest = e.request;
+  // ── Navigations: network-first, redirect-safe ────────────────────────────
+  // Always rebuild the request with redirect:"follow" and normalize the result
+  // so a redirected response can never reach respondWith (the cause of the
+  // "redirected response ... redirect mode is not follow" network errors).
+  // Fall back to cache only when offline, and never serve a redirected entry.
   if (e.request.mode === 'navigate') {
-    fetchRequest = new Request(e.request.url, {
-      method: 'GET',
-      headers: e.request.headers,
-      credentials: e.request.credentials,
-      redirect: 'follow'
-    });
+    e.respondWith(
+      fetch(new Request(e.request.url, {
+        method: 'GET',
+        headers: e.request.headers,
+        credentials: e.request.credentials,
+        redirect: 'follow'
+      })).then(function(response) {
+        return normalize(response).then(function(clean) {
+          if (clean && clean.status === 200) {
+            var forCache = clean.clone();
+            caches.open(CACHE_NAME).then(function(cache) { cache.put(e.request, forCache); });
+          }
+          return clean;
+        });
+      }).catch(function() {
+        return caches.match(e.request).then(function(cached) {
+          if (cached && !cached.redirected) return cached;
+          return caches.match('./index.html');
+        });
+      })
+    );
+    return;
   }
 
+  // ── Sub-resources (css/js/img/...): cache-first, then network ─────────────
   e.respondWith(
     caches.match(e.request).then(function(cached) {
-      var networkFetch = fetch(fetchRequest).then(function(response) {
-        // If the response followed a redirect, the "redirected" flag is set
-        // and browsers refuse to use it for navigations. Rebuild it cleanly.
-        if (response.redirected) {
-          return cleanRedirect(response).then(function(clean) {
-            caches.open(CACHE_NAME).then(function(cache) {
-              cache.put(e.request, clean.clone());
-            });
-            return clean;
-          });
-        }
-        if (response && response.status === 200) {
+      // Ignore any legacy cached entry that is itself a redirect.
+      if (cached && !cached.redirected) return cached;
+      return fetch(e.request).then(function(response) {
+        if (response && response.status === 200 && !response.redirected) {
           var clone = response.clone();
-          caches.open(CACHE_NAME).then(function(cache) {
-            cache.put(e.request, clone);
-          });
+          caches.open(CACHE_NAME).then(function(cache) { cache.put(e.request, clone); });
         }
         return response;
       }).catch(function() { return cached; });
-
-      // Return cached immediately if available, update in background
-      return cached || networkFetch;
     })
   );
 });

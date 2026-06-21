@@ -20,6 +20,14 @@ export default {
 
     // Anything outside /api goes straight to static assets.
     if (!url.pathname.startsWith('/api')) {
+      // With html_handling = "none" (wrangler.toml) assets are served exactly
+      // as named, so the bare root "/" (and any "/folder/" path) no longer maps
+      // to index.html automatically. Map directory-style requests ourselves so
+      // visiting safelearningspot.com still loads the home page.
+      if (url.pathname === '/' || url.pathname.endsWith('/')) {
+        const indexUrl = new URL(url.pathname + 'index.html', url.origin);
+        return env.ASSETS.fetch(new Request(indexUrl.toString(), { headers: request.headers }));
+      }
       return env.ASSETS.fetch(request);
     }
 

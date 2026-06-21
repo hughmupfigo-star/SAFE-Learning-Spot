@@ -8,6 +8,15 @@ compatibility_flags = ["nodejs_compat"]
 [assets]
 directory = "."
 binding = "ASSETS"
+# Serve files EXACTLY as named (e.g. /login.html) instead of Cloudflare's
+# default behaviour of 307-redirecting /login.html -> /login. That redirect was
+# the root cause of the "a redirected response was used for a request whose
+# redirect mode is not follow" service-worker errors: the SW pre-caches .html
+# pages and a SW may not return a redirected response for a navigation request.
+html_handling = "none"
+# Unknown paths return a plain 404 (the app only links to real .html files).
+# The bare root "/" is mapped to /index.html inside worker/index.js.
+not_found_handling = "none"
 
 # D1 database for users, progress, sync state.
 # After running `wrangler d1 create safe-learning-spot`, paste the
