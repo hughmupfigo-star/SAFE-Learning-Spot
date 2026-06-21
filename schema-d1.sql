@@ -6,12 +6,14 @@
 CREATE TABLE IF NOT EXISTS users (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
   email         TEXT UNIQUE NOT NULL,
-  password_hash TEXT NOT NULL,
+  password_hash TEXT NOT NULL DEFAULT '',
   first_name    TEXT,
   last_name     TEXT,
+  google_id     TEXT,
   created_at    INTEGER NOT NULL DEFAULT (strftime('%s','now') * 1000),
   updated_at    INTEGER NOT NULL DEFAULT (strftime('%s','now') * 1000)
 );
+CREATE UNIQUE INDEX IF NOT EXISTS idx_users_google_id ON users(google_id);
 
 CREATE TABLE IF NOT EXISTS course_access (
   id         INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -7,7 +7,8 @@
 //   env.JWT_SECRET — set with `wrangler secret put JWT_SECRET`
 
 import { corsPreflight, error, json } from './lib/response.js';
-import { signup, login, verify, requestReset, resetPassword } from './routes/auth.js';
+import { signup, login, verify, requestReset, resetPassword, recoverEmail } from './routes/auth.js';
+import { googleStart, googleCallback } from './routes/oauth-google.js';
 import {
   listProgress, getCourseProgress, setCourseProgress,
 } from './routes/progress.js';
@@ -53,6 +54,11 @@ async function route(request, env, url) {
   if (method === 'POST' && path === '/api/auth/verify')        return verify(request, env);
   if (method === 'POST' && path === '/api/auth/request-reset') return requestReset(request, env);
   if (method === 'POST' && path === '/api/auth/reset')         return resetPassword(request, env);
+  if (method === 'POST' && path === '/api/auth/recover-email') return recoverEmail(request, env);
+
+  // Google OAuth (GETs because browser does the redirects)
+  if (method === 'GET' && path === '/api/auth/google/start')    return googleStart(request, env);
+  if (method === 'GET' && path === '/api/auth/google/callback') return googleCallback(request, env);
 
   // Progress
   if (method === 'GET' && path === '/api/progress')      return listProgress(request, env);

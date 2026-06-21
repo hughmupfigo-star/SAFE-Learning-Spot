@@ -46,6 +46,11 @@ html[data-theme="dark"] .field input{background:var(--soft)}
 .btn-submit{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:3px;font-family:var(--sans);font-size:.9rem;letter-spacing:.04em;cursor:pointer;margin-top:8px;transition:opacity .2s}
 .btn-submit:hover{opacity:.85}
 .btn-submit:disabled{opacity:.5;cursor:not-allowed}
+.btn-google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:11px 14px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:3px;font-family:var(--sans);font-size:.9rem;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s}
+.btn-google:hover{background:var(--soft);border-color:var(--ink)}
+html[data-theme="dark"] .btn-google{background:var(--soft)}
+.auth-divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.auth-divider::before,.auth-divider::after{content:"";flex:1;height:1px;background:var(--line)}
 .auth-msg{margin-bottom:16px;padding:11px 14px;border-radius:3px;font-size:.875rem;line-height:1.5;display:none}
 .auth-msg.error{background:#fdf5f4;border:1px solid #e8a09a;color:#8b2020}
 .auth-msg.success{background:#f0faf4;border:1px solid #8ecfaa;color:#1a5c35}
@@ -117,6 +122,18 @@ html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
       <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')" role="tab">Create account</button>
     </div>
 
+    <!-- Google sign-in button (shown above both panels) -->
+    <a class="btn-google" id="google-btn" href="#" onclick="return startGoogleSignIn()">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.76h3.56c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.56-2.76c-.99.66-2.25 1.06-3.72 1.06-2.87 0-5.3-1.94-6.17-4.54H2.18v2.85A11 11 0 0 0 12 23z"/>
+        <path fill="#FBBC05" d="M5.83 14.1A6.6 6.6 0 0 1 5.47 12c0-.73.13-1.43.36-2.1V7.05H2.18A11 11 0 0 0 1 12c0 1.78.43 3.46 1.18 4.95l3.65-2.85z"/>
+        <path fill="#EA4335" d="M12 4.74c1.62 0 3.07.56 4.21 1.65l3.16-3.16C17.45 1.43 14.96.5 12 .5A11 11 0 0 0 2.18 7.05L5.83 9.9C6.7 7.3 9.13 4.74 12 4.74z"/>
+      </svg>
+      <span>Continue with Google</span>
+    </a>
+    <div class="auth-divider"><span>or</span></div>
+
     <!-- LOGIN -->
     <div class="auth-panel active" id="panel-login">
       <div class="auth-msg error" id="login-error"></div>
@@ -132,7 +149,7 @@ html[data-zoom="lg"]{zoom:1.2}html[data-zoom="xl"]{zoom:1.45}
         </div>
       </div>
       <button class="btn-submit" id="login-btn" onclick="doLogin()">Sign in</button>
-      <div class="auth-footer"><a href="forgot-password.html">Forgot your password?</a></div>
+      <div class="auth-footer"><a href="account-recovery.html">Forgot your password or email?</a></div>
       <div class="auth-footer">No account? <a onclick="switchTab('signup')">Create one &rarr;</a></div>
     </div>
 
@@ -238,6 +255,57 @@ function getRedirectDest(){
 // Redirect if already logged in
 (function(){
   try{if(localStorage.getItem(SESSION_KEY)){window.location.replace(getRedirectDest());}}catch(e){}
+})();
+
+// ── Google sign-in ──────────────────────────────────────────────────────
+function startGoogleSignIn(){
+  var ret = encodeURIComponent(getRedirectDest());
+  window.location.href = '/api/auth/google/start?return_to=' + ret;
+  return false;
+}
+
+// Handle the redirect back from /api/auth/google/callback. The Worker puts
+// a JWT and basic profile fields in the URL fragment (after #) so they stay
+// out of server logs.
+(function handleOAuthReturn(){
+  if (!window.location.hash || window.location.hash.length < 2) return;
+  var hash = window.location.hash.slice(1);
+  var params = new URLSearchParams(hash);
+
+  var errParam = params.get('oauth_error');
+  if (errParam){
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    var msgEl = document.getElementById('login-error');
+    if (msgEl){
+      msgEl.textContent = 'Google sign-in didn’t complete (' + errParam + '). Please try again or use email & password.';
+      msgEl.classList.add('visible');
+    }
+    return;
+  }
+
+  var token = params.get('token');
+  if (!token) return;
+
+  var firstName = params.get('first_name') || '';
+  var lastName  = params.get('last_name')  || '';
+  var email     = params.get('email')      || '';
+  var returnTo  = params.get('return_to')  || getRedirectDest();
+
+  try { localStorage.setItem('slsc_token', token); } catch(e){}
+  setSession({ email: email, fullName: (firstName + ' ' + lastName).trim() || email });
+
+  // Clear the fragment so a refresh doesn't re-trigger this.
+  history.replaceState(null, '', window.location.pathname);
+
+  // Pull any synced state, then go.
+  function go(){ window.location.replace(returnTo); }
+  if (window.SLSC_SYNC && window.SLSC_SYNC.enabled && window.SLSC_SYNC.enabled()){
+    var done=false; var leave=function(){ if(done)return; done=true; go(); };
+    try { window.SLSC_SYNC.pull(leave); } catch(e){ leave(); }
+    setTimeout(leave, 1800);
+  } else {
+    go();
+  }
 })();
 
 function doLogin(){
