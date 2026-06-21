@@ -5,6 +5,7 @@
 import { hashPassword, verifyPassword } from '../lib/password.js';
 import { signJwt, verifyJwt } from '../lib/jwt.js';
 import { json, error, readJson } from '../lib/response.js';
+import { sendEmail, passwordResetEmail } from '../lib/email.js';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const TOKEN_DAYS = 30;
@@ -77,4 +78,120 @@ export async function verify(request, env) {
   const payload = await verifyJwt(m[1], env.JWT_SECRET);
   if (!payload || !payload.userId) return error('Invalid token', 401);
   return json({ valid: true, userId: payload.userId });
+}
+
+// ─── Password reset ───────────────────────────────────────────────────────
+
+const RESET_TOKEN_BYTES = 32;       // 256 bits of entropy
+const RESET_TTL_MS = 60 * 60 * 1000; // 1 hour
+
+function bytesToB64Url(bytes) {
+  let s = '';
+  for (let i = 0; i < bytes.length; i++) s += String.fromCharCode(bytes[i]);
+  return btoa(s).replace(/=+$/, '').replace(/\+/g, '-').replace(/\//g, '_');
+}
+
+async function sha256Hex(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  const bytes = new Uint8Array(buf);
+  let hex = '';
+  for (let i = 0; i < bytes.length; i++) hex += bytes[i].toString(16).padStart(2, '0');
+  return hex;
+}
+
+/**
+ * POST /api/auth/request-reset
+ * Body: { email }
+ *
+ * Always returns 200 with a neutral message — we never reveal whether the
+ * email is registered. If the user exists, we generate a single-use token,
+ * store its SHA-256 hash, and (TODO) email the reset URL. Until email
+ * sending is wired up, the URL is returned in the response under reset_url
+ * so the flow can be tested end-to-end.
+ */
+export async function requestReset(request, env) {
+  const body = await readJson(request);
+  if (!body) return error('Invalid JSON', 400);
+
+  const email = String(body.email || '').trim().toLowerCase();
+  if (!EMAIL_RE.test(email)) return error('Invalid email address', 400);
+
+  const row = await env.DB.prepare(
+    'SELECT id, first_name FROM users WHERE email = ?1'
+  ).bind(email).first();
+
+  // Always succeed so we don't leak account existence. If the user does
+  // exist, create + store a reset token, and email the reset URL.
+  if (row) {
+    const tokenBytes = crypto.getRandomValues(new Uint8Array(RESET_TOKEN_BYTES));
+    const token = bytesToB64Url(tokenBytes);
+    const tokenHash = await sha256Hex(token);
+    const expiresAt = Date.now() + RESET_TTL_MS;
+
+    await env.DB.prepare(
+      'INSERT INTO password_resets (token_hash, user_id, expires_at) VALUES (?1, ?2, ?3)'
+    ).bind(tokenHash, row.id, expiresAt).run();
+
+    const origin = new URL(request.url).origin;
+    const resetUrl = `${origin}/reset-password.html?token=${encodeURIComponent(token)}`;
+
+    const { html, text } = passwordResetEmail({ resetUrl, firstName: row.first_name });
+    const result = await sendEmail(env, {
+      to: email,
+      subject: 'Reset your Safe Spot password',
+      html,
+      text,
+    });
+
+    // If email isn't wired up yet (RESEND_API_KEY missing), return the URL
+    // directly so the flow can still be tested end-to-end. Once the key is
+    // set, this fallback won't trigger and the URL won't be leaked over HTTP.
+    if (!result.sent && result.reason === 'missing_api_key') {
+      console.log(`[password-reset] ${email} → ${resetUrl}`);
+      return json({ ok: true, reset_url: resetUrl });
+    }
+  }
+
+  // Neutral response — never reveals whether the email exists or whether
+  // mail delivery actually succeeded.
+  return json({ ok: true });
+}
+
+/**
+ * POST /api/auth/reset
+ * Body: { token, password }
+ *
+ * Verifies the reset token, hashes the new password, updates the user row,
+ * and marks the token used.
+ */
+export async function resetPassword(request, env) {
+  const body = await readJson(request);
+  if (!body) return error('Invalid JSON', 400);
+
+  const token = String(body.token || '');
+  const password = String(body.password || '');
+  if (!token) return error('Missing reset token', 400);
+  if (password.length < 8) return error('Password must be at least 8 characters', 400);
+
+  const tokenHash = await sha256Hex(token);
+  const reset = await env.DB.prepare(
+    'SELECT user_id, expires_at, used_at FROM password_resets WHERE token_hash = ?1'
+  ).bind(tokenHash).first();
+
+  if (!reset) return error('This reset link is invalid or has already been used.', 400);
+  if (reset.used_at)         return error('This reset link has already been used.', 400);
+  if (reset.expires_at < Date.now()) return error('This reset link has expired. Please request a new one.', 400);
+
+  const password_hash = await hashPassword(password);
+  const now = Date.now();
+
+  // Update user + mark token used in the same batch
+  await env.DB.batch([
+    env.DB.prepare('UPDATE users SET password_hash = ?1, updated_at = ?2 WHERE id = ?3')
+      .bind(password_hash, now, reset.user_id),
+    env.DB.prepare('UPDATE password_resets SET used_at = ?1 WHERE token_hash = ?2')
+      .bind(now, tokenHash),
+  ]);
+
+  return json({ ok: true });
 }

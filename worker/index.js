@@ -7,7 +7,7 @@
 //   env.JWT_SECRET — set with `wrangler secret put JWT_SECRET`
 
 import { corsPreflight, error, json } from './lib/response.js';
-import { signup, login, verify } from './routes/auth.js';
+import { signup, login, verify, requestReset, resetPassword } from './routes/auth.js';
 import {
   listProgress, getCourseProgress, setCourseProgress,
 } from './routes/progress.js';
@@ -48,9 +48,11 @@ async function route(request, env, url) {
   }
 
   // Auth
-  if (method === 'POST' && path === '/api/auth/signup') return signup(request, env);
-  if (method === 'POST' && path === '/api/auth/login')  return login(request, env);
-  if (method === 'POST' && path === '/api/auth/verify') return verify(request, env);
+  if (method === 'POST' && path === '/api/auth/signup')        return signup(request, env);
+  if (method === 'POST' && path === '/api/auth/login')         return login(request, env);
+  if (method === 'POST' && path === '/api/auth/verify')        return verify(request, env);
+  if (method === 'POST' && path === '/api/auth/request-reset') return requestReset(request, env);
+  if (method === 'POST' && path === '/api/auth/reset')         return resetPassword(request, env);
 
   // Progress
   if (method === 'GET' && path === '/api/progress')      return listProgress(request, env);
