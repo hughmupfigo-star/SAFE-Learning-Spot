@@ -158,6 +158,67 @@ export async function requestReset(request, env) {
 }
 
 /**
+ * POST /api/auth/recover-email
+ * Body: { fullName, contactEmail, notes }
+ *
+ * For users who can't remember which email is on their account. Forwards
+ * the request to the Safe Spot support inbox so a human can help. We do
+ * NOT search the database from the Worker — that would let attackers
+ * enumerate accounts by name.
+ */
+export async function recoverEmail(request, env) {
+  const body = await readJson(request);
+  if (!body) return error('Invalid JSON', 400);
+
+  const fullName     = String(body.fullName     || '').trim();
+  const contactEmail = String(body.contactEmail || '').trim().toLowerCase();
+  const notes        = String(body.notes        || '').trim();
+
+  if (!fullName)                    return error('Full name is required', 400);
+  if (!EMAIL_RE.test(contactEmail)) return error('A valid contact email is required', 400);
+
+  const supportTo = env.SUPPORT_EMAIL || 'enquiries@safespot.life';
+  const subject = `Account recovery request from ${fullName}`;
+
+  const escapeHtml = (s) => s.replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+
+  const text = [
+    `A user has requested help recovering the email on their account.`,
+    ``,
+    `Full name:     ${fullName}`,
+    `Contact email: ${contactEmail}`,
+    `Notes:         ${notes || '(none)'}`,
+    ``,
+    `Please look up the account and reply to ${contactEmail}.`,
+  ].join('\n');
+
+  const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#0a0a0a;max-width:560px;margin:0 auto;padding:24px;line-height:1.6">
+    <h2 style="font-family:Georgia,serif;font-weight:300;margin:0 0 16px 0">Account recovery request</h2>
+    <table cellpadding="6" style="border-collapse:collapse;font-size:14px">
+      <tr><td style="color:#6b6b66">Full name</td><td><strong>${escapeHtml(fullName)}</strong></td></tr>
+      <tr><td style="color:#6b6b66">Contact email</td><td><a href="mailto:${escapeHtml(contactEmail)}">${escapeHtml(contactEmail)}</a></td></tr>
+      <tr><td style="color:#6b6b66;vertical-align:top">Notes</td><td>${escapeHtml(notes) || '<em style="color:#6b6b66">(none)</em>'}</td></tr>
+    </table>
+    <p style="margin-top:22px;font-size:13px;color:#6b6b66">Please look up the account and reply directly to ${escapeHtml(contactEmail)}.</p>
+  </div>`;
+
+  const result = await sendEmail(env, {
+    to: supportTo,
+    subject,
+    html,
+    text,
+  });
+
+  // Don't reveal whether the support email actually went through — neutral OK.
+  if (!result.sent) {
+    console.warn(`[recover-email] sendEmail failed: ${JSON.stringify(result)}`);
+  }
+  return json({ ok: true });
+}
+
+/**
  * POST /api/auth/reset
  * Body: { token, password }
  *
